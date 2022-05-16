@@ -26,9 +26,17 @@ public class FragmentMain1 extends Fragment {
 
 
         
-        binding.btnFrg1.setOnClickListener(V->{
-            Toast.makeText(getContext(), "jhjhj", Toast.LENGTH_SHORT).show();
-        });
+
+
+
+
+
+
+
+
+
+
+
         return view;
     }
 

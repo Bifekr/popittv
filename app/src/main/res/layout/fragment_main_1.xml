@@ -1,25 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools">
-<ScrollView
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  xmlns:app="http://schemas.android.com/apk/res-auto">
 
-  <androidx.constraintlayout.widget.ConstraintLayout
+  <ScrollView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="match_parent">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      >
 
+      <ImageView
+        android:id="@+id/iv_backHeader_frg1"
+        android:layout_width="0dp"
+        android:layout_height="230dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/iv_header_10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+      <ImageView
+        android:id="@+id/iv_header11_frg1"
+        android:layout_width="149dp"
+        android:layout_height="183dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/iv_header_11"
+        app:layout_constraintBottom_toBottomOf="@id/iv_backHeader_frg1"
+        app:layout_constraintStart_toStartOf="@id/iv_backHeader_frg1"
+        app:layout_constraintTop_toTopOf="@id/iv_backHeader_frg1"
+        app:layout_constraintVertical_bias="0.9" />
 
+      <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="90dp"
+        android:cropToPadding="true"
+        android:scaleType="center"
+        android:src="@drawable/iv_header_12"
+        app:layout_constraintBottom_toBottomOf="@id/iv_backHeader_frg1"
+        app:layout_constraintStart_toStartOf="@+id/iv_header11_frg1" />
 
+      <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/iv_header_13"
+        app:layout_constraintBottom_toBottomOf="@id/iv_backHeader_frg1"
+        app:layout_constraintEnd_toEndOf="@id/iv_backHeader_frg1"
+        app:layout_constraintTop_toTopOf="@id/iv_backHeader_frg1" />
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/back_view"
+        android:id="@+id/cons_content_frg1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</ScrollView>
+        <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/rv1_frg1"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="1"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="@id/cons_content_frg1"
+          app:layout_constraintWidth_percent=".80" />
+
+        <androidx.recyclerview.widget.RecyclerView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="18dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="1"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/rv1_frg1"
+          app:layout_constraintWidth_percent=".80" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </ScrollView>
 
 
 </layout>
