@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+  xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <ScrollView
@@ -12,44 +13,74 @@
       android:layout_height="wrap_content"
       >
 
-      <ImageView
+      <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/iv_backHeader_frg1"
         android:layout_width="0dp"
-        android:layout_height="230dp"
+        android:layout_height="0dp"
         android:scaleType="centerCrop"
+        android:background="@drawable/iv_header_10"
         android:src="@drawable/iv_header_10"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintWidth_percent="1"
+        app:layout_constraintHeight_percent="0.45"
+        >
+        <ImageView
+          android:id="@+id/iv_backHeader2_frg1"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:scaleType="centerCrop"
+          android:src="@drawable/iv_header_10"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="0"
+          app:layout_constraintWidth_percent="1"
+          app:layout_constraintHeight_percent="0.45"/>
 
-      <ImageView
-        android:id="@+id/iv_header11_frg1"
-        android:layout_width="149dp"
-        android:layout_height="183dp"
-        android:layout_marginStart="16dp"
-        android:src="@drawable/iv_header_11"
-        app:layout_constraintBottom_toBottomOf="@id/iv_backHeader_frg1"
-        app:layout_constraintStart_toStartOf="@id/iv_backHeader_frg1"
-        app:layout_constraintTop_toTopOf="@id/iv_backHeader_frg1"
-        app:layout_constraintVertical_bias="0.9" />
+        <ImageView
+          android:id="@+id/iv_header11_frg1"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:layout_marginStart="16dp"
+          android:src="@drawable/iv_header_11"
+          app:layout_constraintBottom_toBottomOf="@id/iv_backHeader_frg1"
+          app:layout_constraintEnd_toStartOf="@+id/iv_header12_frg1"
+          app:layout_constraintStart_toStartOf="@id/iv_backHeader_frg1"
+          app:layout_constraintTop_toTopOf="@id/iv_backHeader_frg1"
+          app:layout_constraintVertical_bias="0.9" />
 
-      <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="90dp"
-        android:cropToPadding="true"
-        android:scaleType="center"
-        android:src="@drawable/iv_header_12"
-        app:layout_constraintBottom_toBottomOf="@id/iv_backHeader_frg1"
-        app:layout_constraintStart_toStartOf="@+id/iv_header11_frg1" />
+        <ImageView
+          android:id="@+id/iv_header12_frg1"
+          android:layout_width="202dp"
+          android:layout_height="161dp"
+          android:layout_marginStart="173dp"
+          android:layout_marginBottom="8dp"
+          android:cropToPadding="true"
+          android:scaleType="center"
+          android:src="@drawable/iv_header_12"
+          app:layout_constraintBottom_toBottomOf="@id/iv_backHeader_frg1"
+          app:layout_constraintEnd_toStartOf="@+id/imageView"
+          app:layout_constraintHorizontal_bias="0.045"
+          app:layout_constraintStart_toStartOf="@+id/iv_backHeader_frg1"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="0.442" />
 
-      <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/iv_header_13"
-        app:layout_constraintBottom_toBottomOf="@id/iv_backHeader_frg1"
-        app:layout_constraintEnd_toEndOf="@id/iv_backHeader_frg1"
-        app:layout_constraintTop_toTopOf="@id/iv_backHeader_frg1" />
+        <ImageView
+          android:id="@+id/imageView"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/iv_header_13"
+          app:layout_constraintBottom_toBottomOf="@id/iv_backHeader_frg1"
+          app:layout_constraintEnd_toEndOf="@id/iv_backHeader_frg1"
+          app:layout_constraintTop_toTopOf="@id/iv_backHeader_frg1" />
+
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
 
       <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@drawable/back_view"
