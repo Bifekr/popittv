@@ -4,43 +4,153 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
+<ScrollView
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+      android:id="@+id/bg_frg1"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      app:layout_constraintHeight_percent=".3"
+      app:layout_constraintVertical_bias="0"
+      android:scaleType="centerCrop"
+      android:src="@drawable/bg_header11"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/cons_mainMenu"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:elevation="4dp"
+      android:background="@drawable/btn_border"
+      android:padding="10dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.18"
+      app:layout_constraintWidth_percent=".9"
+      app:layout_constraintHeight_percent=".12">
+
+
+      <Button
+        android:id="@+id/btn1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/back"
+        app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
+        app:layout_constraintEnd_toStartOf="@id/btn2"
+        app:layout_constraintStart_toStartOf="@id/cons_mainMenu"
+        app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
+
+      <Button
+        android:id="@+id/btn2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="12dp"
+        android:background="@drawable/iv_btn_2"
+        app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
+        app:layout_constraintEnd_toStartOf="@id/btn3"
+        app:layout_constraintStart_toEndOf="@+id/btn1"
+        app:layout_constraintTop_toTopOf="@id/cons_mainMenu"
+        app:layout_constraintVertical_bias="1.0" />
+
+      <Button
+        android:id="@+id/btn3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="12dp"
+        android:background="@drawable/iv_btn_3"
+        app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
+        app:layout_constraintEnd_toStartOf="@id/btn4"
+        app:layout_constraintStart_toEndOf="@+id/btn2"
+        app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
+
+      <Button
+        android:id="@+id/btn4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="12dp"
+        android:background="@drawable/iv_btn_4"
+        app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
+        app:layout_constraintEnd_toStartOf="@id/btn5"
+        app:layout_constraintStart_toEndOf="@+id/btn3"
+        app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
+
+      <Button
+        android:id="@+id/btn5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="12dp"
+        android:background="@drawable/iv_btn_5"
+        app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
+        app:layout_constraintEnd_toStartOf="@id/btn6"
+        app:layout_constraintStart_toEndOf="@+id/btn4"
+        app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
+
+      <Button
+        android:id="@+id/btn6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="12dp"
+        android:background="@drawable/iv_btn_6"
+        app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
+        app:layout_constraintEnd_toStartOf="@id/btn7"
+        app:layout_constraintStart_toEndOf="@+id/btn5"
+        app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
+
+      <Button
+
+        android:id="@+id/btn7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="12dp"
+        android:background="@drawable/iv_btn_7"
+        app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
+        app:layout_constraintEnd_toEndOf="@id/cons_mainMenu"
+        app:layout_constraintStart_toEndOf="@+id/btn6"
+        app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:src="@drawable/gradiant1"
+      app:layout_constraintVertical_bias="0"
+      app:layout_constraintHeight_percent="1"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
-      <ImageView
-        android:id="@+id/bg_frg1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent=".35"
-        app:layout_constraintVertical_bias="0"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bg_header11"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+      android:layout_height="400dp"
+      app:layout_constraintTop_toBottomOf="@id/bg_frg1"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintVertical_bias="1"
+      android:background="@drawable/back_view"
+      app:layout_constraintHeight_percent=".60">
 
-      <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/gradiant1"/>
-
-      <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="1"
-        android:background="@drawable/back_view"
-        app:layout_constraintHeight_percent=".60">
-
-      </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
+
 
 
 
