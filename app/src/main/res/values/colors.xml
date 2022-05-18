@@ -9,14 +9,15 @@
   <color name="white">#FFFFFFFF</color>
 
   <color name="yellow">#ffe22f</color>
-<color name="transparent80">#80ffffff</color>
-<color name="backFrg1">#E34800</color>
+  <color name="transparent80">#80ffffff</color>
+  <color name="transparent40">#40ffffff</color>
+  <color name="transparent90">#90ffffff</color>
+  <color name="backFrg1">#E34800</color>
 
 
   <color name="bottomBarColor">#f3f8ff</color>
   <color name="sideBarColor">#D7D6F1FA</color>
   <color name="mainBackground">#fafcfe</color>
-
 
 
   <color name="khakestari">#C5CFD6</color>
