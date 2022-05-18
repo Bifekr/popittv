@@ -5,8 +5,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -14,53 +13,50 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import ir.popittv.myapplication.adapter.TabAdapter;
 import ir.popittv.myapplication.databinding.ActivityMainBinding;
 import ir.popittv.myapplication.ui.FragmentMain1;
+import ir.popittv.myapplication.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    FragmentTransaction transaction;
-    FragmentManager manager;
-    FragmentMain1 fragmentMain1;
-    private ActivityMainBinding binding;
-    View view1;
 
+    FragmentMain1 fragmentMain1;
+    MainViewModel mainViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        fragmentMain1 = new FragmentMain1();
+
+        //ViewModel Provider
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
 
-        transaction = getSupportFragmentManager().beginTransaction();
-
-
-        view1=getLayoutInflater().inflate(R.layout.custom_tab,null,false);
+        View view1 = getLayoutInflater().inflate(R.layout.custom_tab, null, false);
         view1.findViewById(R.id.icon).setBackgroundResource(R.drawable.iv_btn_1);
         binding.tblMainActivity.addTab(binding.tblMainActivity.newTab().setCustomView(view1));
 
-        View view2=getLayoutInflater().inflate(R.layout.custom_tab,null,false);
+        View view2 = getLayoutInflater().inflate(R.layout.custom_tab, null, false);
         view2.findViewById(R.id.icon).setBackgroundResource(R.drawable.iv_btn_2);
         binding.tblMainActivity.addTab(binding.tblMainActivity.newTab().setCustomView(view2));
 
-        View view3=getLayoutInflater().inflate(R.layout.custom_tab,null,false);
+        View view3 = getLayoutInflater().inflate(R.layout.custom_tab, null, false);
         view3.findViewById(R.id.icon).setBackgroundResource(R.drawable.iv_btn_3);
         binding.tblMainActivity.addTab(binding.tblMainActivity.newTab().setCustomView(view3));
 
-        View view4=getLayoutInflater().inflate(R.layout.custom_tab,null,false);
+        View view4 = getLayoutInflater().inflate(R.layout.custom_tab, null, false);
         view4.findViewById(R.id.icon).setBackgroundResource(R.drawable.iv_btn_4);
         binding.tblMainActivity.addTab(binding.tblMainActivity.newTab().setCustomView(view4));
 
-        View view5=getLayoutInflater().inflate(R.layout.custom_tab,null,false);
+        View view5 = getLayoutInflater().inflate(R.layout.custom_tab, null, false);
         view5.findViewById(R.id.icon).setBackgroundResource(R.drawable.iv_btn_5);
         binding.tblMainActivity.addTab(binding.tblMainActivity.newTab().setCustomView(view5));
 
-        View view6=getLayoutInflater().inflate(R.layout.custom_tab,null,false);
+        View view6 = getLayoutInflater().inflate(R.layout.custom_tab, null, false);
         view6.findViewById(R.id.icon).setBackgroundResource(R.drawable.iv_btn_6);
         binding.tblMainActivity.addTab(binding.tblMainActivity.newTab().setCustomView(view6));
 
-        View view7=getLayoutInflater().inflate(R.layout.custom_tab,null,false);
+        View view7 = getLayoutInflater().inflate(R.layout.custom_tab, null, false);
         view7.findViewById(R.id.icon).setBackgroundResource(R.drawable.iv_btn_7);
         binding.tblMainActivity.addTab(binding.tblMainActivity.newTab().setCustomView(view7));
 
