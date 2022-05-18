@@ -29,11 +29,9 @@ public class MainActivity extends AppCompatActivity {
         transaction = getSupportFragmentManager().beginTransaction();
 
 
-        binding.btn1.setOnClickListener(V -> {
-            // manager.beginTransaction().replace(binding.consMainMenu.getId(),fragmentMain1).commit();
-            transaction.replace(binding.containerMain.getId(), fragmentMain1).commit();
 
-        });
+
+
 
     }
 }
