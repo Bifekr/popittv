@@ -17,8 +17,6 @@ import ir.popittv.myapplication.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    FragmentMain1 fragmentMain1;
     MainViewModel mainViewModel;
 
     @Override
