@@ -7,7 +7,7 @@ public class Service {
 
     private static Retrofit retrofit;
     private static final Retrofit.Builder builder =new Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl("https://api.themoviedb.org/")
             .addConverterFactory(GsonConverterFactory.create());
 
     private static Retrofit getRetrofit() {
@@ -17,7 +17,7 @@ public class Service {
         return retrofit;
     }
 
-    public ApiClient getClient(){
-        return Service.getRetrofit().create(ApiClient.class);
+    public static ApiClient getApiClient(){
+        return getRetrofit().create(ApiClient.class);
     }
 }
