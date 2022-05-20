@@ -60,7 +60,7 @@ public class MainApiClient {
                 myHandler.cancel(true);
 
             }
-        }, 3, TimeUnit.MINUTES);
+        }, 30, TimeUnit.MINUTES);
     }
 
     private class RetrieveMovieRunnable implements Runnable {

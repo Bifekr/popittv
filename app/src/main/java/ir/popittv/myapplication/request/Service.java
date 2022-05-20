@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Service {
 
     private static Retrofit retrofit;
-    private static final Retrofit.Builder builder =new Retrofit.Builder()
+    private static  Retrofit.Builder builder =new Retrofit.Builder()
             .baseUrl("https://api.themoviedb.org/")
             .addConverterFactory(GsonConverterFactory.create());
 
