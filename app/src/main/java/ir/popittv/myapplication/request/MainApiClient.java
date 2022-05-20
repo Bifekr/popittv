@@ -12,6 +12,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import ir.popittv.myapplication.AppExecuter;
+import ir.popittv.myapplication.models.CafeModel;
 import ir.popittv.myapplication.models.MovieModel;
 import ir.popittv.myapplication.models.MovieResponse;
 import retrofit2.Call;
@@ -22,13 +23,18 @@ public class MainApiClient {
 
     public static final String API_KEY = "4d47df412982ceebfee953c580aea342";
     private static MainApiClient mainApiClient;
+
     private RetrieveMovieRunnable retrieveMovieRunnable;
-    private MutableLiveData<List<MovieModel>> mMovie;
+    private RetrieveCafeBazarRunnable cafeBazarRunnable;
+
+    private final MutableLiveData<List<MovieModel>> mMovie;
+    private final MutableLiveData<List<CafeModel>> mCafe;
 
 
     private MainApiClient() {
 
         mMovie = new MutableLiveData<>();
+        mCafe = new MutableLiveData<>();
     }
 
     public static MainApiClient getInstance() {
@@ -42,8 +48,13 @@ public class MainApiClient {
         return mMovie;
     }
 
+    public LiveData<List<CafeModel>> getCafeBazar() {
+        return mCafe;
+    }
 
-    public void retrieveMovie( int page) {
+
+    //retrieve data from movie.db
+    public void retrieveMovie(int page) {
 
 
         if (retrieveMovieRunnable!=null) {
@@ -63,12 +74,33 @@ public class MainApiClient {
         }, 30, TimeUnit.MINUTES);
     }
 
+    //retrieve data from localHost
+    public void retrieveCafe() {
+
+
+        if (cafeBazarRunnable!=null) {
+            cafeBazarRunnable = null;
+        }
+
+        cafeBazarRunnable = new RetrieveCafeBazarRunnable();
+
+        final Future myHandler2 = AppExecuter.getAppExecuter().networkIo().submit(cafeBazarRunnable);
+
+        AppExecuter.getAppExecuter().networkIo().schedule(new Runnable() {
+            @Override
+            public void run() {
+                myHandler2.cancel(true);
+
+            }
+        }, 1, TimeUnit.MINUTES);
+    }
+
     private class RetrieveMovieRunnable implements Runnable {
 
-        private int page;
-        private boolean canclable;
+        private final int page;
+        private final boolean canclable;
 
-        public RetrieveMovieRunnable( int page) {
+        public RetrieveMovieRunnable(int page) {
             this.page = page;
             canclable = false;
         }
@@ -96,7 +128,7 @@ public class MainApiClient {
                         mMovie.postValue(currentMovies);
                     }
 
-                }else {
+                } else {
                     String error = response.errorBody().string();
                     Log.i("tag", "run: " + error);
                 }
@@ -111,7 +143,7 @@ public class MainApiClient {
         }
 
 
-        private Call<MovieResponse> getMovieResponseCall( int page) {
+        private Call<MovieResponse> getMovieResponseCall(int page) {
             return Service.getApiClient().getPopularMovies(API_KEY, page);
 
         }
@@ -119,5 +151,53 @@ public class MainApiClient {
 
     }
 
+    private class RetrieveCafeBazarRunnable implements Runnable {
+
+
+        private final boolean canclable;
+
+        public RetrieveCafeBazarRunnable() {
+
+            canclable = false;
+        }
+
+
+        @Override
+        public void run() {
+
+
+            try {
+                if (canclable)
+                    return;
+
+                Response response2 = cafeCallMethod().execute();
+
+                if (response2.code()==200) {
+                    assert response2.body()!=null;
+                    List<CafeModel> cafeModels = new ArrayList<>(((MovieResponse) response2.body()).getApp());
+
+                    mCafe.postValue(cafeModels);
+                } else {
+                    String error = response2.errorBody().string();
+                    Log.i("tag", "run: " + error);
+                }
+
+            } catch (IOException e) {
+
+                e.printStackTrace();
+                mCafe.postValue(null);
+            }
+
+
+        }
+
+
+        private Call<MovieResponse> cafeCallMethod() {
+            return Service.getApiClient().getCafe();
+
+        }
+
+
+    }
 
 }

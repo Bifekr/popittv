@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+import ir.popittv.myapplication.models.CafeModel;
 import ir.popittv.myapplication.models.MovieModel;
 import ir.popittv.myapplication.request.MainApiClient;
 
@@ -31,5 +32,12 @@ public class MainRepository {
 
     public void getMovieApi( int page) {
         mainApiClient.retrieveMovie(page);
+    }
+
+    public LiveData<List<CafeModel>> getCafeBazar(){
+       return mainApiClient.getCafeBazar();
+    }
+    public void retrieveCafe(){
+        mainApiClient.retrieveCafe();
     }
 }

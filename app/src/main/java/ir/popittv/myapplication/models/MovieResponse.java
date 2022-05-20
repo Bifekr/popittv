@@ -14,4 +14,10 @@ public class MovieResponse {
     public List<MovieModel> getMovie() {
         return movie;
     }
+
+    private List<CafeModel> app;
+
+    public List<CafeModel> getApp() {
+        return app;
+    }
 }
