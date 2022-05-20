@@ -61,6 +61,7 @@ public class Frg1Rv1_Adapter extends RecyclerView.Adapter<Frg1Rv1_Adapter.Frg1Rv
         ImageView iv_poster;
         TextView tv_title;
 
+
         public Frg1Rv1_ViewHolder(@NonNull View itemView) {
             super(itemView);
 
