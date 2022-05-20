@@ -54,10 +54,12 @@ public class FragmentMain1 extends Fragment {
             @Override
             public void onChanged(List<MovieModel> movieModel) {
                 if (movieModel!=null) {
+                    adapter.setData(movieModel);
                     for (MovieModel movies : movieModel
                     ) {
                         Log.i("tag", "onChanged: " + movies.getOverview());
-                        adapter.setData(movieModel);
+                       // adapter.setData(movieModel);
+
 
                     }
                 } else {

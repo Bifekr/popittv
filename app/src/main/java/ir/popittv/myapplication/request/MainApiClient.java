@@ -112,7 +112,7 @@ public class MainApiClient {
 
 
         private Call<MovieResponse> getMovieResponseCall( int page) {
-            return Service.getApiClient().getPopularMovies(API_KEY,  page);
+            return Service.getApiClient().getPopularMovies(API_KEY, page);
 
         }
 
