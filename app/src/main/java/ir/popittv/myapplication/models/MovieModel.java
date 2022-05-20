@@ -5,9 +5,6 @@ import android.os.Parcelable;
 
 public class MovieModel implements Parcelable{
 
-
-
-
         private String title;
         private String poster_path;
         private int id;
