@@ -1,35 +1,43 @@
 package ir.popittv.myapplication;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import java.util.List;
+
 import ir.popittv.myapplication.adapter.TabAdapter;
 import ir.popittv.myapplication.databinding.ActivityMainBinding;
-import ir.popittv.myapplication.ui.FragmentMain1;
+import ir.popittv.myapplication.models.MovieModel;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
     MainViewModel mainViewModel;
+    ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
         //ViewModel Provider
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
+        initTablayout();
+    }
 
+    private void initTablayout() {
         View view1 = getLayoutInflater().inflate(R.layout.custom_tab, null, false);
         view1.findViewById(R.id.icon).setBackgroundResource(R.drawable.iv_btn_1);
         binding.tblMainActivity.addTab(binding.tblMainActivity.newTab().setCustomView(view1));
@@ -111,7 +119,5 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }).attach();
-
-
     }
 }

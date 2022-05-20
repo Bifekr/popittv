@@ -1,5 +1,7 @@
 package ir.popittv.myapplication.request;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -41,14 +43,14 @@ public class MainApiClient {
     }
 
 
-    public void retrieveMovie(String query, int page) {
+    public void retrieveMovie( int page) {
 
 
         if (retrieveMovieRunnable!=null) {
             retrieveMovieRunnable = null;
         }
 
-        retrieveMovieRunnable = new RetrieveMovieRunnable(query, page);
+        retrieveMovieRunnable = new RetrieveMovieRunnable(page);
 
         final Future myHandler = AppExecuter.getAppExecuter().networkIo().submit(retrieveMovieRunnable);
 
@@ -58,17 +60,15 @@ public class MainApiClient {
                 myHandler.cancel(true);
 
             }
-        }, 3000, TimeUnit.MILLISECONDS);
+        }, 3, TimeUnit.MINUTES);
     }
 
     private class RetrieveMovieRunnable implements Runnable {
 
-        private String query;
         private int page;
         private boolean canclable;
 
-        public RetrieveMovieRunnable(String query, int page) {
-            this.query = query;
+        public RetrieveMovieRunnable( int page) {
             this.page = page;
             canclable = false;
         }
@@ -79,10 +79,10 @@ public class MainApiClient {
 
 
             try {
-                Response response = getMovieResponseCall(query, page).execute();
-                if (canclable) {
+                if (canclable)
                     return;
-                }
+
+                Response response = getMovieResponseCall(page).execute();
 
                 if (response.code()==200) {
                     assert response.body()!=null;
@@ -96,9 +96,13 @@ public class MainApiClient {
                         mMovie.postValue(currentMovies);
                     }
 
+                }else {
+                    String error = response.errorBody().string();
+                    Log.i("tag", "run: " + error);
                 }
 
             } catch (IOException e) {
+
                 e.printStackTrace();
                 mMovie.postValue(null);
             }
@@ -107,8 +111,8 @@ public class MainApiClient {
         }
 
 
-        private Call<MovieResponse> getMovieResponseCall(String query, int page) {
-            return Service.getApiClient().getMovieSearchResponse(API_KEY, query, page);
+        private Call<MovieResponse> getMovieResponseCall( int page) {
+            return Service.getApiClient().getPopularMovies(API_KEY,  page);
 
         }
 

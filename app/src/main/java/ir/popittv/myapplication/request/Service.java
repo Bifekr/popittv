@@ -16,8 +16,8 @@ public class Service {
         }
         return retrofit;
     }
-
+    private static ApiClient movieApi = getRetrofit().create(ApiClient.class);
     public static ApiClient getApiClient(){
-        return getRetrofit().create(ApiClient.class);
+        return movieApi;
     }
 }

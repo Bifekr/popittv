@@ -10,24 +10,26 @@ import ir.popittv.myapplication.request.MainApiClient;
 public class MainRepository {
 
     private static MainRepository mainRepository;
-    private final MainApiClient mainApiClient;
+    public static MainRepository getInstance() {
+        if (mainRepository==null) {
+            mainRepository = new MainRepository();
+        }
+        return mainRepository;
+    }
+
+
+    private  MainApiClient mainApiClient;
 
     private MainRepository() {
         mainApiClient = MainApiClient.getInstance();
     }
 
-    public static MainRepository getInstance() {
-        if (mainRepository==null) {
-            mainRepository = new MainRepository();
-        }
-        return getInstance();
-    }
 
     public LiveData<List<MovieModel>> getMovie() {
         return mainApiClient.getMovie();
     }
 
-    public void getMovieApi(String query, int page) {
-        mainApiClient.retrieveMovie(query, page);
+    public void getMovieApi( int page) {
+        mainApiClient.retrieveMovie(page);
     }
 }

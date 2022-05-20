@@ -12,4 +12,8 @@ public interface ApiClient {
             @Query("api_key") String  key,
             @Query("query") String query,
             @Query("page") int page);
+
+    @GET("3/movie/popular/")
+    Call<MovieResponse> getPopularMovies(@Query("api_key") String apiKey,
+                                               @Query("page") int page);
 }

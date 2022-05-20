@@ -20,8 +20,8 @@ public class MainViewModel extends ViewModel {
         return mainRepository.getMovie();
     }
 
-    public void getMovieApi(String query, int page) {
-        mainRepository.getMovieApi(query, page);
+    public void getMovieApi( int page) {
+        mainRepository.getMovieApi(page);
     }
 
 }
