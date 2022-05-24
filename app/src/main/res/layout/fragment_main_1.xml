@@ -3,7 +3,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
-  <ScrollView android:layout_width="match_parent"
+  <ScrollView
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
 
@@ -143,95 +144,113 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="1"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bg_frg1"
         app:layout_constraintVertical_bias="1">
 
-        <RelativeLayout
+        <androidx.cardview.widget.CardView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginLeft="20dp"
-          android:layout_marginTop="30dp"
-          android:background="@color/banner_background_light">
+          android:layout_marginTop="12dp"
+          app:cardCornerRadius="48dp"
+          app:cardElevation="12dp">
 
-          <LinearLayout
-            android:id="@+id/cardFeature_dashboard"
-            android:layout_width="140dp"
-            android:layout_height="200dp"
-            android:layout_margin="12dp"
-            android:background="@color/banner_background"
-            android:orientation="vertical"
-            android:padding="8dp">
-
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginTop="16dp"
-              android:text="Animation for all kids"
-              android:textAllCaps="true"
-              android:textColor="@color/black"
-              android:textSize="22sp"
-              android:textStyle="bold" />
-
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginTop="4dp"
-              android:text="all animation for kods and whatch for learn and study somethings for life" />
-          </LinearLayout>
-
-          <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv1_frg1"
+          <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/cardFeature_dashboard"
-            android:background="@color/home_background" />
 
-        </RelativeLayout>
+            android:background="@color/banner_background_light">
 
-        <RelativeLayout
+
+            <LinearLayout
+              android:id="@+id/cardFeature_dashboard"
+              android:layout_width="140dp"
+              android:layout_height="200dp"
+              android:layout_margin="12dp"
+              android:background="@color/banner_background"
+              android:orientation="vertical"
+              android:padding="8dp">
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Animation for all kids"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="all animation for kods and whatch for learn and study somethings for life" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+              android:id="@+id/rv1_frg1"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_centerVertical="true"
+              android:layout_toRightOf="@id/cardFeature_dashboard"
+              android:background="@color/home_background" />
+
+          </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginLeft="20dp"
-          android:layout_marginTop="20dp"
-          android:background="@color/banner_background_light">
+          android:layout_marginTop="12dp"
+          app:cardCornerRadius="48dp"
+          app:cardElevation="12dp">
 
-          <LinearLayout
-            android:id="@+id/cardFeature2_dashboard"
-            android:layout_width="140dp"
-            android:layout_height="200dp"
-            android:layout_margin="12dp"
-            android:background="@color/banner_background"
-            android:orientation="vertical"
-            android:padding="8dp">
-
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginTop="16dp"
-              android:text="Animation for all kids"
-              android:textAllCaps="true"
-              android:textColor="@color/black"
-              android:textSize="22sp"
-              android:textStyle="bold" />
-
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginTop="4dp"
-              android:text="all animation for kods and whatch for learn and study somethings for life" />
-          </LinearLayout>
-
-          <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv2_first_dashboard"
+          <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/cardFeature2_dashboard"
-            android:background="@color/home_background" />
 
-        </RelativeLayout>
+            android:background="@color/banner_background_light">
+
+            <LinearLayout
+              android:id="@+id/cardFeature2_dashboard"
+              android:layout_width="140dp"
+              android:layout_height="200dp"
+              android:layout_margin="12dp"
+              android:layout_alignParentRight="true"
+              android:background="@color/banner_background"
+              android:orientation="vertical"
+              android:padding="8dp">
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Animation for all kids"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="all animation for kods and whatch for learn and study somethings for life" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+              android:id="@+id/rv2_first_dashboard"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_centerVertical="true"
+              android:layout_toLeftOf="@id/cardFeature2_dashboard"
+              android:background="@color/home_background" />
+
+          </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
 
         <RelativeLayout
           android:layout_width="match_parent"
