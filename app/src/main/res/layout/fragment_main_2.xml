@@ -1,167 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
 
-    <ScrollView android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/cons_parent"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content">
 
+      <ImageView
+        android:id="@+id/bg_frg1"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_header11"
+        app:layout_constraintBottom_toBottomOf="@id/cons_rv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent=".18"
+        app:layout_constraintStart_toStartOf="@id/cons_parent"
+        app:layout_constraintTop_toTopOf="@id/cons_parent"
+        app:layout_constraintVertical_bias="0" />
 
       <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cons_parent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:id="@+id/cons_mainMenu"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@drawable/btn_border"
+        android:elevation="4dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/bg_frg1"
+        app:layout_constraintEnd_toEndOf="@id/bg_frg1"
+        app:layout_constraintHeight_percent=".050"
+        app:layout_constraintStart_toStartOf="@id/bg_frg1"
+        app:layout_constraintTop_toTopOf="@id/bg_frg1"
+        app:layout_constraintVertical_bias="0.7"
+        app:layout_constraintWidth_percent=".5">
 
-        <ImageView
-          android:id="@+id/bg_frg1"
-          android:layout_width="match_parent"
-          android:layout_height="180dp"
-          android:scaleType="centerCrop"
-          android:src="@drawable/bg_header11"
-          app:layout_constraintBottom_toBottomOf="@id/cons_rv"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHeight_percent=".18"
-          app:layout_constraintStart_toStartOf="@id/cons_parent"
-          app:layout_constraintTop_toTopOf="@id/cons_parent"
-          app:layout_constraintVertical_bias="0" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-          android:id="@+id/cons_mainMenu"
+        <Button
+          android:id="@+id/frg1_sub_btn1"
           android:layout_width="0dp"
-          android:layout_height="50dp"
-          android:background="@drawable/btn_border"
-          android:elevation="4dp"
-          android:padding="10dp"
-          app:layout_constraintBottom_toBottomOf="@id/bg_frg1"
-          app:layout_constraintEnd_toEndOf="@id/bg_frg1"
-          app:layout_constraintHeight_percent=".050"
-          app:layout_constraintStart_toStartOf="@id/bg_frg1"
-          app:layout_constraintTop_toTopOf="@id/bg_frg1"
-          app:layout_constraintVertical_bias="0.7"
-          app:layout_constraintWidth_percent=".5">
-
-
-          <Button
-            android:id="@+id/frg1_sub_btn1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/ic_black"
-            app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
-            app:layout_constraintEnd_toStartOf="@id/btn2"
-            app:layout_constraintStart_toStartOf="@id/cons_mainMenu"
-            app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
-
-          <ImageButton
-            android:id="@+id/btn2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="12dp"
-            android:background="@drawable/ic_black"
-            android:src="@drawable/ic_category_1"
-            app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
-            app:layout_constraintEnd_toStartOf="@id/btn3"
-            app:layout_constraintStart_toEndOf="@+id/frg1_sub_btn1"
-            app:layout_constraintTop_toTopOf="@id/cons_mainMenu"
-            app:layout_constraintVertical_bias="1.0" />
-
-          <Button
-            android:id="@+id/btn3"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="12dp"
-            android:background="@drawable/ic_black"
-            android:drawableTop="@drawable/ic_audiotrack_1"
-            app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
-            app:layout_constraintEnd_toStartOf="@id/btn4"
-            app:layout_constraintStart_toEndOf="@+id/btn2"
-            app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
-
-          <Button
-            android:id="@+id/btn4"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="12dp"
-            android:background="@drawable/ic_black"
-            app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
-            app:layout_constraintEnd_toStartOf="@id/btn5"
-            app:layout_constraintStart_toEndOf="@+id/btn3"
-            app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
-
-          <Button
-            android:id="@+id/btn5"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="12dp"
-            android:background="@drawable/ic_black"
-            app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
-            app:layout_constraintEnd_toStartOf="@id/btn6"
-            app:layout_constraintStart_toEndOf="@+id/btn4"
-            app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
-
-          <Button
-            android:id="@+id/btn6"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="12dp"
-            android:background="@drawable/ic_black"
-            app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
-            app:layout_constraintEnd_toStartOf="@id/btn7"
-            app:layout_constraintStart_toEndOf="@+id/btn5"
-            app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
-
-          <Button
-
-            android:id="@+id/btn7"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="12dp"
-            android:background="@drawable/ic_black"
-            app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
-            app:layout_constraintEnd_toEndOf="@id/cons_mainMenu"
-            app:layout_constraintStart_toEndOf="@+id/btn6"
-            app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ImageView
-          android:layout_width="match_parent"
           android:layout_height="0dp"
-          android:src="@drawable/gradiant1"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHeight_percent="1"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          app:layout_constraintVertical_bias="0" />
+          android:background="@drawable/ic_black"
+          app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
+          app:layout_constraintEnd_toStartOf="@id/btn2"
+          app:layout_constraintStart_toStartOf="@id/cons_mainMenu"
+          app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
 
-        <LinearLayout
-          android:id="@+id/cons_rv"
+        <ImageButton
+          android:id="@+id/btn2"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:layout_marginLeft="12dp"
+          android:background="@drawable/ic_black"
+          android:src="@drawable/ic_category_1"
+          app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
+          app:layout_constraintEnd_toStartOf="@id/btn3"
+          app:layout_constraintStart_toEndOf="@+id/frg1_sub_btn1"
+          app:layout_constraintTop_toTopOf="@id/cons_mainMenu"
+          app:layout_constraintVertical_bias="1.0" />
+
+        <Button
+          android:id="@+id/btn3"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:layout_marginLeft="12dp"
+          android:background="@drawable/ic_black"
+          android:drawableTop="@drawable/ic_audiotrack_1"
+          app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
+          app:layout_constraintEnd_toStartOf="@id/btn4"
+          app:layout_constraintStart_toEndOf="@+id/btn2"
+          app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
+
+        <Button
+          android:id="@+id/btn4"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:layout_marginLeft="12dp"
+          android:background="@drawable/ic_black"
+          app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
+          app:layout_constraintEnd_toStartOf="@id/btn5"
+          app:layout_constraintStart_toEndOf="@+id/btn3"
+          app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
+
+        <Button
+          android:id="@+id/btn5"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:layout_marginLeft="12dp"
+          android:background="@drawable/ic_black"
+          app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
+          app:layout_constraintEnd_toStartOf="@id/btn6"
+          app:layout_constraintStart_toEndOf="@+id/btn4"
+          app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
+
+        <Button
+          android:id="@+id/btn6"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:layout_marginLeft="12dp"
+          android:background="@drawable/ic_black"
+          app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
+          app:layout_constraintEnd_toStartOf="@id/btn7"
+          app:layout_constraintStart_toEndOf="@+id/btn5"
+          app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
+
+        <Button
+
+          android:id="@+id/btn7"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:layout_marginLeft="12dp"
+          android:background="@drawable/ic_black"
+          app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
+          app:layout_constraintEnd_toEndOf="@id/cons_mainMenu"
+          app:layout_constraintStart_toEndOf="@+id/btn6"
+          app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:src="@drawable/gradiant1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
+
+      <LinearLayout
+        android:id="@+id/cons_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-40dp"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="1"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bg_frg1"
+        app:layout_constraintVertical_bias="1">
+
+        <androidx.cardview.widget.CardView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:background="@drawable/back_view"
-          android:orientation="vertical"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHeight_percent="1"
-          app:layout_constraintHorizontal_bias="1.0"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/bg_frg1"
-          app:layout_constraintVertical_bias="1">
+          android:layout_marginTop="12dp"
+          app:cardCornerRadius="25dp"
+          app:cardElevation="12dp">
 
           <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
-            android:background="@color/banner_background_light">
+            android:background="@color/black">
+
 
             <LinearLayout
               android:id="@+id/cardFeature_dashboard"
               android:layout_width="140dp"
-              android:layout_height="200dp"
-              android:layout_margin="12dp"
-              android:background="@color/banner_background"
+              android:layout_height="match_parent"
+              android:layout_marginStart="12dp"
+              android:layout_marginLeft="8dp"
+              android:layout_marginTop="12dp"
+              android:layout_marginEnd="12dp"
+              android:layout_marginBottom="12dp"
+              android:background="@drawable/custom_card_feature"
               android:orientation="vertical"
               android:padding="8dp">
 
@@ -191,18 +203,26 @@
               android:background="@color/home_background" />
 
           </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="12dp"
+          app:cardCornerRadius="48dp"
+          app:cardElevation="12dp">
 
           <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+
             android:background="@color/banner_background_light">
 
             <LinearLayout
               android:id="@+id/cardFeature2_dashboard"
               android:layout_width="140dp"
               android:layout_height="200dp"
+              android:layout_alignParentRight="true"
               android:layout_margin="12dp"
               android:background="@color/banner_background"
               android:orientation="vertical"
@@ -230,67 +250,59 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_centerVertical="true"
-              android:layout_toRightOf="@id/cardFeature2_dashboard"
+              android:layout_toLeftOf="@id/cardFeature2_dashboard"
               android:background="@color/home_background" />
 
           </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="12dp"
+          app:cardCornerRadius="25dp"
+          app:cardElevation="12dp">
 
           <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/banner_background_light">
-
-            <LinearLayout
-              android:id="@+id/cardFeature3_dashboard"
-              android:layout_width="140dp"
-              android:layout_height="200dp"
-              android:layout_margin="12dp"
-              android:background="@color/banner_background"
-              android:orientation="vertical"
-              android:padding="8dp">
-
-              <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Animation for all kids"
-                android:textAllCaps="true"
-                android:textColor="@color/black"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-              <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="all animation for kods and whatch for learn and study somethings for life" />
-            </LinearLayout>
+            android:background="@color/black">
 
             <androidx.recyclerview.widget.RecyclerView
-              android:id="@+id/rv3_first_dashboard"
+              android:id="@+id/rv3_frg1"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_centerVertical="true"
-              android:layout_toRightOf="@id/cardFeature3_dashboard"
+              android:layout_marginTop="12dp"
+              android:layout_marginBottom="12dp"
               android:background="@color/home_background" />
 
           </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="12dp"
+          app:cardCornerRadius="25dp"
+          app:cardElevation="12dp">
 
           <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/banner_background_light">
+            android:background="@color/sideBarColor">
+
 
             <LinearLayout
               android:id="@+id/cardFeature4_dashboard"
               android:layout_width="140dp"
-              android:layout_height="200dp"
-              android:layout_margin="12dp"
-              android:background="@color/banner_background"
+              android:layout_height="match_parent"
+              android:layout_marginStart="12dp"
+              android:layout_marginLeft="8dp"
+              android:layout_marginTop="12dp"
+              android:layout_marginEnd="12dp"
+              android:layout_marginBottom="12dp"
+              android:background="@drawable/custom_card_feature"
               android:orientation="vertical"
               android:padding="8dp">
 
@@ -312,7 +324,7 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-              android:id="@+id/rv4_first_dashboard"
+              android:id="@+id/rv4_frg1"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_centerVertical="true"
@@ -320,49 +332,59 @@
               android:background="@color/home_background" />
 
           </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
-          <LinearLayout
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="20dp"
+          android:orientation="vertical"
+          android:padding="20dp">
+
+          <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:layout_height="wrap_content">
 
-            <RelativeLayout
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:fontFamily="@font/bree_serif"
+              android:text="All Categury"
+              android:textSize="18sp"
+              android:textStyle="bold" />
 
-              <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/bree_serif"
-                android:text="All Categury"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentRight="true"
+              android:layout_centerVertical="true"
+              android:fontFamily="@font/bree_serif"
+              android:text="View More"
+              android:textSize="12sp"
+              android:textStyle="bold" />
+          </RelativeLayout>
 
-              <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:fontFamily="@font/bree_serif"
-                android:text="View More"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-            </RelativeLayout>
+          <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-              android:layout_width="match_parent"
-              android:layout_height="100dp" />
-
-          </LinearLayout>
         </LinearLayout>
 
 
-      </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
-
+      </LinearLayout>
 
 
+
+
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </ScrollView>
 </layout>
+
+
+
