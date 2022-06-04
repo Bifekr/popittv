@@ -5,19 +5,21 @@
 
   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="200dp"
     android:orientation="vertical">
 
     <ImageView
 
+      android:layout_marginRight="8dp"
       android:id="@+id/ivPoster_itemFrg1_rv1"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      android:layout_width="280dp"
+      android:layout_height="150dp"
       android:scaleType="centerCrop" />
 
 
     <TextView
 
+      android:textStyle="bold"
       android:id="@+id/tvTitle_itemFrg1_rv1"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content" />

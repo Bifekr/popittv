@@ -20,6 +20,6 @@ public interface ApiClient {
     Call<MovieResponse> getPopularMovies(@Query("api_key") String apiKey,
                                                @Query("page") int page);
 
-    @GET("getAppNew.php")
+    @GET("getFunny.php")
     Call<MovieResponse> getCafe();
 }

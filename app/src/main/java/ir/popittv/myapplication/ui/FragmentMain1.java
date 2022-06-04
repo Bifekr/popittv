@@ -65,7 +65,7 @@ public class FragmentMain1 extends Fragment {
                  adapter2.getDataCafe(cafeModelList);
                  for (CafeModel cafe:cafeModelList
                       ) {
-                     Toast.makeText(getContext(), "+++" + cafe.getIcon(), Toast.LENGTH_SHORT).show();
+                     Toast.makeText(getContext(), "+++" + cafe.getPoster(), Toast.LENGTH_SHORT).show();
                  }
                  
              }else {

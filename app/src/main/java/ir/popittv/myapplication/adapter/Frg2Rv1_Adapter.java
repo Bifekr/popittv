@@ -2,7 +2,6 @@ package ir.popittv.myapplication.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,6 +9,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -45,8 +45,11 @@ public class Frg2Rv1_Adapter extends RecyclerView.Adapter<Frg2Rv1_Adapter.Rv2Vie
     @Override
     public void onBindViewHolder(@NonNull Rv2ViewHolder holder, int position) {
 
-        holder.binding.tvTitleItemFrg1Rv1.setText(cafeModelList.get(position).getName());
-        Glide.with(context).load(cafeModelList.get(position).getIcon())
+        holder.binding.tvTitleItemFrg1Rv1.setText(cafeModelList.get(position).getTitle_en());
+       /* Glide.with(context).load(cafeModelList.get(position).getPoster())
+                .into(holder.binding.ivPosterItemFrg1Rv1);*/
+
+        Picasso.get().load(cafeModelList.get(position).getPoster())
                 .into(holder.binding.ivPosterItemFrg1Rv1);
 
     }

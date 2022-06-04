@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="wrap_content"
+  android:layout_height="150dp">
+
+  <ImageView
+    android:id="@+id/ivBanner_itemChannel_all"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scaleType="fitXY"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:srcCompat="@drawable/banner_channel_poster" />
+
+  <LinearLayout
+    android:background="@drawable/shadow_back"
+    android:layout_width="110dp"
+    android:layout_height="130dp"
+    android:gravity="center"
+    app:layout_constraintTop_toTopOf="@id/ivBanner_itemChannel_all"
+    app:layout_constraintStart_toStartOf="@id/ivBanner_itemChannel_all"
+    app:layout_constraintBottom_toBottomOf="@id/ivBanner_itemChannel_all"
+    app:layout_constraintEnd_toEndOf="@id/ivBanner_itemChannel_all"
+    app:layout_constraintHorizontal_bias=".05"
+    android:orientation="vertical">
+    <ImageView
+      android:layout_width="40dp"
+      android:layout_height="40dp"
+      android:src="@drawable/ic_launcher_background"
+      android:id="@+id/ivProfile_itemChannel_All"/>
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/tvName_itemChannel_all"
+      android:text="Seegi channel"
+      android:gravity="center"
+      android:textColor="@color/yellow"/>
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvLike_itemChannel_all"
+        android:text="Like :"
+        android:gravity="center"
+        android:textColor="@color/yellow"/>
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvSubscrip_itemChannel_all"
+        android:text="Subsrip :"
+        android:gravity="center"
+        android:textColor="@color/yellow"/>
+
+
+  </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
