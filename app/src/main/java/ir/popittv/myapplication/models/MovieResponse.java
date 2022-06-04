@@ -15,6 +15,8 @@ public class MovieResponse {
         return movie;
     }
 
+    @SerializedName("funny")
+    @Expose
     private List<CafeModel> app;
 
     public List<CafeModel> getApp() {

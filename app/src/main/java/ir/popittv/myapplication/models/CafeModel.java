@@ -4,18 +4,18 @@ public class CafeModel {
 
 private int id;
 private String package_name;
-private String name;
+private String title_en;
 private String kind;
 private String type;
-private String icon;
+private String poster;
 
-    public CafeModel(int id, String package_name, String name, String kind, String type, String icon) {
+    public CafeModel(int id, String package_name, String title_en, String kind, String type, String poster) {
         this.id = id;
         this.package_name = package_name;
-        this.name = name;
+        this.title_en = title_en;
         this.kind = kind;
         this.type = type;
-        this.icon = icon;
+        this.poster = poster;
     }
 
     public CafeModel() {
@@ -29,8 +29,8 @@ private String icon;
         return package_name;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle_en() {
+        return title_en;
     }
 
     public String getKind() {
@@ -41,7 +41,7 @@ private String icon;
         return type;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getPoster() {
+        return poster;
     }
 }

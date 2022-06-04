@@ -10,6 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/cons_parent"
+      android:background="@drawable/gradiant1"
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
 
@@ -216,7 +217,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:background="@color/banner_background_light">
+            android:background="@color/sideBarColor">
 
             <LinearLayout
               android:id="@+id/cardFeature2_dashboard"
@@ -251,7 +252,7 @@
               android:layout_height="wrap_content"
               android:layout_centerVertical="true"
               android:layout_toLeftOf="@id/cardFeature2_dashboard"
-              android:background="@color/home_background" />
+              android:background="@color/transparent_color" />
 
           </RelativeLayout>
         </androidx.cardview.widget.CardView>
