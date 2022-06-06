@@ -20,6 +20,7 @@ import ir.popittv.myapplication.adapter.Frg1Rv1_Adapter;
 import ir.popittv.myapplication.adapter.Frg2Rv1_Adapter;
 import ir.popittv.myapplication.databinding.FragmentMain1Binding;
 import ir.popittv.myapplication.models.CafeModel;
+import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.models.MovieModel;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
@@ -45,7 +46,7 @@ public class FragmentMain1 extends Fragment {
 
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
-        mainViewModel.getMovieApi(1);
+        mainViewModel.requestFunny_best();
         mainViewModel.retrieveCafe();
 
         configrc();
@@ -54,6 +55,19 @@ public class FragmentMain1 extends Fragment {
         obsercCafeBazar();
 
 
+    }
+
+    private void observMoviePopular() {
+        mainViewModel.getFunny_best().observe(requireActivity(), new Observer<List<FunnyDataModel>>() {
+            @Override
+            public void onChanged(List<FunnyDataModel> funnyDataModels) {
+                if (funnyDataModels!=null){
+                    adapter.setData(funnyDataModels);
+                    for (FunnyDataModel funnys:funnyDataModels)
+                        Toast.makeText(getContext(), "Funny Data"+funnys.getLink_480(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void obsercCafeBazar() {
@@ -76,7 +90,7 @@ public class FragmentMain1 extends Fragment {
 
     }
 
-    private void observMoviePopular() {
+    /*private void observMoviePopular() {
         mainViewModel.getMovie().observe(requireActivity(), new Observer<List<MovieModel>>() {
             @Override
             public void onChanged(List<MovieModel> movieModel) {
@@ -94,7 +108,7 @@ public class FragmentMain1 extends Fragment {
                 }
             }
         });
-    }
+    }*/
 
     private void configrc() {
 

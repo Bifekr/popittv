@@ -3,9 +3,16 @@ package ir.popittv.myapplication.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class MovieModel implements Parcelable{
 
+    @SerializedName("title_en")
+    @Expose
         private String title;
+    @SerializedName("poster")
+    @Expose
         private String poster_path;
         private int id;
         private String release_date;
