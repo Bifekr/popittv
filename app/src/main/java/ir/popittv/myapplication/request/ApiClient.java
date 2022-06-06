@@ -4,6 +4,7 @@ import java.util.List;
 
 import ir.popittv.myapplication.models.CafeModel;
 import ir.popittv.myapplication.models.MovieResponse;
+import ir.popittv.myapplication.response.FunnyResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -22,4 +23,7 @@ public interface ApiClient {
 
     @GET("getFunny.php")
     Call<MovieResponse> getCafe();
+
+    @GET("getFunny_best.php")
+    Call<FunnyResponse> getFunny_best();
 }

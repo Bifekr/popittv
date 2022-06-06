@@ -73,28 +73,6 @@ public class MainApiClient {
             }
         }, 30, TimeUnit.MINUTES);
     }
-
-    //retrieve data from localHost
-    public void retrieveCafe() {
-
-
-        if (cafeBazarRunnable!=null) {
-            cafeBazarRunnable = null;
-        }
-
-        cafeBazarRunnable = new RetrieveCafeBazarRunnable();
-
-        final Future myHandler2 = AppExecuter.getAppExecuter().networkIo().submit(cafeBazarRunnable);
-
-        AppExecuter.getAppExecuter().networkIo().schedule(new Runnable() {
-            @Override
-            public void run() {
-                myHandler2.cancel(true);
-
-            }
-        }, 1, TimeUnit.MINUTES);
-    }
-
     private class RetrieveMovieRunnable implements Runnable {
 
         private final int page;
@@ -149,6 +127,28 @@ public class MainApiClient {
         }
 
 
+    }
+
+
+    //retrieve data from localHost
+    public void retrieveCafe() {
+
+
+        if (cafeBazarRunnable!=null) {
+            cafeBazarRunnable = null;
+        }
+
+        cafeBazarRunnable = new RetrieveCafeBazarRunnable();
+
+        final Future myHandler2 = AppExecuter.getAppExecuter().networkIo().submit(cafeBazarRunnable);
+
+        AppExecuter.getAppExecuter().networkIo().schedule(new Runnable() {
+            @Override
+            public void run() {
+                myHandler2.cancel(true);
+
+            }
+        }, 2, TimeUnit.MINUTES);
     }
 
     private class RetrieveCafeBazarRunnable implements Runnable {
