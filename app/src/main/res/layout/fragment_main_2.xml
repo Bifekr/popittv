@@ -155,57 +155,14 @@
         app:layout_constraintTop_toBottomOf="@id/bg_frg1"
         app:layout_constraintVertical_bias="1">
 
-        <androidx.cardview.widget.CardView
 
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="12dp"
-          app:cardCornerRadius="48dp"
-          app:cardElevation="12dp">
-
-          <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:background="@color/banner_background_light">
-
-            <LinearLayout
-              android:id="@+id/cardFeature1_dashboard"
-              android:layout_width="140dp"
-              android:layout_height="200dp"
-              android:layout_alignParentRight="true"
-              android:layout_margin="12dp"
-              android:background="@color/banner_background"
-              android:orientation="vertical"
-              android:padding="8dp">
-
-              <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Animation for all kids"
-                android:textAllCaps="true"
-                android:textColor="@color/black"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-              <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="all animation for kods and whatch for learn and study somethings for life" />
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
+            <androidx.viewpager2.widget.ViewPager2
               android:id="@+id/rv1_frg2"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_centerVertical="true"
-              android:layout_toLeftOf="@id/cardFeature1_dashboard"
               android:background="@color/home_background" />
 
-          </RelativeLayout>
-        </androidx.cardview.widget.CardView>
 
         <LinearLayout
 
