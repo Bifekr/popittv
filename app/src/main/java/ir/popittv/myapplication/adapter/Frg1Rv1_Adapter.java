@@ -2,10 +2,7 @@ package ir.popittv.myapplication.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -18,7 +15,6 @@ import java.util.List;
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.databinding.ItemFrg1Rv1Binding;
 import ir.popittv.myapplication.models.FunnyDataModel;
-import ir.popittv.myapplication.models.MovieModel;
 
 public class Frg1Rv1_Adapter extends RecyclerView.Adapter<Frg1Rv1_Adapter.Frg1Rv1_ViewHolder> {
 

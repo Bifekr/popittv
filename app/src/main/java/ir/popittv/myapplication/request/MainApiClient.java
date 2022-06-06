@@ -12,28 +12,26 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import ir.popittv.myapplication.AppExecuter;
-import ir.popittv.myapplication.models.CafeModel;
-import ir.popittv.myapplication.models.MovieModel;
-import ir.popittv.myapplication.models.MovieResponse;
+import ir.popittv.myapplication.models.FunnyDataModel;
+import ir.popittv.myapplication.response.FunnyResponse;
 import retrofit2.Call;
 import retrofit2.Response;
 
 public class MainApiClient {
 
 
-    public static final String API_KEY = "4d47df412982ceebfee953c580aea342";
+
     private static MainApiClient mainApiClient;
 
-    private RetrieveMovieRunnable retrieveMovieRunnable;
+
     private RetrieveCafeBazarRunnable cafeBazarRunnable;
 
-    private final MutableLiveData<List<MovieModel>> mMovie;
-    private final MutableLiveData<List<CafeModel>> mCafe;
+
+    private final MutableLiveData<List<FunnyDataModel>> mCafe;
 
 
     private MainApiClient() {
 
-        mMovie = new MutableLiveData<>();
         mCafe = new MutableLiveData<>();
     }
 
@@ -44,90 +42,13 @@ public class MainApiClient {
         return mainApiClient;
     }
 
-    public LiveData<List<MovieModel>> getMovie() {
-        return mMovie;
-    }
 
-    public LiveData<List<CafeModel>> getCafeBazar() {
+    public LiveData<List<FunnyDataModel>> getCafeBazar() {
         return mCafe;
     }
 
 
-    //retrieve data from movie.db
-    public void retrieveMovie(int page) {
 
-
-        if (retrieveMovieRunnable!=null) {
-            retrieveMovieRunnable = null;
-        }
-
-        retrieveMovieRunnable = new RetrieveMovieRunnable(page);
-
-        final Future myHandler = AppExecuter.getAppExecuter().networkIo().submit(retrieveMovieRunnable);
-
-        AppExecuter.getAppExecuter().networkIo().schedule(new Runnable() {
-            @Override
-            public void run() {
-                myHandler.cancel(true);
-
-            }
-        }, 30, TimeUnit.MINUTES);
-    }
-    private class RetrieveMovieRunnable implements Runnable {
-
-        private final int page;
-        private final boolean canclable;
-
-        public RetrieveMovieRunnable(int page) {
-            this.page = page;
-            canclable = false;
-        }
-
-
-        @Override
-        public void run() {
-
-
-            try {
-                if (canclable)
-                    return;
-
-                Response response = getMovieResponseCall(page).execute();
-
-                if (response.code()==200) {
-                    assert response.body()!=null;
-                    List<MovieModel> movieModels = new ArrayList<>(((MovieResponse) response.body()).getMovie());
-                    if (page==1) {
-
-                        mMovie.postValue(movieModels);
-                    } else {
-                        List<MovieModel> currentMovies = mMovie.getValue();
-                        currentMovies.addAll(movieModels);
-                        mMovie.postValue(currentMovies);
-                    }
-
-                } else {
-                    String error = response.errorBody().string();
-                    Log.i("tag", "run: " + error);
-                }
-
-            } catch (IOException e) {
-
-                e.printStackTrace();
-                mMovie.postValue(null);
-            }
-
-
-        }
-
-
-        private Call<MovieResponse> getMovieResponseCall(int page) {
-            return Service.getApiClient().getPopularMovies(API_KEY, page);
-
-        }
-
-
-    }
 
 
     //retrieve data from localHost
@@ -174,7 +95,7 @@ public class MainApiClient {
 
                 if (response2.code()==200) {
                     assert response2.body()!=null;
-                    List<CafeModel> cafeModels = new ArrayList<>(((MovieResponse) response2.body()).getApp());
+                    List<FunnyDataModel> cafeModels = new ArrayList<>(((FunnyResponse) response2.body()).getFunny_all());
 
                     mCafe.postValue(cafeModels);
                 } else {
@@ -192,8 +113,8 @@ public class MainApiClient {
         }
 
 
-        private Call<MovieResponse> cafeCallMethod() {
-            return Service.getApiClient().getCafe();
+        private Call<FunnyResponse> cafeCallMethod() {
+            return Service.getApiClient().getFunny_all();
 
         }
 

@@ -8,25 +8,24 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.databinding.ItemFrg1Rv1Binding;
-import ir.popittv.myapplication.models.CafeModel;
+import ir.popittv.myapplication.models.FunnyDataModel;
 
 public class Frg2Rv1_Adapter extends RecyclerView.Adapter<Frg2Rv1_Adapter.Rv2ViewHolder> {
 
-    private List<CafeModel> cafeModelList;
+    private List<FunnyDataModel> cafeModelList;
     private Context context;
 
     public Frg2Rv1_Adapter(Context context) {
         this.context = context;
     }
 
-    public void getDataCafe(List<CafeModel> cafeModelList){
+    public void getDataCafe(List<FunnyDataModel> cafeModelList){
         this.cafeModelList=cafeModelList;
         notifyDataSetChanged();
     }

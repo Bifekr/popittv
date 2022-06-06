@@ -1,22 +1,17 @@
 package ir.popittv.myapplication;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.util.List;
-
 import ir.popittv.myapplication.adapter.TabAdapter;
 import ir.popittv.myapplication.databinding.ActivityMainBinding;
-import ir.popittv.myapplication.models.MovieModel;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
