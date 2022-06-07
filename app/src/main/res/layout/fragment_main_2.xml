@@ -129,6 +129,7 @@
        -->
 
       <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:src="@drawable/gradiant1"
@@ -146,6 +147,7 @@
         android:layout_marginTop="-80dp"
         android:orientation="vertical"
         android:paddingLeft="20dp"
+        android:gravity="center"
         android:paddingRight="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -157,11 +159,11 @@
 
 
             <androidx.viewpager2.widget.ViewPager2
-              android:id="@+id/rv1_frg2"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_centerVertical="true"
-              android:background="@color/home_background" />
+              android:id="@+id/selectVp2Frg2"
+              android:layout_width="481dp"
+              android:layout_height="180dp"
+
+               />
 
 
         <LinearLayout

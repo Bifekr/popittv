@@ -60,8 +60,7 @@ public class FragmentMain1 extends Fragment {
             public void onChanged(List<FunnyDataModel> funnyDataModels) {
                 if (funnyDataModels!=null){
                     adapter.setData(funnyDataModels);
-                    for (FunnyDataModel funnys:funnyDataModels)
-                        Toast.makeText(getContext(), "Funny Data"+funnys.getTitle_en(), Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -76,7 +75,7 @@ public class FragmentMain1 extends Fragment {
                  adapter2.getDataCafe(funnyDataModels);
                  for (FunnyDataModel cafe:funnyDataModels
                       ) {
-                     Toast.makeText(getContext(), "+++" + cafe.getPoster(), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getContext(), "+++" + cafe.getPoster(), Toast.LENGTH_SHORT).show();
                  }
                  
              }else {
