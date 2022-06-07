@@ -143,6 +143,8 @@
 
 
     <androidx.cardview.widget.CardView
+      android:background="@color/transparent_color"
+      android:layout_marginTop="150dp"
       android:id="@+id/card22"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -153,45 +155,14 @@
       <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/sideBarColor">
-
-        <LinearLayout
-          android:id="@+id/cardFeature4_dashboard"
-          android:layout_width="140dp"
-          android:layout_height="match_parent"
-          android:layout_marginStart="12dp"
-          android:layout_marginLeft="8dp"
-          android:layout_marginTop="12dp"
-          android:layout_marginEnd="12dp"
-          android:layout_marginBottom="12dp"
-          android:background="@drawable/custom_card_feature"
-          android:orientation="vertical"
-          android:padding="8dp">
-
-          <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Animation for all kids"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-          <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="all animation for kods and whatch for learn and study somethings for life" />
-        </LinearLayout>
-
+        android:background="@color/transparent_color">
         <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/rv4_frg1"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_centerVertical="true"
-          android:layout_toRightOf="@id/cardFeature4_dashboard"
-          android:background="@color/home_background" />
+
+          android:background="@color/transparent_color" />
 
       </RelativeLayout>
     </androidx.cardview.widget.CardView>

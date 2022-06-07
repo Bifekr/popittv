@@ -1,32 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<layout>
-
-  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <androidx.cardview.widget.CardView
+android:layout_marginRight="8dp"
+    android:padding="5dp"
     android:layout_width="wrap_content"
-    android:layout_height="200dp"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    >
 
-    <ImageView
-
-      android:layout_marginRight="8dp"
-      android:id="@+id/ivPoster_itemFrg1_rv1"
-      android:layout_width="280dp"
-      android:layout_height="150dp"
-      android:scaleType="centerCrop" />
-
-
-    <TextView
-
-      android:textStyle="bold"
-      android:id="@+id/tvTitle_itemFrg1_rv1"
+    <LinearLayout
       android:layout_width="wrap_content"
-      android:layout_height="wrap_content" />
+      android:layout_height="wrap_content"
+      android:background="@drawable/custom_card_feature"
+      android:orientation="vertical">
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/con"
+        android:layout_width="260dp"
+        android:layout_height="120dp">
 
-  </LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/constraintLayout2"
+          android:layout_width="260dp"
+          android:layout_height="120dp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent">
+
+          <androidx.cardview.widget.CardView
+            android:id="@+id/card_poster_itemVideo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:cardElevation="8dp"
+            app:layout_constraintBottom_toBottomOf="@id/constraintLayout2"
+            app:layout_constraintEnd_toEndOf="@id/constraintLayout2"
+            app:layout_constraintStart_toStartOf="@id/constraintLayout2"
+            app:layout_constraintTop_toTopOf="@id/constraintLayout2"
+            >
+
+            <ImageView
+              android:id="@+id/ivPoster_itemVideo"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:scaleType="centerCrop"
+              android:src="@drawable/img_thumbnail_poster"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent" />
+
+
+          </androidx.cardview.widget.CardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/cons_detail_like"
+          android:layout_width="0dp"
+          android:layout_height="20dp"
+          app:layout_constraintEnd_toEndOf="@id/constraintLayout2"
+
+          app:layout_constraintStart_toStartOf="@id/constraintLayout2"
+          app:layout_constraintTop_toTopOf="@id/con">
+
+          <ImageButton
+            android:id="@+id/ib_1"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="18dp"
+            android:background="@drawable/back_view"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_like_selected"
+            app:layout_constraintBottom_toBottomOf="@id/cons_detail_like"
+            app:layout_constraintEnd_toStartOf="@id/tv1"
+            app:layout_constraintStart_toStartOf="@id/cons_detail_like"
+            app:layout_constraintTop_toTopOf="@id/cons_detail_like" />
+
+          <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="2145"
+            android:textSize="8dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/ib_1"
+            app:layout_constraintEnd_toStartOf="@id/ib_2"
+            app:layout_constraintStart_toEndOf="@id/ib_1"
+            app:layout_constraintTop_toTopOf="@id/ib_1" />
+
+          <ImageButton
+            android:id="@+id/ib_2"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="18dp"
+            android:background="@drawable/back_view"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_view_color"
+            app:layout_constraintBottom_toBottomOf="@id/cons_detail_like"
+            app:layout_constraintEnd_toStartOf="@id/tv2"
+            app:layout_constraintStart_toEndOf="@id/tv1"
+            app:layout_constraintTop_toTopOf="@id/cons_detail_like" />
+
+          <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:background="@color/white"
+            android:text="2145"
+            android:textSize="8dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/ib_2"
+            app:layout_constraintEnd_toStartOf="@id/ib_3"
+            app:layout_constraintStart_toEndOf="@id/ib_2"
+            app:layout_constraintTop_toTopOf="@id/ib_2" />
+
+          <ImageButton
+            android:id="@+id/ib_3"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/back_view"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_mark_color_2"
+            app:layout_constraintBottom_toBottomOf="@id/cons_detail_like"
+            app:layout_constraintEnd_toStartOf="@id/tv3"
+            app:layout_constraintStart_toEndOf="@id/tv2"
+            app:layout_constraintTop_toTopOf="@id/cons_detail_like" />
+
+          <TextView
+            android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="2145"
+            android:textSize="8sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/ib_3"
+            app:layout_constraintStart_toEndOf="@id/ib_3"
+            app:layout_constraintTop_toTopOf="@id/ib_3" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+      <TextView
+        android:id="@+id/tvTitle_Fa_itemVideo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="نام فارسی تیاس اذتاس تل ت سیب تلایبس  . ..  "
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:layout_margin="4dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle_En_itemVideo" />
+      <TextView
+        android:id="@+id/tvTitle_En_itemVideo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="fghfh fghfg jk dr jlc df kifg sdf hjl cfggh "
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="12sp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    </LinearLayout>
+  </androidx.cardview.widget.CardView>
+
+
+
 
 </layout>
-
-
-

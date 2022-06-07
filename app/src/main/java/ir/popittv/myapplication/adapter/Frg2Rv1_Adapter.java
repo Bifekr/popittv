@@ -44,12 +44,12 @@ public class Frg2Rv1_Adapter extends RecyclerView.Adapter<Frg2Rv1_Adapter.Rv2Vie
     @Override
     public void onBindViewHolder(@NonNull Rv2ViewHolder holder, int position) {
 
-        holder.binding.tvTitleItemFrg1Rv1.setText(cafeModelList.get(position).getTitle_en());
+        holder.binding.tvTitleEnItemVideo.setText(cafeModelList.get(position).getTitle_en());
        /* Glide.with(context).load(cafeModelList.get(position).getPoster())
                 .into(holder.binding.ivPosterItemFrg1Rv1);*/
 
         Picasso.get().load(cafeModelList.get(position).getPoster())
-                .into(holder.binding.ivPosterItemFrg1Rv1);
+                .into(holder.binding.ivPosterItemVideo);
 
     }
 
