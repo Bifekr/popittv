@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 
 import com.bumptech.glide.Glide;
@@ -22,6 +23,12 @@ public class Frg2_VpSelect_Adapter extends RecyclerView.Adapter<Frg2_VpSelect_Ad
 
 
     private List<FunnyDataModel> funnyDataModelList;
+    private ViewPager2 viewPager2;
+
+    public Frg2_VpSelect_Adapter(ViewPager2 viewPager2) {
+        this.viewPager2 = viewPager2;
+    }
+
     @NonNull
     @Override
     public SelectedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -66,4 +73,13 @@ public class Frg2_VpSelect_Adapter extends RecyclerView.Adapter<Frg2_VpSelect_Ad
             this.binding=binding;
         }
     }
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+
+            funnyDataModelList.addAll(funnyDataModelList);
+            notifyDataSetChanged();
+        }
+    };
 }

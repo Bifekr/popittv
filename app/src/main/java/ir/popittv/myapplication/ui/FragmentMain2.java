@@ -47,7 +47,7 @@ public class FragmentMain2 extends Fragment {
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
 
-        select_adapter = new Frg2_VpSelect_Adapter();
+        select_adapter = new Frg2_VpSelect_Adapter(binding.selectVp2Frg2);
         mainViewModel.requestFunny_best();
 
 
@@ -60,7 +60,7 @@ public class FragmentMain2 extends Fragment {
         binding.selectVp2Frg2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
         CompositePageTransformer transformer = new CompositePageTransformer();
-        transformer.addTransformer(new MarginPageTransformer(40));
+        transformer.addTransformer(new MarginPageTransformer(20));
         transformer.addTransformer(new ViewPager2.PageTransformer() {
             @Override
             public void transformPage(@NonNull View page, float position) {
@@ -75,7 +75,7 @@ public class FragmentMain2 extends Fragment {
                 public void onPageScrollStateChanged(int state) {
                     super.onPageScrollStateChanged(state);
                     slideHandler.removeCallbacks(runnable);
-                    slideHandler.postDelayed(runnable,2000);
+                    slideHandler.postDelayed(runnable,200);
                 }
             });
 
@@ -90,6 +90,7 @@ public class FragmentMain2 extends Fragment {
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
+
           binding.selectVp2Frg2.setCurrentItem(binding.selectVp2Frg2.getCurrentItem() + 1);
         }
     };

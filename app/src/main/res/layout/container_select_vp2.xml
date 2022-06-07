@@ -4,13 +4,15 @@
 
 
 
-    <ImageView
-      android:id="@+id/iv_container_select_vp2"
+    <com.makeramen.roundedimageview.RoundedImageView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:scaleType="center"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
       android:adjustViewBounds="true"
-      />
+      android:id="@+id/iv_container_select_vp2"
+      app:riv_corner_radius="12dp">
+
+    </com.makeramen.roundedimageview.RoundedImageView>
 
 
 
