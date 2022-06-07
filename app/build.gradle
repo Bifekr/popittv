@@ -65,4 +65,6 @@ dependencies {
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
     implementation "com.makeramen:roundedimageview:2.3.0"
+
+    implementation 'link.fls:swipestack:0.3.0'
 }
