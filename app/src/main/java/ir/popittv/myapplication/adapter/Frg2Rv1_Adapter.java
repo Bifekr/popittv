@@ -8,7 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -45,11 +46,10 @@ public class Frg2Rv1_Adapter extends RecyclerView.Adapter<Frg2Rv1_Adapter.Rv2Vie
     public void onBindViewHolder(@NonNull Rv2ViewHolder holder, int position) {
 
         holder.binding.tvTitleEnItemVideo.setText(cafeModelList.get(position).getTitle_en());
-       /* Glide.with(context).load(cafeModelList.get(position).getPoster())
-                .into(holder.binding.ivPosterItemFrg1Rv1);*/
-
-        Picasso.get().load(cafeModelList.get(position).getPoster())
+        Glide.with(context).load(cafeModelList.get(position).getPoster())
                 .into(holder.binding.ivPosterItemVideo);
+
+
 
     }
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <item
+    android:id="@+id/alarms2"
+    android:enabled="true"
+    android:icon="@drawable/ic_home"
+    android:title="@string/alarms_destination_label" />
+  <item
+    android:id="@+id/schedule"
+    android:enabled="true"
+    android:icon="@drawable/ic_happy"
+    android:title="@string/schedule_destination_label" />
+  <item
+    android:id="@+id/timer"
+    android:enabled="true"
+    android:icon="@drawable/ic_like"
+    android:title="@string/timer_destination_label" />
+  <item
+    android:id="@+id/stopwatch"
+    android:enabled="true"
+    android:icon="@drawable/ic_black"
+    android:title="@string/stopwatch_destination_label" />
+</menu>
