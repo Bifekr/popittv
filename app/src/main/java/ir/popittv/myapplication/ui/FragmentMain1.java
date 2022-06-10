@@ -1,7 +1,6 @@
 package ir.popittv.myapplication.ui;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +18,7 @@ import java.util.List;
 import ir.popittv.myapplication.adapter.Frg1Rv1_Adapter;
 import ir.popittv.myapplication.adapter.Frg2Rv1_Adapter;
 import ir.popittv.myapplication.databinding.FragmentMain1Binding;
-import ir.popittv.myapplication.models.CafeModel;
-import ir.popittv.myapplication.models.MovieModel;
+import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
 public class FragmentMain1 extends Fragment {
@@ -45,7 +43,7 @@ public class FragmentMain1 extends Fragment {
 
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
-        mainViewModel.getMovieApi(1);
+        mainViewModel.requestFunny_best();
         mainViewModel.retrieveCafe();
 
         configrc();
@@ -56,16 +54,28 @@ public class FragmentMain1 extends Fragment {
 
     }
 
+    private void observMoviePopular() {
+        mainViewModel.getFunny_best().observe(requireActivity(), new Observer<List<FunnyDataModel>>() {
+            @Override
+            public void onChanged(List<FunnyDataModel> funnyDataModels) {
+                if (funnyDataModels!=null){
+                    adapter.setData(funnyDataModels);
+
+                }
+            }
+        });
+    }
+
     private void obsercCafeBazar() {
 
-     mainViewModel.getCafe().observe(requireActivity(), new Observer<List<CafeModel>>() {
+     mainViewModel.getCafe().observe(requireActivity(), new Observer<List<FunnyDataModel>>() {
          @Override
-         public void onChanged(List<CafeModel> cafeModelList) {
-             if (cafeModelList!=null){
-                 adapter2.getDataCafe(cafeModelList);
-                 for (CafeModel cafe:cafeModelList
+         public void onChanged(List<FunnyDataModel> funnyDataModels) {
+             if (funnyDataModels!=null){
+                 adapter2.getDataCafe(funnyDataModels);
+                 for (FunnyDataModel cafe:funnyDataModels
                       ) {
-                     Toast.makeText(getContext(), "+++" + cafe.getPoster(), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getContext(), "+++" + cafe.getPoster(), Toast.LENGTH_SHORT).show();
                  }
                  
              }else {
@@ -76,25 +86,6 @@ public class FragmentMain1 extends Fragment {
 
     }
 
-    private void observMoviePopular() {
-        mainViewModel.getMovie().observe(requireActivity(), new Observer<List<MovieModel>>() {
-            @Override
-            public void onChanged(List<MovieModel> movieModel) {
-                if (movieModel!=null) {
-                    adapter.setData(movieModel);
-                    for (MovieModel movies : movieModel
-                    ) {
-                        Log.i("tag", "onChanged: " + movies.getOverview());
-                       // adapter.setData(movieModel);
-
-
-                    }
-                } else {
-                    Toast.makeText(getContext(), "null", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-    }
 
     private void configrc() {
 

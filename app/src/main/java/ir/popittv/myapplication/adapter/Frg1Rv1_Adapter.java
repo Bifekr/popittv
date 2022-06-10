@@ -2,10 +2,7 @@ package ir.popittv.myapplication.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -17,13 +14,13 @@ import java.util.List;
 
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.databinding.ItemFrg1Rv1Binding;
-import ir.popittv.myapplication.models.MovieModel;
+import ir.popittv.myapplication.models.FunnyDataModel;
 
 public class Frg1Rv1_Adapter extends RecyclerView.Adapter<Frg1Rv1_Adapter.Frg1Rv1_ViewHolder> {
 
 
 
-    List<MovieModel> movieModelList;
+    List<FunnyDataModel> movieModelList;
     Context context;
 
     public Frg1Rv1_Adapter(Context context) {
@@ -44,9 +41,9 @@ public class Frg1Rv1_Adapter extends RecyclerView.Adapter<Frg1Rv1_Adapter.Frg1Rv
     @Override
     public void onBindViewHolder(@NonNull Frg1Rv1_ViewHolder holder, int position) {
 
-        holder.binding.tvTitleItemFrg1Rv1.setText(movieModelList.get(position).getTitle());
-        Glide.with(context).load("https://image.tmdb.org/t/p/w500/"+movieModelList.get(position).getPoster_path())
-                .into(holder.binding.ivPosterItemFrg1Rv1);
+        holder.binding.tvTitleEnItemVideo.setText(movieModelList.get(position).getTitle_en());
+        Glide.with(context).load(movieModelList.get(position).getPoster())
+                .into(holder.binding.ivPosterItemVideo);
 
       /*  holder.tv_title.setText(movieModelList.get(position).getTitle());
 
@@ -83,7 +80,7 @@ public class Frg1Rv1_Adapter extends RecyclerView.Adapter<Frg1Rv1_Adapter.Frg1Rv
         }
     }
 
-    public void setData(List<MovieModel> movieModelList){
+    public void setData(List<FunnyDataModel> movieModelList){
     this.movieModelList=movieModelList;
     notifyDataSetChanged();
     }
