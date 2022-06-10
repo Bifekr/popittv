@@ -54,7 +54,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.13.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.1'
 
-    implementation 'com.squareup.picasso:picasso:2.8'
+
 
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
@@ -65,6 +65,8 @@ dependencies {
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
     implementation "com.makeramen:roundedimageview:2.3.0"
+
+    implementation 'com.github.devlight:infinitecycleviewpager:1.0.2'
 
     implementation 'link.fls:swipestack:0.3.0'
 }

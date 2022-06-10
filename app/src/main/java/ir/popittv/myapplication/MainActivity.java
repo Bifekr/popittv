@@ -10,17 +10,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 
-import ir.popittv.myapplication.adapter.TabAdapter;
 import ir.popittv.myapplication.databinding.ActivityMainBinding;
 import ir.popittv.myapplication.ui.FragmentMain1;
 import ir.popittv.myapplication.ui.FragmentMain2;
-import ir.popittv.myapplication.ui.FunnyActivity;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,9 +43,6 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                Navigation.findNavController(MainActivity.this,item.getItemId())
-                        .navigate(R.id.action_fragmentMain1_to_fragmentMain2);
                 switch (item.getItemId()){
                     case R.id.alarms2:
                         Toast.makeText(MainActivity.this, "Alarms Clicked", Toast.LENGTH_SHORT).show();
@@ -80,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.alarms2:
                         Toast.makeText(MainActivity.this, "Alarms Clicked", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(MainActivity.this, FunnyActivity.class));
                    break;
 
                     case R.id.schedule:
