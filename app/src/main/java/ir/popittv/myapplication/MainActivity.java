@@ -1,7 +1,6 @@
 package ir.popittv.myapplication;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,6 +8,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.navigation.NavigationBarView;
@@ -16,12 +18,17 @@ import com.google.android.material.navigation.NavigationBarView;
 import ir.popittv.myapplication.databinding.ActivityMainBinding;
 import ir.popittv.myapplication.ui.FragmentMain1;
 import ir.popittv.myapplication.ui.FragmentMain2;
+import ir.popittv.myapplication.ui.FragmentMain3;
+import ir.popittv.myapplication.ui.FragmentMain4;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
     MainViewModel mainViewModel;
     ActivityMainBinding binding;
+    FragmentManager fragmentManager;
+    FragmentTransaction transaction;
+    Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,59 +40,67 @@ public class MainActivity extends AppCompatActivity {
         //ViewModel Provider
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
+        if (fragment==null) {
+            fragmentManager = getSupportFragmentManager();
+            transaction = fragmentManager.beginTransaction();
+            transaction.replace(binding.containerMain.getId(), new FragmentMain1()).commit();
+        }
         initRail();
 
     }
 
-    private  void  initRail() {
+    private void initRail() {
+
 
         binding.navRail.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.alarms2:
-                        Toast.makeText(MainActivity.this, "Alarms Clicked", Toast.LENGTH_SHORT).show();
+                        fragment = new FragmentMain1();
+                        getSupportFragmentManager().beginTransaction().isAddToBackStackAllowed();
 
-                        return true;
+                        break;
 
                     case R.id.schedule:
-                        Toast.makeText(MainActivity.this, "Alarms xcClicked", Toast.LENGTH_SHORT).show();
-                      /*  getSupportFragmentManager().beginTransaction()
-                                .replace(binding.containerMain.getId(),new FragmentMain1()).commit();*/
+                        fragment = new FragmentMain2();
 
-                        return true;
-
+                        break;
                     case R.id.timer:
-                        Toast.makeText(MainActivity.this, "Alarms xcxcClicked", Toast.LENGTH_SHORT).show();
-               /*         getSupportFragmentManager().beginTransaction()
-                                .replace(binding.containerMain.getId(),new FragmentMain2()).commit();*/
-                        return true;
+                        fragment = new FragmentMain3();
+
+                        break;
+                    case R.id.stopwatch:
+                        fragment = new FragmentMain4();
+
+                        break;
                 }
-                return false;
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(binding.containerMain.getId(), fragment)
+                        .commit();
+
+                return true;
             }
         });
 
         binding.navRail.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
             @Override
             public void onNavigationItemReselected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.alarms2:
                         Toast.makeText(MainActivity.this, "Alarms Clicked", Toast.LENGTH_SHORT).show();
-                   break;
+                        break;
 
                     case R.id.schedule:
                         Toast.makeText(MainActivity.this, "Alarms xcClicked", Toast.LENGTH_SHORT).show();
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(binding.containerMain.getId(),new FragmentMain1()).commit();
 
-                       break;
+                        break;
 
                     case R.id.timer:
                         Toast.makeText(MainActivity.this, "Alarms xcxcClicked", Toast.LENGTH_SHORT).show();
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(binding.containerMain.getId(),new FragmentMain2()).commit();
-                       break;
+                        break;
                 }
 
             }
@@ -93,7 +108,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
 
-
-
+    }
 }
