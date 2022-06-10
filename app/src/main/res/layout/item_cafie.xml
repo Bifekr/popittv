@@ -3,15 +3,15 @@
   android:layout_marginRight="8dp"
   android:padding="5dp"
   android:orientation="vertical"
-  android:layout_width="280dp"
-  android:layout_height="200dp"
+  android:layout_width="220dp"
+  android:layout_height="150dp"
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/custom_card_feature"
+    android:background="@drawable/ic_circle"
     android:orientation="vertical">
     <TextView
       android:id="@+id/tvTitle_En_itemVideo"
@@ -27,7 +27,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent" />
     <ImageView
-
+android:elevation="18dp"
       android:id="@+id/ivPoster_itemVideo"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
