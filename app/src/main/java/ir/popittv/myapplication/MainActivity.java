@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     FragmentTransaction transaction;
     Fragment fragment;
+    boolean back = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +41,15 @@ public class MainActivity extends AppCompatActivity {
         //ViewModel Provider
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
-        if (fragment==null) {
-            fragmentManager = getSupportFragmentManager();
-            transaction = fragmentManager.beginTransaction();
-            transaction.replace(binding.containerMain.getId(), new FragmentMain1()).commit();
-        }
+       if (fragment==null) {
+           fragmentManager = getSupportFragmentManager();
+           transaction = fragmentManager.beginTransaction();
+           transaction.replace(binding.containerMain.getId(), new FragmentMain1()).commit();
+       }
         initRail();
 
     }
+
 
     private void initRail() {
 
@@ -59,28 +61,20 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.alarms2:
                         fragment = new FragmentMain1();
-                        getSupportFragmentManager().beginTransaction().isAddToBackStackAllowed();
-
                         break;
-
                     case R.id.schedule:
                         fragment = new FragmentMain2();
-
                         break;
                     case R.id.timer:
                         fragment = new FragmentMain3();
-
                         break;
                     case R.id.stopwatch:
                         fragment = new FragmentMain4();
-
                         break;
                 }
-
                 getSupportFragmentManager().beginTransaction()
                         .replace(binding.containerMain.getId(), fragment)
-                        .commit();
-
+                        .addToBackStack(null).commit();
                 return true;
             }
         });
@@ -109,8 +103,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
 
     }
+
 }

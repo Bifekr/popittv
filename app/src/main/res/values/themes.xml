@@ -18,7 +18,14 @@
     <item name="android:windowContentTransitions">true</item>
     <item name="android:windowFullscreen">true</item>
 
-    <item name="android:colorBackground">@color/home_background</item>
+    <item name="android:colorBackground">@color/banner_background</item>
+  </style>
+  
+  <style name="widget_nav_rail" parent="Widget.MaterialComponents.NavigationRailView">
+
+
+
+
   </style>
 
 </resources>
