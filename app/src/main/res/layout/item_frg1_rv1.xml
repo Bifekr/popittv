@@ -101,7 +101,7 @@
           android:layout_height="match_parent"
           android:gravity="center"
           android:orientation="vertical"
-         android:paddingTop="4dp"
+         android:paddingTop="9dp"
           app:layout_constraintBottom_toBottomOf="@id/parentDetail"
           app:layout_constraintEnd_toEndOf="@id/parentDetail"
           app:layout_constraintStart_toStartOf="@id/parentDetail"
@@ -109,7 +109,7 @@
 
           <ImageView
             android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_height="18dp"
             android:src="@drawable/ic_like_selected" />
 
           <TextView
@@ -141,7 +141,7 @@
 
           <ImageView
             android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_height="18dp"
             android:src="@drawable/ic_view_color" />
 
           <TextView
@@ -172,20 +172,10 @@
 
           <ImageView
             android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_height="18dp"
             android:src="@drawable/ic_mark_color_2" />
 
-          <TextView
 
-            android:id="@+id/txt3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:includeFontPadding="true"
-            android:text="8654"
-            android:textColor="@color/reply_blue_800"
-            android:textSize="8sp" />
 
         </LinearLayout>
 
