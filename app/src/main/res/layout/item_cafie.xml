@@ -1,36 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/card_dd"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/card_dd"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
   android:layout_marginRight="8dp"
-  android:padding="5dp"
   android:orientation="vertical"
-  android:layout_width="220dp"
-  android:layout_height="150dp"
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+  android:padding="5dp">
 
-  <LinearLayout
+  <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_circle"
+    android:layout_marginBottom="100dp"
     android:orientation="vertical">
     <TextView
       android:id="@+id/tvTitle_En_itemVideo"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="fghfh fghfg jk dr jlc df kifg sdf hjl cfggh "
-      android:textColor="@color/black"
       android:layout_gravity="center"
       android:gravity="center"
+      android:text="fghfh fghfg jk dr jlc df kifg sdf hjl cfggh "
+      android:textColor="@color/black"
       android:textSize="12sp"
-
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent" />
-    <ImageView
-android:elevation="18dp"
-      android:id="@+id/ivPoster_itemVideo"
+
+    <androidx.cardview.widget.CardView
+      android:elevation="12dp"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      />
-  </LinearLayout>
+      app:cardCornerRadius="50dp">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/reply_orange_400"
+        android:orientation="vertical">
+
+        <ImageView
+          android:id="@+id/ivDecor_itemCofie"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:src="@drawable/iv_header_12" />
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="50dp">
+
+        <TextView
+          android:id="@+id/tvChannel_itemCofie"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="d-channl-title-channel"
+          android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+          android:textColor="@color/reply_blue_800"
+          android:textStyle="bold" />
+
+        <TextView
+          android:id="@+id/tvChannel2_itemCofie"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="d-channl-title-channel"
+          android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+      </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+  </RelativeLayout>
+  <ImageView
+    android:src="@drawable/iv_header_11"
+    android:id="@+id/ivPoster_itemVideo"
+    android:layout_width="wrap_content"
+    android:layout_height="220dp"
+    android:layout_marginTop="-220dp"
+    android:layout_gravity="end"
+    android:elevation="18dp" />
 </LinearLayout>
