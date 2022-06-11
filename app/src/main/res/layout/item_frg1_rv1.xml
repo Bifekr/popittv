@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="300dp"
       android:layout_height="160dp"
-      android:background="@drawable/custom_card_feature">
+      android:background="@drawable/gradiant1">
 
       <androidx.cardview.widget.CardView
         android:id="@+id/conitemvideo"
@@ -22,11 +22,11 @@
         app:cardElevation="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".82"
-        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintVertical_bias="0"
+        app:layout_constraintHeight_percent=".8"
         app:layout_constraintWidth_percent=".89">
 
         <ImageView
@@ -44,54 +44,45 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
-        android:paddingLeft="5dp"
-        android:orientation=""
-        android:paddingRight="5dp"
+        android:paddingLeft="35dp"
+        android:orientation="vertical"
+        android:paddingRight="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/parentChannel"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/conitemvideo"
-        app:layout_constraintWidth_percent=".915">
+       >
 
         <TextView
+          android:textColor="@color/black"
           android:id="@+id/titleFa_video_itemVideoThumb"
-          android:layout_width="110dp"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginLeft="3dp"
           android:ellipsize="end"
           android:fontFamily="@font/bree_serif"
-          android:maxLength="25"
           android:maxLines="1"
+
           android:minLines="1"
-          android:paddingLeft="1dp"
+          android:includeFontPadding="true"
+          android:paddingRight="1dp"
           android:text="fdkljfdkjfg rfg  fggtfgf fg  fgdlfkj"
-          android:textAlignment="textEnd"
-          android:textColor="@color/black"
+
           android:textSize="12sp" />
-
-        <View
-          android:layout_width="1dp"
-          android:layout_height="10dp"
-          android:layout_marginTop="1dp"
-          android:layout_marginBottom="1dp"
-          android:background="@color/black" />
-
         <TextView
           android:id="@+id/titleEn_video_itemVideoThumb"
-          android:layout_width="110dp"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginLeft="3dp"
           android:ellipsize="end"
-          android:fontFamily="@font/bree_serif"
-          android:maxLength="25"
+          android:paddingLeft="15dp"
+          android:paddingRight="10dp"
+          android:fontFamily="@font/work_sans_semibold"
           android:maxLines="1"
           android:minLines="1"
-          android:paddingLeft="1dp"
           android:text="fdkljfdkjfg rfg  fggtfgf fg  fgdlfkj"
-          android:textAlignment="textStart"
-          android:textColor="@color/black"
-          android:textSize="12sp" />
+
+
+          android:textSize="9sp" />
       </LinearLayout>
 
       <androidx.constraintlayout.widget.ConstraintLayout
@@ -213,7 +204,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias=".95">
 
-        <com.makeramen.roundedimageview.RoundedImageView
+  <com.makeramen.roundedimageview.RoundedImageView
+    android:elevation="12dp"
+    android:id="@+id/itemProfile_channel_videoThumb"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:src="@drawable/avatar_2"
+    app:riv_border_color="@color/yellow_active"
+    app:riv_border_width="1dp"
+    app:riv_corner_radius="50dp" />
+
+
+
+
+<!--
+<com.makeramen.roundedimageview.RoundedImageView
+          android:elevation="12dp"
           android:id="@+id/itemProfile_channel_videoThumb"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
@@ -221,7 +227,7 @@
           app:riv_border_color="@color/yellow"
           app:riv_border_width="1dp"
           app:riv_corner_radius="50dp" />
-
+-->
 
       </androidx.constraintlayout.widget.ConstraintLayout>
 
