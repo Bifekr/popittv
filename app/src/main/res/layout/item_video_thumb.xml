@@ -203,7 +203,7 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_like" />
+            android:src="@drawable/ic_baseline_eye_24" />
 
           <TextView
             android:id="@+id/txt22"
@@ -234,7 +234,7 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_like" />
+            android:src="@drawable/ic_twotone_send" />
 
           <TextView
             android:id="@+id/txt3"
@@ -264,7 +264,7 @@
           <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_like" />
+            android:src="@drawable/ic_bookmark_24dp" />
 
           <TextView
             android:layout_width="wrap_content"
