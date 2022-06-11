@@ -18,15 +18,15 @@
         android:id="@+id/conitemvideo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:cardElevation="12dp"
         app:cardCornerRadius="24dp"
+        app:cardElevation="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent=".82"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintVertical_bias="0"
-        app:layout_constraintHeight_percent=".82"
         app:layout_constraintWidth_percent=".89">
 
         <ImageView
@@ -44,6 +44,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
@@ -53,15 +55,19 @@
 
         <TextView
           android:id="@+id/titleFa_video_itemVideoThumb"
-          android:layout_width="wrap_content"
+          android:layout_width="110dp"
           android:layout_height="wrap_content"
-          android:layout_marginRight="3dp"
-          android:maxLength="40"
+          android:layout_marginLeft="3dp"
+          android:ellipsize="end"
+          android:fontFamily="@font/bree_serif"
+          android:maxLength="25"
           android:maxLines="1"
           android:minLines="1"
-          android:text="fبی بلیبل بلالبلا  تا تالاا  بللا  لال  لاالنهمخلی سل "
+          android:paddingLeft="1dp"
+          android:text="fdkljfdkjfg rfg  fggtfgf fg  fgdlfkj"
+          android:textAlignment="textEnd"
           android:textColor="@color/black"
-          android:textSize="8sp" />
+          android:textSize="12sp" />
 
         <View
           android:layout_width="1dp"
@@ -71,15 +77,20 @@
           android:background="@color/black" />
 
         <TextView
-          android:layout_width="wrap_content"
+          android:id="@+id/titleEn_video_itemVideoThumb"
+          android:layout_width="110dp"
           android:layout_height="wrap_content"
           android:layout_marginLeft="3dp"
-          android:maxLength="50"
+          android:ellipsize="end"
+          android:fontFamily="@font/bree_serif"
+          android:maxLength="25"
           android:maxLines="1"
           android:minLines="1"
+          android:paddingLeft="1dp"
           android:text="fdkljfdkjfg rfg  fggtfgf fg  fgdlfkj"
+          android:textAlignment="textStart"
           android:textColor="@color/black"
-          android:textSize="8sp" />
+          android:textSize="12sp" />
       </LinearLayout>
 
       <androidx.constraintlayout.widget.ConstraintLayout
@@ -92,20 +103,18 @@
         app:layout_constraintHeight_percent="1"
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toEndOf="@id/conitemvideo"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:gravity="top|center"
-          android:paddingTop="12dp"
           android:orientation="vertical"
+          android:paddingTop="12dp"
           app:layout_constraintBottom_toBottomOf="@id/parentDetail"
           app:layout_constraintEnd_toEndOf="@id/parentDetail"
           app:layout_constraintStart_toStartOf="@id/parentDetail"
-          app:layout_constraintTop_toTopOf="@id/parentDetail"
-         >
+          app:layout_constraintTop_toTopOf="@id/parentDetail">
 
           <ImageView
             android:layout_width="15dp"
@@ -197,23 +206,19 @@
         app:layout_constraintHorizontal_bias=".97"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".95"
-       >
+        app:layout_constraintVertical_bias=".95">
 
-          <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/itemProfile_channel_videoThumb"
-            android:layout_width="match_parent"
-            app:riv_corner_radius="50dp"
-            app:riv_border_color="@color/yellow"
-            app:riv_border_width="1dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/avatar_2" />
+        <com.makeramen.roundedimageview.RoundedImageView
+          android:id="@+id/itemProfile_channel_videoThumb"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:src="@drawable/avatar_2"
+          app:riv_border_color="@color/yellow"
+          app:riv_border_width="1dp"
+          app:riv_corner_radius="50dp" />
 
 
       </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
