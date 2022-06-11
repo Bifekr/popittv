@@ -13,22 +13,8 @@
       android:background="@drawable/gradiant1"
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
-
-      <ImageView
-        android:id="@+id/header_frg2"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bg_header11"
-
-        app:layout_constraintBottom_toBottomOf="@id/cons_rv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".18"
-        app:layout_constraintStart_toStartOf="@id/cons_parent"
-        app:layout_constraintTop_toTopOf="@id/cons_parent"
-        app:layout_constraintVertical_bias="0" />
-
-      <androidx.constraintlayout.widget.ConstraintLayout
+      <!--\
+             <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cons_mainMenu"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -126,6 +112,8 @@
 
       </androidx.constraintlayout.widget.ConstraintLayout>
 
+       -->
+
       <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -150,12 +138,12 @@
         app:layout_constraintHeight_percent="1"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_frg2"
         app:layout_constraintVertical_bias="1">
 
 
 
           <RelativeLayout
+            android:layout_marginTop="50dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/transparent_color">
