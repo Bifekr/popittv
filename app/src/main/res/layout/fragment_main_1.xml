@@ -153,53 +153,22 @@
         app:layout_constraintTop_toBottomOf="@id/header_frg2"
         app:layout_constraintVertical_bias="1">
 
-        <androidx.cardview.widget.CardView
-          android:background="@color/transparent_color"
-          android:layout_width="match_parent"
-          android:layout_height="160dp"
-          app:cardCornerRadius="25dp"
-          app:cardElevation="12dp">
+
 
           <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/transparent_color">
 
-            <LinearLayout
-              android:id="@+id/cardFeature_dashboard"
-              android:layout_width="140dp"
-              android:layout_height="match_parent"
-              android:background="@drawable/custom_card_feature"
-              android:orientation="vertical"
-              android:padding="8dp">
-
-              <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Animation for all kids"
-                android:textAllCaps="true"
-                android:textColor="@color/black"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-              <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="all animation for kods and whatch for learn and study somethings for life" />
-            </LinearLayout>
-
             <androidx.recyclerview.widget.RecyclerView
               android:id="@+id/rv1_frg1"
-              android:layout_width="match_parent"
-              android:layout_height="160dp"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
               android:layout_centerVertical="true"
-              android:layout_toRightOf="@id/cardFeature_dashboard"
               android:background="@color/transparent_color" />
 
           </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+
 
         <androidx.cardview.widget.CardView
           android:layout_width="match_parent"
