@@ -41,7 +41,7 @@ public class Frg1Rv1_Adapter extends RecyclerView.Adapter<Frg1Rv1_Adapter.Frg1Rv
     @Override
     public void onBindViewHolder(@NonNull Frg1Rv1_ViewHolder holder, int position) {
 
-        holder.binding.tvTitleEnItemVideo.setText(movieModelList.get(position).getTitle_en());
+        holder.binding.titleFaVideoItemVideoThumb.setText(movieModelList.get(position).getTitle_en());
         Glide.with(context).load(movieModelList.get(position).getPoster())
                 .into(holder.binding.ivPosterItemVideo);
 
