@@ -51,6 +51,7 @@
           app:layout_constraintVertical_bias="0.0" /> -->
   <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
     android:id="@+id/view_pager"
+
     android:layout_width="320dp"
     android:layout_height="250dp"
     app:icvp_center_page_scale_offset="10dp"
