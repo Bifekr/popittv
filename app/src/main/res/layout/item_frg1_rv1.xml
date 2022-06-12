@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="300dp"
       android:layout_height="160dp"
-      android:background="@drawable/gradiant1">
+      android:background="@drawable/gradiant4">
 
       <androidx.cardview.widget.CardView
         android:id="@+id/conitemvideo"
@@ -62,7 +62,6 @@
           android:ellipsize="end"
           android:fontFamily="@font/bree_serif"
           android:maxLines="1"
-
           android:minLines="1"
           android:includeFontPadding="true"
           android:paddingRight="1dp"
@@ -80,8 +79,6 @@
           android:maxLines="1"
           android:minLines="1"
           android:text="fdkljfdkjfg rfg  fggtfgf fg  fgdlfkj"
-
-
           android:textSize="9sp" />
       </LinearLayout>
 
@@ -95,7 +92,6 @@
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toEndOf="@id/conitemvideo"
         app:layout_constraintTop_toTopOf="parent">
-
         <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent"
@@ -106,12 +102,10 @@
           app:layout_constraintEnd_toEndOf="@id/parentDetail"
           app:layout_constraintStart_toStartOf="@id/parentDetail"
           app:layout_constraintTop_toTopOf="@id/parentDetail">
-
           <ImageView
             android:layout_width="15dp"
             android:layout_height="18dp"
             android:src="@drawable/ic_like_selected" />
-
           <TextView
             android:id="@+id/txt1"
             android:layout_width="match_parent"
@@ -122,28 +116,23 @@
             android:text="502,45"
             android:textColor="@color/reply_blue_800"
             android:textSize="8sp" />
-
-
-          <View
+          <FrameLayout
+            android:layout_marginTop="5dp"
             android:id="@+id/spacer_detail_1"
             android:layout_width="match_parent"
             android:layout_height="0.8dp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/black"
+            android:background="@drawable/divider"
             android:gravity="center"
             app:layout_constraintTop_toBottomOf="@id/txt1" />
-
-
           <ImageView
             android:layout_width="15dp"
             android:layout_height="18dp"
             android:src="@drawable/ic_view_color" />
-
           <TextView
             android:id="@+id/txt22"
             android:layout_width="match_parent"
@@ -154,9 +143,7 @@
             android:text="200585"
             android:textColor="@color/reply_blue_800"
             android:textSize="8sp" />
-
-          <View
-
+          <FrameLayout
             android:layout_marginTop="5dp"
             android:id="@+id/spacer_detail_2"
             android:layout_width="match_parent"
@@ -166,17 +153,13 @@
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/black"
+            android:background="@drawable/divider"
             android:gravity="center"
             app:layout_constraintTop_toBottomOf="@id/txt22" />
-
           <ImageView
             android:layout_width="15dp"
             android:layout_height="18dp"
             android:src="@drawable/ic_mark_color_2" />
-
-
-
         </LinearLayout>
 
 

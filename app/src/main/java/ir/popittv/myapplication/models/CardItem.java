@@ -1,5 +1,7 @@
 package ir.popittv.myapplication.models;
 
+import android.graphics.drawable.Drawable;
+
 public class CardItem {
 
     private int mTextResource;

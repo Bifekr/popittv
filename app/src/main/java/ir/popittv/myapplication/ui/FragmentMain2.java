@@ -55,20 +55,19 @@ public class FragmentMain2 extends Fragment {
         mCardAdapter = new CardPagerAdapter();
 
         mCardAdapter = new CardPagerAdapter();
-        mCardAdapter.addCardItem(new CardItem(R.string.title_1, R.string.text_1));
-        mCardAdapter.addCardItem(new CardItem(R.string.title_2, R.string.text_1));
-        mCardAdapter.addCardItem(new CardItem(R.string.title_3, R.string.text_1));
-        mCardAdapter.addCardItem(new CardItem(R.string.title_4, R.string.text_1));
+        mCardAdapter.addCardItem(new CardItem(R.drawable.banner1, R.string.alarms_destination_label));
+        mCardAdapter.addCardItem(new CardItem(R.drawable.banner2, R.string.app_name));
+        mCardAdapter.addCardItem(new CardItem(R.drawable.banner3, R.string.app_name));
+        mCardAdapter.addCardItem(new CardItem(R.drawable.banner4, R.string.app_name));
 
         mCardShadowTransformer = new ShadowTransformer(binding.viewpagerSlideFrg2,  mCardAdapter);
 
         binding.viewpagerSlideFrg2.setAdapter(mCardAdapter);
         binding.viewpagerSlideFrg2.setPageTransformer(false, mCardShadowTransformer);
-        binding.viewpagerSlideFrg2.setOffscreenPageLimit(6);
+        binding.viewpagerSlideFrg2.setOffscreenPageLimit(3);
 
 
-        binding.viewpagerSlideFrg2.setAdapter(mCardAdapter);
-        binding.viewpagerSlideFrg2.setPageTransformer(false, mCardShadowTransformer);
+
 
 
 
@@ -90,12 +89,12 @@ public class FragmentMain2 extends Fragment {
 
 
        binding.viewPager.setAdapter(pagerAdapter);
-       binding.ivLogo.setOnClickListener(v -> {
+     /*  binding.ivLogo.setOnClickListener(v -> {
            binding.ivLogo.setVisibility(View.VISIBLE);
            binding.ivLogo.startAnimation(animLogoMove);
            binding.viewPager.setVisibility(View.VISIBLE);
            binding.viewPager.startAnimation(animTransition);
-       });
+       });*/
 
 
 

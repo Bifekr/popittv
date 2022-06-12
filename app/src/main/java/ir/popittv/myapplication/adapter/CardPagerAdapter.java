@@ -3,6 +3,7 @@ package ir.popittv.myapplication.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -88,9 +89,9 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
 
     private void bind(CardItem item, View view) {
         TextView titleTextView = (TextView) view.findViewById(R.id.titleTextView);
-        TextView contentTextView = (TextView) view.findViewById(R.id.contentTextView);
+        ImageView contentImageView =  view.findViewById(R.id.contentImageView);
         titleTextView.setText(item.getText());
-        contentTextView.setText(item.getTitle());
+        contentImageView.setImageResource(item.getTitle());
     }
 
 }

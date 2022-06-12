@@ -31,8 +31,8 @@ public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPa
             // grow main card
             CardView currentCard = mAdapter.getCardViewAt(mViewPager.getCurrentItem());
             if (currentCard != null) {
-                currentCard.animate().scaleY(1.1f);
-                currentCard.animate().scaleX(1.1f);
+                currentCard.animate().scaleY(1.2f);
+                currentCard.animate().scaleX(1.2f);
             }
         }
 
@@ -89,8 +89,8 @@ public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPa
         // was already destroyed or a fragment might not have been created yet
         if (nextCard != null) {
             if (mScalingEnabled) {
-                nextCard.setScaleX((float) (1 + 0.1 * (realOffset)));
-                nextCard.setScaleY((float) (1 + 0.1 * (realOffset)));
+                nextCard.setScaleX((float) (1 + 0.2 * (realOffset)));
+                nextCard.setScaleY((float) (1 + 0.2 * (realOffset)));
             }
             nextCard.setCardElevation((baseElevation + baseElevation
                     * (CardAdapter.MAX_ELEVATION_FACTOR - 1) * (realOffset)));
