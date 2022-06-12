@@ -1,22 +1,17 @@
 package ir.popittv.myapplication.ui;
 
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager.widget.ViewPager;
-
 
 import java.util.List;
 
@@ -25,9 +20,7 @@ import ir.popittv.myapplication.ShadowTransformer;
 import ir.popittv.myapplication.adapter.CardPagerAdapter;
 import ir.popittv.myapplication.adapter.Frg1Rv1_Adapter;
 import ir.popittv.myapplication.adapter.PagerAdapter;
-
 import ir.popittv.myapplication.databinding.FragmentMain2Binding;
-import ir.popittv.myapplication.models.CardItem;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
@@ -50,11 +43,11 @@ public class FragmentMain2 extends Fragment {
         binding = FragmentMain2Binding.inflate(inflater, container, false);
         //// mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
-        animLogoMove= AnimationUtils.loadAnimation(getContext(), R.anim.logo_move);
-        animTransition = AnimationUtils.loadAnimation(getContext(),R.anim.transition);
-        mCardAdapter = new CardPagerAdapter();
+        animLogoMove = AnimationUtils.loadAnimation(getContext(), R.anim.logo_move);
+        animTransition = AnimationUtils.loadAnimation(getContext(), R.anim.transition);
 
-        mCardAdapter = new CardPagerAdapter();
+
+ /*       mCardAdapter = new CardPagerAdapter();
         mCardAdapter.addCardItem(new CardItem(R.drawable.banner1, R.string.alarms_destination_label));
         mCardAdapter.addCardItem(new CardItem(R.drawable.banner2, R.string.app_name));
         mCardAdapter.addCardItem(new CardItem(R.drawable.banner3, R.string.app_name));
@@ -64,7 +57,7 @@ public class FragmentMain2 extends Fragment {
 
         binding.viewpagerSlideFrg2.setAdapter(mCardAdapter);
         binding.viewpagerSlideFrg2.setPageTransformer(false, mCardShadowTransformer);
-        binding.viewpagerSlideFrg2.setOffscreenPageLimit(3);
+        binding.viewpagerSlideFrg2.setOffscreenPageLimit(3);*/
 
 
 
@@ -83,12 +76,12 @@ public class FragmentMain2 extends Fragment {
         //set data into dataModel
         mainViewModel.requestFunny_best();
 
-        // RecyclerView 1
+        // init adapters
        adapter = new Frg1Rv1_Adapter(getActivity());
-       pagerAdapter = new PagerAdapter(getActivity());
+        pagerAdapter = new PagerAdapter(getActivity());
+        mCardAdapter = new CardPagerAdapter(getActivity());
 
-
-       binding.viewPager.setAdapter(pagerAdapter);
+        binding.viewPager.setAdapter(pagerAdapter);
      /*  binding.ivLogo.setOnClickListener(v -> {
            binding.ivLogo.setVisibility(View.VISIBLE);
            binding.ivLogo.startAnimation(animLogoMove);
@@ -97,6 +90,10 @@ public class FragmentMain2 extends Fragment {
        });*/
 
 
+        mCardShadowTransformer = new ShadowTransformer(binding.viewpagerSlideFrg2, mCardAdapter);
+        binding.viewpagerSlideFrg2.setAdapter(mCardAdapter);
+        binding.viewpagerSlideFrg2.setPageTransformer(false, mCardShadowTransformer);
+        binding.viewpagerSlideFrg2.setOffscreenPageLimit(1);
 
 
         //get data from dataModel
@@ -114,7 +111,10 @@ public class FragmentMain2 extends Fragment {
                 if (funnyDataModels!=null) {
                     adapter.setData(funnyDataModels);
                     pagerAdapter.setData(funnyDataModels);
-
+                    for (FunnyDataModel fuuny : funnyDataModels
+                    ) {
+                        mCardAdapter.addCardItem(fuuny);
+                    }
 
 
                 }

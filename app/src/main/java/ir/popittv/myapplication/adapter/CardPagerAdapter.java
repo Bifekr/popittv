@@ -1,5 +1,6 @@
 package ir.popittv.myapplication.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 import androidx.viewpager.widget.PagerAdapter;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,15 +25,19 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
     private List<CardItem> mData;
     private List<FunnyDataModel> funnyDataModels;
     private float mBaseElevation;
+    Context context;
 
-    public CardPagerAdapter() {
+    public CardPagerAdapter(Context context) {
         mData = new ArrayList<>();
         mViews = new ArrayList<>();
+        funnyDataModels = new ArrayList<>();
+        this.context=context;
     }
 
-   public void addCardItem(CardItem item) {
+   public void addCardItem(FunnyDataModel item) {
        mViews.add(null);
-       mData.add(item);
+       funnyDataModels.add(item);
+       notifyDataSetChanged();
 
    }
 
@@ -51,8 +58,8 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
 
     @Override
     public int getCount() {
-        if (mData!=null){
-            return mData.size();
+        if (funnyDataModels!=null){
+            return funnyDataModels.size();
         }else {
             return 0;
         }
@@ -69,7 +76,7 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
         View view = LayoutInflater.from(container.getContext())
                 .inflate(R.layout.adapter, container, false);
         container.addView(view);
-        bind(mData.get(position), view);
+        bind(funnyDataModels.get(position), view);
         CardView cardView = (CardView) view.findViewById(R.id.cardView);
 
         if (mBaseElevation == 0) {
@@ -87,11 +94,12 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
         mViews.set(position, null);
     }
 
-    private void bind(CardItem item, View view) {
-        TextView titleTextView = (TextView) view.findViewById(R.id.titleTextView);
+    private void bind(FunnyDataModel item, View view) {
+        TextView titleTextView = view.findViewById(R.id.titleTextView);
         ImageView contentImageView =  view.findViewById(R.id.contentImageView);
-        titleTextView.setText(item.getText());
-        contentImageView.setImageResource(item.getTitle());
+        titleTextView.setText(item.getTitle_en());
+       // contentImageView.setImageResource(item.getTitle());
+        Glide.with(context).load(item.getPoster()).into(contentImageView);
     }
 
 }
