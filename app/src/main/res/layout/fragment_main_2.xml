@@ -53,7 +53,6 @@
     android:id="@+id/view_pager"
     android:layout_width="320dp"
     android:layout_height="250dp"
-    android:layout_marginTop="24dp"
     app:icvp_center_page_scale_offset="10dp"
     app:icvp_interpolator="@android:anim/accelerate_decelerate_interpolator"
     app:icvp_max_page_scale="0.8"
@@ -69,11 +68,13 @@
 
     />
 
-  <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
+  <ImageView
     android:id="@+id/view_pager2"
     android:layout_width="320dp"
     android:layout_height="250dp"
-    android:layout_marginTop="24dp"
+
+    android:src="@drawable/banner1"
+    android:scaleType="centerCrop"
     app:icvp_center_page_scale_offset="10dp"
     app:icvp_interpolator="@android:anim/accelerate_decelerate_interpolator"
     app:icvp_max_page_scale="0.8"
