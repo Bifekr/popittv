@@ -3,7 +3,7 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:id="@+id/card_dd"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"
+  android:layout_height="wrap_content"
   android:layout_marginRight="8dp"
   android:orientation="vertical"
   android:elevation="12dp"
@@ -12,35 +12,21 @@
   <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="100dp"
     android:orientation="vertical">
-    <TextView
-      android:id="@+id/titleChannelEn_itemCofie"
-      android:layout_width="match_parent"
-      android:layout_height="48dp"
-      android:layout_gravity="center"
-      android:gravity="center"
-      android:text="fghfh fghfg jk dr jlc df kifg sdf hjl cfggh "
-      android:textColor="@color/black"
-      android:textSize="12sp"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent" />
-
     <androidx.cardview.widget.CardView
-      app:cardUseCompatPadding="false"
       android:elevation="24dp"
+      app:cardUseCompatPadding="false"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       app:cardCornerRadius="50dp">
 
-        <ImageView
-          android:id="@+id/ivPoster_itemCoffie"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
+      <ImageView
+        android:id="@+id/ivPoster_itemCoffie"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
-          android:scaleType="centerCrop"
-          android:src="@drawable/iv_header_12" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/iv_header_12" />
 
       <LinearLayout
         android:layout_marginBottom="5dp"
@@ -70,13 +56,13 @@
     </androidx.cardview.widget.CardView>
 
   </RelativeLayout>
- <!-- <ImageView
-    android:src="@drawable/iv_header_11"
-    android:id="@+id/ivPoster_itemVideo"
-    android:layout_width="wrap_content"
-    android:layout_height="220dp"
-    android:layout_marginTop="-220dp"
-    android:layout_gravity="end"
-    android:elevation="18dp" />-->
+  <!-- <ImageView
+     android:src="@drawable/iv_header_11"
+     android:id="@+id/ivPoster_itemVideo"
+     android:layout_width="wrap_content"
+     android:layout_height="220dp"
+     android:layout_marginTop="-220dp"
+     android:layout_gravity="end"
+     android:elevation="18dp" />-->
 </LinearLayout>
 

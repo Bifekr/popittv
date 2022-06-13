@@ -91,7 +91,7 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((View) object);
-        mViews.set(position, null);
+       // mViews.set(position, null);
     }
 
     private void bind(FunnyDataModel item, View view) {

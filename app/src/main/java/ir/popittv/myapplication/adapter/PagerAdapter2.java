@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -17,12 +16,12 @@ import java.util.List;
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.models.FunnyDataModel;
 
-public class PagerAdapter extends androidx.viewpager.widget.PagerAdapter {
+public class PagerAdapter2 extends androidx.viewpager.widget.PagerAdapter {
 
     private Context context;
     private List<FunnyDataModel> funnyDataModels;
 
-    public PagerAdapter(Context context) {
+    public PagerAdapter2(Context context) {
         this.context = context;
     }
 
@@ -38,7 +37,7 @@ public class PagerAdapter extends androidx.viewpager.widget.PagerAdapter {
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-      return   view.equals(object);
+        return   view.equals(object);
     }
 
     @Override
@@ -55,22 +54,18 @@ public class PagerAdapter extends androidx.viewpager.widget.PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.item_cafie, container, false);
-        ImageView imageView = view.findViewById(R.id.ivPoster_itemCoffie);
-        TextView textView = view.findViewById(R.id.titleEn_itemCofie);
+        View view= LayoutInflater.from(context).inflate(R.layout.item_cafie,container,false);
+        ImageView imageView=view.findViewById(R.id.ivPoster_itemCoffie);
+        TextView textView=view.findViewById(R.id.titleEn_itemCofie);
         TextView titleFa = view.findViewById(R.id.titlefa_itemCofie);
-       // TextView titleChann_en = view.findViewById(R.id.titleChannelEn_itemCofie);
+      //  TextView titleChann_en = view.findViewById(R.id.titleChannelEn_itemCofie);
         // RoundedImageView channel = view.findViewById(R.id.profileChannel_itemCofie);
 
 
         Glide.with(context).load(funnyDataModels.get(position).getPoster()).into(imageView);
         textView.setText(funnyDataModels.get(position).getTitle_en());
         titleFa.setText(funnyDataModels.get(position).getTitle_fa());
-      //  titleChann_en.setText(funnyDataModels.get(position).getTitle_en());
-
-        imageView.setOnClickListener(v -> {
-            Toast.makeText(context, "OnClick"+funnyDataModels.get(position).getTitle_en(), Toast.LENGTH_SHORT).show();
-        });
+     //   titleChann_en.setText(funnyDataModels.get(position).getTitle_en());
 
         container.addView(view);
 

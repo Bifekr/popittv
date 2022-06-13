@@ -20,6 +20,7 @@ import ir.popittv.myapplication.ShadowTransformer;
 import ir.popittv.myapplication.adapter.CardPagerAdapter;
 import ir.popittv.myapplication.adapter.Frg1Rv1_Adapter;
 import ir.popittv.myapplication.adapter.PagerAdapter;
+import ir.popittv.myapplication.adapter.PagerAdapter2;
 import ir.popittv.myapplication.databinding.FragmentMain2Binding;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
@@ -28,6 +29,7 @@ public class FragmentMain2 extends Fragment {
 
     Frg1Rv1_Adapter adapter;
     PagerAdapter pagerAdapter;
+    PagerAdapter2 pagerAdapter2;
     private FragmentMain2Binding binding;
     private MainViewModel mainViewModel;
     Animation animLogoMove,animTransition;
@@ -77,11 +79,15 @@ public class FragmentMain2 extends Fragment {
         mainViewModel.requestFunny_best();
 
         // init adapters
-       adapter = new Frg1Rv1_Adapter(getActivity());
+        adapter = new Frg1Rv1_Adapter(getActivity());
         pagerAdapter = new PagerAdapter(getActivity());
+        pagerAdapter2 = new PagerAdapter2(getActivity());
+
         mCardAdapter = new CardPagerAdapter(getActivity());
 
         binding.viewPager.setAdapter(pagerAdapter);
+        binding.viewPager2.setAdapter(pagerAdapter2);
+
      /*  binding.ivLogo.setOnClickListener(v -> {
            binding.ivLogo.setVisibility(View.VISIBLE);
            binding.ivLogo.startAnimation(animLogoMove);
@@ -93,7 +99,7 @@ public class FragmentMain2 extends Fragment {
         mCardShadowTransformer = new ShadowTransformer(binding.viewpagerSlideFrg2, mCardAdapter);
         binding.viewpagerSlideFrg2.setAdapter(mCardAdapter);
         binding.viewpagerSlideFrg2.setPageTransformer(false, mCardShadowTransformer);
-        binding.viewpagerSlideFrg2.setOffscreenPageLimit(1);
+        binding.viewpagerSlideFrg2.setOffscreenPageLimit(3);
 
 
         //get data from dataModel
@@ -111,6 +117,7 @@ public class FragmentMain2 extends Fragment {
                 if (funnyDataModels!=null) {
                     adapter.setData(funnyDataModels);
                     pagerAdapter.setData(funnyDataModels);
+                    pagerAdapter2.setData(funnyDataModels);
                     for (FunnyDataModel fuuny : funnyDataModels
                     ) {
                         mCardAdapter.addCardItem(fuuny);
