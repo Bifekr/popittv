@@ -7,6 +7,6 @@
 
   <solid
     android:angle="180"
-    android:color="@color/reply_red_400" />
+    android:color="@color/banner_background" />
 
 </shape>

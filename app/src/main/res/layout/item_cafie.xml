@@ -6,6 +6,7 @@
   android:layout_height="match_parent"
   android:layout_marginRight="8dp"
   android:orientation="vertical"
+  android:elevation="12dp"
   android:padding="5dp">
 
   <RelativeLayout
@@ -14,9 +15,9 @@
     android:layout_marginBottom="100dp"
     android:orientation="vertical">
     <TextView
-      android:id="@+id/tvTitle_En_itemVideo"
+      android:id="@+id/titleChannelEn_itemCofie"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_height="48dp"
       android:layout_gravity="center"
       android:gravity="center"
       android:text="fghfh fghfg jk dr jlc df kifg sdf hjl cfggh "
@@ -27,33 +28,31 @@
       app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.cardview.widget.CardView
-      android:elevation="12dp"
+      app:cardUseCompatPadding="false"
+      android:elevation="24dp"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       app:cardCornerRadius="50dp">
 
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/reply_orange_400"
-        android:orientation="vertical">
-
         <ImageView
-          android:id="@+id/ivDecor_itemCofie"
+          android:id="@+id/ivPoster_itemCoffie"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
+
+          android:scaleType="centerCrop"
           android:src="@drawable/iv_header_12" />
 
-      </LinearLayout>
-
       <LinearLayout
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/gradian3"
         android:layout_width="match_parent"
+        android:gravity="bottom"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="50dp">
+        android:padding="20dp">
 
         <TextView
-          android:id="@+id/tvChannel_itemCofie"
+          android:id="@+id/titleEn_itemCofie"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="d-channl-title-channel"
@@ -62,7 +61,7 @@
           android:textStyle="bold" />
 
         <TextView
-          android:id="@+id/tvChannel2_itemCofie"
+          android:id="@+id/titlefa_itemCofie"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="d-channl-title-channel"
@@ -71,12 +70,13 @@
     </androidx.cardview.widget.CardView>
 
   </RelativeLayout>
-  <ImageView
+ <!-- <ImageView
     android:src="@drawable/iv_header_11"
     android:id="@+id/ivPoster_itemVideo"
     android:layout_width="wrap_content"
     android:layout_height="220dp"
     android:layout_marginTop="-220dp"
     android:layout_gravity="end"
-    android:elevation="18dp" />
+    android:elevation="18dp" />-->
 </LinearLayout>
+

@@ -8,14 +8,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
+
 
 import com.bumptech.glide.Glide;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
 import ir.popittv.myapplication.R;
-import ir.popittv.myapplication.databinding.ItemFrg1Rv1Binding;
+
 import ir.popittv.myapplication.models.FunnyDataModel;
 
 public class PagerAdapter extends androidx.viewpager.widget.PagerAdapter {
@@ -57,11 +58,17 @@ public class PagerAdapter extends androidx.viewpager.widget.PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
         View view=LayoutInflater.from(context).inflate(R.layout.item_cafie,container,false);
-        ImageView imageView=view.findViewById(R.id.ivPoster_itemVideo);
-        TextView textView=view.findViewById(R.id.tvTitle_En_itemVideo);
+        ImageView imageView=view.findViewById(R.id.ivPoster_itemCoffie);
+        TextView textView=view.findViewById(R.id.titleEn_itemCofie);
+        TextView titleFa = view.findViewById(R.id.titlefa_itemCofie);
+        TextView titleChann_en = view.findViewById(R.id.titleChannelEn_itemCofie);
+       // RoundedImageView channel = view.findViewById(R.id.profileChannel_itemCofie);
+
 
         Glide.with(context).load(funnyDataModels.get(position).getPoster()).into(imageView);
         textView.setText(funnyDataModels.get(position).getTitle_en());
+      titleFa.setText(funnyDataModels.get(position).getTitle_fa());
+       titleChann_en.setText(funnyDataModels.get(position).getTitle_en());
 
         container.addView(view);
 

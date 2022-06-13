@@ -1,8 +1,5 @@
 package ir.popittv.myapplication.response;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 import ir.popittv.myapplication.models.FunnyDataModel;
@@ -16,8 +13,9 @@ public class FunnyResponse {
         return funny;
     }
 
-    private List<FunnyDataModel> view;
+
+    private List<FunnyDataModel> best;
     public List<FunnyDataModel> getFunny_view() {
-        return view;
+        return best;
     }
 }

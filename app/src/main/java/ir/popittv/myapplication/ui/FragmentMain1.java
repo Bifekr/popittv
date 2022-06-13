@@ -75,7 +75,7 @@ public class FragmentMain1 extends Fragment {
                  adapter2.getDataCafe(funnyDataModels);
                  for (FunnyDataModel cafe:funnyDataModels
                       ) {
-                   // Toast.makeText(getContext(), "+++" + cafe.getPoster(), Toast.LENGTH_SHORT).show();
+                  //Toast.makeText(getActivity(), "+++" + cafe.getPoster(), Toast.LENGTH_SHORT).show();
                  }
                  
              }else {

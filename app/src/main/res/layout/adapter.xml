@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.cardview.widget.CardView
-  android:padding="18dp"
   android:id="@+id/cardView"
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
@@ -12,9 +11,9 @@ app:cardCornerRadius="18dp"
   xmlns:android="http://schemas.android.com/apk/res/android">
 
   <androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="240dp"
+    android:layout_width="230dp"
     android:layout_height="150dp"
-
+    android:padding="5dp"
     app:layout_constraintBottom_toBottomOf="@id/parentChannel"
     app:layout_constraintEnd_toEndOf="@id/parentChannel"
     app:layout_constraintHeight_percent=".8"
@@ -45,19 +44,20 @@ app:cardCornerRadius="18dp"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/banner1" />
+        android:src="@drawable/trophy" />
     </androidx.cardview.widget.CardView>
 
     <ImageView
-      android:layout_width="30dp"
-      android:layout_height="40dp"
+      android:layout_width="40dp"
+      android:cropToPadding="true"
+      android:layout_height="50dp"
       android:src="@drawable/cup"
       android:elevation="18dp"
       android:scaleType="centerCrop"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintBottom_toBottomOf="@id/itemProfile_channel_videoThumb"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.99"
+      app:layout_constraintHorizontal_bias="0.96"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintVertical_bias="1" />
 
@@ -82,7 +82,8 @@ app:cardCornerRadius="18dp"
         android:layout_marginLeft="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="برترین ویدیوها"
+        android:text="Best"
+        android:textStyle="bold"
         android:textSize="8sp"/>
 
 

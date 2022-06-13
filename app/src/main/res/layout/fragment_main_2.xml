@@ -30,8 +30,8 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:clipToPadding="false"
-    android:paddingEnd="180dp"
-    android:paddingStart="180dp"
+    android:paddingEnd="220dp"
+    android:paddingStart="185dp"
     android:overScrollMode="never"
     android:paddingBottom="30dp"
     app:layout_constraintEnd_toEndOf="parent"
@@ -51,31 +51,8 @@
           app:layout_constraintVertical_bias="0.0" /> -->
   <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
     android:id="@+id/view_pager"
-
-    android:layout_width="320dp"
-    android:layout_height="250dp"
-    app:icvp_center_page_scale_offset="10dp"
-    app:icvp_interpolator="@android:anim/accelerate_decelerate_interpolator"
-    app:icvp_max_page_scale="0.8"
-    app:icvp_medium_scaled="false"
-    app:icvp_min_page_scale="0.55"
-    app:icvp_min_page_scale_offset="5dp"
-    app:icvp_scroll_duration="250"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toStartOf="@id/view_pager2"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/viewpagerSlide_frg2"
-    app:layout_constraintHorizontal_bias=".1"
-
-    />
-
-  <ImageView
-    android:id="@+id/view_pager2"
-    android:layout_width="320dp"
-    android:layout_height="250dp"
-
-    android:src="@drawable/banner1"
-    android:scaleType="centerCrop"
+    android:layout_width="wrap_content"
+    android:layout_height="420dp"
     app:icvp_center_page_scale_offset="10dp"
     app:icvp_interpolator="@android:anim/accelerate_decelerate_interpolator"
     app:icvp_max_page_scale="0.8"
@@ -85,11 +62,13 @@
     app:icvp_scroll_duration="250"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toEndOf="@id/view_pager"
+    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/viewpagerSlide_frg2"
-    app:layout_constraintHorizontal_bias=".91"
+    app:layout_constraintHorizontal_bias="0"
 
     />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
