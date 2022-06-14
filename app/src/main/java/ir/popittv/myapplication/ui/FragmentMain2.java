@@ -12,7 +12,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ir.popittv.myapplication.R;
@@ -21,8 +24,10 @@ import ir.popittv.myapplication.adapter.CardPagerAdapter;
 import ir.popittv.myapplication.adapter.Frg1Rv1_Adapter;
 import ir.popittv.myapplication.adapter.PagerAdapter;
 import ir.popittv.myapplication.adapter.PagerAdapter2;
+import ir.popittv.myapplication.adapter.StaticRvAdapter;
 import ir.popittv.myapplication.databinding.FragmentMain2Binding;
 import ir.popittv.myapplication.models.FunnyDataModel;
+import ir.popittv.myapplication.models.StaticRvModel;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
 public class FragmentMain2 extends Fragment {
@@ -30,6 +35,8 @@ public class FragmentMain2 extends Fragment {
     Frg1Rv1_Adapter adapter;
     PagerAdapter pagerAdapter;
     PagerAdapter2 pagerAdapter2;
+    StaticRvAdapter staticRvAdapter;
+
     private FragmentMain2Binding binding;
     private MainViewModel mainViewModel;
     Animation animLogoMove,animTransition;
@@ -48,18 +55,18 @@ public class FragmentMain2 extends Fragment {
         animLogoMove = AnimationUtils.loadAnimation(getContext(), R.anim.logo_move);
         animTransition = AnimationUtils.loadAnimation(getContext(), R.anim.transition);
 
+        ArrayList<StaticRvModel> staticRvModels=new ArrayList<>();
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_1,"Holloween"));
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_2,"Animals"));
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_3,"Dance-Music"));
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"Family"));
+        staticRvAdapter = new StaticRvAdapter(staticRvModels);
+        binding.rvSubMenuFunny.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL,false));
+        binding.rvSubMenuFunny.setAdapter(staticRvAdapter);
 
- /*       mCardAdapter = new CardPagerAdapter();
-        mCardAdapter.addCardItem(new CardItem(R.drawable.banner1, R.string.alarms_destination_label));
-        mCardAdapter.addCardItem(new CardItem(R.drawable.banner2, R.string.app_name));
-        mCardAdapter.addCardItem(new CardItem(R.drawable.banner3, R.string.app_name));
-        mCardAdapter.addCardItem(new CardItem(R.drawable.banner4, R.string.app_name));
 
-        mCardShadowTransformer = new ShadowTransformer(binding.viewpagerSlideFrg2,  mCardAdapter);
 
-        binding.viewpagerSlideFrg2.setAdapter(mCardAdapter);
-        binding.viewpagerSlideFrg2.setPageTransformer(false, mCardShadowTransformer);
-        binding.viewpagerSlideFrg2.setOffscreenPageLimit(3);*/
+
 
 
 
