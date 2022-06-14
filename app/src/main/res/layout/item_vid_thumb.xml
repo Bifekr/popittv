@@ -2,16 +2,25 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
-
+<androidx.constraintlayout.widget.ConstraintLayout
+  android:layout_width="match_parent"
+  android:padding="8dp"
+  android:layout_height="170dp">
   <androidx.cardview.widget.CardView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    app:layout_constraintWidth_percent="1"
+    app:layout_constraintHeight_percent="1"
     android:layout_margin="4dp"
     app:cardCornerRadius="24dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-      android:layout_width="300dp"
-      android:layout_height="170dp"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
       android:background="@drawable/gradiant4">
 
       <androidx.cardview.widget.CardView
@@ -52,7 +61,7 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/conitemvideo"
-       >
+        >
 
         <TextView
           android:textColor="@color/black"
@@ -90,6 +99,9 @@
         app:layout_constraintBottom_toTopOf="@id/parentChannel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintHeight_percent=".7"
+        app:layout_constraintVertical_bias=".5"
+        app:layout_constraintWidth_percent=".12"
         app:layout_constraintStart_toEndOf="@id/conitemvideo"
         app:layout_constraintTop_toTopOf="parent">
         <LinearLayout
@@ -97,7 +109,7 @@
           android:layout_height="match_parent"
           android:gravity="center"
           android:orientation="vertical"
-         android:paddingTop="9dp"
+          android:paddingTop="9dp"
           app:layout_constraintBottom_toBottomOf="@id/parentDetail"
           app:layout_constraintEnd_toEndOf="@id/parentDetail"
           app:layout_constraintStart_toStartOf="@id/parentDetail"
@@ -105,7 +117,7 @@
           <ImageView
             android:layout_width="15dp"
             android:layout_height="18dp"
-            android:src="@drawable/ic_like_selected" />
+            android:src="@drawable/ic_baseline_eye_24" />
           <TextView
             android:id="@+id/txt1"
             android:layout_width="match_parent"
@@ -132,7 +144,7 @@
           <ImageView
             android:layout_width="15dp"
             android:layout_height="18dp"
-            android:src="@drawable/ic_view_color" />
+            android:src="@drawable/ic_like" />
           <TextView
             android:id="@+id/txt22"
             android:layout_width="match_parent"
@@ -159,7 +171,7 @@
           <ImageView
             android:layout_width="15dp"
             android:layout_height="18dp"
-            android:src="@drawable/ic_mark_color_2" />
+            android:src="@drawable/ic_bookmark_24dp" />
         </LinearLayout>
 
 
@@ -177,34 +189,37 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias=".95">
 
-  <com.makeramen.roundedimageview.RoundedImageView
-    android:elevation="12dp"
-    android:id="@+id/itemProfile_channel_videoThumb"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:src="@drawable/avatar_2"
-    app:riv_border_color="@color/yellow_active"
-    app:riv_border_width="1dp"
-    app:riv_corner_radius="50dp" />
-
-
-
-
-<!--
-<com.makeramen.roundedimageview.RoundedImageView
+        <com.makeramen.roundedimageview.RoundedImageView
           android:elevation="12dp"
           android:id="@+id/itemProfile_channel_videoThumb"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:src="@drawable/avatar_2"
-          app:riv_border_color="@color/yellow"
+          app:riv_border_color="@color/yellow_active"
           app:riv_border_width="1dp"
           app:riv_corner_radius="50dp" />
--->
+
+
+
+
+        <!--
+        <com.makeramen.roundedimageview.RoundedImageView
+                  android:elevation="12dp"
+                  android:id="@+id/itemProfile_channel_videoThumb"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:src="@drawable/avatar_2"
+                  app:riv_border_color="@color/yellow"
+                  app:riv_border_width="1dp"
+                  app:riv_corner_radius="50dp" />
+        -->
 
       </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
   </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

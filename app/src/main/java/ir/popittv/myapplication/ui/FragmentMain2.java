@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +22,7 @@ import java.util.List;
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.ShadowTransformer;
 import ir.popittv.myapplication.adapter.CardPagerAdapter;
+import ir.popittv.myapplication.adapter.DynamicRvAdapter;
 import ir.popittv.myapplication.adapter.Frg1Rv1_Adapter;
 import ir.popittv.myapplication.adapter.PagerAdapter;
 import ir.popittv.myapplication.adapter.PagerAdapter2;
@@ -36,6 +38,7 @@ public class FragmentMain2 extends Fragment {
     PagerAdapter pagerAdapter;
     PagerAdapter2 pagerAdapter2;
     StaticRvAdapter staticRvAdapter;
+    DynamicRvAdapter dynamicRvAdapter;
 
     private FragmentMain2Binding binding;
     private MainViewModel mainViewModel;
@@ -58,6 +61,10 @@ public class FragmentMain2 extends Fragment {
         ArrayList<StaticRvModel> staticRvModels=new ArrayList<>();
         staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_1,"Holloween"));
         staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_2,"Animals"));
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_3,"Dance-Music"));
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"Family"));
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_3,"Dance-Music"));
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"Family"));
         staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_3,"Dance-Music"));
         staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"Family"));
         staticRvAdapter = new StaticRvAdapter(staticRvModels);
@@ -89,11 +96,13 @@ public class FragmentMain2 extends Fragment {
         adapter = new Frg1Rv1_Adapter(getActivity());
         pagerAdapter = new PagerAdapter(getActivity());
         pagerAdapter2 = new PagerAdapter2(getActivity());
-
         mCardAdapter = new CardPagerAdapter(getActivity());
+        dynamicRvAdapter = new DynamicRvAdapter(getActivity());
 
         binding.viewPager.setAdapter(pagerAdapter);
         binding.viewPager2.setAdapter(pagerAdapter2);
+        binding.rvAllFunny.setAdapter(dynamicRvAdapter);
+        binding.rvAllFunny.setLayoutManager(new GridLayoutManager(getActivity(),3,GridLayoutManager.VERTICAL,false));
 
      /*  binding.ivLogo.setOnClickListener(v -> {
            binding.ivLogo.setVisibility(View.VISIBLE);
@@ -125,6 +134,7 @@ public class FragmentMain2 extends Fragment {
                     adapter.setData(funnyDataModels);
                     pagerAdapter.setData(funnyDataModels);
                     pagerAdapter2.setData(funnyDataModels);
+                    dynamicRvAdapter.setData(funnyDataModels);
                     for (FunnyDataModel fuuny : funnyDataModels
                     ) {
                         mCardAdapter.addCardItem(fuuny);
