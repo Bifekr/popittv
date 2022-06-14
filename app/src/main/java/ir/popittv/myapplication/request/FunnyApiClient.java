@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import ir.popittv.myapplication.AppExecuter;
+import ir.popittv.myapplication.utils.AppExecuter;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.response.FunnyResponse;
 import retrofit2.Call;
@@ -28,11 +28,13 @@ public class FunnyApiClient {
     }
 
     private MutableLiveData<List<FunnyDataModel>> mFunny_best;
+
     //Constructor
     private FunnyApiClient(){
         mFunny_best = new MutableLiveData<>();
 
     }
+
     //liveData return Mutable content of funny_best
     public LiveData<List<FunnyDataModel>> getFunny_best(){
         return mFunny_best;
@@ -56,7 +58,6 @@ public class FunnyApiClient {
             }
         },3, TimeUnit.MINUTES);
     }
-
     //create Runnable class for set to AppExecutor
     private class FunnyBest_Runnable implements Runnable{
 

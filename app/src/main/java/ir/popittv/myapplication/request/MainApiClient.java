@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import ir.popittv.myapplication.AppExecuter;
+import ir.popittv.myapplication.utils.AppExecuter;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.response.FunnyResponse;
 import retrofit2.Call;
@@ -52,14 +52,14 @@ public class MainApiClient {
 
 
     //retrieve data from localHost
-    public void retrieveCafe() {
+    public void retrieveCafe(String id_SubMenu) {
 
 
         if (cafeBazarRunnable!=null) {
             cafeBazarRunnable = null;
         }
 
-        cafeBazarRunnable = new RetrieveCafeBazarRunnable();
+        cafeBazarRunnable = new RetrieveCafeBazarRunnable(id_SubMenu);
 
         final Future myHandler2 = AppExecuter.getAppExecuter().networkIo().submit(cafeBazarRunnable);
 
@@ -76,9 +76,10 @@ public class MainApiClient {
 
 
         private final boolean canclable;
+        String id_sumMenu;
 
-        public RetrieveCafeBazarRunnable() {
-
+        public RetrieveCafeBazarRunnable(String id_sumMenu) {
+            this.id_sumMenu=id_sumMenu;
             canclable = false;
         }
 
@@ -91,11 +92,11 @@ public class MainApiClient {
                 if (canclable)
                     return;
 
-                Response response2 = cafeCallMethod().execute();
+                Response response2 = cafeCallMethod(id_sumMenu).execute();
 
                 if (response2.code()==200) {
                     assert response2.body()!=null;
-                    List<FunnyDataModel> cafeModels = new ArrayList<>(((FunnyResponse) response2.body()).getFunny_all());
+                    List<FunnyDataModel> cafeModels = new ArrayList<>(((FunnyResponse) response2.body()).getFunny());
 
                     mCafe.postValue(cafeModels);
                 } else {
@@ -113,8 +114,8 @@ public class MainApiClient {
         }
 
 
-        private Call<FunnyResponse> cafeCallMethod() {
-            return Service.getApiClient().getFunny_all();
+        private Call<FunnyResponse> cafeCallMethod(String id_subMenu) {
+            return Service.getApiClient().getFunny(id_subMenu);
 
         }
 

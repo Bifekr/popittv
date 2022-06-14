@@ -9,7 +9,7 @@ public class FunnyResponse {
 
     private List<FunnyDataModel> funny;
 
-    public List<FunnyDataModel> getFunny_all() {
+    public List<FunnyDataModel> getFunny() {
         return funny;
     }
 

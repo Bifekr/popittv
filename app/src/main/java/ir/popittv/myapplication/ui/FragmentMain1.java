@@ -44,7 +44,8 @@ public class FragmentMain1 extends Fragment {
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
         mainViewModel.requestFunny_best();
-        mainViewModel.retrieveCafe();
+
+        mainViewModel.retrieveCafe("9");
 
         configrc();
 

@@ -22,8 +22,8 @@ public class MainViewModel extends ViewModel {
         return mainRepository.getCafeBazar();
     }
 
-    public void retrieveCafe() {
-        mainRepository.retrieveCafe();
+    public void retrieveCafe(String id_sumMenu) {
+        mainRepository.retrieveCafe(id_sumMenu);
     }
 
     ///////////  funny Best /////////////////

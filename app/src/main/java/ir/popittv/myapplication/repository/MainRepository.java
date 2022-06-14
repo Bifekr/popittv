@@ -32,8 +32,8 @@ public class MainRepository {
     public LiveData<List<FunnyDataModel>> getCafeBazar(){
        return mainApiClient.getCafeBazar();
     }
-    public void retrieveCafe(){
-        mainApiClient.retrieveCafe();
+    public void retrieveCafe(String id_sumMenu){
+        mainApiClient.retrieveCafe(id_sumMenu);
     }
 
 
