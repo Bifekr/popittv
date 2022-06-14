@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import ir.popittv.myapplication.R;
-import ir.popittv.myapplication.databinding.ItemFrg1Rv1Binding;
+import ir.popittv.myapplication.databinding.ItemVidThumbBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
 
 public class Frg1Rv1_Adapter extends RecyclerView.Adapter<Frg1Rv1_Adapter.Frg1Rv1_ViewHolder> {
@@ -33,7 +33,7 @@ public class Frg1Rv1_Adapter extends RecyclerView.Adapter<Frg1Rv1_Adapter.Frg1Rv
 
       //  View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_frg1_rv1,parent,false);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        ItemFrg1Rv1Binding binding= DataBindingUtil.inflate(inflater,R.layout.item_frg1_rv1,parent,false);
+        ItemVidThumbBinding binding= DataBindingUtil.inflate(inflater,R.layout.item_vid_thumb,parent,false);
 
         return new Frg1Rv1_ViewHolder(binding);
     }
@@ -64,12 +64,12 @@ public class Frg1Rv1_Adapter extends RecyclerView.Adapter<Frg1Rv1_Adapter.Frg1Rv
 
     public class Frg1Rv1_ViewHolder extends RecyclerView.ViewHolder{
 
-        private ItemFrg1Rv1Binding binding;
+        private ItemVidThumbBinding binding;
       //  ImageView iv_poster;
        // TextView tv_title;
 
 
-        public Frg1Rv1_ViewHolder(@NonNull ItemFrg1Rv1Binding binding) {
+        public Frg1Rv1_ViewHolder(@NonNull ItemVidThumbBinding binding) {
             super(binding.getRoot());
 
             this.binding=binding;

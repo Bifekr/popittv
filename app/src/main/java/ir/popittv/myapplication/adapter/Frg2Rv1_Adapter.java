@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import ir.popittv.myapplication.R;
-import ir.popittv.myapplication.databinding.ItemFrg1Rv1Binding;
+import ir.popittv.myapplication.databinding.ItemVidThumbBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
 
 public class Frg2Rv1_Adapter extends RecyclerView.Adapter<Frg2Rv1_Adapter.Rv2ViewHolder> {
@@ -36,7 +36,7 @@ public class Frg2Rv1_Adapter extends RecyclerView.Adapter<Frg2Rv1_Adapter.Rv2Vie
     public Rv2ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater=LayoutInflater.from(parent.getContext());
-        ItemFrg1Rv1Binding binding= DataBindingUtil.inflate(inflater, R.layout.item_frg1_rv1,
+        ItemVidThumbBinding binding= DataBindingUtil.inflate(inflater, R.layout.item_vid_thumb,
                 parent,false);
 
         return new Rv2ViewHolder(binding);
@@ -65,9 +65,9 @@ public class Frg2Rv1_Adapter extends RecyclerView.Adapter<Frg2Rv1_Adapter.Rv2Vie
 
     public class Rv2ViewHolder extends RecyclerView.ViewHolder{
 
-        private ItemFrg1Rv1Binding binding;
+        private ItemVidThumbBinding binding;
 
-        public Rv2ViewHolder(@NonNull ItemFrg1Rv1Binding binding) {
+        public Rv2ViewHolder(@NonNull ItemVidThumbBinding binding) {
             super(binding.getRoot());
 
             this.binding=binding;
