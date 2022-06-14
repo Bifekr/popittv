@@ -44,4 +44,26 @@ public class MainRepository {
         funnyApiClient.requestFunny_best();
     }
 
+    public LiveData<List<FunnyDataModel>> getFunny_view(){
+       return funnyApiClient.getFunny_view();
+    }
+    public void requestFunny_view(){funnyApiClient.requestFunny_view();}
+
+    public LiveData<List<FunnyDataModel>> getFunny_liky(){
+        return funnyApiClient.getFunny_liky();
+    }
+    public void requestFunny_liky(){
+        funnyApiClient.requestFunny_liky();
+    }
+
+    public LiveData<List<FunnyDataModel>> getFunny_subMenu(){
+        return funnyApiClient.getFunny_subMenu();
+    }
+
+    public void requestFunny_subMenu(String id_subMenu){
+        funnyApiClient.requestFunny_subMenu(id_subMenu);
+    }
+
+
+
 }

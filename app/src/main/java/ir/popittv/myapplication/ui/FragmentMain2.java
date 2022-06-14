@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -75,11 +76,6 @@ public class FragmentMain2 extends Fragment {
 
 
 
-
-
-
-
-
         return binding.getRoot();
 
     }
@@ -91,18 +87,12 @@ public class FragmentMain2 extends Fragment {
 
         //set data into dataModel
         mainViewModel.requestFunny_best();
-
+        mainViewModel.requestFunny_view();
+        mainViewModel.requestFunny_liky();
+        mainViewModel.requestFunny_subMenu("5");
         // init adapters
-        adapter = new Frg1Rv1_Adapter(getActivity());
-        pagerAdapter = new PagerAdapter(getActivity());
-        pagerAdapter2 = new PagerAdapter2(getActivity());
-        mCardAdapter = new CardPagerAdapter(getActivity());
-        dynamicRvAdapter = new DynamicRvAdapter(getActivity());
+        initAdapter();
 
-        binding.viewPager.setAdapter(pagerAdapter);
-        binding.viewPager2.setAdapter(pagerAdapter2);
-        binding.rvAllFunny.setAdapter(dynamicRvAdapter);
-        binding.rvAllFunny.setLayoutManager(new GridLayoutManager(getActivity(),3,GridLayoutManager.VERTICAL,false));
 
      /*  binding.ivLogo.setOnClickListener(v -> {
            binding.ivLogo.setVisibility(View.VISIBLE);
@@ -119,22 +109,60 @@ public class FragmentMain2 extends Fragment {
 
 
         //get data from dataModel
-        getBestFunny();
+        getFunny_best();
+        getFunny_view();
+        getFunny_liky();
+        getFunny_subMenu();
 
 
     }
 
+    private void getFunny_subMenu() {
 
-    private void getBestFunny() {
+        mainViewModel.getFunny_subMenu().observe(requireActivity(), new Observer<List<FunnyDataModel>>() {
+            @Override
+            public void onChanged(List<FunnyDataModel> funnyDataModels) {
+                if (funnyDataModels!=null){
+                    dynamicRvAdapter.setData(funnyDataModels);
+                }
+            }
+        });
+    }
+
+    private void initAdapter() {
+        adapter = new Frg1Rv1_Adapter(getActivity());
+        pagerAdapter = new PagerAdapter(getActivity());
+        pagerAdapter2 = new PagerAdapter2(getActivity());
+        mCardAdapter = new CardPagerAdapter(getActivity());
+        dynamicRvAdapter = new DynamicRvAdapter(getActivity());
+
+        binding.viewPager.setAdapter(pagerAdapter);
+        binding.viewPager2.setAdapter(pagerAdapter2);
+        binding.rvAllFunny.setAdapter(dynamicRvAdapter);
+        binding.rvAllFunny.setLayoutManager(new GridLayoutManager
+                (getActivity(),3,GridLayoutManager.VERTICAL,false));
+    }
+
+    private void getFunny_liky() {
+        mainViewModel.getFunny_liky().observe(requireActivity(), new Observer<List<FunnyDataModel>>() {
+            @Override
+            public void onChanged(List<FunnyDataModel> funnyDataModels) {
+                if (funnyDataModels!=null){
+                    pagerAdapter2.setData(funnyDataModels);
+                }
+            }
+        });
+    }
+
+
+    private void getFunny_best() {
 
         mainViewModel.getFunny_best().observe(requireActivity(), new Observer<List<FunnyDataModel>>() {
             @Override
             public void onChanged(List<FunnyDataModel> funnyDataModels) {
                 if (funnyDataModels!=null) {
                     adapter.setData(funnyDataModels);
-                    pagerAdapter.setData(funnyDataModels);
-                    pagerAdapter2.setData(funnyDataModels);
-                    dynamicRvAdapter.setData(funnyDataModels);
+
                     for (FunnyDataModel fuuny : funnyDataModels
                     ) {
                         mCardAdapter.addCardItem(fuuny);
@@ -145,6 +173,22 @@ public class FragmentMain2 extends Fragment {
             }
         });
 
+    }
+    private void getFunny_view(){
+        mainViewModel.getFunny_view().observe(requireActivity(), new Observer<List<FunnyDataModel>>() {
+            @Override
+            public void onChanged(List<FunnyDataModel> funnyDataModels) {
+                if (funnyDataModels!=null){
+                    pagerAdapter.setData(funnyDataModels);
+                    for (FunnyDataModel funnyDataModel:funnyDataModels)
+                    {
+                        Toast.makeText(getActivity(), ""+funnyDataModel.getTitle_en(), Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    Toast.makeText(getActivity(), "ggggg", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override

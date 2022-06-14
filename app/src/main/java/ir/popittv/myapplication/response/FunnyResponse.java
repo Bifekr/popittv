@@ -15,7 +15,13 @@ public class FunnyResponse {
 
 
     private List<FunnyDataModel> best;
-    public List<FunnyDataModel> getFunny_view() {
+    public List<FunnyDataModel> getFunny_best() {
         return best;
     }
+
+    private List<FunnyDataModel> view;
+    public List<FunnyDataModel> getView(){return view;}
+
+    private List<FunnyDataModel> liky;
+    public List<FunnyDataModel> getLiky(){return liky;}
 }
