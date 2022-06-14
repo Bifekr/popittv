@@ -211,6 +211,7 @@ public class FunnyApiClient {
                     List<FunnyDataModel> funnyDataModels = new ArrayList<>(((FunnyResponse) response.body()).getLiky());
                     mFunny_liky.postValue(funnyDataModels);
                 } else {
+
                     assert response.errorBody()!=null;
                     String error = response.errorBody().string();
                     Log.i("tagy", "run: " + error);
