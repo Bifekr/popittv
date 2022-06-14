@@ -4,17 +4,18 @@
   android:id="@+id/card_dd"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:layout_marginRight="8dp"
   android:orientation="vertical"
-  android:elevation="12dp"
-  android:padding="5dp">
+
+ >
 
   <RelativeLayout
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
     <androidx.cardview.widget.CardView
-      android:elevation="24dp"
+      app:cardElevation="6dp"
+      android:layout_margin="12dp"
       app:cardUseCompatPadding="false"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
@@ -29,7 +30,6 @@
         android:src="@drawable/iv_header_12" />
 
       <LinearLayout
-        android:layout_marginBottom="5dp"
         android:background="@drawable/gradian3"
         android:layout_width="match_parent"
         android:gravity="bottom"
