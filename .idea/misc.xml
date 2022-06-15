@@ -14,39 +14,67 @@
         <entry key="..\:/popitv/PopitTv/app/src/main/res/layout/fragment_main_5.xml" value="0.32037037037037036" />
         <entry key="..\:/popitv/PopitTv/app/src/main/res/layout/fragment_main_6.xml" value="0.32037037037037036" />
         <entry key="..\:/popitv/PopitTv/app/src/main/res/layout/fragment_main_7.xml" value="0.32037037037037036" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/avatar_none.xml" value="0.30684931506849317" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/avd_edit_to_reply.xml" value="0.30684931506849317" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/back.xml" value="0.3446153846153846" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/back_view.xml" value="0.3446153846153846" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/bottom_app_bar_title_foreground.xml" value="0.2712962962962963" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/btn_border.xml" value="0.3446153846153846" />
-        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/custom_card_feature.xml" value="0.35" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/custom_card_feature.xml" value="0.22" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/default_background_oval.xml" value="0.2712962962962963" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/default_background_rounded_rect.xml" value="0.2712962962962963" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/divider.xml" value="0.3111111111111111" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/gradian2.xml" value="0.27037037037037037" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/gradian3.xml" value="0.20277777777777778" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/gradiant1.xml" value="0.3388888888888889" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/gradiant2.xml" value="0.27037037037037037" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/gradiant4.xml" value="0.22" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_arrow_back.xml" value="0.2712962962962963" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_black.xml" value="0.525" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_category_1.xml" value="0.525" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/like_background_oval.xml" value="0.2945205479452055" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/list_background_oval.xml" value="0.2945205479452055" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/nav_divider_top.xml" value="0.2945205479452055" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/person_background_oval.xml" value="0.2945205479452055" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/photos_background_stroke.xml" value="0.2945205479452055" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/rounded_rect_white.xml" value="0.2945205479452055" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/search_background_oval.xml" value="0.2945205479452055" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/search_background_stroke.xml" value="0.2945205479452055" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/shadow_back.xml" value="0.3233333333333333" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/shop_background_stroke.xml" value="0.2945205479452055" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/stack_bg.xml" value="0.3446153846153846" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/static_rv_bg.xml" value="0.2564814814814815" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/static_rv_select_bg.xml" value="0.2564814814814815" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/transition_background_drawable_call.xml" value="0.30684931506849317" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/transition_background_drawable_default.xml" value="0.30684931506849317" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/transition_background_drawable_home.xml" value="0.30684931506849317" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/transition_background_drawable_like.xml" value="0.2945205479452055" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/transition_background_drawable_list.xml" value="0.2945205479452055" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/transition_background_drawable_person.xml" value="0.2945205479452055" />
         <entry key="..\:/popitv/popittv/app/src/main/res/font/work_sans.xml" value="0.2712962962962963" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/popitv/popittv/app/src/main/res/layout/adapter.xml" value="0.32407407407407407" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/layout/adapter.xml" value="0.2" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/custom_tab.xml" value="0.30625" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_3_study.xml" value="0.22027491408934707" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_5_farsi.xml" value="0.22" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_channel_detail.xml" value="0.16111111111111112" />
-        <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_main_1.xml" value="0.2" />
-        <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_main_2.xml" value="0.12" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_main_1.xml" value="0.1" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_main_2.xml" value="0.22" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_main_3.xml" value="0.30625" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_main_4.xml" value="0.30625" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_main_5.xml" value="0.30625" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_main_6.xml" value="0.30625" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_main_7.xml" value="0.1" />
-        <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_cafie.xml" value="0.3175925925925926" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_cafie.xml" value="0.12" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_chanel_all.xml" value="0.22027491408934707" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_chanel_detail.xml" value="0.22027491408934707" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_channel_all.xml" value="0.16" />
-        <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_frg1_rv1.xml" value="0.27046413502109706" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_frg1_rv1.xml" value="0.22" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_stack.xml" value="0.32871794871794874" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_static_rv.xml" value="0.67" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_sweep_view.xml" value="0.33" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_vid_thumb.xml" value="0.2740740740740741" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_video_thumb.xml" value="0.25" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_video_thumbnail.xml" value="0.16" />
         <entry key="..\:/popitv/popittv/app/src/main/res/menu/menu_rail.xml" value="0.26481481481481484" />
       </map>

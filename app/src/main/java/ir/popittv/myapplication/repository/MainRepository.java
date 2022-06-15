@@ -32,8 +32,8 @@ public class MainRepository {
     public LiveData<List<FunnyDataModel>> getCafeBazar(){
        return mainApiClient.getCafeBazar();
     }
-    public void retrieveCafe(){
-        mainApiClient.retrieveCafe();
+    public void retrieveCafe(int id_sumMenu){
+        mainApiClient.retrieveCafe(id_sumMenu);
     }
 
 
@@ -43,5 +43,27 @@ public class MainRepository {
     public void requestFunny_best(){
         funnyApiClient.requestFunny_best();
     }
+
+    public LiveData<List<FunnyDataModel>> getFunny_view(){
+       return funnyApiClient.getFunny_view();
+    }
+    public void requestFunny_view(){funnyApiClient.requestFunny_view();}
+
+    public LiveData<List<FunnyDataModel>> getFunny_liky(){
+        return funnyApiClient.getFunny_liky();
+    }
+    public void requestFunny_liky(){
+        funnyApiClient.requestFunny_liky();
+    }
+
+    public LiveData<List<FunnyDataModel>> getFunny_subMenu(){
+        return funnyApiClient.getFunny_subMenu();
+    }
+
+    public void requestFunny_subMenu(int id_subMenu){
+        funnyApiClient.requestFunny_subMenu(id_subMenu);
+    }
+
+
 
 }

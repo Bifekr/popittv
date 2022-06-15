@@ -6,164 +6,201 @@
   <ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-      android:id="@+id/cons_parent"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content">
-
-      <!--
-
-      <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cons_mainMenu"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:background="@drawable/btn_border"
-        android:elevation="4dp"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/bg_frg1"
-        app:layout_constraintEnd_toEndOf="@id/bg_frg1"
-        app:layout_constraintHeight_percent=".050"
-        app:layout_constraintStart_toStartOf="@id/bg_frg1"
-        app:layout_constraintTop_toTopOf="@id/bg_frg1"
-        app:layout_constraintVertical_bias="0.7"
-        app:layout_constraintWidth_percent=".5">
+<androidx.constraintlayout.widget.ConstraintLayout
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
 
 
-        <Button
-          android:id="@+id/frg1_sub_btn1"
-          android:layout_width="0dp"
-          android:layout_height="0dp"
-          android:background="@drawable/ic_black"
-          app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
-          app:layout_constraintEnd_toStartOf="@id/btn2"
-          app:layout_constraintStart_toStartOf="@id/cons_mainMenu"
-          app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
+  <androidx.viewpager.widget.ViewPager
+    android:id="@+id/viewpagerSlide_frg2"
+    android:layout_width="0dp"
+    android:layout_height="180dp"
 
-        <ImageButton
-          android:id="@+id/btn2"
-          android:layout_width="0dp"
-          android:layout_height="0dp"
-          android:layout_marginLeft="12dp"
-          android:background="@drawable/ic_black"
-          android:src="@drawable/ic_category_1"
-          app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
-          app:layout_constraintEnd_toStartOf="@id/btn3"
-          app:layout_constraintStart_toEndOf="@+id/frg1_sub_btn1"
-          app:layout_constraintTop_toTopOf="@id/cons_mainMenu"
-          app:layout_constraintVertical_bias="1.0" />
+    android:paddingStart="200dp"
+    android:paddingLeft="200dp"
+    android:paddingEnd="200dp"
+    android:paddingRight="200dp"
 
-        <Button
-          android:id="@+id/btn3"
-          android:layout_width="0dp"
-          android:layout_height="0dp"
-          android:layout_marginLeft="12dp"
-          android:background="@drawable/ic_black"
-          android:drawableTop="@drawable/ic_audiotrack_1"
-          app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
-          app:layout_constraintEnd_toStartOf="@id/btn4"
-          app:layout_constraintStart_toEndOf="@+id/btn2"
-          app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:clipToPadding="false"
 
-        <Button
-          android:id="@+id/btn4"
-          android:layout_width="0dp"
-          android:layout_height="0dp"
-          android:layout_marginLeft="12dp"
-          android:background="@drawable/ic_black"
-          app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
-          app:layout_constraintEnd_toStartOf="@id/btn5"
-          app:layout_constraintStart_toEndOf="@+id/btn3"
-          app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
+    android:overScrollMode="never"
+    app:layout_constraintWidth_percent=".97"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-          android:id="@+id/btn5"
-          android:layout_width="0dp"
-          android:layout_height="0dp"
-          android:layout_marginLeft="12dp"
-          android:background="@drawable/ic_black"
-          app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
-          app:layout_constraintEnd_toStartOf="@id/btn6"
-          app:layout_constraintStart_toEndOf="@+id/btn4"
-          app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
+  <RelativeLayout
+    android:id="@+id/title2_frg2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="24dp"
+    android:layout_marginRight="24dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:background="@drawable/gradiant4"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/viewpagerSlide_frg2">
 
-        <Button
-          android:id="@+id/btn6"
-          android:layout_width="0dp"
-          android:layout_height="0dp"
-          android:layout_marginLeft="12dp"
-          android:background="@drawable/ic_black"
-          app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
-          app:layout_constraintEnd_toStartOf="@id/btn7"
-          app:layout_constraintStart_toEndOf="@+id/btn5"
-          app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_centerVertical="true"
+      android:layout_marginLeft="20dp"
+      android:fontFamily="@font/bree_serif"
+      android:text="Pupolar "
+      android:textSize="18sp"
+      android:textStyle="bold" />
 
-        <Button
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_centerVertical="true"
+      android:layout_marginRight="20dp"
+      android:fontFamily="@font/bree_serif"
+      android:text="View More"
+      android:textSize="12sp"
+      android:textStyle="bold" />
+  </RelativeLayout>
 
-          android:id="@+id/btn7"
-          android:layout_width="0dp"
-          android:layout_height="0dp"
-          android:layout_marginLeft="12dp"
-          android:background="@drawable/ic_black"
-          app:layout_constraintBottom_toBottomOf="@id/cons_mainMenu"
-          app:layout_constraintEnd_toEndOf="@id/cons_mainMenu"
-          app:layout_constraintStart_toEndOf="@+id/btn6"
-          app:layout_constraintTop_toTopOf="@id/cons_mainMenu" />
+  <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
+    android:id="@+id/view_pager"
+    android:layout_width="wrap_content"
+    android:layout_height="300dp"
+    app:icvp_center_page_scale_offset="10dp"
+    app:icvp_interpolator="@android:anim/accelerate_decelerate_interpolator"
+    app:icvp_max_page_scale="0.8"
+    app:icvp_medium_scaled="false"
+    app:icvp_min_page_scale="0.55"
+    app:icvp_min_page_scale_offset="5dp"
+    app:icvp_scroll_duration="250"
+    app:layout_constraintBottom_toTopOf="@id/title3_frg2"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/title2_frg2"
+    app:layout_constraintVertical_bias="0" />
 
-      </androidx.constraintlayout.widget.ConstraintLayout>
+  <RelativeLayout
+    android:id="@+id/title3_frg2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="24dp"
+    android:layout_marginRight="24dp"
 
-       -->
+    android:background="@drawable/gradiant4"
+    app:layout_constraintBottom_toTopOf="@id/view_pager2"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/view_pager">
 
-      <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpagerSlide_frg2"
-        android:layout_width="match_parent"
-        android:layout_height="330dp"
-        android:layout_gravity="bottom"
-        android:clipToPadding="false"
-        android:paddingEnd="90dp"
-        android:paddingLeft="90dp"
-        android:paddingRight="90dp"
-        android:paddingStart="90dp"
-        android:overScrollMode="never"
-        android:paddingBottom="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_centerVertical="true"
+      android:layout_marginLeft="20dp"
+      android:fontFamily="@font/bree_serif"
+      android:text="Top View"
+      android:textSize="18sp"
+      android:textStyle="bold" />
 
-      <ImageView
-        android:id="@+id/iv_logo"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:src="@drawable/iv_header_13"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewpagerSlide_frg2"
-        app:layout_constraintVertical_bias="0.0" />
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_centerVertical="true"
+      android:layout_marginRight="20dp"
+      android:fontFamily="@font/bree_serif"
+      android:text="View More"
+      android:textSize="12sp"
+      android:textStyle="bold" />
+  </RelativeLayout>
 
-      <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="220dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="24dp"
-        android:visibility="invisible"
-        app:icvp_center_page_scale_offset="10dp"
-        app:icvp_interpolator="@android:anim/accelerate_decelerate_interpolator"
-        app:icvp_max_page_scale="0.8"
-        app:icvp_medium_scaled="false"
-        app:icvp_min_page_scale="0.55"
-        app:icvp_min_page_scale_offset="5dp"
-        app:icvp_scroll_duration="250"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_logo" />
+  <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
+    android:id="@+id/view_pager2"
+    android:layout_width="wrap_content"
+    android:layout_height="300dp"
+    app:icvp_center_page_scale_offset="10dp"
+    app:icvp_interpolator="@android:anim/accelerate_decelerate_interpolator"
+    app:icvp_max_page_scale="0.8"
+    app:icvp_medium_scaled="false"
+    app:icvp_min_page_scale="0.55"
+    app:icvp_min_page_scale_offset="5dp"
+    app:icvp_scroll_duration="250"
+    android:layout_marginTop="10dp"
+    app:layout_constraintHorizontal_bias="0"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/title3_frg2" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+  <RelativeLayout
+    android:id="@+id/title4_frg2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="24dp"
+    android:layout_marginRight="24dp"
+    android:background="@drawable/gradiant4"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    app:layout_constraintBottom_toTopOf="@id/rvSubMenuFunny"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/view_pager2">
 
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_centerVertical="true"
+      android:layout_marginLeft="20dp"
+      android:fontFamily="@font/bree_serif"
+      android:text="All Funny Video"
+      android:textSize="18sp"
+      android:textStyle="bold" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_centerVertical="true"
+      android:layout_marginRight="20dp"
+      android:fontFamily="@font/bree_serif"
+      android:text="View More"
+      android:textSize="12sp"
+      android:textStyle="bold" />
+  </RelativeLayout>
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:id="@+id/rvSubMenuFunny"
+    android:layout_width="match_parent"
+    app:layout_constraintVertical_bias="0"
+    android:layout_height="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/title4_frg2" />
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:id="@+id/rvAllFunny"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    app:layout_constraintVertical_bias="0"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/rvSubMenuFunny" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
   </ScrollView>
-
 </layout>
 
 

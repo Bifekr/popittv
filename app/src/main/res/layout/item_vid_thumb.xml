@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout
+  android:layout_width="match_parent"
+  android:padding="8dp"
+  android:layout_height="170dp">
+  <androidx.cardview.widget.CardView
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    app:layout_constraintWidth_percent="1"
+    app:layout_constraintHeight_percent="1"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="24dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@drawable/gradiant4">
+
+      <androidx.cardview.widget.CardView
+        android:id="@+id/conitemvideo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintHeight_percent=".8"
+        app:layout_constraintWidth_percent=".89">
+
+        <ImageView
+          android:id="@+id/ivPoster_itemVideo"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:adjustViewBounds="true"
+          android:scaleType="centerCrop"
+          android:src="@drawable/trophy" />
+
+
+      </androidx.cardview.widget.CardView>
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingLeft="35dp"
+        android:orientation="vertical"
+        android:paddingRight="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/parentChannel"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/conitemvideo"
+        >
+
+        <TextView
+          android:gravity="center_horizontal"
+          android:textColor="@color/black"
+          android:id="@+id/titleFa_video_itemVideoThumb"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ellipsize="end"
+          android:fontFamily="@font/bree_serif"
+          android:maxLines="1"
+          android:minLines="1"
+          android:includeFontPadding="true"
+          android:paddingRight="1dp"
+          android:text="fdkljfdkjfg rfg  fggtfgf fg  fgdlfkj"
+
+          android:textSize="12sp" />
+        <TextView
+          android:gravity="center_horizontal"
+          android:id="@+id/titleEn_video_itemVideoThumb"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ellipsize="end"
+          android:paddingLeft="15dp"
+          android:paddingRight="10dp"
+          android:fontFamily="@font/work_sans_semibold"
+          android:maxLines="1"
+          android:minLines="1"
+          android:text="fdkljfdkjfg rfg  fggtfgf fg  fgdlfkj"
+          android:textSize="9sp" />
+      </LinearLayout>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parentDetail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toTopOf="@id/parentChannel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintHeight_percent=".7"
+        app:layout_constraintVertical_bias=".5"
+        app:layout_constraintWidth_percent=".12"
+        app:layout_constraintStart_toEndOf="@id/conitemvideo"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:gravity="center"
+          android:orientation="vertical"
+          android:paddingTop="9dp"
+          app:layout_constraintBottom_toBottomOf="@id/parentDetail"
+          app:layout_constraintEnd_toEndOf="@id/parentDetail"
+          app:layout_constraintStart_toStartOf="@id/parentDetail"
+          app:layout_constraintTop_toTopOf="@id/parentDetail">
+          <ImageView
+            android:layout_width="15dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_baseline_eye_24" />
+          <TextView
+            android:id="@+id/txt1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:includeFontPadding="true"
+            android:text="502,45"
+            android:textColor="@color/reply_blue_800"
+            android:textSize="8sp" />
+          <FrameLayout
+            android:layout_marginTop="5dp"
+            android:id="@+id/spacer_detail_1"
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/divider"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/txt1" />
+          <ImageView
+            android:layout_width="15dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_like" />
+          <TextView
+            android:id="@+id/txt22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:includeFontPadding="true"
+            android:text="200585"
+            android:textColor="@color/reply_blue_800"
+            android:textSize="8sp" />
+          <FrameLayout
+            android:layout_marginTop="5dp"
+            android:id="@+id/spacer_detail_2"
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/divider"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/txt22" />
+          <ImageView
+            android:layout_width="15dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_bookmark_24dp" />
+        </LinearLayout>
+
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parentChannel"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent=".15"
+        app:layout_constraintHorizontal_bias=".97"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".95">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+          android:elevation="12dp"
+          android:id="@+id/itemProfile_channel_videoThumb"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:src="@drawable/avatar_2"
+          app:riv_border_color="@color/yellow_active"
+          app:riv_border_width="1dp"
+          app:riv_corner_radius="50dp" />
+
+
+
+
+        <!--
+        <com.makeramen.roundedimageview.RoundedImageView
+                  android:elevation="12dp"
+                  android:id="@+id/itemProfile_channel_videoThumb"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:src="@drawable/avatar_2"
+                  app:riv_border_color="@color/yellow"
+                  app:riv_border_width="1dp"
+                  app:riv_corner_radius="50dp" />
+        -->
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

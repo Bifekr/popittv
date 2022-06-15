@@ -22,8 +22,8 @@ public class MainViewModel extends ViewModel {
         return mainRepository.getCafeBazar();
     }
 
-    public void retrieveCafe() {
-        mainRepository.retrieveCafe();
+    public void retrieveCafe(int id_sumMenu) {
+        mainRepository.retrieveCafe(id_sumMenu);
     }
 
     ///////////  funny Best /////////////////
@@ -34,4 +34,33 @@ public class MainViewModel extends ViewModel {
     public void requestFunny_best() {
         mainRepository.requestFunny_best();
     }
+
+    ///////// funny_view /////////////
+    public LiveData<List<FunnyDataModel>> getFunny_view(){
+        return mainRepository.getFunny_view();
+    }
+    public void requestFunny_view(){
+        mainRepository.requestFunny_view();
+    }
+
+    ////////// funny_liky ////////////
+    public LiveData<List<FunnyDataModel>> getFunny_liky(){
+        return mainRepository.getFunny_liky();
+    }
+
+    public void requestFunny_liky(){
+        mainRepository.requestFunny_liky();
+    }
+
+    /////////// funny_subMenu ////////////////
+
+    public LiveData<List<FunnyDataModel>> getFunny_subMenu(){
+        return mainRepository.getFunny_subMenu();
+    }
+
+    public void requestFunny_subMenu(int id_subMeny){
+        mainRepository.requestFunny_subMenu(id_subMeny);
+    }
+
+
 }

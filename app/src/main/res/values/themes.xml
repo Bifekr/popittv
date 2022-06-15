@@ -59,4 +59,12 @@
     <item name="android:windowFullscreen">true</item>
   </style>
 
+
+  <style name="CustomCardViewStyle" parent="@style/Widget.MaterialComponents.CardView">
+    <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay_card_custom_corners</item>
+  </style>
+
+
+
+
 </resources>

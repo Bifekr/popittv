@@ -44,7 +44,8 @@ public class FragmentMain1 extends Fragment {
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
         mainViewModel.requestFunny_best();
-        mainViewModel.retrieveCafe();
+
+        mainViewModel.retrieveCafe(9);
 
         configrc();
 
@@ -75,11 +76,11 @@ public class FragmentMain1 extends Fragment {
                  adapter2.getDataCafe(funnyDataModels);
                  for (FunnyDataModel cafe:funnyDataModels
                       ) {
-                   // Toast.makeText(getContext(), "+++" + cafe.getPoster(), Toast.LENGTH_SHORT).show();
+                  //Toast.makeText(getActivity(), "+++" + cafe.getPoster(), Toast.LENGTH_SHORT).show();
                  }
                  
              }else {
-                 Toast.makeText(getContext(), "nulllllll", Toast.LENGTH_SHORT).show();
+                 //Toast.makeText(getContext(), "nulllllll", Toast.LENGTH_SHORT).show();
              }
          }
      });
