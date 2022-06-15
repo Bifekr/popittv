@@ -74,6 +74,7 @@ public class FragmentMain2 extends Fragment implements OnClickStaticRv {
         staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"آشنایی و نگهداری از طبیعت"));
         staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"افزایش انرژی و شادابی"));
         staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"رقص با خانواده"));
+
         staticRvAdapter = new StaticRvAdapter(staticRvModels,this);
         binding.rvSubMenuFunny.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL,false));
         binding.rvSubMenuFunny.setAdapter(staticRvAdapter);
