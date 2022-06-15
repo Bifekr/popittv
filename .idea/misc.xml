@@ -31,6 +31,7 @@
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/gradiant4.xml" value="0.22" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/gradiant_main.xml" value="0.275" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_arrow_back.xml" value="0.2712962962962963" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_baseline_battery_4_bar_24.xml" value="0.2945205479452055" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_black.xml" value="0.525" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_category_1.xml" value="0.525" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/like_background_oval.xml" value="0.2945205479452055" />
@@ -59,7 +60,7 @@
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_3_study.xml" value="0.22027491408934707" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_5_farsi.xml" value="0.22" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_channel_detail.xml" value="0.16111111111111112" />
-        <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_main_1.xml" value="0.25" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_main_1.xml" value="0.21" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_main_2.xml" value="0.22" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_main_3.xml" value="0.30625" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_main_4.xml" value="0.30625" />
@@ -77,6 +78,7 @@
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_vid_thumb.xml" value="0.2740740740740741" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_video_thumb.xml" value="0.25" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_video_thumbnail.xml" value="0.16" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/layout/toolbar_cust.xml" value="0.25" />
         <entry key="..\:/popitv/popittv/app/src/main/res/menu/menu_rail.xml" value="0.26481481481481484" />
       </map>
     </option>

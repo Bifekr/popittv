@@ -16,16 +16,6 @@ public class MainViewModel extends ViewModel {
         mainRepository = MainRepository.getInstance();
     }
 
-
-    ////////// funny all video /////////////////
-    public LiveData<List<FunnyDataModel>> getCafe() {
-        return mainRepository.getCafeBazar();
-    }
-
-    public void retrieveCafe(int id_sumMenu) {
-        mainRepository.retrieveCafe(id_sumMenu);
-    }
-
     ///////////  funny Best /////////////////
     public LiveData<List<FunnyDataModel>> getFunny_best() {
         return mainRepository.getFunny_best();

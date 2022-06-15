@@ -29,12 +29,7 @@ public class MainRepository {
 
 
 
-    public LiveData<List<FunnyDataModel>> getCafeBazar(){
-       return mainApiClient.getCafeBazar();
-    }
-    public void retrieveCafe(int id_sumMenu){
-        mainApiClient.retrieveCafe(id_sumMenu);
-    }
+
 
 
     public LiveData<List<FunnyDataModel>> getFunny_best(){
