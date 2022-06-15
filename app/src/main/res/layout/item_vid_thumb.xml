@@ -64,6 +64,7 @@
         >
 
         <TextView
+          android:gravity="center_horizontal"
           android:textColor="@color/black"
           android:id="@+id/titleFa_video_itemVideoThumb"
           android:layout_width="match_parent"
@@ -78,6 +79,7 @@
 
           android:textSize="12sp" />
         <TextView
+          android:gravity="center_horizontal"
           android:id="@+id/titleEn_video_itemVideoThumb"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"

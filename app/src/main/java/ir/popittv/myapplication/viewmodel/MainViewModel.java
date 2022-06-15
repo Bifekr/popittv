@@ -22,7 +22,7 @@ public class MainViewModel extends ViewModel {
         return mainRepository.getCafeBazar();
     }
 
-    public void retrieveCafe(String id_sumMenu) {
+    public void retrieveCafe(int id_sumMenu) {
         mainRepository.retrieveCafe(id_sumMenu);
     }
 
@@ -58,7 +58,7 @@ public class MainViewModel extends ViewModel {
         return mainRepository.getFunny_subMenu();
     }
 
-    public void requestFunny_subMenu(String id_subMeny){
+    public void requestFunny_subMenu(int id_subMeny){
         mainRepository.requestFunny_subMenu(id_subMeny);
     }
 

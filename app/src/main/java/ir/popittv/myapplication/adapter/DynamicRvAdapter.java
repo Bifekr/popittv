@@ -41,6 +41,8 @@ public class DynamicRvAdapter extends RecyclerView.Adapter<DynamicRvAdapter.Dyna
 
         holder.binding.titleFaVideoItemVideoThumb.setText(funnyDataModels.get(position).getTitle_fa());
         holder.binding.titleEnVideoItemVideoThumb.setText(funnyDataModels.get(position).getTitle_en());
+        holder.binding.txt1.setText(funnyDataModels.get(position).getLiky()+"");
+        holder.binding.txt22.setText(funnyDataModels.get(position).getView()+"");
         Glide.with(context).load(funnyDataModels.get(position).getPoster())
                 .into(holder.binding.ivPosterItemVideo);
 

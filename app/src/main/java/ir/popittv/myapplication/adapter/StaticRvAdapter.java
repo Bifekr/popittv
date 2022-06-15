@@ -14,14 +14,23 @@ import java.util.ArrayList;
 
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.models.StaticRvModel;
+import ir.popittv.myapplication.utils.OnClickStaticRv;
 
 public class StaticRvAdapter extends RecyclerView.Adapter<StaticRvAdapter.StaticRvViewHolder>  {
 
     private ArrayList<StaticRvModel> items;
-    int row_index = -1;
+    int row_index = 0;
 
-    public StaticRvAdapter(ArrayList<StaticRvModel> items) {
+    //onClick
+    OnClickStaticRv onClickStaticRv;
+
+
+
+
+
+    public StaticRvAdapter(ArrayList<StaticRvModel> items,OnClickStaticRv onClickStaticRv) {
         this.items = items;
+        this.onClickStaticRv=onClickStaticRv;
     }
 
     @NonNull
@@ -39,14 +48,14 @@ public class StaticRvAdapter extends RecyclerView.Adapter<StaticRvAdapter.Static
         holder.tvItemStatic.setText(items.get(position).getText());
         holder.ivItemStatic.setImageResource(items.get(position).getImage());
 
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                row_index =holder.getAdapterPosition();
-                notifyDataSetChanged();
-
-            }
+        holder.linearLayout.setOnClickListener(v -> {
+            row_index =holder.getAdapterPosition();
+            notifyDataSetChanged();
+            onClickStaticRv.onMenuClick(row_index+2);
+           // Toast.makeText(v.getContext(), ""+row_index, Toast.LENGTH_SHORT).show();
         });
+
+
 
         if (row_index == position){
 
@@ -72,12 +81,20 @@ public class StaticRvAdapter extends RecyclerView.Adapter<StaticRvAdapter.Static
         ImageView ivItemStatic;
         LinearLayout linearLayout;
 
+
+
         public StaticRvViewHolder(@NonNull View itemView) {
             super(itemView);
             tvItemStatic=itemView.findViewById(R.id.tvItemStatic);
             ivItemStatic=itemView.findViewById(R.id.ivItemStatic);
             linearLayout=itemView.findViewById(R.id.linear);
 
+
+
+
         }
+
+
+
     }
 }

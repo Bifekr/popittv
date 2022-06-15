@@ -11,14 +11,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.ShadowTransformer;
@@ -31,15 +30,17 @@ import ir.popittv.myapplication.adapter.StaticRvAdapter;
 import ir.popittv.myapplication.databinding.FragmentMain2Binding;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.models.StaticRvModel;
+import ir.popittv.myapplication.utils.OnClickStaticRv;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
-public class FragmentMain2 extends Fragment {
+public class FragmentMain2 extends Fragment implements OnClickStaticRv {
 
     Frg1Rv1_Adapter adapter;
     PagerAdapter pagerAdapter;
     PagerAdapter2 pagerAdapter2;
     StaticRvAdapter staticRvAdapter;
     DynamicRvAdapter dynamicRvAdapter;
+    int id_subMenu;
 
     private FragmentMain2Binding binding;
     private MainViewModel mainViewModel;
@@ -60,15 +61,20 @@ public class FragmentMain2 extends Fragment {
         animTransition = AnimationUtils.loadAnimation(getContext(), R.anim.transition);
 
         ArrayList<StaticRvModel> staticRvModels=new ArrayList<>();
-        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_1,"Holloween"));
-        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_2,"Animals"));
-        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_3,"Dance-Music"));
-        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"Family"));
-        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_3,"Dance-Music"));
-        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"Family"));
-        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_3,"Dance-Music"));
-        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"Family"));
-        staticRvAdapter = new StaticRvAdapter(staticRvModels);
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_1,"جدیدترین ها"));
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_2,"پرورش خلاقیت"));
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_3," کاردستی"));
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"مهارت افردی"));
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_3,"مهارت اجتماعی"));
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"تقویت هوش هیجانی"));
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_3," رفار صحیح در خانه وجامعه"));
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"نکات علمی و دانش عمومی"));
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"تقویت مهارت در نقاشی"));
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"جشن ها و مناسبت ها"));
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"آشنایی و نگهداری از طبیعت"));
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"افزایش انرژی و شادابی"));
+        staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"رقص با خانواده"));
+        staticRvAdapter = new StaticRvAdapter(staticRvModels,this);
         binding.rvSubMenuFunny.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL,false));
         binding.rvSubMenuFunny.setAdapter(staticRvAdapter);
 
@@ -89,7 +95,8 @@ public class FragmentMain2 extends Fragment {
         mainViewModel.requestFunny_best();
         mainViewModel.requestFunny_view();
         mainViewModel.requestFunny_liky();
-        mainViewModel.requestFunny_subMenu("5");
+        mainViewModel.requestFunny_subMenu(2);
+
         // init adapters
         initAdapter();
 
@@ -117,14 +124,50 @@ public class FragmentMain2 extends Fragment {
 
     }
 
+
+    private void getFunny_best() {
+
+        mainViewModel.getFunny_best().observe(requireActivity(), funnyDataModels -> {
+            if (funnyDataModels!=null) {
+                adapter.setData(funnyDataModels);
+
+                for (FunnyDataModel fuuny : funnyDataModels
+                ) {
+                    mCardAdapter.addCardItem(fuuny);
+                }
+
+
+            }
+        });
+
+    }
+
+    private void getFunny_view() {
+        mainViewModel.getFunny_view().observe(requireActivity(), funnyDataModels -> {
+            if (funnyDataModels!=null) {
+                pagerAdapter.setData(funnyDataModels);
+                for (FunnyDataModel funnyDataModel : funnyDataModels) {
+                   // Toast.makeText(getActivity(), "" + funnyDataModel.getTitle_en(), Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(getActivity(), "ggggg", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void getFunny_liky() {
+        mainViewModel.getFunny_liky().observe(requireActivity(), funnyDataModels -> {
+            if (funnyDataModels!=null) {
+                pagerAdapter2.setData(funnyDataModels);
+            }
+        });
+    }
+
     private void getFunny_subMenu() {
 
-        mainViewModel.getFunny_subMenu().observe(requireActivity(), new Observer<List<FunnyDataModel>>() {
-            @Override
-            public void onChanged(List<FunnyDataModel> funnyDataModels) {
-                if (funnyDataModels!=null){
-                    dynamicRvAdapter.setData(funnyDataModels);
-                }
+        mainViewModel.getFunny_subMenu().observe(requireActivity(), funnyDataModels -> {
+            if (funnyDataModels!=null) {
+                dynamicRvAdapter.setData(funnyDataModels);
             }
         });
     }
@@ -134,66 +177,30 @@ public class FragmentMain2 extends Fragment {
         pagerAdapter = new PagerAdapter(getActivity());
         pagerAdapter2 = new PagerAdapter2(getActivity());
         mCardAdapter = new CardPagerAdapter(getActivity());
-        dynamicRvAdapter = new DynamicRvAdapter(getActivity());
+
 
         binding.viewPager.setAdapter(pagerAdapter);
         binding.viewPager2.setAdapter(pagerAdapter2);
+        // All Funny Video from SubMenu into RecyclerView
+        dynamicRvAdapter = new DynamicRvAdapter(getActivity());
         binding.rvAllFunny.setAdapter(dynamicRvAdapter);
         binding.rvAllFunny.setLayoutManager(new GridLayoutManager
-                (getActivity(),3,GridLayoutManager.VERTICAL,false));
-    }
-
-    private void getFunny_liky() {
-        mainViewModel.getFunny_liky().observe(requireActivity(), new Observer<List<FunnyDataModel>>() {
-            @Override
-            public void onChanged(List<FunnyDataModel> funnyDataModels) {
-                if (funnyDataModels!=null){
-                    pagerAdapter2.setData(funnyDataModels);
-                }
-            }
-        });
-    }
-
-
-    private void getFunny_best() {
-
-        mainViewModel.getFunny_best().observe(requireActivity(), new Observer<List<FunnyDataModel>>() {
-            @Override
-            public void onChanged(List<FunnyDataModel> funnyDataModels) {
-                if (funnyDataModels!=null) {
-                    adapter.setData(funnyDataModels);
-
-                    for (FunnyDataModel fuuny : funnyDataModels
-                    ) {
-                        mCardAdapter.addCardItem(fuuny);
-                    }
-
-
-                }
-            }
-        });
-
-    }
-    private void getFunny_view(){
-        mainViewModel.getFunny_view().observe(requireActivity(), new Observer<List<FunnyDataModel>>() {
-            @Override
-            public void onChanged(List<FunnyDataModel> funnyDataModels) {
-                if (funnyDataModels!=null){
-                    pagerAdapter.setData(funnyDataModels);
-                    for (FunnyDataModel funnyDataModel:funnyDataModels)
-                    {
-                        Toast.makeText(getActivity(), ""+funnyDataModel.getTitle_en(), Toast.LENGTH_SHORT).show();
-                    }
-                }else {
-                    Toast.makeText(getActivity(), "ggggg", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+                (getActivity(), 3, GridLayoutManager.VERTICAL, false));
+        binding.rvAllFunny.addItemDecoration(new DividerItemDecoration(requireActivity(),LinearLayoutManager.VERTICAL));
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+
+    @Override
+    public void onMenuClick(int position) {
+       // Toast.makeText(requireActivity(), "menu posiution" + position, Toast.LENGTH_SHORT).show();
+        id_subMenu=position;
+        mainViewModel.requestFunny_subMenu(id_subMenu);
+
     }
 }

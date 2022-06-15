@@ -32,7 +32,7 @@ public class MainRepository {
     public LiveData<List<FunnyDataModel>> getCafeBazar(){
        return mainApiClient.getCafeBazar();
     }
-    public void retrieveCafe(String id_sumMenu){
+    public void retrieveCafe(int id_sumMenu){
         mainApiClient.retrieveCafe(id_sumMenu);
     }
 
@@ -60,7 +60,7 @@ public class MainRepository {
         return funnyApiClient.getFunny_subMenu();
     }
 
-    public void requestFunny_subMenu(String id_subMenu){
+    public void requestFunny_subMenu(int id_subMenu){
         funnyApiClient.requestFunny_subMenu(id_subMenu);
     }
 

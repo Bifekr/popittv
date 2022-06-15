@@ -9,7 +9,7 @@ public interface ApiClient {
 
 
     @GET("getFunny.php")
-    Call<FunnyResponse> getFunny(@Query("id_subMenu") String id_subMenu);
+    Call<FunnyResponse> getFunny(@Query("id_subMenu") int id_subMenu);
 
     @GET("getFunny_best.php")
     Call<FunnyResponse> getFunny_best();

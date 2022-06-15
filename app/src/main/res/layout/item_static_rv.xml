@@ -7,6 +7,7 @@
   android:layout_marginLeft="10dp"
   android:background="@drawable/static_rv_bg"
   android:elevation="@dimen/plane_02"
+  android:gravity="center_vertical|top"
   android:id="@+id/linear"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:orientation="vertical">
@@ -22,6 +23,7 @@
     android:src="@drawable/iv_btn_2"
     android:layout_gravity="center"/>
   <TextView
+    android:gravity="center_vertical|center_horizontal"
     android:id="@+id/tvItemStatic"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"

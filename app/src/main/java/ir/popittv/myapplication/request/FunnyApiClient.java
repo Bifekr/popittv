@@ -113,7 +113,7 @@ public class FunnyApiClient {
 
     }
 
-    public void requestFunny_subMenu(String id_SubMenu) {
+    public void requestFunny_subMenu(int id_SubMenu) {
 
 
         if (funnySubMenu_runnable!=null) {
@@ -234,9 +234,9 @@ public class FunnyApiClient {
 
 
         private final boolean canclable;
-        String id_sumMenu;
+        int id_sumMenu;
 
-        public FunnySubMenu_Runnable(String id_sumMenu) {
+        public FunnySubMenu_Runnable(int id_sumMenu) {
             this.id_sumMenu=id_sumMenu;
             canclable = false;
         }
@@ -272,7 +272,7 @@ public class FunnyApiClient {
         }
 
 
-        private Call<FunnyResponse> cafeCallMethod(String id_subMenu) {
+        private Call<FunnyResponse> cafeCallMethod(int id_subMenu) {
             return Service.getApiClient().getFunny(id_subMenu);
 
         }

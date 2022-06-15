@@ -52,7 +52,7 @@ public class MainApiClient {
 
 
     //retrieve data from localHost
-    public void retrieveCafe(String id_SubMenu) {
+    public void retrieveCafe(int id_SubMenu) {
 
 
         if (cafeBazarRunnable!=null) {
@@ -76,9 +76,9 @@ public class MainApiClient {
 
 
         private final boolean canclable;
-        String id_sumMenu;
+        int id_sumMenu;
 
-        public RetrieveCafeBazarRunnable(String id_sumMenu) {
+        public RetrieveCafeBazarRunnable(int id_sumMenu) {
             this.id_sumMenu=id_sumMenu;
             canclable = false;
         }
@@ -114,7 +114,7 @@ public class MainApiClient {
         }
 
 
-        private Call<FunnyResponse> cafeCallMethod(String id_subMenu) {
+        private Call<FunnyResponse> cafeCallMethod(int id_subMenu) {
             return Service.getApiClient().getFunny(id_subMenu);
 
         }

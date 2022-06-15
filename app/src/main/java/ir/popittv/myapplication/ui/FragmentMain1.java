@@ -45,7 +45,7 @@ public class FragmentMain1 extends Fragment {
 
         mainViewModel.requestFunny_best();
 
-        mainViewModel.retrieveCafe("9");
+        mainViewModel.retrieveCafe(9);
 
         configrc();
 
@@ -80,7 +80,7 @@ public class FragmentMain1 extends Fragment {
                  }
                  
              }else {
-                 Toast.makeText(getContext(), "nulllllll", Toast.LENGTH_SHORT).show();
+                 //Toast.makeText(getContext(), "nulllllll", Toast.LENGTH_SHORT).show();
              }
          }
      });
