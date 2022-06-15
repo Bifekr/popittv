@@ -78,10 +78,6 @@ public class FragmentMain2 extends Fragment implements OnClickStaticRv {
         binding.rvSubMenuFunny.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL,false));
         binding.rvSubMenuFunny.setAdapter(staticRvAdapter);
 
-
-
-
-
         return binding.getRoot();
 
     }

@@ -103,8 +103,6 @@
   <color name="orange_inactive">#ffb74d</color>
   <color name="gery_inactive">#e0e0e0</color>
 
-  <color name="default_inactive">#78909c</color>
-
   <color name="red_bg_light">#ffebee</color>
   <color name="purple_bg_light">#f3e5f5</color>
   <color name="blue_bg_light">#e3f2fd</color>
@@ -113,6 +111,18 @@
   <color name="yellow_bg_light">#fffde7</color>
   <color name="orange_bg_light">#fff3e0</color>
   <color name="grey_bg_light">#fafafa</color>
+
+
+  <color name="popit_blue_light">#Ebedfb</color>
+  <color name="popit_blue_on_light">#f1f1fb</color>
+  <color name="popit_gradiant_back_brown">#A05B56</color>
+  <color name="popit_blue_dark">#707A85</color>
+  <color name="popit_color_title">#1a2022</color>
+  <color name="popit_color_subtitle">#9aa2a9</color>
+  <color name="popit_yellow">#FFEC2E</color>
+  <color name="popit_orange">#ffa600</color>
+
+
 
 
 

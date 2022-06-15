@@ -20,4 +20,5 @@
     <dimen name="plane_06">6dp</dimen>
     <dimen name="plane_08">8dp</dimen>
     <dimen name="plane_16">16dp</dimen>
+    <dimen name="plane_24">24dp</dimen>
 </resources>

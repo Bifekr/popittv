@@ -1,15 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!-- Base application theme. -->
   <style name="Theme.PopitTv" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
-    <item name="colorPrimary">@color/reply_blue_700</item>
+    <item name="colorPrimary">@color/reply_blue_800 </item>
     <item name="colorPrimaryVariant">@color/reply_blue_800</item>
     <item name="colorSecondary">@color/reply_orange_500</item>
     <item name="colorSecondaryVariant">@color/reply_orange_400</item>
 
-    <item name="android:colorBackground">@color/reply_blue_50</item>
-    <item name="colorSurface">@color/reply_white_50</item>
-    <item name="colorPrimarySurfaceVariant">?attr/colorPrimaryVariant</item>
-    <item name="colorError">@color/reply_red_400</item>
+
 
     <item name="colorOnPrimary">@color/reply_white_50</item>
     <item name="colorOnSecondary">@color/reply_black_900</item>
@@ -18,8 +15,7 @@
     <item name="colorOnError">@color/reply_black_900</item>
 
     <item name="scrimBackground">@color/reply_white_50_alpha_060</item>
-    <item name="android:statusBarColor">@color/reply_blue_50_alpha_060</item>
-    <item name="android:navigationBarColor">@color/brown</item>
+    <item name="android:navigationBarColor">@color/popit_blue_light</item>
 
     <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Reply.SmallComponent</item>
     <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Reply.MediumComponent</item>
@@ -57,12 +53,17 @@
     <item name="android:windowBackground">?android:colorBackground</item>
     <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
     <item name="android:windowFullscreen">true</item>
+    <item name="android:statusBarColor">#00000000</item>
+    <item name="android:windowContentTransitions">true</item>
+
+    <item name="android:colorBackground">@color/popit_blue_light</item>
+    <item name="colorSurface">@color/popit_blue_on_light</item>
+    <item name="colorPrimarySurfaceVariant">@color/popit_blue_dark</item>
+    <item name="colorError">@color/reply_red_400</item>
   </style>
 
 
-  <style name="CustomCardViewStyle" parent="@style/Widget.MaterialComponents.CardView">
-    <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay_card_custom_corners</item>
-  </style>
+
 
 
 

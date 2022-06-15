@@ -18,10 +18,10 @@
     <dimen name="min_icon_target_padding">12dp</dimen>
 
     <!--BottomAppBar-->
-    <dimen name="bottom_app_bar_height">56dp</dimen>
-    <dimen name="bottom_app_bar_fab_cradle_corner_radius">32dp</dimen>
+    <dimen name="bottom_app_bar_height">32dp</dimen>
+    <dimen name="bottom_app_bar_fab_cradle_corner_radius">24dp</dimen>
     <dimen name="bottom_app_bar_fab_cradle_margin">8dp</dimen>
-    <dimen name="bottom_app_bar_logo_size">32dp</dimen>
+    <dimen name="bottom_app_bar_logo_size">24dp</dimen>
 
     <!--BottomNavigationDrawer-->
     <dimen name="navigation_drawer_profile_image_size">48dp</dimen>
