@@ -235,6 +235,7 @@
     app:layout_constraintStart_toStartOf="@id/rvRecommend_frg1"
     app:layout_constraintTop_toBottomOf="@id/vp_cat_frg1">
 
+
     <TextView
       android:id="@+id/titleFav_frg1"
       style="@style/TextAppearance.Reply.Headline6"
