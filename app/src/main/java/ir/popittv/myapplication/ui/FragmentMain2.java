@@ -23,7 +23,6 @@ import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.ShadowTransformer;
 import ir.popittv.myapplication.adapter.CardPagerAdapter;
 import ir.popittv.myapplication.adapter.DynamicRvAdapter;
-import ir.popittv.myapplication.adapter.RvChannel_Frg1;
 import ir.popittv.myapplication.adapter.PagerAdapter;
 import ir.popittv.myapplication.adapter.PagerAdapter2;
 import ir.popittv.myapplication.adapter.StaticRvAdapter;
@@ -55,7 +54,7 @@ public class FragmentMain2 extends Fragment implements OnClickStaticRv {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentMain2Binding.inflate(inflater, container, false);
-    mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+        mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         //set data into dataModel
         mainViewModel.requestFunny_best();
         mainViewModel.requestFunny_view();

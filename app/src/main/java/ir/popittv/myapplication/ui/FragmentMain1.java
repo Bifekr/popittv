@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import ir.popittv.myapplication.ShadowTransformer;
 import ir.popittv.myapplication.adapter.CardPagerAdapter2;
+import ir.popittv.myapplication.adapter.InfinitFrg1_PagerAdapter;
 import ir.popittv.myapplication.adapter.RvChannel_Frg1;
 import ir.popittv.myapplication.databinding.FragmentMain1Binding;
 import ir.popittv.myapplication.models.ChannelDataModel;
@@ -20,33 +22,57 @@ import ir.popittv.myapplication.viewmodel.MainViewModel;
 
 public class FragmentMain1 extends Fragment {
 
-
-    MainViewModel mainViewModel;
     private FragmentMain1Binding binding;
-    RvChannel_Frg1 rvChannel_frg1;
+    private MainViewModel mainViewModel;
 
+
+    //global adapter
+    private RvChannel_Frg1 rvChannel_frg1;
+    private InfinitFrg1_PagerAdapter infinitAdapter;
+
+    //Utils Class
     private CardPagerAdapter2 cardPagerAdapter2;
     private ShadowTransformer shadowTransformer;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentMain1Binding.inflate(inflater, container, false);
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+
+
+        //request from Api to get DataModel
         mainViewModel.requestChannel();
+        mainViewModel.requestFunny_view();
+
+
+        initRv_Vp_adapter();
+
+
+        //update AND get Data from DataModel into LiveData
+        getChannel();
+        getFunny_view();
+
 
         return binding.getRoot();
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+    private void initRv_Vp_adapter() {
+
+        //init channel list Adapter
+        rvChannel_frg1 = new RvChannel_Frg1(requireActivity());
+        //init Rv channel List
+        binding.rvChannelListFrg1.setAdapter(rvChannel_frg1);
+        binding.rvChannelListFrg1.setLayoutManager(new LinearLayoutManager(getActivity(),
+                LinearLayoutManager.HORIZONTAL, false));
+        //horizontal viewpager infinite
+        infinitAdapter = new InfinitFrg1_PagerAdapter(requireActivity());
+        binding.infinitCycleFrg1.setAdapter(infinitAdapter);
 
 
-        rvChannel_frg1=new RvChannel_Frg1(requireActivity());
-        binding.vpChannelListFrg1.setAdapter(rvChannel_frg1);
-        binding.vpChannelListFrg1.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+
      /*   cardPagerAdapter2 = new CardPagerAdapter2(getActivity());
         shadowTransformer = new ShadowTransformer(binding.vpChannelListFrg1, cardPagerAdapter2);
         binding.vpChannelListFrg1.setAdapter(cardPagerAdapter2);
@@ -54,16 +80,14 @@ public class FragmentMain1 extends Fragment {
         binding.vpChannelListFrg1.setOffscreenPageLimit(6);*/
 
 
-getChannel();
-
     }
 
     private void getChannel() {
         mainViewModel.getChannel().observe(requireActivity(),channelDataModels -> {
-            if (channelDataModels!=null){
+            if (channelDataModels!=null) {
                 rvChannel_frg1.setData(channelDataModels);
-                for (ChannelDataModel channel:channelDataModels
-                     ) {
+                for (ChannelDataModel channel : channelDataModels
+                ) {
 //                    cardPagerAdapter2.addCardItem(channel);
 
                 }
@@ -71,6 +95,24 @@ getChannel();
         });
     }
 
+    private void getFunny_view() {
+        mainViewModel.getFunny_view().observe(requireActivity(), funnyDataModels -> {
+            if (funnyDataModels!=null) {
+                infinitAdapter.setData(funnyDataModels);
+               /* for (FunnyDataModel funnyDataModel : funnyDataModels) {
+                     Toast.makeText(getActivity(), "" + funnyDataModel.getTitle_en(), Toast.LENGTH_SHORT).show();
+                }*/
+            } else {
+                Toast.makeText(getActivity(), "ggggg", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+
+    }
 
     @Override
     public void onDestroyView() {
