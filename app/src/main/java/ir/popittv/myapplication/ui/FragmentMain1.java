@@ -9,114 +9,110 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import java.util.List;
-
-import ir.popittv.myapplication.adapter.Frg1Rv1_Adapter;
-import ir.popittv.myapplication.adapter.Frg2Rv1_Adapter;
+import ir.popittv.myapplication.ShadowTransformer;
+import ir.popittv.myapplication.adapter.CardPagerAdapter2;
+import ir.popittv.myapplication.adapter.InfinitFrg1_PagerAdapter;
+import ir.popittv.myapplication.adapter.RvChannel_Frg1;
 import ir.popittv.myapplication.databinding.FragmentMain1Binding;
-import ir.popittv.myapplication.models.FunnyDataModel;
+import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
 public class FragmentMain1 extends Fragment {
 
-
-    Frg1Rv1_Adapter adapter;
-    Frg2Rv1_Adapter adapter2;
-    MainViewModel mainViewModel;
     private FragmentMain1Binding binding;
+    private MainViewModel mainViewModel;
+
+
+    //global adapter
+    private RvChannel_Frg1 rvChannel_frg1;
+    private InfinitFrg1_PagerAdapter infinitAdapter;
+
+    //Utils Class
+    private CardPagerAdapter2 cardPagerAdapter2;
+    private ShadowTransformer shadowTransformer;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentMain1Binding.inflate(inflater, container, false);
+        mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+
+
+        //request from Api to get DataModel
+        mainViewModel.requestChannel();
+        mainViewModel.requestFunny_view();
+
+
+        initRv_Vp_adapter();
+
+
+        //update AND get Data from DataModel into LiveData
+        getChannel();
+        getFunny_view();
 
 
         return binding.getRoot();
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+    private void initRv_Vp_adapter() {
 
-        mainViewModel.requestFunny_best();
+        //init channel list Adapter
+        rvChannel_frg1 = new RvChannel_Frg1(requireActivity());
+        //init Rv channel List
+        binding.rvChannelListFrg1.setAdapter(rvChannel_frg1);
+        binding.rvChannelListFrg1.setLayoutManager(new LinearLayoutManager(getActivity(),
+                LinearLayoutManager.HORIZONTAL, false));
+        //horizontal viewpager infinite
+        infinitAdapter = new InfinitFrg1_PagerAdapter(requireActivity());
+        binding.infinitCycleFrg1.setAdapter(infinitAdapter);
 
-        mainViewModel.retrieveCafe(9);
 
-        configrc();
 
-        observMoviePopular();
-        obsercCafeBazar();
+     /*   cardPagerAdapter2 = new CardPagerAdapter2(getActivity());
+        shadowTransformer = new ShadowTransformer(binding.vpChannelListFrg1, cardPagerAdapter2);
+        binding.vpChannelListFrg1.setAdapter(cardPagerAdapter2);
+        binding.vpChannelListFrg1.setPageTransformer(false, shadowTransformer);
+        binding.vpChannelListFrg1.setOffscreenPageLimit(6);*/
 
 
     }
 
-    private void observMoviePopular() {
-        mainViewModel.getFunny_best().observe(requireActivity(), new Observer<List<FunnyDataModel>>() {
-            @Override
-            public void onChanged(List<FunnyDataModel> funnyDataModels) {
-                if (funnyDataModels!=null){
-                    adapter.setData(funnyDataModels);
+    private void getChannel() {
+        mainViewModel.getChannel().observe(requireActivity(),channelDataModels -> {
+            if (channelDataModels!=null) {
+                rvChannel_frg1.setData(channelDataModels);
+                for (ChannelDataModel channel : channelDataModels
+                ) {
+//                    cardPagerAdapter2.addCardItem(channel);
 
                 }
             }
         });
     }
 
-    private void obsercCafeBazar() {
-
-     mainViewModel.getCafe().observe(requireActivity(), new Observer<List<FunnyDataModel>>() {
-         @Override
-         public void onChanged(List<FunnyDataModel> funnyDataModels) {
-             if (funnyDataModels!=null){
-                 adapter2.getDataCafe(funnyDataModels);
-                 for (FunnyDataModel cafe:funnyDataModels
-                      ) {
-                  //Toast.makeText(getActivity(), "+++" + cafe.getPoster(), Toast.LENGTH_SHORT).show();
-                 }
-                 
-             }else {
-                 //Toast.makeText(getContext(), "nulllllll", Toast.LENGTH_SHORT).show();
-             }
-         }
-     });
-
+    private void getFunny_view() {
+        mainViewModel.getFunny_view().observe(requireActivity(), funnyDataModels -> {
+            if (funnyDataModels!=null) {
+                infinitAdapter.setData(funnyDataModels);
+               /* for (FunnyDataModel funnyDataModel : funnyDataModels) {
+                     Toast.makeText(getActivity(), "" + funnyDataModel.getTitle_en(), Toast.LENGTH_SHORT).show();
+                }*/
+            } else {
+                Toast.makeText(getActivity(), "ggggg", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
-    private void configrc() {
-
-        // RecyclerView 1
-        adapter = new Frg1Rv1_Adapter(getActivity());
-        binding.rv1Frg1.setAdapter(adapter);
-        binding.rv1Frg1.setLayoutManager(new LinearLayoutManager(getActivity(),
-                LinearLayoutManager.HORIZONTAL, false));
-
-
-        //recyclerView 2
-        adapter2 = new Frg2Rv1_Adapter(getContext());
-        binding.rv2FirstDashboard.setAdapter(adapter2);
-        binding.rv2FirstDashboard.setLayoutManager(new LinearLayoutManager(getActivity(),
-                LinearLayoutManager.HORIZONTAL,false));
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @Override
     public void onDestroyView() {

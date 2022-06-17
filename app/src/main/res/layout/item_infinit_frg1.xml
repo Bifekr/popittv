@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/card_dd"
+  android:layout_width="180dp"
+  android:layout_height="180dp"
+  android:orientation="vertical"
+
+ >
+
+  <RelativeLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <androidx.cardview.widget.CardView
+      app:cardElevation="6dp"
+      android:layout_margin="12dp"
+      app:cardUseCompatPadding="false"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:cardCornerRadius="50dp">
+
+      <ImageView
+        android:id="@+id/ivPoster_itemCoffie"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/iv_header_12" />
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="bottom"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+      </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+  </RelativeLayout>
+  <!-- <ImageView
+     android:src="@drawable/iv_header_11"
+     android:id="@+id/ivPoster_itemVideo"
+     android:layout_width="wrap_content"
+     android:layout_height="220dp"
+     android:layout_marginTop="-220dp"
+     android:layout_gravity="end"
+     android:elevation="18dp" />-->
+</LinearLayout>
+

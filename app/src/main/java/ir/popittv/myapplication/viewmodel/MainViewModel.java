@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
+import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.repository.MainRepository;
 
@@ -17,13 +18,11 @@ public class MainViewModel extends ViewModel {
     }
 
 
-    ////////// funny all video /////////////////
-    public LiveData<List<FunnyDataModel>> getCafe() {
-        return mainRepository.getCafeBazar();
+    public LiveData<List<ChannelDataModel>> getChannel(){
+        return mainRepository.getChannel();
     }
-
-    public void retrieveCafe(int id_sumMenu) {
-        mainRepository.retrieveCafe(id_sumMenu);
+    public void requestChannel(){
+        mainRepository.requestChannel();
     }
 
     ///////////  funny Best /////////////////
