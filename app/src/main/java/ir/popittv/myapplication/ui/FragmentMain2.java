@@ -23,7 +23,7 @@ import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.ShadowTransformer;
 import ir.popittv.myapplication.adapter.CardPagerAdapter;
 import ir.popittv.myapplication.adapter.DynamicRvAdapter;
-import ir.popittv.myapplication.adapter.Frg1Rv1_Adapter;
+import ir.popittv.myapplication.adapter.RvChannel_Frg1;
 import ir.popittv.myapplication.adapter.PagerAdapter;
 import ir.popittv.myapplication.adapter.PagerAdapter2;
 import ir.popittv.myapplication.adapter.StaticRvAdapter;
@@ -35,7 +35,6 @@ import ir.popittv.myapplication.viewmodel.MainViewModel;
 
 public class FragmentMain2 extends Fragment implements OnClickStaticRv {
 
-    Frg1Rv1_Adapter adapter;
     PagerAdapter pagerAdapter;
     PagerAdapter2 pagerAdapter2;
     StaticRvAdapter staticRvAdapter;
@@ -44,6 +43,7 @@ public class FragmentMain2 extends Fragment implements OnClickStaticRv {
 
     private FragmentMain2Binding binding;
     private MainViewModel mainViewModel;
+
     Animation animLogoMove,animTransition;
 
 
@@ -55,7 +55,13 @@ public class FragmentMain2 extends Fragment implements OnClickStaticRv {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentMain2Binding.inflate(inflater, container, false);
-        //// mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+    mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+        //set data into dataModel
+        mainViewModel.requestFunny_best();
+        mainViewModel.requestFunny_view();
+        mainViewModel.requestFunny_liky();
+        mainViewModel.requestFunny_subMenu(2);
+
 
         animLogoMove = AnimationUtils.loadAnimation(getContext(), R.anim.logo_move);
         animTransition = AnimationUtils.loadAnimation(getContext(), R.anim.transition);
@@ -78,6 +84,13 @@ public class FragmentMain2 extends Fragment implements OnClickStaticRv {
         binding.rvSubMenuFunny.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL,false));
         binding.rvSubMenuFunny.setAdapter(staticRvAdapter);
 
+
+        //get data from dataModel
+        getFunny_best();
+        getFunny_view();
+        getFunny_liky();
+        getFunny_subMenu();
+
         return binding.getRoot();
 
     }
@@ -87,11 +100,7 @@ public class FragmentMain2 extends Fragment implements OnClickStaticRv {
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
 
-        //set data into dataModel
-        mainViewModel.requestFunny_best();
-        mainViewModel.requestFunny_view();
-        mainViewModel.requestFunny_liky();
-        mainViewModel.requestFunny_subMenu(2);
+
 
         // init adapters
         initAdapter();
@@ -111,11 +120,7 @@ public class FragmentMain2 extends Fragment implements OnClickStaticRv {
         binding.viewpagerSlideFrg2.setOffscreenPageLimit(3);
 
 
-        //get data from dataModel
-        getFunny_best();
-        getFunny_view();
-        getFunny_liky();
-        getFunny_subMenu();
+
 
 
     }
@@ -125,8 +130,6 @@ public class FragmentMain2 extends Fragment implements OnClickStaticRv {
 
         mainViewModel.getFunny_best().observe(requireActivity(), funnyDataModels -> {
             if (funnyDataModels!=null) {
-                adapter.setData(funnyDataModels);
-
                 for (FunnyDataModel fuuny : funnyDataModels
                 ) {
                     mCardAdapter.addCardItem(fuuny);
@@ -169,7 +172,7 @@ public class FragmentMain2 extends Fragment implements OnClickStaticRv {
     }
 
     private void initAdapter() {
-        adapter = new Frg1Rv1_Adapter(getActivity());
+
         pagerAdapter = new PagerAdapter(getActivity());
         pagerAdapter2 = new PagerAdapter2(getActivity());
         mCardAdapter = new CardPagerAdapter(getActivity());

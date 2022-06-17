@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import ir.popittv.myapplication.models.ChannelDataModel;
+import ir.popittv.myapplication.response.ChannelResponse;
 import ir.popittv.myapplication.utils.AppExecuter;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.response.FunnyResponse;
@@ -24,15 +26,15 @@ public class MainApiClient {
     private static MainApiClient mainApiClient;
 
 
-    private RetrieveCafeBazarRunnable cafeBazarRunnable;
+    private ChannelRunnable channelRunnable;
 
 
-    private final MutableLiveData<List<FunnyDataModel>> mCafe;
+    private final MutableLiveData<List<ChannelDataModel>> mChannel;
 
 
     private MainApiClient() {
 
-        mCafe = new MutableLiveData<>();
+        mChannel = new MutableLiveData<>();
     }
 
     public static MainApiClient getInstance() {
@@ -43,8 +45,8 @@ public class MainApiClient {
     }
 
 
-    public LiveData<List<FunnyDataModel>> getCafeBazar() {
-        return mCafe;
+    public LiveData<List<ChannelDataModel>> getChannel() {
+        return mChannel;
     }
 
 
@@ -52,16 +54,16 @@ public class MainApiClient {
 
 
     //retrieve data from localHost
-    public void retrieveCafe(int id_SubMenu) {
+    public void requestChannel() {
 
 
-        if (cafeBazarRunnable!=null) {
-            cafeBazarRunnable = null;
+        if (channelRunnable!=null) {
+            channelRunnable = null;
         }
 
-        cafeBazarRunnable = new RetrieveCafeBazarRunnable(id_SubMenu);
+        channelRunnable = new ChannelRunnable();
 
-        final Future myHandler2 = AppExecuter.getAppExecuter().networkIo().submit(cafeBazarRunnable);
+        final Future myHandler2 = AppExecuter.getAppExecuter().networkIo().submit(channelRunnable);
 
         AppExecuter.getAppExecuter().networkIo().schedule(new Runnable() {
             @Override
@@ -72,14 +74,13 @@ public class MainApiClient {
         }, 2, TimeUnit.MINUTES);
     }
 
-    private class RetrieveCafeBazarRunnable implements Runnable {
+    private class ChannelRunnable implements Runnable {
 
 
         private final boolean canclable;
-        int id_sumMenu;
 
-        public RetrieveCafeBazarRunnable(int id_sumMenu) {
-            this.id_sumMenu=id_sumMenu;
+
+        public ChannelRunnable() {
             canclable = false;
         }
 
@@ -92,13 +93,13 @@ public class MainApiClient {
                 if (canclable)
                     return;
 
-                Response response2 = cafeCallMethod(id_sumMenu).execute();
+                Response response2 = channelResponseCall().execute();
 
                 if (response2.code()==200) {
                     assert response2.body()!=null;
-                    List<FunnyDataModel> cafeModels = new ArrayList<>(((FunnyResponse) response2.body()).getFunny());
+                    List<ChannelDataModel> channelDataModels = new ArrayList<>(((ChannelResponse) response2.body()).getChannel());
 
-                    mCafe.postValue(cafeModels);
+                    mChannel.postValue(channelDataModels);
                 } else {
                     String error = response2.errorBody().string();
                     Log.i("tag", "run: " + error);
@@ -107,15 +108,15 @@ public class MainApiClient {
             } catch (IOException e) {
 
                 e.printStackTrace();
-                mCafe.postValue(null);
+                mChannel.postValue(null);
             }
 
 
         }
 
 
-        private Call<FunnyResponse> cafeCallMethod(int id_subMenu) {
-            return Service.getApiClient().getFunny(id_subMenu);
+        private Call<ChannelResponse> channelResponseCall() {
+            return Service.getApiClient().getChannel();
 
         }
 

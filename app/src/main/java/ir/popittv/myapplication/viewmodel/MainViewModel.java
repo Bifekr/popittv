@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
+import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.repository.MainRepository;
 
@@ -14,6 +15,14 @@ public class MainViewModel extends ViewModel {
 
     public MainViewModel() {
         mainRepository = MainRepository.getInstance();
+    }
+
+
+    public LiveData<List<ChannelDataModel>> getChannel(){
+        return mainRepository.getChannel();
+    }
+    public void requestChannel(){
+        mainRepository.requestChannel();
     }
 
     ///////////  funny Best /////////////////

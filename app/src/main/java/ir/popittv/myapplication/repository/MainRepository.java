@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.request.FunnyApiClient;
 import ir.popittv.myapplication.request.MainApiClient;
@@ -29,7 +30,13 @@ public class MainRepository {
 
 
 
+public LiveData<List<ChannelDataModel>> getChannel(){
+        return mainApiClient.getChannel();
+}
 
+public void requestChannel(){
+        mainApiClient.requestChannel();
+}
 
 
     public LiveData<List<FunnyDataModel>> getFunny_best(){

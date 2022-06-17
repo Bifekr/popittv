@@ -13,38 +13,37 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import ir.popittv.myapplication.R;
-import ir.popittv.myapplication.databinding.ItemVidThumbBinding;
-import ir.popittv.myapplication.models.FunnyDataModel;
+import ir.popittv.myapplication.databinding.ItemChannelProfileBinding;
+import ir.popittv.myapplication.models.ChannelDataModel;
 
-public class Frg1Rv1_Adapter extends RecyclerView.Adapter<Frg1Rv1_Adapter.Frg1Rv1_ViewHolder> {
+public class RvChannel_Frg1 extends RecyclerView.Adapter<RvChannel_Frg1.rvChannel_ViewHolder> {
 
 
 
-    List<FunnyDataModel> movieModelList;
+    List<ChannelDataModel> channelDataModels;
     Context context;
 
-    public Frg1Rv1_Adapter(Context context) {
+    public RvChannel_Frg1(Context context) {
         this.context = context;
     }
 
     @NonNull
     @Override
-    public Frg1Rv1_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public rvChannel_ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
       //  View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_frg1_rv1,parent,false);
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        ItemVidThumbBinding binding= DataBindingUtil.inflate(inflater,R.layout.item_vid_thumb,parent,false);
+        ItemChannelProfileBinding binding= DataBindingUtil.inflate(inflater,R.layout.item_channel_profile,parent,false);
 
-        return new Frg1Rv1_ViewHolder(binding);
+        return new rvChannel_ViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Frg1Rv1_ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull rvChannel_ViewHolder holder, int position) {
 
-        holder.binding.titleFaVideoItemVideoThumb.setText(movieModelList.get(position).getTitle_fa());
-        holder.binding.titleEnVideoItemVideoThumb.setText(movieModelList.get(position).getTitle_en());
-        Glide.with(context).load(movieModelList.get(position).getPoster())
-                .into(holder.binding.ivPosterItemVideo);
+
+        Glide.with(context).load(channelDataModels.get(position).getProfile_chann())
+                .into(holder.binding.itemChannProfile);
 
       /*  holder.tv_title.setText(movieModelList.get(position).getTitle());
 
@@ -55,21 +54,21 @@ public class Frg1Rv1_Adapter extends RecyclerView.Adapter<Frg1Rv1_Adapter.Frg1Rv
 
     @Override
     public int getItemCount() {
-        if (movieModelList!=null) {
-            return movieModelList.size();
+        if (channelDataModels!=null) {
+            return channelDataModels.size();
         } else
             return 0;
 
     }
 
-    public class Frg1Rv1_ViewHolder extends RecyclerView.ViewHolder{
+    public class rvChannel_ViewHolder extends RecyclerView.ViewHolder{
 
-        private ItemVidThumbBinding binding;
+        private ItemChannelProfileBinding binding;
       //  ImageView iv_poster;
        // TextView tv_title;
 
 
-        public Frg1Rv1_ViewHolder(@NonNull ItemVidThumbBinding binding) {
+        public rvChannel_ViewHolder(@NonNull ItemChannelProfileBinding binding) {
             super(binding.getRoot());
 
             this.binding=binding;
@@ -81,8 +80,8 @@ public class Frg1Rv1_Adapter extends RecyclerView.Adapter<Frg1Rv1_Adapter.Frg1Rv
         }
     }
 
-    public void setData(List<FunnyDataModel> movieModelList){
-    this.movieModelList=movieModelList;
+    public void setData(List<ChannelDataModel> movieModelList){
+    this.channelDataModels =movieModelList;
     notifyDataSetChanged();
     }
 
