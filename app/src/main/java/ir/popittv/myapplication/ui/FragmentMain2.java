@@ -55,6 +55,10 @@ public class FragmentMain2 extends Fragment implements OnClickStaticRv {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentMain2Binding.inflate(inflater, container, false);
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+
+        // init adapters
+        initAdapter();
+
         //set data into dataModel
         mainViewModel.requestFunny_best();
         mainViewModel.requestFunny_view();
@@ -101,8 +105,7 @@ public class FragmentMain2 extends Fragment implements OnClickStaticRv {
 
 
 
-        // init adapters
-        initAdapter();
+
 
 
      /*  binding.ivLogo.setOnClickListener(v -> {

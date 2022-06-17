@@ -4,8 +4,9 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="260dp"
-    android:layout_height="170dp">
+    android:layout_marginBottom="4dp"
+    android:layout_width="match_parent"
+    android:layout_height="140dp">
 
     <androidx.cardview.widget.CardView
       android:layout_width="0dp"
@@ -154,6 +155,7 @@
             android:src="@drawable/ic_like" />
 
           <TextView
+            android:id="@+id/tvLike_itemVidDef"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="124k"
@@ -180,6 +182,7 @@
             android:src="@drawable/ic_baseline_eye_24" />
 
           <TextView
+            android:id="@+id/tvView_itemVidDef"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="124k"
