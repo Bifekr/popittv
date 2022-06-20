@@ -116,7 +116,7 @@ public class MainApiClient {
 
 
         private Call<ChannelResponse> channelResponseCall() {
-            return Service.getApiClient().getChannel();
+            return Service.getApiClient().getChannel(1);
 
         }
 

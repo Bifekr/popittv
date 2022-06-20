@@ -21,5 +21,5 @@ public interface ApiClient {
     @GET("getFunny_view.php")
     Call<FunnyResponse> getFunny_view();
     @GET("getChannel.php")
-    Call<ChannelResponse> getChannel();
+    Call<ChannelResponse> getChannel(@Query("kind") int kin);
 }
