@@ -83,6 +83,7 @@
         app:layout_constraintVertical_bias="1"
         app:layout_constraintBottom_toBottomOf="parent">
         <ImageView
+          android:id="@+id/showProfileChan_frg1"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:src="@drawable/avatar_2"
@@ -121,7 +122,7 @@
               android:paddingEnd="@dimen/plane_08"
               android:textAppearance="@style/TextAppearance.Reply.Headline6" />
             <TextView
-              android:id="@+id/tvSub_showChan_frg1"
+              android:id="@+id/tvSub_detailChan_frg1"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="154 k"
@@ -161,6 +162,7 @@
               android:text="Age"
               android:textAppearance="@style/TextAppearance.Reply.Headline6" />
             <TextView
+              android:id="@+id/tvAge_detailChan_frg1"
               android:layout_marginTop="2dp"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
@@ -190,7 +192,7 @@
             app:layout_constraintWidth_percent=".6">
 
             <TextView
-              android:id="@+id/titleFa_video_itemVideoThumb"
+              android:id="@+id/titleFa_detailChan_frg1"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:ellipsize="end"
@@ -206,7 +208,7 @@
               />
 
             <TextView
-              android:id="@+id/titleEn_video_itemVideoThumb"
+              android:id="@+id/titleEn_detailChan_frg1"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:ellipsize="end"

@@ -1,6 +1,6 @@
 package ir.popittv.myapplication.utils;
 
-public interface OnClickDetailChannel {
+public interface OnClickFrg1 {
 
     public void OnclickDetail(int pos);
 }

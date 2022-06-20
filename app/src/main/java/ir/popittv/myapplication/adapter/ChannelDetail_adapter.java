@@ -16,6 +16,7 @@ import java.util.List;
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.databinding.ItemChannelDetailBinding;
 import ir.popittv.myapplication.databinding.ItemVidDefultBinding;
+import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
 
 public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_adapter.DetailChannel_holder> {
@@ -46,13 +47,11 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
         holder.binding.titleFaVideoItemVideoThumb.setText(funnyDataModels.get(position).getTitle_fa());
         holder.binding.titleEnVideoItemVideoThumb.setText(funnyDataModels.get(position).getTitle_en());
         holder.binding.tvViewItemVidDef.setText(funnyDataModels.get(position).getView()+"");
-        holder.binding.tvLikeItemVidDef.setText(funnyDataModels.get(position).getLiky()+"");
-
+      //  holder.binding.tvLikeItemVidDef.setText(funnyDataModels.get(position).getLiky()+"");
         Glide.with(context).load(funnyDataModels.get(position).getPoster())
                 .into(holder.binding.ivPosterItemVideo);
 
-        Glide.with(context).load(funnyDataModels.get(position).getProfile_chann())
-                .into(holder.binding.ivPosterItemVideo);
+
 
     }
 

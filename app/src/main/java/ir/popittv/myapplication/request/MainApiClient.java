@@ -1,6 +1,7 @@
 package ir.popittv.myapplication.request;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -27,14 +28,17 @@ public class MainApiClient {
 
 
     private ChannelRunnable channelRunnable;
+    private ChannelDetail_Run channelDetail_run;
 
 
     private final MutableLiveData<List<ChannelDataModel>> mChannel;
+    private final MutableLiveData<ChannelDataModel> mDetailChannel;
 
 
     private MainApiClient() {
 
         mChannel = new MutableLiveData<>();
+        mDetailChannel = new MutableLiveData<>();
     }
 
     public static MainApiClient getInstance() {
@@ -48,13 +52,14 @@ public class MainApiClient {
     public LiveData<List<ChannelDataModel>> getChannel() {
         return mChannel;
     }
+    public LiveData<ChannelDataModel> getChannel_detail(){return  mDetailChannel;}
 
 
 
 
 
-    //retrieve data from localHost
-    public void requestChannel() {
+    //retrieve data from dataBase
+    public void requestChannel_kind() {
 
 
         if (channelRunnable!=null) {
@@ -73,7 +78,6 @@ public class MainApiClient {
             }
         }, 2, TimeUnit.MINUTES);
     }
-
     private class ChannelRunnable implements Runnable {
 
 
@@ -87,8 +91,6 @@ public class MainApiClient {
 
         @Override
         public void run() {
-
-
             try {
                 if (canclable)
                     return;
@@ -120,6 +122,61 @@ public class MainApiClient {
 
         }
 
+
+    }
+
+    //retrieve detail Channel from dataBase
+    public void requestChannel_detail(int id_channel){
+
+        if (channelDetail_run!=null){
+            channelDetail_run=null;
+        }
+
+        channelDetail_run = new ChannelDetail_Run(id_channel);
+        Future detailHandler = AppExecuter.getAppExecuter().networkIo().submit(channelDetail_run);
+        AppExecuter.getAppExecuter().networkIo().schedule(new Runnable() {
+            @Override
+            public void run() {
+                detailHandler.cancel(true);
+            }
+        },2,TimeUnit.MINUTES);
+    }
+    private class ChannelDetail_Run implements Runnable{
+
+        int id_channel;
+
+        public ChannelDetail_Run(int id_channel) {
+            this.id_channel = id_channel;
+        }
+
+        @Override
+        public void run() {
+
+            try {
+                Response response= call(id_channel).execute();
+                if (response.isSuccessful()){
+                    ChannelDataModel channelDataModel=(ChannelDataModel) response.body();
+                    mDetailChannel.postValue(channelDataModel);
+                }else {
+                   String errorResponse= response.errorBody().string();
+                   Log.e("tag","error"+errorResponse);
+                }
+
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                mDetailChannel.postValue(null);
+            }
+
+
+        }
+
+        private Call<ChannelDataModel> call(int id_channel){
+
+            return Service.getApiClient().getChannel_detail(id_channel);
+
+        }
 
     }
 
