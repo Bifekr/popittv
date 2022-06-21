@@ -1,4 +1,4 @@
-package ir.popittv.myapplication;
+package ir.popittv.myapplication.activitys;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -22,20 +22,20 @@ import com.google.android.material.navigation.NavigationBarView;
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.popittv.myapplication.R;
+import ir.popittv.myapplication.ShadowTransformer;
 import ir.popittv.myapplication.adapter.CardPagerAdapter2;
 import ir.popittv.myapplication.adapter.ChannelDetail_adapter;
 import ir.popittv.myapplication.adapter.InfinitFrg1_PagerAdapter;
 import ir.popittv.myapplication.adapter.Recommend_Adapter;
 import ir.popittv.myapplication.adapter.RvChannel_Frg1;
 import ir.popittv.myapplication.databinding.ActivityMainBinding;
-import ir.popittv.myapplication.databinding.FragmentMain1Binding;
 import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.ui.FragmentMain1;
 import ir.popittv.myapplication.ui.FragmentMain2;
 import ir.popittv.myapplication.ui.FragmentMain3;
 import ir.popittv.myapplication.ui.FragmentMain4;
-import ir.popittv.myapplication.ui.RealityActivity;
 import ir.popittv.myapplication.ui.TestActivity;
 import ir.popittv.myapplication.utils.OnClickFrg1;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
 
     MainViewModel mainViewModel;
     ActivityMainBinding binding;
+
+
     FragmentManager fragmentManager;
     FragmentTransaction transaction;
     Fragment fragment;
@@ -79,38 +81,11 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
 
         //ViewModel Provider
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        binding.navRail.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.schedule:
-                        startActivity(new Intent(MainActivity.this, TestActivity.class));
-                        break;
-                    case R.id.timer:
-                        startActivity(new Intent(MainActivity.this, RealityActivity.class));
-                        break;
-
-
-                }
-            return true;
-            }
-        });
-       /* binding.navRail.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
-            @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.schedule:
-                        startActivity(new Intent(MainActivity.this,TestActivity.class));
-                        break;
-                    case R.id.timer:
-                        startActivity(new Intent(MainActivity.this, RealityActivity.class));
-                        break;
 
 
 
-                }
-            }
-        });*/
+
+        initRailActivity();
 
   /*     if (fragment==null) {
            fragmentManager = getSupportFragmentManager();
@@ -143,6 +118,55 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
 
     }
 
+    private void initRailActivity() {
+        binding.navRail.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case  R.id.Funny:
+                        startActivity(new Intent(MainActivity.this, MainActivity.class));
+                        break;
+                    case R.id.Reality:
+                        startActivity(new Intent(MainActivity.this, RealityActivity.class));
+                        break;
+                    case R.id.Learning:
+                        startActivity(new Intent(MainActivity.this, StudyActivity.class));
+                        break;
+                    case R.id.Farsi:
+                        startActivity(new Intent(MainActivity.this, FarsiActivity.class));
+                        break;
+                    case R.id.Games:
+                        startActivity(new Intent(MainActivity.this, GameActivity.class));
+                        break;
+                }
+                return true;
+            }
+        });
+        binding.navRail.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
+            @Override
+            public void onNavigationItemReselected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.Funny:
+                        startActivity(new Intent(MainActivity.this,MainActivity.class));
+                        break;
+                    case R.id.Reality:
+                        startActivity(new Intent(MainActivity.this, RealityActivity.class));
+                        break;
+                    case R.id.Learning:
+                        startActivity(new Intent(MainActivity.this, StudyActivity.class));
+                        break;
+                    case R.id.Farsi:
+                        startActivity(new Intent(MainActivity.this, FarsiActivity.class));
+                        break;
+                    case R.id.Games:
+                        startActivity(new Intent(MainActivity.this, GameActivity.class));
+                        break;
+
+
+                }
+            }
+        });
+    }
 
 
     private void initRv_Vp_adapter() {
@@ -250,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
 
 
 
-    private void initRail() {
+  /*  private void initRail() {
 
 
         binding.navRail.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -299,7 +323,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
             }
         });
 
-    }
+    }*/
 
     @Override
     protected void onResume() {
