@@ -1,6 +1,5 @@
 package ir.popittv.myapplication.activitys;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -32,11 +31,6 @@ import ir.popittv.myapplication.adapter.RvChannel_Frg1;
 import ir.popittv.myapplication.databinding.ActivityMainBinding;
 import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
-import ir.popittv.myapplication.ui.FragmentMain1;
-import ir.popittv.myapplication.ui.FragmentMain2;
-import ir.popittv.myapplication.ui.FragmentMain3;
-import ir.popittv.myapplication.ui.FragmentMain4;
-import ir.popittv.myapplication.ui.TestActivity;
 import ir.popittv.myapplication.utils.OnClickFrg1;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
@@ -78,13 +72,8 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-
         //ViewModel Provider
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-
-
-
-
         initRailActivity();
 
   /*     if (fragment==null) {
@@ -221,21 +210,15 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
     private void getChannel_detail(){
         mainViewModel.getChannel_detail().observe(this, channelDataModel -> {
 
-
-
-
-            Glide.with(this).load(channelDataModel.getProfile_chann())
-                    .into(binding.showProfileChanFrg1);
-
             List<FunnyDataModel> models = new ArrayList<>((channelDataModel).getVideos_channel());
             detail_adapter.setFunnyDataModels(models);
 
-
-            //  binding.tvSubDetailChanFrg1.setText(tv1);
-            // binding.tvAgeDetailChanFrg1.setText(channelDataModel.getAge()+"");
-            // binding.titleFaDetailChanFrg1.setText(channelDataModel.getName_chan_fa()+"");
-            // binding.titleEnDetailChanFrg1.setText(channelDataModel.getName_chan_en()+"");
-
+            Glide.with(this).load(channelDataModel.getProfile_chann())
+                    .into(binding.showProfileChanFrg1);
+            binding.tvSubDetailChanFrg1.setText(channelDataModel.getFollowers());
+            binding.tvAgeDetailChanFrg1.setText(channelDataModel.getAge());
+            binding.titleFaDetailChanFrg1.setText(channelDataModel.getName_chan_fa().trim());
+            binding.titleEnDetailChanFrg1.setText(channelDataModel.getName_chan_en().trim());
 
 
         });
@@ -246,11 +229,8 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
             if (funnyDataModels!=null) {
                 infinitAdapter.setData(funnyDataModels);
                 recommend_adapter.setFunnyDataModels(funnyDataModels);
-               /* for (FunnyDataModel funnyDataModel : funnyDataModels) {
-                     Toast.makeText(getActivity(), "" + funnyDataModel.getTitle_en(), Toast.LENGTH_SHORT).show();
-                }*/
             } else {
-                Toast.makeText(this, "ggggg", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "اینترنت را بررسی کنید", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -260,7 +240,6 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
 
     @Override
     public void OnclickDetail(int pos) {
-
         id_channel=pos;
         mainViewModel.requestChannel_detail(id_channel);
 
