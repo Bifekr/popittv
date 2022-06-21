@@ -11,16 +11,26 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ir.popittv.myapplication.ShadowTransformer;
 import ir.popittv.myapplication.adapter.CardPagerAdapter2;
+import ir.popittv.myapplication.adapter.ChannelDetail_adapter;
 import ir.popittv.myapplication.adapter.InfinitFrg1_PagerAdapter;
+import ir.popittv.myapplication.adapter.Recommend_Adapter;
 import ir.popittv.myapplication.adapter.RvChannel_Frg1;
 import ir.popittv.myapplication.databinding.FragmentMain1Binding;
 import ir.popittv.myapplication.models.ChannelDataModel;
+import ir.popittv.myapplication.models.FunnyDataModel;
+import ir.popittv.myapplication.utils.OnClickFrg1;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
-public class FragmentMain1 extends Fragment {
+public class FragmentMain1 extends Fragment implements OnClickFrg1 {
 
     private FragmentMain1Binding binding;
     private MainViewModel mainViewModel;
@@ -28,7 +38,15 @@ public class FragmentMain1 extends Fragment {
 
     //global adapter
     private RvChannel_Frg1 rvChannel_frg1;
+    private ChannelDetail_adapter detail_adapter;
     private InfinitFrg1_PagerAdapter infinitAdapter;
+    Recommend_Adapter recommend_adapter;
+
+
+    //global Variable
+    int id_channel;
+    String tv1;
+
 
     //Utils Class
     private CardPagerAdapter2 cardPagerAdapter2;
@@ -41,17 +59,20 @@ public class FragmentMain1 extends Fragment {
         binding = FragmentMain1Binding.inflate(inflater, container, false);
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
-
+        initRv_Vp_adapter();
         //request from Api to get DataModel
         mainViewModel.requestChannel();
+        //detail Channel Selected
+       // mainViewModel.requestChannel_detail(1);
         mainViewModel.requestFunny_view();
 
 
-        initRv_Vp_adapter();
+
 
 
         //update AND get Data from DataModel into LiveData
         getChannel();
+        getChannel_detail();
         getFunny_view();
 
 
@@ -62,14 +83,27 @@ public class FragmentMain1 extends Fragment {
     private void initRv_Vp_adapter() {
 
         //init channel list Adapter
-        rvChannel_frg1 = new RvChannel_Frg1(requireActivity());
-        //init Rv channel List
+        rvChannel_frg1 = new RvChannel_Frg1(requireActivity(),this);
         binding.rvChannelListFrg1.setAdapter(rvChannel_frg1);
-        binding.rvChannelListFrg1.setLayoutManager(new LinearLayoutManager(getActivity(),
+        binding.rvChannelListFrg1.setLayoutManager(new LinearLayoutManager(requireActivity(),
                 LinearLayoutManager.HORIZONTAL, false));
+
+        //Show Detail Channel Recycler
+        detail_adapter=new ChannelDetail_adapter(requireActivity());
+        binding.rvDetailFrg1.setAdapter(detail_adapter);
+        binding.rvDetailFrg1.setLayoutManager(new LinearLayoutManager(requireActivity(),
+                LinearLayoutManager.HORIZONTAL,false));
+
+
         //horizontal viewpager infinite
         infinitAdapter = new InfinitFrg1_PagerAdapter(requireActivity());
         binding.infinitCycleFrg1.setAdapter(infinitAdapter);
+
+        //Recommended Vide Rv
+        recommend_adapter=new Recommend_Adapter(requireActivity());
+        binding.rvRecommendFrg1.setLayoutManager(new LinearLayoutManager(requireActivity(),
+                RecyclerView.VERTICAL,false));
+        binding.rvRecommendFrg1.setAdapter(recommend_adapter);
 
 
 
@@ -86,6 +120,7 @@ public class FragmentMain1 extends Fragment {
         mainViewModel.getChannel().observe(requireActivity(),channelDataModels -> {
             if (channelDataModels!=null) {
                 rvChannel_frg1.setData(channelDataModels);
+
                 for (ChannelDataModel channel : channelDataModels
                 ) {
 //                    cardPagerAdapter2.addCardItem(channel);
@@ -94,11 +129,34 @@ public class FragmentMain1 extends Fragment {
             }
         });
     }
+    private void getChannel_detail(){
+        mainViewModel.getChannel_detail().observe(requireActivity(), channelDataModel -> {
+
+
+
+
+           Glide.with(requireActivity()).load(channelDataModel.getProfile_chann())
+                    .into(binding.showProfileChanFrg1);
+
+            List<FunnyDataModel> models = new ArrayList<>((channelDataModel).getVideos_channel());
+            detail_adapter.setFunnyDataModels(models);
+
+
+       //  binding.tvSubDetailChanFrg1.setText(tv1);
+           // binding.tvAgeDetailChanFrg1.setText(channelDataModel.getAge()+"");
+           // binding.titleFaDetailChanFrg1.setText(channelDataModel.getName_chan_fa()+"");
+           // binding.titleEnDetailChanFrg1.setText(channelDataModel.getName_chan_en()+"");
+
+
+
+        });
+    }
 
     private void getFunny_view() {
         mainViewModel.getFunny_view().observe(requireActivity(), funnyDataModels -> {
             if (funnyDataModels!=null) {
                 infinitAdapter.setData(funnyDataModels);
+                recommend_adapter.setFunnyDataModels(funnyDataModels);
                /* for (FunnyDataModel funnyDataModel : funnyDataModels) {
                      Toast.makeText(getActivity(), "" + funnyDataModel.getTitle_en(), Toast.LENGTH_SHORT).show();
                 }*/
@@ -114,10 +172,19 @@ public class FragmentMain1 extends Fragment {
 
     }
 
+
+
+    @Override
+    public void OnclickDetail(int pos) {
+
+        id_channel=pos;
+        mainViewModel.requestChannel_detail(id_channel);
+
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-
 }

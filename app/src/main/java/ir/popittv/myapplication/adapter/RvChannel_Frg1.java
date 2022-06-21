@@ -3,9 +3,11 @@ package ir.popittv.myapplication.adapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -15,17 +17,21 @@ import java.util.List;
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.databinding.ItemChannelProfileBinding;
 import ir.popittv.myapplication.models.ChannelDataModel;
+import ir.popittv.myapplication.utils.OnClickFrg1;
 
 public class RvChannel_Frg1 extends RecyclerView.Adapter<RvChannel_Frg1.rvChannel_ViewHolder> {
 
 
 
     List<ChannelDataModel> channelDataModels;
+    OnClickFrg1 onClickFrg1;
     Context context;
 
-    public RvChannel_Frg1(Context context) {
+    public RvChannel_Frg1(FragmentActivity context , OnClickFrg1 onClickFrg1) {
         this.context = context;
+        this.onClickFrg1=onClickFrg1;
     }
+
 
     @NonNull
     @Override
@@ -44,11 +50,13 @@ public class RvChannel_Frg1 extends RecyclerView.Adapter<RvChannel_Frg1.rvChanne
 
         Glide.with(context).load(channelDataModels.get(position).getProfile_chann())
                 .into(holder.binding.itemChannProfile);
+        holder.binding.tvAgeItemProfileChan.setText(channelDataModels.get(position).getAge());
+        holder.binding.parentItemProfileChan.setOnClickListener(v->{
 
-      /*  holder.tv_title.setText(movieModelList.get(position).getTitle());
+            onClickFrg1.OnclickDetail(channelDataModels.get(position).getId_channel());
 
-        Glide.with(context).load("https://image.tmdb.org/t/p/w500/"+movieModelList.get(position).getPoster_path())
-                .into(holder.iv_poster);*/
+
+        });
 
     }
 

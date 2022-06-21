@@ -21,15 +21,15 @@ public class FunnyDataModel implements Parcelable {
     private String link_720;
     private String name_chan_en;
     private String name_chan_fa;
-    private String icon_profile;
-    private String poster_vr;
-    private String poster_hr;
+    private String profile_chann;
+    private String banner_chann;
+    private String followers;
 
     public FunnyDataModel() {
     }
 
 
-    public FunnyDataModel(int id_funny, int id_channel, int view, int liky, int age1, int age2, int age3, int age4, int age5, String title_en, String title_fa, String poster, String link_480, String link_720, String name_chan_en, String name_chan_fa, String icon_profile, String poster_vr, String poster_hr) {
+    public FunnyDataModel(int id_funny, int id_channel, int view, int liky, int age1, int age2, int age3, int age4, int age5, String title_en, String title_fa, String poster, String link_480, String link_720, String name_chan_en, String name_chan_fa, String profile_chann, String banner_chann, String followers) {
         this.id_funny = id_funny;
         this.id_channel = id_channel;
         this.view = view;
@@ -46,9 +46,9 @@ public class FunnyDataModel implements Parcelable {
         this.link_720 = link_720;
         this.name_chan_en = name_chan_en;
         this.name_chan_fa = name_chan_fa;
-        this.icon_profile = icon_profile;
-        this.poster_vr = poster_vr;
-        this.poster_hr = poster_hr;
+        this.profile_chann = profile_chann;
+        this.banner_chann = banner_chann;
+        this.followers = followers;
     }
 
     protected FunnyDataModel(Parcel in) {
@@ -68,9 +68,9 @@ public class FunnyDataModel implements Parcelable {
         link_720 = in.readString();
         name_chan_en = in.readString();
         name_chan_fa = in.readString();
-        icon_profile = in.readString();
-        poster_vr = in.readString();
-        poster_hr = in.readString();
+        profile_chann = in.readString();
+        banner_chann = in.readString();
+        followers = in.readString();
     }
 
     public static final Creator<FunnyDataModel> CREATOR = new Creator<FunnyDataModel>() {
@@ -149,16 +149,16 @@ public class FunnyDataModel implements Parcelable {
         return name_chan_fa;
     }
 
-    public String getIcon_profile() {
-        return icon_profile;
+    public String getProfile_chann() {
+        return profile_chann;
     }
 
-    public String getPoster_vr() {
-        return poster_vr;
+    public String getBanner_chann() {
+        return banner_chann;
     }
 
-    public String getPoster_hr() {
-        return poster_hr;
+    public String getFollowers() {
+        return followers;
     }
 
     @Override
@@ -184,9 +184,9 @@ public class FunnyDataModel implements Parcelable {
         dest.writeString(link_720);
         dest.writeString(name_chan_en);
         dest.writeString(name_chan_fa);
-        dest.writeString(icon_profile);
-        dest.writeString(poster_vr);
-        dest.writeString(poster_hr);
+        dest.writeString(profile_chann);
+        dest.writeString(banner_chann);
+        dest.writeString(followers);
     }
 }
 

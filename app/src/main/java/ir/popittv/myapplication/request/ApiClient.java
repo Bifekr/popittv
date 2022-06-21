@@ -1,5 +1,6 @@
 package ir.popittv.myapplication.request;
 
+import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.response.ChannelResponse;
 import ir.popittv.myapplication.response.FunnyResponse;
 import retrofit2.Call;
@@ -21,5 +22,7 @@ public interface ApiClient {
     @GET("getFunny_view.php")
     Call<FunnyResponse> getFunny_view();
     @GET("getChannel.php")
-    Call<ChannelResponse> getChannel();
+    Call<ChannelResponse> getChannel(@Query("kind") int kind);
+    @GET("getChannel_detail.php")
+    Call<ChannelDataModel> getChannel_detail(@Query("id_channel") int id_channel);
 }

@@ -25,6 +25,9 @@ public class MainViewModel extends ViewModel {
         mainRepository.requestChannel();
     }
 
+    public LiveData<ChannelDataModel> getChannel_detail(){return mainRepository.getChannel_detail();}
+    public void requestChannel_detail(int id_channel){mainRepository.requestChannel_detail(id_channel);}
+
     ///////////  funny Best /////////////////
     public LiveData<List<FunnyDataModel>> getFunny_best() {
         return mainRepository.getFunny_best();

@@ -80,9 +80,9 @@
           android:paddingRight="2dp"
           android:showDividers="middle"
           app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toStartOf="@id/Profile_channel_videoThumb"
+          app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="1"
-          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintStart_toEndOf="@id/parentLike_itemVidDef"
           app:layout_constraintTop_toBottomOf="@id/parentPoster_itemDef"
           app:layout_constraintWidth_percent=".6">
 
@@ -189,23 +189,6 @@
             android:textSize="10sp" />
         </LinearLayout>
 
-
-        <com.makeramen.roundedimageview.RoundedImageView
-          android:id="@+id/Profile_channel_videoThumb"
-          android:layout_width="36dp"
-          android:layout_height="32dp"
-          android:elevation="12dp"
-          android:src="@drawable/avatar_2"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHeight_percent=".15"
-          app:layout_constraintHorizontal_bias=".98"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          app:layout_constraintVertical_bias=".96"
-          app:riv_border_color="@color/yellow_active"
-          app:riv_border_width="1dp"
-          app:riv_corner_radius="50dp" />
 
 
       </androidx.constraintlayout.widget.ConstraintLayout>
