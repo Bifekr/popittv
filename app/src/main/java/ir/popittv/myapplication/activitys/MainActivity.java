@@ -8,9 +8,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,14 +37,6 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
     ActivityMainBinding binding;
 
 
-    FragmentManager fragmentManager;
-    FragmentTransaction transaction;
-    Fragment fragment;
-    boolean back = true;
-
-
-
-
     //global adapter
     private RvChannel_Frg1 rvChannel_frg1;
     private ChannelDetail_adapter detail_adapter;
@@ -72,29 +61,17 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
         //ViewModel Provider
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
         initRailActivity();
 
-  /*     if (fragment==null) {
-           fragmentManager = getSupportFragmentManager();
-           transaction = fragmentManager.beginTransaction();
-           transaction.replace(binding.containerMain.getId(), new FragmentMain1()).commit();
-       }
-        initRail();*/
+        //retrieve data into modelClass
+        request();
 
-
-
-        //request from Api to get DataModel
-        mainViewModel.requestChannel();
-        //detail Channel Selected
-        mainViewModel.requestChannel_detail(3);
-        // mainViewModel.requestChannel_detail(1);
-        mainViewModel.requestFunny_view();
-
-
+        /////
         initRv_Vp_adapter();
-
 
         //update AND get Data from DataModel into LiveData
         getChannel();
@@ -102,8 +79,15 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
         getFunny_view();
 
 
+    }
 
-
+    private void request() {
+        //request from Api to get DataModel
+        mainViewModel.requestChannel();
+        //detail Channel Selected
+        mainViewModel.requestChannel_detail(3);
+        // mainViewModel.requestChannel_detail(1);
+        mainViewModel.requestFunny_view();
 
     }
 
@@ -112,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case  R.id.Funny:
+                    case R.id.Funny:
                         startActivity(new Intent(MainActivity.this, MainActivity.class));
                         break;
                     case R.id.Reality:
@@ -156,8 +140,6 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
             }
         });
     }
-
-
     private void initRv_Vp_adapter() {
 
         //init channel list Adapter
@@ -193,7 +175,6 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
 
 
     }
-
     private void getChannel() {
         mainViewModel.getChannel().observe(this,channelDataModels -> {
             if (channelDataModels!=null) {
@@ -245,64 +226,6 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
 
     }
 
-
-
-
-
-
-
-
-
-  /*  private void initRail() {
-
-
-        binding.navRail.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @SuppressLint("NonConstantResourceId")
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.alarms2:
-                        fragment = new FragmentMain1();
-                        break;
-                    case R.id.schedule:
-                        fragment = new FragmentMain2();
-                        break;
-                    case R.id.timer:
-                        fragment = new FragmentMain3();
-                        break;
-                    case R.id.stopwatch:
-                        fragment = new FragmentMain4();
-                        break;
-                }
-                getSupportFragmentManager().beginTransaction()
-                        .replace(binding.containerMain.getId(), fragment)
-                        .addToBackStack(null).commit();
-                return true;
-            }
-        });
-
-        binding.navRail.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
-            @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.alarms2:
-                        Toast.makeText(MainActivity.this, "Alarms Clicked", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case R.id.schedule:
-                        Toast.makeText(MainActivity.this, "Alarms xcClicked", Toast.LENGTH_SHORT).show();
-
-                        break;
-
-                    case R.id.timer:
-                        Toast.makeText(MainActivity.this, "Alarms xcxcClicked", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-
-            }
-        });
-
-    }*/
 
     @Override
     protected void onResume() {
