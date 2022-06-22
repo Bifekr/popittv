@@ -1,6 +1,7 @@
 package ir.popittv.myapplication.activitys;
 
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,9 +26,11 @@ import ir.popittv.myapplication.adapter.ChannelDetail_adapter;
 import ir.popittv.myapplication.adapter.InfinitFrg1_PagerAdapter;
 import ir.popittv.myapplication.adapter.Recommend_Adapter;
 import ir.popittv.myapplication.adapter.RvChannel_Frg1;
+import ir.popittv.myapplication.adapter.TagAdapter;
 import ir.popittv.myapplication.databinding.ActivityMainBinding;
 import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
+import ir.popittv.myapplication.models.HashTagDataModel;
 import ir.popittv.myapplication.utils.OnClickFrg1;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
@@ -41,8 +44,10 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
     private RvChannel_Frg1 rvChannel_frg1;
     private ChannelDetail_adapter detail_adapter;
     private InfinitFrg1_PagerAdapter infinitAdapter;
-    Recommend_Adapter recommend_adapter;
-    Recommend_Adapter recommend_adapter2;
+   private Recommend_Adapter recommend_adapter;
+    private Recommend_Adapter recommend_adapter2;
+    private TagAdapter tagAdapter;
+
 
 
     //global Variable
@@ -70,7 +75,9 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
         detail_adapter=new ChannelDetail_adapter(this);
         rvChannel_frg1 = new RvChannel_Frg1(this,this);
         infinitAdapter = new InfinitFrg1_PagerAdapter(this);
+
         initRailActivity();
+        taginit();
 
         //retrieve data into modelClass
         request();
@@ -83,6 +90,34 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
         getChannel_detail();
         getFunny_view();
         getFunny_liky();
+
+
+    }
+
+    private void taginit() {
+
+binding.rvMenuTagFrg1.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
+        GradientDrawable drawable1=new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xffeff400,0xffaff600});
+        GradientDrawable drawable2=new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xffeaf500,0xffaff100});
+        GradientDrawable drawable3=new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xffeff200,0xffaaf400});
+        GradientDrawable drawable4=new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xFFFF9800,0xffaaf400});
+        GradientDrawable drawable5=new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xFFFF9800,0xffaF9800});
+ArrayList<HashTagDataModel> tagList = new ArrayList<>();
+tagList.add(new HashTagDataModel("#اگی واگی",R.drawable.tag_huggy_1,drawable1));
+        tagList.add(new HashTagDataModel("#سونیک",R.drawable.tag_sonic_1,drawable2));
+        tagList.add(new HashTagDataModel("#آدمک خای خمیری",R.drawable.tag_claymixer_1,drawable3));
+        tagList.add(new HashTagDataModel("#کریستمس",R.drawable.tag_christmas_1,drawable4));
+        tagList.add(new HashTagDataModel("#کیسی میسی",R.drawable.tag_kissy_1,drawable5));
+
+
+        tagAdapter = new TagAdapter(tagList);
+        binding.rvMenuTagFrg1.setAdapter(tagAdapter);
+
 
 
     }
