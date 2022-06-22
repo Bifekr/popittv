@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
     private ChannelDetail_adapter detail_adapter;
     private InfinitFrg1_PagerAdapter infinitAdapter;
     Recommend_Adapter recommend_adapter;
+    Recommend_Adapter recommend_adapter2;
 
 
     //global Variable
@@ -64,7 +65,11 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
 
         //ViewModel Provider
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-
+        recommend_adapter=new Recommend_Adapter(this);
+        recommend_adapter2=new Recommend_Adapter(this);
+        detail_adapter=new ChannelDetail_adapter(this);
+        rvChannel_frg1 = new RvChannel_Frg1(this,this);
+        infinitAdapter = new InfinitFrg1_PagerAdapter(this);
         initRailActivity();
 
         //retrieve data into modelClass
@@ -77,8 +82,16 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
         getChannel();
         getChannel_detail();
         getFunny_view();
+        getFunny_liky();
 
 
+    }
+
+    private void getFunny_liky() {
+        mainViewModel.getFunny_liky().observe(this,funnyDataModels -> {
+            recommend_adapter2.setFunnyDataModels(funnyDataModels);
+
+        });
     }
 
     private void request() {
@@ -88,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
         mainViewModel.requestChannel_detail(3);
         // mainViewModel.requestChannel_detail(1);
         mainViewModel.requestFunny_view();
+        mainViewModel.requestFunny_liky();
 
     }
 
@@ -143,24 +157,35 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
     private void initRv_Vp_adapter() {
 
         //init channel list Adapter
-        rvChannel_frg1 = new RvChannel_Frg1(this,this);
-        binding.rvChannelListFrg1.setAdapter(rvChannel_frg1);
+        binding.rvChannelListFrg1.setHasFixedSize(true);
         binding.rvChannelListFrg1.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false));
+        binding.rvChannelListFrg1.setAdapter(rvChannel_frg1);
 
         //Show Detail Channel Recycler
-        detail_adapter=new ChannelDetail_adapter(this);
-        binding.rvDetailFrg1.setAdapter(detail_adapter);
+        binding.rvDetailFrg1.setHasFixedSize(true);
         binding.rvDetailFrg1.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL,false));
+        binding.rvDetailFrg1.setAdapter(detail_adapter);
 
+        //RecyclerView Selected 1
+        binding.rvSelect1Frg1.setHasFixedSize(true);
+        binding.rvSelect1Frg1.setLayoutManager(new LinearLayoutManager(this,
+                LinearLayoutManager.HORIZONTAL,false));
+        binding.rvSelect1Frg1.setAdapter(recommend_adapter);
+
+        //recyclerView Selected2
+        binding.rvSelect2Frg1.setHasFixedSize(true);
+        binding.rvSelect2Frg1.setLayoutManager(new LinearLayoutManager(this,
+                LinearLayoutManager.HORIZONTAL,true));
+        binding.rvSelect2Frg1.setAdapter(recommend_adapter2);
 
         //horizontal viewpager infinite
-        infinitAdapter = new InfinitFrg1_PagerAdapter(this);
+
         binding.infinitCycleFrg1.setAdapter(infinitAdapter);
 
         //Recommended Vide Rv
-        recommend_adapter=new Recommend_Adapter(this);
+        binding.rvRecommendFrg1.setHasFixedSize(true);
         binding.rvRecommendFrg1.setLayoutManager(new LinearLayoutManager(this,
                 RecyclerView.VERTICAL,false));
         binding.rvRecommendFrg1.setAdapter(recommend_adapter);
