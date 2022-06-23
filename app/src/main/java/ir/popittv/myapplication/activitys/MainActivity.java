@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +25,7 @@ import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.ShadowTransformer;
 import ir.popittv.myapplication.adapter.CardPagerAdapter2;
 import ir.popittv.myapplication.adapter.ChannelDetail_adapter;
+import ir.popittv.myapplication.adapter.FunnyAdapter;
 import ir.popittv.myapplication.adapter.InfinitFrg1_PagerAdapter;
 import ir.popittv.myapplication.adapter.Recommend_Adapter;
 import ir.popittv.myapplication.adapter.RvChannel_Frg1;
@@ -47,12 +50,15 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
    private Recommend_Adapter recommend_adapter;
     private Recommend_Adapter recommend_adapter2;
     private TagAdapter tagAdapter;
+    FunnyAdapter funnyAdapter;
+
 
 
 
     //global Variable
     int id_channel;
-    String tv1;
+    int id_subMenu;
+
 
 
     //Utils Class
@@ -90,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
         getChannel_detail();
         getFunny_view();
         getFunny_liky();
+        getFunny_subMenu();
 
 
     }
@@ -97,17 +104,17 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
     private void taginit() {
 
 binding.rvMenuTagFrg1.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
-        GradientDrawable drawable1=new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xffeff400,0xffaff600});
-        GradientDrawable drawable2=new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xffeaf500,0xffaff100});
-        GradientDrawable drawable3=new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xffeff200,0xffaaf400});
-        GradientDrawable drawable4=new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xFFFF9800,0xffaaf400});
-        GradientDrawable drawable5=new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xFFFF9800,0xffaF9800});
-ArrayList<HashTagDataModel> tagList = new ArrayList<>();
+        GradientDrawable drawable1 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xffeff400, 0xffaff600});
+        GradientDrawable drawable2 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xFF03A9F4, 0xFF90CAF9});
+        GradientDrawable drawable3 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xFFFFEB3B, 0xffaaf400});
+        GradientDrawable drawable4 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xFF7ADCCF, 0xFF80CBC4});
+        GradientDrawable drawable5 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xf469a9, 0xFFF48FB1});
+        ArrayList<HashTagDataModel> tagList = new ArrayList<>();
 tagList.add(new HashTagDataModel("#اگی واگی",R.drawable.tag_huggy_1,drawable1));
         tagList.add(new HashTagDataModel("#سونیک",R.drawable.tag_sonic_1,drawable2));
         tagList.add(new HashTagDataModel("#آدمک خای خمیری",R.drawable.tag_claymixer_1,drawable3));
@@ -115,7 +122,7 @@ tagList.add(new HashTagDataModel("#اگی واگی",R.drawable.tag_huggy_1,drawa
         tagList.add(new HashTagDataModel("#کیسی میسی",R.drawable.tag_kissy_1,drawable5));
 
 
-        tagAdapter = new TagAdapter(tagList);
+        tagAdapter = new TagAdapter(tagList,this);
         binding.rvMenuTagFrg1.setAdapter(tagAdapter);
 
 
@@ -137,7 +144,7 @@ tagList.add(new HashTagDataModel("#اگی واگی",R.drawable.tag_huggy_1,drawa
         // mainViewModel.requestChannel_detail(1);
         mainViewModel.requestFunny_view();
         mainViewModel.requestFunny_liky();
-
+        mainViewModel.requestFunny_subMenu(2);
     }
 
     private void initRailActivity() {
@@ -225,6 +232,12 @@ tagList.add(new HashTagDataModel("#اگی واگی",R.drawable.tag_huggy_1,drawa
                 RecyclerView.VERTICAL,false));
         binding.rvRecommendFrg1.setAdapter(recommend_adapter);
 
+        funnyAdapter = new FunnyAdapter(this);
+        binding.rvSubMenuTagFrg1.setAdapter(funnyAdapter);
+        binding.rvSubMenuTagFrg1.setLayoutManager(new GridLayoutManager
+                (this, 3, GridLayoutManager.VERTICAL, false));
+        binding.rvSubMenuTagFrg1.addItemDecoration(new DividerItemDecoration(this,LinearLayoutManager.VERTICAL));
+
 
 
      /*   cardPagerAdapter2 = new CardPagerAdapter2(getActivity());
@@ -235,6 +248,7 @@ tagList.add(new HashTagDataModel("#اگی واگی",R.drawable.tag_huggy_1,drawa
 
 
     }
+
     private void getChannel() {
         mainViewModel.getChannel().observe(this,channelDataModels -> {
             if (channelDataModels!=null) {
@@ -264,7 +278,6 @@ tagList.add(new HashTagDataModel("#اگی واگی",R.drawable.tag_huggy_1,drawa
 
         });
     }
-
     private void getFunny_view() {
         mainViewModel.getFunny_view().observe(this, funnyDataModels -> {
             if (funnyDataModels!=null) {
@@ -272,6 +285,14 @@ tagList.add(new HashTagDataModel("#اگی واگی",R.drawable.tag_huggy_1,drawa
                 recommend_adapter.setFunnyDataModels(funnyDataModels);
             } else {
                 Toast.makeText(this, "اینترنت را بررسی کنید", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void getFunny_subMenu() {
+
+        mainViewModel.getFunny_subMenu().observe(this, funnyDataModels -> {
+            if (funnyDataModels!=null) {
+                funnyAdapter.setData(funnyDataModels);
             }
         });
     }
@@ -283,6 +304,13 @@ tagList.add(new HashTagDataModel("#اگی واگی",R.drawable.tag_huggy_1,drawa
     public void OnclickDetail(int pos) {
         id_channel=pos;
         mainViewModel.requestChannel_detail(id_channel);
+
+    }
+
+    @Override
+    public void onMenuClick(int position) {
+        id_subMenu = position;
+        mainViewModel.requestFunny_subMenu(id_subMenu);
 
     }
 

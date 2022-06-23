@@ -9,7 +9,6 @@ public class FunnyDataModel implements Parcelable {
     private int id_channel;
     private String view;
     private String liky;
-
     private String title_en;
     private String title_fa;
     private String poster;

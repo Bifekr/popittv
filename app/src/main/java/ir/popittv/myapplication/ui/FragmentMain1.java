@@ -183,6 +183,11 @@ public class FragmentMain1 extends Fragment implements OnClickFrg1 {
     }
 
     @Override
+    public void onMenuClick(int position) {
+
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;

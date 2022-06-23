@@ -22,23 +22,20 @@ import java.util.ArrayList;
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.ShadowTransformer;
 import ir.popittv.myapplication.adapter.CardPagerAdapter;
-import ir.popittv.myapplication.adapter.DynamicRvAdapter;
 import ir.popittv.myapplication.adapter.PagerAdapter;
 import ir.popittv.myapplication.adapter.PagerAdapter2;
 import ir.popittv.myapplication.adapter.StaticRvAdapter;
 import ir.popittv.myapplication.databinding.FragmentMain2Binding;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.models.StaticRvModel;
-import ir.popittv.myapplication.utils.OnClickStaticRv;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
-public class FragmentMain2 extends Fragment implements OnClickStaticRv {
+public class FragmentMain2 extends Fragment {
 
     PagerAdapter pagerAdapter;
     PagerAdapter2 pagerAdapter2;
     StaticRvAdapter staticRvAdapter;
-    DynamicRvAdapter dynamicRvAdapter;
-    int id_subMenu;
+
 
     private FragmentMain2Binding binding;
     private MainViewModel mainViewModel;
@@ -83,7 +80,6 @@ public class FragmentMain2 extends Fragment implements OnClickStaticRv {
         staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"آشنایی و نگهداری از طبیعت"));
         staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"افزایش انرژی و شادابی"));
         staticRvModels.add(new StaticRvModel(R.drawable.iv_btn_4,"رقص با خانواده"));
-        staticRvAdapter = new StaticRvAdapter(staticRvModels,this);
         binding.rvSubMenuFunny.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL,false));
         binding.rvSubMenuFunny.setAdapter(staticRvAdapter);
 
@@ -92,7 +88,6 @@ public class FragmentMain2 extends Fragment implements OnClickStaticRv {
         getFunny_best();
         getFunny_view();
         getFunny_liky();
-        getFunny_subMenu();
 
         return binding.getRoot();
 
@@ -164,14 +159,6 @@ public class FragmentMain2 extends Fragment implements OnClickStaticRv {
         });
     }
 
-    private void getFunny_subMenu() {
-
-        mainViewModel.getFunny_subMenu().observe(requireActivity(), funnyDataModels -> {
-            if (funnyDataModels!=null) {
-                dynamicRvAdapter.setData(funnyDataModels);
-            }
-        });
-    }
 
     private void initAdapter() {
 
@@ -183,8 +170,6 @@ public class FragmentMain2 extends Fragment implements OnClickStaticRv {
         binding.viewPager.setAdapter(pagerAdapter);
         binding.viewPager2.setAdapter(pagerAdapter2);
         // All Funny Video from SubMenu into RecyclerView
-        dynamicRvAdapter = new DynamicRvAdapter(getActivity());
-        binding.rvAllFunny.setAdapter(dynamicRvAdapter);
         binding.rvAllFunny.setLayoutManager(new GridLayoutManager
                 (getActivity(), 3, GridLayoutManager.VERTICAL, false));
         binding.rvAllFunny.addItemDecoration(new DividerItemDecoration(requireActivity(),LinearLayoutManager.VERTICAL));
@@ -196,12 +181,4 @@ public class FragmentMain2 extends Fragment implements OnClickStaticRv {
         binding = null;
     }
 
-
-    @Override
-    public void onMenuClick(int position) {
-       // Toast.makeText(requireActivity(), "menu posiution" + position, Toast.LENGTH_SHORT).show();
-        id_subMenu=position;
-        mainViewModel.requestFunny_subMenu(id_subMenu);
-
-    }
 }
