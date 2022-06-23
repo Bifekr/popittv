@@ -236,7 +236,7 @@ tagList.add(new HashTagDataModel("#اگی واگی",R.drawable.tag_huggy_1,drawa
         binding.rvSubMenuTagFrg1.setAdapter(funnyAdapter);
         binding.rvSubMenuTagFrg1.setLayoutManager(new GridLayoutManager
                 (this, 3, GridLayoutManager.VERTICAL, false));
-        binding.rvSubMenuTagFrg1.addItemDecoration(new DividerItemDecoration(this,LinearLayoutManager.VERTICAL));
+        binding.rvSubMenuTagFrg1.addItemDecoration(new DividerItemDecoration(this,LinearLayoutManager.HORIZONTAL));
 
 
 

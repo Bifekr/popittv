@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+  xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools">
 
@@ -44,8 +45,9 @@
               android:id="@+id/toolbar"
               layout="@layout/toolbar_cust"
               app:layout_constraintTop_toTopOf="parent" />
-            <androidx.recyclerview.widget.RecyclerView
-              android:id="@+id/rv_channelList_frg1"
+
+            <LinearLayout
+              android:id="@+id/parent_channelList_frg1"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               app:layout_constraintBottom_toTopOf="@id/parentChannelDetail_cardView"
@@ -53,7 +55,51 @@
               android:paddingBottom="4dp"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toBottomOf="@id/toolbar" />
+              app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+              <androidx.cardview.widget.CardView
+                android:id="@+id/showAllChannel_mainActivity"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/plane_08"
+                android:layout_marginBottom="@dimen/plane_08"
+                android:elevation="@dimen/plane_02"
+                app:cardCornerRadius="@dimen/plane_24">
+
+                <ImageView
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:adjustViewBounds="true"
+                  android:scaleType="fitXY"
+                  android:src="@drawable/action_hero" />
+
+                <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="All Channel" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                  android:id="@+id/parent2ShowChannel"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:background="@drawable/gradiant1"
+                  android:orientation="vertical">
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+              </androidx.cardview.widget.CardView>
+
+              <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_channelList_frg1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                app:layout_constraintBottom_toTopOf="@id/parentChannelDetail_cardView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar" />
+            </LinearLayout>
 
             <ImageView
               android:id="@+id/lastVideo_watching"
@@ -65,8 +111,9 @@
               app:layout_constraintHorizontal_bias="1"
               app:layout_constraintStart_toEndOf="@id/parentChannelDetail_cardView"
               app:layout_constraintWidth_percent=".35"
-              app:layout_constraintTop_toBottomOf="@+id/rv_channelList_frg1"
+              app:layout_constraintTop_toBottomOf="@+id/parent_channelList_frg1"
               app:srcCompat="@drawable/last_video_2" />
+
             <androidx.cardview.widget.CardView
               android:id="@+id/parentChannelDetail_cardView"
               android:layout_width="0dp"
@@ -76,12 +123,13 @@
               app:cardCornerRadius="@dimen/plane_24"
               app:layout_constraintEnd_toStartOf="@id/lastVideo_watching"
               app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toBottomOf="@+id/rv_channelList_frg1">
+              app:layout_constraintTop_toBottomOf="@+id/parent_channelList_frg1">
 
               <androidx.constraintlayout.widget.ConstraintLayout
                 android:background="@color/popit_blue_on_light"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <androidx.recyclerview.widget.RecyclerView
                   android:id="@+id/rvDetail_frg1"
                   android:layout_width="0dp"
@@ -551,6 +599,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/rvSubMenuTag_frg1"/>
               <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginBottom="@dimen/plane_08"
                 android:id="@+id/rvSubMenuTag_frg1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

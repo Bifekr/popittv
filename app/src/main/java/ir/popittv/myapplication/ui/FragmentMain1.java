@@ -84,8 +84,8 @@ public class FragmentMain1 extends Fragment implements OnClickFrg1 {
 
         //init channel list Adapter
         rvChannel_frg1 = new RvChannel_Frg1(requireActivity(),this);
-        binding.rvChannelListFrg1.setAdapter(rvChannel_frg1);
-        binding.rvChannelListFrg1.setLayoutManager(new LinearLayoutManager(requireActivity(),
+        binding.parentChannelListFrg1.setAdapter(rvChannel_frg1);
+        binding.parentChannelListFrg1.setLayoutManager(new LinearLayoutManager(requireActivity(),
                 LinearLayoutManager.HORIZONTAL, false));
 
         //Show Detail Channel Recycler
