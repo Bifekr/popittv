@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="wrap_content"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  app:cardCornerRadius="@dimen/plane_08"
+  app:cardElevation="@dimen/plane_16"
+  android:layout_margin="@dimen/plane_04"
+  android:layout_height="wrap_content">
+  <LinearLayout
+    android:padding="@dimen/plane_04"
+    android:id="@+id/parentAge_itemAge"
+    android:background="@color/green_active"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="سال"/>
+    <TextView
+      android:id="@+id/tvAge_itemAge"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="2 to 4 "/>
+
+  </LinearLayout>
+
+</androidx.cardview.widget.CardView>

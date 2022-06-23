@@ -25,4 +25,6 @@ public interface ApiClient {
     Call<ChannelResponse> getChannel(@Query("kind") int kind);
     @GET("getChannel_detail.php")
     Call<ChannelDataModel> getChannel_detail(@Query("id_channel") int id_channel);
+    @GET("getChannel_all.php")
+    Call<ChannelResponse> getChannel_all(@Query("kind") int kind , @Query("age") int age);
 }

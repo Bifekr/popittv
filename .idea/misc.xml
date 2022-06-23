@@ -64,7 +64,7 @@
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/transition_background_drawable_list.xml" value="0.2945205479452055" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/transition_background_drawable_person.xml" value="0.2945205479452055" />
         <entry key="..\:/popitv/popittv/app/src/main/res/font/work_sans.xml" value="0.2712962962962963" />
-        <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_all_channel.xml" value="0.29269406392694064" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_all_channel.xml" value="0.18" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_farsi.xml" value="0.29269406392694064" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_game.xml" value="0.29269406392694064" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_main.xml" value="0.22350472193074503" />
@@ -83,6 +83,7 @@
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_main_5.xml" value="0.30625" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_main_6.xml" value="0.30625" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/fragment_main_7.xml" value="0.1" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_age.xml" value="0.2967592592592593" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_cafie.xml" value="0.12" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_chanel_all.xml" value="0.22027491408934707" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_chanel_detail.xml" value="0.22027491408934707" />

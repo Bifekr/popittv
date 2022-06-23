@@ -28,6 +28,9 @@
         app:riv_corner_radius="20dp" />
 
       <TextView
+        android:background="@drawable/shape_tag4"
+        android:paddingStart="@dimen/plane_04"
+        android:paddingEnd="@dimen/plane_04"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

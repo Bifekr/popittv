@@ -41,6 +41,9 @@ public void requestChannel(){
 public LiveData<ChannelDataModel> getChannel_detail(){return mainApiClient.getChannel_detail();}
 public void requestChannel_detail(int id_channel){mainApiClient.requestChannel_detail(id_channel);}
 
+public LiveData<List<ChannelDataModel>> getChannel_all(){return mainApiClient.getChannel_all();}
+public void requestChannel_all(int age){mainApiClient.requestChannel_all(age);}
+
 
     public LiveData<List<FunnyDataModel>> getFunny_best(){
         return funnyApiClient.getFunny_best();
