@@ -73,9 +73,9 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-
         //ViewModel Provider
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
         recommend_adapter=new Recommend_Adapter(this);
         recommend_adapter2=new Recommend_Adapter(this);
         detail_adapter=new ChannelDetail_adapter(this);
@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
         initRv_Vp_adapter();
 
         //update AND get Data from DataModel into LiveData
+        allChannel();
         getChannel();
         getChannel_detail();
         getFunny_view();
@@ -101,43 +102,12 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
 
     }
 
-    private void taginit() {
-
-binding.rvMenuTagFrg1.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
-        GradientDrawable drawable1 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xffeff400, 0xffaff600});
-        GradientDrawable drawable2 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xFF03A9F4, 0xFF90CAF9});
-        GradientDrawable drawable3 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xFFFFEB3B, 0xffaaf400});
-        GradientDrawable drawable4 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xFF7ADCCF, 0xFF80CBC4});
-        GradientDrawable drawable5 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xf469a9, 0xFFF48FB1});
-        ArrayList<HashTagDataModel> tagList = new ArrayList<>();
-tagList.add(new HashTagDataModel("#اگی واگی",R.drawable.tag_huggy_1,drawable1));
-        tagList.add(new HashTagDataModel("#سونیک",R.drawable.tag_sonic_1,drawable2));
-        tagList.add(new HashTagDataModel("#آدمک خای خمیری",R.drawable.tag_claymixer_1,drawable3));
-        tagList.add(new HashTagDataModel("#کریستمس",R.drawable.tag_christmas_1,drawable4));
-        tagList.add(new HashTagDataModel("#کیسی میسی",R.drawable.tag_kissy_1,drawable5));
-
-
-        tagAdapter = new TagAdapter(tagList,this);
-        binding.rvMenuTagFrg1.setAdapter(tagAdapter);
 
 
 
-    }
-
-    private void getFunny_liky() {
-        mainViewModel.getFunny_liky().observe(this,funnyDataModels -> {
-            recommend_adapter2.setFunnyDataModels(funnyDataModels);
-
-        });
-    }
-
+    //request from Api to get DataModel
     private void request() {
-        //request from Api to get DataModel
+
         mainViewModel.requestChannel();
         //detail Channel Selected
         mainViewModel.requestChannel_detail(3);
@@ -147,6 +117,7 @@ tagList.add(new HashTagDataModel("#اگی واگی",R.drawable.tag_huggy_1,drawa
         mainViewModel.requestFunny_subMenu(2);
     }
 
+    //Initialize widgets
     private void initRailActivity() {
         binding.navRail.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -195,6 +166,33 @@ tagList.add(new HashTagDataModel("#اگی واگی",R.drawable.tag_huggy_1,drawa
                 }
             }
         });
+    }
+    private void taginit() {
+
+        binding.rvMenuTagFrg1.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
+        GradientDrawable drawable1 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xffeff400, 0xffaff600});
+        GradientDrawable drawable2 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xFF03A9F4, 0xFF90CAF9});
+        GradientDrawable drawable3 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xFFFFEB3B, 0xffaaf400});
+        GradientDrawable drawable4 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xFF7ADCCF, 0xFF80CBC4});
+        GradientDrawable drawable5 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xf469a9, 0xFFF48FB1});
+        ArrayList<HashTagDataModel> tagList = new ArrayList<>();
+        tagList.add(new HashTagDataModel("#اگی واگی",R.drawable.tag_huggy_1,drawable1));
+        tagList.add(new HashTagDataModel("#سونیک",R.drawable.tag_sonic_1,drawable2));
+        tagList.add(new HashTagDataModel("#آدمک خای خمیری",R.drawable.tag_claymixer_1,drawable3));
+        tagList.add(new HashTagDataModel("#کریستمس",R.drawable.tag_christmas_1,drawable4));
+        tagList.add(new HashTagDataModel("#کیسی میسی",R.drawable.tag_kissy_1,drawable5));
+
+
+        tagAdapter = new TagAdapter(tagList,this);
+        binding.rvMenuTagFrg1.setAdapter(tagAdapter);
+
+
+
     }
     private void initRv_Vp_adapter() {
 
@@ -249,16 +247,17 @@ tagList.add(new HashTagDataModel("#اگی واگی",R.drawable.tag_huggy_1,drawa
 
     }
 
+    //Set Data to LiveData
+    private void allChannel(){
+        binding.showAllChannelMainActivity.setOnClickListener(v->{
+            Intent intent=new Intent(MainActivity.this,AllChannelActivity.class);
+            startActivity(intent);
+        });
+    }
     private void getChannel() {
         mainViewModel.getChannel().observe(this,channelDataModels -> {
             if (channelDataModels!=null) {
                 rvChannel_frg1.setData(channelDataModels);
-
-                for (ChannelDataModel channel : channelDataModels
-                ) {
-//                    cardPagerAdapter2.addCardItem(channel);
-
-                }
             }
         });
     }
@@ -286,6 +285,12 @@ tagList.add(new HashTagDataModel("#اگی واگی",R.drawable.tag_huggy_1,drawa
             } else {
                 Toast.makeText(this, "اینترنت را بررسی کنید", Toast.LENGTH_SHORT).show();
             }
+        });
+    }
+    private void getFunny_liky() {
+        mainViewModel.getFunny_liky().observe(this,funnyDataModels -> {
+            recommend_adapter2.setFunnyDataModels(funnyDataModels);
+
         });
     }
     private void getFunny_subMenu() {

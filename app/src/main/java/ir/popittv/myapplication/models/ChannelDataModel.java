@@ -14,6 +14,7 @@ public class ChannelDataModel implements Parcelable {
     private String banner_chann;
     private String followers;
     private String age;
+    private String age_name;
     private int kind;
     private List<FunnyDataModel> videos_channel;
 
@@ -22,7 +23,7 @@ public class ChannelDataModel implements Parcelable {
 
     public ChannelDataModel(int id_channel, String name_chan_en, String name_chan_fa,
                             String profile_chann, String banner_chann, String followers,
-                            String age, int kind, List<FunnyDataModel> videos_channel) {
+                            String age, int kind, List<FunnyDataModel> videos_channel , String age_name) {
         this.id_channel = id_channel;
         this.name_chan_en = name_chan_en;
         this.name_chan_fa = name_chan_fa;
@@ -32,6 +33,7 @@ public class ChannelDataModel implements Parcelable {
         this.age = age;
         this.kind = kind;
         this.videos_channel = videos_channel;
+        this.age_name = age_name;
     }
 
     protected ChannelDataModel(Parcel in) {
@@ -43,6 +45,7 @@ public class ChannelDataModel implements Parcelable {
         followers = in.readString();
         age = in.readString();
         kind = in.readInt();
+        age_name = in.readString();
         videos_channel = in.createTypedArrayList(FunnyDataModel.CREATOR);
     }
 
@@ -57,6 +60,10 @@ public class ChannelDataModel implements Parcelable {
             return new ChannelDataModel[size];
         }
     };
+
+    public String getAge_name() {
+        return age_name;
+    }
 
     public int getId_channel() {
         return id_channel;
@@ -110,5 +117,6 @@ public class ChannelDataModel implements Parcelable {
         dest.writeString(age);
         dest.writeInt(kind);
         dest.writeTypedList(videos_channel);
+        dest.writeString(age_name);
     }
 }
