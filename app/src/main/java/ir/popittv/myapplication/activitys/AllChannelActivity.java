@@ -39,7 +39,7 @@ public class AllChannelActivity extends AppCompatActivity implements OnClickAllC
         setContentView(view);
 
         viewModel=new ViewModelProvider(this).get(MainViewModel.class);
-        allChannel_adapter = new AllChannel_Adapter(this);
+        allChannel_adapter = new AllChannel_Adapter(this,this);
         viewModel.requestChannel_all(0);
 
         initAgeMenu();
@@ -101,6 +101,13 @@ public class AllChannelActivity extends AppCompatActivity implements OnClickAllC
 
         Toast.makeText(this, "age id ; "+pos, Toast.LENGTH_SHORT).show();
         viewModel.requestChannel_all(pos);
+
+    }
+
+    @Override
+    public void onClickDetailChannel(int pos) {
+
+        viewModel.requestChannel_detail(pos);
 
     }
 }
