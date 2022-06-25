@@ -1,7 +1,10 @@
 package ir.popittv.myapplication.adapter;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import ir.popittv.myapplication.R;
+import ir.popittv.myapplication.activitys.AllChannelActivity;
 import ir.popittv.myapplication.activitys.DetailActivity;
 import ir.popittv.myapplication.databinding.ItemChannelAllBinding;
 import ir.popittv.myapplication.models.ChannelDataModel;
@@ -26,12 +30,14 @@ public class AllChannel_Adapter extends RecyclerView.Adapter<AllChannel_Adapter.
 
     private List<ChannelDataModel> channelDataModels;
     private Context context;
+    private Activity activity;
     private OnClickAllChannel onClickDetailActivity;
     private int row_index;
 
-    public AllChannel_Adapter(Context context,OnClickAllChannel onClickDetailActivity) {
+    public AllChannel_Adapter(Context context,OnClickAllChannel onClickDetailActivity,Activity activity) {
         this.context = context;
         this.onClickDetailActivity=onClickDetailActivity;
+        this.activity=activity;
     }
     public void setChannelDataModels(List<ChannelDataModel> channelDataModels){
         this.channelDataModels=channelDataModels;
@@ -69,6 +75,13 @@ public class AllChannel_Adapter extends RecyclerView.Adapter<AllChannel_Adapter.
             onClickDetailActivity.onClickDetailChannel(row_index);
 
             Intent intent=new Intent(context, DetailActivity.class);
+            intent.putExtra("id_channel",row_index);
+            Pair[] pairs = new Pair[3];
+            pairs[0] = new Pair<View,String>(holder.binding.ivBannerItemChannelAll,"banner_channel");
+            pairs[1] = new Pair<View,String>(holder.binding.parentChannelProfileItemAllChan,"cardProfile_channel");
+            pairs[2] = new Pair<View,String>(holder.binding.parentTitleItemAllChannel,"parentTitle_channel");
+            ActivityOptions activityOptions=ActivityOptions.makeSceneTransitionAnimation(activity,pairs);
+            context.startActivity(intent,activityOptions.toBundle());
 
         });
 

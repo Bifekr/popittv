@@ -16,7 +16,8 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:scaleType="centerCrop"
-      app:srcCompat="@drawable/banner_channel_poster" />
+      app:srcCompat="@drawable/banner_channel_poster"
+      android:transitionName="banner_channel"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:background="@drawable/shadow_back"
@@ -34,7 +35,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias=".9"
         app:layout_constraintHorizontal_bias=".02"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:transitionName="cardProfile_channel">
         <com.makeramen.roundedimageview.RoundedImageView
           android:id="@+id/ivProfile_itemAllChan"
           android:layout_width="42dp"
@@ -138,7 +140,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/parentAge_showChann_frg1"
         app:layout_constraintStart_toEndOf="@id/parentSub_showChannel_frg1"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:transitionName="parentTitle_channel">
 
         <TextView
           android:id="@+id/titleFa_itemAllChannel"

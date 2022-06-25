@@ -31,6 +31,9 @@ public class AllChannelActivity extends AppCompatActivity implements OnClickAllC
     AgeMenu_Adapter ageMenu_adapter;
     AllChannel_Adapter allChannel_adapter;
 
+    //variable
+    private int id_channel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +42,10 @@ public class AllChannelActivity extends AppCompatActivity implements OnClickAllC
         setContentView(view);
 
         viewModel=new ViewModelProvider(this).get(MainViewModel.class);
-        allChannel_adapter = new AllChannel_Adapter(this,this);
+        allChannel_adapter = new AllChannel_Adapter(this,this,AllChannelActivity.this);
         viewModel.requestChannel_all(0);
+
+
 
         initAgeMenu();
 
@@ -107,7 +112,7 @@ public class AllChannelActivity extends AppCompatActivity implements OnClickAllC
     @Override
     public void onClickDetailChannel(int pos) {
 
-        viewModel.requestChannel_detail(pos);
+
 
     }
 }
