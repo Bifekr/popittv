@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.response.FunnyResponse;
 import ir.popittv.myapplication.utils.AppExecuter;
@@ -26,6 +27,7 @@ public class FunnyApiClient {
     private MutableLiveData<List<FunnyDataModel>> mFunny_best;
     private MutableLiveData<List<FunnyDataModel>> mFunny_liky;
     private MutableLiveData<List<FunnyDataModel>> mFunny_subMenu;
+    private MutableLiveData <FunnyDataModel> mFunny_single;
 
 
     //Constructor
@@ -34,6 +36,7 @@ public class FunnyApiClient {
         mFunny_liky = new MutableLiveData<>();
         mFunny_view = new MutableLiveData<>();
         mFunny_subMenu = new MutableLiveData<>();
+        mFunny_single = new MutableLiveData<>();
 
     }
 
@@ -50,6 +53,7 @@ public class FunnyApiClient {
     }
     public LiveData<List<FunnyDataModel>> getFunny_view() {return mFunny_view;}
     public LiveData<List<FunnyDataModel>> getFunny_liky() {return mFunny_liky; }
+    public LiveData<FunnyDataModel> getFunny_single() {return mFunny_single; }
 
 
     public LiveData<List<FunnyDataModel>> getFunny_subMenu() {
@@ -60,6 +64,7 @@ public class FunnyApiClient {
     private FunnyView_Runnable funnyView_runnable;
     private FunnyLiky_Runnable funnyLiky_runnable;
     private FunnySubMenu_Runnable funnySubMenu_runnable;
+    private FunnySingle_Run funnySingle_run;
 
 
     //method for request from host to get data and post in the livedata
@@ -277,6 +282,57 @@ public class FunnyApiClient {
 
         }
 
+
+    }
+
+    public void requestFunny_single(int id_funny){
+
+        if (funnySingle_run!=null){
+            funnySingle_run=null;
+        }
+
+        funnySingle_run = new FunnySingle_Run(id_funny);
+        Future singleHandler = AppExecuter.getAppExecuter().networkIo().submit(funnySingle_run);
+        AppExecuter.getAppExecuter().networkIo().schedule(() -> {
+            singleHandler.cancel(true);
+        },2,TimeUnit.MINUTES);
+    }
+    private class FunnySingle_Run implements Runnable{
+
+        int id_funny;
+
+        public FunnySingle_Run(int id_funny) {
+            this.id_funny = id_funny;
+        }
+
+        @Override
+        public void run() {
+
+            try {
+                Response response= call(id_funny).execute();
+                if (response.isSuccessful()){
+                    FunnyDataModel funnyDataModel=(FunnyDataModel) response.body();
+                    mFunny_single.postValue(funnyDataModel);
+                }else {
+                    String errorResponse= response.errorBody().string();
+                    Log.e("tag","error"+errorResponse);
+                }
+
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                mFunny_single.postValue(null);
+            }
+
+
+        }
+
+        private Call<FunnyDataModel> call(int id_funny){
+
+            return Service.getApiClient().getFunny_single(id_funny);
+
+        }
 
     }
 

@@ -8,7 +8,94 @@
     android:layout_height="match_parent"
     tools:context=".activitys.PlayerActivity">
 
-<exo
+
+
+<com.google.android.exoplayer2.ui.PlayerView
+  android:id="@+id/exoPlayer"
+  android:layout_width="400dp"
+  android:layout_height="250dp"
+  app:layout_constraintHorizontal_bias="0"
+  app:layout_constraintStart_toStartOf="parent"
+  app:layout_constraintTop_toTopOf="parent"
+  app:layout_constraintEnd_toEndOf="parent"/>
+    <!--<ImageView
+      android:layout_width="400dp"
+      android:layout_height="250dp"
+      app:layout_constraintHorizontal_bias="0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:scaleType="centerCrop"
+      android:src="@drawable/banner_channel_poster"/>-->
+
+    <LinearLayout
+      android:id="@+id/parentTitle_itemDefult"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:divider="@drawable/divider"
+      android:dividerPadding="1dp"
+      android:gravity="center_vertical|center_horizontal"
+      android:orientation="vertical"
+      android:paddingLeft="2dp"
+      android:paddingRight="2dp"
+      android:showDividers="middle"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintHeight_percent=".2"
+      app:layout_constraintEnd_toEndOf="@id/exoPlayer"
+      app:layout_constraintHorizontal_bias="1"
+      app:layout_constraintVertical_bias="0"
+      app:layout_constraintStart_toStartOf="@id/exoPlayer"
+      app:layout_constraintTop_toBottomOf="@id/exoPlayer"
+      >
+
+      <TextView
+        android:id="@+id/titleFa_video_itemVideoThumb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/baloo"
+        android:gravity="center_horizontal"
+        android:includeFontPadding="true"
+        android:maxLines="1"
+        android:minLines="1"
+        android:paddingRight="1dp"
+        android:text="fdkljfdkjfg rfg  gf gh gh gf fg ghg  ghfggtfgf fg  fgdlfkj"
+        android:textSize="9sp"
+
+        />
+
+      <TextView
+        android:id="@+id/titleEn_video_itemVideoThumb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/baloo"
+        android:gravity="center_horizontal"
+        android:includeFontPadding="true"
+        android:maxLines="1"
+        android:minLines="1"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="fdkljfdkjfg rfg  gf gh gh gf fg ghg  ghfggtfgf fg  fgdlfkj"
+        android:textSize="9sp"
+
+        />
+      <!-- <TextView
+         android:id="@+id/titleEn_video_itemVideoThumb"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:ellipsize="end"
+         android:fontFamily="@font/baloo"
+         android:gravity="center_horizontal"
+         android:includeFontPadding="false"
+         android:maxLines="1"
+         android:minLines="1"
+         android:paddingLeft="15dp"
+         android:paddingTop="0dp"
+         android:paddingRight="10dp"
+         android:text="fdkljfdkjfg rfg  fggtfgf fg  fgdlfkj"
+         android:textSize="9sp" />-->
+    </LinearLayout>
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
