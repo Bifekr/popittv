@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.response.FunnyResponse;
 import ir.popittv.myapplication.utils.AppExecuter;
@@ -139,21 +138,29 @@ public class FunnyApiClient {
     }
 
     //create Runnable class for set to AppExecutor
-    private class FunnyBest_Runnable implements Runnable{
+    private class FunnyBest_Runnable implements Runnable {
 
+        private final boolean canclable;
+
+        public FunnyBest_Runnable() {
+            canclable = false;
+        }
 
         @Override
         public void run() {
 
             try {
+                if (canclable) {
+                    return;
+                }
                 Response response = funnyResponseCall().execute();
-                if (response.body()!= null){
+                if (response.body()!=null) {
 
                     List<FunnyDataModel> funnyDataModelList = new ArrayList<>(((FunnyResponse) response.body()).getFunny_best());
 
                     mFunny_best.postValue(funnyDataModelList);
 
-                }else {
+                } else {
                     assert response.errorBody()!=null;
                     String error = response.errorBody().string();
                     Log.i("tagy", "run: " + error);
@@ -175,11 +182,19 @@ public class FunnyApiClient {
 
     //Runnable class for request funny_view
     private class FunnyView_Runnable implements Runnable {
+        private final boolean canclable;
+
+        public FunnyView_Runnable() {
+            canclable = false;
+        }
 
         @Override
         public void run() {
 
             try {
+                if (canclable) {
+                    return;
+                }
                 Response response = funnyResponseCall().execute();
 
                 if (response.body()!=null) {
@@ -205,11 +220,19 @@ public class FunnyApiClient {
     }
 
     private class FunnyLiky_Runnable implements Runnable {
+        private final boolean canclable;
+
+        public FunnyLiky_Runnable() {
+            canclable = false;
+        }
 
         @Override
         public void run() {
 
             try {
+                if (canclable) {
+                    return;
+                }
                 Response response = funnyResponseCall().execute();
 
                 if (response.body()!=null) {
@@ -300,24 +323,28 @@ public class FunnyApiClient {
     private class FunnySingle_Run implements Runnable{
 
         int id_funny;
+        private final boolean canclable;
 
         public FunnySingle_Run(int id_funny) {
             this.id_funny = id_funny;
+            canclable = false;
         }
 
         @Override
         public void run() {
 
             try {
-                Response response= call(id_funny).execute();
-                if (response.isSuccessful()){
-                    FunnyDataModel funnyDataModel=(FunnyDataModel) response.body();
-                    mFunny_single.postValue(funnyDataModel);
-                }else {
-                    String errorResponse= response.errorBody().string();
-                    Log.e("tag","error"+errorResponse);
+                if (canclable) {
+                    return;
                 }
-
+                Response response = call(id_funny).execute();
+                if (response.isSuccessful()) {
+                    FunnyDataModel funnyDataModel = (FunnyDataModel) response.body();
+                    mFunny_single.postValue(funnyDataModel);
+                } else {
+                    String errorResponse = response.errorBody().string();
+                    Log.e("tag", "error" + errorResponse);
+                }
 
 
             } catch (IOException e) {

@@ -70,7 +70,7 @@
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_farsi.xml" value="0.29269406392694064" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_game.xml" value="0.29269406392694064" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_main.xml" value="0.22350472193074503" />
-        <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_player.xml" value="0.14" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_player.xml" value="0.33" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_reality.xml" value="0.22916666666666666" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_study.xml" value="0.2808219178082192" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_test.xml" value="0.22916666666666666" />
@@ -105,6 +105,7 @@
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_vid_thumb.xml" value="0.2740740740740741" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_video_thumb.xml" value="0.25" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_video_thumbnail.xml" value="0.16" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/layout/test.xml" value="0.29269406392694064" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/toolbar_cust.xml" value="0.25" />
         <entry key="..\:/popitv/popittv/app/src/main/res/menu/menu_rail.xml" value="0.26481481481481484" />
       </map>

@@ -149,16 +149,21 @@ public class MainApiClient {
     private class ChannelDetail_Run implements Runnable{
 
         int id_channel;
+        private final boolean canclable2;
 
         public ChannelDetail_Run(int id_channel) {
             this.id_channel = id_channel;
+            canclable2=false;
         }
 
         @Override
         public void run() {
 
             try {
+                if (canclable2)
+                    return;
                 Response response= call(id_channel).execute();
+                assert response.body()!=null;
                 if (response.isSuccessful()){
                     ChannelDataModel channelDataModel=(ChannelDataModel) response.body();
                     mDetailChannel.postValue(channelDataModel);

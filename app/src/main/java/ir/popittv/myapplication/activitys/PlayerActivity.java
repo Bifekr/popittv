@@ -1,6 +1,5 @@
 package ir.popittv.myapplication.activitys;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,9 +8,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.source.MergingMediaSource;
 
 import ir.popittv.myapplication.databinding.ActivityPlayerBinding;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
@@ -109,8 +108,16 @@ public class PlayerActivity extends AppCompatActivity {
 
     private void getFunny_single() {
         viewModel.getFunny_single().observe(this, funnyDataModel -> {
-            binding.titleEnVideoItemVideoThumb.setText(funnyDataModel.getTitle_en());
-            binding.titleFaVideoItemVideoThumb.setText(funnyDataModel.getTitle_fa());
+            binding.titleEnVideoPlayer.setText(funnyDataModel.getTitle_en());
+            binding.titleFaVideoPlayer.setText(funnyDataModel.getTitle_fa());
+            binding.titleEnChannelPlayer.setText(funnyDataModel.getName_chan_en());
+            binding.titleFaChannelPlayer.setText(funnyDataModel.getName_chan_fa());
+            binding.titleSubPlayer.setText(funnyDataModel.getFollowers());
+            binding.titleViewPlayer.setText(funnyDataModel.getView());
+            binding.titleLikePlayer.setText(funnyDataModel.getLiky());
+
+            Glide.with(this).load(funnyDataModel.getProfile_chann())
+                    .into(binding.ivProfileItemAllChan);
 
             mediaItem = MediaItem.fromUri(funnyDataModel.getLink_480());
             exoPlayer.addMediaItem(mediaItem);
