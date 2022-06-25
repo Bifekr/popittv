@@ -557,13 +557,8 @@
                   </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
-
-
-
               </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
-
-
             <androidx.constraintlayout.widget.ConstraintLayout
               android:id="@+id/parentFavTag_frg1"
               android:layout_width="0dp"
@@ -575,8 +570,6 @@
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toBottomOf="@id/parentInfint_cardView">
-
-
               <TextView
                 android:id="@+id/titleFav_frg1"
                 style="@style/TextAppearance.Reply.Headline6"

@@ -40,7 +40,7 @@ public class PlayerActivity extends AppCompatActivity {
         id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
         viewModel.requestFunny_single(id_vid_funny);
 
-
+        getFunny_single();
         initExo();
 
 
@@ -96,7 +96,7 @@ public class PlayerActivity extends AppCompatActivity {
             exoPlayer.prepare();
             exoPlayer.setPlayWhenReady(playWhenReady);
             exoPlayer.seekTo(currentWindow, playBackPosition);
-            getFunny_single();
+
 
 
         } catch (Exception e) {
