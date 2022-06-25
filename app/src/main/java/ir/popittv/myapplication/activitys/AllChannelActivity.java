@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.adapter.AgeMenu_Adapter;
+import ir.popittv.myapplication.adapter.AllChannel_Adapter;
 import ir.popittv.myapplication.adapter.TagAdapter;
 import ir.popittv.myapplication.databinding.ActivityAllChannelBinding;
 import ir.popittv.myapplication.models.AgeDataModel;
@@ -28,6 +29,7 @@ public class AllChannelActivity extends AppCompatActivity implements OnClickAllC
 
     //init Adapter
     AgeMenu_Adapter ageMenu_adapter;
+    AllChannel_Adapter allChannel_adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +37,17 @@ public class AllChannelActivity extends AppCompatActivity implements OnClickAllC
         binding=ActivityAllChannelBinding.inflate(getLayoutInflater());
         View view=binding.getRoot();
         setContentView(view);
-        viewModel=new ViewModelProvider(this).get(MainViewModel.class);
 
+        viewModel=new ViewModelProvider(this).get(MainViewModel.class);
+        allChannel_adapter = new AllChannel_Adapter(this);
+        viewModel.requestChannel_all(0);
 
         initAgeMenu();
 
         initRecyclerView();
 
 
-
+        getChannel_All();
 
 
     }
@@ -78,6 +82,7 @@ public class AllChannelActivity extends AppCompatActivity implements OnClickAllC
     private void initRecyclerView() {
         binding.rvAllChannelActivityAllChannel.setLayoutManager(new LinearLayoutManager
                 (this, RecyclerView.VERTICAL,false));
+        binding.rvAllChannelActivityAllChannel.setAdapter(allChannel_adapter);
 
     }
 
@@ -85,7 +90,7 @@ public class AllChannelActivity extends AppCompatActivity implements OnClickAllC
     private void getChannel_All(){
         viewModel.getChannel_all().observe(this,channelDataModels -> {
             if (channelDataModels!=null){
-
+            allChannel_adapter.setChannelDataModels(channelDataModels);
 
             }
         });

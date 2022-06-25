@@ -13,6 +13,9 @@
     android:theme="@style/Theme.PopitTv"
     android:usesCleartextTraffic="true">
     <activity
+      android:name=".activitys.DetailActivity"
+      android:exported="false" />
+    <activity
       android:name=".activitys.AllChannelActivity"
       android:exported="false" />
     <activity
