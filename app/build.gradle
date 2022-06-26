@@ -73,4 +73,5 @@ dependencies {
     // dependency for exoplayer
 
     implementation 'com.google.android.exoplayer:exoplayer:2.13.2'
+    implementation 'com.ramotion.circlemenu:circle-menu:0.3.2'
 }
