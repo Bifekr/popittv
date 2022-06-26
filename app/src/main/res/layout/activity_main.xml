@@ -15,7 +15,6 @@
       style="@style/Widget.Reply.NavigationView"
       android:layout_width="wrap_content"
       android:layout_height="0dp"
-      android:elevation="1dp"
       app:labelVisibilityMode="selected"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toStartOf="@id/container_main"
@@ -54,13 +53,13 @@
         android:src="@drawable/avatar_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/battry_toolbar"
-        app:layout_constraintHeight_percent=".8"
 
         app:layout_constraintStart_toEndOf="@id/tv_userName_toolbar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent=".06"
         app:riv_border_color="@color/popit_gradiant_back_brown"
         app:riv_border_width="1dp"
+        app:layout_constraintHeight_percent=".8"
         app:riv_oval="true" />
 
       <TextView
@@ -134,7 +133,6 @@
         android:id="@+id/switchNet_toolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:elevation="@dimen/plane_08"
         android:padding="@dimen/plane_08"
         android:soundEffectsEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"

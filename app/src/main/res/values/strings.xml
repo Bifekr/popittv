@@ -27,5 +27,10 @@
   <string name="title_4">Ugly card</string>
 
   <string name="text_1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Etiam eget ligula eu lectus lobortis condimentum.</string>
+  <string name="funny_nav">Funny</string>
+  <string name="reality_nav">Reality</string>
+  <string name="learning_nav">Learning</string>
+  <string name="farsi_nav">Farsi</string>
+  <string name="games_nav">Games</string>
 
 </resources>

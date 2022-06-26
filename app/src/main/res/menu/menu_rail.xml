@@ -3,26 +3,26 @@
   <item
     android:id="@+id/Funny"
     android:enabled="true"
-    android:icon="@drawable/ic_home"
-    android:title="Funny" />
+    android:icon="@drawable/ic_baseline_live_tv_24"
+    android:title="@string/funny_nav" />
   <item
     android:id="@+id/Reality"
     android:enabled="true"
-    android:icon="@drawable/ic_happy"
-    android:title="Reality" />
+    android:icon="@drawable/ic_reality_24"
+    android:title="@string/reality_nav" />
   <item
     android:id="@+id/Learning"
     android:enabled="true"
-    android:icon="@drawable/ic_like"
-    android:title="Learning" />
+    android:icon="@drawable/ic_baseline_school_24"
+    android:title="@string/learning_nav" />
   <item
     android:id="@+id/Farsi"
     android:enabled="true"
-    android:icon="@drawable/ic_black"
-    android:title="Farsi" />
+    android:icon="@drawable/ic_twotone_star"
+    android:title="@string/farsi_nav" />
   <item
     android:id="@+id/Games"
     android:enabled="true"
-    android:icon="@drawable/ic_black"
-    android:title="Games" />
+    android:icon="@drawable/ic_baseline_videogame_asset_24"
+    android:title="@string/games_nav" />
 </menu>
