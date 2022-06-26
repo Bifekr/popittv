@@ -47,21 +47,24 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
 
     @Override
     public void onBindViewHolder(@NonNull DetailChannel_holder holder, int position) {
-        holder.binding.titleFaVideoItemVideoThumb.setText(funnyDataModels.get(position).getTitle_fa());
-        holder.binding.titleEnVideoItemVideoThumb.setText(funnyDataModels.get(position).getTitle_en());
-        holder.binding.tvViewItemVidDef.setText(funnyDataModels.get(position).getView()+"");
-      //  holder.binding.tvLikeItemVidDef.setText(funnyDataModels.get(position).getLiky()+"");
-        Glide.with(context).load(funnyDataModels.get(position).getPoster())
-                .into(holder.binding.ivPosterItemVideo);
 
-        holder.binding.ivPosterItemVideo.setOnClickListener(v -> {
-            Intent intent=new Intent(context, PlayerActivity.class);
-            id_vid_funny=funnyDataModels.get(position).getId_funny();
-            intent.putExtra("id_vid_funny",id_vid_funny);
-            context.startActivity(intent);
-        });
+        if(funnyDataModels!=null) {
 
+            holder.binding.titleFaVideoItemVideoThumb.setText(funnyDataModels.get(position).getTitle_fa());
+            holder.binding.titleEnVideoItemVideoThumb.setText(funnyDataModels.get(position).getTitle_en());
+            holder.binding.tvViewItemVidDef.setText(funnyDataModels.get(position).getView() + "");
+            //  holder.binding.tvLikeItemVidDef.setText(funnyDataModels.get(position).getLiky()+"");
+            Glide.with(context).load(funnyDataModels.get(position).getPoster())
+                    .into(holder.binding.ivPosterItemVideo);
 
+            holder.binding.ivPosterItemVideo.setOnClickListener(v -> {
+                Intent intent = new Intent(context, PlayerActivity.class);
+                id_vid_funny = funnyDataModels.get(position).getId_funny();
+                intent.putExtra("id_vid_funny", id_vid_funny);
+                context.startActivity(intent);
+            });
+
+        }
 
 
 
