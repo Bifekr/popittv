@@ -15,7 +15,7 @@
     <item name="colorOnError">@color/reply_black_900</item>
 
     <item name="scrimBackground">@color/reply_white_50_alpha_060</item>
-    <item name="android:navigationBarColor">@color/popit_blue_light</item>
+    <item name="android:navigationBarColor">@color/popit_yellow</item>
 
     <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Reply.SmallComponent</item>
     <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Reply.MediumComponent</item>
