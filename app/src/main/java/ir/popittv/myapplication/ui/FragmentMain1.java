@@ -61,7 +61,7 @@ public class FragmentMain1 extends Fragment implements OnClickFrg1 {
 
         initRv_Vp_adapter();
         //request from Api to get DataModel
-        mainViewModel.requestChannel();
+        mainViewModel.requestChannel_kind(1);
         //detail Channel Selected
        // mainViewModel.requestChannel_detail(1);
         mainViewModel.requestFunny_view();
@@ -71,7 +71,7 @@ public class FragmentMain1 extends Fragment implements OnClickFrg1 {
 
 
         //update AND get Data from DataModel into LiveData
-        getChannel();
+        getChannel_kind();
         getChannel_detail();
         getFunny_view();
 
@@ -116,8 +116,8 @@ public class FragmentMain1 extends Fragment implements OnClickFrg1 {
 
     }
 
-    private void getChannel() {
-        mainViewModel.getChannel().observe(requireActivity(),channelDataModels -> {
+    private void getChannel_kind() {
+        mainViewModel.getChannel_kind().observe(requireActivity(), channelDataModels -> {
             if (channelDataModels!=null) {
                 rvChannel_frg1.setData(channelDataModels);
 

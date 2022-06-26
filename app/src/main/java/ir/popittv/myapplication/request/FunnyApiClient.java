@@ -21,12 +21,12 @@ public class FunnyApiClient {
 
     private static FunnyApiClient funnyApiClient;
 
-    private MutableLiveData<List<FunnyDataModel>> mFunny_view;
+    private final MutableLiveData<List<FunnyDataModel>> mFunny_view;
 
-    private MutableLiveData<List<FunnyDataModel>> mFunny_best;
-    private MutableLiveData<List<FunnyDataModel>> mFunny_liky;
-    private MutableLiveData<List<FunnyDataModel>> mFunny_subMenu;
-    private MutableLiveData <FunnyDataModel> mFunny_single;
+    private final MutableLiveData<List<FunnyDataModel>> mFunny_best;
+    private final MutableLiveData<List<FunnyDataModel>> mFunny_liky;
+    private final MutableLiveData<List<FunnyDataModel>> mFunny_subMenu;
+    private final MutableLiveData <FunnyDataModel> mFunny_single;
 
 
     //Constructor

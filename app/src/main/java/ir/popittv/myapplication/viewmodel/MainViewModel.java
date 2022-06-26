@@ -18,11 +18,11 @@ public class MainViewModel extends ViewModel {
     }
 
 
-    public LiveData<List<ChannelDataModel>> getChannel(){
-        return mainRepository.getChannel();
+    public LiveData<List<ChannelDataModel>> getChannel_kind(){
+        return mainRepository.getChannel_kind();
     }
-    public void requestChannel(){
-        mainRepository.requestChannel();
+    public void requestChannel_kind(int kind){
+        mainRepository.requestChannel_kind(kind);
     }
 
     public LiveData<ChannelDataModel> getChannel_detail(){return mainRepository.getChannel_detail();}

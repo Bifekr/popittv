@@ -20,8 +20,8 @@ public class MainRepository {
     }
 
 
-    private  MainApiClient mainApiClient;
-    private FunnyApiClient funnyApiClient;
+    private final MainApiClient mainApiClient;
+    private final FunnyApiClient funnyApiClient;
 
     private MainRepository() {
         mainApiClient = MainApiClient.getInstance();
@@ -30,12 +30,12 @@ public class MainRepository {
 
 
 
-public LiveData<List<ChannelDataModel>> getChannel(){
-        return mainApiClient.getChannel();
+public LiveData<List<ChannelDataModel>> getChannel_kind(){
+        return mainApiClient.getChannel_kind();
 }
 
-public void requestChannel(){
-        mainApiClient.requestChannel_kind();
+public void requestChannel_kind(int kind){
+        mainApiClient.requestChannel_kind(kind);
 }
 
 public LiveData<ChannelDataModel> getChannel_detail(){return mainApiClient.getChannel_detail();}

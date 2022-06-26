@@ -23,7 +23,7 @@ public interface ApiClient {
     Call<FunnyResponse> getFunny_view();
 
     @GET("getChannel.php")
-    Call<ChannelResponse> getChannel(@Query("kind") int kind);
+    Call<ChannelResponse> getChannel_kind(@Query("kind") int kind);
     @GET("getChannel_detail.php")
     Call<ChannelDataModel> getChannel_detail(@Query("id_channel") int id_channel);
     @GET("getChannel_all.php")

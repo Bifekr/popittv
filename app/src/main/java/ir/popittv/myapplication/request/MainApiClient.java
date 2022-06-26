@@ -1,7 +1,6 @@
 package ir.popittv.myapplication.request;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -15,8 +14,6 @@ import java.util.concurrent.TimeUnit;
 import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.response.ChannelResponse;
 import ir.popittv.myapplication.utils.AppExecuter;
-import ir.popittv.myapplication.models.FunnyDataModel;
-import ir.popittv.myapplication.response.FunnyResponse;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -27,7 +24,7 @@ public class MainApiClient {
     private static MainApiClient mainApiClient;
 
 
-    private ChannelRunnable channelRunnable;
+    private ChannelKind_Runnable channelKindRunnable;
     private ChannelDetail_Run channelDetail_run;
     private ChannelAll_Run channelAll_run;
 
@@ -52,7 +49,7 @@ public class MainApiClient {
     }
 
 
-    public LiveData<List<ChannelDataModel>> getChannel() {
+    public LiveData<List<ChannelDataModel>> getChannel_kind() {
         return mChannel;
     }
     public LiveData<ChannelDataModel> getChannel_detail(){return  mDetailChannel;}
@@ -63,32 +60,31 @@ public class MainApiClient {
 
 
     //retrieve data from dataBase
-    public void requestChannel_kind() {
+    public void requestChannel_kind(int kind) {
 
 
-        if (channelRunnable!=null) {
-            channelRunnable = null;
+        if (channelKindRunnable!=null) {
+            channelKindRunnable = null;
         }
 
-        channelRunnable = new ChannelRunnable();
+        channelKindRunnable = new ChannelKind_Runnable(kind);
 
-        final Future myHandler2 = AppExecuter.getAppExecuter().networkIo().submit(channelRunnable);
+        final Future myHandler2 = AppExecuter.getAppExecuter().networkIo().submit(channelKindRunnable);
 
-        AppExecuter.getAppExecuter().networkIo().schedule(new Runnable() {
-            @Override
-            public void run() {
-                myHandler2.cancel(true);
+        AppExecuter.getAppExecuter().networkIo().schedule(() -> {
+            myHandler2.cancel(true);
 
-            }
         }, 2, TimeUnit.MINUTES);
     }
-    private class ChannelRunnable implements Runnable {
+    private class ChannelKind_Runnable implements Runnable {
 
 
         private final boolean canclable;
+        private int kind;
 
 
-        public ChannelRunnable() {
+        public ChannelKind_Runnable(int kind) {
+            this.kind=kind;
             canclable = false;
         }
 
@@ -99,7 +95,7 @@ public class MainApiClient {
                 if (canclable)
                     return;
 
-                Response response2 = channelResponseCall().execute();
+                Response response2 = channelResponseCall(kind).execute();
 
                 if (response2.code()==200) {
                     assert response2.body()!=null;
@@ -121,8 +117,8 @@ public class MainApiClient {
         }
 
 
-        private Call<ChannelResponse> channelResponseCall() {
-            return Service.getApiClient().getChannel(1);
+        private Call<ChannelResponse> channelResponseCall(int kind) {
+            return Service.getApiClient().getChannel_kind(kind);
 
         }
 

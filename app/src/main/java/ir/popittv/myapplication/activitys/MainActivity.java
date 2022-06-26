@@ -31,7 +31,6 @@ import ir.popittv.myapplication.adapter.Recommend_Adapter;
 import ir.popittv.myapplication.adapter.RvChannel_Frg1;
 import ir.popittv.myapplication.adapter.TagAdapter;
 import ir.popittv.myapplication.databinding.ActivityMainBinding;
-import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.models.HashTagDataModel;
 import ir.popittv.myapplication.utils.OnClickFrg1;
@@ -41,30 +40,20 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
 
     MainViewModel mainViewModel;
     ActivityMainBinding binding;
-
-
+    FunnyAdapter funnyAdapter;
+    //global Variable
+    int id_channel;
+    int id_subMenu;
     //global adapter
     private RvChannel_Frg1 rvChannel_frg1;
     private ChannelDetail_adapter detail_adapter;
     private InfinitFrg1_PagerAdapter infinitAdapter;
-   private Recommend_Adapter recommend_adapter;
+    private Recommend_Adapter recommend_adapter;
     private Recommend_Adapter recommend_adapter2;
     private TagAdapter tagAdapter;
-    FunnyAdapter funnyAdapter;
-
-
-
-
-    //global Variable
-    int id_channel;
-    int id_subMenu;
-
-
-
     //Utils Class
     private CardPagerAdapter2 cardPagerAdapter2;
     private ShadowTransformer shadowTransformer;
-
 
 
     @Override
@@ -76,10 +65,10 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
         //ViewModel Provider
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
-        recommend_adapter=new Recommend_Adapter(this);
-        recommend_adapter2=new Recommend_Adapter(this);
-        detail_adapter=new ChannelDetail_adapter(this);
-        rvChannel_frg1 = new RvChannel_Frg1(this,this);
+        rvChannel_frg1 = new RvChannel_Frg1(this, this);
+        recommend_adapter = new Recommend_Adapter(this);
+        recommend_adapter2 = new Recommend_Adapter(this);
+        detail_adapter = new ChannelDetail_adapter(this);
         infinitAdapter = new InfinitFrg1_PagerAdapter(this);
 
         initRailActivity();
@@ -93,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
 
         //update AND get Data from DataModel into LiveData
         allChannel();
-        getChannel();
+        getChannel_kind();
         getChannel_detail();
         getFunny_view();
         getFunny_liky();
@@ -103,12 +92,11 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
     }
 
 
-
-
     //request from Api to get DataModel
     private void request() {
 
-        mainViewModel.requestChannel();
+
+        mainViewModel.requestChannel_kind(1);
         //detail Channel Selected
         mainViewModel.requestChannel_detail(3);
         // mainViewModel.requestChannel_detail(1);
@@ -145,9 +133,9 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
         binding.navRail.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
             @Override
             public void onNavigationItemReselected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.Funny:
-                        startActivity(new Intent(MainActivity.this,MainActivity.class));
+                        startActivity(new Intent(MainActivity.this, MainActivity.class));
                         break;
                     case R.id.Reality:
                         startActivity(new Intent(MainActivity.this, RealityActivity.class));
@@ -167,9 +155,10 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
             }
         });
     }
+
     private void taginit() {
 
-        binding.rvMenuTagFrg1.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
+        binding.rvMenuTagFrg1.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         GradientDrawable drawable1 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
                 new int[]{0xffeff400, 0xffaff600});
         GradientDrawable drawable2 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
@@ -181,19 +170,19 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
         GradientDrawable drawable5 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
                 new int[]{0xf469a9, 0xFFF48FB1});
         ArrayList<HashTagDataModel> tagList = new ArrayList<>();
-        tagList.add(new HashTagDataModel("#اگی واگی",R.drawable.tag_huggy_1,drawable1));
-        tagList.add(new HashTagDataModel("#سونیک",R.drawable.tag_sonic_1,drawable2));
-        tagList.add(new HashTagDataModel("#آدمک خای خمیری",R.drawable.tag_claymixer_1,drawable3));
-        tagList.add(new HashTagDataModel("#کریستمس",R.drawable.tag_christmas_1,drawable4));
-        tagList.add(new HashTagDataModel("#کیسی میسی",R.drawable.tag_kissy_1,drawable5));
+        tagList.add(new HashTagDataModel("#اگی واگی", R.drawable.tag_huggy_1, drawable1));
+        tagList.add(new HashTagDataModel("#سونیک", R.drawable.tag_sonic_1, drawable2));
+        tagList.add(new HashTagDataModel("#آدمک خای خمیری", R.drawable.tag_claymixer_1, drawable3));
+        tagList.add(new HashTagDataModel("#کریستمس", R.drawable.tag_christmas_1, drawable4));
+        tagList.add(new HashTagDataModel("#کیسی میسی", R.drawable.tag_kissy_1, drawable5));
 
 
-        tagAdapter = new TagAdapter(tagList,this);
+        tagAdapter = new TagAdapter(tagList, this);
         binding.rvMenuTagFrg1.setAdapter(tagAdapter);
 
 
-
     }
+
     private void initRv_Vp_adapter() {
 
         //init channel list Adapter
@@ -205,19 +194,19 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
         //Show Detail Channel Recycler
         binding.rvDetailFrg1.setHasFixedSize(true);
         binding.rvDetailFrg1.setLayoutManager(new LinearLayoutManager(this,
-                LinearLayoutManager.HORIZONTAL,false));
+                LinearLayoutManager.HORIZONTAL, false));
         binding.rvDetailFrg1.setAdapter(detail_adapter);
 
         //RecyclerView Selected 1
         binding.rvSelect1Frg1.setHasFixedSize(true);
         binding.rvSelect1Frg1.setLayoutManager(new LinearLayoutManager(this,
-                LinearLayoutManager.HORIZONTAL,false));
+                LinearLayoutManager.HORIZONTAL, false));
         binding.rvSelect1Frg1.setAdapter(recommend_adapter);
 
         //recyclerView Selected2
         binding.rvSelect2Frg1.setHasFixedSize(true);
         binding.rvSelect2Frg1.setLayoutManager(new LinearLayoutManager(this,
-                LinearLayoutManager.HORIZONTAL,true));
+                LinearLayoutManager.HORIZONTAL, true));
         binding.rvSelect2Frg1.setAdapter(recommend_adapter2);
 
         //horizontal viewpager infinite
@@ -227,14 +216,14 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
         //Recommended Vide Rv
         binding.rvRecommendFrg1.setHasFixedSize(true);
         binding.rvRecommendFrg1.setLayoutManager(new LinearLayoutManager(this,
-                RecyclerView.VERTICAL,false));
+                RecyclerView.VERTICAL, false));
         binding.rvRecommendFrg1.setAdapter(recommend_adapter);
 
         funnyAdapter = new FunnyAdapter(this);
         binding.rvSubMenuTagFrg1.setAdapter(funnyAdapter);
         binding.rvSubMenuTagFrg1.setLayoutManager(new GridLayoutManager
                 (this, 3, GridLayoutManager.VERTICAL, false));
-        binding.rvSubMenuTagFrg1.addItemDecoration(new DividerItemDecoration(this,LinearLayoutManager.HORIZONTAL));
+        binding.rvSubMenuTagFrg1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL));
 
 
 
@@ -248,20 +237,22 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
     }
 
     //Set Data to LiveData
-    private void allChannel(){
-        binding.showAllChannelMainActivity.setOnClickListener(v->{
-            Intent intent=new Intent(MainActivity.this,AllChannelActivity.class);
+    private void allChannel() {
+        binding.showAllChannelMainActivity.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AllChannelActivity.class);
             startActivity(intent);
         });
     }
-    private void getChannel() {
-        mainViewModel.getChannel().observe(this,channelDataModels -> {
+
+    private void getChannel_kind() {
+        mainViewModel.getChannel_kind().observe(this, channelDataModels -> {
             if (channelDataModels!=null) {
                 rvChannel_frg1.setData(channelDataModels);
             }
         });
     }
-    private void getChannel_detail(){
+
+    private void getChannel_detail() {
         mainViewModel.getChannel_detail().observe(this, channelDataModel -> {
 
             List<FunnyDataModel> models = new ArrayList<>((channelDataModel).getVideos_channel());
@@ -277,6 +268,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
 
         });
     }
+
     private void getFunny_view() {
         mainViewModel.getFunny_view().observe(this, funnyDataModels -> {
             if (funnyDataModels!=null) {
@@ -287,12 +279,14 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
             }
         });
     }
+
     private void getFunny_liky() {
-        mainViewModel.getFunny_liky().observe(this,funnyDataModels -> {
+        mainViewModel.getFunny_liky().observe(this, funnyDataModels -> {
             recommend_adapter2.setFunnyDataModels(funnyDataModels);
 
         });
     }
+
     private void getFunny_subMenu() {
 
         mainViewModel.getFunny_subMenu().observe(this, funnyDataModels -> {
@@ -303,12 +297,10 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
     }
 
 
-
-
     @Override
     public void OnclickDetail(int pos) {
-        id_channel=pos;
-        mainViewModel.requestChannel_detail(id_channel);
+        id_channel = pos;
+        mainViewModel.requestChannel_detail(pos);
 
     }
 
