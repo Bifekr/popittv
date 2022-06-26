@@ -38,12 +38,12 @@ import ir.popittv.myapplication.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
 
-    MainViewModel mainViewModel;
-    ActivityMainBinding binding;
-    FunnyAdapter funnyAdapter;
+    List<FunnyDataModel> models;
     //global Variable
-    int id_channel;
-    int id_subMenu;
+    private int id_channel;
+    private MainViewModel mainViewModel;
+    private ActivityMainBinding binding;
+    private FunnyAdapter funnyAdapter;
     //global adapter
     private RvChannel_Frg1 rvChannel_frg1;
     private ChannelDetail_adapter detail_adapter;
@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
     private CardPagerAdapter2 cardPagerAdapter2;
     private ShadowTransformer shadowTransformer;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
         setContentView(view);
         //ViewModel Provider
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
+        models = new ArrayList<>();
 
         rvChannel_frg1 = new RvChannel_Frg1(this, this);
         recommend_adapter = new Recommend_Adapter(this);
@@ -74,11 +75,11 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
         initRailActivity();
         taginit();
 
-        //retrieve data into modelClass
-        request();
-
         /////
         initRv_Vp_adapter();
+
+        //retrieve data into modelClass
+        request();
 
         //update AND get Data from DataModel into LiveData
         allChannel();
@@ -255,8 +256,12 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
     private void getChannel_detail() {
         mainViewModel.getChannel_detail().observe(this, channelDataModel -> {
 
-            List<FunnyDataModel> models = new ArrayList<>((channelDataModel).getVideos_channel());
-            detail_adapter.setFunnyDataModels(models);
+
+            models.addAll(channelDataModel.getVideos_channel());
+            if (models!=null){
+                detail_adapter.setFunnyDataModels(models);
+            }
+
 
             Glide.with(this).load(channelDataModel.getProfile_chann())
                     .into(binding.showProfileChanFrg1);
@@ -306,8 +311,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
 
     @Override
     public void onMenuClick(int position) {
-        id_subMenu = position;
-        mainViewModel.requestFunny_subMenu(id_subMenu);
+        mainViewModel.requestFunny_subMenu(position);
 
     }
 
