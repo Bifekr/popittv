@@ -19,69 +19,72 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
+      app:headerLayout="@layout/header_rail"
       app:menu="@menu/menu_rail"
       app:menuGravity="bottom" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/toolbar"
-      android:padding="3dp"
+      android:padding="6dp"
       android:background="@color/popit_yellow"
       android:layout_width="0dp"
       android:layout_height="?attr/actionBarSize"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintStart_toEndOf="@id/navRail"
-      app:layout_constraintEnd_toEndOf="parent">
+      app:layout_constraintEnd_toEndOf="parent"
+    >
 
       <ImageView
         android:id="@+id/battry_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_battery_4_bar_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".8"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintStart_toEndOf="@id/userProfile_toolbar"
+        app:layout_constraintStart_toEndOf="@id/iconWifi_toolbar"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent=".06" />
+       />
 
-      <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/userProfile_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/avatar_2"
+      <ImageView
+        android:id="@+id/iconWifi_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_baseline_wifi_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/battry_toolbar"
-
-        app:layout_constraintStart_toEndOf="@id/tv_userName_toolbar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent=".06"
-        app:riv_border_color="@color/popit_gradiant_back_brown"
-        app:riv_border_width="1dp"
-        app:layout_constraintHeight_percent=".8"
-        app:riv_oval="true" />
-
-      <TextView
-        android:id="@+id/tv_userName_toolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="12dp"
-        android:gravity="center_vertical"
-        android:paddingEnd="4dp"
-        android:paddingStart="4dp"
-        android:text="نام کاربری"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/userProfile_toolbar"
-        app:layout_constraintHeight_percent=".8"
-        app:layout_constraintHorizontal_bias="01"
-        app:layout_constraintStart_toEndOf="@id/search_toolbar"
+        app:layout_constraintStart_toEndOf="@id/tv_safeNet_toolbar"
         app:layout_constraintTop_toTopOf="parent" />
 
+      <TextView
+        android:id="@+id/tv_safeNet_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:text="صرفه جویی در حجم اینترنت"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/iconWifi_toolbar"
+        app:layout_constraintStart_toEndOf="@id/switchNet_toolbar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switchNet_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:soundEffectsEnabled="true"
+        android:gravity="end|center_horizontal|center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_safeNet_toolbar"
+        app:layout_constraintStart_toEndOf="@id/search_toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent=".08"/>
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/search_toolbar"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:hint="@string/search"
         android:orientation="horizontal"
         android:textColorHint="@color/black"
@@ -90,10 +93,8 @@
         app:endIconMode="clear_text"
         app:hintTextColor="@color/blue_light"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tv_userName_toolbar"
-        app:layout_constraintHeight_percent=".8"
-
-        app:layout_constraintStart_toEndOf="@id/iconWifi_toolbar"
+        app:layout_constraintEnd_toStartOf="@id/switchNet_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent=".4"
         app:startIconDrawable="@drawable/ic_search">
@@ -104,41 +105,6 @@
           android:drawableEnd="@drawable/ic_mic" />
 
       </com.google.android.material.textfield.TextInputLayout>
-
-      <ImageView
-        android:id="@+id/iconWifi_toolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginEnd="@dimen/plane_08"
-        android:src="@drawable/ic_baseline_wifi_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tv_safeNet_toolbar"
-        app:layout_constraintStart_toEndOf="@id/switchNet_toolbar"
-        app:layout_constraintTop_toTopOf="parent" />
-
-      <TextView
-        android:id="@+id/tv_safeNet_toolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginRight="@dimen/plane_08"
-        android:gravity="center"
-        android:text="صرفه جویی در مصرف اینترنت"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/search_toolbar"
-        app:layout_constraintStart_toEndOf="@id/iconWifi_toolbar"
-        app:layout_constraintTop_toTopOf="parent" />
-
-      <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/switchNet_toolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/plane_08"
-        android:soundEffectsEnabled="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tv_safeNet_toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
       <ScrollView
