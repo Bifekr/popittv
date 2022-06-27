@@ -1,14 +1,19 @@
 package ir.popittv.myapplication.activitys;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -38,7 +43,7 @@ import ir.popittv.myapplication.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
 
-    List<FunnyDataModel> models;
+
     //global Variable
     private int id_channel;
     private MainViewModel mainViewModel;
@@ -59,12 +64,15 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
+
+        setContentView(binding.getRoot());
+
+
+        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //ViewModel Provider
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
-        models = new ArrayList<>();
+
 
         rvChannel_frg1 = new RvChannel_Frg1(this, this);
         recommend_adapter = new Recommend_Adapter(this);
@@ -90,6 +98,8 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
         getFunny_subMenu();
 
 
+
+
     }
 
 
@@ -107,54 +117,50 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
     }
 
     //Initialize widgets
+    @SuppressLint("NonConstantResourceId")
     private void initRailActivity() {
-        binding.navRail.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.Funny:
-                        startActivity(new Intent(MainActivity.this, MainActivity.class));
-                        break;
-                    case R.id.Reality:
-                        startActivity(new Intent(MainActivity.this, RealityActivity.class));
-                        break;
-                    case R.id.Learning:
-                        startActivity(new Intent(MainActivity.this, StudyActivity.class));
-                        break;
-                    case R.id.Farsi:
-                        startActivity(new Intent(MainActivity.this, FarsiActivity.class));
-                        break;
-                    case R.id.Games:
-                        startActivity(new Intent(MainActivity.this, GameActivity.class));
-                        break;
-                }
-                return true;
+        binding.navRail.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.Funny:
+                    startActivity(new Intent(MainActivity.this, MainActivity.class));
+                    break;
+                case R.id.Reality:
+                    startActivity(new Intent(MainActivity.this, RealityActivity.class));
+                    break;
+                case R.id.Learning:
+                    startActivity(new Intent(MainActivity.this, StudyActivity.class));
+                    break;
+                case R.id.Farsi:
+                    startActivity(new Intent(MainActivity.this, FarsiActivity.class));
+                    break;
+                case R.id.Games:
+                    startActivity(new Intent(MainActivity.this, GameActivity.class));
+                    break;
             }
+            return true;
         });
-        binding.navRail.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
-            @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.Funny:
-                        startActivity(new Intent(MainActivity.this, MainActivity.class));
-                        break;
-                    case R.id.Reality:
-                        startActivity(new Intent(MainActivity.this, RealityActivity.class));
-                        break;
-                    case R.id.Learning:
-                        startActivity(new Intent(MainActivity.this, StudyActivity.class));
-                        break;
-                    case R.id.Farsi:
-                        startActivity(new Intent(MainActivity.this, FarsiActivity.class));
-                        break;
-                    case R.id.Games:
-                        startActivity(new Intent(MainActivity.this, GameActivity.class));
-                        break;
+        
+             /*  binding.navRail.setOnItemReselectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.Funny:
+                    startActivity(new Intent(MainActivity.this, MainActivity.class));
+                    break;
+                case R.id.Reality:
+                    startActivity(new Intent(MainActivity.this, RealityActivity.class));
+                    break;
+                case R.id.Learning:
+                    startActivity(new Intent(MainActivity.this, StudyActivity.class));
+                    break;
+                case R.id.Farsi:
+                    startActivity(new Intent(MainActivity.this, FarsiActivity.class));
+                    break;
+                case R.id.Games:
+                    startActivity(new Intent(MainActivity.this, GameActivity.class));
+                    break;
 
 
-                }
             }
-        });
+        });*/
     }
 
     private void taginit() {
@@ -256,19 +262,21 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
     private void getChannel_detail() {
         mainViewModel.getChannel_detail().observe(this, channelDataModel -> {
 
+            if (channelDataModel!=null){
+                List<FunnyDataModel> funnyDataModels=new ArrayList<>((channelDataModel).getVideos_channel());
 
-            models.addAll(channelDataModel.getVideos_channel());
-            if (models!=null){
-                detail_adapter.setFunnyDataModels(models);
+                detail_adapter.setFunnyDataModels(funnyDataModels);
+
+
+                Glide.with(this).load(channelDataModel.getProfile_chann())
+                        .into(binding.showProfileChanFrg1);
+                binding.tvSubDetailChanFrg1.setText(channelDataModel.getFollowers());
+                binding.tvAgeDetailChanFrg1.setText(channelDataModel.getAge());
+                binding.titleFaDetailChanFrg1.setText(channelDataModel.getName_chan_fa().trim());
+                binding.titleEnDetailChanFrg1.setText(channelDataModel.getName_chan_en().trim());
+
             }
 
-
-            Glide.with(this).load(channelDataModel.getProfile_chann())
-                    .into(binding.showProfileChanFrg1);
-            binding.tvSubDetailChanFrg1.setText(channelDataModel.getFollowers());
-            binding.tvAgeDetailChanFrg1.setText(channelDataModel.getAge());
-            binding.titleFaDetailChanFrg1.setText(channelDataModel.getName_chan_fa().trim());
-            binding.titleEnDetailChanFrg1.setText(channelDataModel.getName_chan_en().trim());
 
 
         });
@@ -305,7 +313,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
     @Override
     public void OnclickDetail(int pos) {
         id_channel = pos;
-        mainViewModel.requestChannel_detail(pos);
+        mainViewModel.requestChannel_detail(id_channel);
 
     }
 

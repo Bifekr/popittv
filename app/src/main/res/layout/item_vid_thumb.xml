@@ -86,7 +86,7 @@
           android:ellipsize="end"
           android:paddingLeft="15dp"
           android:paddingRight="10dp"
-          android:fontFamily="@font/work_sans_semibold"
+          android:fontFamily="@font/baloo"
           android:maxLines="1"
           android:minLines="1"
           android:text="fdkljfdkjfg rfg  fggtfgf fg  fgdlfkj"
