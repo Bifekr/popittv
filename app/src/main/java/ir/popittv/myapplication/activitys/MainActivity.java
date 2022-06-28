@@ -140,6 +140,10 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
             return true;
         });
         
+binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v -> {
+    startActivity(new Intent(MainActivity.this, UserActivity.class));
+});
+        
              /*  binding.navRail.setOnItemReselectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.Funny:

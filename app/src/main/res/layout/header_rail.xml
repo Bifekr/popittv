@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/fab_add2">
   <com.google.android.material.floatingactionbutton.FloatingActionButton
     android:id="@+id/fab_add"
     android:layout_width="wrap_content"
