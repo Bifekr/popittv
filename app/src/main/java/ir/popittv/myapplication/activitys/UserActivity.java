@@ -49,6 +49,7 @@ public class UserActivity extends AppCompatActivity {
 
         binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v -> {
             startActivity(new Intent(UserActivity.this, MainActivity.class));
+            binding.navRail.getHeaderView().setBackgroundResource(R.drawable.ic_close);
         });
 
              /*  binding.navRail.setOnItemReselectedListener(item -> {

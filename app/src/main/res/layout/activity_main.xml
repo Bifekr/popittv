@@ -28,7 +28,6 @@
       android:layout_width="0dp"
       android:layout_height="?attr/actionBarSize"
       android:background="@color/popit_yellow"
-      android:padding="6dp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toEndOf="@id/navRail"
       app:layout_constraintTop_toTopOf="parent">
@@ -41,7 +40,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iconWifi_toolbar"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="TODO" />
 
       <ImageView
         android:id="@+id/iconWifi_toolbar"
@@ -61,7 +61,9 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="صرفه جویی در حجم اینترنت"
-        android:textSize="12sp"
+        android:textColor="#6D4C41"
+        android:textSize="14sp"
+        android:fontFamily="@font/lalezar_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/iconWifi_toolbar"
         app:layout_constraintStart_toEndOf="@id/switchNet_toolbar"
@@ -187,7 +189,7 @@
           android:layout_width="0dp"
           android:layout_height="160dp"
           android:layout_marginTop="@dimen/plane_08"
-          android:layout_marginRight="10dp"
+          android:layout_marginEnd="10dp"
           app:cardCornerRadius="@dimen/plane_24"
           app:cardElevation="@dimen/plane_08"
           app:layout_constraintBottom_toTopOf="@id/parentSelect1_frg1"
@@ -668,6 +670,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
       </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
 
 

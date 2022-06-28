@@ -36,4 +36,10 @@
   <string name="dummy_button">Dummy Button</string>
   <string name="dummy_content">DUMMY\nCONTENT</string>
 
+  <string name="parentBookmark">Your\nBookmark</string>
+  <string name="parentSubscribe">Your\nSubscribe</string>
+  <string name="parentWatchLater">Your\nWatchLater</string>
+  <string name="parentHistoey">Your\nHistory</string>
+  <string name="parentDownload">Your\nDownloads</string>
+
 </resources>
