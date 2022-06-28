@@ -40,9 +40,12 @@
   <string name="parentSubscribe">Your\nSubscribe</string>
   <string name="parentWatchLater">Your\nWatchLater</string>
   <string name="parentHistoey">Your\nHistory</string>
-  <string name="parentDownload">Your\nDownloads</string>
+  <string name="parentDownload">Your\nDownload</string>
   <string name="age">Age</string>
   <string name="subscribe">Subscribe</string>
-  <string name="not_acccsec_code">کد دسترسی ثبت نشده است</string>
+  <string name="not_acccsec_code">کد ویژه دسترسی یافت نشد - برای استفاده از محتوا و ملحق شدن به دوستانتان ابتدا یکی از کدهای زیر را انتخاب کنید .</string>
+  <string name="fun_video">ویدئوهای فان</string>
+  <string name="fav_title">محبوب ترین</string>
+  <string name="mostview_title">پربازدیدترین</string>
 
 </resources>

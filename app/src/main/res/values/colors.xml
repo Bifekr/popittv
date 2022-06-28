@@ -122,6 +122,7 @@
   <color name="popit_yellow">#FFCC22</color>
   <color name="popit_orange">#ffa600</color>
   <color name="popit_disable">#78909C</color>
+  <color name="popit_red">#AD1457</color>
   <color name="light_blue_600">#FF039BE5</color>
   <color name="light_blue_900">#FF01579B</color>
   <color name="light_blue_A200">#FF40C4FF</color>

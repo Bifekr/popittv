@@ -209,16 +209,16 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
         binding.rvDetailFrg1.setAdapter(detail_adapter);
 
         //RecyclerView Selected 1
-        binding.rvSelect1Frg1.setHasFixedSize(true);
-        binding.rvSelect1Frg1.setLayoutManager(new LinearLayoutManager(this,
+        binding.rvPopularMainActivity.setHasFixedSize(true);
+        binding.rvPopularMainActivity.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false));
-        binding.rvSelect1Frg1.setAdapter(recommend_adapter);
+        binding.rvPopularMainActivity.setAdapter(recommend_adapter);
 
         //recyclerView Selected2
-        binding.rvSelect2Frg1.setHasFixedSize(true);
-        binding.rvSelect2Frg1.setLayoutManager(new LinearLayoutManager(this,
+        binding.rvBestViewMainActivity.setHasFixedSize(true);
+        binding.rvBestViewMainActivity.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, true));
-        binding.rvSelect2Frg1.setAdapter(recommend_adapter2);
+        binding.rvBestViewMainActivity.setAdapter(recommend_adapter2);
 
         //horizontal viewpager infinite
 

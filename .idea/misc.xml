@@ -48,9 +48,11 @@
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_bookmark_24dp.xml" value="0.30462962962962964" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_category_1.xml" value="0.525" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_circle.xml" value="0.1" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_history_24.xml" value="0.3111111111111111" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_reality_24.xml" value="0.1" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_reply.xml" value="0.1" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_reply_all.xml" value="0.1" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_schedule.xml" value="0.3111111111111111" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/like_background_oval.xml" value="0.2945205479452055" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/list_background_oval.xml" value="0.2945205479452055" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/nav_divider_top.xml" value="0.2945205479452055" />
@@ -84,7 +86,7 @@
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_farsi.xml" value="0.29269406392694064" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_fullscreen.xml" value="0.1" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_game.xml" value="0.29269406392694064" />
-        <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_main.xml" value="0.2874439461883408" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_player.xml" value="0.25" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_reality.xml" value="0.22916666666666666" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_study.xml" value="0.2808219178082192" />
