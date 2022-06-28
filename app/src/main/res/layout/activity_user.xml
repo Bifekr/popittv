@@ -72,18 +72,19 @@
               android:textSize="18sp"
               app:layout_constraintTop_toBottomOf="@id/tvTitleUser"
               app:layout_constraintEnd_toEndOf="@id/tvTitleUser"/>
+
             <TextView
               android:id="@+id/phoneNum_userActivity"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              app:layout_constraintEnd_toStartOf="@id/tvNum_userActivity"
-              app:layout_constraintTop_toTopOf="@id/tvNum_userActivity"
-              app:layout_constraintBottom_toBottomOf="@id/tvNum_userActivity"
-              android:fontFamily="@font/lalezar_regular"
               android:layout_marginEnd="@dimen/plane_08"
+              android:fontFamily="@font/lalezar_regular"
+              android:hint="09 + + + +  +  +++"
               android:textSize="18sp"
               android:textStyle="normal"
-              android:hint="09 + + + +  +  +++"/>
+              app:layout_constraintBottom_toBottomOf="@id/tvNum_userActivity"
+              app:layout_constraintEnd_toStartOf="@id/tvNum_userActivity"
+              app:layout_constraintTop_toTopOf="@id/tvNum_userActivity" />
             <TextView
               android:id="@+id/tvName_userActivity"
               android:layout_width="wrap_content"
@@ -93,16 +94,17 @@
               android:text="نام کاربری : "
               android:fontFamily="@font/lalezar_regular"
               android:textSize="18sp"/>
+
             <TextView
               android:id="@+id/userName_userActivity"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              app:layout_constraintEnd_toStartOf="@id/tvName_userActivity"
-              app:layout_constraintTop_toTopOf="@id/tvName_userActivity"
-              app:layout_constraintBottom_toBottomOf="@id/tvName_userActivity"
-              android:textSize="18sp"
+              android:fontFamily="@font/lalezar_regular"
               android:hint="بدون نام"
-              android:fontFamily="@font/lalezar_regular"/>
+              android:textSize="18sp"
+              app:layout_constraintBottom_toBottomOf="@id/tvName_userActivity"
+              app:layout_constraintEnd_toStartOf="@id/tvName_userActivity"
+              app:layout_constraintTop_toTopOf="@id/tvName_userActivity" />
             <TextView
               android:id="@+id/tvAccess_userActivity"
               android:layout_width="wrap_content"
@@ -115,18 +117,18 @@
               android:textStyle="bold"
               android:text=" وضعیت دسترسی :"
               android:textColor="@color/brown"/>
+
             <TextView
               android:id="@+id/showDay_userActivity"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              app:layout_constraintEnd_toStartOf="@id/tvAccess_userActivity"
-              app:layout_constraintTop_toTopOf="@id/tvAccess_userActivity"
-              app:layout_constraintBottom_toBottomOf="@id/tvAccess_userActivity"
-              android:hint=" کد دسترسی ثبت نشده است"
               android:fontFamily="@font/lalezar_regular"
-              android:textSize="18sp"
+              android:hint="@string/not_acccsec_code"
               android:textColor="@color/brown"
-              />
+              android:textSize="18sp"
+              app:layout_constraintBottom_toBottomOf="@id/tvAccess_userActivity"
+              app:layout_constraintEnd_toStartOf="@id/tvAccess_userActivity"
+              app:layout_constraintTop_toTopOf="@id/tvAccess_userActivity" />
 
             <com.makeramen.roundedimageview.RoundedImageView
               android:id="@+id/avatarUser_userActivity"

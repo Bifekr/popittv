@@ -273,12 +273,13 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
 
 
                 Glide.with(this).load(channelDataModel.getProfile_chann())
-                        .into(binding.showProfileChanFrg1);
-                binding.tvSubDetailChanFrg1.setText(channelDataModel.getFollowers());
-                binding.tvAgeDetailChanFrg1.setText(channelDataModel.getAge());
-                binding.titleFaDetailChanFrg1.setText(channelDataModel.getName_chan_fa().trim());
-                binding.titleEnDetailChanFrg1.setText(channelDataModel.getName_chan_en().trim());
+                        .into(binding.profileShowChannelMainActivity);
+                binding.subShowChannelMainActivity.setText(channelDataModel.getFollowers());
+                binding.ageShowChannelMainActivity.setText(channelDataModel.getAge());
+                binding.titleShowChannelMainActivity.setText(channelDataModel.getName_chan_en().trim());
 
+            }else {
+                Toast.makeText(MainActivity.this,"net not connection",Toast.LENGTH_LONG).show();
             }
 
 

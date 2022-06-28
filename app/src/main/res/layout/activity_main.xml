@@ -12,11 +12,11 @@
 
     <com.google.android.material.navigationrail.NavigationRailView
       android:id="@+id/navRail"
+      style="@style/Widget.MaterialComponents.NavigationRailView.Compact"
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
       app:headerLayout="@layout/header_rail"
       app:labelVisibilityMode="auto"
-      style="@style/Widget.MaterialComponents.NavigationRailView.Compact"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
@@ -36,12 +36,12 @@
         android:id="@+id/battry_toolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="TODO"
         android:src="@drawable/ic_baseline_battery_4_bar_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iconWifi_toolbar"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="TODO" />
+        app:layout_constraintTop_toTopOf="parent" />
 
       <ImageView
         android:id="@+id/iconWifi_toolbar"
@@ -59,11 +59,11 @@
         android:id="@+id/tv_safeNet_toolbar"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:fontFamily="@font/lalezar_regular"
         android:gravity="center"
         android:text="صرفه جویی در حجم اینترنت"
         android:textColor="#6D4C41"
         android:textSize="14sp"
-        android:fontFamily="@font/lalezar_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/iconWifi_toolbar"
         app:layout_constraintStart_toEndOf="@id/switchNet_toolbar"
@@ -103,7 +103,7 @@
         <com.google.android.material.textfield.TextInputEditText
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:drawableEnd="@drawable/ic_mic" />
+          android:drawableEnd="@drawable/ic_mic"/>
 
       </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -137,33 +137,35 @@
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <androidx.recyclerview.widget.RecyclerView
               android:id="@+id/rv_channelList_frg1"
               android:layout_width="0dp"
               android:layout_height="match_parent"
+              android:background="@color/popit_yellow"
               android:foregroundGravity="center_vertical|center_horizontal"
               app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toTopOf="parent"
-              android:background="@color/popit_yellow" />
+              app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-              android:fontFamily="@font/baloo"
-              android:textStyle="bold"
-
-              android:padding="@dimen/plane_08"
-              android:background="@drawable/shape_tag5"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintHorizontal_bias="1"
-              app:layout_constraintVertical_bias="0"
-              android:textSize="26sp"
               android:layout_width="87dp"
               android:layout_height="0dp"
-              android:text="show  All  Channel" />
+
+              android:background="@drawable/shape_tag5"
+              android:fontFamily="@font/baloo"
+              android:padding="@dimen/plane_08"
+              android:text="show  All  Channel"
+              android:textColor="#6D4C41"
+              android:textSize="26sp"
+              android:textStyle="bold"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="1"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintVertical_bias="0" />
 
           </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -171,27 +173,25 @@
         </androidx.cardview.widget.CardView>
 
 
-        <ImageView
+        <com.google.android.exoplayer2.ui.PlayerView
           android:id="@+id/lastVideo_watching"
           android:layout_width="0dp"
-          android:layout_height="180dp"
-          android:scaleType="centerCrop"
+          android:layout_height="160dp"
           app:layout_constraintBottom_toTopOf="@id/rvRecommend_frg1"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="1"
           app:layout_constraintStart_toEndOf="@id/parentChannelDetail_cardView"
           app:layout_constraintTop_toTopOf="@id/parentChannelDetail_cardView"
-          app:layout_constraintWidth_percent=".35"
-          app:srcCompat="@drawable/last_video_2" />
+          app:layout_constraintWidth_percent=".35" />
 
         <androidx.cardview.widget.CardView
           android:id="@+id/parentChannelDetail_cardView"
           android:layout_width="0dp"
           android:layout_height="160dp"
-          android:layout_marginTop="@dimen/plane_08"
+          android:layout_marginTop="@dimen/plane_16"
           android:layout_marginEnd="10dp"
-          app:cardCornerRadius="@dimen/plane_24"
-          app:cardElevation="@dimen/plane_08"
+          app:cardCornerRadius="36dp"
+          app:cardElevation="@dimen/plane_16"
           app:layout_constraintBottom_toTopOf="@id/parentSelect1_frg1"
           app:layout_constraintEnd_toStartOf="@id/lastVideo_watching"
           app:layout_constraintStart_toStartOf="parent"
@@ -199,182 +199,102 @@
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:backgroundTint="@color/banner_background_light">
+            android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
               android:id="@+id/rvDetail_frg1"
-              android:layout_width="0dp"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+              android:layout_width="120dp"
               android:layout_height="match_parent"
-              android:foregroundGravity="center_vertical|center_horizontal"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toTopOf="parent" />
+              android:background="@drawable/shape_tag6"
+              android:gravity="center_vertical|center_horizontal"
+              android:orientation="vertical"
+              app:layout_constraintEnd_toEndOf="parent">
 
-            <androidx.cardview.widget.CardView
-              android:id="@+id/cardParentShowdetail"
-              android:layout_width="0dp"
-              android:layout_height="match_parent"
-              android:elevation="@dimen/plane_08"
-              app:cardCornerRadius="@dimen/plane_24"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintHorizontal_bias="1"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintVertical_bias="1"
-              app:layout_constraintWidth_percent=".25">
+              <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/profileShowChannel_mainActivity"
+                android:layout_width="90dp"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/avatar_2"
+                android:elevation="@dimen/plane_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:riv_border_color="@color/red_active"
+                app:riv_border_width="1dp"
+                app:riv_oval="true"
+                tools:ignore="ImageContrastCheck" />
 
-                <ImageView
-                  android:id="@+id/showProfileChan_frg1"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:adjustViewBounds="true"
-                  android:scaleType="centerCrop"
-                  android:src="@drawable/avatar_2" />
+              <TextView
+                android:id="@+id/tvAge_mainActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/baloo"
+                android:text="@string/age"
+                android:textColor="#AD1457"
+                app:layout_constraintEnd_toStartOf="@id/age_showChannel_mainActivity"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profileShowChannel_mainActivity" />
 
-              <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/conParentShowDetail"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+              <TextView
+                android:id="@+id/age_showChannel_mainActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/baloo"
+                android:textColor="#6D4C41"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/tvAge_mainActivity"
+                app:layout_constraintEnd_toEndOf="@id/sub_showChannel_mainActivity"
+                app:layout_constraintStart_toStartOf="@id/sub_showChannel_mainActivity"
+                app:layout_constraintTop_toTopOf="@id/tvAge_mainActivity"
+                tools:text="2 - 4" />
 
-                <LinearLayout
-                  android:id="@+id/parentSub_showChannel_frg1"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:gravity="center_horizontal|center_vertical"
-                  android:orientation="vertical"
-                  app:layout_constraintBottom_toBottomOf="@id/parentAge_showChann_frg1"
-                  app:layout_constraintEnd_toEndOf="parent"
-                  app:layout_constraintHorizontal_bias="0"
-                  app:layout_constraintStart_toStartOf="parent"
-                  app:layout_constraintTop_toTopOf="@id/parentAge_showChann_frg1">
+              <TextView
+                android:id="@+id/tvSub_mainActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/baloo"
+                android:text="@string/subscribe"
+                android:textColor="#AD1457"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@id/sub_showChannel_mainActivity"
+                app:layout_constraintEnd_toStartOf="@id/age_showChannel_mainActivity"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAge_mainActivity" />
 
-                  <TextView
-                    android:id="@+id/sub_showChann_frg1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shape_tag2"
-                    android:paddingStart="@dimen/plane_08"
-                    android:paddingTop="@dimen/plane_02"
-                    android:paddingEnd="@dimen/plane_08"
-                    android:paddingBottom="@dimen/plane_02"
-                    android:text="SUBSCIBR"
-                    android:textAppearance="@style/TextAppearance.Reply.Headline6"
-                    android:textSize="12sp" />
+              <TextView
+                android:id="@+id/sub_showChannel_mainActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/baloo"
+                android:textColor="#6D4C41"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/tvSub_mainActivity"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvSub_mainActivity"
+                app:layout_constraintTop_toBottomOf="@id/age_showChannel_mainActivity"
+                tools:text="158k" />
 
-                  <TextView
-                    android:id="@+id/tvSub_detailChan_frg1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:gravity="center_horizontal"
-                    android:includeFontPadding="false"
-                    android:text="154 k"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                  android:id="@+id/parentAge_showChann_frg1"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:gravity="center_horizontal"
-                  android:orientation="vertical"
-                  app:flow_firstHorizontalBias="1"
-                  app:layout_constraintBottom_toBottomOf="@id/parentSub_showChannel_frg1"
-                  app:layout_constraintEnd_toEndOf="parent"
-                  app:layout_constraintHorizontal_bias="1"
-                  app:layout_constraintStart_toEndOf="@id/parentSub_showChannel_frg1"
-                  app:layout_constraintTop_toTopOf="@id/parentSub_showChannel_frg1"
-                  app:layout_constraintVertical_bias="1">
-
-                  <TextView
-                    android:id="@+id/age_showChann_frg1"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shape_tag2"
-                    android:gravity="center"
-                    android:maxLength="35"
-                    android:maxLines="1"
-                    android:paddingTop="@dimen/plane_02"
-                    android:paddingBottom="@dimen/plane_02"
-                    android:text="Age"
-                    android:textAppearance="@style/TextAppearance.Reply.Headline6"
-                    android:textSize="12sp" />
-
-                  <TextView
-                    android:id="@+id/tvAge_detailChan_frg1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:gravity="center_horizontal"
-                    android:includeFontPadding="false"
-                    android:text="2 to 4"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                  android:id="@+id/parentTitle_itemDefult"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:divider="@drawable/divider"
-                  android:dividerPadding="1dp"
-                  android:gravity="center_vertical|center_horizontal"
-                  android:orientation="vertical"
-                  android:paddingLeft="18dp"
-                  android:paddingRight="18dp"
-                  android:showDividers="middle"
-                  app:layout_constraintBottom_toBottomOf="parent"
-                  app:layout_constraintEnd_toEndOf="parent"
-                  app:layout_constraintStart_toStartOf="parent"
-                  app:layout_constraintTop_toTopOf="parent"
-                  app:layout_constraintVertical_bias="1"
-                  app:layout_constraintWidth_percent=".6">
-
-                  <TextView
-                    android:id="@+id/titleFa_detailChan_frg1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/baloo"
-                    android:gravity="center_horizontal"
-                    android:includeFontPadding="true"
-                    android:maxLines="1"
-                    android:minLines="1"
-                    android:paddingRight="1dp"
-                    android:text="fdkljfdkjfg rfg  gf gh gh gf fg ghg  ghfggtfgf fg  fgdlfkj"
-                    android:textSize="9sp"
-
-                    />
-
-                  <TextView
-                    android:id="@+id/titleEn_detailChan_frg1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/baloo"
-                    android:gravity="center_horizontal"
-                    android:includeFontPadding="true"
-                    android:maxLines="1"
-                    android:minLines="1"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:text="fdkljfdkjfg rfg  gf gh gh gf fg ghg  ghfggtfgf fg  fgdlfkj"
-                    android:textSize="9sp" />
-                </LinearLayout>
+              <TextView
+                android:id="@+id/title_showChannel_mainActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/baloo"
+                android:text="MonsterSchool"
+                android:textColor="#6D4C41"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sub_showChannel_mainActivity" />
 
 
-              </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
+            </androidx.constraintlayout.widget.ConstraintLayout>
           </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
 
         <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/rvRecommend_frg1"
@@ -392,7 +312,6 @@
           android:layout_height="wrap_content"
           android:layout_marginTop="18dp"
           android:layout_marginEnd="10dp"
-          android:layout_marginRight="10dp"
           android:background="@color/banner_background_light"
           app:layout_constraintBottom_toTopOf="@id/parentSelect2_frg1"
           app:layout_constraintEnd_toStartOf="@id/rvRecommend_frg1"
@@ -429,9 +348,9 @@
             android:id="@+id/rvSelect1_frg1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/ll_titleSelect1_frg1"
+            android:layout_toEndOf="@id/ll_titleSelect1_frg1"
             android:background="@color/home_background" />
 
         </RelativeLayout>
@@ -442,7 +361,6 @@
           android:layout_height="wrap_content"
           android:layout_marginTop="10dp"
           android:layout_marginEnd="10dp"
-          android:layout_marginRight="10dp"
           android:background="@color/banner_background_light"
           app:layout_constraintBottom_toTopOf="@id/parentInfint_cardView"
           app:layout_constraintEnd_toStartOf="@id/rvRecommend_frg1"
@@ -453,7 +371,7 @@
             android:id="@+id/ll_titleSelect2_frg1"
             android:layout_width="130dp"
             android:layout_height="200dp"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
@@ -484,7 +402,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/ll_titleSelect2_frg1"
+            android:layout_toStartOf="@id/ll_titleSelect2_frg1"
             android:background="@color/home_background" />
 
         </RelativeLayout>
@@ -494,7 +412,7 @@
           android:layout_width="0dp"
           android:layout_height="180dp"
           android:layout_marginTop="@dimen/plane_08"
-          android:layout_marginRight="10dp"
+          android:layout_marginEnd="10dp"
           app:cardCornerRadius="@dimen/plane_24"
           app:layout_constraintBottom_toTopOf="@id/parentFavTag_frg1"
           app:layout_constraintEnd_toStartOf="@+id/parentInfint2_cardView"
@@ -542,7 +460,8 @@
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:src="@color/card_2" />
+                android:src="@color/card_2"
+                android:contentDescription="TODO" />
 
               <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/parentShowChannel"
@@ -561,7 +480,7 @@
           android:id="@+id/parentInfint2_cardView"
           android:layout_width="0dp"
           android:layout_height="180dp"
-          android:layout_marginRight="10dp"
+          android:layout_marginEnd="10dp"
           app:cardCornerRadius="@dimen/plane_24"
           app:layout_constraintBottom_toBottomOf="@id/parentInfint_cardView"
           app:layout_constraintEnd_toEndOf="parent"
