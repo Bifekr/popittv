@@ -58,7 +58,6 @@ public class FragmentMain1 extends Fragment implements OnClickFrg1 {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentMain1Binding.inflate(inflater, container, false);
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-
         initRv_Vp_adapter();
         //request from Api to get DataModel
         mainViewModel.requestChannel_kind(1);
