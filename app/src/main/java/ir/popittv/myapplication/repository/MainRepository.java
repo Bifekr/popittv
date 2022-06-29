@@ -20,8 +20,8 @@ public class MainRepository {
     }
 
 
-    private  MainApiClient mainApiClient;
-    private FunnyApiClient funnyApiClient;
+    private final MainApiClient mainApiClient;
+    private final FunnyApiClient funnyApiClient;
 
     private MainRepository() {
         mainApiClient = MainApiClient.getInstance();
@@ -30,16 +30,19 @@ public class MainRepository {
 
 
 
-public LiveData<List<ChannelDataModel>> getChannel(){
-        return mainApiClient.getChannel();
+public LiveData<List<ChannelDataModel>> getChannel_kind(){
+        return mainApiClient.getChannel_kind();
 }
 
-public void requestChannel(){
-        mainApiClient.requestChannel_kind();
+public void requestChannel_kind(int kind){
+        mainApiClient.requestChannel_kind(kind);
 }
 
 public LiveData<ChannelDataModel> getChannel_detail(){return mainApiClient.getChannel_detail();}
 public void requestChannel_detail(int id_channel){mainApiClient.requestChannel_detail(id_channel);}
+
+public LiveData<List<ChannelDataModel>> getChannel_all(){return mainApiClient.getChannel_all();}
+public void requestChannel_all(int age){mainApiClient.requestChannel_all(age);}
 
 
     public LiveData<List<FunnyDataModel>> getFunny_best(){
@@ -61,13 +64,11 @@ public void requestChannel_detail(int id_channel){mainApiClient.requestChannel_d
         funnyApiClient.requestFunny_liky();
     }
 
-    public LiveData<List<FunnyDataModel>> getFunny_subMenu(){
-        return funnyApiClient.getFunny_subMenu();
-    }
+    public LiveData<List<FunnyDataModel>> getFunny_subMenu(){ return funnyApiClient.getFunny_subMenu(); }
+    public void requestFunny_subMenu(int id_subMenu){ funnyApiClient.requestFunny_subMenu(id_subMenu); }
 
-    public void requestFunny_subMenu(int id_subMenu){
-        funnyApiClient.requestFunny_subMenu(id_subMenu);
-    }
+    public LiveData<FunnyDataModel> getFunny_single(){ return funnyApiClient.getFunny_single();}
+    public void requestFunny_single(int id_funny){funnyApiClient.requestFunny_single(id_funny);}
 
 
 

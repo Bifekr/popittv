@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools">
+  <FrameLayout
+    android:id="@+id/container_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+  <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:background="#efc2"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      tools:context=".activitys.PlayerActivity">
+
+      <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/exoPlayer"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/rvChannelVideo_player"/>
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvChannelVideo_player"
+        android:layout_width="180dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toEndOf="@id/exoPlayer"
+        app:layout_constraintTop_toTopOf="@id/exoPlayer"
+        app:layout_constraintBottom_toBottomOf="@id/parentCon_activityPlayer"
+        app:layout_constraintEnd_toEndOf="parent"/>
+      <!--<ImageView
+        android:layout_width="400dp"
+        android:layout_height="250dp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/banner_channel_poster"/>-->
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parentCon_activityPlayer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/plane_08"
+        app:layout_constraintTop_toBottomOf="@id/exoPlayer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/exoPlayer">
+
+        <androidx.cardview.widget.CardView
+          android:id="@+id/parentChannelProfile_itemAllChan"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="@dimen/plane_06"
+          app:cardCornerRadius="14dp"
+          app:layout_constraintBottom_toBottomOf="@id/divider"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toStartOf="@id/titleFaChannel_player"
+          app:layout_constraintTop_toTopOf="parent"
+          android:transitionName="cardProfile_channel">
+          <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/ivProfile_itemAllChan"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:src="@drawable/avatar_2"
+            app:riv_border_color="@color/blue_bg_light"
+            app:riv_border_width="3dp"
+            app:riv_corner_radius="14dp" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+          android:id="@+id/titleFaChannel_player"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:fontFamily="@font/baloo"
+          android:paddingLeft="15dp"
+          android:gravity="center_horizontal"
+          android:includeFontPadding="true"
+          android:paddingRight="1dp"
+          android:text="fdkljfdkjfg rfg  "
+          android:textSize="12sp"
+          app:layout_constraintStart_toEndOf="@id/parentChannelProfile_itemAllChan"
+          app:layout_constraintTop_toTopOf="@id/parentChannelProfile_itemAllChan"
+          app:layout_constraintBottom_toTopOf="@id/titleEnChannel_player"
+          />
+        <TextView
+          android:id="@+id/titleEnChannel_player"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:fontFamily="@font/baloo"
+          android:gravity="start"
+          android:includeFontPadding="true"
+          android:paddingLeft="15dp"
+          android:paddingRight="15dp"
+          android:text="fdkljfdkjfg rfg "
+          android:textSize="12sp"
+          app:layout_constraintTop_toBottomOf="@id/titleFaChannel_player"
+          app:layout_constraintStart_toEndOf="@id/parentChannelProfile_itemAllChan"
+          app:layout_constraintBottom_toBottomOf="@id/parentChannelProfile_itemAllChan"
+          />
+
+        <ImageView
+          android:id="@+id/bookmark_player"
+          android:layout_width="wrap_content"
+          android:layout_height="0dp"
+          android:layout_marginRight="@dimen/plane_08"
+          app:layout_constraintEnd_toStartOf="@id/parentLike"
+          app:layout_constraintTop_toTopOf="@id/titleFaVideo_player"
+          app:layout_constraintBottom_toBottomOf="@id/titleFaVideo_player"
+          app:layout_constraintStart_toEndOf="@id/titleFaVideo_player"
+          android:src="@drawable/ic_bookmark_24dp"
+          android:background="@drawable/shape_tag4"/>
+
+
+        <TextView
+          android:id="@+id/parentAge"
+          android:layout_width="wrap_content"
+          android:layout_height="0dp"
+          android:layout_marginRight="@dimen/plane_08"
+          app:layout_constraintEnd_toStartOf="@id/parentSub"
+          app:layout_constraintTop_toTopOf="@id/titleFaChannel_player"
+          app:layout_constraintBottom_toBottomOf="@id/titleFaChannel_player"
+          android:text="Age"
+          android:textSize="16sp"
+          android:paddingLeft="@dimen/plane_08"
+          android:gravity="center_horizontal|center_vertical"
+          android:paddingEnd="@dimen/plane_16"
+          android:background="@drawable/shape_tag2"
+          />
+
+        <TextView
+          android:id="@+id/titleAge_player"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:layout_constraintStart_toStartOf="@id/parentAge"
+          app:layout_constraintTop_toBottomOf="@id/parentAge"
+          app:layout_constraintEnd_toEndOf="@id/parentAge"
+          android:text="2 to 4"
+          android:textSize="12sp"
+          android:paddingLeft="@dimen/plane_08"
+          android:gravity="center_horizontal|center_vertical"
+          android:paddingEnd="@dimen/plane_16"
+
+          />
+
+        <TextView
+          android:id="@+id/parentSub"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toTopOf="@id/parentAge"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintBottom_toBottomOf="@id/parentAge"
+          app:layout_constraintHorizontal_bias="1"
+          android:text="Subscribe"
+          android:textSize="12sp"
+          android:paddingLeft="@dimen/plane_08"
+          android:paddingEnd="@dimen/plane_16"
+          android:paddingTop="@dimen/plane_08"
+          android:paddingBottom="@dimen/plane_08"
+          android:background="@drawable/shape_tag2"
+          />
+
+        <TextView
+          android:id="@+id/titleSub_player"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:layout_constraintStart_toStartOf="@id/parentSub"
+          app:layout_constraintTop_toBottomOf="@id/parentSub"
+          app:layout_constraintEnd_toEndOf="@id/parentSub"
+          android:text="2 to 4"
+          android:textSize="12sp"
+          android:paddingLeft="@dimen/plane_08"
+          android:gravity="center_horizontal|center_vertical"
+          android:paddingEnd="@dimen/plane_16"
+
+          />
+
+        <View
+          android:id="@+id/divider"
+          android:layout_width="0dp"
+          android:layout_height="@dimen/plane_01"
+          app:layout_constraintTop_toBottomOf="@id/parentChannelProfile_itemAllChan"
+          app:layout_constraintBottom_toTopOf="@id/titleFaVideo_player"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintWidth_percent=".7"
+          android:background="@color/gray_dark"
+          android:layout_marginTop="@dimen/plane_08"/>
+
+
+
+        <TextView
+          android:id="@+id/titleFaVideo_player"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:fontFamily="@font/baloo"
+          android:includeFontPadding="true"
+          android:gravity="end"
+          android:paddingLeft="5dp"
+          android:paddingRight="12dp"
+          android:text="fdkljfdkjfg rfg  gf gh gh gf fg ghg  ghfggtfgf fg  fgdlfkj"
+          android:textSize="14sp"
+          app:layout_constraintTop_toBottomOf="@id/divider"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toStartOf="@id/bookmark_player"
+          app:layout_constraintBottom_toTopOf="@id/titleEnVideo_player"
+          />
+
+
+        <ImageView
+          android:src="@drawable/ic_baseline_eye_24"
+          android:id="@+id/parentView"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:layout_constraintStart_toEndOf="@id/parentLike"
+          app:layout_constraintTop_toTopOf="@id/parentLike"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintBottom_toBottomOf="@id/titleFaVideo_player"
+          android:text="View"
+          android:textSize="16sp"
+          android:paddingLeft="@dimen/plane_08"
+          android:gravity="center_horizontal|center_vertical"
+          android:paddingEnd="@dimen/plane_16"
+          android:background="@drawable/shape_tag4"
+          />
+
+        <TextView
+          android:id="@+id/titleView_player"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:layout_constraintStart_toStartOf="@id/parentView"
+          app:layout_constraintTop_toBottomOf="@id/parentView"
+          app:layout_constraintEnd_toEndOf="@id/parentView"
+          android:text="2 to 4"
+          android:textSize="12sp"
+          android:paddingLeft="@dimen/plane_08"
+          android:gravity="center_horizontal|center_vertical"
+          android:paddingEnd="@dimen/plane_16"
+
+          />
+
+        <TextView
+          android:id="@+id/titleEnVideo_player"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:fontFamily="@font/baloo"
+          android:includeFontPadding="true"
+          android:paddingLeft="15dp"
+          android:paddingRight="15dp"
+          android:text="fdkljfdkjfg rfg  gf gh gh gf fg ghg  ghfggtfgf fg  fgdlfkj"
+          android:textSize="14sp"
+
+          android:gravity="start"
+          app:layout_constraintEnd_toStartOf="@id/parentLike"
+          app:layout_constraintTop_toBottomOf="@id/titleFaVideo_player"
+          app:layout_constraintStart_toStartOf="@id/titleFaVideo_player"
+          />
+        <ImageView
+          android:src="@drawable/ic_like"
+          android:id="@+id/parentLike"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginRight="@dimen/plane_08"
+          app:layout_constraintStart_toEndOf="@id/bookmark_player"
+          app:layout_constraintTop_toTopOf="@id/titleFaVideo_player"
+          app:layout_constraintEnd_toStartOf="@id/parentView"
+          app:layout_constraintBottom_toBottomOf="@id/titleFaVideo_player"
+          android:text="Like"
+          android:textSize="16sp"
+          android:paddingLeft="@dimen/plane_08"
+          android:gravity="center_horizontal|center_vertical"
+          android:paddingEnd="@dimen/plane_16"
+          android:background="@drawable/shape_tag4"
+          />
+
+        <TextView
+          android:id="@+id/titleLike_player"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:layout_constraintStart_toStartOf="@id/parentLike"
+          app:layout_constraintTop_toBottomOf="@id/parentLike"
+          app:layout_constraintEnd_toEndOf="@id/parentLike"
+          android:text="2 to 4"
+          android:textSize="12sp"
+          android:paddingLeft="@dimen/plane_08"
+          android:gravity="center_horizontal|center_vertical"
+          android:paddingEnd="@dimen/plane_16"
+
+          />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <View
+        android:id="@+id/divider3"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/plane_01"
+        app:layout_constraintTop_toBottomOf="@id/parentCon_activityPlayer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent=".7"
+        android:background="@color/gray_dark"
+        android:layout_marginTop="@dimen/plane_08"/>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parentFavTag_player"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/back_view"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/parentCon_activityPlayer">
+        <TextView
+          android:id="@+id/titleFav_frg1"
+          style="@style/TextAppearance.Reply.Headline6"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:paddingStart="10dp"
+          android:paddingTop="6dp"
+          android:paddingEnd="10dp"
+          android:paddingBottom="6dp"
+          android:text="# Favorite Tag"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+        <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/rvMenuTag_player"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toBottomOf="@id/titleFav_frg1"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintBottom_toTopOf="@id/rvSubMenuTag_player"/>
+        <androidx.recyclerview.widget.RecyclerView
+          android:layout_marginBottom="@dimen/plane_08"
+          android:id="@+id/rvSubMenuTag_player"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toBottomOf="@id/rvMenuTag_player"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintBottom_toBottomOf="parent"/>
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </ScrollView>
+  </FrameLayout>
+</layout>

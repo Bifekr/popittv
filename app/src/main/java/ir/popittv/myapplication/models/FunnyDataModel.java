@@ -6,14 +6,9 @@ import android.os.Parcelable;
 public class FunnyDataModel implements Parcelable {
 
     private int id_funny;
-    private  int id_channel;
-    private int view;
-    private int liky;
-    private int age1;
-    private int age2;
-    private int age3;
-    private int age4;
-    private int age5;
+    private int id_channel;
+    private String view;
+    private String liky;
     private String title_en;
     private String title_fa;
     private String poster;
@@ -28,17 +23,14 @@ public class FunnyDataModel implements Parcelable {
     public FunnyDataModel() {
     }
 
-
-    public FunnyDataModel(int id_funny, int id_channel, int view, int liky, int age1, int age2, int age3, int age4, int age5, String title_en, String title_fa, String poster, String link_480, String link_720, String name_chan_en, String name_chan_fa, String profile_chann, String banner_chann, String followers) {
+    public FunnyDataModel(int id_funny, int id_channel, String view, String liky, String title_en,
+                          String title_fa, String poster, String link_480, String link_720,
+                          String name_chan_en, String name_chan_fa, String profile_chann,
+                          String banner_chann, String followers) {
         this.id_funny = id_funny;
         this.id_channel = id_channel;
         this.view = view;
         this.liky = liky;
-        this.age1 = age1;
-        this.age2 = age2;
-        this.age3 = age3;
-        this.age4 = age4;
-        this.age5 = age5;
         this.title_en = title_en;
         this.title_fa = title_fa;
         this.poster = poster;
@@ -54,13 +46,8 @@ public class FunnyDataModel implements Parcelable {
     protected FunnyDataModel(Parcel in) {
         id_funny = in.readInt();
         id_channel = in.readInt();
-        view = in.readInt();
-        liky = in.readInt();
-        age1 = in.readInt();
-        age2 = in.readInt();
-        age3 = in.readInt();
-        age4 = in.readInt();
-        age5 = in.readInt();
+        view = in.readString();
+        liky = in.readString();
         title_en = in.readString();
         title_fa = in.readString();
         poster = in.readString();
@@ -93,32 +80,12 @@ public class FunnyDataModel implements Parcelable {
         return id_channel;
     }
 
-    public int getView() {
+    public String getView() {
         return view;
     }
 
-    public int getLiky() {
+    public String getLiky() {
         return liky;
-    }
-
-    public int getAge1() {
-        return age1;
-    }
-
-    public int getAge2() {
-        return age2;
-    }
-
-    public int getAge3() {
-        return age3;
-    }
-
-    public int getAge4() {
-        return age4;
-    }
-
-    public int getAge5() {
-        return age5;
     }
 
     public String getTitle_en() {
@@ -170,13 +137,8 @@ public class FunnyDataModel implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id_funny);
         dest.writeInt(id_channel);
-        dest.writeInt(view);
-        dest.writeInt(liky);
-        dest.writeInt(age1);
-        dest.writeInt(age2);
-        dest.writeInt(age3);
-        dest.writeInt(age4);
-        dest.writeInt(age5);
+        dest.writeString(view);
+        dest.writeString(liky);
         dest.writeString(title_en);
         dest.writeString(title_fa);
         dest.writeString(poster);
@@ -189,4 +151,3 @@ public class FunnyDataModel implements Parcelable {
         dest.writeString(followers);
     }
 }
-

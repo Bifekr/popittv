@@ -26,6 +26,7 @@ public class RvChannel_Frg1 extends RecyclerView.Adapter<RvChannel_Frg1.rvChanne
     List<ChannelDataModel> channelDataModels;
     OnClickFrg1 onClickFrg1;
     Context context;
+    private int row_index=0;
 
     public RvChannel_Frg1(FragmentActivity context , OnClickFrg1 onClickFrg1) {
         this.context = context;
@@ -50,13 +51,26 @@ public class RvChannel_Frg1 extends RecyclerView.Adapter<RvChannel_Frg1.rvChanne
 
         Glide.with(context).load(channelDataModels.get(position).getProfile_chann())
                 .into(holder.binding.itemChannProfile);
-        holder.binding.tvAgeItemProfileChan.setText(channelDataModels.get(position).getAge());
+        holder.binding.tvAgeItemProfileChan.setText(channelDataModels.get(position).getAge_name());
         holder.binding.parentItemProfileChan.setOnClickListener(v->{
 
+            //get id for fetch channel detail
             onClickFrg1.OnclickDetail(channelDataModels.get(position).getId_channel());
-
-
+            //for change color
+            row_index=holder.getAdapterPosition();
+            notifyDataSetChanged();
         });
+
+
+        if (row_index==position){
+
+            holder.binding.llBack.setBackgroundResource(R.color.reply_orange_300);
+            holder.binding.parentItemProfileChan.setCardElevation(28.8f);
+
+        }else {
+            holder.binding.llBack.setBackgroundResource(R.color.reply_blue_50_alpha_060);
+
+        }
 
     }
 

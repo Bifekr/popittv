@@ -15,7 +15,7 @@
     layout="@layout/toolbar_cust"
     app:layout_constraintTop_toTopOf="parent" />
   <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/rv_channelList_frg1"
+    android:id="@+id/parent_channelList_frg1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layout_constraintBottom_toTopOf="@id/parentChannelDetail_cardView"
@@ -35,7 +35,7 @@
     app:layout_constraintHorizontal_bias="1"
     app:layout_constraintStart_toEndOf="@id/parentChannelDetail_cardView"
     app:layout_constraintWidth_percent=".35"
-    app:layout_constraintTop_toBottomOf="@+id/rv_channelList_frg1"
+    app:layout_constraintTop_toBottomOf="@+id/parent_channelList_frg1"
     app:srcCompat="@drawable/last_video_2" />
   <androidx.cardview.widget.CardView
     android:id="@+id/parentChannelDetail_cardView"
@@ -46,7 +46,7 @@
     app:cardCornerRadius="@dimen/plane_24"
     app:layout_constraintEnd_toStartOf="@id/lastVideo_watching"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/rv_channelList_frg1">
+    app:layout_constraintTop_toBottomOf="@+id/parent_channelList_frg1">
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:background="@color/popit_blue_on_light"

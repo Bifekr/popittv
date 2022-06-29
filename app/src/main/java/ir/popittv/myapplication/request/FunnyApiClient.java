@@ -21,11 +21,12 @@ public class FunnyApiClient {
 
     private static FunnyApiClient funnyApiClient;
 
-    private MutableLiveData<List<FunnyDataModel>> mFunny_view;
+    private final MutableLiveData<List<FunnyDataModel>> mFunny_view;
 
-    private MutableLiveData<List<FunnyDataModel>> mFunny_best;
-    private MutableLiveData<List<FunnyDataModel>> mFunny_liky;
-    private MutableLiveData<List<FunnyDataModel>> mFunny_subMenu;
+    private final MutableLiveData<List<FunnyDataModel>> mFunny_best;
+    private final MutableLiveData<List<FunnyDataModel>> mFunny_liky;
+    private final MutableLiveData<List<FunnyDataModel>> mFunny_subMenu;
+    private final MutableLiveData <FunnyDataModel> mFunny_single;
 
 
     //Constructor
@@ -34,6 +35,7 @@ public class FunnyApiClient {
         mFunny_liky = new MutableLiveData<>();
         mFunny_view = new MutableLiveData<>();
         mFunny_subMenu = new MutableLiveData<>();
+        mFunny_single = new MutableLiveData<>();
 
     }
 
@@ -50,6 +52,7 @@ public class FunnyApiClient {
     }
     public LiveData<List<FunnyDataModel>> getFunny_view() {return mFunny_view;}
     public LiveData<List<FunnyDataModel>> getFunny_liky() {return mFunny_liky; }
+    public LiveData<FunnyDataModel> getFunny_single() {return mFunny_single; }
 
 
     public LiveData<List<FunnyDataModel>> getFunny_subMenu() {
@@ -60,6 +63,7 @@ public class FunnyApiClient {
     private FunnyView_Runnable funnyView_runnable;
     private FunnyLiky_Runnable funnyLiky_runnable;
     private FunnySubMenu_Runnable funnySubMenu_runnable;
+    private FunnySingle_Run funnySingle_run;
 
 
     //method for request from host to get data and post in the livedata
@@ -134,21 +138,29 @@ public class FunnyApiClient {
     }
 
     //create Runnable class for set to AppExecutor
-    private class FunnyBest_Runnable implements Runnable{
+    private class FunnyBest_Runnable implements Runnable {
 
+        private final boolean canclable;
+
+        public FunnyBest_Runnable() {
+            canclable = false;
+        }
 
         @Override
         public void run() {
 
             try {
+                if (canclable) {
+                    return;
+                }
                 Response response = funnyResponseCall().execute();
-                if (response.body()!= null){
+                if (response.body()!=null) {
 
                     List<FunnyDataModel> funnyDataModelList = new ArrayList<>(((FunnyResponse) response.body()).getFunny_best());
 
                     mFunny_best.postValue(funnyDataModelList);
 
-                }else {
+                } else {
                     assert response.errorBody()!=null;
                     String error = response.errorBody().string();
                     Log.i("tagy", "run: " + error);
@@ -170,11 +182,19 @@ public class FunnyApiClient {
 
     //Runnable class for request funny_view
     private class FunnyView_Runnable implements Runnable {
+        private final boolean canclable;
+
+        public FunnyView_Runnable() {
+            canclable = false;
+        }
 
         @Override
         public void run() {
 
             try {
+                if (canclable) {
+                    return;
+                }
                 Response response = funnyResponseCall().execute();
 
                 if (response.body()!=null) {
@@ -200,11 +220,19 @@ public class FunnyApiClient {
     }
 
     private class FunnyLiky_Runnable implements Runnable {
+        private final boolean canclable;
+
+        public FunnyLiky_Runnable() {
+            canclable = false;
+        }
 
         @Override
         public void run() {
 
             try {
+                if (canclable) {
+                    return;
+                }
                 Response response = funnyResponseCall().execute();
 
                 if (response.body()!=null) {
@@ -277,6 +305,61 @@ public class FunnyApiClient {
 
         }
 
+
+    }
+
+    public void requestFunny_single(int id_funny){
+
+        if (funnySingle_run!=null){
+            funnySingle_run=null;
+        }
+
+        funnySingle_run = new FunnySingle_Run(id_funny);
+        Future singleHandler = AppExecuter.getAppExecuter().networkIo().submit(funnySingle_run);
+        AppExecuter.getAppExecuter().networkIo().schedule(() -> {
+            singleHandler.cancel(true);
+        },2,TimeUnit.MINUTES);
+    }
+    private class FunnySingle_Run implements Runnable{
+
+        int id_funny;
+        private final boolean canclable;
+
+        public FunnySingle_Run(int id_funny) {
+            this.id_funny = id_funny;
+            canclable = false;
+        }
+
+        @Override
+        public void run() {
+
+            try {
+                if (canclable) {
+                    return;
+                }
+                Response response = call(id_funny).execute();
+                if (response.isSuccessful()) {
+                    FunnyDataModel funnyDataModel = (FunnyDataModel) response.body();
+                    mFunny_single.postValue(funnyDataModel);
+                } else {
+                    String errorResponse = response.errorBody().string();
+                    Log.e("tag", "error" + errorResponse);
+                }
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                mFunny_single.postValue(null);
+            }
+
+
+        }
+
+        private Call<FunnyDataModel> call(int id_funny){
+
+            return Service.getApiClient().getFunny_single(id_funny);
+
+        }
 
     }
 

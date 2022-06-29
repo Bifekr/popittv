@@ -11,4 +11,10 @@ public class ChannelResponse {
     public List<ChannelDataModel> getChannel() {
         return channel;
     }
+
+    private List<ChannelDataModel> channel_all;
+
+    public List<ChannelDataModel> getChannel_all() {
+        return channel_all;
+    }
 }
