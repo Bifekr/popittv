@@ -54,9 +54,10 @@ public class PlayerActivity extends AppCompatActivity {
     private void login() {
         new Handler().postDelayed(() -> {
 
-            new LoginDialogFragment().show(getSupportFragmentManager(),LoginDialogFragment.TAG);
+            new LoginDialogFragment()
+                    .show(getSupportFragmentManager(),LoginDialogFragment.TAG);
 
-            Toast.makeText(this, "runnable", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "runnable", Toast.LENGTH_SHORT).show();
             
         },5000);
     }

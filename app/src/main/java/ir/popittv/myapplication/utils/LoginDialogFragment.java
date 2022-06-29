@@ -1,5 +1,6 @@
 package ir.popittv.myapplication.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,29 +13,45 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import ir.popittv.myapplication.R;
 
 public class LoginDialogFragment extends DialogFragment {
 
+    private String phone;
+    public static String TAG="LoginDialogFragment";
+
+    @SuppressLint("InflateParams")
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        LayoutInflater inflater=requireActivity().getLayoutInflater();
+        View view = getActivity().getLayoutInflater().inflate(R.layout.custom_dialog, null, false);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        return new AlertDialog.Builder(requireContext())
+        builder.setView(view);
+        builder.setTitle("login");
+        builder.setMessage(getString(R.string.dialog_login_message));
 
-                //.setView(inflater.inflate(R.layout.custom_dialog,))
-                .setMessage(getString(R.string.dialog_login_message))
-                .setPositiveButton(getString(R.string.dialog_login_send_num),(dialog, which) -> {
-                    Toast.makeText(getContext(), "positiveButton", Toast.LENGTH_SHORT).show();
-                })
-                .setNegativeButton(getString(R.string.dialog_login_negative),(dialog, which) -> {
+
+
+        TextInputLayout et_phone=view.findViewById(R.id.et_phone_userProfile);
+
+        phone=et_phone.getEditText().getText().toString();
+
+        builder.setPositiveButton(getString(R.string.dialog_login_send_num), (dialog, which) -> {
+
+            Toast.makeText(getContext(), "phone :"+phone, Toast.LENGTH_SHORT).show();
+        })
+                .setNegativeButton(getString(R.string.dialog_login_negative), (dialog, which) -> {
                     Toast.makeText(getContext(), "negativeButton", Toast.LENGTH_SHORT).show();
-                })
-                .create();
-    }
+                });
 
-    public static String TAG = "LoginDialogFragment";
+
+
+
+        return builder.create();
+    }
 
     @Nullable
     @Override
