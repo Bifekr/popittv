@@ -1,6 +1,7 @@
 package ir.popittv.myapplication.activitys;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 
 import ir.popittv.myapplication.databinding.ActivityPlayerBinding;
+import ir.popittv.myapplication.utils.LoginDialogFragment;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
 public class PlayerActivity extends AppCompatActivity {
@@ -43,7 +45,20 @@ public class PlayerActivity extends AppCompatActivity {
         getFunny_single();
         initExo();
 
+        login();
 
+
+
+    }
+
+    private void login() {
+        new Handler().postDelayed(() -> {
+
+            new LoginDialogFragment().show(getSupportFragmentManager(),LoginDialogFragment.TAG);
+
+            Toast.makeText(this, "runnable", Toast.LENGTH_SHORT).show();
+            
+        },5000);
     }
 
     @Override
@@ -122,7 +137,7 @@ public class PlayerActivity extends AppCompatActivity {
             mediaItem = MediaItem.fromUri(funnyDataModel.getLink_480());
             exoPlayer.addMediaItem(mediaItem);
 
-            Toast.makeText(this, "" + funnyDataModel.getLink_480(), Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "" + funnyDataModel.getLink_480(), Toast.LENGTH_SHORT).show();
         });
     }
 

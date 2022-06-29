@@ -47,5 +47,10 @@
   <string name="fun_video">ویدئوهای فان</string>
   <string name="fav_title">محبوب ترین</string>
   <string name="mostview_title">پربازدیدترین</string>
+  <string name="dialog_login_send_num">شماره همراه خود را وارد کنید</string>
+  <string name="dialog_login_message">برای دسترسی به محتوا نیاز به ثبت و تایید میباشد</string>
+  <string name="dialog_login_negative">الان نه ، ادامه گشت و گذار</string>
+  <string name="username">username</string>
+  <string name="password">password</string>
 
 </resources>

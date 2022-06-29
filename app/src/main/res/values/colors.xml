@@ -46,7 +46,7 @@
   <color name="reply_white_50">#ffffff</color>
 
   <color name="reply_black_800">#121212</color>
-  <color name="reply_black_900">#000000</color>
+  <color name="reply_black_900">#6D4C41</color>
 
   <color name="reply_blue_50">#eef0f2</color>
   <color name="reply_blue_100">#d2dbe0</color>
@@ -123,6 +123,7 @@
   <color name="popit_orange">#ffa600</color>
   <color name="popit_disable">#78909C</color>
   <color name="popit_red">#AD1457</color>
+  <color name="popit_brown">#6D4C41</color>
   <color name="light_blue_600">#FF039BE5</color>
   <color name="light_blue_900">#FF01579B</color>
   <color name="light_blue_A200">#FF40C4FF</color>

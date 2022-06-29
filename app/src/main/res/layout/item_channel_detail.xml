@@ -93,6 +93,7 @@
             android:includeFontPadding="true"
             android:maxLines="1"
             android:minLines="1"
+            android:textColor="@color/popit_brown"
             android:paddingRight="1dp"
             android:text="fdkljfdkjfg rfg  gf gh gh gf fg ghg  ghfggtfgf fg  fgdlfkj"
             android:textSize="9sp"
@@ -111,6 +112,7 @@
             android:minLines="1"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
+            android:textColor="@color/popit_brown"
             android:text="fdkljfdkjfg rfg  gf gh gh gf fg ghg  ghfggtfgf fg  fgdlfkj"
             android:textSize="9sp"
 
