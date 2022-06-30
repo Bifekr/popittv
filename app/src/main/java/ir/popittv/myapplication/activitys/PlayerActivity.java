@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -16,11 +15,13 @@ import com.google.android.exoplayer2.SimpleExoPlayer;
 import ir.popittv.myapplication.databinding.ActivityPlayerBinding;
 import ir.popittv.myapplication.utils.LoginDialogFragment;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
+import ir.popittv.myapplication.viewmodel.UserViewModel;
 
 public class PlayerActivity extends AppCompatActivity {
 
     private ActivityPlayerBinding binding;
-    private MainViewModel viewModel;
+    private MainViewModel mainViewModel;
+    private UserViewModel userViewModel;
 
     private int id_vid_funny;
 
@@ -37,10 +38,13 @@ public class PlayerActivity extends AppCompatActivity {
         binding = ActivityPlayerBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+
+
 
         id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
-        viewModel.requestFunny_single(id_vid_funny);
+        mainViewModel.requestFunny_single(id_vid_funny);
 
         getFunny_single();
         initExo();
@@ -123,7 +127,7 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
     private void getFunny_single() {
-        viewModel.getFunny_single().observe(this, funnyDataModel -> {
+        mainViewModel.getFunny_single().observe(this, funnyDataModel -> {
             binding.titleEnVideoPlayer.setText(funnyDataModel.getTitle_en());
             binding.titleFaVideoPlayer.setText(funnyDataModel.getTitle_fa());
             binding.titleEnChannelPlayer.setText(funnyDataModel.getName_chan_en());

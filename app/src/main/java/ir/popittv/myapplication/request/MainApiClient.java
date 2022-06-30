@@ -34,6 +34,7 @@ public class MainApiClient {
     private final MutableLiveData<List<ChannelDataModel>> mAllChannel;
 
 
+    //constructor
     private MainApiClient() {
 
         mChannel = new MutableLiveData<>();
@@ -41,6 +42,7 @@ public class MainApiClient {
         mAllChannel = new MutableLiveData<>();
     }
 
+    //singleTone pattern
     public static MainApiClient getInstance() {
         if (mainApiClient==null) {
             mainApiClient = new MainApiClient();
@@ -49,6 +51,7 @@ public class MainApiClient {
     }
 
 
+    //methode of receive data from mutable
     public LiveData<List<ChannelDataModel>> getChannel_kind() {
         return mChannel;
     }
@@ -59,7 +62,8 @@ public class MainApiClient {
 
 
 
-    //retrieve data from dataBase
+    //retrieve data from dataBase into mutable and dataModel
+    //kind channel(all funny channel)
     public void requestChannel_kind(int kind) {
 
 
@@ -126,7 +130,7 @@ public class MainApiClient {
     }
 
 
-    //retrieve detail Channel from dataBase
+    // detail Channel selected
     public void requestChannel_detail(int id_channel){
 
         if (channelDetail_run!=null){

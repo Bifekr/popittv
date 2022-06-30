@@ -2,10 +2,13 @@ package ir.popittv.myapplication.request;
 
 import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
+import ir.popittv.myapplication.models.UserDataModel;
 import ir.popittv.myapplication.response.ChannelResponse;
 import ir.popittv.myapplication.response.FunnyResponse;
 import retrofit2.Call;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface ApiClient {
@@ -28,4 +31,9 @@ public interface ApiClient {
     Call<ChannelDataModel> getChannel_detail(@Query("id_channel") int id_channel);
     @GET("getChannel_all.php")
     Call<ChannelResponse> getChannel_all(@Query("kind") int kind , @Query("age") int age);
+
+
+    @POST("Login.php")
+    Call<UserDataModel> userLogin(@Field("phone") String phone);
+
 }
