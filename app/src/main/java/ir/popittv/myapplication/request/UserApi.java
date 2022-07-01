@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import ir.popittv.myapplication.models.UserDataModel;
 import ir.popittv.myapplication.utils.AppExecuter;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -89,7 +90,7 @@ public class UserApi {
         }
 
         //method for response Api
-        private Call<UserDataModel> call(String phone){
+        private Call<ResponseBody> call(String phone){
             return Service.getApiClient().userLogin(phone);
         }
 

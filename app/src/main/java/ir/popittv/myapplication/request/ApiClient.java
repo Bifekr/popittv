@@ -5,8 +5,10 @@ import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.models.UserDataModel;
 import ir.popittv.myapplication.response.ChannelResponse;
 import ir.popittv.myapplication.response.FunnyResponse;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -33,7 +35,10 @@ public interface ApiClient {
     Call<ChannelResponse> getChannel_all(@Query("kind") int kind , @Query("age") int age);
 
 
-    @POST("Login.php")
-    Call<UserDataModel> userLogin(@Field("phone") String phone);
+    @FormUrlEncoded
+    @GET("Login.php")
+    Call<ResponseBody> userLogin(@Query("phone") String phone);
+    @GET("getCode.php")
+    Call<UserDataModel> getUser(@Query("phone") String phone,@Query("code") String code);
 
 }

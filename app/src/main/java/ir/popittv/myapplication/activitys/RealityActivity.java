@@ -30,6 +30,8 @@ public class RealityActivity extends AppCompatActivity {
 
         mainViewModel=new ViewModelProvider(this).get(MainViewModel.class);
         initRailActivity();
+
+
     }
 
 

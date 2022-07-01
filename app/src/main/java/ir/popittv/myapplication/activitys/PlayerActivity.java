@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -12,18 +14,28 @@ import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 
+import java.io.IOException;
+
 import ir.popittv.myapplication.databinding.ActivityPlayerBinding;
+import ir.popittv.myapplication.models.UserDataModel;
+import ir.popittv.myapplication.request.Service;
 import ir.popittv.myapplication.utils.LoginDialogFragment;
+import ir.popittv.myapplication.utils.OnClickLoginDialog;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 import ir.popittv.myapplication.viewmodel.UserViewModel;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class PlayerActivity extends AppCompatActivity {
+public class PlayerActivity extends AppCompatActivity implements OnClickLoginDialog {
 
     private ActivityPlayerBinding binding;
     private MainViewModel mainViewModel;
-    private UserViewModel userViewModel;
+ //   private UserViewModel userViewModel;
 
     private int id_vid_funny;
+    private String user_phone;
 
     SimpleExoPlayer exoPlayer;
     boolean playWhenReady = true;
@@ -39,7 +51,7 @@ public class PlayerActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+       // userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
 
 
@@ -58,13 +70,33 @@ public class PlayerActivity extends AppCompatActivity {
     private void login() {
         new Handler().postDelayed(() -> {
 
-            new LoginDialogFragment()
+            new LoginDialogFragment(this)
                     .show(getSupportFragmentManager(),LoginDialogFragment.TAG);
 
-            //Toast.makeText(this, "runnable", Toast.LENGTH_SHORT).show();
-            
+
+
+
+
         },5000);
     }
+
+    @Override
+    public void phoneClic(String phone) {
+        user_phone=phone;
+
+
+
+Toast.makeText(this, "runnable"+phone, Toast.LENGTH_SHORT).show();
+    }
+
+
+
+
+
+
+
+
+
 
     @Override
     protected void onStart() {
@@ -145,6 +177,7 @@ public class PlayerActivity extends AppCompatActivity {
            // Toast.makeText(this, "" + funnyDataModel.getLink_480(), Toast.LENGTH_SHORT).show();
         });
     }
+
 
 
 }
