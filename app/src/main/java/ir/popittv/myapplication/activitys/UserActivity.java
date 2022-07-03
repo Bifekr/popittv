@@ -42,29 +42,22 @@ public class UserActivity extends AppCompatActivity {
     private String phone_user;
     private String code_user;
     private int id_user;
-    private boolean userLoged=true;
+    private boolean userLoged = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityUserBinding.inflate(getLayoutInflater());
         // this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-
-
         setContentView(binding.getRoot());
-
+        sharedPreferences = UserActivity.this.getSharedPreferences("user_info", MODE_PRIVATE);
         initRailActivity();
 
 
-
-
-
         binding.avatarUserUserActivity.setOnClickListener(v -> {
-            sharedPreferences = UserActivity.this.getSharedPreferences("user_info", MODE_PRIVATE);
 
-            String check=sharedPreferences.getString("name_user","");
-            
-            if (check.equals("")){
+            String check = sharedPreferences.getString("name_user", "");
+            if (check.equals("")) {
 
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
                 bottomView = getLayoutInflater().inflate(R.layout.custom_dialog, null);
@@ -118,7 +111,7 @@ public class UserActivity extends AppCompatActivity {
                                             @Override
                                             public void onResponse(Call<UserDataModel> call1, Response<UserDataModel> response1) {
                                                 UserDataModel userDataModel = response1.body();
-                                                if (response1.isSuccessful()){
+                                                if (response1.isSuccessful()) {
                                                     assert userDataModel!=null;
                                                     id_user = userDataModel.getUser_id();
                                                     name_user = userDataModel.getName();
@@ -127,10 +120,14 @@ public class UserActivity extends AppCompatActivity {
                                                     editor.putInt("id_user", id_user);
                                                     editor.apply();
                                                     bottomSheetDialog2.dismiss();
+                                                    binding.phoneNumUserActivity.setText(phone_user);
+                                                    binding.userNameUserActivity.setText(name_user);
+                                                    binding.avatarUserUserActivity.setBackgroundResource(R.drawable.trophy);
 
                                                 }
 
                                             }
+
                                             @Override
                                             public void onFailure(Call<UserDataModel> call1, Throwable t) {
                                                 Toast.makeText(UserActivity.this, "wrong", Toast.LENGTH_LONG).show();
@@ -153,33 +150,37 @@ public class UserActivity extends AppCompatActivity {
 
 
                 });
-            }else {
-                Toast.makeText(this, "قبلا وارد شده اید", Toast.LENGTH_SHORT).show();
+            } else {
+                String news=sharedPreferences.getString("phone_user","");
+                Toast.makeText(this, "قبلا وارد شده اید"+news, Toast.LENGTH_SHORT).show();
             }
 
-         
 
         });
 
+        String news=sharedPreferences.getString("phone_user",null);
+        String nammm=sharedPreferences.getString("name_user",null);
+        if (news!=null){
+            binding.phoneNumUserActivity.setText(news);
+            binding.userNameUserActivity.setText(nammm);
+            binding.avatarUserUserActivity.setBackgroundResource(R.drawable.trophy);
 
+        }else {
+            binding.phoneNumUserActivity.setText(R.string.hint_number);
+            binding.userNameUserActivity.setText(R.string.hint_user_name);
+            binding.avatarUserUserActivity.setBackgroundResource(R.drawable.ic_baseline_exit_to_app_24);
+        }
 
+        binding.tvExitUserActivity.
 
-
-
-
-
-
-
-
-
-        
-     
-            loginProfile();
+        loginProfile();
 
 
     }
 
     private void loginProfile() {
+
+
     }
 
     @SuppressLint("NonConstantResourceId")

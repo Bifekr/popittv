@@ -52,5 +52,7 @@
   <string name="dialog_login_negative">الان نه ، ادامه گشت و گذار</string>
   <string name="username">username</string>
   <string name="password">password</string>
+  <string name="hint_number">09 + + + + + +++</string>
+  <string name="hint_user_name">بدون نام</string>
 
 </resources>

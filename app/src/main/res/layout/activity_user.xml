@@ -80,7 +80,7 @@
               android:layout_height="wrap_content"
               android:layout_marginEnd="@dimen/plane_08"
               android:fontFamily="@font/lalezar_regular"
-              android:hint="09 + + + +  +  +++"
+              android:hint="@string/hint_number"
               android:textSize="18sp"
               android:textStyle="normal"
               app:layout_constraintBottom_toBottomOf="@id/tvNum_userActivity"
@@ -102,7 +102,7 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:fontFamily="@font/lalezar_regular"
-              android:hint="بدون نام"
+              android:hint="@string/hint_user_name"
               android:textSize="18sp"
               app:layout_constraintBottom_toBottomOf="@id/tvName_userActivity"
               app:layout_constraintEnd_toStartOf="@id/tvName_userActivity"
@@ -149,6 +149,7 @@
               app:riv_oval="true" />
 
             <ImageView
+              android:background="@drawable/shape_tag6"
               android:id="@+id/ivExit_userActivity"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
@@ -163,7 +164,9 @@
               android:id="@+id/tvExit_userActivity"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
+              android:background="@drawable/shape_tag6"
               android:fontFamily="@font/lalezar_regular"
+              android:padding="@dimen/plane_04"
               android:text="خروج از حساب : "
               app:layout_constraintBottom_toBottomOf="@id/ivExit_userActivity"
               app:layout_constraintStart_toEndOf="@id/ivExit_userActivity"
