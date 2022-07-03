@@ -1,8 +1,11 @@
 package ir.popittv.myapplication.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class UserDataModel {
 
     private String success;
+    @SerializedName("id_user")
     private int user_id;
     private String name;
     private String phone;

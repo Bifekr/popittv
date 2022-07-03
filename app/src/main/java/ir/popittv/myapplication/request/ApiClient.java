@@ -35,9 +35,11 @@ public interface ApiClient {
     Call<ChannelResponse> getChannel_all(@Query("kind") int kind , @Query("age") int age);
 
 
-    @FormUrlEncoded
-    @GET("Login.php")
+
+    @GET("login.php")
     Call<ResponseBody> userLogin(@Query("phone") String phone);
+
+
     @GET("getCode.php")
     Call<UserDataModel> getUser(@Query("phone") String phone,@Query("code") String code);
 

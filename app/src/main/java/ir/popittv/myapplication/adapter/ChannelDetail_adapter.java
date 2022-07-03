@@ -50,6 +50,7 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
 
         if(funnyDataModels!=null) {
 
+
             holder.binding.titleFaVideoItemVideoThumb.setText(funnyDataModels.get(position).getTitle_fa());
             holder.binding.titleEnVideoItemVideoThumb.setText(funnyDataModels.get(position).getTitle_en());
             holder.binding.tvViewItemVidDef.setText(funnyDataModels.get(position).getView() + "");
@@ -65,9 +66,6 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
             });
 
         }
-
-
-
     }
 
     @Override
