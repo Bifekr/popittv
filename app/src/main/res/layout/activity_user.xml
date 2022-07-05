@@ -19,6 +19,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/scroll"
       app:menu="@menu/menu_rail"
       app:menuGravity="bottom" />
 
@@ -31,6 +32,7 @@
       app:layout_constraintTop_toTopOf="parent">
 
       <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parentUnderScroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="4dp">
@@ -171,7 +173,8 @@
           android:layout_marginTop="@dimen/plane_24"
           app:cardCornerRadius="40dp"
           app:cardElevation="@dimen/plane_08"
-          app:layout_constraintTop_toBottomOf="@id/parentUserDetail_userActivity">
+          app:layout_constraintTop_toBottomOf="@id/parentUserDetail_userActivity"
+          app:layout_constraintBottom_toTopOf="@id/parentSaveChannel_userActivity">
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -279,11 +282,89 @@
 
         </androidx.cardview.widget.CardView>
 
+        <View
+          android:layout_width="0dp"
+          android:layout_height="8dp"
+          android:elevation="@dimen/plane_08"
+          app:layout_constraintTop_toTopOf="@id/parentMenuUserSub"
+          app:layout_constraintBottom_toBottomOf="@id/parentMenuUserSub"
+          app:layout_constraintStart_toStartOf="@id/parentMenuUserSub"
+          app:layout_constraintEnd_toEndOf="@id/parentMenuUserSub"
+          android:background="@drawable/shape_tag1"/>
+        <LinearLayout
+          android:id="@+id/parentMenuUserSub"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:elevation="@dimen/plane_24"
+          android:layout_marginTop="@dimen/plane_08"
+          app:layout_constraintStart_toStartOf="@id/parentSaveChannel_userActivity"
+          app:layout_constraintEnd_toEndOf="@id/parentSaveChannel_userActivity"
+          app:layout_constraintTop_toBottomOf="@id/parentAccess_userActivity"
+          app:layout_constraintBottom_toBottomOf="@id/parentSaveChannel_userActivity"
+          app:layout_constraintVertical_bias="0"
+          app:layout_constraintHorizontal_bias=".3"
+          app:layout_constraintHeight_percent=".02"
+          android:orientation="horizontal"
+          >
+          <TextView
+            android:id="@+id/menuFunny_subUser"
+            style="@style/TextAppearance.Reply.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_tag1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="6dp"
+            android:text="@string/funny_nav"
+            android:textColor="@color/white" />
+
+          <TextView
+            android:id="@+id/menuReality_subUser"
+            style="@style/TextAppearance.Reply.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/plane_16"
+            android:background="@drawable/shape_tag2"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="6dp"
+            android:text="@string/reality_nav"
+            android:textColor="@color/white"
+           />
+
+          <TextView
+            android:id="@+id/menuStudy_subUser"
+            style="@style/TextAppearance.Reply.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/plane_16"
+            android:background="@drawable/shape_tag1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="6dp"
+            android:text="@string/learning_nav"
+            android:textColor="@color/white" />
+          <TextView
+            android:id="@+id/menuFarsi_subUser"
+            style="@style/TextAppearance.Reply.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/plane_16"
+            android:background="@drawable/shape_tag1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@string/farsi_nav"
+            android:textColor="@color/white"
+            />
+        </LinearLayout>
+
         <androidx.cardview.widget.CardView
           android:id="@+id/parentSaveChannel_userActivity"
           android:layout_width="match_parent"
           android:layout_height="180dp"
           android:layout_marginTop="@dimen/plane_24"
+          app:layout_constraintStart_toStartOf="@id/parentUnderScroll"
+          app:layout_constraintEnd_toEndOf="@id/parentUnderScroll"
           app:cardCornerRadius="40dp"
           app:cardElevation="@dimen/plane_08"
           app:layout_constraintTop_toBottomOf="@id/parentAccess_userActivity">
@@ -337,6 +418,82 @@
           </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
+        <View
+          android:layout_width="0dp"
+          android:layout_height="8dp"
+          android:elevation="@dimen/plane_08"
+          app:layout_constraintTop_toTopOf="@id/parentMenuUserbookmark"
+          app:layout_constraintBottom_toBottomOf="@id/parentMenuUserbookmark"
+          app:layout_constraintStart_toStartOf="@id/parentMenuUserbookmark"
+          app:layout_constraintEnd_toEndOf="@id/parentMenuUserbookmark"
+          android:background="@drawable/shape_tag1"/>
+        <LinearLayout
+          android:id="@+id/parentMenuUserbookmark"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:elevation="@dimen/plane_24"
+          android:layout_marginTop="@dimen/plane_08"
+          app:layout_constraintStart_toStartOf="@id/parentBookmarkVideo_userActivity"
+          app:layout_constraintEnd_toEndOf="@id/parentBookmarkVideo_userActivity"
+          app:layout_constraintTop_toBottomOf="@id/parentSaveChannel_userActivity"
+          app:layout_constraintBottom_toBottomOf="@id/parentBookmarkVideo_userActivity"
+          app:layout_constraintVertical_bias="0"
+          app:layout_constraintHorizontal_bias=".6"
+          app:layout_constraintHeight_percent=".02"
+          android:orientation="horizontal"
+          >
+          <TextView
+            android:id="@+id/menuFunny_bookmarkUser"
+            style="@style/TextAppearance.Reply.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_tag1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="6dp"
+            android:text="@string/funny_nav"
+            android:textColor="@color/white" />
+
+          <TextView
+            android:id="@+id/menuReality_bookmarkUser"
+            style="@style/TextAppearance.Reply.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/plane_16"
+            android:background="@drawable/shape_tag2"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="6dp"
+            android:text="@string/reality_nav"
+            android:textColor="@color/white"
+            />
+
+          <TextView
+            android:id="@+id/menuStudy_bookmarkUser"
+            style="@style/TextAppearance.Reply.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/plane_16"
+            android:background="@drawable/shape_tag1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="6dp"
+            android:text="@string/learning_nav"
+            android:textColor="@color/white" />
+          <TextView
+            android:id="@+id/menuFarsi_bookmarkUser"
+            style="@style/TextAppearance.Reply.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/plane_16"
+            android:background="@drawable/shape_tag1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@string/farsi_nav"
+            android:textColor="@color/white"
+            />
+        </LinearLayout>
+
         <androidx.cardview.widget.CardView
           android:id="@+id/parentBookmarkVideo_userActivity"
           android:layout_width="match_parent"
@@ -344,7 +501,8 @@
           android:layout_marginTop="@dimen/plane_24"
           app:cardCornerRadius="40dp"
           app:cardElevation="@dimen/plane_08"
-          app:layout_constraintTop_toBottomOf="@id/parentSaveChannel_userActivity">
+          app:layout_constraintTop_toBottomOf="@id/parentSaveChannel_userActivity"
+          app:layout_constraintBottom_toTopOf="@id/parentWatchLaterVideo_userActivity">
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -381,6 +539,82 @@
           </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
+        <View
+          android:layout_width="0dp"
+          android:layout_height="8dp"
+          android:elevation="@dimen/plane_08"
+          app:layout_constraintTop_toTopOf="@id/parentMenuUserWatchLater"
+          app:layout_constraintBottom_toBottomOf="@id/parentMenuUserWatchLater"
+          app:layout_constraintStart_toStartOf="@id/parentMenuUserWatchLater"
+          app:layout_constraintEnd_toEndOf="@id/parentMenuUserWatchLater"
+          android:background="@drawable/shape_tag1"/>
+        <LinearLayout
+          android:id="@+id/parentMenuUserWatchLater"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:elevation="@dimen/plane_24"
+          android:layout_marginTop="@dimen/plane_08"
+          app:layout_constraintStart_toStartOf="@id/parentWatchLaterVideo_userActivity"
+          app:layout_constraintEnd_toEndOf="@id/parentWatchLaterVideo_userActivity"
+          app:layout_constraintTop_toBottomOf="@id/parentBookmarkVideo_userActivity"
+          app:layout_constraintBottom_toBottomOf="@id/parentSaveChannel_userActivity"
+          app:layout_constraintVertical_bias="0"
+          app:layout_constraintHorizontal_bias=".3"
+          app:layout_constraintHeight_percent=".02"
+          android:orientation="horizontal"
+          >
+          <TextView
+            android:id="@+id/menuFunny_watchLaterUser"
+            style="@style/TextAppearance.Reply.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_tag1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="6dp"
+            android:text="@string/funny_nav"
+            android:textColor="@color/white" />
+
+          <TextView
+            android:id="@+id/menuReality_watchLaterUser"
+            style="@style/TextAppearance.Reply.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/plane_16"
+            android:background="@drawable/shape_tag2"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="6dp"
+            android:text="@string/reality_nav"
+            android:textColor="@color/white"
+            />
+
+          <TextView
+            android:id="@+id/menuStudy_watchLaterUser"
+            style="@style/TextAppearance.Reply.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/plane_16"
+            android:background="@drawable/shape_tag1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="6dp"
+            android:text="@string/learning_nav"
+            android:textColor="@color/white" />
+          <TextView
+            android:id="@+id/menuFarsi_watchLaterUser"
+            style="@style/TextAppearance.Reply.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/plane_16"
+            android:background="@drawable/shape_tag1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@string/farsi_nav"
+            android:textColor="@color/white"
+            />
+        </LinearLayout>
+
         <androidx.cardview.widget.CardView
           android:id="@+id/parentWatchLaterVideo_userActivity"
           android:layout_width="match_parent"
@@ -388,7 +622,8 @@
           android:layout_marginTop="@dimen/plane_24"
           app:cardCornerRadius="40dp"
           app:cardElevation="@dimen/plane_08"
-          app:layout_constraintTop_toBottomOf="@id/parentBookmarkVideo_userActivity">
+          app:layout_constraintTop_toBottomOf="@id/parentBookmarkVideo_userActivity"
+          app:layout_constraintBottom_toTopOf="@id/parentHistoryVideo_userActivity">
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -427,6 +662,82 @@
           </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
+        <View
+          android:layout_width="0dp"
+          android:layout_height="8dp"
+          android:elevation="@dimen/plane_08"
+          app:layout_constraintTop_toTopOf="@id/parentMenuUserWatchLater"
+          app:layout_constraintBottom_toBottomOf="@id/parentMenuUserWatchLater"
+          app:layout_constraintStart_toStartOf="@id/parentMenuUserWatchLater"
+          app:layout_constraintEnd_toEndOf="@id/parentMenuUserWatchLater"
+          android:background="@drawable/shape_tag1"/>
+        <LinearLayout
+          android:id="@+id/parentMenuUserHistory"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:elevation="@dimen/plane_24"
+          android:layout_marginTop="@dimen/plane_08"
+          app:layout_constraintStart_toStartOf="@id/parentHistoryVideo_userActivity"
+          app:layout_constraintEnd_toEndOf="@id/parentHistoryVideo_userActivity"
+          app:layout_constraintTop_toBottomOf="@id/parentWatchLaterVideo_userActivity"
+          app:layout_constraintBottom_toBottomOf="@id/parentHistoryVideo_userActivity"
+          app:layout_constraintVertical_bias="0"
+          app:layout_constraintHorizontal_bias=".6"
+          app:layout_constraintHeight_percent=".02"
+          android:orientation="horizontal"
+          >
+          <TextView
+            android:id="@+id/menuFunny_watchLaterUser"
+            style="@style/TextAppearance.Reply.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_tag1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="6dp"
+            android:text="@string/funny_nav"
+            android:textColor="@color/white" />
+
+          <TextView
+            android:id="@+id/menuReality_watchLaterUser"
+            style="@style/TextAppearance.Reply.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/plane_16"
+            android:background="@drawable/shape_tag2"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="6dp"
+            android:text="@string/reality_nav"
+            android:textColor="@color/white"
+            />
+
+          <TextView
+            android:id="@+id/menuStudy_watchLaterUser"
+            style="@style/TextAppearance.Reply.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/plane_16"
+            android:background="@drawable/shape_tag1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="6dp"
+            android:text="@string/learning_nav"
+            android:textColor="@color/white" />
+          <TextView
+            android:id="@+id/menuFarsi_watchLaterUser"
+            style="@style/TextAppearance.Reply.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/plane_16"
+            android:background="@drawable/shape_tag1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@string/farsi_nav"
+            android:textColor="@color/white"
+            />
+        </LinearLayout>
+
         <androidx.cardview.widget.CardView
           android:id="@+id/parentHistoryVideo_userActivity"
           android:layout_width="match_parent"
@@ -434,7 +745,8 @@
           android:layout_marginTop="@dimen/plane_24"
           app:cardCornerRadius="40dp"
           app:cardElevation="@dimen/plane_08"
-          app:layout_constraintTop_toBottomOf="@id/parentWatchLaterVideo_userActivity">
+          app:layout_constraintTop_toBottomOf="@id/parentWatchLaterVideo_userActivity"
+          app:layout_constraintBottom_toTopOf="@id/parentDownVideo_userActivity">
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -452,7 +764,9 @@
               android:elevation="@dimen/plane_08"
               android:gravity="center_vertical|center_horizontal"
               android:orientation="vertical"
-              app:layout_constraintStart_toStartOf="parent">
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintBottom_toBottomOf="parent">
 
               <ImageView
                 android:layout_width="wrap_content"
@@ -480,7 +794,7 @@
           android:layout_marginBottom="@dimen/plane_16"
           app:cardCornerRadius="40dp"
           app:cardElevation="@dimen/plane_08"
-          app:layout_constraintBottom_toBottomOf="parent"
+
           app:layout_constraintTop_toBottomOf="@id/parentHistoryVideo_userActivity">
 
           <androidx.constraintlayout.widget.ConstraintLayout
