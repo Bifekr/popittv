@@ -58,11 +58,11 @@ public class UserActivity extends AppCompatActivity {
 
         binding.avatarUserUserActivity.setOnClickListener(v -> { loginUser();});
 
-        String news  = sharedPreferences.getString("phone_user", null);
-        String nammm = sharedPreferences.getString("name_user", null);
-        if (news!=null) {
-            binding.phoneNumUserActivity.setText(news);
-            binding.userNameUserActivity.setText(nammm);
+       phone_user  = sharedPreferences.getString("phone_user", null);
+       name_user = sharedPreferences.getString("name_user", null);
+        if (phone_user!=null) {
+            binding.phoneNumUserActivity.setText(phone_user);
+            binding.userNameUserActivity.setText(name_user);
             binding.avatarUserUserActivity.setBackgroundResource(R.drawable.trophy);
             binding.tvExitUserActivity.setText(R.string.exite);
             binding.tvEnter1RvSubUser.setVisibility(View.GONE);
