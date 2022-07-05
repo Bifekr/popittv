@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -54,12 +55,8 @@ public class UserActivity extends AppCompatActivity {
         initRailActivity();
 
 
-        binding.avatarUserUserActivity.setOnClickListener(v -> {
 
-            loginUser();
-
-
-        });
+        binding.avatarUserUserActivity.setOnClickListener(v -> { loginUser();});
 
         String news = sharedPreferences.getString("phone_user", null);
         String nammm = sharedPreferences.getString("name_user", null);
@@ -68,16 +65,21 @@ public class UserActivity extends AppCompatActivity {
             binding.userNameUserActivity.setText(nammm);
             binding.avatarUserUserActivity.setBackgroundResource(R.drawable.trophy);
             binding.tvExitUserActivity.setText(R.string.exite);
+            binding.tvEnter1RvSubUser.setVisibility(View.GONE);
 
         } else {
             binding.phoneNumUserActivity.setText(R.string.hint_number);
             binding.userNameUserActivity.setText(R.string.hint_user_name);
             binding.tvExitUserActivity.setText(R.string.enter);
+            binding.tvEnter1RvSubUser.setVisibility(View.VISIBLE);
+            binding.tvEnter1RvSubUser.setOnClickListener(v -> {
+                loginUser();
+
+            });
 
         }
 
         binding.tvExitUserActivity.setOnClickListener(v -> {
-
             sharedPreferences = this.getSharedPreferences("user_info", MODE_PRIVATE);
             SharedPreferences.Editor editor22 = sharedPreferences.edit();
             editor22.putString("phone_user", null);
@@ -145,7 +147,7 @@ public class UserActivity extends AppCompatActivity {
                                     code_user = et_code.getEditText().getText().toString();
                                     Service.getApiClient().getUser(phone_user, code_user).enqueue(new Callback<UserDataModel>() {
                                         @Override
-                                        public void onResponse(Call<UserDataModel> call1, Response<UserDataModel> response1) {
+                                        public void onResponse(Call<UserDataModel> call1, @NonNull Response<UserDataModel> response1) {
                                             UserDataModel userDataModel = response1.body();
                                             if (response1.isSuccessful()) {
                                                 assert userDataModel!=null;
@@ -160,6 +162,7 @@ public class UserActivity extends AppCompatActivity {
                                                 binding.userNameUserActivity.setText(name_user);
                                                 binding.avatarUserUserActivity.setBackgroundResource(R.drawable.trophy);
                                                 binding.tvExitUserActivity.setText(R.string.exite);
+                                                binding.tvEnter1RvSubUser.setVisibility(View.GONE);
 
                                             }
 

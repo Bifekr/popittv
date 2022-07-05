@@ -292,12 +292,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+              android:visibility="visible"
+              android:id="@+id/tvEnter1_rvSubUser"
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:fontFamily="@font/lalezar_regular"
+              android:gravity="center_vertical|center_horizontal"
+              android:text="برای مشاهده ویدیوهای خود ابتدا وارد شوید"
+              android:textSize="40sp"
+              app:layout_constraintEnd_toStartOf="@id/parentRvSub_activityUser"
+              app:layout_constraintStart_toStartOf="parent" />
+
             <androidx.recyclerview.widget.RecyclerView
               android:id="@+id/rvSaveChannel_userActivity"
               android:layout_width="match_parent"
               android:layout_height="match_parent" />
 
             <LinearLayout
+              android:id="@+id/parentRvSub_activityUser"
               android:layout_width="130dp"
               android:layout_height="match_parent"
               android:background="@drawable/shape_tag6"
