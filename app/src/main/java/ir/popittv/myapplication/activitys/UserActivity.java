@@ -58,7 +58,7 @@ public class UserActivity extends AppCompatActivity {
 
         binding.avatarUserUserActivity.setOnClickListener(v -> { loginUser();});
 
-        String news = sharedPreferences.getString("phone_user", null);
+        String news  = sharedPreferences.getString("phone_user", null);
         String nammm = sharedPreferences.getString("name_user", null);
         if (news!=null) {
             binding.phoneNumUserActivity.setText(news);
