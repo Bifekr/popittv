@@ -7,16 +7,15 @@ import ir.popittv.myapplication.models.FunnyDataModel;
 public class UserResponse {
 
     private List<FunnyDataModel> userSub;
-    private List<FunnyDataModel> userBookMark;
+    private List<FunnyDataModel> userSave;
     private List<FunnyDataModel> userWatchLater;
     private List<FunnyDataModel> userSee;
+    private List<FunnyDataModel> userLike;
 
-    public List<FunnyDataModel> getUserSub() {
-        return userSub;
-    }
+    public List<FunnyDataModel> getUserSub() { return userSub;}
 
-    public List<FunnyDataModel> getUserBookMark() {
-        return userBookMark;
+    public List<FunnyDataModel> getUserSave() {
+        return userSave;
     }
 
     public List<FunnyDataModel> getUserWatchLater() {
@@ -26,4 +25,6 @@ public class UserResponse {
     public List<FunnyDataModel> getUserSee() {
         return userSee;
     }
+
+    public List<FunnyDataModel> getUserLike() { return userLike;}
 }
