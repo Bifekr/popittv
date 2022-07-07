@@ -4,11 +4,9 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools">
-  <FrameLayout
-    android:id="@+id/container_main"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+
   <ScrollView
+    android:id="@+id/container_main"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -352,5 +350,5 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
   </ScrollView>
-  </FrameLayout>
+
 </layout>

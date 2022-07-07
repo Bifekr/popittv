@@ -1,9 +1,13 @@
 package ir.popittv.myapplication.activitys;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,9 +17,13 @@ import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.IOException;
 
+import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.databinding.ActivityPlayerBinding;
 import ir.popittv.myapplication.models.UserDataModel;
 import ir.popittv.myapplication.request.Service;
@@ -28,14 +36,25 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PlayerActivity extends AppCompatActivity implements OnClickLoginDialog {
+public class PlayerActivity extends AppCompatActivity {
 
     private ActivityPlayerBinding binding;
     private MainViewModel mainViewModel;
  //   private UserViewModel userViewModel;
 
+
+    private SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
+    private String name_user;
+    private String phone_user;
+    private String code_user;
+    private int id_user;
     private int id_vid_funny;
-    private String user_phone;
+
+   private View bottomView;
+    private View bottomView2;
+    TextInputLayout et_phone;
 
     SimpleExoPlayer exoPlayer;
     boolean playWhenReady = true;
@@ -53,7 +72,11 @@ public class PlayerActivity extends AppCompatActivity implements OnClickLoginDia
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
        // userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
+        sharedPreferences=getSharedPreferences("user_info",MODE_PRIVATE);
 
+        phone_user  = sharedPreferences.getString("phone_user", null);
+        name_user = sharedPreferences.getString("name_user", null);
+        id_user = sharedPreferences.getInt("id_user",0);
 
         id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
         mainViewModel.requestFunny_single(id_vid_funny);
@@ -61,17 +84,24 @@ public class PlayerActivity extends AppCompatActivity implements OnClickLoginDia
         getFunny_single();
         initExo();
 
-        login();
+
+        if (phone_user==null) {
+            login();
+        }
+
+
+
 
 
 
     }
 
+
+
     private void login() {
         new Handler().postDelayed(() -> {
 
-            new LoginDialogFragment(this)
-                    .show(getSupportFragmentManager(),LoginDialogFragment.TAG);
+         loginUser();
 
 
 
@@ -80,22 +110,104 @@ public class PlayerActivity extends AppCompatActivity implements OnClickLoginDia
         },5000);
     }
 
-    @Override
-    public void phoneClic(String phone) {
-        user_phone=phone;
+    private void loginUser() {
+        String check = sharedPreferences.getString("phone_user", "");
+        if (check.equals("")) {
+
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+            bottomView = getLayoutInflater().inflate(R.layout.custom_dialog, null);
+            bottomSheetDialog.setContentView(bottomView);
+            BottomSheetBehavior sheetBehavior = BottomSheetBehavior.from((View) bottomView.getParent());
+            sheetBehavior.setPeekHeight(
+
+                    (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 500, getResources().getDisplayMetrics())
+            );
 
 
+            bottomSheetDialog.show();
+            et_phone = bottomView.findViewById(R.id.et_phone_userProfile);
+            Button btn_send = bottomView.findViewById(R.id.send_customLogin);
+            ProgressBar progressBar = bottomView.findViewById(R.id.progress_dialog);
 
-Toast.makeText(this, "runnable"+phone, Toast.LENGTH_SHORT).show();
+
+            btn_send.setOnClickListener(V -> {
+
+                if (et_phone.getEditText().getText().toString().equals("")) {
+                    et_phone.setError("شماره را وارد کنید");
+
+                } else {
+
+                    progressBar.setVisibility(View.VISIBLE);
+                    phone_user = et_phone.getEditText().getText().toString();
+                    editor = sharedPreferences.edit();
+                    editor.putString("phone_user", phone_user);
+                    editor.apply();
+                    Service.getApiClient().userLogin(phone_user).enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                            bottomSheetDialog.dismiss();
+
+                            BottomSheetDialog bottomSheetDialog2 = new BottomSheetDialog(PlayerActivity.this);
+                            bottomView2 = getLayoutInflater().inflate(R.layout.coustom_dialog_code, null);
+                            bottomSheetDialog2.setContentView(bottomView2);
+                            bottomSheetDialog2.show();
+
+                            TextInputLayout et_code = bottomView2.findViewById(R.id.et_code_userProfile);
+                            Button btn_code = bottomView2.findViewById(R.id.sendCode_customLogin);
+                            btn_code.setOnClickListener(v1 -> {
+
+                                if (et_code.getEditText().getText().toString().equals("")) {
+                                    et_code.setError("کد را وارد کنید");
+
+                                } else {
+                                    code_user = et_code.getEditText().getText().toString();
+                                    Service.getApiClient().getUser(phone_user, code_user).enqueue(new Callback<UserDataModel>() {
+                                        @Override
+                                        public void onResponse(Call<UserDataModel> call1, @NonNull Response<UserDataModel> response1) {
+                                            UserDataModel userDataModel = response1.body();
+                                            if (response1.isSuccessful()) {
+                                                assert userDataModel!=null;
+                                                id_user = userDataModel.getUser_id();
+                                                name_user = userDataModel.getName();
+                                                editor = sharedPreferences.edit();
+                                                editor.putString("name_user", name_user);
+                                                editor.putInt("id_user", id_user);
+                                                editor.apply();
+                                                bottomSheetDialog2.dismiss();
+
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<UserDataModel> call1, Throwable t) {
+                                            Toast.makeText(PlayerActivity.this, "wrong", Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+                                }
+                            });
+
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Toast.makeText(PlayerActivity.this, "send again", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
+                }
+
+
+            });
+        } else {
+            String news = sharedPreferences.getString("phone_user", "");
+            Toast.makeText(this, "قبلا وارد شده اید" + news, Toast.LENGTH_SHORT).show();
+        }
+
     }
-
-
-
-
-
-
-
-
 
 
     @Override
