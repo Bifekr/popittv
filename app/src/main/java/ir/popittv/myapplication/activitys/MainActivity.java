@@ -39,23 +39,29 @@ import ir.popittv.myapplication.databinding.ActivityMainBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.models.HashTagDataModel;
 import ir.popittv.myapplication.utils.OnClickFrg1;
+import ir.popittv.myapplication.utils.OnClickFunny;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
-public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
+public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnClickFunny {
 
 
     //global Variable
     private int id_channel;
     private MainViewModel mainViewModel;
     private ActivityMainBinding binding;
+
     private FunnyAdapter funnyAdapter;
+    private FunnyAdapter funnyAdapter_liky;
+    private FunnyAdapter funnyAdapter_view;
+
     //global adapter
     private RvChannel_Frg1 rvChannel_frg1;
     private ChannelDetail_adapter detail_adapter;
     private InfinitFrg1_PagerAdapter infinitAdapter;
     private Recommend_Adapter recommend_adapter;
-    private Recommend_Adapter recommend_adapter2;
+
     private TagAdapter tagAdapter;
+
     //Utils Class
     private CardPagerAdapter2 cardPagerAdapter2;
     private ShadowTransformer shadowTransformer;
@@ -76,9 +82,13 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 {
 
         rvChannel_frg1 = new RvChannel_Frg1(this, this);
         recommend_adapter = new Recommend_Adapter(this);
-        recommend_adapter2 = new Recommend_Adapter(this);
+
         detail_adapter = new ChannelDetail_adapter(this);
         infinitAdapter = new InfinitFrg1_PagerAdapter(this);
+
+        funnyAdapter = new FunnyAdapter(this,this);
+        funnyAdapter_liky = new FunnyAdapter(this,this);
+        funnyAdapter_view = new FunnyAdapter(this,this);
 
         initRailActivity();
         taginit();
@@ -212,13 +222,13 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
         binding.rvPopularMainActivity.setHasFixedSize(true);
         binding.rvPopularMainActivity.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false));
-        binding.rvPopularMainActivity.setAdapter(recommend_adapter);
+        binding.rvPopularMainActivity.setAdapter(funnyAdapter_liky);
 
         //recyclerView Selected2
         binding.rvBestViewMainActivity.setHasFixedSize(true);
         binding.rvBestViewMainActivity.setLayoutManager(new LinearLayoutManager(this,
-                LinearLayoutManager.HORIZONTAL, true));
-        binding.rvBestViewMainActivity.setAdapter(recommend_adapter2);
+                LinearLayoutManager.HORIZONTAL, false));
+        binding.rvBestViewMainActivity.setAdapter(funnyAdapter_view);
 
         //horizontal viewpager infinite
 
@@ -230,7 +240,7 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
                 RecyclerView.VERTICAL, false));
         binding.rvRecommendFrg1.setAdapter(recommend_adapter);
 
-        funnyAdapter = new FunnyAdapter(this);
+
         binding.rvSubMenuTagFrg1.setAdapter(funnyAdapter);
         binding.rvSubMenuTagFrg1.setLayoutManager(new GridLayoutManager
                 (this, 3, GridLayoutManager.VERTICAL, false));
@@ -291,7 +301,7 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
         mainViewModel.getFunny_view().observe(this, funnyDataModels -> {
             if (funnyDataModels!=null) {
                 infinitAdapter.setData(funnyDataModels);
-                recommend_adapter.setFunnyDataModels(funnyDataModels);
+                funnyAdapter_view.setData(funnyDataModels);
             } else {
                 Toast.makeText(this, "اینترنت را بررسی کنید", Toast.LENGTH_SHORT).show();
             }
@@ -300,7 +310,7 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
 
     private void getFunny_liky() {
         mainViewModel.getFunny_liky().observe(this, funnyDataModels -> {
-            recommend_adapter2.setFunnyDataModels(funnyDataModels);
+            funnyAdapter_liky.setData(funnyDataModels);
 
         });
     }
@@ -342,4 +352,23 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
 
     }
 
+    @Override
+    public void onClickSave(int id_vid) {
+        Toast.makeText(this, ""+id_vid, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClickSee(int id_vid) {
+        Toast.makeText(this, ""+id_vid, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClickLike(int id_vid) {
+        Toast.makeText(this, ""+id_vid, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClickLater(int id_vid) {
+        Toast.makeText(this, ""+id_vid, Toast.LENGTH_SHORT).show();
+    }
 }

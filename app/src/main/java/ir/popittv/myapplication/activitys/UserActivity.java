@@ -31,13 +31,14 @@ import ir.popittv.myapplication.databinding.ActivityUserBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.models.UserDataModel;
 import ir.popittv.myapplication.request.Service;
+import ir.popittv.myapplication.utils.OnClickFunny;
 import ir.popittv.myapplication.viewmodel.UserViewModel;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserActivity extends AppCompatActivity {
+public class UserActivity extends AppCompatActivity implements OnClickFunny {
 
     ActivityUserBinding binding;
     private UserViewModel userViewModel;
@@ -70,11 +71,11 @@ public class UserActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         userViewModel= new ViewModelProvider(this).get(UserViewModel.class);
 
-        funnyAdapter=new FunnyAdapter(this);
-        funnyAdapter2=new FunnyAdapter(this);
-        funnyAdapter3=new FunnyAdapter(this);
+        funnyAdapter=new FunnyAdapter(this,this);
+        funnyAdapter2=new FunnyAdapter(this,this);
+        funnyAdapter3=new FunnyAdapter(this,this);
 
-        funnyAdapter5=new FunnyAdapter(this);
+        funnyAdapter5=new FunnyAdapter(this,this);
 
 
         sharedPreferences = UserActivity.this.getSharedPreferences("user_info", MODE_PRIVATE);
@@ -471,5 +472,25 @@ public class UserActivity extends AppCompatActivity {
 
             }
         });*/
+    }
+
+    @Override
+    public void onClickSave(int id_vid) {
+
+    }
+
+    @Override
+    public void onClickSee(int id_vid) {
+
+    }
+
+    @Override
+    public void onClickLike(int id_vid) {
+
+    }
+
+    @Override
+    public void onClickLater(int id_vid) {
+
     }
 }
