@@ -31,6 +31,7 @@ public class UserApi {
 
     //init mutable
 
+
     private final MutableLiveData<List<FunnyDataModel>> mUserSub;
     private final MutableLiveData<List<FunnyDataModel>> mUserSave;
     private final MutableLiveData<List<FunnyDataModel>> mUserSee;
