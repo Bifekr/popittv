@@ -12,16 +12,21 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.List;
 import java.util.Objects;
 
 import ir.popittv.myapplication.R;
+import ir.popittv.myapplication.adapter.FunnyAdapter;
 import ir.popittv.myapplication.databinding.ActivityUserBinding;
+import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.models.UserDataModel;
 import ir.popittv.myapplication.request.Service;
 import ir.popittv.myapplication.viewmodel.UserViewModel;
@@ -34,6 +39,9 @@ public class UserActivity extends AppCompatActivity {
 
     ActivityUserBinding binding;
     private UserViewModel userViewModel;
+
+    private FunnyAdapter funnyAdapter;
+
     View bottomView;
     View bottomView2;
 
@@ -55,12 +63,18 @@ public class UserActivity extends AppCompatActivity {
         // this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         setContentView(binding.getRoot());
         userViewModel= new ViewModelProvider(this).get(UserViewModel.class);
+
+        funnyAdapter=new FunnyAdapter(this);
+
+
         sharedPreferences = UserActivity.this.getSharedPreferences("user_info", MODE_PRIVATE);
         initRailActivity();
 
 
+        userSaveMenuClick(id_user);
 
-
+        intRvUser();
+        userViewModel.request_userSave(1,1);
         binding.avatarUserUserActivity.setOnClickListener(v -> { loginUser();});
        phone_user  = sharedPreferences.getString("phone_user", null);
        name_user = sharedPreferences.getString("name_user", null);
@@ -90,7 +104,44 @@ public class UserActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "شما از حساب خود خارج شدید", Toast.LENGTH_SHORT).show();
         });
 
+        getUserSave();
 
+
+    }
+
+    private void intRvUser() {
+        //RecyclerView user Save Video
+        binding.rvBookMarkVideoUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this,LinearLayoutManager.HORIZONTAL,false));
+        binding.rvBookMarkVideoUserActivity.setAdapter(funnyAdapter);
+    }
+
+    private void getUserSave() {
+        userViewModel.getUserSave().observe(this, funnyDataModels -> {
+
+
+            funnyAdapter.setData(funnyDataModels);
+
+
+        });
+    }
+
+    private void userSaveMenuClick(int id_user) {
+        binding.menuFunnyBookmarkUser.setOnClickListener(v -> {
+
+            userViewModel.request_userSave(id_user,1);
+
+        });
+        binding.menuRealityBookmarkUser.setOnClickListener(v -> {
+            userViewModel.request_userSave(id_user,2);
+        });
+
+        binding.menuStudyBookmarkUser.setOnClickListener(v -> {
+            userViewModel.request_userSave(id_user,3);
+        });
+
+        binding.menuFarsiBookmarkUser.setOnClickListener(v -> {
+            userViewModel.request_userSave(id_user,4);
+        });
     }
 
 

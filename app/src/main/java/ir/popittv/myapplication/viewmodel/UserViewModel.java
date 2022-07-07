@@ -12,7 +12,7 @@ import ir.popittv.myapplication.repository.UserRepository;
 public class UserViewModel extends ViewModel {
 
     private final UserRepository userRepository;
-    private UserViewModel(){
+    public UserViewModel(){
         userRepository=UserRepository.getUserRepository();
     }
 

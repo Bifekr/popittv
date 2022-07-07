@@ -32,7 +32,7 @@
       app:layout_constraintTop_toTopOf="parent">
 
       <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/parentUnderScroll"
+       android:id="@+id/parentUnderScroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="4dp">
@@ -687,7 +687,7 @@
           android:orientation="horizontal"
           >
           <TextView
-            android:id="@+id/menuFunny_watchLaterUser"
+            android:id="@+id/menuFunny_historyUser"
             style="@style/TextAppearance.Reply.Body1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -699,7 +699,7 @@
             android:textColor="@color/white" />
 
           <TextView
-            android:id="@+id/menuReality_watchLaterUser"
+            android:id="@+id/menuReality_historyUser"
             style="@style/TextAppearance.Reply.Body1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -713,7 +713,7 @@
             />
 
           <TextView
-            android:id="@+id/menuStudy_watchLaterUser"
+            android:id="@+id/menuStudy_historyUser"
             style="@style/TextAppearance.Reply.Body1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -725,7 +725,7 @@
             android:text="@string/learning_nav"
             android:textColor="@color/white" />
           <TextView
-            android:id="@+id/menuFarsi_watchLaterUser"
+            android:id="@+id/menuFarsi_historyUser"
             style="@style/TextAppearance.Reply.Body1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

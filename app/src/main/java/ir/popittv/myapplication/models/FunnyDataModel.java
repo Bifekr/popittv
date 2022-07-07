@@ -19,10 +19,11 @@ public class FunnyDataModel implements Parcelable {
     private String link_720;
     private String profile_chann;
     private String banner_chann;
+    private String name_chan_en;
+    private String name_chan_fa;
     private String followers;
     private String age_name;
     private int kind;
-
 
     protected FunnyDataModel(Parcel in) {
         id_funny = in.readInt();
@@ -39,6 +40,8 @@ public class FunnyDataModel implements Parcelable {
         link_720 = in.readString();
         profile_chann = in.readString();
         banner_chann = in.readString();
+        name_chan_en = in.readString();
+        name_chan_fa = in.readString();
         followers = in.readString();
         age_name = in.readString();
         kind = in.readInt();
@@ -112,6 +115,14 @@ public class FunnyDataModel implements Parcelable {
         return banner_chann;
     }
 
+    public String getName_chan_en() {
+        return name_chan_en;
+    }
+
+    public String getName_chan_fa() {
+        return name_chan_fa;
+    }
+
     public String getFollowers() {
         return followers;
     }
@@ -127,11 +138,10 @@ public class FunnyDataModel implements Parcelable {
     public FunnyDataModel() {
     }
 
-    public FunnyDataModel(int id_funny, int id_channel, int id_reality, int id_study,
-                          int id_farsi, String view, String liky, String title_en,
-                          String title_fa, String poster, String link_480, String link_720,
-                          String profile_chann, String banner_chann, String followers,
-                          String age_name, int kind) {
+    public FunnyDataModel(int id_funny, int id_channel, int id_reality, int id_study, int id_farsi,
+                          String view, String liky, String title_en, String title_fa, String poster,
+                          String link_480, String link_720, String profile_chann, String banner_chann,
+                          String name_chan_en, String name_chan_fa, String followers, String age_name, int kind) {
         this.id_funny = id_funny;
         this.id_channel = id_channel;
         this.id_reality = id_reality;
@@ -146,6 +156,8 @@ public class FunnyDataModel implements Parcelable {
         this.link_720 = link_720;
         this.profile_chann = profile_chann;
         this.banner_chann = banner_chann;
+        this.name_chan_en = name_chan_en;
+        this.name_chan_fa = name_chan_fa;
         this.followers = followers;
         this.age_name = age_name;
         this.kind = kind;
@@ -172,6 +184,8 @@ public class FunnyDataModel implements Parcelable {
         dest.writeString(link_720);
         dest.writeString(profile_chann);
         dest.writeString(banner_chann);
+        dest.writeString(name_chan_en);
+        dest.writeString(name_chan_fa);
         dest.writeString(followers);
         dest.writeString(age_name);
         dest.writeInt(kind);
