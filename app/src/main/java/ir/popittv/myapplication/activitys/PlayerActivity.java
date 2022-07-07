@@ -210,17 +210,7 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        initExo();
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        releasePlayer();
-    }
 
     private void releasePlayer() {
         if (exoPlayer!=null) {
@@ -232,25 +222,9 @@ public class PlayerActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
 
-        if (exoPlayer==null) {
-            initExo();
-            hideSystemUi();
-        }
-    }
 
-    private void hideSystemUi() {
-        binding.exoPlayer.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LOW_PROFILE |
-                        View.SYSTEM_UI_FLAG_FULLSCREEN |
-                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
-                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
-                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-        );
-    }
+
 
     private void initExo() {
         try {
@@ -260,7 +234,6 @@ public class PlayerActivity extends AppCompatActivity {
             exoPlayer.prepare();
             exoPlayer.setPlayWhenReady(playWhenReady);
             exoPlayer.seekTo(currentWindow, playBackPosition);
-
 
 
         } catch (Exception e) {
@@ -290,6 +263,34 @@ public class PlayerActivity extends AppCompatActivity {
         });
     }
 
+    private void hideSystemUi() {
+        binding.exoPlayer.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LOW_PROFILE |
+                        View.SYSTEM_UI_FLAG_FULLSCREEN |
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
+                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        );
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        if (exoPlayer==null) {
+            initExo();
+            hideSystemUi();
+        }
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initExo();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        releasePlayer();
+    }
 
 }
