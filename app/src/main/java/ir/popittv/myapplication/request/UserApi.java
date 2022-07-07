@@ -100,7 +100,7 @@ public class UserApi {
             handler_userSave.cancel(true);
         },2,TimeUnit.MINUTES);
     }
-    private void request_userLike(int id_user,int kind){
+    public void request_userLike(int id_user,int kind){
         if (userLike_run!=null){
             userLike_run=null;
         }
@@ -113,7 +113,7 @@ public class UserApi {
             handler_userLike.cancel(true);
         },2,TimeUnit.MINUTES);
     }
-    private void request_userSee(int id_user,int kind){
+    public void request_userSee(int id_user,int kind){
         if (userSee_run!=null){
             userSee_run=null;
         }
@@ -130,7 +130,7 @@ public class UserApi {
         },2,TimeUnit.MINUTES);
 
     }
-    private void request_userLater(int id_user,int kin){
+    public void request_userLater(int id_user,int kin){
         if (userLater_run!=null){
             userLater_run=null;
         }

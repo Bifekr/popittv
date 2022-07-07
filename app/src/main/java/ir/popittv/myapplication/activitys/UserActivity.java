@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -23,6 +24,7 @@ import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.databinding.ActivityUserBinding;
 import ir.popittv.myapplication.models.UserDataModel;
 import ir.popittv.myapplication.request.Service;
+import ir.popittv.myapplication.viewmodel.UserViewModel;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,6 +33,7 @@ import retrofit2.Response;
 public class UserActivity extends AppCompatActivity {
 
     ActivityUserBinding binding;
+    private UserViewModel userViewModel;
     View bottomView;
     View bottomView2;
 
@@ -51,13 +54,14 @@ public class UserActivity extends AppCompatActivity {
         binding = ActivityUserBinding.inflate(getLayoutInflater());
         // this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         setContentView(binding.getRoot());
+        userViewModel= new ViewModelProvider(this).get(UserViewModel.class);
         sharedPreferences = UserActivity.this.getSharedPreferences("user_info", MODE_PRIVATE);
         initRailActivity();
 
 
 
-        binding.avatarUserUserActivity.setOnClickListener(v -> { loginUser();});
 
+        binding.avatarUserUserActivity.setOnClickListener(v -> { loginUser();});
        phone_user  = sharedPreferences.getString("phone_user", null);
        name_user = sharedPreferences.getString("name_user", null);
         if (phone_user!=null) {
@@ -76,7 +80,6 @@ public class UserActivity extends AppCompatActivity {
                 loginUser();
 
             });
-
         }
 
         binding.tvExitUserActivity.setOnClickListener(v -> {
@@ -85,8 +88,6 @@ public class UserActivity extends AppCompatActivity {
             editor22.putString("phone_user", null);
             editor22.apply();
             Toast.makeText(getApplicationContext(), "شما از حساب خود خارج شدید", Toast.LENGTH_SHORT).show();
-
-
         });
 
 
