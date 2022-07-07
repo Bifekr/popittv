@@ -28,7 +28,7 @@ public class UserRepository {
     ////////////////////////////////////////
 
    public LiveData<List<FunnyDataModel>> getUserSub(){return userApi.getUserSub(); }
-   public void request_userSub(int id_user,int kind) {userApi.request_userSub(id_user, kind);}
+   public void request_userSub(int id_user) {userApi.request_userSub(id_user);}
 
     public LiveData<List<FunnyDataModel>> getUserSave(){return userApi.getUserSave(); }
     public void request_userSave(int id_user,int kind) {userApi.request_userSave(id_user, kind);}

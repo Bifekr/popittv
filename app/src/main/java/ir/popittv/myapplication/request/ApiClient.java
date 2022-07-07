@@ -46,7 +46,7 @@ public interface ApiClient {
     Call<UserDataModel> getUser(@Query("phone") String phone, @Query("code") String code);
 
     @GET("getUserSub.php")
-    Call<UserResponse> getUserSub(@Query("id_user") int id_user, @Query("kind") int kind);
+    Call<UserResponse> getUserSub(@Query("id_user") int id_user);
 
     @GET("getUserSave.php")
     Call<UserResponse> getUserSave(@Query("id_user") int id_user, @Query("id_table") int kind);

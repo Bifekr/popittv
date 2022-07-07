@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Objects;
 
 import ir.popittv.myapplication.R;
+import ir.popittv.myapplication.adapter.AllChannel_Adapter;
 import ir.popittv.myapplication.adapter.FunnyAdapter;
 import ir.popittv.myapplication.databinding.ActivityUserBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
@@ -43,6 +44,9 @@ public class UserActivity extends AppCompatActivity {
 
     private FunnyAdapter funnyAdapter;
     private FunnyAdapter funnyAdapter2;
+    private FunnyAdapter funnyAdapter3;
+    private AllChannel_Adapter channel_adapter;
+    private FunnyAdapter funnyAdapter5;
 
     View bottomView;
     View bottomView2;
@@ -68,6 +72,9 @@ public class UserActivity extends AppCompatActivity {
 
         funnyAdapter=new FunnyAdapter(this);
         funnyAdapter2=new FunnyAdapter(this);
+        funnyAdapter3=new FunnyAdapter(this);
+
+        funnyAdapter5=new FunnyAdapter(this);
 
 
         sharedPreferences = UserActivity.this.getSharedPreferences("user_info", MODE_PRIVATE);
@@ -83,8 +90,10 @@ public class UserActivity extends AppCompatActivity {
        name_user = sharedPreferences.getString("name_user", null);
        id_user = sharedPreferences.getInt("id_user",0);
         userViewModel.request_userLater(id_user,1);
+       // userSubMenuClick();
         userSaveMenuClick(id_user);
         userLaterMenuClick(id_user);
+        userSeeMenuClick(id_user);
         if (phone_user!=null) {
             binding.phoneNumUserActivity.setText(phone_user);
             binding.userNameUserActivity.setText(name_user);
@@ -111,9 +120,91 @@ public class UserActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "شما از حساب خود خارج شدید", Toast.LENGTH_SHORT).show();
         });
 
+       // getUserSub();
         getUserSave();
         getUserLater();
+        getUserSee();
 
+
+    }
+    private void getUserSub() {
+        userViewModel.getUserSub().observe(UserActivity.this,funnyDataModels -> {
+
+        });
+    }
+    private void userSubMenuClick() {
+        binding.menuFunnySubUser.setOnClickListener(v -> {
+
+            userViewModel.request_userSub(id_user);
+            binding.menuFunnySubUser.setBackgroundResource(R.drawable.shape_tag2);
+            binding.menuRealitySubUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuStudySubUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuFarsiSubUser.setBackgroundResource(R.drawable.shape_tag1);
+
+        });
+        binding.menuRealitySubUser.setOnClickListener(v -> {
+            userViewModel.request_userSub(id_user);
+            binding.menuFunnySubUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuRealitySubUser.setBackgroundResource(R.drawable.shape_tag2);
+            binding.menuStudySubUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuFarsiSubUser.setBackgroundResource(R.drawable.shape_tag1);
+        });
+
+        binding.menuStudyHistoryUser.setOnClickListener(v -> {
+            userViewModel.request_userSub(id_user);
+            binding.menuFunnySubUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuRealitySubUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuStudySubUser.setBackgroundResource(R.drawable.shape_tag2);
+            binding.menuFarsiSubUser.setBackgroundResource(R.drawable.shape_tag1);
+        });
+
+        binding.menuFarsiHistoryUser.setOnClickListener(v -> {
+            userViewModel.request_userSub(id_user);
+            binding.menuFunnySubUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuRealitySubUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuStudySubUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuFarsiSubUser.setBackgroundResource(R.drawable.shape_tag2);
+        });
+    }
+
+    private void getUserSee(){
+        userViewModel.getUserSee().observe(UserActivity.this,funnyDataModels -> {
+            funnyAdapter3.setData(funnyDataModels);
+        });
+    }
+    private void userSeeMenuClick(int id_user) {
+        binding.menuFunnyHistoryUser.setOnClickListener(v -> {
+
+            userViewModel.request_userSee(id_user,1);
+            binding.menuFunnyHistoryUser.setBackgroundResource(R.drawable.shape_tag2);
+            binding.menuRealityHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuStudyHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuFarsiHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
+
+        });
+        binding.menuRealityHistoryUser.setOnClickListener(v -> {
+            userViewModel.request_userSee(id_user,2);
+            binding.menuFunnyHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuRealityHistoryUser.setBackgroundResource(R.drawable.shape_tag2);
+            binding.menuStudyHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuFarsiHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
+        });
+
+        binding.menuStudyHistoryUser.setOnClickListener(v -> {
+            userViewModel.request_userSee(id_user,3);
+            binding.menuFunnyHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuRealityHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuStudyHistoryUser.setBackgroundResource(R.drawable.shape_tag2);
+            binding.menuFarsiHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
+        });
+
+        binding.menuFarsiHistoryUser.setOnClickListener(v -> {
+            userViewModel.request_userSee(id_user,4);
+            binding.menuFunnyHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuRealityHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuStudyHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuFarsiHistoryUser.setBackgroundResource(R.drawable.shape_tag2);
+        });
 
     }
 
@@ -162,7 +253,6 @@ public class UserActivity extends AppCompatActivity {
     }
 
 
-
     private void getUserSave() {
         userViewModel.getUserSave().observe(this, funnyDataModels -> {
 
@@ -209,6 +299,11 @@ public class UserActivity extends AppCompatActivity {
 
 
     private void intRvUser() {
+
+        //RecyclerView User WatchLater
+        binding.rvSaveChannelUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, RecyclerView.HORIZONTAL,false));
+        binding.rvSaveChannelUserActivity.setAdapter(funnyAdapter5);
+
         //RecyclerView user Save Video
         binding.rvBookMarkVideoUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this,LinearLayoutManager.HORIZONTAL,false));
         binding.rvBookMarkVideoUserActivity.setAdapter(funnyAdapter);
@@ -216,6 +311,11 @@ public class UserActivity extends AppCompatActivity {
         //RecyclerView User WatchLater
         binding.rvWatchLaterUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, RecyclerView.HORIZONTAL,false));
         binding.rvWatchLaterUserActivity.setAdapter(funnyAdapter2);
+
+        //RecyclerView User WatchLater
+        binding.rvHistoryVideoUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, RecyclerView.HORIZONTAL,false));
+        binding.rvHistoryVideoUserActivity.setAdapter(funnyAdapter3);
+
     }
 
     private void loginUser() {

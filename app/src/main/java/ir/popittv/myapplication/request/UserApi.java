@@ -67,13 +67,13 @@ public class UserApi {
     public LiveData<List<FunnyDataModel>> getUserLike(){return mUserLike;}
 
 
-    public void request_userSub(int id_user,int kind){
+    public void request_userSub(int id_user){
 
         if (userSub_run!=null){
             userSub_run=null;
         }
 
-        userSub_run=new UserSub_Run(id_user,kind);
+        userSub_run=new UserSub_Run(id_user);
 
         Future handler_userSub = AppExecuter.getAppExecuter().networkIo().submit(userSub_run);
 
@@ -153,12 +153,11 @@ public class UserApi {
     private class UserSub_Run implements Runnable{
 
         private int id_user;
-        private int kind;
+
         private boolean canclable;
 
-        public UserSub_Run(int id_user, int kind) {
+        public UserSub_Run(int id_user) {
             this.id_user = id_user;
-            this.kind = kind;
             canclable = false;
         }
 
@@ -169,7 +168,7 @@ public class UserApi {
                 if (canclable){
                     return;
                 }
-                Response response=call_userSub(id_user,kind).execute();
+                Response response=call_userSub(id_user).execute();
                 if (response.isSuccessful()){
 
                     assert response.body()!=null;
@@ -188,8 +187,8 @@ public class UserApi {
 
         }
 
-        private Call<UserResponse> call_userSub(int id_user,int kind){
-            return Service.getApiClient().getUserSub(id_user,kind);
+        private Call<UserResponse> call_userSub(int id_user){
+            return Service.getApiClient().getUserSub(id_user);
         }
 
     }

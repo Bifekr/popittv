@@ -19,7 +19,7 @@ public class UserViewModel extends ViewModel {
     ///////////////////////////////////////////
 
     public LiveData<List<FunnyDataModel>> getUserSub(){return userRepository.getUserSub(); }
-    public void request_userSub(int id_user,int kind) {userRepository.request_userSub(id_user, kind);}
+    public void request_userSub(int id_user) {userRepository.request_userSub(id_user);}
 
     public LiveData<List<FunnyDataModel>> getUserSave(){return userRepository.getUserSave(); }
     public void request_userSave(int id_user,int kind) {userRepository.request_userSave(id_user, kind);}
