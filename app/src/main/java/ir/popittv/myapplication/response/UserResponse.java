@@ -8,7 +8,7 @@ public class UserResponse {
 
     private List<FunnyDataModel> userSub;
     private List<FunnyDataModel> userSave;
-    private List<FunnyDataModel> userWatchLater;
+    private List<FunnyDataModel> userLater;
     private List<FunnyDataModel> userSee;
     private List<FunnyDataModel> userLike;
 
@@ -18,8 +18,8 @@ public class UserResponse {
         return userSave;
     }
 
-    public List<FunnyDataModel> getUserWatchLater() {
-        return userWatchLater;
+    public List<FunnyDataModel> getUserLater() {
+        return userLater;
     }
 
     public List<FunnyDataModel> getUserSee() {

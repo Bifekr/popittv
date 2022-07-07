@@ -45,7 +45,21 @@ public interface ApiClient {
     @GET("getCode.php")
     Call<UserDataModel> getUser(@Query("phone") String phone, @Query("code") String code);
 
-    @GET("getUser_sub.php")
-    Call<UserResponse> getUser_sub(@Query("id_user") String id_user, @Query("kind") int kind);
+    @GET("getUserSub.php")
+    Call<UserResponse> getUserSub(@Query("id_user") int id_user, @Query("kind") int kind);
+
+    @GET("getUserSave.php")
+    Call<UserResponse> getUserSave(@Query("id_user") int id_user, @Query("kind") int kind);
+
+    @GET("getUserLater.php")
+    Call<UserResponse> getUserLater(@Query("id_user") int id_user, @Query("kind") int kind);
+
+    @GET("getUserLike.php")
+    Call<UserResponse> getUserLike(@Query("id_user") int id_user, @Query("kind") int kind);
+
+    @GET("getUserSee.php")
+    Call<UserResponse> getUserSee(@Query("id_user") int id_user, @Query("kind") int kind);
+
+
 
 }
