@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -41,6 +42,7 @@ public class UserActivity extends AppCompatActivity {
     private UserViewModel userViewModel;
 
     private FunnyAdapter funnyAdapter;
+    private FunnyAdapter funnyAdapter2;
 
     View bottomView;
     View bottomView2;
@@ -65,19 +67,24 @@ public class UserActivity extends AppCompatActivity {
         userViewModel= new ViewModelProvider(this).get(UserViewModel.class);
 
         funnyAdapter=new FunnyAdapter(this);
+        funnyAdapter2=new FunnyAdapter(this);
 
 
         sharedPreferences = UserActivity.this.getSharedPreferences("user_info", MODE_PRIVATE);
         initRailActivity();
 
 
-        userSaveMenuClick(id_user);
+
 
         intRvUser();
-        userViewModel.request_userSave(1,1);
+
         binding.avatarUserUserActivity.setOnClickListener(v -> { loginUser();});
        phone_user  = sharedPreferences.getString("phone_user", null);
        name_user = sharedPreferences.getString("name_user", null);
+       id_user = sharedPreferences.getInt("id_user",0);
+        userViewModel.request_userLater(id_user,1);
+        userSaveMenuClick(id_user);
+        userLaterMenuClick(id_user);
         if (phone_user!=null) {
             binding.phoneNumUserActivity.setText(phone_user);
             binding.userNameUserActivity.setText(name_user);
@@ -105,15 +112,56 @@ public class UserActivity extends AppCompatActivity {
         });
 
         getUserSave();
+        getUserLater();
 
 
     }
 
-    private void intRvUser() {
-        //RecyclerView user Save Video
-        binding.rvBookMarkVideoUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this,LinearLayoutManager.HORIZONTAL,false));
-        binding.rvBookMarkVideoUserActivity.setAdapter(funnyAdapter);
+
+    private void getUserLater() {
+        userViewModel.getUserLater().observe(UserActivity.this, funnyDataModels -> {
+
+            funnyAdapter2.setData(funnyDataModels);
+
+        });
     }
+    private void userLaterMenuClick(int id_user) {
+        binding.menuFunnyWatchLaterUser.setOnClickListener(v -> {
+
+            userViewModel.request_userLater(id_user,1);
+            binding.menuFunnyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag2);
+            binding.menuRealityWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuStudyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuFarsiWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
+
+        });
+        binding.menuRealityWatchLaterUser.setOnClickListener(v -> {
+            userViewModel.request_userLater(id_user,2);
+            binding.menuFunnyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuRealityWatchLaterUser.setBackgroundResource(R.drawable.shape_tag2);
+            binding.menuStudyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuFarsiWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
+        });
+
+        binding.menuStudyWatchLaterUser.setOnClickListener(v -> {
+            userViewModel.request_userLater(id_user,3);
+            binding.menuFunnyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuRealityWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuStudyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag2);
+            binding.menuFarsiWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
+        });
+
+        binding.menuFarsiWatchLaterUser.setOnClickListener(v -> {
+            userViewModel.request_userLater(id_user,4);
+            binding.menuFunnyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuRealityWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuStudyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuFarsiWatchLaterUser.setBackgroundResource(R.drawable.shape_tag2);
+        });
+
+    }
+
+
 
     private void getUserSave() {
         userViewModel.getUserSave().observe(this, funnyDataModels -> {
@@ -124,26 +172,51 @@ public class UserActivity extends AppCompatActivity {
 
         });
     }
-
     private void userSaveMenuClick(int id_user) {
         binding.menuFunnyBookmarkUser.setOnClickListener(v -> {
 
             userViewModel.request_userSave(id_user,1);
+            binding.menuFunnyBookmarkUser.setBackgroundResource(R.drawable.shape_tag2);
+            binding.menuRealityBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuStudyBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuFarsiBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
 
         });
         binding.menuRealityBookmarkUser.setOnClickListener(v -> {
             userViewModel.request_userSave(id_user,2);
+            binding.menuFunnyBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuRealityBookmarkUser.setBackgroundResource(R.drawable.shape_tag2);
+            binding.menuStudyBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuFarsiBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
         });
 
         binding.menuStudyBookmarkUser.setOnClickListener(v -> {
             userViewModel.request_userSave(id_user,3);
+            binding.menuFunnyBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuRealityBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuStudyBookmarkUser.setBackgroundResource(R.drawable.shape_tag2);
+            binding.menuFarsiBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
         });
 
         binding.menuFarsiBookmarkUser.setOnClickListener(v -> {
             userViewModel.request_userSave(id_user,4);
+            binding.menuFunnyBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuRealityBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuStudyBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuFarsiBookmarkUser.setBackgroundResource(R.drawable.shape_tag2);
         });
     }
 
+
+    private void intRvUser() {
+        //RecyclerView user Save Video
+        binding.rvBookMarkVideoUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this,LinearLayoutManager.HORIZONTAL,false));
+        binding.rvBookMarkVideoUserActivity.setAdapter(funnyAdapter);
+
+        //RecyclerView User WatchLater
+        binding.rvWatchLaterUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, RecyclerView.HORIZONTAL,false));
+        binding.rvWatchLaterUserActivity.setAdapter(funnyAdapter2);
+    }
 
     private void loginUser() {
         String check = sharedPreferences.getString("phone_user", "");

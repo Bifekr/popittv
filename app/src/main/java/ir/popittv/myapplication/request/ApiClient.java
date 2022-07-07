@@ -52,13 +52,13 @@ public interface ApiClient {
     Call<UserResponse> getUserSave(@Query("id_user") int id_user, @Query("id_table") int kind);
 
     @GET("getUserLater.php")
-    Call<UserResponse> getUserLater(@Query("id_user") int id_user, @Query("kind") int kind);
+    Call<UserResponse> getUserLater(@Query("id_user") int id_user, @Query("id_table") int kind);
 
     @GET("getUserLike.php")
-    Call<UserResponse> getUserLike(@Query("id_user") int id_user, @Query("kind") int kind);
+    Call<UserResponse> getUserLike(@Query("id_user") int id_user, @Query("id_table") int kind);
 
     @GET("getUserSee.php")
-    Call<UserResponse> getUserSee(@Query("id_user") int id_user, @Query("kind") int kind);
+    Call<UserResponse> getUserSee(@Query("id_user") int id_user, @Query("id_table") int kind);
 
 
 
