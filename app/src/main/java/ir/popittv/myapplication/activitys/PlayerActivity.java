@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.upstream.cache.CacheDataSource;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
@@ -229,7 +230,10 @@ public class PlayerActivity extends AppCompatActivity {
     private void initExo() {
         try {
 
-            exoPlayer = new SimpleExoPlayer.Builder(this).build();
+            exoPlayer = new SimpleExoPlayer.Builder(this)
+
+
+                    .build();
             binding.exoPlayer.setPlayer(exoPlayer);
             exoPlayer.prepare();
             exoPlayer.setPlayWhenReady(playWhenReady);
