@@ -1,7 +1,9 @@
 package ir.popittv.myapplication.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -14,6 +16,8 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import ir.popittv.myapplication.R;
+import ir.popittv.myapplication.activitys.DetailActivity;
+import ir.popittv.myapplication.activitys.PlayerActivity;
 import ir.popittv.myapplication.databinding.ItemVidDefultBinding;
 import ir.popittv.myapplication.databinding.ItemVidThumbBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
@@ -69,6 +73,24 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
             int id_funny2 = funnyDataModels.get(position).getId_funny();
             onClickFunny.onClickLater(id_funny2);
             holder.binding.ivLaterItemDef.setBackgroundResource(R.drawable.shape_tag2);
+        });
+
+        holder.binding.ivPosterItemVideo.setOnClickListener(v -> {
+            int id_funny3 = funnyDataModels.get(position).getId_funny();
+            onClickFunny.onClickSee(id_funny3);
+            Intent intent = new Intent(context, PlayerActivity.class);
+            id_funny3 = funnyDataModels.get(position).getId_funny();
+            intent.putExtra("id_vid_funny", id_funny3);
+            context.startActivity(intent);
+
+        });
+
+        holder.binding.ProfileChannelVideoThumb.setOnClickListener(v -> {
+            int id_channel=funnyDataModels.get(position).getId_channel();
+            onClickFunny.onClickSub(id_channel);
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra("id_channel", id_channel);
+            context.startActivity(intent);
         });
 
     }

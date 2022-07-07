@@ -2,6 +2,7 @@ package ir.popittv.myapplication.activitys;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,21 +39,32 @@ import ir.popittv.myapplication.adapter.TagAdapter;
 import ir.popittv.myapplication.databinding.ActivityMainBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.models.HashTagDataModel;
+import ir.popittv.myapplication.request.Service;
 import ir.popittv.myapplication.utils.OnClickFrg1;
 import ir.popittv.myapplication.utils.OnClickFunny;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnClickFunny {
 
 
     //global Variable
     private int id_channel;
+    private int id_user;
     private MainViewModel mainViewModel;
     private ActivityMainBinding binding;
+
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     private FunnyAdapter funnyAdapter;
     private FunnyAdapter funnyAdapter_liky;
     private FunnyAdapter funnyAdapter_view;
+
+    private final int FUNNY_KIND=1;
 
     //global adapter
     private RvChannel_Frg1 rvChannel_frg1;
@@ -72,6 +84,9 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 
         setContentView(binding.getRoot());
+
+        sharedPreferences=getSharedPreferences("user_info",MODE_PRIVATE);
+        id_user=sharedPreferences.getInt("id_user",0);
 
 
         //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -108,7 +123,9 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
         getFunny_subMenu();
 
 
+binding.profileShowChannelMainActivity.setOnClickListener(v -> {
 
+});
 
     }
 
@@ -284,6 +301,12 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
 
                 Glide.with(this).load(channelDataModel.getProfile_chann())
                         .into(binding.profileShowChannelMainActivity);
+                binding.profileShowChannelMainActivity.setOnClickListener(v -> {
+                int id_channel_single=channelDataModel.getId_channel();
+                    Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                    intent.putExtra("id_channel", id_channel_single);
+                    startActivity(intent);
+                });
                 binding.subShowChannelMainActivity.setText(channelDataModel.getFollowers());
                 binding.ageShowChannelMainActivity.setText(channelDataModel.getAge());
                 binding.titleShowChannelMainActivity.setText(channelDataModel.getName_chan_en().trim());
@@ -354,21 +377,73 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
 
     @Override
     public void onClickSave(int id_vid) {
-        Toast.makeText(this, ""+id_vid, Toast.LENGTH_SHORT).show();
+        Service.getApiClient().insertUserSave(id_user,id_vid,1).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(MainActivity.this, "bookmark saved", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
+
     }
 
     @Override
     public void onClickSee(int id_vid) {
-        Toast.makeText(this, ""+id_vid, Toast.LENGTH_SHORT).show();
+        Service.getApiClient().insertUserSee(id_user,id_vid,FUNNY_KIND).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+       
     }
 
     @Override
     public void onClickLike(int id_vid) {
-        Toast.makeText(this, ""+id_vid, Toast.LENGTH_SHORT).show();
+        Service.getApiClient().insertUserLike(id_user,id_vid,FUNNY_KIND).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
     }
 
     @Override
     public void onClickLater(int id_vid) {
-        Toast.makeText(this, ""+id_vid, Toast.LENGTH_SHORT).show();
+        Service.getApiClient().insertUserLater(id_user,id_vid,FUNNY_KIND).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onClickSub(int id_channel) {
+
     }
 }

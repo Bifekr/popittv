@@ -313,7 +313,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
         binding.rvWatchLaterUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, RecyclerView.HORIZONTAL,false));
         binding.rvWatchLaterUserActivity.setAdapter(funnyAdapter2);
 
-        //RecyclerView User WatchLater
+        //RecyclerView User History
         binding.rvHistoryVideoUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, RecyclerView.HORIZONTAL,false));
         binding.rvHistoryVideoUserActivity.setAdapter(funnyAdapter3);
 
@@ -491,6 +491,11 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
 
     @Override
     public void onClickLater(int id_vid) {
+
+    }
+
+    @Override
+    public void onClickSub(int id_channel) {
 
     }
 }

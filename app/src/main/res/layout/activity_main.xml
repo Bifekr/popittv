@@ -187,11 +187,11 @@
         <androidx.cardview.widget.CardView
           android:id="@+id/parentChannelDetail_cardView"
           android:layout_width="0dp"
-          android:layout_height="160dp"
+          android:layout_height="140dp"
           android:layout_marginTop="@dimen/plane_16"
           android:layout_marginEnd="10dp"
           app:cardCornerRadius="36dp"
-          app:cardElevation="@dimen/plane_16"
+          app:cardElevation="@dimen/plane_08"
           app:layout_constraintBottom_toTopOf="@id/parentPopular_mainActivity"
           app:layout_constraintEnd_toStartOf="@id/lastVideo_watching"
           app:layout_constraintStart_toStartOf="parent"
@@ -203,13 +203,19 @@
 
             <androidx.recyclerview.widget.RecyclerView
               android:id="@+id/rvDetail_frg1"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent" />
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:background="@color/popit_yellow"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintWidth_percent=".83"
+              app:layout_constraintHorizontal_bias="1"
+              app:layout_constraintEnd_toEndOf="parent"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+              android:id="@+id/conDetail"
               android:layout_width="120dp"
               android:layout_height="match_parent"
-              android:background="@drawable/shape_tag6"
+              android:background="@drawable/shape_tag1"
               android:gravity="center_vertical|center_horizontal"
               android:orientation="vertical"
               app:layout_constraintStart_toStartOf="parent">
@@ -220,7 +226,7 @@
                 android:layout_height="80dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/avatar_2"
-                android:elevation="@dimen/plane_16"
+                android:elevation="@dimen/plane_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -245,7 +251,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/baloo"
-                android:textColor="#6D4C41"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@id/tvAge_mainActivity"
                 app:layout_constraintEnd_toEndOf="@id/sub_showChannel_mainActivity"
@@ -309,7 +314,7 @@
         <androidx.cardview.widget.CardView
           android:id="@+id/parentPopular_mainActivity"
           android:layout_width="0dp"
-          android:layout_height="160dp"
+          android:layout_height="140dp"
           android:layout_marginTop="@dimen/plane_16"
           android:layout_marginEnd="10dp"
           app:cardCornerRadius="36dp"
@@ -378,7 +383,7 @@
         <androidx.cardview.widget.CardView
           android:id="@+id/parentBestView_mainActivity"
           android:layout_width="0dp"
-          android:layout_height="160dp"
+          android:layout_height="140dp"
           android:layout_marginTop="@dimen/plane_16"
           android:layout_marginEnd="10dp"
           app:cardCornerRadius="36dp"
@@ -447,7 +452,7 @@
         <androidx.cardview.widget.CardView
           android:id="@+id/parentInfint_cardView"
           android:layout_width="0dp"
-          android:layout_height="180dp"
+          android:layout_height="140dp"
           android:layout_marginTop="@dimen/plane_08"
           android:layout_marginEnd="10dp"
           app:cardCornerRadius="@dimen/plane_24"
@@ -516,7 +521,7 @@
         <androidx.cardview.widget.CardView
           android:id="@+id/parentInfint2_cardView"
           android:layout_width="0dp"
-          android:layout_height="180dp"
+          android:layout_height="140dp"
           android:layout_marginEnd="10dp"
           app:cardCornerRadius="@dimen/plane_24"
           app:layout_constraintBottom_toBottomOf="@id/parentInfint_cardView"

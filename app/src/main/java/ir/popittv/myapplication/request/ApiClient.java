@@ -61,5 +61,13 @@ public interface ApiClient {
     Call<UserResponse> getUserSee(@Query("id_user") int id_user, @Query("id_table") int kind);
 
 
+    @GET("userSave.php")
+    Call<ResponseBody> insertUserSave(@Query("id_user") int id_user,@Query("id_vid") int id_vid, @Query("id_table") int kind);
 
+    @GET("userSee.php")
+    Call<ResponseBody> insertUserSee(@Query("id_user") int id_user,@Query("id_vid") int id_vid, @Query("id_table") int kind);
+    @GET("userLike.php")
+    Call<ResponseBody> insertUserLike(@Query("id_user") int id_user,@Query("id_vid") int id_vid, @Query("id_table") int kind);
+    @GET("userLater.php")
+    Call<ResponseBody> insertUserLater(@Query("id_user") int id_user,@Query("id_vid") int id_vid, @Query("id_table") int kind);
 }

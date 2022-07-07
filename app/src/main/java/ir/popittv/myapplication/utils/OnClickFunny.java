@@ -6,4 +6,5 @@ public interface OnClickFunny {
     void onClickSee(int id_vid);
     void onClickLike(int id_vid);
     void onClickLater(int id_vid);
+    void onClickSub(int id_channel);
 }
