@@ -1,5 +1,6 @@
 package ir.popittv.myapplication.activitys;
 
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -7,8 +8,10 @@ import android.os.Handler;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -16,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
@@ -26,8 +30,15 @@ import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.Timeline;
 import com.google.android.exoplayer2.metadata.Metadata;
+import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.TrackGroupArray;
+import com.google.android.exoplayer2.source.ads.AdsMediaSource;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
+import com.google.android.exoplayer2.ui.PlayerControlView;
+import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.upstream.DataSource;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
 import com.google.android.exoplayer2.video.VideoListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -45,7 +56,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PlayerActivity extends AppCompatActivity {
+public class PlayerActivity extends AppCompatActivity  {
 
     SharedPreferences.Editor editor;
     TextInputLayout et_phone;
@@ -67,6 +78,29 @@ public class PlayerActivity extends AppCompatActivity {
     private int id_vid_funny;
     private View bottomView;
     private View bottomView2;
+
+
+/////////////////////////////////////////////////////////////////////////////////
+
+    private final String STATE_RESUME_WINDOW = "resumeWindow";
+    private final String STATE_RESUME_POSITION = "resumePosition";
+    private final String STATE_PLAYER_FULLSCREEN = "playerFullscreen";
+
+    private PlayerView playerView;
+    private MediaSource mVideoSource;
+    private boolean mExoPlayerFullscreen = false;
+    private FrameLayout mFullScreenButton;
+    private ImageView mFullScreenIcon;
+    private Dialog mFullScreenDialog;
+    private  DataSource.Factory dataSourceFactory;
+
+    private SimpleExoPlayer player;
+
+    private int mResumeWindow;
+    private long mResumePosition;
+
+////////////////////////////////////
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,11 +130,83 @@ public class PlayerActivity extends AppCompatActivity {
 */
         if (phone_user==null) { login();}
 
+///////////////////////
+        dataSourceFactory =
+                new DefaultDataSourceFactory(
+                        this, Util.getUserAgent(this, getString(R.string.app_name)));
 
+        if (savedInstanceState != null) {
+            mResumeWindow = savedInstanceState.getInt(STATE_RESUME_WINDOW);
+            mResumePosition = savedInstanceState.getLong(STATE_RESUME_POSITION);
+            mExoPlayerFullscreen = savedInstanceState.getBoolean(STATE_PLAYER_FULLSCREEN);
+        }
+      ////////////////////////////////////
 
 
     }
+    ////////////////////////////
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+
+        outState.putInt(STATE_RESUME_WINDOW, mResumeWindow);
+        outState.putLong(STATE_RESUME_POSITION, mResumePosition);
+        outState.putBoolean(STATE_PLAYER_FULLSCREEN, mExoPlayerFullscreen);
+
+        super.onSaveInstanceState(outState);
+    }
+/////////////////////////////////////
+
+    private void initFullscreenDialog() {
+
+        mFullScreenDialog = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen) {
+            public void onBackPressed() {
+                if (mExoPlayerFullscreen)
+                    closeFullscreenDialog();
+                super.onBackPressed();
+            }
+        };
+    }
+
+
+    private void openFullscreenDialog() {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        ((ViewGroup) playerView.getParent()).removeView(playerView);
+        mFullScreenDialog.addContentView(playerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(PlayerActivity.this, R.drawable.ic_fullscreen_skrink));
+        mExoPlayerFullscreen = true;
+        mFullScreenDialog.show();
+
+    }
+
+
+    private void closeFullscreenDialog() {
+
+        ((ViewGroup) playerView.getParent()).removeView(playerView);
+        ((FrameLayout) findViewById(R.id.main_media_frame)).addView(playerView);
+        mExoPlayerFullscreen = false;
+        mFullScreenDialog.dismiss();
+        mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(PlayerActivity.this, R.drawable.ic_fullscreen_expand));
+
+    }
+
+
+    private void initFullscreenButton() {
+
+        PlayerControlView controlView = playerView.findViewById(R.id.exo_controller);
+        mFullScreenIcon = controlView.findViewById(R.id.exo_fullscreen_icon);
+        mFullScreenButton = controlView.findViewById(R.id.exo_fullscreen_button);
+        mFullScreenButton.setOnClickListener(v -> {
+            if (!mExoPlayerFullscreen)
+                openFullscreenDialog();
+            else
+                closeFullscreenDialog();
+        });
+
+    }
+
+
+    ///////////////////////////////////////
 
     private void login() {
         new Handler().postDelayed(() -> {
@@ -229,7 +335,7 @@ public class PlayerActivity extends AppCompatActivity {
             exoPlayer = new SimpleExoPlayer.Builder(this)
 
                     .build();
-            binding.exoPlayer.setPlayer(exoPlayer);
+            binding.exoplayer.setPlayer(exoPlayer);
             exoPlayer.prepare();
             exoPlayer.addListener(new Player.EventListener() {
                 @Override
@@ -373,7 +479,7 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
     private void hideSystemUi() {
-        binding.exoPlayer.setSystemUiVisibility(
+        binding.exoplayer.setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LOW_PROFILE |
                         View.SYSTEM_UI_FLAG_FULLSCREEN |
                         View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
@@ -385,7 +491,11 @@ public class PlayerActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        if (playerView == null) {
+            playerView = findViewById(R.id.exoplayer);
+            initFullscreenDialog();
+            initFullscreenButton();
+        }
         if (exoPlayer==null) {
             initExo();
             hideSystemUi();

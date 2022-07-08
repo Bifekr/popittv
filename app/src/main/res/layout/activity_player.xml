@@ -14,52 +14,73 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       tools:context=".activitys.PlayerActivity">
+<FrameLayout
+  android:id="@+id/main_media_frame"
+  android:layout_width="0dp"
+  android:layout_height="250dp"
 
-      <com.google.android.exoplayer2.ui.PlayerView
-      android:id="@+id/exoPlayer"
-        android:layout_width="0dp"
-        android:layout_height="250dp"
 
+  app:auto_show="true"
+  app:hide_on_touch="true"
+  app:show_timeout="3000"
+  android:background="#ffffff"
 
-        app:auto_show="true"
-        app:hide_on_touch="true"
-        app:show_timeout="3000"
-        android:background="#ffffff"
-
-        app:fastforward_increment="10000"
-        app:repeat_toggle_modes="none"
-        app:resize_mode="fixed_width"
-        app:rewind_increment="15000"
-        app:surface_type="surface_view"
-        app:use_controller="true"
-
-        app:controller_layout_id="@layout/layout_exoplayer_control_views"
+  app:fastforward_increment="10000"
+  app:repeat_toggle_modes="none"
+  app:resize_mode="fixed_width"
+  app:rewind_increment="15000"
+  app:surface_type="surface_view"
+  app:use_controller="true"
 
 
 
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/rvChannelVideo_player"/>
-
-      <ProgressBar
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:id="@+id/progress_bar"
-        android:visibility="gone"
 
 
-        app:layout_constraintStart_toStartOf="@id/exoPlayer"
-        app:layout_constraintEnd_toEndOf="@id/exoPlayer"
-        app:layout_constraintTop_toTopOf="@id/exoPlayer"
-        app:layout_constraintBottom_toBottomOf="@id/exoPlayer"/>
+  app:layout_constraintHorizontal_bias="0"
+  app:layout_constraintVertical_bias="0"
+  app:layout_constraintStart_toStartOf="parent"
+  app:layout_constraintTop_toTopOf="parent"
+  app:layout_constraintEnd_toStartOf="@id/rvChannelVideo_player">
+  <com.google.android.exoplayer2.ui.PlayerView
+    android:id="@+id/exoplayer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+  app:controller_layout_id="@layout/exo_playback_control_view"
+
+    app:auto_show="true"
+    app:hide_on_touch="true"
+    app:show_timeout="3000"
+    android:background="#ffffff"
+
+    app:fastforward_increment="10000"
+    app:repeat_toggle_modes="none"
+    app:resize_mode="fixed_width"
+    app:rewind_increment="15000"
+    app:surface_type="surface_view"
+    app:use_controller="true"
+    />
+
+  <ProgressBar
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:id="@+id/progress_bar"
+    android:visibility="gone"
+
+
+    app:layout_constraintStart_toStartOf="@id/exoplayer"
+    app:layout_constraintEnd_toEndOf="@id/exoplayer"
+    app:layout_constraintTop_toTopOf="@id/exoplayer"
+    app:layout_constraintBottom_toBottomOf="@id/exoplayer"/>
+
+</FrameLayout>
+
       <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvChannelVideo_player"
         android:layout_width="220dp"
         android:layout_height="0dp"
-        app:layout_constraintStart_toEndOf="@id/exoPlayer"
-        app:layout_constraintTop_toTopOf="@id/exoPlayer"
+        app:layout_constraintStart_toEndOf="@id/main_media_frame"
+        app:layout_constraintTop_toTopOf="@id/main_media_frame"
         app:layout_constraintBottom_toBottomOf="@id/parentCon_activityPlayer"
         app:layout_constraintEnd_toEndOf="parent"/>
       <!--<ImageView
@@ -76,9 +97,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/plane_08"
-        app:layout_constraintTop_toBottomOf="@id/exoPlayer"
+        app:layout_constraintTop_toBottomOf="@id/main_media_frame"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/exoPlayer">
+        app:layout_constraintEnd_toEndOf="@id/main_media_frame">
 
         <androidx.cardview.widget.CardView
           android:id="@+id/parentChannelProfile_itemAllChan"
