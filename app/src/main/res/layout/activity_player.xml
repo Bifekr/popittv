@@ -33,7 +33,7 @@
         app:surface_type="surface_view"
         app:use_controller="true"
 
-        app:controller_layout_id="@layout/custom_exo_controller"
+        app:controller_layout_id="@layout/layout_exoplayer_control_views"
 
 
         app:layout_constraintHorizontal_bias="0"

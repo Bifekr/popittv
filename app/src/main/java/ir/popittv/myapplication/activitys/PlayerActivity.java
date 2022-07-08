@@ -89,11 +89,11 @@ public class PlayerActivity extends AppCompatActivity {
 
         getFunny_single();
         initExo();
-        btn_fullScreen = binding.exoPlayer.findViewById(R.id.bt_fullscreen);
+     /*   btn_fullScreen = binding.exoPlayer.findViewById(R.id.bt_fullscreen);
         btn_fullScreen.setOnClickListener(v -> {
 
         });
-
+*/
         if (phone_user==null) { login();}
 
 
@@ -216,6 +216,7 @@ public class PlayerActivity extends AppCompatActivity {
             playWhenReady = exoPlayer.getPlayWhenReady();
             playBackPosition = exoPlayer.getCurrentPosition();
             currentWindow = exoPlayer.getCurrentWindowIndex();
+
             exoPlayer.release();
             exoPlayer = null;
         }
