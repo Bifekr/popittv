@@ -7,22 +7,35 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.MediaController;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
+import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.MediaItem;
+import com.google.android.exoplayer2.PlaybackParameters;
+import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.Timeline;
+import com.google.android.exoplayer2.metadata.Metadata;
+import com.google.android.exoplayer2.source.TrackGroupArray;
+import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.upstream.cache.CacheDataSource;
+import com.google.android.exoplayer2.video.VideoListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.IOException;
+import java.util.List;
 
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.databinding.ActivityPlayerBinding;
@@ -81,6 +94,9 @@ public class PlayerActivity extends AppCompatActivity {
 
         id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
         mainViewModel.requestFunny_single(id_vid_funny);
+
+
+
 
         getFunny_single();
         initExo();
@@ -230,12 +246,123 @@ public class PlayerActivity extends AppCompatActivity {
     private void initExo() {
         try {
 
-            exoPlayer = new SimpleExoPlayer.Builder(this)
-
+            exoPlayer = new  SimpleExoPlayer.Builder(this)
 
                     .build();
             binding.exoPlayer.setPlayer(exoPlayer);
             exoPlayer.prepare();
+exoPlayer.addListener(new Player.EventListener() {
+    @Override
+    public void onTimelineChanged(Timeline timeline, int reason) {
+
+    }
+
+    @Override
+    public void onTimelineChanged(Timeline timeline, @Nullable Object manifest, int reason) {
+
+    }
+
+    @Override
+    public void onMediaItemTransition(@Nullable MediaItem mediaItem, int reason) {
+
+    }
+
+    @Override
+    public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
+
+    }
+
+    @Override
+    public void onStaticMetadataChanged(List<Metadata> metadataList) {
+
+    }
+
+    @Override
+    public void onIsLoadingChanged(boolean isLoading) {
+
+    }
+
+    @Override
+    public void onLoadingChanged(boolean isLoading) {
+
+    }
+
+    @Override
+    public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+
+    }
+
+    @Override
+    public void onPlaybackStateChanged(int state) {
+
+    }
+
+    @Override
+    public void onPlayWhenReadyChanged(boolean playWhenReady, int reason) {
+
+    }
+
+    @Override
+    public void onPlaybackSuppressionReasonChanged(int playbackSuppressionReason) {
+
+    }
+
+    @Override
+    public void onIsPlayingChanged(boolean isPlaying) {
+
+    }
+
+    @Override
+    public void onRepeatModeChanged(int repeatMode) {
+
+    }
+
+    @Override
+    public void onShuffleModeEnabledChanged(boolean shuffleModeEnabled) {
+
+    }
+
+    @Override
+    public void onPlayerError(ExoPlaybackException error) {
+
+    }
+
+    @Override
+    public void onPositionDiscontinuity(int reason) {
+
+    }
+
+    @Override
+    public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
+
+    }
+
+    @Override
+    public void onSeekProcessed() {
+
+    }
+
+    @Override
+    public void onExperimentalOffloadSchedulingEnabledChanged(boolean offloadSchedulingEnabled) {
+
+    }
+
+    @Override
+    public void onExperimentalSleepingForOffloadChanged(boolean sleepingForOffload) {
+
+    }
+
+    @Override
+    public void onEvents(Player player, Player.Events events) {
+
+    }
+});
+            exoPlayer.addVideoListener(new VideoListener() {
+                @Override
+                public void onSurfaceSizeChanged(int width, int height) {
+
+                }
+            });
             exoPlayer.setPlayWhenReady(playWhenReady);
             exoPlayer.seekTo(currentWindow, playBackPosition);
 
@@ -296,5 +423,7 @@ public class PlayerActivity extends AppCompatActivity {
         super.onStop();
         releasePlayer();
     }
+
+
 
 }

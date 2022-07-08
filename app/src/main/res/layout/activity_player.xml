@@ -16,25 +16,39 @@
       tools:context=".activitys.PlayerActivity">
 
       <com.google.android.exoplayer2.ui.PlayerView
-        android:id="@+id/exoPlayer"
+      android:id="@+id/exoPlayer"
         android:layout_width="0dp"
         android:layout_height="250dp"
 
 
         app:auto_show="true"
+        app:hide_on_touch="true"
+        app:show_timeout="3000"
+        android:background="#ffffff"
 
         app:fastforward_increment="10000"
         app:repeat_toggle_modes="none"
         app:resize_mode="fixed_width"
-        app:rewind_increment="10000"
+        app:rewind_increment="15000"
         app:surface_type="surface_view"
         app:use_controller="true"
+
+        app:controller_layout_id="@layout/custom_exo_controller"
+
 
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintVertical_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@id/rvChannelVideo_player"/>
+      <ProgressBar
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/progress_bar"
+        app:layout_constraintStart_toStartOf="@id/exoPlayer"
+        app:layout_constraintEnd_toEndOf="@id/exoPlayer"
+        app:layout_constraintTop_toTopOf="@id/exoPlayer"
+        app:layout_constraintBottom_toBottomOf="@id/exoPlayer"/>
       <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvChannelVideo_player"
         android:layout_width="220dp"
