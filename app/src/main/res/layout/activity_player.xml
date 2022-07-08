@@ -27,7 +27,6 @@
     android:id="@+id/exoplayer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
   app:controller_layout_id="@layout/exo_playback_control_view"
 
     app:auto_show="true"
