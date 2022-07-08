@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -54,7 +55,7 @@ public class PlayerActivity extends AppCompatActivity {
     boolean playWhenReady = true;
     int currentWindow = 0;
     long playBackPosition = 0;
-    boolean flag = false;
+    boolean flag = true;
     MediaItem mediaItem;
     private ActivityPlayerBinding binding;
     private MainViewModel mainViewModel;
@@ -90,22 +91,7 @@ public class PlayerActivity extends AppCompatActivity {
         initExo();
         btn_fullScreen = binding.exoPlayer.findViewById(R.id.bt_fullscreen);
         btn_fullScreen.setOnClickListener(v -> {
-            if (flag) {
 
-                btn_fullScreen.setImageResource(R.drawable.exo_controls_fullscreen_enter);
-
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-                flag = false;
-            } else {
-
-                btn_fullScreen.setImageResource(R.drawable.exo_controls_fullscreen_exit);
-
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
-                flag = true;
-
-            }
         });
 
         if (phone_user==null) { login();}
@@ -250,10 +236,7 @@ public class PlayerActivity extends AppCompatActivity {
 
                 }
 
-                @Override
-                public void onTimelineChanged(Timeline timeline, @Nullable Object manifest, int reason) {
 
-                }
 
                 @Override
                 public void onMediaItemTransition(@Nullable MediaItem mediaItem, int reason) {
@@ -275,15 +258,9 @@ public class PlayerActivity extends AppCompatActivity {
 
                 }
 
-                @Override
-                public void onLoadingChanged(boolean isLoading) {
 
-                }
 
-                @Override
-                public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
 
-                }
 
                 @Override
                 public void onPlaybackStateChanged(int state) {
@@ -299,7 +276,11 @@ public class PlayerActivity extends AppCompatActivity {
                 @Override
                 public void onPlayWhenReadyChanged(boolean playWhenReady, int reason) {
 
-                    if (playWhenReady) {
+                    // play and Pause click
+                    if (!playWhenReady) {
+                        binding.progressBar.setVisibility(View.VISIBLE);
+
+                    }else {
                         binding.progressBar.setVisibility(View.GONE);
                     }
 
@@ -341,11 +322,6 @@ public class PlayerActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onSeekProcessed() {
-
-                }
-
-                @Override
                 public void onExperimentalOffloadSchedulingEnabledChanged(boolean offloadSchedulingEnabled) {
 
                 }
@@ -360,15 +336,9 @@ public class PlayerActivity extends AppCompatActivity {
 
                 }
             });
-            exoPlayer.addVideoListener(new VideoListener() {
-                @Override
-                public void onSurfaceSizeChanged(int width, int height) {
-
-                }
-            });
-            exoPlayer.addMediaItem(mediaItem);
             exoPlayer.setPlayWhenReady(playWhenReady);
             if (!exoPlayer.getPlayWhenReady()) {
+
                 binding.progressBar.setVisibility(View.VISIBLE);
             }
             exoPlayer.seekTo(currentWindow, playBackPosition);
