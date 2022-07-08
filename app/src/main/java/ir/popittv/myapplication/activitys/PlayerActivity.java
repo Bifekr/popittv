@@ -1,16 +1,15 @@
 package ir.popittv.myapplication.activitys;
 
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.MediaController;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.SeekBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,23 +27,18 @@ import com.google.android.exoplayer2.Timeline;
 import com.google.android.exoplayer2.metadata.Metadata;
 import com.google.android.exoplayer2.source.TrackGroupArray;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
-import com.google.android.exoplayer2.upstream.cache.CacheDataSource;
 import com.google.android.exoplayer2.video.VideoListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.io.IOException;
 import java.util.List;
 
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.databinding.ActivityPlayerBinding;
 import ir.popittv.myapplication.models.UserDataModel;
 import ir.popittv.myapplication.request.Service;
-import ir.popittv.myapplication.utils.LoginDialogFragment;
-import ir.popittv.myapplication.utils.OnClickLoginDialog;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
-import ir.popittv.myapplication.viewmodel.UserViewModel;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,30 +46,26 @@ import retrofit2.Response;
 
 public class PlayerActivity extends AppCompatActivity {
 
+    SharedPreferences.Editor editor;
+    TextInputLayout et_phone;
+    //   private UserViewModel userViewModel;
+    ImageView btn_fullScreen;
+    SimpleExoPlayer exoPlayer;
+    boolean playWhenReady = true;
+    int currentWindow = 0;
+    long playBackPosition = 0;
+    boolean flag = false;
+    MediaItem mediaItem;
     private ActivityPlayerBinding binding;
     private MainViewModel mainViewModel;
- //   private UserViewModel userViewModel;
-
-
     private SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
-
     private String name_user;
     private String phone_user;
     private String code_user;
     private int id_user;
     private int id_vid_funny;
-
-   private View bottomView;
+    private View bottomView;
     private View bottomView2;
-    TextInputLayout et_phone;
-
-    SimpleExoPlayer exoPlayer;
-    boolean playWhenReady = true;
-    int currentWindow = 0;
-    long playBackPosition = 0;
-    MediaItem mediaItem;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,29 +74,41 @@ public class PlayerActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-       // userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        // userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        sharedPreferences=getSharedPreferences("user_info",MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
 
-        phone_user  = sharedPreferences.getString("phone_user", null);
+        phone_user = sharedPreferences.getString("phone_user", null);
         name_user = sharedPreferences.getString("name_user", null);
-        id_user = sharedPreferences.getInt("id_user",0);
+        id_user = sharedPreferences.getInt("id_user", 0);
 
         id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
         mainViewModel.requestFunny_single(id_vid_funny);
 
 
-
-
         getFunny_single();
         initExo();
+        btn_fullScreen = binding.exoPlayer.findViewById(R.id.bt_fullscreen);
+        btn_fullScreen.setOnClickListener(v -> {
+            if (flag) {
 
+                btn_fullScreen.setImageResource(R.drawable.exo_controls_fullscreen_enter);
 
-        if (phone_user==null) {
-            login();
-        }
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+                flag = false;
+            } else {
 
+                btn_fullScreen.setImageResource(R.drawable.exo_controls_fullscreen_exit);
+
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+                flag = true;
+
+            }
+        });
+
+        if (phone_user==null) { login();}
 
 
 
@@ -114,17 +116,13 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
 
-
     private void login() {
         new Handler().postDelayed(() -> {
 
-         loginUser();
+            loginUser();
 
 
-
-
-
-        },5000);
+        }, 5000);
     }
 
     private void loginUser() {
@@ -227,8 +225,6 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
 
-
-
     private void releasePlayer() {
         if (exoPlayer!=null) {
             playWhenReady = exoPlayer.getPlayWhenReady();
@@ -240,130 +236,141 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
 
-
-
-
     private void initExo() {
         try {
 
-            exoPlayer = new  SimpleExoPlayer.Builder(this)
+            exoPlayer = new SimpleExoPlayer.Builder(this)
 
                     .build();
             binding.exoPlayer.setPlayer(exoPlayer);
             exoPlayer.prepare();
-exoPlayer.addListener(new Player.EventListener() {
-    @Override
-    public void onTimelineChanged(Timeline timeline, int reason) {
+            exoPlayer.addListener(new Player.EventListener() {
+                @Override
+                public void onTimelineChanged(Timeline timeline, int reason) {
 
-    }
+                }
 
-    @Override
-    public void onTimelineChanged(Timeline timeline, @Nullable Object manifest, int reason) {
+                @Override
+                public void onTimelineChanged(Timeline timeline, @Nullable Object manifest, int reason) {
 
-    }
+                }
 
-    @Override
-    public void onMediaItemTransition(@Nullable MediaItem mediaItem, int reason) {
+                @Override
+                public void onMediaItemTransition(@Nullable MediaItem mediaItem, int reason) {
 
-    }
+                }
 
-    @Override
-    public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
+                @Override
+                public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
 
-    }
+                }
 
-    @Override
-    public void onStaticMetadataChanged(List<Metadata> metadataList) {
+                @Override
+                public void onStaticMetadataChanged(List<Metadata> metadataList) {
 
-    }
+                }
 
-    @Override
-    public void onIsLoadingChanged(boolean isLoading) {
+                @Override
+                public void onIsLoadingChanged(boolean isLoading) {
 
-    }
+                }
 
-    @Override
-    public void onLoadingChanged(boolean isLoading) {
+                @Override
+                public void onLoadingChanged(boolean isLoading) {
 
-    }
+                }
 
-    @Override
-    public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+                @Override
+                public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
 
-    }
+                }
 
-    @Override
-    public void onPlaybackStateChanged(int state) {
+                @Override
+                public void onPlaybackStateChanged(int state) {
+                    if (state==exoPlayer.STATE_BUFFERING) {
+                        binding.progressBar.setVisibility(View.VISIBLE);
+                    } else if (state==exoPlayer.STATE_READY) {
+                        binding.progressBar.setVisibility(View.GONE);
 
-    }
+                    }
 
-    @Override
-    public void onPlayWhenReadyChanged(boolean playWhenReady, int reason) {
+                }
 
-    }
+                @Override
+                public void onPlayWhenReadyChanged(boolean playWhenReady, int reason) {
 
-    @Override
-    public void onPlaybackSuppressionReasonChanged(int playbackSuppressionReason) {
+                    if (playWhenReady) {
+                        binding.progressBar.setVisibility(View.GONE);
+                    }
 
-    }
+                }
 
-    @Override
-    public void onIsPlayingChanged(boolean isPlaying) {
+                @Override
+                public void onPlaybackSuppressionReasonChanged(int playbackSuppressionReason) {
 
-    }
+                }
 
-    @Override
-    public void onRepeatModeChanged(int repeatMode) {
+                @Override
+                public void onIsPlayingChanged(boolean isPlaying) {
 
-    }
+                }
 
-    @Override
-    public void onShuffleModeEnabledChanged(boolean shuffleModeEnabled) {
+                @Override
+                public void onRepeatModeChanged(int repeatMode) {
 
-    }
+                }
 
-    @Override
-    public void onPlayerError(ExoPlaybackException error) {
+                @Override
+                public void onShuffleModeEnabledChanged(boolean shuffleModeEnabled) {
 
-    }
+                }
 
-    @Override
-    public void onPositionDiscontinuity(int reason) {
+                @Override
+                public void onPlayerError(ExoPlaybackException error) {
 
-    }
+                }
 
-    @Override
-    public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
+                @Override
+                public void onPositionDiscontinuity(int reason) {
 
-    }
+                }
 
-    @Override
-    public void onSeekProcessed() {
+                @Override
+                public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
 
-    }
+                }
 
-    @Override
-    public void onExperimentalOffloadSchedulingEnabledChanged(boolean offloadSchedulingEnabled) {
+                @Override
+                public void onSeekProcessed() {
 
-    }
+                }
 
-    @Override
-    public void onExperimentalSleepingForOffloadChanged(boolean sleepingForOffload) {
+                @Override
+                public void onExperimentalOffloadSchedulingEnabledChanged(boolean offloadSchedulingEnabled) {
 
-    }
+                }
 
-    @Override
-    public void onEvents(Player player, Player.Events events) {
+                @Override
+                public void onExperimentalSleepingForOffloadChanged(boolean sleepingForOffload) {
 
-    }
-});
+                }
+
+                @Override
+                public void onEvents(Player player, Player.Events events) {
+
+                }
+            });
             exoPlayer.addVideoListener(new VideoListener() {
                 @Override
                 public void onSurfaceSizeChanged(int width, int height) {
 
                 }
             });
+            exoPlayer.addMediaItem(mediaItem);
             exoPlayer.setPlayWhenReady(playWhenReady);
+            if (!exoPlayer.getPlayWhenReady()) {
+                binding.progressBar.setVisibility(View.VISIBLE);
+            }
             exoPlayer.seekTo(currentWindow, playBackPosition);
 
 
@@ -390,7 +397,7 @@ exoPlayer.addListener(new Player.EventListener() {
             mediaItem = MediaItem.fromUri(funnyDataModel.getLink_480());
             exoPlayer.addMediaItem(mediaItem);
 
-           // Toast.makeText(this, "" + funnyDataModel.getLink_480(), Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, "" + funnyDataModel.getLink_480(), Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -403,6 +410,7 @@ exoPlayer.addListener(new Player.EventListener() {
                         View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         );
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -410,12 +418,17 @@ exoPlayer.addListener(new Player.EventListener() {
         if (exoPlayer==null) {
             initExo();
             hideSystemUi();
+            //  mainViewModel.requestFunny_single(id_vid_funny);
+            // getFunny_single();
         }
     }
+
     @Override
     protected void onStart() {
         super.onStart();
         initExo();
+        //getFunny_single();
+        //  mainViewModel.requestFunny_single(id_vid_funny);
     }
 
     @Override
@@ -423,7 +436,6 @@ exoPlayer.addListener(new Player.EventListener() {
         super.onStop();
         releasePlayer();
     }
-
 
 
 }

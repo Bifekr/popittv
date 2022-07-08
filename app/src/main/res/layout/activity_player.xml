@@ -45,6 +45,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:id="@+id/progress_bar"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@id/exoPlayer"
         app:layout_constraintEnd_toEndOf="@id/exoPlayer"
         app:layout_constraintTop_toTopOf="@id/exoPlayer"
