@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
     private ActivityMainBinding binding;
 
     private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
+    private SharedPreferences.Editor switchEditor;
 
     private FunnyAdapter funnyAdapter;
     private FunnyAdapter funnyAdapter_liky;
@@ -86,17 +86,10 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
 
         binding.switchNetToolbar.setOnCheckedChangeListener((buttonView, isChecked) -> {
 
-           // b_sweetchLimk=isChecked;
-
-            SharedPreferences.Editor switchEditor = sharedPreferences.edit();
+            switchEditor = sharedPreferences.edit();
             switchEditor.putBoolean("switchNet", isChecked);
             switchEditor.apply();
             b_switchLink=sharedPreferences.getBoolean("switchNet",true);
-            if (b_switchLink){
-                Toast.makeText(this, "switch : "+true+"link 480", Toast.LENGTH_SHORT).show();
-            }else {
-                Toast.makeText(this, "switch : "+true+"link 720", Toast.LENGTH_SHORT).show();
-            }
 
         });
 
