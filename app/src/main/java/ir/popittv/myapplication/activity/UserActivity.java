@@ -38,57 +38,49 @@ import retrofit2.Response;
 public class UserActivity extends AppCompatActivity implements OnClickFunny {
 
     ActivityUserBinding binding;
+    View bottomView;
+    View bottomView2;
+    TextInputLayout et_phone;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     private UserViewModel userViewModel;
-
     private FunnyAdapter funnyAdapter;
     private FunnyAdapter funnyAdapter2;
     private FunnyAdapter funnyAdapter3;
     private AllChannel_Adapter channel_adapter;
     private FunnyAdapter funnyAdapter5;
-
-    View bottomView;
-    View bottomView2;
-
-    TextInputLayout et_phone;
-
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
-
     private String name_user;
     private String phone_user;
     private String code_user;
     private int id_user;
-    private boolean userLoged = true;
+    private final boolean userLoged = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPreferences = UserActivity.this.getSharedPreferences("user_info", MODE_PRIVATE);
         super.onCreate(savedInstanceState);
         binding = ActivityUserBinding.inflate(getLayoutInflater());
         // this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         setContentView(binding.getRoot());
-        userViewModel= new ViewModelProvider(this).get(UserViewModel.class);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        funnyAdapter=new FunnyAdapter(this,this);
-        funnyAdapter2=new FunnyAdapter(this,this);
-        funnyAdapter3=new FunnyAdapter(this,this);
+        funnyAdapter = new FunnyAdapter(this, this);
+        funnyAdapter2 = new FunnyAdapter(this, this);
+        funnyAdapter3 = new FunnyAdapter(this, this);
+        funnyAdapter5 = new FunnyAdapter(this, this);
 
-        funnyAdapter5=new FunnyAdapter(this,this);
 
-
-        sharedPreferences = UserActivity.this.getSharedPreferences("user_info", MODE_PRIVATE);
         initRailActivity();
-
-
-
-
         intRvUser();
 
-        binding.avatarUserUserActivity.setOnClickListener(v -> { loginUser();});
-       phone_user  = sharedPreferences.getString("phone_user", null);
-       name_user = sharedPreferences.getString("name_user", null);
-       id_user = sharedPreferences.getInt("id_user",0);
-        userViewModel.request_userLater(id_user,1);
-       // userSubMenuClick();
+        binding.avatarUserUserActivity.setOnClickListener(v -> {
+            loginUser();
+        });
+        phone_user = sharedPreferences.getString("phone_user", null);
+        name_user = sharedPreferences.getString("name_user", null);
+        id_user = sharedPreferences.getInt("id_user", 0);
+        userViewModel.request_userLater(id_user, 1);
+        // userSubMenuClick();
         userSaveMenuClick(id_user);
         userLaterMenuClick(id_user);
         userSeeMenuClick(id_user);
@@ -118,18 +110,20 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
             Toast.makeText(getApplicationContext(), "شما از حساب خود خارج شدید", Toast.LENGTH_SHORT).show();
         });
 
-       // getUserSub();
+        // getUserSub();
         getUserSave();
         getUserLater();
         getUserSee();
 
 
     }
+
     private void getUserSub() {
-        userViewModel.getUserSub().observe(UserActivity.this,funnyDataModels -> {
+        userViewModel.getUserSub().observe(UserActivity.this, funnyDataModels -> {
 
         });
     }
+
     private void userSubMenuClick() {
         binding.menuFunnySubUser.setOnClickListener(v -> {
 
@@ -165,15 +159,16 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
         });
     }
 
-    private void getUserSee(){
-        userViewModel.getUserSee().observe(UserActivity.this,funnyDataModels -> {
+    private void getUserSee() {
+        userViewModel.getUserSee().observe(UserActivity.this, funnyDataModels -> {
             funnyAdapter3.setData(funnyDataModels);
         });
     }
+
     private void userSeeMenuClick(int id_user) {
         binding.menuFunnyHistoryUser.setOnClickListener(v -> {
 
-            userViewModel.request_userSee(id_user,1);
+            userViewModel.request_userSee(id_user, 1);
             binding.menuFunnyHistoryUser.setBackgroundResource(R.drawable.shape_tag2);
             binding.menuRealityHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuStudyHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
@@ -181,7 +176,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
 
         });
         binding.menuRealityHistoryUser.setOnClickListener(v -> {
-            userViewModel.request_userSee(id_user,2);
+            userViewModel.request_userSee(id_user, 2);
             binding.menuFunnyHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuRealityHistoryUser.setBackgroundResource(R.drawable.shape_tag2);
             binding.menuStudyHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
@@ -189,7 +184,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
         });
 
         binding.menuStudyHistoryUser.setOnClickListener(v -> {
-            userViewModel.request_userSee(id_user,3);
+            userViewModel.request_userSee(id_user, 3);
             binding.menuFunnyHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuRealityHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuStudyHistoryUser.setBackgroundResource(R.drawable.shape_tag2);
@@ -197,7 +192,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
         });
 
         binding.menuFarsiHistoryUser.setOnClickListener(v -> {
-            userViewModel.request_userSee(id_user,4);
+            userViewModel.request_userSee(id_user, 4);
             binding.menuFunnyHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuRealityHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuStudyHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
@@ -214,10 +209,11 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
 
         });
     }
+
     private void userLaterMenuClick(int id_user) {
         binding.menuFunnyWatchLaterUser.setOnClickListener(v -> {
 
-            userViewModel.request_userLater(id_user,1);
+            userViewModel.request_userLater(id_user, 1);
             binding.menuFunnyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag2);
             binding.menuRealityWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuStudyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
@@ -225,7 +221,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
 
         });
         binding.menuRealityWatchLaterUser.setOnClickListener(v -> {
-            userViewModel.request_userLater(id_user,2);
+            userViewModel.request_userLater(id_user, 2);
             binding.menuFunnyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuRealityWatchLaterUser.setBackgroundResource(R.drawable.shape_tag2);
             binding.menuStudyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
@@ -233,7 +229,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
         });
 
         binding.menuStudyWatchLaterUser.setOnClickListener(v -> {
-            userViewModel.request_userLater(id_user,3);
+            userViewModel.request_userLater(id_user, 3);
             binding.menuFunnyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuRealityWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuStudyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag2);
@@ -241,7 +237,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
         });
 
         binding.menuFarsiWatchLaterUser.setOnClickListener(v -> {
-            userViewModel.request_userLater(id_user,4);
+            userViewModel.request_userLater(id_user, 4);
             binding.menuFunnyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuRealityWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuStudyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
@@ -260,10 +256,11 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
 
         });
     }
+
     private void userSaveMenuClick(int id_user) {
         binding.menuFunnyBookmarkUser.setOnClickListener(v -> {
 
-            userViewModel.request_userSave(id_user,1);
+            userViewModel.request_userSave(id_user, 1);
             binding.menuFunnyBookmarkUser.setBackgroundResource(R.drawable.shape_tag2);
             binding.menuRealityBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuStudyBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
@@ -271,7 +268,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
 
         });
         binding.menuRealityBookmarkUser.setOnClickListener(v -> {
-            userViewModel.request_userSave(id_user,2);
+            userViewModel.request_userSave(id_user, 2);
             binding.menuFunnyBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuRealityBookmarkUser.setBackgroundResource(R.drawable.shape_tag2);
             binding.menuStudyBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
@@ -279,7 +276,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
         });
 
         binding.menuStudyBookmarkUser.setOnClickListener(v -> {
-            userViewModel.request_userSave(id_user,3);
+            userViewModel.request_userSave(id_user, 3);
             binding.menuFunnyBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuRealityBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuStudyBookmarkUser.setBackgroundResource(R.drawable.shape_tag2);
@@ -287,7 +284,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
         });
 
         binding.menuFarsiBookmarkUser.setOnClickListener(v -> {
-            userViewModel.request_userSave(id_user,4);
+            userViewModel.request_userSave(id_user, 4);
             binding.menuFunnyBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuRealityBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuStudyBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
@@ -299,19 +296,19 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
     private void intRvUser() {
 
         //RecyclerView User WatchLater
-        binding.rvSaveChannelUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, RecyclerView.HORIZONTAL,false));
+        binding.rvSaveChannelUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, RecyclerView.HORIZONTAL, false));
         binding.rvSaveChannelUserActivity.setAdapter(funnyAdapter5);
 
         //RecyclerView user Save Video
-        binding.rvBookMarkVideoUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this,LinearLayoutManager.HORIZONTAL,false));
+        binding.rvBookMarkVideoUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, LinearLayoutManager.HORIZONTAL, false));
         binding.rvBookMarkVideoUserActivity.setAdapter(funnyAdapter);
 
         //RecyclerView User WatchLater
-        binding.rvWatchLaterUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, RecyclerView.HORIZONTAL,false));
+        binding.rvWatchLaterUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, RecyclerView.HORIZONTAL, false));
         binding.rvWatchLaterUserActivity.setAdapter(funnyAdapter2);
 
         //RecyclerView User History
-        binding.rvHistoryVideoUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, RecyclerView.HORIZONTAL,false));
+        binding.rvHistoryVideoUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, RecyclerView.HORIZONTAL, false));
         binding.rvHistoryVideoUserActivity.setAdapter(funnyAdapter3);
 
     }

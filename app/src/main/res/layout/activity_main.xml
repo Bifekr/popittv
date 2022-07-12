@@ -36,7 +36,7 @@
         android:id="@+id/battry_toolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/dummy_content"
         android:src="@drawable/ic_baseline_battery_4_bar_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,22 +52,10 @@
         android:src="@drawable/ic_baseline_wifi_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/battry_toolbar"
-        app:layout_constraintStart_toEndOf="@id/tv_safeNet_toolbar"
-        app:layout_constraintTop_toTopOf="parent" />
-
-      <TextView
-        android:id="@+id/tv_safeNet_toolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:fontFamily="@font/lalezar_regular"
-        android:gravity="center"
-        android:text="صرفه جویی در حجم اینترنت"
-        android:textColor="#6D4C41"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/iconWifi_toolbar"
         app:layout_constraintStart_toEndOf="@id/switchNet_toolbar"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:contentDescription="@string/dummy_content" />
 
       <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/switchNet_toolbar"
@@ -75,8 +63,10 @@
         android:layout_height="match_parent"
         android:gravity="end|center_horizontal|center_vertical"
         android:soundEffectsEnabled="true"
+        android:text="@string/netLowPrice"
+        android:checked="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tv_safeNet_toolbar"
+        app:layout_constraintEnd_toStartOf="@id/iconWifi_toolbar"
         app:layout_constraintStart_toEndOf="@id/search_toolbar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent=".08" />
@@ -97,7 +87,7 @@
         app:layout_constraintEnd_toStartOf="@id/switchNet_toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent=".4"
+        app:layout_constraintWidth_percent=".5"
         app:startIconDrawable="@drawable/ic_search">
 
         <com.google.android.material.textfield.TextInputEditText

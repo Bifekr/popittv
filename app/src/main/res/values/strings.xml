@@ -34,5 +34,6 @@
   <string name="hint_user_name">بدون نام</string>
   <string name="exite">خروج از حساب</string>
   <string name="enter">ورود به حساب</string>
+  <string name="netLowPrice">صرفه جویی در حجم اینترنت</string>
 
 </resources>

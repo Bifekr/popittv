@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
     //global Variable
     private int id_channel;
     private int id_user;
+    private boolean b_switchLink;
+
     private MainViewModel mainViewModel;
     private ActivityMainBinding binding;
 
@@ -72,20 +76,37 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-
-        setContentView(binding.getRoot());
-
+        //get preferences data
         sharedPreferences=getSharedPreferences("user_info",MODE_PRIVATE);
         id_user=sharedPreferences.getInt("id_user",0);
 
+        super.onCreate(savedInstanceState);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        binding.switchNetToolbar.setOnCheckedChangeListener((buttonView, isChecked) -> {
+
+           // b_sweetchLimk=isChecked;
+
+            SharedPreferences.Editor switchEditor = sharedPreferences.edit();
+            switchEditor.putBoolean("switchNet", isChecked);
+            switchEditor.apply();
+            b_switchLink=sharedPreferences.getBoolean("switchNet",true);
+            if (b_switchLink){
+                Toast.makeText(this, "switch : "+true+"link 480", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(this, "switch : "+true+"link 720", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+
+
 
         //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         //ViewModel Provider
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-
-
 
         rvChannel_frg1 = new RvChannel_Frg1(this, this);
         recommend_adapter = new Recommend_Adapter(this);
