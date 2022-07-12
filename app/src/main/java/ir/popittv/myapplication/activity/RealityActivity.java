@@ -1,4 +1,4 @@
-package ir.popittv.myapplication.activitys;
+package ir.popittv.myapplication.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,23 +12,27 @@ import android.view.View;
 import com.google.android.material.navigation.NavigationBarView;
 
 import ir.popittv.myapplication.R;
-import ir.popittv.myapplication.databinding.ActivityFarsiBinding;
+import ir.popittv.myapplication.databinding.ActivityRealityBinding;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
-public class FarsiActivity extends AppCompatActivity {
+public class RealityActivity extends AppCompatActivity {
 
-    private MainViewModel viewModel;
-    private ActivityFarsiBinding binding;
+    MainViewModel mainViewModel;
+    ActivityRealityBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivityFarsiBinding.inflate(getLayoutInflater());
-        View view=binding.getRoot();
+        binding = ActivityRealityBinding.inflate(getLayoutInflater());
+        View view =binding.getRoot();
         setContentView(view);
-        viewModel=new ViewModelProvider(this).get(MainViewModel.class);
+
+        mainViewModel=new ViewModelProvider(this).get(MainViewModel.class);
         initRailActivity();
+
+
     }
+
 
     private void initRailActivity() {
         binding.navRail.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -36,19 +40,19 @@ public class FarsiActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case  R.id.Funny:
-                        startActivity(new Intent(FarsiActivity.this, MainActivity.class));
+                        startActivity(new Intent(RealityActivity.this, MainActivity.class));
                         break;
                     case R.id.Reality:
-                        startActivity(new Intent(FarsiActivity.this, RealityActivity.class));
+                        startActivity(new Intent(RealityActivity.this, RealityActivity.class));
                         break;
                     case R.id.Learning:
-                        startActivity(new Intent(FarsiActivity.this, StudyActivity.class));
+                        startActivity(new Intent(RealityActivity.this, StudyActivity.class));
                         break;
                     case R.id.Farsi:
-                        startActivity(new Intent(FarsiActivity.this, FarsiActivity.class));
+                        startActivity(new Intent(RealityActivity.this, FarsiActivity.class));
                         break;
                     case R.id.Games:
-                        startActivity(new Intent(FarsiActivity.this, GameActivity.class));
+                        startActivity(new Intent(RealityActivity.this, GameActivity.class));
                         break;
                 }
                 return true;
@@ -59,19 +63,19 @@ public class FarsiActivity extends AppCompatActivity {
             public void onNavigationItemReselected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.Funny:
-                        startActivity(new Intent(FarsiActivity.this,MainActivity.class));
+                        startActivity(new Intent(RealityActivity.this,MainActivity.class));
                         break;
                     case R.id.Reality:
-                        startActivity(new Intent(FarsiActivity.this, RealityActivity.class));
+                        startActivity(new Intent(RealityActivity.this, RealityActivity.class));
                         break;
                     case R.id.Learning:
-                        startActivity(new Intent(FarsiActivity.this, StudyActivity.class));
+                        startActivity(new Intent(RealityActivity.this, StudyActivity.class));
                         break;
                     case R.id.Farsi:
-                        startActivity(new Intent(FarsiActivity.this, FarsiActivity.class));
+                        startActivity(new Intent(RealityActivity.this, FarsiActivity.class));
                         break;
                     case R.id.Games:
-                        startActivity(new Intent(FarsiActivity.this, GameActivity.class));
+                        startActivity(new Intent(RealityActivity.this, GameActivity.class));
                         break;
 
 

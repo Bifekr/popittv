@@ -18,20 +18,17 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import ir.popittv.myapplication.R;
-import ir.popittv.myapplication.activitys.AllChannelActivity;
-import ir.popittv.myapplication.activitys.DetailActivity;
+import ir.popittv.myapplication.activity.DetailActivity;
 import ir.popittv.myapplication.databinding.ItemChannelAllBinding;
 import ir.popittv.myapplication.models.ChannelDataModel;
-import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.utils.OnClickAllChannel;
-import ir.popittv.myapplication.utils.OnClickDetailActivity;
 
 public class AllChannel_Adapter extends RecyclerView.Adapter<AllChannel_Adapter.AllChannel_Holder> {
 
     private List<ChannelDataModel> channelDataModels;
-    private Context context;
-    private Activity activity;
-    private OnClickAllChannel onClickDetailActivity;
+    private final Context context;
+    private final Activity activity;
+    private final OnClickAllChannel onClickDetailActivity;
     private int row_index;
 
     public AllChannel_Adapter(Context context,OnClickAllChannel onClickDetailActivity,Activity activity) {
@@ -96,9 +93,9 @@ public class AllChannel_Adapter extends RecyclerView.Adapter<AllChannel_Adapter.
         }
     }
 
-    public class AllChannel_Holder extends RecyclerView.ViewHolder{
+    public static class AllChannel_Holder extends RecyclerView.ViewHolder{
 
-        private ItemChannelAllBinding binding;
+        private final ItemChannelAllBinding binding;
 
         public AllChannel_Holder(@NonNull ItemChannelAllBinding binding) {
             super(binding.getRoot());

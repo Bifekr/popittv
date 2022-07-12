@@ -13,7 +13,7 @@
       android:background="#efc2"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      tools:context=".activitys.PlayerActivity">
+      tools:context=".activity.PlayerActivity">
 <FrameLayout
   android:id="@+id/main_media_frame"
   android:layout_width="0dp"

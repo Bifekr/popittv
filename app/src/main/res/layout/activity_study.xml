@@ -7,7 +7,7 @@
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activitys.StudyActivity">
+    tools:context=".activity.StudyActivity">
     <com.google.android.material.navigationrail.NavigationRailView
       android:id="@+id/navRail"
       android:layout_width="wrap_content"

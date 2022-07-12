@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/popit_yellow"
-    tools:context=".activitys.UserActivity">
+    tools:context=".activity.UserActivity">
 
     <com.google.android.material.navigationrail.NavigationRailView
       android:id="@+id/navRail"

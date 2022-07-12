@@ -6,43 +6,44 @@
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
   <application
-    android:allowBackup="true"
+    android:fullBackupContent="true"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/Theme.PopitTv"
-    android:usesCleartextTraffic="true">
+    android:usesCleartextTraffic="true"
+    android:allowBackup="true">
     <activity
-      android:name=".activitys.UserActivity"
+      android:name=".activity.UserActivity"
       android:exported="false"
       android:screenOrientation="landscape"/>
     <activity
-      android:name=".activitys.PlayerActivity"
+      android:name=".activity.PlayerActivity"
       android:exported="false"
       android:screenOrientation="landscape" />
     <activity
-      android:name=".activitys.DetailActivity"
+      android:name=".activity.DetailActivity"
       android:exported="false"
       android:screenOrientation="landscape"/>
     <activity
-      android:name=".activitys.AllChannelActivity"
+      android:name=".activity.AllChannelActivity"
       android:exported="false"
       android:screenOrientation="landscape"/>
     <activity
-      android:name=".activitys.GameActivity"
+      android:name=".activity.GameActivity"
       android:exported="false"
       android:screenOrientation="landscape"/>
     <activity
-      android:name=".activitys.FarsiActivity"
+      android:name=".activity.FarsiActivity"
       android:exported="false"
       android:screenOrientation="landscape"/>
     <activity
-      android:name=".activitys.StudyActivity"
+      android:name=".activity.StudyActivity"
       android:exported="false"
       android:screenOrientation="landscape"/>
     <activity
-      android:name=".activitys.RealityActivity"
+      android:name=".activity.RealityActivity"
       android:exported="false"
       android:screenOrientation="landscape"/>
     <activity
@@ -50,7 +51,7 @@
       android:exported="false"
       android:screenOrientation="landscape"/>
     <activity
-      android:name=".activitys.MainActivity"
+      android:name=".activity.MainActivity"
       android:exported="true"
       android:screenOrientation="landscape">
       <intent-filter>

@@ -4,29 +4,7 @@
   <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
-  <string name="home">Home</string>
   <string name="search">Search</string>
-  <string name="profile">Profile</string>
-  <string name="notification">Notify</string>
-  <string name="likes">Favs</string>
-  <string name="happy">Happy</string>
-  <string name="room">Room</string>
-  <string name="restaurant">Food</string>
-  <string name="shop">Shop</string>
-  <string name="photos">Pics</string>
-  <string name="call">Call</string>
-  <string name="stopwatch_destination_label">stopWatch</string>
-  <string name="timer_destination_label">timer</string>
-  <string name="schedule_destination_label">schedule</string>
-  <string name="alarms_destination_label">alarms</string>
-
-
-  <string name="title_1">Cool card</string>
-  <string name="title_2">Ok card</string>
-  <string name="title_3">Bad card</string>
-  <string name="title_4">Ugly card</string>
-
-  <string name="text_1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Etiam eget ligula eu lectus lobortis condimentum.</string>
   <string name="funny_nav">Funny</string>
   <string name="reality_nav">Reality</string>
   <string name="learning_nav">Learning</string>

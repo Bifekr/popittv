@@ -1,9 +1,8 @@
-package ir.popittv.myapplication.activitys;
+package ir.popittv.myapplication.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -11,10 +10,8 @@ import android.view.View;
 
 import com.bumptech.glide.Glide;
 
-import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.adapter.ChannelDetail_adapter;
 import ir.popittv.myapplication.databinding.ActivityDetailBinding;
-import ir.popittv.myapplication.utils.OnClickDetailActivity;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
 public class DetailActivity extends AppCompatActivity  {

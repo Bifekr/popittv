@@ -3,7 +3,6 @@ package ir.popittv.myapplication.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -15,10 +14,8 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import ir.popittv.myapplication.R;
-import ir.popittv.myapplication.activitys.PlayerActivity;
+import ir.popittv.myapplication.activity.PlayerActivity;
 import ir.popittv.myapplication.databinding.ItemChannelDetailBinding;
-import ir.popittv.myapplication.databinding.ItemVidDefultBinding;
-import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
 
 public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_adapter.DetailChannel_holder> {

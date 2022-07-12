@@ -17,8 +17,6 @@ import androidx.fragment.app.DialogFragment;
 import com.google.android.material.textfield.TextInputLayout;
 
 import ir.popittv.myapplication.R;
-import ir.popittv.myapplication.activitys.PlayerActivity;
-import ir.popittv.myapplication.models.UserDataModel;
 import ir.popittv.myapplication.request.Service;
 import okhttp3.ResponseBody;
 import retrofit2.Call;

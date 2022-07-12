@@ -1,4 +1,4 @@
-package ir.popittv.myapplication.activitys;
+package ir.popittv.myapplication.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -12,13 +12,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.adapter.AgeMenu_Adapter;
 import ir.popittv.myapplication.adapter.AllChannel_Adapter;
-import ir.popittv.myapplication.adapter.TagAdapter;
 import ir.popittv.myapplication.databinding.ActivityAllChannelBinding;
 import ir.popittv.myapplication.models.AgeDataModel;
-import ir.popittv.myapplication.models.HashTagDataModel;
 import ir.popittv.myapplication.utils.OnClickAllChannel;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 

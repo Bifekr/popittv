@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFCC22"
-    tools:context=".activitys.AllChannelActivity">
+    tools:context=".activity.AllChannelActivity">
 
     <TextView
       android:id="@+id/tvAllChannel_activityAllChannel"
