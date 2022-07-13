@@ -75,7 +75,7 @@
         android:layout_marginTop="@dimen/plane_08"
         app:layout_constraintTop_toBottomOf="@id/main_media_frame"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/main_media_frame">
+        app:layout_constraintEnd_toStartOf="@id/rvChannelVideo_player">
 
         <androidx.cardview.widget.CardView
           android:id="@+id/parentChannelProfile_itemAllChan"
@@ -83,9 +83,10 @@
           android:layout_height="wrap_content"
           android:layout_margin="@dimen/plane_06"
           app:cardCornerRadius="14dp"
+          app:layout_constraintHorizontal_bias="0"
           app:layout_constraintBottom_toBottomOf="@id/divider"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintEnd_toStartOf="@id/titleFaChannel_player"
+
           app:layout_constraintTop_toTopOf="parent"
           android:transitionName="cardProfile_channel">
           <com.makeramen.roundedimageview.RoundedImageView
@@ -104,16 +105,17 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:fontFamily="@font/baloo"
-          android:paddingLeft="15dp"
           android:gravity="center_horizontal"
           android:includeFontPadding="true"
-          android:paddingRight="1dp"
+          android:paddingStart="15dp"
+          android:paddingEnd="1dp"
+          app:layout_constraintHorizontal_bias="0"
           android:text="fdkljfdkjfg rfg  "
           android:textSize="12sp"
-          app:layout_constraintStart_toEndOf="@id/parentChannelProfile_itemAllChan"
-          app:layout_constraintTop_toTopOf="@id/parentChannelProfile_itemAllChan"
           app:layout_constraintBottom_toTopOf="@id/titleEnChannel_player"
-          />
+          app:layout_constraintEnd_toStartOf="@+id/parentAge"
+          app:layout_constraintStart_toEndOf="@id/parentChannelProfile_itemAllChan"
+          app:layout_constraintTop_toTopOf="@id/parentChannelProfile_itemAllChan" />
         <TextView
           android:id="@+id/titleEnChannel_player"
           android:layout_width="wrap_content"
@@ -125,8 +127,9 @@
           android:paddingRight="15dp"
           android:text="fdkljfdkjfg rfg "
           android:textSize="12sp"
+          app:layout_constraintEnd_toEndOf="@id/titleFaChannel_player"
           app:layout_constraintTop_toBottomOf="@id/titleFaChannel_player"
-          app:layout_constraintStart_toEndOf="@id/parentChannelProfile_itemAllChan"
+          app:layout_constraintStart_toStartOf="@id/titleFaChannel_player"
           app:layout_constraintBottom_toBottomOf="@id/parentChannelProfile_itemAllChan"
           />
 
@@ -227,8 +230,8 @@
           android:fontFamily="@font/baloo"
           android:includeFontPadding="true"
           android:gravity="end"
-          android:paddingLeft="5dp"
-          android:paddingRight="12dp"
+          android:paddingStart="5dp"
+          android:paddingEnd="12dp"
           android:text="fdkljfdkjfg rfg  gf gh gh gf fg ghg  ghfggtfgf fg  fgdlfkj"
           android:textSize="14sp"
           app:layout_constraintTop_toBottomOf="@id/divider"

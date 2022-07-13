@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.switchNetToolbar.setChecked(sharedPreferences.getBoolean("switchNet",true));
+
 
         switchNet();
 
@@ -146,12 +146,19 @@ binding.profileShowChannelMainActivity.setOnClickListener(v -> {
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     private void switchNet() {
+
+        binding.switchNetToolbar.setChecked(sharedPreferences.getBoolean("switchNet",true));
+        b_switchLink=sharedPreferences.getBoolean("switchNet",true);
+        Toast.makeText(this,""+b_switchLink,Toast.LENGTH_LONG).show();
+
         binding.switchNetToolbar.setOnCheckedChangeListener((buttonView, isChecked) -> {
 
             switchEditor = sharedPreferences.edit();
             switchEditor.putBoolean("switchNet", isChecked);
-            switchEditor.apply();
-            b_switchLink=sharedPreferences.getBoolean("switchNet",true);
+            switchEditor.commit();
+            recreate();
+
+
 
         });
     }

@@ -71,6 +71,7 @@ public class PlayerActivity extends AppCompatActivity  {
     private String name_user;
     private String phone_user;
     private String code_user;
+    private String url_link;
     private int id_user;
     private int id_vid_funny;
     private View bottomView;
@@ -115,6 +116,8 @@ public class PlayerActivity extends AppCompatActivity  {
         id_user = sharedPreferences.getInt("id_user", 0);
 
         id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
+        url_link = getIntent().getStringExtra("link");
+        Toast.makeText(this, ""+url_link, Toast.LENGTH_SHORT).show();
         mainViewModel.requestFunny_single(id_vid_funny);
 
 
@@ -125,7 +128,7 @@ public class PlayerActivity extends AppCompatActivity  {
 
         });
 */
-        if (phone_user==null) { login();}
+      //   if (phone_user==null) { login();}
 
 ///////////////////////
         dataSourceFactory =
@@ -137,11 +140,23 @@ public class PlayerActivity extends AppCompatActivity  {
             mResumePosition = savedInstanceState.getLong(STATE_RESUME_POSITION);
             mExoPlayerFullscreen = savedInstanceState.getBoolean(STATE_PLAYER_FULLSCREEN);
         }
+
+
+
+
+
+
+
       ////////////////////////////////////
 
 
     }
+
+
+
+
     ////////////////////////////
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -152,7 +167,7 @@ public class PlayerActivity extends AppCompatActivity  {
 
         super.onSaveInstanceState(outState);
     }
-/////////////////////////////////////
+//region fullScreen ExoPlayer
 
     private void initFullscreenDialog() {
 
@@ -203,7 +218,7 @@ public class PlayerActivity extends AppCompatActivity  {
     }
 
 
-    ///////////////////////////////////////
+    //endregion
 
     private void login() {
         new Handler().postDelayed(() -> {
@@ -215,8 +230,8 @@ public class PlayerActivity extends AppCompatActivity  {
     }
 
     private void loginUser() {
-        String check = sharedPreferences.getString("phone_user", "");
-        if (check.equals("")) {
+        String check = sharedPreferences.getString("phone_user", null);
+        if (check==null) {
 
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
             bottomView = getLayoutInflater().inflate(R.layout.custom_dialog, null);
@@ -307,7 +322,7 @@ public class PlayerActivity extends AppCompatActivity  {
 
             });
         } else {
-            String news = sharedPreferences.getString("phone_user", "");
+            String news = sharedPreferences.getString("phone_user", null);
             Toast.makeText(this, "قبلا وارد شده اید" + news, Toast.LENGTH_SHORT).show();
         }
 
@@ -456,17 +471,20 @@ public class PlayerActivity extends AppCompatActivity  {
     }
 
     private void getFunny_single() {
-        mainViewModel.getFunny_single().observe(this, funnyDataModel -> {
-            binding.titleEnVideoPlayer.setText(funnyDataModel.getTitle_en());
-            binding.titleFaVideoPlayer.setText(funnyDataModel.getTitle_fa());
-            binding.titleEnChannelPlayer.setText(funnyDataModel.getName_chan_en());
-            binding.titleFaChannelPlayer.setText(funnyDataModel.getName_chan_fa());
-            binding.titleSubPlayer.setText(funnyDataModel.getFollowers());
-            binding.titleViewPlayer.setText(funnyDataModel.getView());
-            binding.titleLikePlayer.setText(funnyDataModel.getLiky());
+        binding.titleEnVideoPlayer.setText(getIntent().getStringExtra("title_en"));
+        binding.titleFaVideoPlayer.setText(getIntent().getStringExtra("title_fa"));
+        binding.titleEnChannelPlayer.setText(getIntent().getStringExtra("name_chann_en"));
+        binding.titleFaChannelPlayer.setText(getIntent().getStringExtra("name_chann_fa"));
+        binding.titleSubPlayer.setText(getIntent().getStringExtra("followers"));
+        binding.titleViewPlayer.setText(getIntent().getStringExtra("view"));
+        binding.titleLikePlayer.setText(getIntent().getStringExtra("like"));
 
-            Glide.with(this).load(funnyDataModel.getProfile_chann())
-                    .into(binding.ivProfileItemAllChan);
+        Glide.with(this).load(getIntent().getStringExtra("profile_chan"))
+                .into(binding.ivProfileItemAllChan);
+
+        mainViewModel.getFunny_single().observe(this, funnyDataModel -> {
+
+
 
             mediaItem = MediaItem.fromUri(funnyDataModel.getLink_480());
             exoPlayer.addMediaItem(mediaItem);

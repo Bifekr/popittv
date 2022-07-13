@@ -25,17 +25,15 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
 
 
     private List<FunnyDataModel> funnyDataModels;
-    private Context context;
-    private OnClickFunny onClickFunny;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
-    private boolean b_kindlink;
+    private final Context context;
+    private final OnClickFunny onClickFunny;
+    private final boolean b_kindlink;
 
     public FunnyAdapter(Context context,OnClickFunny onClickFunny,boolean b_kindlink) {
         this.context = context;
         this.onClickFunny=onClickFunny;
         this.b_kindlink=b_kindlink;
-        sharedPreferences= context.getSharedPreferences("user_info",Context.MODE_PRIVATE);
+
     }
 
     @NonNull
@@ -78,15 +76,37 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
             holder.binding.ivLaterItemDef.setBackgroundResource(R.drawable.shape_tag2);
         });
 
+
+        //region playerActivity
         holder.binding.ivPosterItemVideo.setOnClickListener(v -> {
             int id_funny3 = funnyDataModels.get(position).getId_funny();
             onClickFunny.onClickSee(id_funny3);
             Intent intent = new Intent(context, PlayerActivity.class);
             id_funny3 = funnyDataModels.get(position).getId_funny();
+
             intent.putExtra("id_vid_funny", id_funny3);
+            intent.putExtra("title_en",funnyDataModels.get(position).getTitle_en());
+            intent.putExtra("title_fa",funnyDataModels.get(position).getTitle_fa());
+            intent.putExtra("name_chann_fa",funnyDataModels.get(position).getName_chan_fa());
+            intent.putExtra("name_chann_en",funnyDataModels.get(position).getName_chan_en());
+            intent.putExtra("followers",funnyDataModels.get(position).getFollowers());
+            intent.putExtra("view",funnyDataModels.get(position).getView());
+            intent.putExtra("like",funnyDataModels.get(position).getLiky());
+            intent.putExtra("profile_chan",funnyDataModels.get(position).getProfile_chann());
+            intent.putExtra("poster",funnyDataModels.get(position).getPoster());
+
+            if (b_kindlink) {
+                String link_480=funnyDataModels.get(position).getLink_480();
+                intent.putExtra("link",link_480);
+            }else {
+                String link_720=funnyDataModels.get(position).getLink_720();
+                intent.putExtra("link",link_720);
+            }
             context.startActivity(intent);
 
         });
+
+        //endregion
 
         holder.binding.ProfileChannelVideoThumb.setOnClickListener(v -> {
             int id_channel=funnyDataModels.get(position).getId_channel();
