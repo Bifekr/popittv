@@ -2,6 +2,7 @@ package ir.popittv.myapplication.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -26,10 +27,15 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
     private List<FunnyDataModel> funnyDataModels;
     private Context context;
     private OnClickFunny onClickFunny;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    private boolean b_kindlink;
 
-    public FunnyAdapter(Context context,OnClickFunny onClickFunny) {
+    public FunnyAdapter(Context context,OnClickFunny onClickFunny,boolean b_kindlink) {
         this.context = context;
         this.onClickFunny=onClickFunny;
+        this.b_kindlink=b_kindlink;
+        sharedPreferences= context.getSharedPreferences("user_info",Context.MODE_PRIVATE);
     }
 
     @NonNull

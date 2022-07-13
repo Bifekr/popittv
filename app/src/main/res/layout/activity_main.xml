@@ -64,7 +64,7 @@
         android:gravity="end|center_horizontal|center_vertical"
         android:soundEffectsEnabled="true"
         android:text="@string/netLowPrice"
-        android:checked="true"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/iconWifi_toolbar"
         app:layout_constraintStart_toEndOf="@id/search_toolbar"

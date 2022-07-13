@@ -54,6 +54,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
     private String code_user;
     private int id_user;
     private final boolean userLoged = true;
+    private boolean b_switchLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +65,10 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
         setContentView(binding.getRoot());
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        funnyAdapter = new FunnyAdapter(this, this);
-        funnyAdapter2 = new FunnyAdapter(this, this);
-        funnyAdapter3 = new FunnyAdapter(this, this);
-        funnyAdapter5 = new FunnyAdapter(this, this);
+        funnyAdapter = new FunnyAdapter(this, this,b_switchLink);
+        funnyAdapter2 = new FunnyAdapter(this, this,b_switchLink);
+        funnyAdapter3 = new FunnyAdapter(this, this,b_switchLink);
+        funnyAdapter5 = new FunnyAdapter(this, this,b_switchLink);
 
 
         initRailActivity();

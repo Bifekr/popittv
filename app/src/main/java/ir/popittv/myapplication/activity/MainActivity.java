@@ -84,14 +84,10 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.switchNetToolbar.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        binding.switchNetToolbar.setChecked(sharedPreferences.getBoolean("switchNet",true));
 
-            switchEditor = sharedPreferences.edit();
-            switchEditor.putBoolean("switchNet", isChecked);
-            switchEditor.apply();
-            b_switchLink=sharedPreferences.getBoolean("switchNet",true);
+        switchNet();
 
-        });
 
 
 
@@ -107,9 +103,9 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
         detail_adapter = new ChannelDetail_adapter(this);
         infinitAdapter = new InfinitFrg1_PagerAdapter(this);
 
-        funnyAdapter = new FunnyAdapter(this,this);
-        funnyAdapter_liky = new FunnyAdapter(this,this);
-        funnyAdapter_view = new FunnyAdapter(this,this);
+        funnyAdapter = new FunnyAdapter(this,this,b_switchLink);
+        funnyAdapter_liky = new FunnyAdapter(this,this,b_switchLink);
+        funnyAdapter_view = new FunnyAdapter(this,this,b_switchLink);
 
         initRailActivity();
         taginit();
@@ -133,6 +129,31 @@ binding.profileShowChannelMainActivity.setOnClickListener(v -> {
 
 });
 
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private void switchNet() {
+        binding.switchNetToolbar.setOnCheckedChangeListener((buttonView, isChecked) -> {
+
+            switchEditor = sharedPreferences.edit();
+            switchEditor.putBoolean("switchNet", isChecked);
+            switchEditor.apply();
+            b_switchLink=sharedPreferences.getBoolean("switchNet",true);
+
+        });
     }
 
 
