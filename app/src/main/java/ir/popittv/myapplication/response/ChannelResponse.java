@@ -17,4 +17,10 @@ public class ChannelResponse {
     public List<ChannelDataModel> getChannel_all() {
         return channel_all;
     }
+
+    private List<ChannelDataModel> userSub;
+
+    public List<ChannelDataModel> getUserSub() {
+        return userSub;
+    }
 }

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,14 +21,18 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.List;
 import java.util.Objects;
 
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.adapter.AllChannel_Adapter;
 import ir.popittv.myapplication.adapter.FunnyAdapter;
+import ir.popittv.myapplication.adapter.RvChannel_Frg1;
 import ir.popittv.myapplication.databinding.ActivityUserBinding;
+import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.UserDataModel;
 import ir.popittv.myapplication.request.Service;
+import ir.popittv.myapplication.utils.OnClickFrg1;
 import ir.popittv.myapplication.utils.OnClickFunny;
 import ir.popittv.myapplication.viewmodel.UserViewModel;
 import okhttp3.ResponseBody;
@@ -35,7 +40,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserActivity extends AppCompatActivity implements OnClickFunny {
+public class UserActivity extends AppCompatActivity implements OnClickFunny , OnClickFrg1 {
 
     ActivityUserBinding binding;
     View bottomView;
@@ -48,7 +53,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
     private FunnyAdapter funnyAdapter2;
     private FunnyAdapter funnyAdapter3;
     private AllChannel_Adapter channel_adapter;
-    private FunnyAdapter funnyAdapter5;
+    private RvChannel_Frg1 funnyAdapter5;
     private String name_user;
     private String phone_user;
     private String code_user;
@@ -59,6 +64,11 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPreferences = UserActivity.this.getSharedPreferences("user_info", MODE_PRIVATE);
+
+        phone_user = sharedPreferences.getString("phone_user", null);
+        name_user = sharedPreferences.getString("name_user", null);
+        id_user = sharedPreferences.getInt("id_user", 0);
+
         super.onCreate(savedInstanceState);
         binding = ActivityUserBinding.inflate(getLayoutInflater());
         // this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
@@ -68,7 +78,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
         funnyAdapter = new FunnyAdapter(this, this,b_switchLink);
         funnyAdapter2 = new FunnyAdapter(this, this,b_switchLink);
         funnyAdapter3 = new FunnyAdapter(this, this,b_switchLink);
-        funnyAdapter5 = new FunnyAdapter(this, this,b_switchLink);
+        funnyAdapter5 = new RvChannel_Frg1(this, this);
 
 
         initRailActivity();
@@ -77,11 +87,9 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
         binding.avatarUserUserActivity.setOnClickListener(v -> {
             loginUser();
         });
-        phone_user = sharedPreferences.getString("phone_user", null);
-        name_user = sharedPreferences.getString("name_user", null);
-        id_user = sharedPreferences.getInt("id_user", 0);
+
         userViewModel.request_userLater(id_user, 1);
-        // userSubMenuClick();
+        userSubMenuClick(id_user);
         userSaveMenuClick(id_user);
         userLaterMenuClick(id_user);
         userSeeMenuClick(id_user);
@@ -99,7 +107,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
             binding.tvEnter1RvSubUser.setVisibility(View.VISIBLE);
             binding.tvEnter1RvSubUser.setOnClickListener(v -> {
                 loginUser();
-
+                binding.tvEnter1RvSubUser.setVisibility(View.GONE);
             });
         }
 
@@ -108,10 +116,11 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
             SharedPreferences.Editor editor22 = sharedPreferences.edit();
             editor22.putString("phone_user", null);
             editor22.apply();
+            recreate();
             Toast.makeText(getApplicationContext(), "شما از حساب خود خارج شدید", Toast.LENGTH_SHORT).show();
         });
 
-        // getUserSub();
+        getUserSub();
         getUserSave();
         getUserLater();
         getUserSee();
@@ -120,12 +129,15 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
     }
 
     private void getUserSub() {
-        userViewModel.getUserSub().observe(UserActivity.this, funnyDataModels -> {
-
+        userViewModel.getUserSub().observe(this, new Observer<List<ChannelDataModel>>() {
+            @Override
+            public void onChanged(List<ChannelDataModel> channelDataModels) {
+                funnyAdapter5.setData(channelDataModels);
+            }
         });
     }
 
-    private void userSubMenuClick() {
+    private void userSubMenuClick(int id_user) {
         binding.menuFunnySubUser.setOnClickListener(v -> {
 
             userViewModel.request_userSub(id_user);
@@ -491,6 +503,16 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny {
 
     @Override
     public void onClickSub(int id_channel) {
+
+    }
+
+    @Override
+    public void OnclickDetail(int pos) {
+
+    }
+
+    @Override
+    public void onMenuClick(int position) {
 
     }
 }

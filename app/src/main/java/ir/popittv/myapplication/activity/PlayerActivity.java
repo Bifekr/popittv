@@ -102,6 +102,10 @@ public class PlayerActivity extends AppCompatActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
+        phone_user = sharedPreferences.getString("phone_user", null);
+        name_user = sharedPreferences.getString("name_user", null);
+        id_user = sharedPreferences.getInt("id_user", 0);
         super.onCreate(savedInstanceState);
         binding = ActivityPlayerBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
@@ -109,11 +113,9 @@ public class PlayerActivity extends AppCompatActivity  {
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         // userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
 
-        phone_user = sharedPreferences.getString("phone_user", null);
-        name_user = sharedPreferences.getString("name_user", null);
-        id_user = sharedPreferences.getInt("id_user", 0);
+
+
 
         id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
         url_link = getIntent().getStringExtra("link");

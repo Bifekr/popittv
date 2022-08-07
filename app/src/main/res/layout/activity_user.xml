@@ -357,7 +357,6 @@
             android:textColor="@color/white"
             />
         </LinearLayout>
-
         <androidx.cardview.widget.CardView
           android:id="@+id/parentSaveChannel_userActivity"
           android:layout_width="match_parent"
@@ -493,7 +492,6 @@
             android:textColor="@color/white"
             />
         </LinearLayout>
-
         <androidx.cardview.widget.CardView
           android:id="@+id/parentBookmarkVideo_userActivity"
           android:layout_width="match_parent"
@@ -614,7 +612,6 @@
             android:textColor="@color/white"
             />
         </LinearLayout>
-
         <androidx.cardview.widget.CardView
           android:id="@+id/parentWatchLaterVideo_userActivity"
           android:layout_width="match_parent"
@@ -737,7 +734,6 @@
             android:textColor="@color/white"
             />
         </LinearLayout>
-
         <androidx.cardview.widget.CardView
           android:id="@+id/parentHistoryVideo_userActivity"
           android:layout_width="match_parent"
@@ -746,7 +742,7 @@
           app:cardCornerRadius="40dp"
           app:cardElevation="@dimen/plane_08"
           app:layout_constraintTop_toBottomOf="@id/parentWatchLaterVideo_userActivity"
-          app:layout_constraintBottom_toTopOf="@id/parentDownVideo_userActivity">
+          app:layout_constraintBottom_toTopOf="@id/parentLikeVideo_userActivity">
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -786,23 +782,97 @@
           </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
+        <View
+          android:layout_width="0dp"
+          android:layout_height="8dp"
+          android:elevation="@dimen/plane_08"
+          app:layout_constraintTop_toTopOf="@id/parentMenuUserWatchLater"
+          app:layout_constraintBottom_toBottomOf="@id/parentMenuUserWatchLater"
+          app:layout_constraintStart_toStartOf="@id/parentMenuUserWatchLater"
+          app:layout_constraintEnd_toEndOf="@id/parentMenuUserWatchLater"
+          android:background="@drawable/shape_tag1"/>
+        <LinearLayout
+          android:id="@+id/parentMenuUserLike"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:elevation="@dimen/plane_24"
+          android:layout_marginTop="@dimen/plane_08"
+          app:layout_constraintStart_toStartOf="@id/parentLikeVideo_userActivity"
+          app:layout_constraintEnd_toEndOf="@id/parentLikeVideo_userActivity"
+          app:layout_constraintTop_toBottomOf="@id/parentHistoryVideo_userActivity"
+          app:layout_constraintBottom_toBottomOf="@id/parentLikeVideo_userActivity"
+          app:layout_constraintVertical_bias="0"
+          app:layout_constraintHorizontal_bias=".3"
+          app:layout_constraintHeight_percent=".02"
+          android:orientation="horizontal"
+          >
+          <TextView
+            android:id="@+id/menuFunny_likeUser"
+            style="@style/TextAppearance.Reply.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_tag1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="6dp"
+            android:text="@string/funny_nav"
+            android:textColor="@color/white" />
+
+          <TextView
+            android:id="@+id/menuReality_likeUser"
+            style="@style/TextAppearance.Reply.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/plane_16"
+            android:background="@drawable/shape_tag2"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="6dp"
+            android:text="@string/reality_nav"
+            android:textColor="@color/white"
+            />
+
+          <TextView
+            android:id="@+id/menuStudy_likeUser"
+            style="@style/TextAppearance.Reply.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/plane_16"
+            android:background="@drawable/shape_tag1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="6dp"
+            android:text="@string/learning_nav"
+            android:textColor="@color/white" />
+          <TextView
+            android:id="@+id/menuFarsi_likeUser"
+            style="@style/TextAppearance.Reply.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/plane_16"
+            android:background="@drawable/shape_tag1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@string/farsi_nav"
+            android:textColor="@color/white"
+            />
+        </LinearLayout>
         <androidx.cardview.widget.CardView
-          android:id="@+id/parentDownVideo_userActivity"
+          android:id="@+id/parentLikeVideo_userActivity"
           android:layout_width="match_parent"
           android:layout_height="180dp"
           android:layout_marginTop="@dimen/plane_24"
-          android:layout_marginBottom="@dimen/plane_16"
           app:cardCornerRadius="40dp"
           app:cardElevation="@dimen/plane_08"
-
-          app:layout_constraintTop_toBottomOf="@id/parentHistoryVideo_userActivity">
+          app:layout_constraintTop_toBottomOf="@id/parentHistoryVideo_userActivity"
+        >
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-              android:id="@+id/rvDowVideo_userActivity"
+              android:id="@+id/rvLikeVideo_userActivity"
               android:layout_width="match_parent"
               android:layout_height="match_parent" />
 
@@ -813,25 +883,29 @@
               android:elevation="@dimen/plane_08"
               android:gravity="center_vertical|center_horizontal"
               android:orientation="vertical"
-              app:layout_constraintEnd_toEndOf="parent">
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintBottom_toBottomOf="parent">
 
               <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:src="@drawable/ic_archive" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_like_selected" />
 
               <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/baloo"
                 android:gravity="center"
-                android:text="@string/parentDownload"
-                android:textColor="@color/popit_red"
-                android:textSize="22sp"
+                android:text="@string/parentLike"
+                android:textSize="24sp"
                 android:textStyle="bold" />
             </LinearLayout>
           </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
+
       </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
   </androidx.constraintlayout.widget.ConstraintLayout>

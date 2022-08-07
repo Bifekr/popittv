@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.models.UserDataModel;
+import ir.popittv.myapplication.response.ChannelResponse;
 import ir.popittv.myapplication.response.UserResponse;
 import ir.popittv.myapplication.utils.AppExecuter;
 import okhttp3.ResponseBody;
@@ -32,7 +34,7 @@ public class UserApi {
     //init mutable
 
 
-    private final MutableLiveData<List<FunnyDataModel>> mUserSub;
+    private final MutableLiveData<List<ChannelDataModel>> mUserSub;
     private final MutableLiveData<List<FunnyDataModel>> mUserSave;
     private final MutableLiveData<List<FunnyDataModel>> mUserSee;
     private final MutableLiveData<List<FunnyDataModel>> mUserLater;
@@ -60,7 +62,7 @@ public class UserApi {
 
     //int livedata for post data from mutable and set into object
 
-    public LiveData<List<FunnyDataModel>> getUserSub(){return mUserSub;}
+    public LiveData<List<ChannelDataModel>> getUserSub(){return mUserSub;}
     public LiveData<List<FunnyDataModel>> getUserSave(){return mUserSave;}
     public LiveData<List<FunnyDataModel>> getUserSee(){return mUserSee;}
     public LiveData<List<FunnyDataModel>> getUserLater(){return mUserLater;}
@@ -88,6 +90,7 @@ public class UserApi {
 
 
     }
+
     public void request_userSave(int id_user,int kind){
         if (userSave_run!=null){
             userSave_run=null;
@@ -172,8 +175,8 @@ public class UserApi {
                 if (response.isSuccessful()){
 
                     assert response.body()!=null;
-                    List<FunnyDataModel> funnyDataModels=new ArrayList<>(((UserResponse)response.body()).getUserSub());
-                    mUserSub.postValue(funnyDataModels);
+                    List<ChannelDataModel> channelDataModels=new ArrayList<>(((ChannelResponse)response.body()).getUserSub());
+                    mUserSub.postValue(channelDataModels);
 
                 }else {
                     assert response.errorBody()!=null;
@@ -187,7 +190,7 @@ public class UserApi {
 
         }
 
-        private Call<UserResponse> call_userSub(int id_user){
+        private Call<ChannelResponse> call_userSub(int id_user){
             return Service.getApiClient().getUserSub(id_user);
         }
 

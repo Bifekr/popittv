@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.models.UserDataModel;
 import ir.popittv.myapplication.request.UserApi;
@@ -27,7 +28,7 @@ public class UserRepository {
 
     ////////////////////////////////////////
 
-   public LiveData<List<FunnyDataModel>> getUserSub(){return userApi.getUserSub(); }
+   public LiveData<List<ChannelDataModel>> getUserSub(){return userApi.getUserSub(); }
    public void request_userSub(int id_user) {userApi.request_userSub(id_user);}
 
     public LiveData<List<FunnyDataModel>> getUserSave(){return userApi.getUserSave(); }

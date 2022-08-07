@@ -310,7 +310,7 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
 
     //Set Data to LiveData
     private void allChannel() {
-        binding.showAllChannelMainActivity.setOnClickListener(v -> {
+        binding.showAllChannel.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AllChannelActivity.class);
             startActivity(intent);
         });
