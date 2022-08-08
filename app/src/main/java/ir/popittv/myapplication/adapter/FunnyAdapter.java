@@ -113,7 +113,7 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
             int id_funny3 = funnyDataModels.get(position).getId_funny();
             onClickFunny.onClickSee(id_funny3);
             Intent intent = new Intent(context, PlayerActivity.class);
-            id_funny3 = funnyDataModels.get(position).getId_funny();
+           // id_funny3 = funnyDataModels.get(position).getId_funny();
 
             intent.putExtra("id_vid_funny", id_funny3);
             intent.putExtra("title_en",funnyDataModels.get(position).getTitle_en());

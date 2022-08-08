@@ -6,6 +6,7 @@ import android.os.Parcelable;
 public class FunnyDataModel implements Parcelable {
 
     private int id_funny;
+    private int id_vid;
     private int id_channel;
     private int id_reality;
     private int id_study;
@@ -24,6 +25,10 @@ public class FunnyDataModel implements Parcelable {
     private String followers;
     private String age_name;
     private int kind;
+
+    public int getId_vid() {
+        return id_vid;
+    }
 
     protected FunnyDataModel(Parcel in) {
         id_funny = in.readInt();

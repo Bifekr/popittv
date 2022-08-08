@@ -173,9 +173,13 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
         });
     }
 
+
+
+    ///////////////////////////////
     private void getUserSee() {
         userViewModel.getUserSee().observe(UserActivity.this, funnyDataModels -> {
             funnyAdapter3.setData(funnyDataModels);
+
         });
     }
 
@@ -215,7 +219,11 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
 
     }
 
+///////////////////////////////////////////
 
+
+
+    ////////////////////////////////
     private void getUserLater() {
         userViewModel.getUserLater().observe(UserActivity.this, funnyDataModels -> {
 
@@ -309,7 +317,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
 
     private void intRvUser() {
 
-        //RecyclerView User WatchLater
+        //RecyclerView User channel
         binding.rvSaveChannelUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, RecyclerView.HORIZONTAL, false));
         binding.rvSaveChannelUserActivity.setAdapter(funnyAdapter5);
 
@@ -321,7 +329,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
         binding.rvWatchLaterUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, RecyclerView.HORIZONTAL, false));
         binding.rvWatchLaterUserActivity.setAdapter(funnyAdapter2);
 
-        //RecyclerView User History
+        //RecyclerView User History (see)
         binding.rvHistoryVideoUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, RecyclerView.HORIZONTAL, false));
         binding.rvHistoryVideoUserActivity.setAdapter(funnyAdapter3);
 
