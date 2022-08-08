@@ -27,7 +27,12 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
     private List<FunnyDataModel> funnyDataModels;
     private final Context context;
     private final OnClickFunny onClickFunny;
-    private final boolean b_kindlink;
+    private  boolean b_kindlink;
+
+    private  boolean bool_like=false;
+    private  boolean boo_mark=false;
+    private  boolean boo_later=false;
+
 
     public FunnyAdapter(Context context,OnClickFunny onClickFunny,boolean b_kindlink) {
         this.context = context;
@@ -56,24 +61,50 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
                 .into(holder.binding.ivPosterItemVideo);
         Glide.with(context).load(funnyDataModels.get(position).getProfile_chann())
                 .into(holder.binding.ProfileChannelVideoThumb);
-        
-        holder.binding.ivMarcItemDef.setOnClickListener(v -> {
-            int id_funny = funnyDataModels.get(position).getId_funny();
-            onClickFunny.onClickSave(id_funny);
-            holder.binding.ivMarcItemDef.setBackgroundResource(R.drawable.shape_tag2);
 
-        });
+
+            holder.binding.ivMarcItemDef.setOnClickListener(v -> {
+                if (!boo_mark) {
+                int id_funny = funnyDataModels.get(position).getId_funny();
+                onClickFunny.onClickSave(id_funny);
+                holder.binding.ivMarcItemDef.setBackgroundResource(R.drawable.shape_tag2);
+                boo_mark=true;
+                }else {
+                    int id_funny = funnyDataModels.get(position).getId_funny();
+                    onClickFunny.onClickSave(id_funny);
+                    holder.binding.ivMarcItemDef.setBackgroundResource(R.drawable.shape_tag1);
+                    boo_mark=false;
+                }
+            });
+
 
         holder.binding.parentLikeItemVidDef.setOnClickListener(v -> {
-            int id_funny1 = funnyDataModels.get(position).getId_funny();
-            onClickFunny.onClickLike(id_funny1);
-            holder.binding.parentLikeItemVidDef.setBackgroundResource(R.drawable.shape_tag2);
+            if (!bool_like){
+                int id_funny1 = funnyDataModels.get(position).getId_funny();
+                onClickFunny.onClickLike(id_funny1);
+                holder.binding.parentLikeItemVidDef.setBackgroundResource(R.drawable.shape_tag2);
+                bool_like=true;
+            }else {
+                int id_funny1 = funnyDataModels.get(position).getId_funny();
+                onClickFunny.onClickLike(id_funny1);
+                holder.binding.parentLikeItemVidDef.setBackgroundResource(R.drawable.shape_tag1);
+                bool_like=false;
+            }
+
         });
 
         holder.binding.ivLaterItemDef.setOnClickListener(v -> {
-            int id_funny2 = funnyDataModels.get(position).getId_funny();
-            onClickFunny.onClickLater(id_funny2);
-            holder.binding.ivLaterItemDef.setBackgroundResource(R.drawable.shape_tag2);
+            if (!boo_later) {
+                int id_funny2 = funnyDataModels.get(position).getId_funny();
+                onClickFunny.onClickLater(id_funny2);
+                holder.binding.ivLaterItemDef.setBackgroundResource(R.drawable.shape_tag2);
+                boo_later=true;
+            }else {
+                int id_funny2 = funnyDataModels.get(position).getId_funny();
+                onClickFunny.onClickLater(id_funny2);
+                holder.binding.ivLaterItemDef.setBackgroundResource(R.drawable.shape_tag1);
+                boo_later=false;
+            }
         });
 
 

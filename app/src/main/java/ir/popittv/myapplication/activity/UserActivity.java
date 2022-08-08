@@ -100,7 +100,8 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
             binding.tvExitUserActivity.setText(R.string.exite);
             binding.tvEnter1RvSubUser.setVisibility(View.GONE);
 
-        } else {
+        } else
+            {
             binding.phoneNumUserActivity.setText(R.string.hint_number);
             binding.userNameUserActivity.setText(R.string.hint_user_name);
             binding.tvExitUserActivity.setText(R.string.enter);
