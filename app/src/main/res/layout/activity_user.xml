@@ -282,81 +282,7 @@
 
         </androidx.cardview.widget.CardView>
 
-        <View
-          android:layout_width="0dp"
-          android:layout_height="8dp"
-          android:elevation="@dimen/plane_08"
-          app:layout_constraintTop_toTopOf="@id/parentMenuUserSub"
-          app:layout_constraintBottom_toBottomOf="@id/parentMenuUserSub"
-          app:layout_constraintStart_toStartOf="@id/parentMenuUserSub"
-          app:layout_constraintEnd_toEndOf="@id/parentMenuUserSub"
-          android:background="@drawable/shape_tag1"/>
-        <LinearLayout
-          android:id="@+id/parentMenuUserSub"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:elevation="@dimen/plane_24"
-          android:layout_marginTop="@dimen/plane_08"
-          app:layout_constraintStart_toStartOf="@id/parentSaveChannel_userActivity"
-          app:layout_constraintEnd_toEndOf="@id/parentSaveChannel_userActivity"
-          app:layout_constraintTop_toBottomOf="@id/parentAccess_userActivity"
-          app:layout_constraintBottom_toBottomOf="@id/parentSaveChannel_userActivity"
-          app:layout_constraintVertical_bias="0"
-          app:layout_constraintHorizontal_bias=".3"
-          app:layout_constraintHeight_percent=".02"
-          android:orientation="horizontal"
-          >
-          <TextView
-            android:id="@+id/menuFunny_subUser"
-            style="@style/TextAppearance.Reply.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/shape_tag2"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:paddingBottom="6dp"
-            android:text="@string/funny_nav"
-            android:textColor="@color/white" />
 
-          <TextView
-            android:id="@+id/menuReality_subUser"
-            style="@style/TextAppearance.Reply.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/plane_16"
-            android:background="@drawable/shape_tag1"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:paddingBottom="6dp"
-            android:text="@string/reality_nav"
-            android:textColor="@color/white"
-           />
-
-          <TextView
-            android:id="@+id/menuStudy_subUser"
-            style="@style/TextAppearance.Reply.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/plane_16"
-            android:background="@drawable/shape_tag1"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:paddingBottom="6dp"
-            android:text="@string/learning_nav"
-            android:textColor="@color/white" />
-          <TextView
-            android:id="@+id/menuFarsi_subUser"
-            style="@style/TextAppearance.Reply.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/plane_16"
-            android:background="@drawable/shape_tag1"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:text="@string/farsi_nav"
-            android:textColor="@color/white"
-            />
-        </LinearLayout>
         <androidx.cardview.widget.CardView
           android:id="@+id/parentSaveChannel_userActivity"
           android:layout_width="match_parent"
@@ -495,7 +421,7 @@
         <androidx.cardview.widget.CardView
           android:id="@+id/parentBookmarkVideo_userActivity"
           android:layout_width="match_parent"
-          android:layout_height="180dp"
+          android:layout_height="160dp"
           android:layout_marginTop="@dimen/plane_24"
           app:cardCornerRadius="40dp"
           app:cardElevation="@dimen/plane_08"
@@ -506,10 +432,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-              android:id="@+id/rvBookMarkVideo_userActivity"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent" />
+
 
             <LinearLayout
               android:layout_width="130dp"
@@ -534,6 +457,10 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
             </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+              android:id="@+id/rvBookMarkVideo_userActivity"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" />
           </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
