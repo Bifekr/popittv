@@ -24,6 +24,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.List;
 import java.util.Objects;
 
+import ir.devage.hamrahpay.HamrahPay;
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.adapter.AllChannel_Adapter;
 import ir.popittv.myapplication.adapter.FunnyAdapter;
@@ -62,6 +63,9 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
     private final boolean userLoged = true;
     private boolean b_switchLink;
 
+    //--- HmarhPay
+    private HamrahPay hp=null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPreferences = UserActivity.this.getSharedPreferences("user_info", MODE_PRIVATE);
@@ -72,62 +76,25 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
 
         super.onCreate(savedInstanceState);
         binding = ActivityUserBinding.inflate(getLayoutInflater());
-        // this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         setContentView(binding.getRoot());
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        funnyAdapter = new FunnyAdapter(this, this,b_switchLink);
-        funnyAdapter2 = new FunnyAdapter(this, this,b_switchLink);
-        funnyAdapter3 = new FunnyAdapter(this, this,b_switchLink);
-        funnyAdapter4 = new FunnyAdapter(this, this,b_switchLink);
-
-        funnyAdapter5 = new RvChannel_Frg1(this, this);
-
-
+        initAdapter(this,b_switchLink);
         initRailActivity();
         intRvUser();
 
-        binding.avatarUserUserActivity.setOnClickListener(v -> {
-            loginUser();
-        });
+        binding.avatarUserUserActivity.setOnClickListener(v -> loginUser());
 
-        userViewModel.request_userLater(id_user, 1);
-        userViewModel.request_userLike(id_user,1);
-        userViewModel.request_userSee(id_user,1);
-        userViewModel.request_userSave(id_user,1);
-        userViewModel.request_userSub(id_user);
+        firstRequest(id_user);
+
 
         userSaveMenuClick(id_user);
         userLaterMenuClick(id_user);
         userSeeMenuClick(id_user);
         userLikeMenuClick(id_user);
-        if (phone_user!=null) {
-            binding.phoneNumUserActivity.setText(phone_user);
-            binding.userNameUserActivity.setText(name_user);
-            binding.avatarUserUserActivity.setBackgroundResource(R.drawable.trophy);
-            binding.tvExitUserActivity.setText(R.string.exite);
-            binding.tvEnter1RvSubUser.setVisibility(View.GONE);
 
-        } else
-            {
-            binding.phoneNumUserActivity.setText(R.string.hint_number);
-            binding.userNameUserActivity.setText(R.string.hint_user_name);
-            binding.tvExitUserActivity.setText(R.string.enter);
-            binding.tvEnter1RvSubUser.setVisibility(View.VISIBLE);
-            binding.tvEnter1RvSubUser.setOnClickListener(v -> {
-                loginUser();
-                binding.tvEnter1RvSubUser.setVisibility(View.GONE);
-            });
-        }
-
-        binding.tvExitUserActivity.setOnClickListener(v -> {
-            sharedPreferences = this.getSharedPreferences("user_info", MODE_PRIVATE);
-            SharedPreferences.Editor editor22 = sharedPreferences.edit();
-            editor22.putString("phone_user", null);
-            editor22.apply();
-            recreate();
-            Toast.makeText(getApplicationContext(), "شما از حساب خود خارج شدید", Toast.LENGTH_SHORT).show();
-        });
+        userSetText();
+        txtExit();
 
         getUserSub();
         getUserSave();
@@ -138,6 +105,53 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
 
     }
 
+    private void firstRequest(int id_user) {
+        userViewModel.request_userLater(id_user, 1);
+        userViewModel.request_userLike(id_user,1);
+        userViewModel.request_userSee(id_user,1);
+        userViewModel.request_userSave(id_user,1);
+        userViewModel.request_userSub(id_user);
+    }
+
+    private void txtExit() {
+        binding.tvExitUserActivity.setOnClickListener(v -> {
+            sharedPreferences = this.getSharedPreferences("user_info", MODE_PRIVATE);
+            SharedPreferences.Editor editor22 = sharedPreferences.edit();
+            editor22.putString("phone_user", null);
+            editor22.apply();
+            recreate();
+            Toast.makeText(getApplicationContext(), "شما از حساب خود خارج شدید", Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    private void userSetText() {
+        if (phone_user!=null) {
+            binding.phoneNumUserActivity.setText(phone_user);
+            binding.userNameUserActivity.setText(name_user);
+            binding.avatarUserUserActivity.setBackgroundResource(R.drawable.trophy);
+            binding.tvExitUserActivity.setText(R.string.exite);
+            binding.tvEnter1RvSubUser.setVisibility(View.GONE);
+
+        } else {
+            binding.phoneNumUserActivity.setText(R.string.hint_number);
+            binding.userNameUserActivity.setText(R.string.hint_user_name);
+            binding.tvExitUserActivity.setText(R.string.enter);
+            binding.tvEnter1RvSubUser.setVisibility(View.VISIBLE);
+            binding.tvEnter1RvSubUser.setOnClickListener(v -> {
+                loginUser();
+                binding.tvEnter1RvSubUser.setVisibility(View.GONE);
+            });
+        }
+    }
+
+    private void initAdapter(UserActivity userActivity, boolean b_switchLink) {
+        funnyAdapter = new FunnyAdapter(userActivity, this,b_switchLink);
+        funnyAdapter2 = new FunnyAdapter(userActivity, this,b_switchLink);
+        funnyAdapter3 = new FunnyAdapter(userActivity, this,b_switchLink);
+        funnyAdapter4 = new FunnyAdapter(userActivity, this,b_switchLink);
+
+        funnyAdapter5 = new RvChannel_Frg1(userActivity, this);
+    }
 
 
     private void getUserSub() {
@@ -149,9 +163,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
         });
     }
 
-
-
-
+//---------------- user Like Video ------------ //
     private void getUserLike(){
         userViewModel.getUserLike().observe(UserActivity.this,funnyDataModels -> {
             funnyAdapter4.setData(funnyDataModels);
@@ -160,14 +172,13 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
     private void userLikeMenuClick(int id_user) {
     }
 
-    //////////////user see/////////////////
+    //----------------user see------------ //
     private void getUserSee() {
         userViewModel.getUserSee().observe(UserActivity.this, funnyDataModels -> {
             funnyAdapter3.setData(funnyDataModels);
 
         });
     }
-
     private void userSeeMenuClick(int id_user) {
         binding.menuFunnyHistoryUser.setOnClickListener(v -> {
 
@@ -204,11 +215,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
 
     }
 
-///////////////////////////////////////////
-
-
-
-    /////////////////user later///////////////
+    //----------------user later------------ //
     private void getUserLater() {
         userViewModel.getUserLater().observe(UserActivity.this, funnyDataModels -> {
 
@@ -216,7 +223,6 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
 
         });
     }
-
     private void userLaterMenuClick(int id_user) {
         binding.menuFunnyWatchLaterUser.setOnClickListener(v -> {
 
@@ -253,7 +259,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
 
     }
 
-////////////////////user save////////////////////////
+    //----------------user save------------ //
     private void getUserSave() {
         userViewModel.getUserSave().observe(this, funnyDataModels -> {
 
@@ -263,7 +269,6 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
 
         });
     }
-
     private void userSaveMenuClick(int id_user) {
         binding.menuFunnyBookmarkUser.setOnClickListener(v -> {
 
@@ -299,7 +304,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
         });
     }
 
-    /////////////////
+    //--------------------------------------------------------------------------------//
 
     private void intRvUser() {
 
@@ -323,7 +328,6 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
         binding.rvHistoryVideoUserActivity.setAdapter(funnyAdapter3);
 
     }
-
     private void loginUser() {
         String check = sharedPreferences.getString("phone_user", "");
         if (check.equals("")) {

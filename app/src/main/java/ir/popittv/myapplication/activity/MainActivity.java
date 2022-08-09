@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
     private SharedPreferences.Editor switchEditor;
 
     //-------------
-    private HamrahPay hp=null;
+
 
     private FunnyAdapter funnyAdapter;
     private FunnyAdapter funnyAdapter_liky;
