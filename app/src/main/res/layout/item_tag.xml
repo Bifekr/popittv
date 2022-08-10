@@ -4,6 +4,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="200dp"
   android:layout_height="190dp"
+  android:layoutDirection="ltr"
   app:cardBackgroundColor="@color/transparent_color"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   app:cardCornerRadius="@dimen/plane_16"

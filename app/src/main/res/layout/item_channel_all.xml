@@ -8,6 +8,7 @@
     android:layout_width="match_parent"
     app:cardCornerRadius="@dimen/plane_24"
     app:cardElevation="@dimen/plane_08"
+    android:layoutDirection="ltr"
     android:layout_marginBottom="@dimen/plane_08"
     android:layout_height="140dp">
 

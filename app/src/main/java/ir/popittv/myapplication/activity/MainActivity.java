@@ -16,12 +16,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.switchmaterial.SwitchMaterial;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.devage.hamrahpay.HamrahPay;
+
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.ShadowTransformer;
 import ir.popittv.myapplication.adapter.CardPagerAdapter2;
@@ -304,11 +304,7 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
 
 
 
-     /*   cardPagerAdapter2 = new CardPagerAdapter2(getActivity());
-        shadowTransformer = new ShadowTransformer(binding.vpChannelListFrg1, cardPagerAdapter2);
-        binding.vpChannelListFrg1.setAdapter(cardPagerAdapter2);
-        binding.vpChannelListFrg1.setPageTransformer(false, shadowTransformer);
-        binding.vpChannelListFrg1.setOffscreenPageLimit(6);*/
+
 
 
     }
@@ -385,6 +381,7 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
         mainViewModel.getFunny_subMenu().observe(this, funnyDataModels -> {
             if (funnyDataModels!=null) {
                 funnyAdapter.setData(funnyDataModels);
+                recommend_adapter.setFunnyDataModels(funnyDataModels);
             }
         });
     }

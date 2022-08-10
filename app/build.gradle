@@ -76,5 +76,5 @@ dependencies {
     implementation 'com.ramotion.circlemenu:circle-menu:0.3.2'
 
 
-    implementation project(path: ':hamrahpay')
+
 }

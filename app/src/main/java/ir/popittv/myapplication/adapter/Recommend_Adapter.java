@@ -48,8 +48,8 @@ public class Recommend_Adapter extends RecyclerView.Adapter<Recommend_Adapter.Rv
 
         holder.binding.titleFaVideoItemVideoThumb.setText(funnyDataModels.get(position).getTitle_fa());
         holder.binding.titleEnVideoItemVideoThumb.setText(funnyDataModels.get(position).getTitle_en());
-        holder.binding.tvViewItemVidDef.setText(funnyDataModels.get(position).getView()+"");
-        holder.binding.tvLikeItemVidDef.setText(funnyDataModels.get(position).getLiky()+"");
+        holder.binding.tvViewItemVidDef.setText(funnyDataModels.get(position).getView());
+        holder.binding.tvLikeItemVidDef.setText(funnyDataModels.get(position).getLiky());
 
         Glide.with(context).load(funnyDataModels.get(position).getPoster())
                 .into(holder.binding.ivPosterItemVideo);
