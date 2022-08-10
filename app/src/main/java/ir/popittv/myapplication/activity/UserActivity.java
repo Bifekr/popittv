@@ -80,7 +80,6 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
         funnyAdapter2 = new FunnyAdapter(this, this,b_switchLink);
         funnyAdapter3 = new FunnyAdapter(this, this,b_switchLink);
         funnyAdapter4 = new FunnyAdapter(this, this,b_switchLink);
-
         funnyAdapter5 = new RvChannel_Frg1(this, this);
 
 
