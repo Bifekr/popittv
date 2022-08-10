@@ -21,6 +21,7 @@ import com.google.android.material.switchmaterial.SwitchMaterial;
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.devage.hamrahpay.HamrahPay;
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.ShadowTransformer;
 import ir.popittv.myapplication.adapter.CardPagerAdapter2;
@@ -56,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor switchEditor;
 
+    //-------------
+
+
     private FunnyAdapter funnyAdapter;
     private FunnyAdapter funnyAdapter_liky;
     private FunnyAdapter funnyAdapter_view;
@@ -87,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
 
 
         switchNet();
+
 
 
 
@@ -367,7 +372,10 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
 
     private void getFunny_liky() {
         mainViewModel.getFunny_liky().observe(this, funnyDataModels -> {
-            funnyAdapter_liky.setData(funnyDataModels);
+
+            if (funnyDataModels!=null) {
+                funnyAdapter_liky.setData(funnyDataModels);
+            }else {mainViewModel.requestFunny_liky();}
 
         });
     }

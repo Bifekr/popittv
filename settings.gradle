@@ -8,3 +8,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Popit Tv"
 include ':app'
+
+include ':hamrahpay'
