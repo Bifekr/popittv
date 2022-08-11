@@ -343,7 +343,6 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
                     startActivity(intent);
                 });
                 binding.subShowChannelMainActivity.setText(channelDataModel.getFollowers());
-                binding.ageShowChannelMainActivity.setText(channelDataModel.getAge());
                 binding.titleShowChannelMainActivity.setText(channelDataModel.getName_chan_en().trim());
 
             }else {
