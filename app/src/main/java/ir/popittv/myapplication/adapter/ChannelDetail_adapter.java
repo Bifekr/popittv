@@ -16,6 +16,7 @@ import java.util.List;
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.activity.PlayerActivity;
 import ir.popittv.myapplication.databinding.ItemChannelDetailBinding;
+import ir.popittv.myapplication.databinding.ItemVidDefultBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
 
 public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_adapter.DetailChannel_holder> {
