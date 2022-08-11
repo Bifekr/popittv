@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
     //-------------
 
 
-    private FunnyAdapter funnyAdapter;
+    private ChannelDetail_adapter funnyAdapter;
     private FunnyAdapter funnyAdapter_liky;
     private FunnyAdapter funnyAdapter_view;
 
@@ -68,9 +68,10 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
 
     //global adapter
     private RvChannel_Frg1 rvChannel_frg1;
-    private ChannelDetail_adapter detail_adapter;
+    private FunnyAdapter detail_adapter;
     private InfinitFrg1_PagerAdapter infinitAdapter;
-    private Recommend_Adapter recommend_adapter;
+    private ChannelDetail_adapter recommend_adapter;
+
 
     private TagAdapter tagAdapter;
 
@@ -103,12 +104,12 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         rvChannel_frg1 = new RvChannel_Frg1(this, this);
-        recommend_adapter = new Recommend_Adapter(this);
+        recommend_adapter = new ChannelDetail_adapter(this);
 
-        detail_adapter = new ChannelDetail_adapter(this);
+        detail_adapter = new FunnyAdapter(this,this,true);
         infinitAdapter = new InfinitFrg1_PagerAdapter(this);
 
-        funnyAdapter = new FunnyAdapter(this,this,b_switchLink);
+        funnyAdapter = new ChannelDetail_adapter(this);
         funnyAdapter_liky = new FunnyAdapter(this,this,b_switchLink);
         funnyAdapter_view = new FunnyAdapter(this,this,b_switchLink);
 
@@ -300,7 +301,7 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
         binding.rvSubMenuTagFrg1.setAdapter(funnyAdapter);
         binding.rvSubMenuTagFrg1.setLayoutManager(new GridLayoutManager
                 (this, 3, GridLayoutManager.VERTICAL, false));
-        binding.rvSubMenuTagFrg1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL));
+       // binding.rvSubMenuTagFrg1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL));
 
 
 
@@ -331,7 +332,7 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
             if (channelDataModel!=null){
                 List<FunnyDataModel> funnyDataModels=new ArrayList<>((channelDataModel).getVideos_channel());
 
-                detail_adapter.setFunnyDataModels(funnyDataModels);
+                detail_adapter.setData(funnyDataModels);
 
 
                 Glide.with(this).load(channelDataModel.getProfile_chann())
@@ -379,7 +380,7 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
 
         mainViewModel.getFunny_subMenu().observe(this, funnyDataModels -> {
             if (funnyDataModels!=null) {
-                funnyAdapter.setData(funnyDataModels);
+                funnyAdapter.setFunnyDataModels(funnyDataModels);
                 recommend_adapter.setFunnyDataModels(funnyDataModels);
             }
         });

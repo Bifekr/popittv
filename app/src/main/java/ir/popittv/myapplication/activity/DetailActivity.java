@@ -23,7 +23,7 @@ public class DetailActivity extends AppCompatActivity implements OnClickFrg1, On
     private MainViewModel viewModel;
     private int id_channel;
 
-    private FunnyAdapter detail_adapter;
+    private ChannelDetail_adapter detail_adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class DetailActivity extends AppCompatActivity implements OnClickFrg1, On
         id_channel= getIntent().getIntExtra("id_channel",0);
         viewModel.requestChannel_detail(id_channel);
 
-        detail_adapter=new FunnyAdapter(this,this,true);
+        detail_adapter=new ChannelDetail_adapter(this);
 
         binding.rvAllVideoDetailActivity.setHasFixedSize(true);
         binding.rvAllVideoDetailActivity.setLayoutManager(new GridLayoutManager(this,3, RecyclerView.VERTICAL
@@ -55,7 +55,7 @@ public class DetailActivity extends AppCompatActivity implements OnClickFrg1, On
     private void getChannel_detail() {
         viewModel.getChannel_detail().observe(this,channelDataModel -> {
 
-            detail_adapter.setData(channelDataModel.getVideos_channel());
+            detail_adapter.setFunnyDataModels(channelDataModel.getVideos_channel());
 
             Glide.with(this).load(channelDataModel.getBanner_chann())
                     .into(binding.ivBannerItemChannelAll);

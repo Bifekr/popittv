@@ -116,7 +116,6 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="@dimen/plane_08"
-          android:layout_marginBottom="@dimen/plane_08"
           android:elevation="@dimen/plane_16"
           app:cardCornerRadius="@dimen/plane_24"
           app:layout_constraintBottom_toTopOf="@id/parentChannelDetail_cardView"
@@ -132,7 +131,7 @@
               android:id="@+id/rv_channelList_frg1"
               android:layout_width="0dp"
               android:layout_height="match_parent"
-              android:background="@color/popit_yellow"
+              android:background="#FCE4EC"
               android:foregroundGravity="center_vertical|center_horizontal"
               app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintEnd_toStartOf="@id/showAllChannel"
@@ -166,7 +165,7 @@
           android:id="@+id/parentChannelDetail_cardView"
           android:layout_width="0dp"
           android:layout_height="140dp"
-          android:background="@color/popit_blue_on_light"
+          android:background="@drawable/shape_tag3"
           app:layout_constraintBottom_toTopOf="@id/parentInfint_cardView"
           app:layout_constraintEnd_toStartOf="@id/rvRecommend_frg1"
           app:layout_constraintStart_toStartOf="parent"
@@ -179,7 +178,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/conDetail"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent=".94"
+            app:layout_constraintHorizontal_bias="1"/>
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/conDetail"
@@ -256,7 +257,7 @@
           android:id="@+id/rvRecommend_frg1"
           android:layout_width="0dp"
           android:layout_height="0dp"
-          android:background="@color/popit_orange"
+          android:background="@color/popit_yellow"
           app:layout_constraintBottom_toBottomOf="@id/parentInfint2_cardView"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="1"
@@ -279,7 +280,7 @@
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/popit_blue_on_light">
+            android:background="#FCE4EC">
 
             <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
               android:id="@+id/infinitCycle_frg1"
@@ -360,9 +361,10 @@
           android:id="@+id/parentInfint2_cardView"
           android:layout_width="0dp"
           android:layout_height="140dp"
+          android:layout_marginTop="@dimen/plane_08"
           android:layout_marginEnd="10dp"
           app:cardCornerRadius="@dimen/plane_24"
-          app:layout_constraintBottom_toTopOf="@id/parentPopular_mainActivity"
+          app:layout_constraintBottom_toTopOf="@id/parentInfint2_cardView"
           app:layout_constraintEnd_toStartOf="@id/rvRecommend_frg1"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/parentInfint_cardView">
@@ -370,63 +372,91 @@
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/popit_blue_on_light">
+            android:background="#FCE4EC">
 
             <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
               android:id="@+id/infinitCycle2_frg1"
               android:layout_width="0dp"
               android:layout_height="match_parent"
-              app:icvp_center_page_scale_offset="10dp"
+              app:icvp_center_page_scale_offset="12dp"
               app:icvp_interpolator="@android:anim/accelerate_decelerate_interpolator"
               app:icvp_max_page_scale="0.8"
               app:icvp_medium_scaled="false"
               app:icvp_min_page_scale="0.55"
-              app:icvp_min_page_scale_offset="5dp"
-              app:icvp_scroll_duration="250"
+              app:icvp_min_page_scale_offset="8dp"
+              app:icvp_scroll_duration="150"
               app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintStart_toEndOf="@id/cardParentShoChannel2"
-              app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintWidth_percent=".65" />
-
-            <androidx.cardview.widget.CardView
-              android:id="@+id/cardParentShoChannel2"
-              android:layout_width="0dp"
-              android:layout_height="match_parent"
-              android:layout_marginTop="@dimen/plane_08"
-              android:layout_marginBottom="@dimen/plane_08"
-              android:elevation="@dimen/plane_02"
-              app:cardCornerRadius="@dimen/plane_24"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintEnd_toStartOf="@id/infinitCycle2_frg1"
+              app:layout_constraintHorizontal_bias="1"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintVertical_bias="1">
+              app:layout_constraintWidth_percent=".9" />
 
-              <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:adjustViewBounds="true"
+            <androidx.constraintlayout.widget.ConstraintLayout
+              android:id="@+id/parentInfint2_con"
+              android:layout_width="120dp"
+              android:layout_height="match_parent"
+              android:background="@drawable/shape_titlerv"
+              android:gravity="center_vertical|center_horizontal"
+              android:orientation="vertical"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintStart_toStartOf="parent">
+
+              <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/ivTitle_infilit2"
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:elevation="@dimen/plane_16"
                 android:scaleType="fitXY"
-                android:src="@color/card_2" />
+                android:src="@drawable/trophy"
+                app:layout_constraintBottom_toTopOf="@+id/tvInfilit2_mainActivity"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:riv_border_color="@color/red_active"
 
-              <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/parentShowChannel2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/gradiant2"
-                android:orientation="vertical"></androidx.constraintlayout.widget.ConstraintLayout>
+                app:riv_oval="true"
+                tools:ignore="ImageContrastCheck" />
 
-            </androidx.cardview.widget.CardView>
+              <TextView
+                android:id="@+id/tvInfilit2_mainActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lalezar_regular"
+                android:text="@string/fav_title"
+                android:textColor="@color/reply_red_400"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@id/tvfun_infilit2"
+                app:layout_constraintEnd_toEndOf="@+id/ivTitle_infilit2"
+                app:layout_constraintStart_toStartOf="@+id/ivTitle_infilit2"
+                app:layout_constraintTop_toBottomOf="@+id/ivTitle_infilit2" />
+
+              <TextView
+                android:id="@+id/tvfun_infilit2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lalezar_regular"
+                android:text="@string/fun_video"
+                android:textColor="@color/popit_disable"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/tvInfilit2_mainActivity"
+                app:layout_constraintStart_toStartOf="@id/tvInfilit2_mainActivity"
+                app:layout_constraintTop_toBottomOf="@+id/tvInfilit2_mainActivity" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
           </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
           android:id="@+id/parentPopular_mainActivity"
           android:layout_width="0dp"
           android:layout_height="140dp"
           android:layout_marginTop="@dimen/plane_08"
-          android:background="@color/popit_blue_on_light"
+          android:background="@drawable/shape_tag3"
           app:layout_constraintBottom_toTopOf="@id/parentBestView_mainActivity"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
@@ -502,7 +532,7 @@
           android:layout_width="0dp"
           android:layout_height="140dp"
           android:layout_marginTop="@dimen/plane_08"
-          android:background="@color/popit_blue_on_light"
+          android:background="@drawable/shape_tag3"
           app:layout_constraintBottom_toTopOf="@id/parentFavTag_frg1"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
@@ -571,7 +601,7 @@
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_marginTop="10dp"
-          android:background="@drawable/back_view"
+          android:background="@drawable/shape_tag3"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
