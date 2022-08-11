@@ -6,7 +6,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    app:cardCornerRadius="@dimen/plane_24"
+    app:cardCornerRadius="@dimen/plane_08"
     app:cardElevation="@dimen/plane_08"
     android:layoutDirection="ltr"
     android:layout_marginBottom="@dimen/plane_08"

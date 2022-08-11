@@ -83,7 +83,7 @@
         app:boxStrokeColor="@color/black"
         app:boxStrokeWidthFocused="1dp"
         app:endIconMode="clear_text"
-        app:hintTextColor="@color/blue_light"
+        app:hintTextColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/switchNet_toolbar"
         app:layout_constraintStart_toStartOf="parent"
@@ -147,10 +147,13 @@
               android:background="@drawable/shape_tag5"
               android:fontFamily="@font/baloo"
               android:padding="@dimen/plane_08"
-              android:text="show  All  Channel"
+              android:text="@string/showAllChannelFa"
               android:textColor="#6D4C41"
-              android:textSize="26sp"
+              android:textSize="18sp"
               android:textStyle="bold"
+              android:textAlignment="center"
+              android:textDirection="rtl"
+              android:gravity="center_horizontal|center_vertical"
               app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintHorizontal_bias="1"
@@ -173,7 +176,7 @@
             android:layout_width="0dp"
             android:layout_height="140dp"
             android:background="@color/popit_blue_on_light"
-            app:layout_constraintBottom_toTopOf="@id/parentPopular_mainActivity"
+            app:layout_constraintBottom_toTopOf="@id/parentInfint_cardView"
             app:layout_constraintEnd_toStartOf="@id/rvRecommend_frg1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/parentAllChannel_mainActivity">
@@ -283,7 +286,7 @@
           android:id="@+id/rvRecommend_frg1"
           android:layout_width="0dp"
           android:layout_height="0dp"
-          app:layout_constraintBottom_toBottomOf="@id/parentBestView_mainActivity"
+          app:layout_constraintBottom_toBottomOf="@id/parentInfint2_cardView"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="1"
           app:layout_constraintStart_toEndOf="@id/parentChannelDetail_cardView"
@@ -292,144 +295,7 @@
 
 
 
-          <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/parentPopular_mainActivity"
-            android:layout_width="0dp"
-            android:layout_height="140dp"
-            android:background="@color/popit_blue_on_light"
-            android:layout_marginTop="@dimen/plane_08"
-            app:layout_constraintBottom_toTopOf="@id/parentBestView_mainActivity"
-            app:layout_constraintEnd_toStartOf="@id/rvRecommend_frg1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/parentChannelDetail_cardView">
 
-            <androidx.recyclerview.widget.RecyclerView
-              android:id="@+id/rvPopular_mainActivity"
-              android:layout_width="0dp"
-              android:layout_height="match_parent"
-              app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintEnd_toStartOf="@id/parentLike_con"/>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-              android:id="@+id/parentLike_con"
-              android:layout_width="120dp"
-              android:layout_height="match_parent"
-              android:background="@drawable/shape_tag6"
-              android:gravity="center_vertical|center_horizontal"
-              android:orientation="vertical"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintBottom_toBottomOf="parent"
-             >
-
-              <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/xxx"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_like_selected"
-                android:elevation="@dimen/plane_16"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:riv_border_color="@color/red_active"
-                app:riv_border_width="1dp"
-                app:riv_oval="true"
-                tools:ignore="ImageContrastCheck" />
-              <TextView
-                android:id="@+id/tvFav_mainActivity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/xxx"
-                app:layout_constraintStart_toStartOf="@+id/xxx"
-                app:layout_constraintEnd_toEndOf="@+id/xxx"
-                android:text="@string/fav_title"
-                android:fontFamily="@font/lalezar_regular"
-                android:textSize="20sp"
-                android:textColor="@color/popit_red"/>
-              <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/tvFav_mainActivity"
-                app:layout_constraintStart_toStartOf="@id/tvFav_mainActivity"
-                app:layout_constraintEnd_toEndOf="@id/tvFav_mainActivity"
-                android:text="@string/fun_video"
-                android:fontFamily="@font/lalezar_regular"
-                android:textSize="16sp"
-                android:textColor="@color/popit_disable"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-          </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-          <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/parentBestView_mainActivity"
-            android:layout_width="0dp"
-            android:layout_height="140dp"
-            android:layout_marginTop="@dimen/plane_08"
-            app:layout_constraintBottom_toTopOf="@id/parentInfint_cardView"
-            app:layout_constraintEnd_toStartOf="@id/rvRecommend_frg1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/parentPopular_mainActivity">
-
-            <androidx.recyclerview.widget.RecyclerView
-              android:id="@+id/rvBestView_mainActivity"
-              android:layout_width="0dp"
-              android:layout_height="match_parent"
-              android:background="@color/popit_blue_on_light"
-              app:layout_constraintStart_toEndOf="@+id/constraintLayout"
-              app:layout_constraintEnd_toEndOf="parent"/>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-              android:id="@+id/constraintLayout"
-              android:layout_width="120dp"
-              android:layout_height="match_parent"
-              android:background="@drawable/shape_tag6"
-              android:gravity="center_vertical|center_horizontal"
-              android:orientation="vertical"
-              app:layout_constraintStart_toStartOf="parent">
-
-              <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/xxxx"
-                android:layout_width="90dp"
-                android:layout_height="80dp"
-                android:elevation="@dimen/plane_08"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_view_color"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:riv_border_color="@color/red_active"
-                app:riv_border_width="1dp"
-                app:riv_oval="true"
-                tools:ignore="ImageContrastCheck" />
-
-              <TextView
-                android:id="@+id/tvBestView_mainActivity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lalezar_regular"
-                android:text="@string/mostview_title"
-                android:textColor="@color/popit_red"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="@+id/xxxx"
-                app:layout_constraintStart_toStartOf="@+id/xxxx"
-                app:layout_constraintTop_toBottomOf="@+id/xxxx" />
-
-              <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lalezar_regular"
-                android:text="@string/fun_video"
-                android:textColor="@color/popit_disable"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@id/tvBestView_mainActivity"
-                app:layout_constraintStart_toStartOf="@id/tvBestView_mainActivity"
-                app:layout_constraintTop_toBottomOf="@+id/tvBestView_mainActivity" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-          </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <androidx.cardview.widget.CardView
@@ -439,10 +305,10 @@
           android:layout_marginTop="@dimen/plane_08"
           android:layout_marginEnd="10dp"
           app:cardCornerRadius="@dimen/plane_24"
-          app:layout_constraintBottom_toTopOf="@id/parentFavTag_frg1"
-          app:layout_constraintEnd_toStartOf="@+id/parentInfint2_cardView"
+          app:layout_constraintBottom_toTopOf="@id/parentInfint2_cardView"
+         app:layout_constraintEnd_toStartOf="@id/rvRecommend_frg1"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/parentBestView_mainActivity">
+          app:layout_constraintTop_toBottomOf="@id/parentChannelDetail_cardView">
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -461,13 +327,13 @@
               app:icvp_min_page_scale_offset="5dp"
               app:icvp_scroll_duration="250"
               app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintEnd_toStartOf="@id/cardParentShoChannel"
+              app:layout_constraintEnd_toStartOf="@id/cardParentShoChannel3"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent"
               app:layout_constraintWidth_percent=".65" />
 
             <androidx.cardview.widget.CardView
-              android:id="@+id/cardParentShoChannel"
+              android:id="@+id/cardParentShoChannel3"
               android:layout_width="0dp"
               android:layout_height="match_parent"
               android:layout_marginTop="@dimen/plane_08"
@@ -480,20 +346,55 @@
               app:layout_constraintTop_toTopOf="parent"
               app:layout_constraintVertical_bias="1">
 
-              <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@color/card_2"
-                android:contentDescription="TODO" />
+
 
               <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/parentShowChannel"
-                android:layout_width="match_parent"
+                android:id="@+id/constraintLayout2"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/gradiant2"
-                android:orientation="vertical"></androidx.constraintlayout.widget.ConstraintLayout>
+                android:background="@drawable/shape_tag6"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                  android:id="@+id/xxxxx"
+                  android:layout_width="90dp"
+                  android:layout_height="80dp"
+                  android:elevation="@dimen/plane_08"
+                  android:scaleType="fitXY"
+                  android:src="@drawable/ic_view_color"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toTopOf="parent"
+                  app:riv_border_color="@color/red_active"
+                  app:riv_border_width="1dp"
+                  app:riv_oval="true"
+                  tools:ignore="ImageContrastCheck" />
+
+                <TextView
+                  android:id="@+id/tvBestViewx_mainActivity"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:fontFamily="@font/lalezar_regular"
+                  android:text="@string/mostview_title"
+                  android:textColor="@color/popit_red"
+                  android:textSize="24sp"
+                  app:layout_constraintEnd_toEndOf="@+id/xxxxx"
+                  app:layout_constraintStart_toStartOf="@+id/xxxxx"
+                  app:layout_constraintTop_toBottomOf="@+id/xxxxx" />
+
+                <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:fontFamily="@font/lalezar_regular"
+                  android:text="@string/fun_video"
+                  android:textColor="@color/popit_disable"
+                  android:textSize="18sp"
+                  app:layout_constraintEnd_toEndOf="@id/tvBestViewx_mainActivity"
+                  app:layout_constraintStart_toStartOf="@id/tvBestViewx_mainActivity"
+                  app:layout_constraintTop_toBottomOf="@+id/tvBestViewx_mainActivity" />
+              </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 
@@ -507,10 +408,10 @@
           android:layout_height="140dp"
           android:layout_marginEnd="10dp"
           app:cardCornerRadius="@dimen/plane_24"
-          app:layout_constraintBottom_toBottomOf="@id/parentInfint_cardView"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toEndOf="@id/parentInfint_cardView"
-          app:layout_constraintTop_toTopOf="@id/parentInfint_cardView">
+          app:layout_constraintBottom_toTopOf="@id/parentPopular_mainActivity"
+          app:layout_constraintEnd_toStartOf="@id/rvRecommend_frg1"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/parentInfint_cardView">
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -567,6 +468,143 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/parentPopular_mainActivity"
+          android:layout_width="0dp"
+          android:layout_height="140dp"
+          android:background="@color/popit_blue_on_light"
+          android:layout_marginTop="@dimen/plane_08"
+          app:layout_constraintTop_toBottomOf="@id/parentInfint2_cardView"
+          app:layout_constraintBottom_toTopOf="@id/parentBestView_mainActivity"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          >
+
+          <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPopular_mainActivity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/parentLike_con"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+          <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/parentLike_con"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_titlerv"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+
+            <com.makeramen.roundedimageview.RoundedImageView
+              android:id="@+id/xxx"
+              android:layout_width="60dp"
+              android:layout_height="60dp"
+              android:scaleType="fitXY"
+              android:src="@drawable/ic_like_selected"
+              android:elevation="@dimen/plane_16"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              app:riv_border_color="@color/red_active"
+              app:riv_border_width="1dp"
+              app:riv_oval="true"
+              tools:ignore="ImageContrastCheck" />
+            <TextView
+              android:id="@+id/tvFav_mainActivity"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              app:layout_constraintTop_toBottomOf="@+id/xxx"
+              app:layout_constraintStart_toStartOf="@+id/xxx"
+              app:layout_constraintEnd_toEndOf="@+id/xxx"
+              android:text="@string/fav_title"
+              android:fontFamily="@font/lalezar_regular"
+              android:textSize="20sp"
+              android:textColor="@color/live_red"/>
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              app:layout_constraintTop_toBottomOf="@+id/tvFav_mainActivity"
+              app:layout_constraintStart_toStartOf="@id/tvFav_mainActivity"
+              app:layout_constraintEnd_toEndOf="@id/tvFav_mainActivity"
+              android:text="@string/fun_video"
+              android:fontFamily="@font/lalezar_regular"
+              android:textSize="16sp"
+              android:textColor="@color/popit_disable"/>
+          </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/parentBestView_mainActivity"
+          android:layout_width="0dp"
+          android:layout_height="140dp"
+          android:layout_marginTop="@dimen/plane_08"
+          android:background="@color/popit_blue_on_light"
+          app:layout_constraintBottom_toTopOf="@id/parentFavTag_frg1"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/parentPopular_mainActivity">
+
+          <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvBestView_mainActivity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+          <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_titlerv"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+              android:id="@+id/xxxx"
+              android:layout_width="90dp"
+              android:layout_height="80dp"
+              android:elevation="@dimen/plane_08"
+              android:scaleType="fitXY"
+              android:src="@drawable/ic_view_color"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              app:riv_border_color="@color/red_active"
+              app:riv_border_width="1dp"
+              app:riv_oval="true"
+              tools:ignore="ImageContrastCheck" />
+
+            <TextView
+              android:id="@+id/tvBestView_mainActivity"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:fontFamily="@font/lalezar_regular"
+              android:text="@string/mostview_title"
+              android:textColor="@color/popit_red"
+              android:textSize="24sp"
+              app:layout_constraintEnd_toEndOf="@+id/xxxx"
+              app:layout_constraintStart_toStartOf="@+id/xxxx"
+              app:layout_constraintTop_toBottomOf="@+id/xxxx" />
+
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:fontFamily="@font/lalezar_regular"
+              android:text="@string/fun_video"
+              android:textColor="@color/popit_disable"
+              android:textSize="18sp"
+              app:layout_constraintEnd_toEndOf="@id/tvBestView_mainActivity"
+              app:layout_constraintStart_toStartOf="@id/tvBestView_mainActivity"
+              app:layout_constraintTop_toBottomOf="@+id/tvBestView_mainActivity" />
+          </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
           android:id="@+id/parentFavTag_frg1"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
@@ -576,7 +614,7 @@
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/parentInfint_cardView">
+          app:layout_constraintTop_toBottomOf="@id/parentBestView_mainActivity">
 
           <TextView
             android:id="@+id/titleFav_frg1"
