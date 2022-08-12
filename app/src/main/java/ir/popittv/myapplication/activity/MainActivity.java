@@ -31,6 +31,7 @@ import ir.popittv.myapplication.adapter.FunnyAdapter;
 import ir.popittv.myapplication.adapter.InfinitFrg1_PagerAdapter;
 import ir.popittv.myapplication.adapter.Recommend_Adapter;
 import ir.popittv.myapplication.adapter.RvChannel_Frg1;
+import ir.popittv.myapplication.adapter.SearchAdapter;
 import ir.popittv.myapplication.adapter.TagAdapter;
 import ir.popittv.myapplication.databinding.ActivityMainBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
     private ChannelDetail_adapter funnyAdapter;
     private FunnyAdapter funnyAdapter_liky;
     private FunnyAdapter funnyAdapter_view;
+    private SearchAdapter searchAdapter;
 
     private final int FUNNY_KIND=1;
 
@@ -115,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
         funnyAdapter = new ChannelDetail_adapter(this);
         funnyAdapter_liky = new FunnyAdapter(this,this,b_switchLink);
         funnyAdapter_view = new FunnyAdapter(this,this,b_switchLink);
+        searchAdapter = new SearchAdapter(this);
 
         initRailActivity();
         taginit();
