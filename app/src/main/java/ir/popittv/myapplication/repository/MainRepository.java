@@ -70,6 +70,9 @@ public void requestChannel_all(int age){mainApiClient.requestChannel_all(age);}
     public LiveData<FunnyDataModel> getFunny_single(){ return funnyApiClient.getFunny_single();}
     public void requestFunny_single(int id_funny){funnyApiClient.requestFunny_single(id_funny);}
 
+    public LiveData<List<FunnyDataModel>> getFunny_search(){return funnyApiClient.getFunny_search();}
+    public void requestFunny_search(String search){ funnyApiClient.requestFunny_search(search);}
+
 
 
 }

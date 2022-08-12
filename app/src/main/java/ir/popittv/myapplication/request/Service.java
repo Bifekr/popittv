@@ -7,7 +7,7 @@ public class Service {
 
     private static Retrofit retrofit;
     private static  Retrofit.Builder builder =new Retrofit.Builder()
-          // .baseUrl("https://api.themoviedb.org/")
+
             .baseUrl("https://pikoboom.ir/")
             .addConverterFactory(GsonConverterFactory.create());
 

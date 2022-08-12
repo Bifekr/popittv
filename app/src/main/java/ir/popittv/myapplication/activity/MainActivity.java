@@ -9,6 +9,7 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -35,6 +36,7 @@ import ir.popittv.myapplication.databinding.ActivityMainBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.models.HashTagDataModel;
 import ir.popittv.myapplication.request.Service;
+import ir.popittv.myapplication.response.UserResponse;
 import ir.popittv.myapplication.utils.OnClickFrg1;
 import ir.popittv.myapplication.utils.OnClickFunny;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
@@ -92,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
 
 
         switchNet();
+        search();
 
 
 
@@ -145,7 +148,24 @@ binding.profileShowChannelMainActivity.setOnClickListener(v -> {
 
 
 
+
     }
+
+    private void search() {
+        binding.searchToolbar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                mainViewModel.requestFunny_search(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+    }
+
 
 
 

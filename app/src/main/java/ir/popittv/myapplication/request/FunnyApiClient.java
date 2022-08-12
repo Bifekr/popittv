@@ -26,6 +26,7 @@ public class FunnyApiClient {
     private final MutableLiveData<List<FunnyDataModel>> mFunny_best;
     private final MutableLiveData<List<FunnyDataModel>> mFunny_liky;
     private final MutableLiveData<List<FunnyDataModel>> mFunny_subMenu;
+    private final MutableLiveData<List<FunnyDataModel>> mFunny_search;
     private final MutableLiveData <FunnyDataModel> mFunny_single;
 
 
@@ -36,6 +37,7 @@ public class FunnyApiClient {
         mFunny_view = new MutableLiveData<>();
         mFunny_subMenu = new MutableLiveData<>();
         mFunny_single = new MutableLiveData<>();
+        mFunny_search = new MutableLiveData<>();
 
     }
 
@@ -52,6 +54,7 @@ public class FunnyApiClient {
     }
     public LiveData<List<FunnyDataModel>> getFunny_view() {return mFunny_view;}
     public LiveData<List<FunnyDataModel>> getFunny_liky() {return mFunny_liky; }
+    public LiveData<List<FunnyDataModel>> getFunny_search() {return mFunny_search; }
     public LiveData<FunnyDataModel> getFunny_single() {return mFunny_single; }
 
 
@@ -64,6 +67,7 @@ public class FunnyApiClient {
     private FunnyLiky_Runnable funnyLiky_runnable;
     private FunnySubMenu_Runnable funnySubMenu_runnable;
     private FunnySingle_Run funnySingle_run;
+    private FunnySearch_Runnable funnySearch_runnable;
 
 
     //method for request from host to get data and post in the livedata
@@ -135,6 +139,63 @@ public class FunnyApiClient {
 
             }
         }, 2, TimeUnit.MINUTES);
+    }
+
+
+    public void requestFunny_search(String search){
+
+        if (funnySearch_runnable != null){
+            funnySearch_runnable=null;
+        }
+
+        funnySearch_runnable = new FunnySearch_Runnable(search);
+
+        final Future handler_search = AppExecuter.getAppExecuter().networkIo().submit(funnySearch_runnable);
+        AppExecuter.getAppExecuter().networkIo().schedule(new Runnable() {
+            @Override
+            public void run() {
+                handler_search.cancel(true);
+                funnySearch_runnable.cancellable =true;
+
+            }
+        },2,TimeUnit.MINUTES);
+
+    }
+
+    private class FunnySearch_Runnable implements Runnable{
+
+        private boolean cancellable;
+        private String search;
+
+        private FunnySearch_Runnable(String search) {
+            this.search=search;
+            cancellable = false;
+        }
+
+        @Override
+        public void run() {
+
+            try {
+                if (cancellable){
+                    return;
+                }
+                Response response=callSearch(search).execute();
+                if (response.body()!=null){
+                    List<FunnyDataModel> funnyDataModelList = new ArrayList<>(((FunnyResponse)response.body()).getSearch());
+                    mFunny_search.postValue(funnyDataModelList);
+                }else {
+                    mFunny_search.postValue(null);
+                }
+            } catch (IOException e) {
+                mFunny_search.postValue(null);
+                e.printStackTrace();
+            }
+
+        }
+
+        private Call<FunnyResponse> callSearch(String search){
+            return Service.getApiClient().searchFunny(search);
+        }
     }
 
     //create Runnable class for set to AppExecutor

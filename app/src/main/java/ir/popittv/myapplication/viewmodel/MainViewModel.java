@@ -65,4 +65,8 @@ public class MainViewModel extends ViewModel {
 
     public LiveData<FunnyDataModel> getFunny_single(){ return mainRepository.getFunny_single();}
     public void requestFunny_single(int id_funny){mainRepository.requestFunny_single(id_funny);}
+
+
+    public LiveData<List<FunnyDataModel>> getFunny_search(){return mainRepository.getFunny_search();}
+    public void requestFunny_search(String search){ mainRepository.requestFunny_search(search);}
 }

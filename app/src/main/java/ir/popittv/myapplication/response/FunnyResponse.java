@@ -25,6 +25,9 @@ public class FunnyResponse {
     private List<FunnyDataModel> liky;
     public List<FunnyDataModel> getLiky(){return liky;}
 
+    private List<FunnyDataModel> search;
+    public List<FunnyDataModel> getSearch(){return search;}
+
     private FunnyDataModel single;
     public FunnyDataModel getSingle(){return single;}
 }
