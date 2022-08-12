@@ -4,18 +4,24 @@ import android.graphics.drawable.Drawable;
 
 public class HashTagDataModel {
 
-    private String titleTag;
+    private String titleTagEn;
+    private String titleTagFa;
     private int iconTag;
     private Drawable backgroundTag;
 
-    public HashTagDataModel(String titleTag, int iconTag, Drawable backgroundTag) {
-        this.titleTag = titleTag;
+    public HashTagDataModel(String titleTagEn, int iconTag, Drawable backgroundTag,String titleTagFa) {
+        this.titleTagEn = titleTagEn;
+        this.titleTagFa = titleTagFa;
         this.iconTag = iconTag;
         this.backgroundTag = backgroundTag;
     }
 
-    public String getTitleTag() {
-        return titleTag;
+    public String getTitleTagFa() {
+        return titleTagFa;
+    }
+
+    public String getTitleTagEn() {
+        return titleTagEn;
     }
 
     public int getIconTag() {

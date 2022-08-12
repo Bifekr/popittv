@@ -37,12 +37,13 @@ public class TagAdapter extends RecyclerView.Adapter<TagAdapter.TagHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull TagHolder holder, int position) {
-        holder.titleTag.setText(tagList.get(position).getTitleTag());
+        holder.titleTagEn.setText(tagList.get(position).getTitleTagEn());
+        holder.titleTagFa.setText(tagList.get(position).getTitleTagFa());
         holder.iconTag.setImageResource(tagList.get(position).getIconTag());
         holder.parentTag.setBackground(tagList.get(position).getBackgroundTag());
         holder.parentItemTag.setOnClickListener(v->{
             row_index= holder.getAdapterPosition();
-            onClickFrg1.onMenuClick(row_index+2);
+            onClickFrg1.onMenuClick(row_index);
         });
 
     }
@@ -55,14 +56,16 @@ public class TagAdapter extends RecyclerView.Adapter<TagAdapter.TagHolder> {
     public class TagHolder extends RecyclerView.ViewHolder{
         RelativeLayout parentItemTag;
         RelativeLayout parentTag;
-        TextView titleTag;
+        TextView titleTagEn;
+        TextView titleTagFa;
         ImageView iconTag;
 
         public TagHolder(@NonNull View itemView) {
             super(itemView);
             parentItemTag=itemView.findViewById(R.id.parentItemTag);
             parentTag=itemView.findViewById(R.id.tagParent_itemTag);
-            titleTag=itemView.findViewById(R.id.tagTitle_itemTag);
+            titleTagEn =itemView.findViewById(R.id.titleEn_tag);
+            titleTagFa =itemView.findViewById(R.id.titleFa_tag);
             iconTag=itemView.findViewById(R.id.tagImage_itemTag);
 
         }

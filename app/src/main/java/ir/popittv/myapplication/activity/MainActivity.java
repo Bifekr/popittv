@@ -248,11 +248,11 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
         GradientDrawable drawable5 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
                 new int[]{0xf469a9, 0xFFF48FB1});
         ArrayList<HashTagDataModel> tagList = new ArrayList<>();
-        tagList.add(new HashTagDataModel("#اگی واگی", R.drawable.tag_huggy_1, drawable1));
-        tagList.add(new HashTagDataModel("#سونیک", R.drawable.tag_sonic_1, drawable2));
-        tagList.add(new HashTagDataModel("#آدمک خای خمیری", R.drawable.tag_claymixer_1, drawable3));
-        tagList.add(new HashTagDataModel("#کریستمس", R.drawable.tag_christmas_1, drawable4));
-        tagList.add(new HashTagDataModel("#کیسی میسی", R.drawable.tag_kissy_1, drawable5));
+        tagList.add(new HashTagDataModel("#Huggy Wuggy", R.drawable.tag_huggy_1, drawable1,"#اگی واگی"));
+        tagList.add(new HashTagDataModel("#Sonic", R.drawable.tag_sonic_1, drawable2,"#سونیک"));
+        tagList.add(new HashTagDataModel("#duls khamir", R.drawable.tag_claymixer_1, drawable3,"#آدمک خای خمیری"));
+        tagList.add(new HashTagDataModel("#Christmas", R.drawable.tag_christmas_1, drawable4,"#کریستمس"));
+        tagList.add(new HashTagDataModel("#Kissy Missy", R.drawable.tag_kissy_1, drawable5,"#کیسی میسی"));
 
 
         tagAdapter = new TagAdapter(tagList, this);
