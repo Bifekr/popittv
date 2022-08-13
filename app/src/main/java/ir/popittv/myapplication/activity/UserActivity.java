@@ -512,4 +512,9 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
     public void onMenuClick(int position) {
 
     }
+
+    @Override
+    public void onRow_index(int position) {
+
+    }
 }

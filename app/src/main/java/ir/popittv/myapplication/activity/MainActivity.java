@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         //update AND get Data from DataModel into LiveData
         allChannel();
         getChannel_kind();
-        getChannel_detail();
+     getChannel_detail();
         getFunny_view();
         getFunny_liky();
         getFunny_subMenu();
@@ -113,11 +113,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         binding.iconWifiToolbar.setOnClickListener(v -> {
             Toast.makeText(this, "sdfsdf", Toast.LENGTH_SHORT).show();
         });
-        binding.profileShowChannelMainActivity.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-            intent.putExtra("id_channel", id_channel);
-            startActivity(intent);
-        });
+
 
     }
 
@@ -193,8 +189,8 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
         mainViewModel.requestChannel_kind(1);
         //detail Channel Selected
-        mainViewModel.requestChannel_detail(row_index);
-        // mainViewModel.requestChannel_detail(1);
+
+         mainViewModel.requestChannel_detail(1);
         mainViewModel.requestFunny_view();
         mainViewModel.requestFunny_liky();
         mainViewModel.requestFunny_subMenu(2);
@@ -355,8 +351,10 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
                         .into(binding.profileShowChannelMainActivity);
                 binding.profileShowChannelMainActivity.setOnClickListener(v -> {
                     int id_channel_single = channelDataModel.getId_channel();
+
                     Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                     intent.putExtra("id_channel", id_channel_single);
+
                     startActivity(intent);
                 });
                 binding.subShowChannelMainActivity.setText(channelDataModel.getFollowers());
@@ -512,7 +510,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
     @Override
     public void onClickSub(int id_channel) {
-        id_channel = id_channel;
+
 
 
     }

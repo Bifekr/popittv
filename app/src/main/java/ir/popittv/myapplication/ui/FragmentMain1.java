@@ -189,6 +189,11 @@ public class FragmentMain1 extends Fragment implements OnClickFrg1 , OnClickFunn
     }
 
     @Override
+    public void onRow_index(int position) {
+
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;

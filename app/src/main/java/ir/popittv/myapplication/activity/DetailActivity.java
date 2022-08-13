@@ -22,6 +22,7 @@ public class DetailActivity extends AppCompatActivity implements OnClickFrg1, On
     private ActivityDetailBinding binding;
     private MainViewModel viewModel;
     private int id_channel;
+    private int kind;
 
     private ChannelDetail_adapter detail_adapter;
 
@@ -78,6 +79,11 @@ public class DetailActivity extends AppCompatActivity implements OnClickFrg1, On
 
     @Override
     public void onMenuClick(int position) {
+
+    }
+
+    @Override
+    public void onRow_index(int position) {
 
     }
 

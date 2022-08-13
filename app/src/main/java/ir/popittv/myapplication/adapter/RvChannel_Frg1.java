@@ -56,6 +56,8 @@ public class RvChannel_Frg1 extends RecyclerView.Adapter<RvChannel_Frg1.rvChanne
 
             //get id for fetch channel detail
             onClickFrg1.OnclickDetail(channelDataModels.get(position).getId_channel());
+            int getKind=channelDataModels.get(position).getKind();
+
             //for change color
             row_index=holder.getAdapterPosition();
             int row_index2 =channelDataModels.get(0).getId_channel();
