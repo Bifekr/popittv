@@ -16,6 +16,7 @@ import ir.popittv.myapplication.response.FunnyResponse;
 import ir.popittv.myapplication.utils.AppExecuter;
 import retrofit2.Call;
 import retrofit2.Response;
+import retrofit2.http.Query;
 
 public class FunnyApiClient {
 
@@ -244,9 +245,10 @@ public class FunnyApiClient {
     //Runnable class for request funny_view
     private class FunnyView_Runnable implements Runnable {
         private final boolean canclable;
-
-        public FunnyView_Runnable() {
+        int kind;
+        public FunnyView_Runnable(int kind) {
             canclable = false;
+            this.kind = kind;
         }
 
         @Override
@@ -275,8 +277,8 @@ public class FunnyApiClient {
 
         }
 
-        private Call<FunnyResponse> funnyResponseCall() {
-            return Service.getApiClient().getFunny_view();
+        private Call<FunnyResponse> funnyResponseCall(int kind) {
+            return Service.getApiClient().getFunny_view(kind);
         }
     }
 

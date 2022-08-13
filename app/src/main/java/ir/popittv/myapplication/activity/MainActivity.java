@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         mainViewModel.requestChannel_kind(1);
         //detail Channel Selected
 
-         mainViewModel.requestChannel_detail(1);
+         mainViewModel.requestChannel_detail(1,1);
         mainViewModel.requestFunny_view();
         mainViewModel.requestFunny_liky();
         mainViewModel.requestFunny_subMenu(2);
@@ -351,9 +351,11 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
                         .into(binding.profileShowChannelMainActivity);
                 binding.profileShowChannelMainActivity.setOnClickListener(v -> {
                     int id_channel_single = channelDataModel.getId_channel();
+                    int kind = channelDataModel.getKind();
 
                     Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                     intent.putExtra("id_channel", id_channel_single);
+                    intent.putExtra("kind", kind);
 
                     startActivity(intent);
                 });
@@ -405,7 +407,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
     @Override
     public void OnclickDetail(int pos) {
         id_channel = pos;
-        mainViewModel.requestChannel_detail(id_channel);
+        mainViewModel.requestChannel_detail(id_channel,1);
 
     }
 

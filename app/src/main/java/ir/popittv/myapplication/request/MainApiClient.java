@@ -131,13 +131,13 @@ public class MainApiClient {
 
 
     // detail Channel selected
-    public void requestChannel_detail(int id_channel){
+    public void requestChannel_detail(int id_channel,int kind){
 
         if (channelDetail_run!=null){
             channelDetail_run=null;
         }
 
-        channelDetail_run = new ChannelDetail_Run(id_channel);
+        channelDetail_run = new ChannelDetail_Run(id_channel,kind);
         Future detailHandler = AppExecuter.getAppExecuter().networkIo().submit(channelDetail_run);
         AppExecuter.getAppExecuter().networkIo().schedule(new Runnable() {
             @Override
@@ -149,11 +149,13 @@ public class MainApiClient {
     private class ChannelDetail_Run implements Runnable{
 
         int id_channel;
+        int kind;
         private final boolean canclable2;
 
-        public ChannelDetail_Run(int id_channel) {
+        public ChannelDetail_Run(int id_channel,int kind) {
             this.id_channel = id_channel;
             canclable2=false;
+            this.kind = kind;
         }
 
         @Override
@@ -162,7 +164,7 @@ public class MainApiClient {
             try {
                 if (canclable2)
                     return;
-                Response response= call(id_channel).execute();
+                Response response= call(id_channel,kind).execute();
                 assert response.body()!=null;
                 if (response.isSuccessful()){
                     ChannelDataModel channelDataModel=(ChannelDataModel) response.body();
@@ -182,9 +184,9 @@ public class MainApiClient {
 
         }
 
-        private Call<ChannelDataModel> call(int id_channel){
+        private Call<ChannelDataModel> call(int id_channel,int kind){
 
-            return Service.getApiClient().getChannel_detail(id_channel);
+            return Service.getApiClient().getChannel_detail(id_channel,kind);
 
         }
 

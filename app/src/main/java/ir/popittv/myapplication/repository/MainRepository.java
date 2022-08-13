@@ -39,7 +39,7 @@ public void requestChannel_kind(int kind){
 }
 
 public LiveData<ChannelDataModel> getChannel_detail(){return mainApiClient.getChannel_detail();}
-public void requestChannel_detail(int id_channel){mainApiClient.requestChannel_detail(id_channel);}
+public void requestChannel_detail(int id_channel,int kind){mainApiClient.requestChannel_detail(id_channel,kind);}
 
 public LiveData<List<ChannelDataModel>> getChannel_all(){return mainApiClient.getChannel_all();}
 public void requestChannel_all(int age){mainApiClient.requestChannel_all(age);}

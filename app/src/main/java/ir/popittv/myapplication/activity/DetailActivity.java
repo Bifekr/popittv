@@ -36,7 +36,8 @@ public class DetailActivity extends AppCompatActivity implements OnClickFrg1, On
 
 
         id_channel= getIntent().getIntExtra("id_channel",0);
-        viewModel.requestChannel_detail(id_channel);
+        kind= getIntent().getIntExtra("kind",0);
+        viewModel.requestChannel_detail(id_channel,kind);
 
         detail_adapter=new ChannelDetail_adapter(this,this);
 

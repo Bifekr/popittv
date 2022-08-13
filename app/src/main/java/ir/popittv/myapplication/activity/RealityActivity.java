@@ -1,40 +1,26 @@
 package ir.popittv.myapplication.activity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
-import android.os.Bundle;
-import android.speech.RecognitionListener;
-import android.speech.RecognizerIntent;
-import android.speech.SpeechRecognizer;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.adapter.ChannelDetail_adapter;
@@ -43,7 +29,6 @@ import ir.popittv.myapplication.adapter.InfinitFrg1_PagerAdapter;
 import ir.popittv.myapplication.adapter.RvChannel_Frg1;
 import ir.popittv.myapplication.adapter.SearchAdapter;
 import ir.popittv.myapplication.adapter.TagAdapter;
-import ir.popittv.myapplication.databinding.ActivityMainBinding;
 import ir.popittv.myapplication.databinding.ActivityRealityBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.models.HashTagDataModel;
@@ -58,9 +43,9 @@ import retrofit2.Response;
 
 public class RealityActivity extends AppCompatActivity implements OnClickFrg1, OnClickFunny {
 
+    private final int KIND = 2;
     MainViewModel mainViewModel;
     ActivityRealityBinding binding;
-    private final int KIND = 2;
     //global Variable
     private int id_channel;
     private int row_index;
@@ -105,8 +90,7 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
         //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
-
-        initNewRv(this,this);
+        initNewRv(this, this);
 
         initRailActivity();
 
@@ -120,7 +104,7 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
         //-------------update AND get Data from DataModel into LiveData ----------------//
         allChannel();
         getChannel_kind();
-      getChannel_detail();
+        getChannel_detail();
         getFunny_view();
         getFunny_liky();
         getFunny_subMenu();
@@ -129,9 +113,6 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
         binding.iconWifiToolbar.setOnClickListener(v -> {
             Toast.makeText(this, "sdfsdf", Toast.LENGTH_SHORT).show();
         });
-
-
-
 
 
     }
@@ -212,7 +193,7 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
         mainViewModel.requestChannel_kind(KIND);
         //detail Channel Selected
 
-      mainViewModel.requestChannel_detail(1);
+        mainViewModel.requestChannel_detail(15,2);
         mainViewModel.requestFunny_view();
         mainViewModel.requestFunny_liky();
         mainViewModel.requestFunny_subMenu(2);
@@ -268,176 +249,178 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
             }
         });
     }
-        private void taginit() {
 
-            binding.rvMenuTagFrg1.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-            GradientDrawable drawable1 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                    new int[]{0xffeff400, 0xffaff600});
-            GradientDrawable drawable2 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                    new int[]{0xFF03A9F4, 0xFF90CAF9});
-            GradientDrawable drawable3 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                    new int[]{0xFFFFEB3B, 0xffaaf400});
-            GradientDrawable drawable4 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                    new int[]{0xFF7ADCCF, 0xFF80CBC4});
-            GradientDrawable drawable5 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                    new int[]{0xf469a9, 0xFFF48FB1});
-            ArrayList<HashTagDataModel> tagList = new ArrayList<>();
-            tagList.add(new HashTagDataModel("#Huggy Wuggy", R.drawable.tag_huggy_1, drawable1, "#اگی واگی"));
-            tagList.add(new HashTagDataModel("#Sonic", R.drawable.tag_sonic_1, drawable2, "#سونیک"));
-            tagList.add(new HashTagDataModel("#duls khamir", R.drawable.tag_claymixer_1, drawable3, "#آدمک خای خمیری"));
-            tagList.add(new HashTagDataModel("#Christmas", R.drawable.tag_christmas_1, drawable4, "#کریستمس"));
-            tagList.add(new HashTagDataModel("#Kissy Missy", R.drawable.tag_kissy_1, drawable5, "#کیسی میسی"));
+    private void taginit() {
 
-
-            tagAdapter = new TagAdapter(tagList, this);
-            binding.rvMenuTagFrg1.setAdapter(tagAdapter);
+        binding.rvMenuTagFrg1.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+        GradientDrawable drawable1 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xffeff400, 0xffaff600});
+        GradientDrawable drawable2 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xFF03A9F4, 0xFF90CAF9});
+        GradientDrawable drawable3 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xFFFFEB3B, 0xffaaf400});
+        GradientDrawable drawable4 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xFF7ADCCF, 0xFF80CBC4});
+        GradientDrawable drawable5 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xf469a9, 0xFFF48FB1});
+        ArrayList<HashTagDataModel> tagList = new ArrayList<>();
+        tagList.add(new HashTagDataModel("#Huggy Wuggy", R.drawable.tag_huggy_1, drawable1, "#اگی واگی"));
+        tagList.add(new HashTagDataModel("#Sonic", R.drawable.tag_sonic_1, drawable2, "#سونیک"));
+        tagList.add(new HashTagDataModel("#duls khamir", R.drawable.tag_claymixer_1, drawable3, "#آدمک خای خمیری"));
+        tagList.add(new HashTagDataModel("#Christmas", R.drawable.tag_christmas_1, drawable4, "#کریستمس"));
+        tagList.add(new HashTagDataModel("#Kissy Missy", R.drawable.tag_kissy_1, drawable5, "#کیسی میسی"));
 
 
-        }
-
-        private void initRv_Vp_adapter() {
-
-            //init channel list Adapter
-            binding.rvChannelListFrg1.setHasFixedSize(true);
-            binding.rvChannelListFrg1.setLayoutManager(new LinearLayoutManager(this,
-                    LinearLayoutManager.HORIZONTAL, false));
-            binding.rvChannelListFrg1.setAdapter(rvChannel_frg1);
-
-            //Show Detail Channel Recycler
-            binding.rvDetailFrg1.setHasFixedSize(true);
-            binding.rvDetailFrg1.setLayoutManager(new LinearLayoutManager(this,
-                    LinearLayoutManager.HORIZONTAL, false));
-            binding.rvDetailFrg1.setAdapter(detail_adapter);
-
-            //RecyclerView Selected 1
-            binding.rvPopularMainActivity.setHasFixedSize(true);
-            binding.rvPopularMainActivity.setLayoutManager(new LinearLayoutManager(this,
-                    LinearLayoutManager.HORIZONTAL, false));
-            binding.rvPopularMainActivity.setAdapter(funnyAdapter_liky);
-
-            //recyclerView Selected2
-            binding.rvBestViewMainActivity.setHasFixedSize(true);
-            binding.rvBestViewMainActivity.setLayoutManager(new LinearLayoutManager(this,
-                    LinearLayoutManager.HORIZONTAL, false));
-            binding.rvBestViewMainActivity.setAdapter(funnyAdapter_view);
-
-            //horizontal viewpager infinite
-
-            binding.infinitCycleFrg1.setAdapter(infinitAdapter);
-
-            //Recommended Vide Rv
-            binding.rvRecommendFrg1.setHasFixedSize(true);
-            binding.rvRecommendFrg1.setLayoutManager(new LinearLayoutManager(this,
-                    RecyclerView.VERTICAL, false));
-            binding.rvRecommendFrg1.setAdapter(recommend_adapter);
+        tagAdapter = new TagAdapter(tagList, this);
+        binding.rvMenuTagFrg1.setAdapter(tagAdapter);
 
 
-            binding.rvSubMenuTagFrg1.setAdapter(funnyAdapter);
-            binding.rvSubMenuTagFrg1.setLayoutManager(new GridLayoutManager
-                    (this, 3, GridLayoutManager.VERTICAL, false));
-            // binding.rvSubMenuTagFrg1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL));
+    }
 
-            binding.rvSearch.setAdapter(searchAdapter);
-            binding.rvSearch.setLayoutManager(new GridLayoutManager
-                    (this, 3, GridLayoutManager.VERTICAL, false));
+    private void initRv_Vp_adapter() {
 
+        //init channel list Adapter
+        binding.rvChannelListFrg1.setHasFixedSize(true);
+        binding.rvChannelListFrg1.setLayoutManager(new LinearLayoutManager(this,
+                LinearLayoutManager.HORIZONTAL, false));
+        binding.rvChannelListFrg1.setAdapter(rvChannel_frg1);
 
-        }
-        //Set Data to LiveData
-        private void allChannel() {
-            binding.showAllChannel.setOnClickListener(v -> {
-                Intent intent = new Intent(RealityActivity.this, AllChannelActivity.class);
-                startActivity(intent);
-            });
-        }
+        //Show Detail Channel Recycler
+        binding.rvDetailFrg1.setHasFixedSize(true);
+        binding.rvDetailFrg1.setLayoutManager(new LinearLayoutManager(this,
+                LinearLayoutManager.HORIZONTAL, false));
+        binding.rvDetailFrg1.setAdapter(detail_adapter);
 
-        private void getChannel_kind() {
-            mainViewModel.getChannel_kind().observe(this, channelDataModels -> {
-                if (channelDataModels!=null) {
-                    rvChannel_frg1.setData(channelDataModels);
-                }
-            });
-        }
+        //RecyclerView Selected 1
+        binding.rvPopularMainActivity.setHasFixedSize(true);
+        binding.rvPopularMainActivity.setLayoutManager(new LinearLayoutManager(this,
+                LinearLayoutManager.HORIZONTAL, false));
+        binding.rvPopularMainActivity.setAdapter(funnyAdapter_liky);
 
-        private void getChannel_detail() {
-            mainViewModel.getChannel_detail().observe(this, channelDataModel -> {
+        //recyclerView Selected2
+        binding.rvBestViewMainActivity.setHasFixedSize(true);
+        binding.rvBestViewMainActivity.setLayoutManager(new LinearLayoutManager(this,
+                LinearLayoutManager.HORIZONTAL, false));
+        binding.rvBestViewMainActivity.setAdapter(funnyAdapter_view);
 
-                if (channelDataModel!=null) {
-                    List<FunnyDataModel> funnyDataModels = new ArrayList<>((channelDataModel).getVideos_channel());
+        //horizontal viewpager infinite
 
-                    detail_adapter.setData(funnyDataModels);
+        binding.infinitCycleFrg1.setAdapter(infinitAdapter);
 
-
-                    Glide.with(this).load(channelDataModel.getProfile_chann())
-                            .into(binding.profileShowChannelMainActivity);
-                    binding.profileShowChannelMainActivity.setOnClickListener(v -> {
-                        int id_channel_single = channelDataModel.getId_channel();
-                        int kind = channelDataModel.getKind();
-                        Intent intent = new Intent(RealityActivity.this, DetailActivity.class);
-                        intent.putExtra("id_channel", id_channel_single);
-                        intent.putExtra("kind", kind);
-                        startActivity(intent);
-                    });
-                    binding.subShowChannelMainActivity.setText(channelDataModel.getFollowers());
-                    binding.titleShowChannelMainActivity.setText(channelDataModel.getName_chan_en().trim());
-
-                } else {
-                    Toast.makeText(RealityActivity.this, "net not connection", Toast.LENGTH_LONG).show();
-                }
+        //Recommended Vide Rv
+        binding.rvRecommendFrg1.setHasFixedSize(true);
+        binding.rvRecommendFrg1.setLayoutManager(new LinearLayoutManager(this,
+                RecyclerView.VERTICAL, false));
+        binding.rvRecommendFrg1.setAdapter(recommend_adapter);
 
 
-            });
-        }
+        binding.rvSubMenuTagFrg1.setAdapter(funnyAdapter);
+        binding.rvSubMenuTagFrg1.setLayoutManager(new GridLayoutManager
+                (this, 3, GridLayoutManager.VERTICAL, false));
+        // binding.rvSubMenuTagFrg1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL));
 
-        private void getFunny_view() {
-            mainViewModel.getFunny_view().observe(this, funnyDataModels -> {
-                if (funnyDataModels!=null) {
-                    infinitAdapter.setData(funnyDataModels);
-                    funnyAdapter_view.setData(funnyDataModels);
-                } else {
-                    Toast.makeText(this, "اینترنت را بررسی کنید", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+        binding.rvSearch.setAdapter(searchAdapter);
+        binding.rvSearch.setLayoutManager(new GridLayoutManager
+                (this, 3, GridLayoutManager.VERTICAL, false));
 
-        private void getFunny_liky() {
-            mainViewModel.getFunny_liky().observe(this, funnyDataModels -> {
 
-                if (funnyDataModels!=null) {
-                    funnyAdapter_liky.setData(funnyDataModels);
-                } else {
-                    mainViewModel.requestFunny_liky();
-                }
+    }
 
-            });
-        }
+    //Set Data to LiveData
+    private void allChannel() {
+        binding.showAllChannel.setOnClickListener(v -> {
+            Intent intent = new Intent(RealityActivity.this, AllChannelActivity.class);
+            startActivity(intent);
+        });
+    }
 
-        private void getFunny_subMenu() {
+    private void getChannel_kind() {
+        mainViewModel.getChannel_kind().observe(this, channelDataModels -> {
+            if (channelDataModels!=null) {
+                rvChannel_frg1.setData(channelDataModels);
+            }
+        });
+    }
 
-            mainViewModel.getFunny_subMenu().observe(this, funnyDataModels -> {
-                if (funnyDataModels!=null) {
-                    funnyAdapter.setFunnyDataModels(funnyDataModels);
-                    recommend_adapter.setFunnyDataModels(funnyDataModels);
-                }
-            });
-        }
+    private void getChannel_detail() {
+        mainViewModel.getChannel_detail().observe(this, channelDataModel -> {
 
-        @Override
-        public void onBackPressed() {
+            if (channelDataModel!=null) {
+                List<FunnyDataModel> funnyDataModels = new ArrayList<>((channelDataModel).getVideos_channel());
 
-            if (b_search) {
-                binding.rvSearch.setVisibility(View.GONE);
+                detail_adapter.setData(funnyDataModels);
+
+
+                Glide.with(this).load(channelDataModel.getProfile_chann())
+                        .into(binding.profileShowChannelMainActivity);
+                binding.profileShowChannelMainActivity.setOnClickListener(v -> {
+                    int id_channel_single = channelDataModel.getId_channel();
+                    int kind = channelDataModel.getKind();
+                    Intent intent = new Intent(RealityActivity.this, DetailActivity.class);
+                    intent.putExtra("id_channel", id_channel_single);
+                    intent.putExtra("kind", kind);
+                    startActivity(intent);
+                });
+                binding.subShowChannelMainActivity.setText(channelDataModel.getFollowers());
+                binding.titleShowChannelMainActivity.setText(channelDataModel.getName_chan_en().trim());
+
             } else {
-                super.onBackPressed();
+                Toast.makeText(RealityActivity.this, "net not connection", Toast.LENGTH_LONG).show();
             }
 
+
+        });
+    }
+
+    private void getFunny_view() {
+        mainViewModel.getFunny_view().observe(this, funnyDataModels -> {
+            if (funnyDataModels!=null) {
+                infinitAdapter.setData(funnyDataModels);
+                funnyAdapter_view.setData(funnyDataModels);
+            } else {
+                Toast.makeText(this, "اینترنت را بررسی کنید", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void getFunny_liky() {
+        mainViewModel.getFunny_liky().observe(this, funnyDataModels -> {
+
+            if (funnyDataModels!=null) {
+                funnyAdapter_liky.setData(funnyDataModels);
+            } else {
+                mainViewModel.requestFunny_liky();
+            }
+
+        });
+    }
+
+    private void getFunny_subMenu() {
+
+        mainViewModel.getFunny_subMenu().observe(this, funnyDataModels -> {
+            if (funnyDataModels!=null) {
+                funnyAdapter.setFunnyDataModels(funnyDataModels);
+                recommend_adapter.setFunnyDataModels(funnyDataModels);
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (b_search) {
+            binding.rvSearch.setVisibility(View.GONE);
+        } else {
+            super.onBackPressed();
         }
+
+    }
 
 
     @Override
     public void OnclickDetail(int pos) {
         id_channel = pos;
-        mainViewModel.requestChannel_detail(id_channel);
+        mainViewModel.requestChannel_detail(id_channel,2);
     }
 
     @Override
@@ -447,7 +430,7 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
 
     @Override
     public void onRow_index(int position) {
-        row_index=position;
+        row_index = position;
     }
 
     @Override

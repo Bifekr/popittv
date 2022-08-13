@@ -27,13 +27,13 @@ public interface ApiClient {
     Call<FunnyResponse> getFunny_liky();
 
     @GET("getFunny_view.php")
-    Call<FunnyResponse> getFunny_view();
+    Call<FunnyResponse> getFunny_view(@Query("kind") int kind);
 
     @GET("getChannel.php")
     Call<ChannelResponse> getChannel_kind(@Query("kind") int kind);
 
     @GET("getChannel_detail.php")
-    Call<ChannelDataModel> getChannel_detail(@Query("id_channel") int id_channel);
+    Call<ChannelDataModel> getChannel_detail(@Query("id_channel") int id_channel,@Query("kind") int kind);
 
     @GET("getChannel_all.php")
     Call<ChannelResponse> getChannel_all(@Query("kind") int kind, @Query("age") int age);

@@ -26,7 +26,7 @@ public class MainViewModel extends ViewModel {
     }
 
     public LiveData<ChannelDataModel> getChannel_detail(){return mainRepository.getChannel_detail();}
-    public void requestChannel_detail(int id_channel){mainRepository.requestChannel_detail(id_channel);}
+    public void requestChannel_detail(int id_channel,int kind){mainRepository.requestChannel_detail(id_channel,kind);}
 
     public LiveData<List<ChannelDataModel>> getChannel_all(){return mainRepository.getChannel_all();}
     public void requestChannel_all(int age){mainRepository.requestChannel_all(age);}
