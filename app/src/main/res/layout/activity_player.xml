@@ -13,6 +13,7 @@
       android:background="#efc2"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layoutDirection="ltr"
       tools:context=".activity.PlayerActivity">
 <FrameLayout
   android:id="@+id/main_media_frame"
@@ -27,7 +28,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/posterPlayer"
-    android:visibility="gone"/>
+    android:visibility="visible"/>
   <com.google.android.exoplayer2.ui.PlayerView
     android:id="@+id/exoplayer"
     android:layout_width="match_parent"

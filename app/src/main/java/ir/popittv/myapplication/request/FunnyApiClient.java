@@ -379,12 +379,13 @@ public class FunnyApiClient {
         Future singleHandler = AppExecuter.getAppExecuter().networkIo().submit(funnySingle_run);
         AppExecuter.getAppExecuter().networkIo().schedule(() -> {
             singleHandler.cancel(true);
+            funnySingle_run.canclable=true;
         },2,TimeUnit.MINUTES);
     }
     private class FunnySingle_Run implements Runnable{
 
         int id_funny;
-        private final boolean canclable;
+        private  boolean canclable;
 
         public FunnySingle_Run(int id_funny) {
             this.id_funny = id_funny;
@@ -404,6 +405,7 @@ public class FunnyApiClient {
                     mFunny_single.postValue(funnyDataModel);
                 } else {
                     String errorResponse = response.errorBody().string();
+                    mFunny_single.postValue(null);
                     Log.e("tag", "error" + errorResponse);
                 }
 

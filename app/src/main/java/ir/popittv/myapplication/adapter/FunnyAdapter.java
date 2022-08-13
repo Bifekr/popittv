@@ -131,7 +131,7 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
                 if (!boo_later) {
                     int id_funny2 = funnyDataModels.get(position).getId_funny();
                     onClickFunny.onClickLater(id_funny2);
-                    holder.binding.ivLaterItemDef.setBackgroundResource(R.drawable.shape_tag2);
+                    holder.binding.parentViewItemVidDef.setBackgroundResource(R.drawable.shape_tag2);
                     boo_later=true;
                 }else {
                     int id_funny2 = funnyDataModels.get(position).getId_funny();
@@ -140,6 +140,7 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
                 }
             onClickFunny.onClickSee(id_funny3);
             Intent intent = new Intent(context, PlayerActivity.class);
+            intent.putExtra("id_vid_funny",id_funny3);
             context.startActivity(intent);
 
         });
@@ -151,6 +152,7 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
             onClickFunny.onClickSub(id_channel);
             Intent intent = new Intent(context, DetailActivity.class);
             intent.putExtra("id_channel", id_channel);
+            notifyDataSetChanged();
             context.startActivity(intent);
         });
 

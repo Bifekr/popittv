@@ -25,7 +25,7 @@ import ir.popittv.myapplication.utils.OnClickFunny;
 public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_adapter.DetailChannel_holder> {
 
     private List<FunnyDataModel> funnyDataModels;
-    private Context context;
+    private final Context context;
     private int id_vid_funny;
     private final OnClickFunny onClickFunny;
 
@@ -137,7 +137,7 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
                 if (!boo_later) {
                     int id_funny2 = funnyDataModels.get(position).getId_funny();
                     onClickFunny.onClickLater(id_funny2);
-                    holder.binding.ivLaterItemDef.setBackgroundResource(R.drawable.shape_tag2);
+                    holder.binding.parentViewItemVidDef.setBackgroundResource(R.drawable.shape_tag2);
                     boo_later=true;
                 }else {
                     int id_funny2 = funnyDataModels.get(position).getId_funny();
@@ -146,6 +146,7 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
                 }
                 onClickFunny.onClickSee(id_funny3);
                 Intent intent = new Intent(context, PlayerActivity.class);
+                intent.putExtra("id_vid_funny",id_funny3);
                 context.startActivity(intent);
 
             });
