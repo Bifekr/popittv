@@ -28,9 +28,10 @@ import ir.popittv.myapplication.databinding.FragmentMain1Binding;
 import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.utils.OnClickFrg1;
+import ir.popittv.myapplication.utils.OnClickFunny;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
-public class FragmentMain1 extends Fragment implements OnClickFrg1 {
+public class FragmentMain1 extends Fragment implements OnClickFrg1 , OnClickFunny {
 
     private FragmentMain1Binding binding;
     private MainViewModel mainViewModel;
@@ -89,7 +90,7 @@ public class FragmentMain1 extends Fragment implements OnClickFrg1 {
                 LinearLayoutManager.HORIZONTAL, false));
 
         //Show Detail Channel Recycler
-        detail_adapter=new ChannelDetail_adapter(requireActivity());
+        detail_adapter=new ChannelDetail_adapter(requireActivity(),this);
         binding.rvDetailFrg1.setAdapter(detail_adapter);
         binding.rvDetailFrg1.setLayoutManager(new LinearLayoutManager(requireActivity(),
                 LinearLayoutManager.HORIZONTAL,false));
@@ -191,5 +192,30 @@ public class FragmentMain1 extends Fragment implements OnClickFrg1 {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onClickSave(int id_vid) {
+
+    }
+
+    @Override
+    public void onClickSee(int id_vid) {
+
+    }
+
+    @Override
+    public void onClickLike(int id_vid) {
+
+    }
+
+    @Override
+    public void onClickLater(int id_vid) {
+
+    }
+
+    @Override
+    public void onClickSub(int id_channel) {
+
     }
 }

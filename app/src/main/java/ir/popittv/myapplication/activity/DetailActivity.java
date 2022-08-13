@@ -37,7 +37,7 @@ public class DetailActivity extends AppCompatActivity implements OnClickFrg1, On
         id_channel= getIntent().getIntExtra("id_channel",0);
         viewModel.requestChannel_detail(id_channel);
 
-        detail_adapter=new ChannelDetail_adapter(this);
+        detail_adapter=new ChannelDetail_adapter(this,this);
 
         binding.rvAllVideoDetailActivity.setHasFixedSize(true);
         binding.rvAllVideoDetailActivity.setLayoutManager(new GridLayoutManager(this,3, RecyclerView.VERTICAL

@@ -77,7 +77,9 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:hint="@string/search"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:background="@drawable/shape_search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/switchNet_toolbar"
@@ -87,10 +89,10 @@
         app:layout_constraintHeight_percent=".8"
         />
    <!--   <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/search_toolbar"
+        android:id="@+id/search2_toolbar"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:hint="@string/search"
         android:orientation="horizontal"
         android:textColorHint="@color/black"
@@ -103,7 +105,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent=".5"
-        app:startIconDrawable="@drawable/ic_search">
+        app:layout_constraintHeight_percent=".8"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
           android:layout_width="match_parent"
@@ -124,6 +127,24 @@
       <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+
+          <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/plane_24"
+            android:elevation="@dimen/plane_24"
+
+            android:id="@+id/rvSearch"
+            android:background="@color/transparent80"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"/>
+
+
+
+
 
         <androidx.cardview.widget.CardView
           android:id="@+id/parentAllChannel_mainActivity"

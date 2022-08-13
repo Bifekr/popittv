@@ -76,10 +76,10 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
         setContentView(binding.getRoot());
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        funnyAdapter = new FunnyAdapter(this, this,b_switchLink);
-        funnyAdapter2 = new FunnyAdapter(this, this,b_switchLink);
-        funnyAdapter3 = new FunnyAdapter(this, this,b_switchLink);
-        funnyAdapter4 = new FunnyAdapter(this, this,b_switchLink);
+        funnyAdapter = new FunnyAdapter(this, this);
+        funnyAdapter2 = new FunnyAdapter(this, this);
+        funnyAdapter3 = new FunnyAdapter(this, this);
+        funnyAdapter4 = new FunnyAdapter(this, this);
         funnyAdapter5 = new RvChannel_Frg1(this, this);
 
 

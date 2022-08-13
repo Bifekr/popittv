@@ -26,21 +26,49 @@
         android:layout_height="match_parent"
         android:background="@color/popit_yellow">
 
-        <ImageView
-          android:id="@+id/ivMarc_itemDef"
-          android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-          android:adjustViewBounds="true"
+
+
+        <FrameLayout
+          android:id="@+id/ivLater_itemDef"
+          android:layout_width="22dp"
+          android:layout_height="18dp"
+          android:background="@drawable/shape_tag4"
           android:elevation="13dp"
-          android:scaleType="center"
-          android:src="@drawable/ic_bookmark_24dp"
           app:layout_constraintBottom_toBottomOf="@id/parentPoster_itemDef"
           app:layout_constraintEnd_toEndOf="@id/parentPoster_itemDef"
-          app:layout_constraintHorizontal_bias="0.12"
-          app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
-          app:layout_constraintVertical_bias="0" />
+          app:layout_constraintVertical_bias="0.03">
 
+          <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:elevation="13dp"
+            android:src="@drawable/ic_schedule" />
+
+        </FrameLayout>
+
+        <FrameLayout
+          android:id="@+id/ivMarc_itemDef"
+          android:layout_width="18dp"
+          android:layout_height="18dp"
+          android:background="@drawable/shape_tag4"
+          android:elevation="13dp"
+          app:layout_constraintBottom_toBottomOf="@id/parentPoster_itemDef"
+          app:layout_constraintEnd_toStartOf="@id/ivLater_itemDef"
+          app:layout_constraintHorizontal_bias="0.15"
+          app:layout_constraintStart_toStartOf="@id/parentPoster_itemDef"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="0.03">
+
+          <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:elevation="13dp"
+            android:src="@drawable/ic_bookmark_24dp" />
+
+        </FrameLayout>
         <androidx.cardview.widget.CardView
           android:id="@+id/parentPoster_itemDef"
           android:layout_width="0dp"
@@ -136,17 +164,19 @@
         </LinearLayout>
 
         <LinearLayout
+
           android:id="@+id/parentLike_itemVidDef"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginStart="@dimen/plane_08"
-          android:background="@drawable/shape_tag2"
           android:paddingStart="4dp"
           android:paddingEnd="4dp"
+          android:orientation="horizontal"
           app:layout_constraintBottom_toTopOf="@id/parentView_itemVidDef"
           app:layout_constraintEnd_toStartOf="@id/parentTitle_itemDefult"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="@id/parentTitle_itemDefult">
+
 
           <ImageView
             android:id="@+id/like"
@@ -167,7 +197,6 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginStart="@dimen/plane_08"
-          android:background="@drawable/shape_tag4"
           android:paddingStart="4dp"
           android:paddingEnd="4dp"
           app:layout_constraintBottom_toBottomOf="parent"

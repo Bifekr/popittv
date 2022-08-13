@@ -3,6 +3,7 @@ package ir.popittv.myapplication.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.icu.text.DecimalFormat;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -27,17 +28,20 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
     private List<FunnyDataModel> funnyDataModels;
     private final Context context;
     private final OnClickFunny onClickFunny;
-    private  boolean b_kindlink;
+
+
+
+
 
     private  boolean bool_like=false;
     private  boolean boo_mark=false;
     private  boolean boo_later=false;
 
 
-    public FunnyAdapter(Context context,OnClickFunny onClickFunny,boolean b_kindlink) {
+    public FunnyAdapter(Context context,OnClickFunny onClickFunny) {
         this.context = context;
         this.onClickFunny=onClickFunny;
-        this.b_kindlink=b_kindlink;
+
 
     }
 
@@ -49,14 +53,27 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
                 .inflate(inflater,R.layout.item_vid_defult,parent,false);
         return new FunnyHolder(binding);
     }
+    public String prettyCount(Number number) {
+        char[] suffix = {' ', 'k', 'M', 'B', 'T', 'P', 'E'};
+        long numValue = number.longValue();
+        int value = (int) Math.floor(Math.log10(numValue));
+        int base = value / 3;
+        if (value >= 3 && base < suffix.length) {
+            return new DecimalFormat("#0.0").format(numValue / Math.pow(10, base * 3)) + suffix[base];
+        } else {
+            return new DecimalFormat("#,##0").format(numValue);
+        }
+    }
 
     @Override
     public void onBindViewHolder(@NonNull FunnyHolder holder, int position) {
 
         holder.binding.titleFaVideoItemVideoThumb.setText(funnyDataModels.get(position).getTitle_fa());
         holder.binding.titleEnVideoItemVideoThumb.setText(funnyDataModels.get(position).getTitle_en());
-        holder.binding.tvLikeItemVidDef.setText(funnyDataModels.get(position).getLiky());
-        holder.binding.tvViewItemVidDef.setText(funnyDataModels.get(position).getView());
+        int like= Integer.parseInt(funnyDataModels.get(position).getLiky());
+        int view= Integer.parseInt(funnyDataModels.get(position).getView());
+        holder.binding.tvLikeItemVidDef.setText(prettyCount(like));
+        holder.binding.tvViewItemVidDef.setText(prettyCount(view));
         Glide.with(context).load(funnyDataModels.get(position).getPoster())
                 .into(holder.binding.ivPosterItemVideo);
         Glide.with(context).load(funnyDataModels.get(position).getProfile_chann())
@@ -72,7 +89,7 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
                 }else {
                     int id_funny = funnyDataModels.get(position).getId_funny();
                     onClickFunny.onClickSave(id_funny);
-                    holder.binding.ivMarcItemDef.setBackgroundResource(R.drawable.shape_tag1);
+                    holder.binding.ivMarcItemDef.setBackgroundResource(R.drawable.shape_tag4);
                     boo_mark=false;
                 }
             });
@@ -87,7 +104,7 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
             }else {
                 int id_funny1 = funnyDataModels.get(position).getId_funny();
                 onClickFunny.onClickLike(id_funny1);
-                holder.binding.parentLikeItemVidDef.setBackgroundResource(R.drawable.shape_tag1);
+
                 bool_like=false;
             }
 
@@ -102,7 +119,7 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
             }else {
                 int id_funny2 = funnyDataModels.get(position).getId_funny();
                 onClickFunny.onClickLater(id_funny2);
-                holder.binding.ivLaterItemDef.setBackgroundResource(R.drawable.shape_tag1);
+                holder.binding.ivLaterItemDef.setBackgroundResource(R.drawable.shape_tag4);
                 boo_later=false;
             }
         });
@@ -111,28 +128,18 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
         //region playerActivity
         holder.binding.ivPosterItemVideo.setOnClickListener(v -> {
             int id_funny3 = funnyDataModels.get(position).getId_funny();
+                if (!boo_later) {
+                    int id_funny2 = funnyDataModels.get(position).getId_funny();
+                    onClickFunny.onClickLater(id_funny2);
+                    holder.binding.ivLaterItemDef.setBackgroundResource(R.drawable.shape_tag2);
+                    boo_later=true;
+                }else {
+                    int id_funny2 = funnyDataModels.get(position).getId_funny();
+                    onClickFunny.onClickLater(id_funny2);
+                    boo_later=false;
+                }
             onClickFunny.onClickSee(id_funny3);
             Intent intent = new Intent(context, PlayerActivity.class);
-           // id_funny3 = funnyDataModels.get(position).getId_funny();
-
-            intent.putExtra("id_vid_funny", id_funny3);
-            intent.putExtra("title_en",funnyDataModels.get(position).getTitle_en());
-            intent.putExtra("title_fa",funnyDataModels.get(position).getTitle_fa());
-            intent.putExtra("name_chann_fa",funnyDataModels.get(position).getName_chan_fa());
-            intent.putExtra("name_chann_en",funnyDataModels.get(position).getName_chan_en());
-            intent.putExtra("followers",funnyDataModels.get(position).getFollowers());
-            intent.putExtra("view",funnyDataModels.get(position).getView());
-            intent.putExtra("like",funnyDataModels.get(position).getLiky());
-            intent.putExtra("profile_chan",funnyDataModels.get(position).getProfile_chann());
-            intent.putExtra("poster",funnyDataModels.get(position).getPoster());
-
-            if (b_kindlink) {
-                String link_480=funnyDataModels.get(position).getLink_480();
-                intent.putExtra("link",link_480);
-            }else {
-                String link_720=funnyDataModels.get(position).getLink_720();
-                intent.putExtra("link",link_720);
-            }
             context.startActivity(intent);
 
         });

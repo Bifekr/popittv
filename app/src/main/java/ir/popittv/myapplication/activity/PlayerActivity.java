@@ -71,6 +71,7 @@ public class PlayerActivity extends AppCompatActivity  {
     private String name_user;
     private String phone_user;
     private String code_user;
+    private int id_channel;
     private String url_link;
     private int id_user;
     private int id_vid_funny;
@@ -92,6 +93,8 @@ public class PlayerActivity extends AppCompatActivity  {
     private Dialog mFullScreenDialog;
     private  DataSource.Factory dataSourceFactory;
 
+    private boolean b_kindlink;
+
     private SimpleExoPlayer player;
 
     private int mResumeWindow;
@@ -106,6 +109,7 @@ public class PlayerActivity extends AppCompatActivity  {
         phone_user = sharedPreferences.getString("phone_user", null);
         name_user = sharedPreferences.getString("name_user", null);
         id_user = sharedPreferences.getInt("id_user", 0);
+        b_kindlink = sharedPreferences.getBoolean("switchNet",true);
         super.onCreate(savedInstanceState);
         binding = ActivityPlayerBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
@@ -398,12 +402,12 @@ public class PlayerActivity extends AppCompatActivity  {
                 public void onPlayWhenReadyChanged(boolean playWhenReady, int reason) {
 
                     // play and Pause click
-                    if (!playWhenReady) {
-                        binding.progressBar.setVisibility(View.VISIBLE);
+                 /*   if (!playWhenReady) {
+                        binding.posterPlayer.setVisibility(View.VISIBLE);
 
                     }else {
-                        binding.progressBar.setVisibility(View.GONE);
-                    }
+                        binding.posterPlayer.setVisibility(View.GONE);
+                    }*/
 
                 }
 
@@ -459,7 +463,7 @@ public class PlayerActivity extends AppCompatActivity  {
             });
             exoPlayer.setPlayWhenReady(playWhenReady);
             if (!exoPlayer.getPlayWhenReady()) {
-
+                binding.posterPlayer.setVisibility(View.VISIBLE);
                 binding.progressBar.setVisibility(View.VISIBLE);
             }
             exoPlayer.seekTo(currentWindow, playBackPosition);
@@ -473,25 +477,28 @@ public class PlayerActivity extends AppCompatActivity  {
     }
 
     private void getFunny_single() {
-        binding.titleEnVideoPlayer.setText(getIntent().getStringExtra("title_en"));
-        binding.titleFaVideoPlayer.setText(getIntent().getStringExtra("title_fa"));
-        binding.titleEnChannelPlayer.setText(getIntent().getStringExtra("name_chann_en"));
-        binding.titleFaChannelPlayer.setText(getIntent().getStringExtra("name_chann_fa"));
-        binding.titleSubPlayer.setText(getIntent().getStringExtra("followers"));
-        binding.titleViewPlayer.setText(getIntent().getStringExtra("view"));
-        binding.titleLikePlayer.setText(getIntent().getStringExtra("like"));
-
-        Glide.with(this).load(getIntent().getStringExtra("profile_chan"))
-                .into(binding.ivProfileItemAllChan);
-
         mainViewModel.getFunny_single().observe(this, funnyDataModel -> {
+            binding.titleEnVideoPlayer.setText(funnyDataModel.getTitle_fa());
+            binding.titleFaVideoPlayer.setText(funnyDataModel.getTitle_fa());
+            binding.titleEnChannelPlayer.setText(funnyDataModel.getName_chan_en());
+            binding.titleFaChannelPlayer.setText(funnyDataModel.getName_chan_fa());
+            binding.titleSubPlayer.setText(funnyDataModel.getFollowers());
+            binding.titleViewPlayer.setText(funnyDataModel.getView());
+            binding.titleLikePlayer.setText(funnyDataModel.getLiky());
+            id_channel=funnyDataModel.getId_channel();
+            Glide.with(this).load(funnyDataModel.getPoster())
+                    .into(binding.posterPlayer);
 
-
-
-            mediaItem = MediaItem.fromUri(funnyDataModel.getLink_480());
+            Glide.with(this).load(funnyDataModel.getProfile_chann())
+                    .into(binding.ivProfileItemAllChan);
+            if (b_kindlink) {
+                mediaItem = MediaItem.fromUri(funnyDataModel.getLink_480());
+            }else {
+                mediaItem = MediaItem.fromUri(funnyDataModel.getLink_720());
+            }
             exoPlayer.addMediaItem(mediaItem);
 
-            // Toast.makeText(this, "" + funnyDataModel.getLink_480(), Toast.LENGTH_SHORT).show();
+
         });
     }
 
@@ -516,8 +523,9 @@ public class PlayerActivity extends AppCompatActivity  {
         if (exoPlayer==null) {
             initExo();
             hideSystemUi();
-            //  mainViewModel.requestFunny_single(id_vid_funny);
-            // getFunny_single();
+            mainViewModel.requestFunny_single(id_vid_funny);
+            getFunny_single();
+
         }
     }
 
@@ -525,8 +533,9 @@ public class PlayerActivity extends AppCompatActivity  {
     protected void onStart() {
         super.onStart();
         initExo();
-        //getFunny_single();
-        //  mainViewModel.requestFunny_single(id_vid_funny);
+        mainViewModel.requestFunny_single(id_vid_funny);
+        getFunny_single();
+
     }
 
     @Override

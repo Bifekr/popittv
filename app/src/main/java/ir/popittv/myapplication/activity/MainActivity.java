@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProvider;
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
     private int id_channel;
     private int id_user;
     private boolean b_switchLink;
+    private boolean b_search=false;
 
     private MainViewModel mainViewModel;
     private ActivityMainBinding binding;
@@ -96,7 +100,10 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
 
 
         switchNet();
-        search();
+
+            search();
+
+
 
 
 
@@ -109,14 +116,14 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         rvChannel_frg1 = new RvChannel_Frg1(this, this);
-        recommend_adapter = new ChannelDetail_adapter(this);
+        recommend_adapter = new ChannelDetail_adapter(this,this);
 
-        detail_adapter = new FunnyAdapter(this,this,true);
+        detail_adapter = new FunnyAdapter(this,this);
         infinitAdapter = new InfinitFrg1_PagerAdapter(this);
 
-        funnyAdapter = new ChannelDetail_adapter(this);
-        funnyAdapter_liky = new FunnyAdapter(this,this,b_switchLink);
-        funnyAdapter_view = new FunnyAdapter(this,this,b_switchLink);
+        funnyAdapter = new ChannelDetail_adapter(this,this);
+        funnyAdapter_liky = new FunnyAdapter(this,this);
+        funnyAdapter_view = new FunnyAdapter(this,this);
         searchAdapter = new SearchAdapter(this);
 
         initRailActivity();
@@ -135,6 +142,11 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
         getFunny_view();
         getFunny_liky();
         getFunny_subMenu();
+        getSearchFunny();
+
+        binding.iconWifiToolbar.setOnClickListener(v -> {
+            Toast.makeText(this, "sdfsdf", Toast.LENGTH_SHORT).show();
+        });
 
 
 binding.profileShowChannelMainActivity.setOnClickListener(v -> {
@@ -154,17 +166,41 @@ binding.profileShowChannelMainActivity.setOnClickListener(v -> {
 
     }
 
+
+
+
+    private void getSearchFunny() {
+        mainViewModel.getFunny_search().observe(this,funnyDataModels -> {
+
+            if (funnyDataModels!=null){
+                b_search=true;
+                binding.rvSearch.setVisibility(View.VISIBLE);
+                searchAdapter.setData(funnyDataModels);
+            }
+
+        });
+    }
+
     private void search() {
+
         binding.searchToolbar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                mainViewModel.requestFunny_search(query);
-                return false;
+                if (!query.equals("")) {
+                    mainViewModel.requestFunny_search(query);
+
+                }
+                return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                return false;
+
+                if (!newText.equals("")) {
+                    mainViewModel.requestFunny_search(newText);
+
+                }
+                return true;
             }
         });
     }
@@ -178,7 +214,7 @@ binding.profileShowChannelMainActivity.setOnClickListener(v -> {
 
         binding.switchNetToolbar.setChecked(sharedPreferences.getBoolean("switchNet",true));
         b_switchLink=sharedPreferences.getBoolean("switchNet",true);
-        Toast.makeText(this,""+b_switchLink,Toast.LENGTH_LONG).show();
+
 
         binding.switchNetToolbar.setOnCheckedChangeListener((buttonView, isChecked) -> {
 
@@ -326,7 +362,9 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
                 (this, 3, GridLayoutManager.VERTICAL, false));
        // binding.rvSubMenuTagFrg1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL));
 
-
+        binding.rvSearch.setAdapter(searchAdapter);
+        binding.rvSearch.setLayoutManager(new GridLayoutManager
+                (this, 3, GridLayoutManager.VERTICAL, false));
 
 
 
@@ -431,9 +469,15 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
 
     }
 
+
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
+        if(b_search){
+            binding.rvSearch.setVisibility(View.GONE);
+        }else {
+            super.onBackPressed();
+        }
 
     }
 
@@ -461,6 +505,7 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
         Service.getApiClient().insertUserSee(id_user,id_vid,FUNNY_KIND).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
 
             }
 
