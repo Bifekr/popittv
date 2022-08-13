@@ -326,7 +326,6 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
 
     }
-
     //Set Data to LiveData
     private void allChannel() {
         binding.showAllChannel.setOnClickListener(v -> {
