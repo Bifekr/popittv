@@ -80,25 +80,18 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     private View bottomView;
     private View bottomView2;
 
-
 /////////////////////////////////////////////////////////////////////////////////
 
     private final String STATE_RESUME_WINDOW = "resumeWindow";
     private final String STATE_RESUME_POSITION = "resumePosition";
     private final String STATE_PLAYER_FULLSCREEN = "playerFullscreen";
-
     private PlayerView playerView;
     private boolean mExoPlayerFullscreen = false;
     private FrameLayout mFullScreenButton;
     private ImageView mFullScreenIcon;
     private Dialog mFullScreenDialog;
     private  DataSource.Factory dataSourceFactory;
-
     private boolean b_kindlink;
-
-
-
-
 
 ////////////////////////////////////
 
@@ -118,17 +111,9 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         // userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-
-
-
         Log.i("TAG", "onCreate: "+b_kindlink);
        id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
         mainViewModel.requestFunny_single(id_vid_funny);
-
-
-
-
-
 
         initExo();
         getFunny_single();
@@ -152,21 +137,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         }
 
 
-
-
-
-
-
-      ////////////////////////////////////
-
-
     }
-
-
-
-
-    ////////////////////////////
-
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -252,12 +223,10 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
                     (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 500, getResources().getDisplayMetrics())
             );
 
-
             bottomSheetDialog.show();
             et_phone = bottomView.findViewById(R.id.et_phone_userProfile);
             Button btn_send = bottomView.findViewById(R.id.send_customLogin);
             ProgressBar progressBar = bottomView.findViewById(R.id.progress_dialog);
-
 
             btn_send.setOnClickListener(V -> {
 
@@ -523,10 +492,6 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
             exoPlayer.setMediaItem(mediaItem);
 
-
-
-
-
         });
     }
 
@@ -565,12 +530,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
         //startPlayer();
 
-
-
-
-
     }
-
 
     @Override
     protected void onStop() {

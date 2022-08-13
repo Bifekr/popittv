@@ -5,26 +5,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.speech.RecognizerIntent;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-
 import java.util.ArrayList;
 import java.util.List;
-
 
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.ShadowTransformer;
@@ -32,7 +26,6 @@ import ir.popittv.myapplication.adapter.CardPagerAdapter2;
 import ir.popittv.myapplication.adapter.ChannelDetail_adapter;
 import ir.popittv.myapplication.adapter.FunnyAdapter;
 import ir.popittv.myapplication.adapter.InfinitFrg1_PagerAdapter;
-import ir.popittv.myapplication.adapter.Recommend_Adapter;
 import ir.popittv.myapplication.adapter.RvChannel_Frg1;
 import ir.popittv.myapplication.adapter.SearchAdapter;
 import ir.popittv.myapplication.adapter.TagAdapter;
@@ -40,7 +33,6 @@ import ir.popittv.myapplication.databinding.ActivityMainBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.models.HashTagDataModel;
 import ir.popittv.myapplication.request.Service;
-import ir.popittv.myapplication.response.UserResponse;
 import ir.popittv.myapplication.utils.OnClickFrg1;
 import ir.popittv.myapplication.utils.OnClickFunny;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
@@ -49,31 +41,26 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnClickFunny {
+public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnClickFunny {
 
 
+    private final int FUNNY_KIND = 1;
     //global Variable
     private int id_channel;
+    private int row_index;
     private int id_user;
     private boolean b_switchLink;
-    private boolean b_search=false;
-
+    private boolean b_search = false;
     private MainViewModel mainViewModel;
     private ActivityMainBinding binding;
-
     private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor switchEditor;
 
     //-------------
-
-
+    private SharedPreferences.Editor switchEditor;
     private ChannelDetail_adapter funnyAdapter;
     private FunnyAdapter funnyAdapter_liky;
     private FunnyAdapter funnyAdapter_view;
     private SearchAdapter searchAdapter;
-
-    private final int FUNNY_KIND=1;
-
     //global adapter
     private RvChannel_Frg1 rvChannel_frg1;
     private FunnyAdapter detail_adapter;
@@ -90,46 +77,25 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //get preferences data
-        sharedPreferences=getSharedPreferences("user_info",MODE_PRIVATE);
-        id_user=sharedPreferences.getInt("id_user",0);
+        sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
+        id_user = sharedPreferences.getInt("id_user", 0);
 
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-
-
-        switchNet();
-
-            search();
-
-
-
-
-
-
-
-
-        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         //ViewModel Provider
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
-        rvChannel_frg1 = new RvChannel_Frg1(this, this);
-        recommend_adapter = new ChannelDetail_adapter(this,this);
+        switchNet();
 
-        detail_adapter = new FunnyAdapter(this,this);
-        infinitAdapter = new InfinitFrg1_PagerAdapter(this);
+        search();
+        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        funnyAdapter = new ChannelDetail_adapter(this,this);
-        funnyAdapter_liky = new FunnyAdapter(this,this);
-        funnyAdapter_view = new FunnyAdapter(this,this);
-        searchAdapter = new SearchAdapter(this);
 
+
+        initNewRv(this,this);
         initRailActivity();
         taginit();
-
-        /////
         initRv_Vp_adapter();
 
         //retrieve data into modelClass
@@ -147,33 +113,32 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1 , OnC
         binding.iconWifiToolbar.setOnClickListener(v -> {
             Toast.makeText(this, "sdfsdf", Toast.LENGTH_SHORT).show();
         });
-
-
-binding.profileShowChannelMainActivity.setOnClickListener(v -> {
-
-});
-
-
-
-
-
-
-
-
-
-
-
+        binding.profileShowChannelMainActivity.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+            intent.putExtra("id_channel", id_channel);
+            startActivity(intent);
+        });
 
     }
 
+    private void initNewRv(MainActivity mainActivity, MainActivity mainActivity1) {
+        rvChannel_frg1 = new RvChannel_Frg1(mainActivity, mainActivity1);
+        recommend_adapter = new ChannelDetail_adapter(mainActivity, mainActivity1);
 
+        detail_adapter = new FunnyAdapter(mainActivity, mainActivity1);
+        infinitAdapter = new InfinitFrg1_PagerAdapter(mainActivity);
 
+        funnyAdapter = new ChannelDetail_adapter(mainActivity, mainActivity1);
+        funnyAdapter_liky = new FunnyAdapter(mainActivity, mainActivity1);
+        funnyAdapter_view = new FunnyAdapter(mainActivity, mainActivity1);
+        searchAdapter = new SearchAdapter(mainActivity);
+    }
 
     private void getSearchFunny() {
-        mainViewModel.getFunny_search().observe(this,funnyDataModels -> {
+        mainViewModel.getFunny_search().observe(this, funnyDataModels -> {
 
-            if (funnyDataModels!=null){
-                b_search=true;
+            if (funnyDataModels!=null) {
+                b_search = true;
                 binding.rvSearch.setVisibility(View.VISIBLE);
                 searchAdapter.setData(funnyDataModels);
             }
@@ -205,15 +170,11 @@ binding.profileShowChannelMainActivity.setOnClickListener(v -> {
         });
     }
 
-
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
-
+    //-----------------get 720 or 480 -------------------------------
     private void switchNet() {
 
-        binding.switchNetToolbar.setChecked(sharedPreferences.getBoolean("switchNet",true));
-        b_switchLink=sharedPreferences.getBoolean("switchNet",true);
+        binding.switchNetToolbar.setChecked(sharedPreferences.getBoolean("switchNet", true));
+        b_switchLink = sharedPreferences.getBoolean("switchNet", true);
 
 
         binding.switchNetToolbar.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -224,18 +185,15 @@ binding.profileShowChannelMainActivity.setOnClickListener(v -> {
             recreate();
 
 
-
         });
     }
-
 
     //request from Api to get DataModel
     private void request() {
 
-
         mainViewModel.requestChannel_kind(1);
         //detail Channel Selected
-        mainViewModel.requestChannel_detail(3);
+        mainViewModel.requestChannel_detail(row_index);
         // mainViewModel.requestChannel_detail(1);
         mainViewModel.requestFunny_view();
         mainViewModel.requestFunny_liky();
@@ -265,10 +223,10 @@ binding.profileShowChannelMainActivity.setOnClickListener(v -> {
             }
             return true;
         });
-        
-binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v -> {
-    startActivity(new Intent(MainActivity.this, UserActivity.class));
-});
+
+        binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, UserActivity.class));
+        });
         
              /*  binding.navRail.setOnItemReselectedListener(item -> {
             switch (item.getItemId()) {
@@ -307,11 +265,11 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
         GradientDrawable drawable5 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
                 new int[]{0xf469a9, 0xFFF48FB1});
         ArrayList<HashTagDataModel> tagList = new ArrayList<>();
-        tagList.add(new HashTagDataModel("#Huggy Wuggy", R.drawable.tag_huggy_1, drawable1,"#اگی واگی"));
-        tagList.add(new HashTagDataModel("#Sonic", R.drawable.tag_sonic_1, drawable2,"#سونیک"));
-        tagList.add(new HashTagDataModel("#duls khamir", R.drawable.tag_claymixer_1, drawable3,"#آدمک خای خمیری"));
-        tagList.add(new HashTagDataModel("#Christmas", R.drawable.tag_christmas_1, drawable4,"#کریستمس"));
-        tagList.add(new HashTagDataModel("#Kissy Missy", R.drawable.tag_kissy_1, drawable5,"#کیسی میسی"));
+        tagList.add(new HashTagDataModel("#Huggy Wuggy", R.drawable.tag_huggy_1, drawable1, "#اگی واگی"));
+        tagList.add(new HashTagDataModel("#Sonic", R.drawable.tag_sonic_1, drawable2, "#سونیک"));
+        tagList.add(new HashTagDataModel("#duls khamir", R.drawable.tag_claymixer_1, drawable3, "#آدمک خای خمیری"));
+        tagList.add(new HashTagDataModel("#Christmas", R.drawable.tag_christmas_1, drawable4, "#کریستمس"));
+        tagList.add(new HashTagDataModel("#Kissy Missy", R.drawable.tag_kissy_1, drawable5, "#کیسی میسی"));
 
 
         tagAdapter = new TagAdapter(tagList, this);
@@ -360,13 +318,11 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
         binding.rvSubMenuTagFrg1.setAdapter(funnyAdapter);
         binding.rvSubMenuTagFrg1.setLayoutManager(new GridLayoutManager
                 (this, 3, GridLayoutManager.VERTICAL, false));
-       // binding.rvSubMenuTagFrg1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL));
+        // binding.rvSubMenuTagFrg1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL));
 
         binding.rvSearch.setAdapter(searchAdapter);
         binding.rvSearch.setLayoutManager(new GridLayoutManager
                 (this, 3, GridLayoutManager.VERTICAL, false));
-
-
 
 
     }
@@ -390,8 +346,8 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
     private void getChannel_detail() {
         mainViewModel.getChannel_detail().observe(this, channelDataModel -> {
 
-            if (channelDataModel!=null){
-                List<FunnyDataModel> funnyDataModels=new ArrayList<>((channelDataModel).getVideos_channel());
+            if (channelDataModel!=null) {
+                List<FunnyDataModel> funnyDataModels = new ArrayList<>((channelDataModel).getVideos_channel());
 
                 detail_adapter.setData(funnyDataModels);
 
@@ -399,7 +355,7 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
                 Glide.with(this).load(channelDataModel.getProfile_chann())
                         .into(binding.profileShowChannelMainActivity);
                 binding.profileShowChannelMainActivity.setOnClickListener(v -> {
-                int id_channel_single=channelDataModel.getId_channel();
+                    int id_channel_single = channelDataModel.getId_channel();
                     Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                     intent.putExtra("id_channel", id_channel_single);
                     startActivity(intent);
@@ -407,10 +363,9 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
                 binding.subShowChannelMainActivity.setText(channelDataModel.getFollowers());
                 binding.titleShowChannelMainActivity.setText(channelDataModel.getName_chan_en().trim());
 
-            }else {
-                Toast.makeText(MainActivity.this,"net not connection",Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(MainActivity.this, "net not connection", Toast.LENGTH_LONG).show();
             }
-
 
 
         });
@@ -432,7 +387,9 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
 
             if (funnyDataModels!=null) {
                 funnyAdapter_liky.setData(funnyDataModels);
-            }else {mainViewModel.requestFunny_liky();}
+            } else {
+                mainViewModel.requestFunny_liky();
+            }
 
         });
     }
@@ -461,6 +418,11 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
 
     }
 
+    @Override
+    public void onRow_index(int position) {
+        row_index=position;
+    }
+
 
     @Override
     protected void onResume() {
@@ -473,9 +435,9 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
     @Override
     public void onBackPressed() {
 
-        if(b_search){
+        if (b_search) {
             binding.rvSearch.setVisibility(View.GONE);
-        }else {
+        } else {
             super.onBackPressed();
         }
 
@@ -483,7 +445,7 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
 
     @Override
     public void onClickSave(int id_vid) {
-        Service.getApiClient().insertUserSave(id_user,id_vid,1).enqueue(new Callback<ResponseBody>() {
+        Service.getApiClient().insertUserSave(id_user, id_vid, 1).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
@@ -502,7 +464,7 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
 
     @Override
     public void onClickSee(int id_vid) {
-        Service.getApiClient().insertUserSee(id_user,id_vid,FUNNY_KIND).enqueue(new Callback<ResponseBody>() {
+        Service.getApiClient().insertUserSee(id_user, id_vid, FUNNY_KIND).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -514,12 +476,12 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
 
             }
         });
-       
+
     }
 
     @Override
     public void onClickLike(int id_vid) {
-        Service.getApiClient().insertUserLike(id_user,id_vid,FUNNY_KIND).enqueue(new Callback<ResponseBody>() {
+        Service.getApiClient().insertUserLike(id_user, id_vid, FUNNY_KIND).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -535,7 +497,7 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
 
     @Override
     public void onClickLater(int id_vid) {
-        Service.getApiClient().insertUserLater(id_user,id_vid,FUNNY_KIND).enqueue(new Callback<ResponseBody>() {
+        Service.getApiClient().insertUserLater(id_user, id_vid, FUNNY_KIND).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -551,6 +513,8 @@ binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v 
 
     @Override
     public void onClickSub(int id_channel) {
+        id_channel = id_channel;
+
 
     }
 }

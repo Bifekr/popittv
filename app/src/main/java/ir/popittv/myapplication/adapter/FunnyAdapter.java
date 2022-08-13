@@ -28,15 +28,9 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
     private List<FunnyDataModel> funnyDataModels;
     private final Context context;
     private final OnClickFunny onClickFunny;
-
-
-
-
-
     private  boolean bool_like=false;
     private  boolean boo_mark=false;
     private  boolean boo_later=false;
-
 
     public FunnyAdapter(Context context,OnClickFunny onClickFunny) {
         this.context = context;
@@ -124,7 +118,6 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
             }
         });
 
-
         //region playerActivity
         holder.binding.ivPosterItemVideo.setOnClickListener(v -> {
             int id_funny3 = funnyDataModels.get(position).getId_funny();
@@ -152,7 +145,6 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
             onClickFunny.onClickSub(id_channel);
             Intent intent = new Intent(context, DetailActivity.class);
             intent.putExtra("id_channel", id_channel);
-            notifyDataSetChanged();
             context.startActivity(intent);
         });
 
