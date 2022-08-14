@@ -44,16 +44,15 @@ public class MainViewModel extends ViewModel {
     public LiveData<List<FunnyDataModel>> getFunny_view(){
         return mainRepository.getFunny_view();
     }
-    public void requestFunny_view(){
-        mainRepository.requestFunny_view();
+    public void requestFunny_view(int kind){
+        mainRepository.requestFunny_view(kind);
     }
 
     ////////// funny_liky ////////////
     public LiveData<List<FunnyDataModel>> getFunny_liky(){
         return mainRepository.getFunny_liky();
     }
-    public void requestFunny_liky(){
-        mainRepository.requestFunny_liky();
+    public void requestFunny_liky(int kind){mainRepository.requestFunny_liky(kind);
     }
 
     /////////// funny_subMenu ////////////////

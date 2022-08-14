@@ -88,35 +88,37 @@ public class FunnyApiClient {
         },3, TimeUnit.MINUTES);
     }
 
-    public void requestFunny_view() {
+    public void requestFunny_view(int kind) {
         if (funnyView_runnable!=null) {
             funnyView_runnable = null;
         }
 
-        funnyView_runnable = new FunnyView_Runnable();
+        funnyView_runnable = new FunnyView_Runnable(kind);
 
        final Future handlerView = AppExecuter.getAppExecuter().networkIo().submit(funnyView_runnable);
         AppExecuter.getAppExecuter().networkIo().schedule(new Runnable() {
             @Override
             public void run() {
                 handlerView.cancel(true);
+                funnyView_runnable.canclable = true;
             }
         }, 3, TimeUnit.MINUTES);
 
     }
 
-    public void requestFunny_liky() {
+    public void requestFunny_liky(int kind) {
         if (funnyLiky_runnable!=null) {
             funnyView_runnable = null;
         }
 
-        funnyLiky_runnable = new FunnyLiky_Runnable();
+        funnyLiky_runnable = new FunnyLiky_Runnable(kind);
 
         final Future handlerView = AppExecuter.getAppExecuter().networkIo().submit(funnyLiky_runnable);
         AppExecuter.getAppExecuter().networkIo().schedule(new Runnable() {
             @Override
             public void run() {
                 handlerView.cancel(true);
+                funnyLiky_runnable.canclable = true;
             }
         }, 3, TimeUnit.MINUTES);
 
@@ -244,7 +246,7 @@ public class FunnyApiClient {
 
     //Runnable class for request funny_view
     private class FunnyView_Runnable implements Runnable {
-        private final boolean canclable;
+        private boolean canclable;
         int kind;
         public FunnyView_Runnable(int kind) {
             canclable = false;
@@ -258,7 +260,7 @@ public class FunnyApiClient {
                 if (canclable) {
                     return;
                 }
-                Response response = funnyResponseCall().execute();
+                Response response = funnyResponseCall(kind).execute();
 
                 if (response.body()!=null) {
                     List<FunnyDataModel> funnyDataModels = new ArrayList<>(((FunnyResponse) response.body()).getView());
@@ -283,10 +285,11 @@ public class FunnyApiClient {
     }
 
     private class FunnyLiky_Runnable implements Runnable {
-        private final boolean canclable;
-
-        public FunnyLiky_Runnable() {
+        private  boolean canclable;
+        int kind;
+        public FunnyLiky_Runnable(int kind) {
             canclable = false;
+            this.kind = kind;
         }
 
         @Override
@@ -296,7 +299,7 @@ public class FunnyApiClient {
                 if (canclable) {
                     return;
                 }
-                Response response = funnyResponseCall().execute();
+                Response response = funnyResponseCall(kind).execute();
 
                 if (response.body()!=null) {
                     List<FunnyDataModel> funnyDataModels = new ArrayList<>(((FunnyResponse) response.body()).getLiky());
@@ -316,8 +319,8 @@ public class FunnyApiClient {
 
         }
 
-        private Call<FunnyResponse> funnyResponseCall() {
-            return Service.getApiClient().getFunny_liky();
+        private Call<FunnyResponse> funnyResponseCall(int kind) {
+            return Service.getApiClient().getFunny_liky(kind);
         }
     }
 

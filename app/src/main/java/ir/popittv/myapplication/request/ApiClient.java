@@ -24,7 +24,7 @@ public interface ApiClient {
     Call<FunnyResponse> getFunny_best();
 
     @GET("getFunny_liky.php")
-    Call<FunnyResponse> getFunny_liky();
+    Call<FunnyResponse> getFunny_liky(@Query("kind") int kind);
 
     @GET("getFunny_view.php")
     Call<FunnyResponse> getFunny_view(@Query("kind") int kind);

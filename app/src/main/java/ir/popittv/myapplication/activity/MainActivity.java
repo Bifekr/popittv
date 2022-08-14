@@ -191,8 +191,8 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         //detail Channel Selected
 
          mainViewModel.requestChannel_detail(1,1);
-        mainViewModel.requestFunny_view();
-        mainViewModel.requestFunny_liky();
+        mainViewModel.requestFunny_view(1);
+        mainViewModel.requestFunny_liky(1);
         mainViewModel.requestFunny_subMenu(2);
     }
 
@@ -387,7 +387,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
             if (funnyDataModels!=null) {
                 funnyAdapter_liky.setData(funnyDataModels);
             } else {
-                mainViewModel.requestFunny_liky();
+                mainViewModel.requestFunny_liky(1);
             }
 
         });

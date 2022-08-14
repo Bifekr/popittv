@@ -194,8 +194,8 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
         //detail Channel Selected
 
         mainViewModel.requestChannel_detail(15,2);
-        mainViewModel.requestFunny_view();
-        mainViewModel.requestFunny_liky();
+        mainViewModel.requestFunny_view(2);
+        mainViewModel.requestFunny_liky(2);
         mainViewModel.requestFunny_subMenu(2);
     }
 
@@ -389,7 +389,7 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
             if (funnyDataModels!=null) {
                 funnyAdapter_liky.setData(funnyDataModels);
             } else {
-                mainViewModel.requestFunny_liky();
+                mainViewModel.requestFunny_liky(2);
             }
 
         });
