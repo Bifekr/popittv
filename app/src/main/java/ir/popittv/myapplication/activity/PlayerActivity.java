@@ -613,7 +613,6 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         Toast.makeText(PlayerActivity.this, ""+id_vid_funny, Toast.LENGTH_SHORT).show();
         kind = getIntent().getIntExtra("kind", 0);
         id_channel = getIntent().getIntExtra("id_channel", 0);
-
         mainViewModel.requestFunny_single(id_vid_funny, kind);
         mainViewModel.requestChannel_detail(id_channel, kind);
     }

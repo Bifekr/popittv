@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.ShadowTransformer;
@@ -44,7 +45,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnClickFunny {
 
 
-    private final int FUNNY_KIND = 1;
+    private final int KIND = 1;
     //global Variable
     int id_channel_single;
     private int row_index;
@@ -92,8 +93,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
-
-        initNewRv(this,this);
+        initNewRv(this, this);
         initRailActivity();
         taginit();
         initRv_Vp_adapter();
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         //update AND get Data from DataModel into LiveData
         allChannel();
         getChannel_kind();
-     getChannel_detail();
+        getChannel_detail();
         getFunny_view();
         getFunny_liky();
         getFunny_subMenu();
@@ -187,13 +187,13 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
     //request from Api to get DataModel
     private void request() {
 
-        mainViewModel.requestChannel_kind(1);
+        mainViewModel.requestChannel_kind(KIND);
         //detail Channel Selected
 
-         mainViewModel.requestChannel_detail(1,1);
-        mainViewModel.requestFunny_view(1);
-        mainViewModel.requestFunny_liky(1);
-        mainViewModel.requestFunny_subMenu(2,1);
+        mainViewModel.requestChannel_detail(1, KIND);
+        mainViewModel.requestFunny_view(KIND);
+        mainViewModel.requestFunny_liky(KIND);
+        mainViewModel.requestFunny_subMenu(2, KIND);
     }
 
     //Initialize widgets
@@ -220,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
             return true;
         });
 
-        binding.navRail.getHeaderView().findViewById(R.id.fab_add).setOnClickListener(v -> {
+        Objects.requireNonNull(binding.navRail.getHeaderView()).findViewById(R.id.fab_add).setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, UserActivity.class));
         });
         
@@ -322,6 +322,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
 
     }
+
     //Set Data to LiveData
     private void allChannel() {
         binding.showAllChannel.setOnClickListener(v -> {
@@ -351,11 +352,11 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
                         .into(binding.profileShowChannelMainActivity);
                 binding.profileShowChannelMainActivity.setOnClickListener(v -> {
                     id_channel_single = channelDataModel.getId_channel();
-                    int kind = channelDataModel.getKind();
+
 
                     Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                     intent.putExtra("id_channel_single", id_channel_single);
-                    intent.putExtra("kind", 1);
+                    intent.putExtra("kind", KIND);
 
                     startActivity(intent);
                 });
@@ -387,7 +388,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
             if (funnyDataModels!=null) {
                 funnyAdapter_liky.setData(funnyDataModels);
             } else {
-                mainViewModel.requestFunny_liky(1);
+                mainViewModel.requestFunny_liky(KIND);
             }
 
         });
@@ -406,21 +407,21 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
     @Override
     public void OnclickDetail(int pos) {
-       id_channel_single = pos;
+        id_channel_single = pos;
 
-        mainViewModel.requestChannel_detail(pos,1);
+        mainViewModel.requestChannel_detail(pos, KIND);
 
     }
 
     @Override
     public void onMenuClick(int position) {
-        mainViewModel.requestFunny_subMenu(position,1);
+        mainViewModel.requestFunny_subMenu(position, KIND);
 
     }
 
     @Override
     public void onRow_index(int position) {
-        row_index=position;
+        row_index = position;
     }
 
 
@@ -445,7 +446,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
     @Override
     public void onClickSave(int id_vid) {
-        Service.getApiClient().insertUserSave(id_user, id_vid, 1).enqueue(new Callback<ResponseBody>() {
+        Service.getApiClient().insertUserSave(id_user, id_vid, KIND).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
@@ -464,7 +465,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
     @Override
     public void onClickSee(int id_vid) {
-        Service.getApiClient().insertUserSee(id_user, id_vid, FUNNY_KIND).enqueue(new Callback<ResponseBody>() {
+        Service.getApiClient().insertUserSee(id_user, id_vid, KIND).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -481,7 +482,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
     @Override
     public void onClickLike(int id_vid) {
-        Service.getApiClient().insertUserLike(id_user, id_vid, FUNNY_KIND).enqueue(new Callback<ResponseBody>() {
+        Service.getApiClient().insertUserLike(id_user, id_vid, KIND).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -497,7 +498,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
     @Override
     public void onClickLater(int id_vid) {
-        Service.getApiClient().insertUserLater(id_user, id_vid, FUNNY_KIND).enqueue(new Callback<ResponseBody>() {
+        Service.getApiClient().insertUserLater(id_user, id_vid, KIND).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
@@ -515,15 +516,14 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
     public void onClickSub(int id_channel) {
 
 
-
     }
 
     @Override
     public void onClickPlayer(int id_vid_funny, int id_channel, int kind) {
         Intent intent = new Intent(MainActivity.this, PlayerActivity.class);
-        intent.putExtra("id_vid_funny",id_vid_funny);
-        intent.putExtra("kind",1);
-        intent.putExtra("id_channel",id_channel);
+        intent.putExtra("id_vid_funny", id_vid_funny);
+        intent.putExtra("kind", KIND);
+        intent.putExtra("id_channel", id_channel);
         startActivity(intent);
     }
 }

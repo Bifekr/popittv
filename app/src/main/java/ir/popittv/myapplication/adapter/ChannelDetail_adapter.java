@@ -154,9 +154,7 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
 
             });
 
-            //endregion
-           // notifyDataSetChanged();
-           // notifyItemChanged(position);
+
 
 
         }
