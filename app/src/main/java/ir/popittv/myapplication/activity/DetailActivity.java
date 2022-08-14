@@ -5,8 +5,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -21,11 +23,10 @@ public class DetailActivity extends AppCompatActivity implements OnClickFrg1, On
 
     private ActivityDetailBinding binding;
     private MainViewModel viewModel;
-    private int id_channel;
-    private int kind;
 
     private ChannelDetail_adapter detail_adapter;
-
+    int id_channel2;
+    int kind2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,17 +35,19 @@ public class DetailActivity extends AppCompatActivity implements OnClickFrg1, On
         setContentView(view);
         viewModel=new ViewModelProvider(this).get(MainViewModel.class);
 
-
-        id_channel= getIntent().getIntExtra("id_channel",0);
-        kind= getIntent().getIntExtra("kind",0);
-        viewModel.requestChannel_detail(id_channel,kind);
-
         detail_adapter=new ChannelDetail_adapter(this,this);
 
         binding.rvAllVideoDetailActivity.setHasFixedSize(true);
         binding.rvAllVideoDetailActivity.setLayoutManager(new GridLayoutManager(this,3, RecyclerView.VERTICAL
                 ,false));
         binding.rvAllVideoDetailActivity.setAdapter(detail_adapter);
+
+         id_channel2 = getIntent().getIntExtra("id_channel_single", 0);
+        kind2 = getIntent().getIntExtra("kind", 0);
+        Toast.makeText(this, ""+kind2, Toast.LENGTH_SHORT).show();
+        viewModel.requestChannel_detail(id_channel2, kind2);
+
+
 
 
 
@@ -111,5 +114,15 @@ public class DetailActivity extends AppCompatActivity implements OnClickFrg1, On
     @Override
     public void onClickSub(int id_channel) {
 
+    }
+
+    @Override
+    public void onClickPlayer(int id_vid_funny, int id_channel, int kind) {
+        Intent intent = new Intent(DetailActivity.this, PlayerActivity.class);
+        intent.putExtra("id_vid_funny",id_vid_funny);
+        intent.putExtra("kind",kind2);
+        Toast.makeText(DetailActivity.this, "kind"+kind2+"kk"+kind, Toast.LENGTH_SHORT).show();
+        intent.putExtra("id_channel",id_channel2);
+        startActivity(intent);
     }
 }

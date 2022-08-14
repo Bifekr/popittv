@@ -78,13 +78,15 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
             holder.binding.tvViewItemVidDef.setText(prettyCount(view));
             Glide.with(context).load(funnyDataModels.get(position).getPoster())
                     .into(holder.binding.ivPosterItemVideo);
+            Glide.with(context).load(funnyDataModels.get(position).getProfile_chann())
+                    .into(holder.binding.ProfileChannelVideoThumb);
 
-         /*   holder.binding.ivPosterItemVideo.setOnClickListener(v -> {
+           holder.binding.ivPosterItemVideo.setOnClickListener(v -> {
                 Intent intent = new Intent(context, PlayerActivity.class);
                 id_vid_funny = funnyDataModels.get(position).getId_funny();
                 intent.putExtra("id_vid_funny", id_vid_funny);
                 context.startActivity(intent);
-            });*/
+            });
 
             holder.binding.ivMarcItemDef.setOnClickListener(v -> {
                 if (!boo_mark) {
@@ -134,8 +136,8 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
             //region playerActivity
             holder.binding.ivPosterItemVideo.setOnClickListener(v -> {
                 int id_funny3 = funnyDataModels.get(position).getId_funny();
-                int kind = funnyDataModels.get(position).getKind();
                 int id_channel = funnyDataModels.get(position).getId_channel();
+                int kind = funnyDataModels.get(position).getKind();
                 if (!boo_later) {
                     int id_funny2 = funnyDataModels.get(position).getId_funny();
                     onClickFunny.onClickLater(id_funny2);
@@ -147,16 +149,14 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
                     boo_later=false;
                 }
                 onClickFunny.onClickSee(id_funny3);
-                Intent intent = new Intent(context, PlayerActivity.class);
-                intent.putExtra("id_vid_funny",id_funny3);
-                intent.putExtra("kind",kind);
-                intent.putExtra("id_channel",id_channel);
-                context.startActivity(intent);
+                onClickFunny.onClickPlayer(id_funny3,id_channel,kind);
+
 
             });
 
             //endregion
-
+           // notifyDataSetChanged();
+           // notifyItemChanged(position);
 
 
         }

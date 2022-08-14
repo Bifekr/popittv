@@ -54,9 +54,11 @@ public class RvChannel_Frg1 extends RecyclerView.Adapter<RvChannel_Frg1.rvChanne
         holder.binding.tvAgeItemProfileChan.setText(channelDataModels.get(position).getAge_name());
         holder.binding.parentItemProfileChan.setOnClickListener(v->{
 
+            int kind = channelDataModels.get(position).getKind();
+            int id_channel = channelDataModels.get(position).getId_channel();
             //get id for fetch channel detail
             onClickFrg1.OnclickDetail(channelDataModels.get(position).getId_channel());
-            int getKind=channelDataModels.get(position).getKind();
+
 
             //for change color
             row_index=holder.getAdapterPosition();

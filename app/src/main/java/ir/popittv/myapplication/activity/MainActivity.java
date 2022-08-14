@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
     private final int FUNNY_KIND = 1;
     //global Variable
-    private int id_channel;
+    int id_channel_single;
     private int row_index;
     private int id_user;
     private boolean b_switchLink;
@@ -350,12 +350,12 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
                 Glide.with(this).load(channelDataModel.getProfile_chann())
                         .into(binding.profileShowChannelMainActivity);
                 binding.profileShowChannelMainActivity.setOnClickListener(v -> {
-                    int id_channel_single = channelDataModel.getId_channel();
+                    id_channel_single = channelDataModel.getId_channel();
                     int kind = channelDataModel.getKind();
 
                     Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                    intent.putExtra("id_channel", id_channel_single);
-                    intent.putExtra("kind", kind);
+                    intent.putExtra("id_channel_single", id_channel_single);
+                    intent.putExtra("kind", 1);
 
                     startActivity(intent);
                 });
@@ -406,8 +406,9 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
     @Override
     public void OnclickDetail(int pos) {
-        id_channel = pos;
-        mainViewModel.requestChannel_detail(id_channel,1);
+       id_channel_single = pos;
+
+        mainViewModel.requestChannel_detail(pos,1);
 
     }
 
@@ -515,5 +516,14 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
 
 
+    }
+
+    @Override
+    public void onClickPlayer(int id_vid_funny, int id_channel, int kind) {
+        Intent intent = new Intent(MainActivity.this, PlayerActivity.class);
+        intent.putExtra("id_vid_funny",id_vid_funny);
+        intent.putExtra("kind",1);
+        intent.putExtra("id_channel",id_channel);
+        startActivity(intent);
     }
 }

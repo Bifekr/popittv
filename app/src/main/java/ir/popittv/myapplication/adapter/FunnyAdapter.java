@@ -134,11 +134,8 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
                     boo_later=false;
                 }
             onClickFunny.onClickSee(id_funny3);
-            Intent intent = new Intent(context, PlayerActivity.class);
-            intent.putExtra("id_vid_funny",id_funny3);
-            intent.putExtra("kind",kind);
-            intent.putExtra("id_channel",id_channel);
-            context.startActivity(intent);
+            onClickFunny.onClickPlayer(id_funny3,id_channel,kind);
+
 
         });
 

@@ -21,6 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -80,6 +81,8 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
 /////////////////////////////////////////////////////////////////////////////////
     private int id_vid_funny;
+    int kind;
+    int id_channel;
     private View bottomView;
     private View bottomView2;
     private PlayerView playerView;
@@ -110,17 +113,20 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         // userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         detail_adapter = new ChannelDetail_adapter(this, this);
+        initRv();
         Log.i("TAG", "onCreate: " + b_kindlink);
         id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
-        int kind = getIntent().getIntExtra("kind", 0);
-        int id_channel = getIntent().getIntExtra("id_channel", 0);
+        kind = getIntent().getIntExtra("kind", 0);
+         id_channel = getIntent().getIntExtra("id_channel", 0);
+        Toast.makeText(PlayerActivity.this, "i_channel"+id_channel+"id_vid"+id_vid_funny+"==="+kind, Toast.LENGTH_LONG).show();
         mainViewModel.requestFunny_single(id_vid_funny, kind);
         mainViewModel.requestChannel_detail(id_channel, kind);
 
-        initRv();
+
         initExo();
-        getFunny_single();
         getChannel_detail();
+        getFunny_single();
+
 
      /*   btn_fullScreen = binding.exoPlayer.findViewById(R.id.bt_fullscreen);
         btn_fullScreen.setOnClickListener(v -> {
@@ -149,8 +155,9 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
 
         binding.rvChannelVideoPlayer.setHasFixedSize(true);
-        binding.rvChannelVideoPlayer.setLayoutManager(new LinearLayoutManager(PlayerActivity.this, RecyclerView.VERTICAL, false));
-
+        //binding.rvChannelVideoPlayer.setLayoutManager(new LinearLayoutManager(PlayerActivity.this, RecyclerView.VERTICAL, false));
+        binding.rvChannelVideoPlayer.setLayoutManager(new GridLayoutManager(this,2, RecyclerView.VERTICAL
+                ,false));
         binding.rvChannelVideoPlayer.setAdapter(detail_adapter);
     }
 
@@ -159,14 +166,14 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
             detail_adapter.setFunnyDataModels(channelDataModel.getVideos_channel());
 
-        /*    Glide.with(this).load(channelDataModel.getBanner_chann())
+         Glide.with(this).load(channelDataModel.getBanner_chann())
                     .into(binding.ivBannerItemChannelAll);
-            Glide.with(this).load(channelDataModel.getProfile_chann())
+        /*    Glide.with(this).load(channelDataModel.getProfile_chann())
                     .into(binding.ivProfileItemAllChan);
-            binding.tvSubAllChannel.setText(channelDataModel.getFollowers());
-            binding.tvAgeAllChannel.setText(channelDataModel.getAge_name());
-            binding.titleFaItemAllChannel.setText(channelDataModel.getName_chan_fa().trim());
-            binding.titleEnItemAllChannel.setText(channelDataModel.getName_chan_en().trim());*/
+         binding.titleSubPlayer.setText(channelDataModel.getFollowers());
+            binding.titleAgePlayer.setText(channelDataModel.getAge_name());
+            binding.titleFaChannelPlayer.setText(channelDataModel.getName_chan_fa().trim());
+            binding.titleEnChannelPlayer.setText(channelDataModel.getName_chan_en().trim());*/
 
 
         });
@@ -189,13 +196,13 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             binding.titleEnVideoPlayer.setText(funnyDataModel.getTitle_en());
             binding.titleFaVideoPlayer.setText(funnyDataModel.getTitle_fa());
             binding.titleEnChannelPlayer.setText(funnyDataModel.getName_chan_en());
-            binding.titleFaChannelPlayer.setText(funnyDataModel.getName_chan_fa());
+           binding.titleFaChannelPlayer.setText(funnyDataModel.getName_chan_fa());
             binding.titleSubPlayer.setText(funnyDataModel.getFollowers());
             int like = Integer.parseInt(funnyDataModel.getLiky());
             int view = Integer.parseInt(funnyDataModel.getView());
 
-            binding.titleViewPlayer.setText(prettyCount(view));
-            binding.titleLikePlayer.setText(prettyCount(like));
+            binding.tvViewItemVidDef.setText(prettyCount(view));
+            binding.tvLikeItemVidDef.setText(prettyCount(like));
            int id_channel_2 = funnyDataModel.getId_channel();
             Glide.with(this).load(funnyDataModel.getPoster())
                     .into(binding.posterPlayer);
@@ -598,5 +605,16 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     @Override
     public void onClickSub(int id_channel) {
 
+    }
+
+    @Override
+    public void onClickPlayer(int id_vid_funny, int id_channel, int kind) {
+        id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
+        Toast.makeText(PlayerActivity.this, ""+id_vid_funny, Toast.LENGTH_SHORT).show();
+        kind = getIntent().getIntExtra("kind", 0);
+        id_channel = getIntent().getIntExtra("id_channel", 0);
+
+        mainViewModel.requestFunny_single(id_vid_funny, kind);
+        mainViewModel.requestChannel_detail(id_channel, kind);
     }
 }

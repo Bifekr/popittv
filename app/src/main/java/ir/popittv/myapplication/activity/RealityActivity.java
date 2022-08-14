@@ -47,7 +47,7 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
     MainViewModel mainViewModel;
     ActivityRealityBinding binding;
     //global Variable
-    private int id_channel;
+    int id_channel_single;
     private int row_index;
     private int id_user;
     private boolean b_switchLink;
@@ -354,11 +354,11 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
                 Glide.with(this).load(channelDataModel.getProfile_chann())
                         .into(binding.profileShowChannelMainActivity);
                 binding.profileShowChannelMainActivity.setOnClickListener(v -> {
-                    int id_channel_single = channelDataModel.getId_channel();
+                    id_channel_single = channelDataModel.getId_channel();
                     int kind = channelDataModel.getKind();
                     Intent intent = new Intent(RealityActivity.this, DetailActivity.class);
-                    intent.putExtra("id_channel", id_channel_single);
-                    intent.putExtra("kind", kind);
+                    intent.putExtra("id_channel_single", id_channel_single);
+                    intent.putExtra("kind", 2);
                     startActivity(intent);
                 });
                 binding.subShowChannelMainActivity.setText(channelDataModel.getFollowers());
@@ -419,8 +419,9 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
 
     @Override
     public void OnclickDetail(int pos) {
-        id_channel = pos;
-        mainViewModel.requestChannel_detail(id_channel,2);
+        id_channel_single = pos;
+
+        mainViewModel.requestChannel_detail(pos,2);
     }
 
     @Override
@@ -499,5 +500,14 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
     @Override
     public void onClickSub(int id_channel) {
         id_channel = id_channel;
+    }
+
+    @Override
+    public void onClickPlayer(int id_vid_funny, int id_channel, int kind) {
+        Intent intent = new Intent(RealityActivity.this, PlayerActivity.class);
+        intent.putExtra("id_vid_funny",id_vid_funny);
+        intent.putExtra("kind",2);
+        intent.putExtra("id_channel",id_channel);
+        startActivity(intent);
     }
 }

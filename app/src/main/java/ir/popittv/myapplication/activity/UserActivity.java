@@ -504,6 +504,15 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
     }
 
     @Override
+    public void onClickPlayer(int id_vid_funny, int id_channel, int kind) {
+        Intent intent = new Intent(UserActivity.this, PlayerActivity.class);
+        intent.putExtra("id_vid_funny",id_vid_funny);
+        intent.putExtra("kind",kind);
+        intent.putExtra("id_channel",id_channel);
+        startActivity(intent);
+    }
+
+    @Override
     public void OnclickDetail(int pos) {
 
     }
