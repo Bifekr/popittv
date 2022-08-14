@@ -21,6 +21,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -30,7 +32,6 @@ import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.Timeline;
 import com.google.android.exoplayer2.metadata.Metadata;
-import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.TrackGroupArray;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.ui.PlayerControlView;
@@ -45,6 +46,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.List;
 
 import ir.popittv.myapplication.R;
+import ir.popittv.myapplication.adapter.ChannelDetail_adapter;
 import ir.popittv.myapplication.databinding.ActivityPlayerBinding;
 import ir.popittv.myapplication.models.UserDataModel;
 import ir.popittv.myapplication.request.Service;
@@ -57,15 +59,16 @@ import retrofit2.Response;
 
 public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
+    private final String STATE_RESUME_WINDOW = "resumeWindow";
+    private final String STATE_RESUME_POSITION = "resumePosition";
+    //   private UserViewModel userViewModel;
+    private final String STATE_PLAYER_FULLSCREEN = "playerFullscreen";
     SharedPreferences.Editor editor;
     TextInputLayout et_phone;
-    //   private UserViewModel userViewModel;
-
     SimpleExoPlayer exoPlayer;
     boolean playWhenReady = true;
     int currentWindow = 0;
     long playBackPosition = 0;
-
     MediaItem mediaItem;
     private ActivityPlayerBinding binding;
     private MainViewModel mainViewModel;
@@ -73,25 +76,21 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     private String name_user;
     private String phone_user;
     private String code_user;
-    private int id_channel;
-
     private int id_user;
+
+/////////////////////////////////////////////////////////////////////////////////
     private int id_vid_funny;
     private View bottomView;
     private View bottomView2;
-
-/////////////////////////////////////////////////////////////////////////////////
-
-    private final String STATE_RESUME_WINDOW = "resumeWindow";
-    private final String STATE_RESUME_POSITION = "resumePosition";
-    private final String STATE_PLAYER_FULLSCREEN = "playerFullscreen";
     private PlayerView playerView;
     private boolean mExoPlayerFullscreen = false;
     private FrameLayout mFullScreenButton;
     private ImageView mFullScreenIcon;
     private Dialog mFullScreenDialog;
-    private  DataSource.Factory dataSourceFactory;
+    private DataSource.Factory dataSourceFactory;
     private boolean b_kindlink;
+
+    private ChannelDetail_adapter detail_adapter;
 
 ////////////////////////////////////
 
@@ -102,7 +101,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         phone_user = sharedPreferences.getString("phone_user", null);
         name_user = sharedPreferences.getString("name_user", null);
         id_user = sharedPreferences.getInt("id_user", 0);
-        b_kindlink = sharedPreferences.getBoolean("switchNet",true);
+        b_kindlink = sharedPreferences.getBoolean("switchNet", true);
 
         super.onCreate(savedInstanceState);
         binding = ActivityPlayerBinding.inflate(getLayoutInflater());
@@ -110,27 +109,32 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         setContentView(view);
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         // userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        detail_adapter = new ChannelDetail_adapter(this, this);
+        Log.i("TAG", "onCreate: " + b_kindlink);
+        id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
+        int kind = getIntent().getIntExtra("kind", 0);
+        int id_channel = getIntent().getIntExtra("id_channel", 0);
+        mainViewModel.requestFunny_single(id_vid_funny, kind);
+        mainViewModel.requestChannel_detail(id_channel, kind);
 
-        Log.i("TAG", "onCreate: "+b_kindlink);
-       id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
-        mainViewModel.requestFunny_single(id_vid_funny);
-
+        initRv();
         initExo();
         getFunny_single();
+        getChannel_detail();
 
      /*   btn_fullScreen = binding.exoPlayer.findViewById(R.id.bt_fullscreen);
         btn_fullScreen.setOnClickListener(v -> {
 
         });
 */
-      //   if (phone_user==null) { login();}
+        //   if (phone_user==null) { login();}
 
 ///////////////////////
         dataSourceFactory =
                 new DefaultDataSourceFactory(
                         this, Util.getUserAgent(this, getString(R.string.app_name)));
 
-        if (savedInstanceState != null) {
+        if (savedInstanceState!=null) {
             currentWindow = savedInstanceState.getInt(STATE_RESUME_WINDOW);
             playBackPosition = savedInstanceState.getLong(STATE_RESUME_POSITION);
             mExoPlayerFullscreen = savedInstanceState.getBoolean(STATE_PLAYER_FULLSCREEN);
@@ -138,6 +142,80 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
 
     }
+
+
+    //------------------- onCreate ------------
+    private void initRv() {
+
+
+        binding.rvChannelVideoPlayer.setHasFixedSize(true);
+        binding.rvChannelVideoPlayer.setLayoutManager(new LinearLayoutManager(PlayerActivity.this, RecyclerView.VERTICAL, false));
+
+        binding.rvChannelVideoPlayer.setAdapter(detail_adapter);
+    }
+
+    private void getChannel_detail() {
+        mainViewModel.getChannel_detail().observe(this, channelDataModel -> {
+
+            detail_adapter.setFunnyDataModels(channelDataModel.getVideos_channel());
+
+        /*    Glide.with(this).load(channelDataModel.getBanner_chann())
+                    .into(binding.ivBannerItemChannelAll);
+            Glide.with(this).load(channelDataModel.getProfile_chann())
+                    .into(binding.ivProfileItemAllChan);
+            binding.tvSubAllChannel.setText(channelDataModel.getFollowers());
+            binding.tvAgeAllChannel.setText(channelDataModel.getAge_name());
+            binding.titleFaItemAllChannel.setText(channelDataModel.getName_chan_fa().trim());
+            binding.titleEnItemAllChannel.setText(channelDataModel.getName_chan_en().trim());*/
+
+
+        });
+    }
+
+    public String prettyCount(Number number) {
+        char[] suffix = {' ', 'k', 'M', 'B', 'T', 'P', 'E'};
+        long numValue = number.longValue();
+        int value = (int) Math.floor(Math.log10(numValue));
+        int base = value / 3;
+        if (value >= 3 && base < suffix.length) {
+            return new DecimalFormat("#0.0").format(numValue / Math.pow(10, base * 3)) + suffix[base];
+        } else {
+            return new DecimalFormat("#,##0").format(numValue);
+        }
+    }
+
+    private void getFunny_single() {
+        mainViewModel.getFunny_single().observe(this, funnyDataModel -> {
+            binding.titleEnVideoPlayer.setText(funnyDataModel.getTitle_en());
+            binding.titleFaVideoPlayer.setText(funnyDataModel.getTitle_fa());
+            binding.titleEnChannelPlayer.setText(funnyDataModel.getName_chan_en());
+            binding.titleFaChannelPlayer.setText(funnyDataModel.getName_chan_fa());
+            binding.titleSubPlayer.setText(funnyDataModel.getFollowers());
+            int like = Integer.parseInt(funnyDataModel.getLiky());
+            int view = Integer.parseInt(funnyDataModel.getView());
+
+            binding.titleViewPlayer.setText(prettyCount(view));
+            binding.titleLikePlayer.setText(prettyCount(like));
+           int id_channel_2 = funnyDataModel.getId_channel();
+            Glide.with(this).load(funnyDataModel.getPoster())
+                    .into(binding.posterPlayer);
+
+            Glide.with(this).load(funnyDataModel.getProfile_chann())
+                    .into(binding.ivProfileItemAllChan);
+
+            if (b_kindlink) {
+                mediaItem = MediaItem.fromUri(funnyDataModel.getLink_480());
+
+            } else {
+                mediaItem = MediaItem.fromUri(funnyDataModel.getLink_720());
+
+            }
+
+            exoPlayer.setMediaItem(mediaItem);
+
+        });
+    }
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -335,7 +413,6 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
                 }
 
 
-
                 @Override
                 public void onMediaItemTransition(@Nullable MediaItem mediaItem, int reason) {
 
@@ -355,9 +432,6 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
                 public void onIsLoadingChanged(boolean isLoading) {
 
                 }
-
-
-
 
 
                 @Override
@@ -444,56 +518,17 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             Log.e("TAG", "Error : " + e.toString());
         }
     }
-    private void pausePlayer(){
+
+    private void pausePlayer() {
         exoPlayer.setPlayWhenReady(false);
         exoPlayer.getPlaybackState();
     }
-    private void startPlayer(){
+
+    private void startPlayer() {
         exoPlayer.setPlayWhenReady(true);
         exoPlayer.getPlaybackState();
     }
-    public String prettyCount(Number number) {
-        char[] suffix = {' ', 'k', 'M', 'B', 'T', 'P', 'E'};
-        long numValue = number.longValue();
-        int value = (int) Math.floor(Math.log10(numValue));
-        int base = value / 3;
-        if (value >= 3 && base < suffix.length) {
-            return new DecimalFormat("#0.0").format(numValue / Math.pow(10, base * 3)) + suffix[base];
-        } else {
-            return new DecimalFormat("#,##0").format(numValue);
-        }
-    }
-    private void getFunny_single() {
-        mainViewModel.getFunny_single().observe(this, funnyDataModel -> {
-            binding.titleEnVideoPlayer.setText(funnyDataModel.getTitle_en());
-            binding.titleFaVideoPlayer.setText(funnyDataModel.getTitle_fa());
-            binding.titleEnChannelPlayer.setText(funnyDataModel.getName_chan_en());
-            binding.titleFaChannelPlayer.setText(funnyDataModel.getName_chan_fa());
-            binding.titleSubPlayer.setText(funnyDataModel.getFollowers());
-            int like= Integer.parseInt(funnyDataModel.getLiky());
-            int view= Integer.parseInt(funnyDataModel.getView());
 
-            binding.titleViewPlayer.setText(prettyCount(view));
-            binding.titleLikePlayer.setText(prettyCount(like));
-            id_channel=funnyDataModel.getId_channel();
-            Glide.with(this).load(funnyDataModel.getPoster())
-                    .into(binding.posterPlayer);
-
-            Glide.with(this).load(funnyDataModel.getProfile_chann())
-                    .into(binding.ivProfileItemAllChan);
-
-         if (b_kindlink) {
-             mediaItem = MediaItem.fromUri(funnyDataModel.getLink_480());
-
-            }else {
-             mediaItem = MediaItem.fromUri(funnyDataModel.getLink_720());
-
-            }
-
-            exoPlayer.setMediaItem(mediaItem);
-
-        });
-    }
 
     private void hideSystemUi() {
         binding.exoplayer.setSystemUiVisibility(
@@ -509,7 +544,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     protected void onResume() {
         super.onResume();
         //pausePlayer();
-        if (playerView == null) {
+        if (playerView==null) {
             playerView = findViewById(R.id.exoplayer);
             initFullscreenDialog();
             initFullscreenButton();
@@ -518,13 +553,13 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             initExo();
             hideSystemUi();
         }
-      //  startPlayer();
+        //  startPlayer();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if (exoPlayer==null){
+        if (exoPlayer==null) {
             initExo();
         }
 

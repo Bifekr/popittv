@@ -67,7 +67,7 @@ public void requestChannel_all(int age){mainApiClient.requestChannel_all(age);}
     public void requestFunny_subMenu(int id_subMenu,int kind){ funnyApiClient.requestFunny_subMenu(id_subMenu,kind); }
 
     public LiveData<FunnyDataModel> getFunny_single(){ return funnyApiClient.getFunny_single();}
-    public void requestFunny_single(int id_funny){funnyApiClient.requestFunny_single(id_funny);}
+    public void requestFunny_single(int id_funny,int kind){funnyApiClient.requestFunny_single(id_funny,kind);}
 
     public LiveData<List<FunnyDataModel>> getFunny_search(){return funnyApiClient.getFunny_search();}
     public void requestFunny_search(String search){ funnyApiClient.requestFunny_search(search);}

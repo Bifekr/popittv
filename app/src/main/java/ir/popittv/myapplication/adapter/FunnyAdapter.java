@@ -121,6 +121,8 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
         //region playerActivity
         holder.binding.ivPosterItemVideo.setOnClickListener(v -> {
             int id_funny3 = funnyDataModels.get(position).getId_funny();
+            int kind = funnyDataModels.get(position).getKind();
+            int id_channel = funnyDataModels.get(position).getId_channel();
                 if (!boo_later) {
                     int id_funny2 = funnyDataModels.get(position).getId_funny();
                     onClickFunny.onClickLater(id_funny2);
@@ -134,6 +136,8 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
             onClickFunny.onClickSee(id_funny3);
             Intent intent = new Intent(context, PlayerActivity.class);
             intent.putExtra("id_vid_funny",id_funny3);
+            intent.putExtra("kind",kind);
+            intent.putExtra("id_channel",id_channel);
             context.startActivity(intent);
 
         });

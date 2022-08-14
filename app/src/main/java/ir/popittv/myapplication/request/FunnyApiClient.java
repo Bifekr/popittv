@@ -377,13 +377,13 @@ public class FunnyApiClient {
 
     }
 
-    public void requestFunny_single(int id_funny){
+    public void requestFunny_single(int id_funny,int kind){
 
         if (funnySingle_run!=null){
             funnySingle_run=null;
         }
 
-        funnySingle_run = new FunnySingle_Run(id_funny);
+        funnySingle_run = new FunnySingle_Run(id_funny,kind);
         Future singleHandler = AppExecuter.getAppExecuter().networkIo().submit(funnySingle_run);
         AppExecuter.getAppExecuter().networkIo().schedule(() -> {
             singleHandler.cancel(true);
@@ -393,10 +393,12 @@ public class FunnyApiClient {
     private class FunnySingle_Run implements Runnable{
 
         int id_funny;
+        int kind;
         private  boolean canclable;
 
-        public FunnySingle_Run(int id_funny) {
+        public FunnySingle_Run(int id_funny,int kind) {
             this.id_funny = id_funny;
+            this.kind = kind;
             canclable = false;
         }
 
@@ -407,7 +409,7 @@ public class FunnyApiClient {
                 if (canclable) {
                     return;
                 }
-                Response response = call(id_funny).execute();
+                Response response = call(id_funny,kind).execute();
                 if (response.isSuccessful()) {
                     FunnyDataModel funnyDataModel = (FunnyDataModel) response.body();
                     mFunny_single.postValue(funnyDataModel);
@@ -426,9 +428,9 @@ public class FunnyApiClient {
 
         }
 
-        private Call<FunnyDataModel> call(int id_funny){
+        private Call<FunnyDataModel> call(int id_funny,int kind){
 
-            return Service.getApiClient().getFunny_single(id_funny);
+            return Service.getApiClient().getFunny_single(id_funny,kind);
 
         }
 
