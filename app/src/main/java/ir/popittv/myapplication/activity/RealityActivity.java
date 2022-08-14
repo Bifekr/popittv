@@ -196,7 +196,7 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
         mainViewModel.requestChannel_detail(15,2);
         mainViewModel.requestFunny_view(2);
         mainViewModel.requestFunny_liky(2);
-        mainViewModel.requestFunny_subMenu(2);
+        mainViewModel.requestFunny_subMenu(2,2);
     }
 
 
@@ -425,7 +425,7 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
 
     @Override
     public void onMenuClick(int position) {
-        mainViewModel.requestFunny_subMenu(position);
+        mainViewModel.requestFunny_subMenu(position,2);
     }
 
     @Override

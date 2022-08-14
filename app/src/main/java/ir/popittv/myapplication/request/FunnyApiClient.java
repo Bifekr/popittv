@@ -124,14 +124,14 @@ public class FunnyApiClient {
 
     }
 
-    public void requestFunny_subMenu(int id_SubMenu) {
+    public void requestFunny_subMenu(int id_SubMenu,int kind) {
 
 
         if (funnySubMenu_runnable!=null) {
             funnySubMenu_runnable = null;
         }
 
-        funnySubMenu_runnable = new FunnySubMenu_Runnable(id_SubMenu);
+        funnySubMenu_runnable = new FunnySubMenu_Runnable(id_SubMenu,kind);
 
         final Future myHandler2 = AppExecuter.getAppExecuter().networkIo().submit(funnySubMenu_runnable);
 
@@ -139,6 +139,7 @@ public class FunnyApiClient {
             @Override
             public void run() {
                 myHandler2.cancel(true);
+                funnySubMenu_runnable.canclable=true;
 
             }
         }, 2, TimeUnit.MINUTES);
@@ -327,11 +328,13 @@ public class FunnyApiClient {
     private class FunnySubMenu_Runnable implements Runnable {
 
 
-        private final boolean canclable;
+        private boolean canclable;
         int id_sumMenu;
+        int kind;
 
-        public FunnySubMenu_Runnable(int id_sumMenu) {
+        public FunnySubMenu_Runnable(int id_sumMenu,int kind) {
             this.id_sumMenu=id_sumMenu;
+            this.kind = kind;
             canclable = false;
         }
 
@@ -344,7 +347,7 @@ public class FunnyApiClient {
                 if (canclable)
                     return;
 
-                Response response2 = cafeCallMethod(id_sumMenu).execute();
+                Response response2 = cafeCallMethod(id_sumMenu,kind).execute();
 
                 if (response2.code()==200) {
                     assert response2.body()!=null;
@@ -366,8 +369,8 @@ public class FunnyApiClient {
         }
 
 
-        private Call<FunnyResponse> cafeCallMethod(int id_subMenu) {
-            return Service.getApiClient().getFunny(id_subMenu);
+        private Call<FunnyResponse> cafeCallMethod(int id_subMenu,int kind) {
+            return Service.getApiClient().getFunny(id_subMenu,kind);
 
         }
 

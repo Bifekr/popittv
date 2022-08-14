@@ -58,7 +58,7 @@ public class MainViewModel extends ViewModel {
     /////////// funny_subMenu ////////////////
 
     public LiveData<List<FunnyDataModel>> getFunny_subMenu(){ return mainRepository.getFunny_subMenu(); }
-    public void requestFunny_subMenu(int id_subMeny){ mainRepository.requestFunny_subMenu(id_subMeny); }
+    public void requestFunny_subMenu(int id_subMeny,int kind){ mainRepository.requestFunny_subMenu(id_subMeny,kind); }
 
     /////////////////////////
 

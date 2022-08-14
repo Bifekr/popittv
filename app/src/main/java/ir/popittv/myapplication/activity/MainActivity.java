@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
          mainViewModel.requestChannel_detail(1,1);
         mainViewModel.requestFunny_view(1);
         mainViewModel.requestFunny_liky(1);
-        mainViewModel.requestFunny_subMenu(2);
+        mainViewModel.requestFunny_subMenu(2,1);
     }
 
     //Initialize widgets
@@ -413,7 +413,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
     @Override
     public void onMenuClick(int position) {
-        mainViewModel.requestFunny_subMenu(position);
+        mainViewModel.requestFunny_subMenu(position,1);
 
     }
 

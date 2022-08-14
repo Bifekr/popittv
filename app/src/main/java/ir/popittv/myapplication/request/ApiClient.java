@@ -15,7 +15,7 @@ public interface ApiClient {
 
 
     @GET("getFunny.php")
-    Call<FunnyResponse> getFunny(@Query("id_subMenu") int id_subMenu);
+    Call<FunnyResponse> getFunny(@Query("id_subMenu") int id_subMenu,@Query("kind") int kind);
 
     @GET("getFunny_single.php")
     Call<FunnyDataModel> getFunny_single(@Query("id_funny") int id_funny);
