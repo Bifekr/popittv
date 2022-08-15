@@ -154,7 +154,15 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
 
             });
 
-
+            holder.binding.ProfileChannelVideoThumb.setOnClickListener(v -> {
+                int id_channel=funnyDataModels.get(position).getId_channel();
+                int kind=funnyDataModels.get(position).getKind();
+                onClickFunny.onClickSub(id_channel);
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra("id_channel_single", id_channel);
+                intent.putExtra("kind", kind);
+                context.startActivity(intent);
+            });
 
 
         }

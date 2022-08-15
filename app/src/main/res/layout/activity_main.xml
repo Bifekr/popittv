@@ -151,7 +151,6 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="@dimen/plane_08"
-          android:elevation="@dimen/plane_16"
           app:cardCornerRadius="@dimen/plane_24"
           app:layout_constraintBottom_toTopOf="@id/parentChannelDetail_cardView"
           app:layout_constraintEnd_toEndOf="parent"
@@ -199,8 +198,9 @@
         <androidx.constraintlayout.widget.ConstraintLayout
           android:id="@+id/parentChannelDetail_cardView"
           android:layout_width="0dp"
-          android:layout_height="140dp"
+          android:layout_height="150dp"
           android:background="@drawable/shape_tag3"
+          android:elevation="@dimen/plane_16"
           app:layout_constraintBottom_toTopOf="@id/parentInfint_cardView"
           app:layout_constraintEnd_toStartOf="@id/rvRecommend_frg1"
           app:layout_constraintStart_toStartOf="parent"
@@ -209,7 +209,7 @@
           <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvDetail_frg1"
             android:layout_width="0dp"
-            android:layout_height="140dp"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/conDetail"
@@ -303,8 +303,8 @@
         <androidx.cardview.widget.CardView
           android:id="@+id/parentInfint_cardView"
           android:layout_width="0dp"
-          android:layout_height="140dp"
-          android:layout_marginTop="@dimen/plane_08"
+          android:layout_height="150dp"
+          android:layout_marginTop="@dimen/plane_16"
           android:layout_marginEnd="10dp"
           app:cardCornerRadius="@dimen/plane_24"
           app:layout_constraintBottom_toTopOf="@id/parentInfint2_cardView"
@@ -315,6 +315,7 @@
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:background="#FCE4EC">
 
             <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
@@ -395,8 +396,8 @@
         <androidx.cardview.widget.CardView
           android:id="@+id/parentInfint2_cardView"
           android:layout_width="0dp"
-          android:layout_height="140dp"
-          android:layout_marginTop="@dimen/plane_08"
+          android:layout_height="150dp"
+          android:layout_marginTop="@dimen/plane_16"
           android:layout_marginEnd="10dp"
           app:cardCornerRadius="@dimen/plane_24"
           app:layout_constraintBottom_toTopOf="@id/parentInfint2_cardView"
@@ -489,9 +490,10 @@
         <androidx.constraintlayout.widget.ConstraintLayout
           android:id="@+id/parentPopular_mainActivity"
           android:layout_width="0dp"
-          android:layout_height="140dp"
-          android:layout_marginTop="@dimen/plane_08"
+          android:layout_height="150dp"
+          android:layout_marginTop="@dimen/plane_16"
           android:background="@drawable/shape_tag3"
+          android:elevation="@dimen/plane_08"
           app:layout_constraintBottom_toTopOf="@id/parentBestView_mainActivity"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
@@ -512,6 +514,7 @@
             android:id="@+id/parentLike_con"
             android:layout_width="120dp"
             android:layout_height="match_parent"
+            android:elevation="@dimen/plane_08"
             android:background="@drawable/shape_titlerv"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="vertical"
@@ -565,8 +568,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
           android:id="@+id/parentBestView_mainActivity"
           android:layout_width="0dp"
-          android:layout_height="140dp"
-          android:layout_marginTop="@dimen/plane_08"
+          android:layout_height="150dp"
+          android:layout_marginTop="@dimen/plane_16"
           android:background="@drawable/shape_tag3"
           app:layout_constraintBottom_toTopOf="@id/parentFavTag_frg1"
           app:layout_constraintEnd_toEndOf="parent"
@@ -577,6 +580,7 @@
             android:id="@+id/rvBestView_mainActivity"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:foregroundGravity="center_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toStartOf="parent"
@@ -635,7 +639,7 @@
           android:id="@+id/parentFavTag_frg1"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:layout_marginTop="10dp"
+          android:layout_marginTop="@dimen/plane_16"
           android:elevation="@dimen/plane_08"
           android:background="@drawable/shape_tag3"
           app:layout_constraintBottom_toBottomOf="parent"
@@ -643,7 +647,7 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/parentBestView_mainActivity">
 
-          <TextView
+ <!--         <TextView
             android:id="@+id/titleFav_frg1"
             style="@style/TextAppearance.Reply.Headline6"
             android:layout_width="wrap_content"
@@ -651,27 +655,25 @@
             android:paddingStart="10dp"
             android:paddingTop="6dp"
             android:paddingEnd="10dp"
-            android:paddingBottom="6dp"
             android:text="# Favorite Tag"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />-->
 
           <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMenuTag_frg1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/banner_background"
             app:layout_constraintBottom_toTopOf="@id/rvSubMenuTag_frg1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleFav_frg1" />
-
+            app:layout_constraintTop_toTopOf="parent"/>
           <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSubMenuTag_frg1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/plane_08"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

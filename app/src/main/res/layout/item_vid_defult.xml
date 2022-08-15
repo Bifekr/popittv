@@ -1,238 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="240dp"
+    android:layout_height="150dp"
+    android:layout_margin="2dp"
+    android:padding="@dimen/plane_04">
 
-  <androidx.cardview.widget.CardView
-    android:layout_width="220dp"
-    android:layout_height="140dp"
-    android:layout_margin="4dp"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="12dp">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:background="@color/popit_yellow">
+      app:cardCornerRadius="24dp"
+      app:cardElevation="@dimen/plane_04"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHeight_percent="1"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintWidth_percent="1">
 
-      <FrameLayout
-        android:id="@+id/ivLater_itemDef"
-        android:layout_width="22dp"
-        android:layout_height="18dp"
-        android:background="@drawable/shape_tag4"
-        android:elevation="13dp"
-        app:layout_constraintBottom_toBottomOf="@id/parentPoster_itemDef"
-        app:layout_constraintEnd_toEndOf="@id/parentPoster_itemDef"
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/popit_yellow"
+        android:paddingLeft="@dimen/plane_04"
+        android:paddingTop="@dimen/plane_04"
+        android:paddingRight="@dimen/plane_04"
+        android:paddingBottom="6dp">
 
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.03">
+        <FrameLayout
+          android:id="@+id/ivLater_itemDef"
+          android:layout_width="@dimen/plane_24"
+          android:layout_height="@dimen/plane_24"
+          android:background="@drawable/shape_tag4"
+          android:elevation="9dp"
+          app:layout_constraintBottom_toBottomOf="@id/parentPoster_itemDef"
+          app:layout_constraintEnd_toEndOf="@id/parentPoster_itemDef"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="0.03">
 
-        <ImageView
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:adjustViewBounds="true"
+          <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:elevation="13dp"
+            android:src="@drawable/ic_schedule" />
+        </FrameLayout>
+
+        <FrameLayout
+          android:id="@+id/ivMarc_itemDef"
+          android:layout_width="@dimen/plane_24"
+          android:layout_height="@dimen/plane_24"
+          android:background="@drawable/shape_tag4"
           android:elevation="13dp"
-          android:src="@drawable/ic_schedule" />
+          app:layout_constraintBottom_toBottomOf="@id/parentPoster_itemDef"
+          app:layout_constraintHorizontal_bias="0.15"
+          app:layout_constraintStart_toStartOf="@id/parentPoster_itemDef"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="0.03">
 
-      </FrameLayout>
+          <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:elevation="13dp"
+            android:src="@drawable/ic_bookmark_24dp" />
+        </FrameLayout>
 
-      <FrameLayout
-        android:id="@+id/ivMarc_itemDef"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:background="@drawable/shape_tag4"
-        android:elevation="13dp"
-        app:layout_constraintBottom_toBottomOf="@id/parentPoster_itemDef"
-        app:layout_constraintEnd_toStartOf="@id/ivLater_itemDef"
-        app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.03">
+        <androidx.cardview.widget.CardView
+          android:id="@+id/parentPoster_itemDef"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          app:cardCornerRadius="28dp"
+          app:cardElevation="@dimen/plane_08"
+          app:layout_constraintBottom_toTopOf="@id/parentTitle_itemDefult"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHeight_percent=".75"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintWidth_percent=".94">
 
-        <ImageView
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:adjustViewBounds="true"
-          android:elevation="13dp"
-          android:src="@drawable/ic_bookmark_24dp" />
+          <ImageView
+            android:id="@+id/ivPoster_itemVideo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/trophy" />
+        </androidx.cardview.widget.CardView>
 
-      </FrameLayout>
+        <LinearLayout
+          android:id="@+id/parentTitle_itemDefult"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:orientation="vertical"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toStartOf="@id/Profile_channel_videoThumb"
+          app:layout_constraintStart_toEndOf="@id/parentLike_itemVidDef"
+          app:layout_constraintTop_toBottomOf="@id/parentPoster_itemDef"
+          app:layout_constraintWidth_percent=".62">
 
+          <TextView
+            android:id="@+id/titleFa_video_itemVideoThumb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:ellipsize="end"
+            android:fontFamily="@font/lalezar_regular"
+            android:gravity="top|center"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:minLines="1"
+            android:paddingStart="1dp"
+            android:paddingEnd="1dp"
+            android:textColor="@color/popit_brown"
+            android:textSize="9sp" />
 
-      <androidx.cardview.widget.CardView
-        android:id="@+id/parentPoster_itemDef"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:cardCornerRadius="40dp"
-        app:cardElevation="12dp"
-        app:layout_constraintBottom_toTopOf="@id/parentTitle_itemDefult"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".72"
-        app:layout_constraintHorizontal_bias=".5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".2"
-        app:layout_constraintWidth_percent=".92">
+          <TextView
+            android:id="@+id/titleEn_video_itemVideoThumb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/bree_serif"
+            android:gravity="center_horizontal"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:minLines="1"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textColor="@color/popit_brown"
+            android:textSize="9sp" />
+        </LinearLayout>
 
-        <ImageView
-          android:id="@+id/ivPoster_itemVideo"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:adjustViewBounds="true"
-          android:scaleType="centerCrop"
-          android:src="@drawable/trophy" />
-
-
-      </androidx.cardview.widget.CardView>
-
-
-      <LinearLayout
-        android:id="@+id/parentTitle_itemDefult"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:divider="@drawable/divider"
-        android:dividerPadding="1dp"
-        android:gravity="center_vertical|center_horizontal"
-        android:orientation="vertical"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
-        android:showDividers="middle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/Profile_channel_videoThumb"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/parentPoster_itemDef"
-        app:layout_constraintWidth_percent=".6">
-
-        <TextView
-          android:id="@+id/titleFa_video_itemVideoThumb"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:ellipsize="end"
-          android:fontFamily="@font/baloo"
-          android:gravity="center_horizontal"
-          android:includeFontPadding="true"
-          android:maxLines="1"
-          android:minLines="1"
-          android:paddingStart="1dp"
-          android:paddingEnd="1dp"
-          android:text="fdkljfdkjfg rfg  gf gh gh gf fg ghg  ghfggtfgf fg  fgdlfkj"
-          android:textColor="@color/popit_brown"
-          android:textSize="9sp"
-
-          />
-
-        <TextView
-          android:id="@+id/titleEn_video_itemVideoThumb"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:ellipsize="end"
-          android:fontFamily="@font/baloo"
-          android:gravity="center_horizontal"
-          android:includeFontPadding="true"
-          android:maxLines="1"
-          android:minLines="1"
-          android:paddingLeft="15dp"
-          android:paddingRight="15dp"
-          android:text="fdkljfdkjfg rfg  gf gh gh gf fg ghg  ghfggtfgf fg  fgdlfkj"
-          android:textColor="@color/popit_brown"
-          android:textSize="9sp"
-
-          />
-        <!-- <TextView
-           android:id="@+id/titleEn_video_itemVideoThumb"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:ellipsize="end"
-           android:fontFamily="@font/baloo"
-           android:gravity="center_horizontal"
-           android:includeFontPadding="false"
-           android:maxLines="1"
-           android:minLines="1"
-           android:paddingLeft="15dp"
-           android:paddingTop="0dp"
-           android:paddingRight="10dp"
-           android:text="fdkljfdkjfg rfg  fggtfgf fg  fgdlfkj"
-           android:textSize="9sp" />-->
-      </LinearLayout>
-
-      <LinearLayout
-        android:id="@+id/parentLike_itemVidDef"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/plane_08"
-
-        android:paddingStart="4dp"
-        android:paddingEnd="4dp"
-        app:layout_constraintBottom_toTopOf="@id/parentView_itemVidDef"
-        app:layout_constraintEnd_toStartOf="@id/parentTitle_itemDefult"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/parentTitle_itemDefult">
-
-        <ImageView
-          android:id="@+id/like"
-          android:layout_width="12dp"
-          android:layout_height="12dp"
-          android:src="@drawable/ic_like" />
-
-        <TextView
-          android:id="@+id/tvLike_itemVidDef"
+        <LinearLayout
+          android:id="@+id/parentLike_itemVidDef"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="124k"
-          android:textSize="10sp" />
-      </LinearLayout>
+          android:layout_marginStart="@dimen/plane_08"
+          android:layout_marginTop="@dimen/plane_04"
+          android:orientation="horizontal"
+          android:paddingStart="4dp"
+          android:paddingEnd="4dp"
+          app:layout_constraintBottom_toTopOf="@id/parentView_itemVidDef"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/parentPoster_itemDef">
 
-      <LinearLayout
-        android:id="@+id/parentView_itemVidDef"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/plane_08"
+          <ImageView
+            android:id="@+id/like"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:src="@drawable/ic_baseline_heart_broken_24" />
 
-        android:paddingStart="4dp"
-        android:paddingEnd="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/parentTitle_itemDefult"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/parentLike_itemVidDef">
+          <TextView
+            android:id="@+id/tvLike_itemVidDef"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bree_serif"
+            android:textSize="10sp" />
+        </LinearLayout>
 
-        <ImageView
-          android:id="@+id/view"
-          android:layout_width="12dp"
-          android:layout_height="12dp"
-          android:src="@drawable/ic_baseline_eye_24" />
-
-        <TextView
-          android:id="@+id/tvView_itemVidDef"
+        <LinearLayout
+          android:id="@+id/parentView_itemVidDef"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="124k"
-          android:textSize="10sp" />
-      </LinearLayout>
+          android:layout_marginStart="@dimen/plane_08"
+          android:paddingStart="4dp"
+          android:paddingEnd="4dp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/parentLike_itemVidDef">
 
+          <ImageView
+            android:id="@+id/view"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:src="@drawable/ic_baseline_eye_24" />
 
-      <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/Profile_channel_videoThumb"
-        android:layout_width="36dp"
-        android:layout_height="32dp"
-        android:elevation="12dp"
-        android:src="@drawable/avatar_2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".15"
-        app:layout_constraintHorizontal_bias=".98"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".96"
-        app:riv_border_color="@color/yellow_active"
-        app:riv_border_width="1dp"
-        app:riv_corner_radius="50dp" />
+          <TextView
+            android:id="@+id/tvView_itemVidDef"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bree_serif"
+            android:textSize="10sp" />
+        </LinearLayout>
 
+        <com.makeramen.roundedimageview.RoundedImageView
+          android:id="@+id/Profile_channel_videoThumb"
+          android:layout_width="36dp"
+          android:layout_height="32dp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHeight_percent=".15"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="1"
+          app:riv_border_color="@color/yellow_active"
+          app:riv_border_width="1dp"
+          app:riv_corner_radius="50dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+      </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </androidx.cardview.widget.CardView>
 
-  </androidx.cardview.widget.CardView>
-
+  </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -44,16 +44,16 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnClickFunny {
 
-
     private final int KIND = 1;
     //global Variable
     int id_channel_single;
+    private MainViewModel mainViewModel;
+    private ActivityMainBinding binding;
     private int row_index;
     private int id_user;
     private boolean b_switchLink;
     private boolean b_search = false;
-    private MainViewModel mainViewModel;
-    private ActivityMainBinding binding;
+
     private SharedPreferences sharedPreferences;
 
     //-------------
@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
     }
 
+    ///////////---------------------------------OnCreate--------------------------------------------------------------///////////////
     private void initNewRv(MainActivity mainActivity, MainActivity mainActivity1) {
         rvChannel_frg1 = new RvChannel_Frg1(mainActivity, mainActivity1);
         recommend_adapter = new ChannelDetail_adapter(mainActivity, mainActivity1);
@@ -193,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         mainViewModel.requestChannel_detail(1, KIND);
         mainViewModel.requestFunny_view(KIND);
         mainViewModel.requestFunny_liky(KIND);
-        mainViewModel.requestFunny_subMenu(2, KIND);
+        mainViewModel.requestFunny_subMenu(0, KIND);
     }
 
     //Initialize widgets

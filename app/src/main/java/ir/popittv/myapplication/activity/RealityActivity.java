@@ -193,10 +193,10 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
         mainViewModel.requestChannel_kind(KIND);
         //detail Channel Selected
 
-        mainViewModel.requestChannel_detail(15,2);
-        mainViewModel.requestFunny_view(2);
-        mainViewModel.requestFunny_liky(2);
-        mainViewModel.requestFunny_subMenu(2,2);
+        mainViewModel.requestChannel_detail(15,KIND);
+        mainViewModel.requestFunny_view(KIND);
+        mainViewModel.requestFunny_liky(KIND);
+        mainViewModel.requestFunny_subMenu(0,KIND);
     }
 
 
@@ -355,10 +355,9 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
                         .into(binding.profileShowChannelMainActivity);
                 binding.profileShowChannelMainActivity.setOnClickListener(v -> {
                     id_channel_single = channelDataModel.getId_channel();
-                    int kind = channelDataModel.getKind();
                     Intent intent = new Intent(RealityActivity.this, DetailActivity.class);
                     intent.putExtra("id_channel_single", id_channel_single);
-                    intent.putExtra("kind", 2);
+                    intent.putExtra("kind", KIND);
                     startActivity(intent);
                 });
                 binding.subShowChannelMainActivity.setText(channelDataModel.getFollowers());
@@ -389,7 +388,7 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
             if (funnyDataModels!=null) {
                 funnyAdapter_liky.setData(funnyDataModels);
             } else {
-                mainViewModel.requestFunny_liky(2);
+                mainViewModel.requestFunny_liky(KIND);
             }
 
         });
@@ -421,12 +420,12 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
     public void OnclickDetail(int pos) {
         id_channel_single = pos;
 
-        mainViewModel.requestChannel_detail(pos,2);
+        mainViewModel.requestChannel_detail(pos,KIND);
     }
 
     @Override
     public void onMenuClick(int position) {
-        mainViewModel.requestFunny_subMenu(position,2);
+        mainViewModel.requestFunny_subMenu(position,KIND);
     }
 
     @Override
@@ -436,7 +435,7 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
 
     @Override
     public void onClickSave(int id_vid) {
-        Service.getApiClient().insertUserSave(id_user, id_vid, 1).enqueue(new Callback<ResponseBody>() {
+        Service.getApiClient().insertUserSave(id_user, id_vid, KIND).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
@@ -506,7 +505,7 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
     public void onClickPlayer(int id_vid_funny, int id_channel, int kind) {
         Intent intent = new Intent(RealityActivity.this, PlayerActivity.class);
         intent.putExtra("id_vid_funny",id_vid_funny);
-        intent.putExtra("kind",2);
+        intent.putExtra("kind",KIND);
         intent.putExtra("id_channel",id_channel);
         startActivity(intent);
     }

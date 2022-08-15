@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.text.DecimalFormat;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.activity.DetailActivity;
+import ir.popittv.myapplication.activity.MainActivity;
 import ir.popittv.myapplication.activity.PlayerActivity;
 import ir.popittv.myapplication.databinding.ItemVidDefultBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
@@ -70,9 +72,12 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
         holder.binding.tvViewItemVidDef.setText(prettyCount(view));
         Glide.with(context).load(funnyDataModels.get(position).getPoster())
                 .into(holder.binding.ivPosterItemVideo);
-        Glide.with(context).load(funnyDataModels.get(position).getProfile_chann())
-                .into(holder.binding.ProfileChannelVideoThumb);
-
+        if (funnyDataModels.get(position).getProfile_chann()!=null) {
+            Glide.with(context).load(funnyDataModels.get(position).getProfile_chann())
+                    .into(holder.binding.ProfileChannelVideoThumb);
+        }else {
+            holder.binding.ProfileChannelVideoThumb.setVisibility(View.GONE);
+        }
 
             holder.binding.ivMarcItemDef.setOnClickListener(v -> {
                 if (!boo_mark) {
@@ -143,9 +148,11 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
 
         holder.binding.ProfileChannelVideoThumb.setOnClickListener(v -> {
             int id_channel=funnyDataModels.get(position).getId_channel();
+            int kind=funnyDataModels.get(position).getKind();
             onClickFunny.onClickSub(id_channel);
             Intent intent = new Intent(context, DetailActivity.class);
-            intent.putExtra("id_channel", id_channel);
+            intent.putExtra("id_channel_single", id_channel);
+            intent.putExtra("kind", kind);
             context.startActivity(intent);
         });
 
