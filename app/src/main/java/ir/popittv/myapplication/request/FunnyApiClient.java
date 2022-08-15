@@ -10,8 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Handler;
 
 import ir.popittv.myapplication.models.FunnyDataModel;
+import ir.popittv.myapplication.models.HashTagDataModel;
 import ir.popittv.myapplication.response.FunnyResponse;
 import ir.popittv.myapplication.utils.AppExecuter;
 import retrofit2.Call;
@@ -23,7 +25,7 @@ public class FunnyApiClient {
     private static FunnyApiClient funnyApiClient;
 
     private final MutableLiveData<List<FunnyDataModel>> mFunny_view;
-
+    private final MutableLiveData<List<HashTagDataModel>> mTag;
     private final MutableLiveData<List<FunnyDataModel>> mFunny_best;
     private final MutableLiveData<List<FunnyDataModel>> mFunny_liky;
     private final MutableLiveData<List<FunnyDataModel>> mFunny_subMenu;
@@ -39,6 +41,7 @@ public class FunnyApiClient {
         mFunny_subMenu = new MutableLiveData<>();
         mFunny_single = new MutableLiveData<>();
         mFunny_search = new MutableLiveData<>();
+        mTag = new MutableLiveData<>();
 
     }
 
@@ -56,6 +59,7 @@ public class FunnyApiClient {
     public LiveData<List<FunnyDataModel>> getFunny_view() {return mFunny_view;}
     public LiveData<List<FunnyDataModel>> getFunny_liky() {return mFunny_liky; }
     public LiveData<List<FunnyDataModel>> getFunny_search() {return mFunny_search; }
+    public LiveData<List<HashTagDataModel>> getTag() {return mTag; }
     public LiveData<FunnyDataModel> getFunny_single() {return mFunny_single; }
 
 
@@ -69,6 +73,7 @@ public class FunnyApiClient {
     private FunnySubMenu_Runnable funnySubMenu_runnable;
     private FunnySingle_Run funnySingle_run;
     private FunnySearch_Runnable funnySearch_runnable;
+    private Tag_Runnable tag_runnable;
 
 
     //method for request from host to get data and post in the livedata
@@ -145,7 +150,6 @@ public class FunnyApiClient {
         }, 2, TimeUnit.MINUTES);
     }
 
-
     public void requestFunny_search(String search){
 
         if (funnySearch_runnable != null){
@@ -165,7 +169,6 @@ public class FunnyApiClient {
         },2,TimeUnit.MINUTES);
 
     }
-
     private class FunnySearch_Runnable implements Runnable{
 
         private boolean cancellable;
@@ -202,6 +205,61 @@ public class FunnyApiClient {
         }
     }
 
+    public void request_tag(int kind){
+        if (tag_runnable!=null){
+            tag_runnable=null;
+        }
+        tag_runnable=new Tag_Runnable(kind);
+
+        final Future future_tag=AppExecuter.getAppExecuter().networkIo().submit(tag_runnable);
+        AppExecuter.getAppExecuter().networkIo().schedule(new Runnable() {
+            @Override
+            public void run() {
+                tag_runnable.canclable=true;
+                future_tag.cancel(true);
+
+            }
+        },1,TimeUnit.MINUTES);
+
+    }
+    private class Tag_Runnable implements Runnable{
+
+        private int kind;
+        private boolean canclable;
+
+        public Tag_Runnable(int kind) {
+            this.kind = kind;
+            canclable = false;
+        }
+
+        @Override
+        public void run() {
+            if (canclable)
+                return;
+            try {
+                Response response=callTag(kind).execute();
+                if (response.isSuccessful()) {
+                    assert response.body()!=null;
+                    List<HashTagDataModel> tagList = new ArrayList<>(((FunnyResponse) response.body()).getTag());
+                    mTag.postValue(tagList);
+                }else {
+                    mTag.postValue(null);
+                    assert response.errorBody()!=null;
+                    String error = response.errorBody().string();
+                    Log.i("tagy", "run: " + error);
+                }
+            } catch (IOException e) {
+                mTag.postValue(null);
+                e.printStackTrace();
+            }
+
+        }
+
+        private Call<FunnyResponse> callTag(int kind){
+            return Service.getApiClient().getTag(kind);
+        }
+    }
+
     //create Runnable class for set to AppExecutor
     private class FunnyBest_Runnable implements Runnable {
 
@@ -219,14 +277,13 @@ public class FunnyApiClient {
                     return;
                 }
                 Response response = funnyResponseCall().execute();
-                if (response.body()!=null) {
-
+                if (response.isSuccessful()) {
+                    assert response.body()!=null;
                     List<FunnyDataModel> funnyDataModelList = new ArrayList<>(((FunnyResponse) response.body()).getFunny_best());
-
                     mFunny_best.postValue(funnyDataModelList);
-
                 } else {
                     assert response.errorBody()!=null;
+                    mFunny_best.postValue(null);
                     String error = response.errorBody().string();
                     Log.i("tagy", "run: " + error);
                 }

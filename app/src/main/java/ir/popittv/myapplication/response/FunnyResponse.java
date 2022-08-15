@@ -3,6 +3,7 @@ package ir.popittv.myapplication.response;
 import java.util.List;
 
 import ir.popittv.myapplication.models.FunnyDataModel;
+import ir.popittv.myapplication.models.HashTagDataModel;
 
 public class FunnyResponse {
 
@@ -27,6 +28,9 @@ public class FunnyResponse {
 
     private List<FunnyDataModel> search;
     public List<FunnyDataModel> getSearch(){return search;}
+
+    private List<HashTagDataModel> tag;
+    public List<HashTagDataModel> getTag(){return tag;}
 
     private FunnyDataModel single;
     public FunnyDataModel getSingle(){return single;}

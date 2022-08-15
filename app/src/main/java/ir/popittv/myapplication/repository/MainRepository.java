@@ -6,6 +6,7 @@ import java.util.List;
 
 import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
+import ir.popittv.myapplication.models.HashTagDataModel;
 import ir.popittv.myapplication.request.FunnyApiClient;
 import ir.popittv.myapplication.request.MainApiClient;
 
@@ -71,6 +72,9 @@ public void requestChannel_all(int age){mainApiClient.requestChannel_all(age);}
 
     public LiveData<List<FunnyDataModel>> getFunny_search(){return funnyApiClient.getFunny_search();}
     public void requestFunny_search(String search){ funnyApiClient.requestFunny_search(search);}
+
+    public LiveData<List<HashTagDataModel>> getTag(){return funnyApiClient.getTag();}
+    public void request_tag(int kind){ funnyApiClient.request_tag(kind);}
 
 
 

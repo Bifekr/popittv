@@ -493,7 +493,6 @@
           android:layout_height="150dp"
           android:layout_marginTop="@dimen/plane_16"
           android:background="@drawable/shape_tag3"
-          android:elevation="@dimen/plane_08"
           app:layout_constraintBottom_toTopOf="@id/parentBestView_mainActivity"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"

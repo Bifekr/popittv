@@ -7,6 +7,7 @@ import java.util.List;
 
 import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
+import ir.popittv.myapplication.models.HashTagDataModel;
 import ir.popittv.myapplication.repository.MainRepository;
 
 public class MainViewModel extends ViewModel {
@@ -68,4 +69,7 @@ public class MainViewModel extends ViewModel {
 
     public LiveData<List<FunnyDataModel>> getFunny_search(){return mainRepository.getFunny_search();}
     public void requestFunny_search(String search){ mainRepository.requestFunny_search(search);}
+
+    public LiveData<List<HashTagDataModel>> getTag(){return mainRepository.getTag();}
+    public void request_tag(int kind){ mainRepository.request_tag(kind);}
 }

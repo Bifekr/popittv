@@ -1,14 +1,18 @@
 package ir.popittv.myapplication.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -18,13 +22,17 @@ import ir.popittv.myapplication.utils.OnClickFrg1;
 
 public class TagAdapter extends RecyclerView.Adapter<TagAdapter.TagHolder> {
 
-    private List<HashTagDataModel> tagList;
+    private List<HashTagDataModel> tagDataModels;
     private int row_index=0;
     private OnClickFrg1 onClickFrg1;
 
-    public TagAdapter(List<HashTagDataModel> tagList,OnClickFrg1 onClickFrg1) {
-        this.tagList = tagList;
+    public TagAdapter(OnClickFrg1 onClickFrg1) {
+
         this.onClickFrg1=onClickFrg1;
+    }
+    public void setData(List<HashTagDataModel> tagDataModels){
+        this.tagDataModels=tagDataModels;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -37,10 +45,12 @@ public class TagAdapter extends RecyclerView.Adapter<TagAdapter.TagHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull TagHolder holder, int position) {
-        holder.titleTagEn.setText(tagList.get(position).getTitleTagEn());
-        holder.titleTagFa.setText(tagList.get(position).getTitleTagFa());
-        holder.iconTag.setImageResource(tagList.get(position).getIconTag());
-        holder.parentTag.setBackground(tagList.get(position).getBackgroundTag());
+        holder.titleTagEn.setText(tagDataModels.get(position).getTag_title_en());
+        holder.titleTagFa.setText(tagDataModels.get(position).getTag_title_fa());
+        Toast.makeText(holder.parentTag.getContext(), ""+tagDataModels.get(position).getTag_title_fa(), Toast.LENGTH_SHORT).show();
+        Glide.with(holder.parentItemTag.getContext()).load(tagDataModels.get(position).getTag_pic())
+                .into(holder.iconTag);
+       // holder.parentTag.setBackground(tagDataModels.get(position).getBackgroundTag());
         holder.parentItemTag.setOnClickListener(v->{
             row_index= holder.getAdapterPosition();
             onClickFrg1.onMenuClick(row_index);
@@ -50,7 +60,11 @@ public class TagAdapter extends RecyclerView.Adapter<TagAdapter.TagHolder> {
 
     @Override
     public int getItemCount() {
-        return tagList.size();
+        if (tagDataModels!=null) {
+            return tagDataModels.size();
+        }else {
+            return 0;
+        }
     }
 
     public class TagHolder extends RecyclerView.ViewHolder{

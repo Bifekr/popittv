@@ -38,6 +38,8 @@ public interface ApiClient {
     @GET("getChannel_all.php")
     Call<ChannelResponse> getChannel_all(@Query("kind") int kind, @Query("age") int age);
 
+    @GET("getTag.php")
+    Call<FunnyResponse> getTag(@Query("kind") int kind);
 
     @GET("login.php")
     Call<ResponseBody> userLogin(@Query("phone") String phone);

@@ -95,7 +95,7 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
         initRailActivity();
 
         initRailActivity();
-        taginit();
+       // taginit();
         initRv_Vp_adapter();
 
         //retrieve data into modelClass
@@ -264,15 +264,15 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
         GradientDrawable drawable5 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
                 new int[]{0xf469a9, 0xFFF48FB1});
         ArrayList<HashTagDataModel> tagList = new ArrayList<>();
-        tagList.add(new HashTagDataModel("#Huggy Wuggy", R.drawable.tag_huggy_1, drawable1, "#اگی واگی"));
+ /*       tagList.add(new HashTagDataModel("#Huggy Wuggy", R.drawable.tag_huggy_1, drawable1, "#اگی واگی"));
         tagList.add(new HashTagDataModel("#Sonic", R.drawable.tag_sonic_1, drawable2, "#سونیک"));
         tagList.add(new HashTagDataModel("#duls khamir", R.drawable.tag_claymixer_1, drawable3, "#آدمک خای خمیری"));
         tagList.add(new HashTagDataModel("#Christmas", R.drawable.tag_christmas_1, drawable4, "#کریستمس"));
         tagList.add(new HashTagDataModel("#Kissy Missy", R.drawable.tag_kissy_1, drawable5, "#کیسی میسی"));
 
 
-        tagAdapter = new TagAdapter(tagList, this);
-        binding.rvMenuTagFrg1.setAdapter(tagAdapter);
+        tagAdapter = new TagAdapter( this);
+        binding.rvMenuTagFrg1.setAdapter(tagAdapter);*/
 
 
     }

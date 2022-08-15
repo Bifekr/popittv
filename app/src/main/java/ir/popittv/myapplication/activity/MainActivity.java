@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -129,6 +130,8 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         funnyAdapter_liky = new FunnyAdapter(mainActivity, mainActivity1);
         funnyAdapter_view = new FunnyAdapter(mainActivity, mainActivity1);
         searchAdapter = new SearchAdapter(mainActivity);
+
+        tagAdapter = new TagAdapter( mainActivity);
     }
 
     private void getSearchFunny() {
@@ -195,6 +198,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         mainViewModel.requestFunny_view(KIND);
         mainViewModel.requestFunny_liky(KIND);
         mainViewModel.requestFunny_subMenu(0, KIND);
+        mainViewModel.request_tag(KIND);
     }
 
     //Initialize widgets
@@ -250,8 +254,8 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
     private void taginit() {
 
-        binding.rvMenuTagFrg1.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-        GradientDrawable drawable1 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+
+    /*    GradientDrawable drawable1 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
                 new int[]{0xffeff400, 0xffaff600});
         GradientDrawable drawable2 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
                 new int[]{0xFF03A9F4, 0xFF90CAF9});
@@ -267,10 +271,14 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         tagList.add(new HashTagDataModel("#duls khamir", R.drawable.tag_claymixer_1, drawable3, "#آدمک خای خمیری"));
         tagList.add(new HashTagDataModel("#Christmas", R.drawable.tag_christmas_1, drawable4, "#کریستمس"));
         tagList.add(new HashTagDataModel("#Kissy Missy", R.drawable.tag_kissy_1, drawable5, "#کیسی میسی"));
+*/
+        mainViewModel.getTag().observe(this, hashTagDataModels -> {
+            tagAdapter.setData(hashTagDataModels);
+        });
 
 
-        tagAdapter = new TagAdapter(tagList, this);
-        binding.rvMenuTagFrg1.setAdapter(tagAdapter);
+
+
 
 
     }
@@ -320,6 +328,10 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         binding.rvSearch.setAdapter(searchAdapter);
         binding.rvSearch.setLayoutManager(new GridLayoutManager
                 (this, 3, GridLayoutManager.VERTICAL, false));
+
+        binding.rvMenuTagFrg1.setLayoutManager(new LinearLayoutManager(this,
+                RecyclerView.HORIZONTAL, false));
+        binding.rvMenuTagFrg1.setAdapter(tagAdapter);
 
 
     }
