@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="150dp"
     android:layout_margin="2dp"
     android:padding="@dimen/plane_04">
 
@@ -13,7 +12,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       app:cardCornerRadius="24dp"
-      app:cardElevation="@dimen/plane_04"
+
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHeight_percent="1"
@@ -32,8 +31,8 @@
 
         <FrameLayout
           android:id="@+id/ivLater_itemDef"
-          android:layout_width="18dp"
-          android:layout_height="18dp"
+          android:layout_width="@dimen/plane_24"
+          android:layout_height="@dimen/plane_24"
           android:background="@drawable/shape_tag4"
           android:elevation="9dp"
           app:layout_constraintBottom_toBottomOf="@id/parentPoster_itemDef"
@@ -47,13 +46,12 @@
             android:adjustViewBounds="true"
             android:elevation="13dp"
             android:src="@drawable/ic_schedule" />
-
         </FrameLayout>
 
         <FrameLayout
           android:id="@+id/ivMarc_itemDef"
-          android:layout_width="18dp"
-          android:layout_height="18dp"
+          android:layout_width="@dimen/plane_24"
+          android:layout_height="@dimen/plane_24"
           android:background="@drawable/shape_tag4"
           android:elevation="13dp"
           app:layout_constraintBottom_toBottomOf="@id/parentPoster_itemDef"
@@ -73,11 +71,12 @@
         <androidx.cardview.widget.CardView
           android:id="@+id/parentPoster_itemDef"
           android:layout_width="0dp"
-          android:layout_height="90dp"
-          app:cardCornerRadius="@dimen/plane_16"
+          android:layout_height="0dp"
+          app:cardCornerRadius="28dp"
           app:cardElevation="@dimen/plane_08"
           app:layout_constraintBottom_toTopOf="@id/parentTitle_itemDefult"
           app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHeight_percent=".75"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintWidth_percent=".94">
@@ -94,27 +93,29 @@
         <LinearLayout
           android:id="@+id/parentTitle_itemDefult"
           android:layout_width="0dp"
-          android:layout_height="match_parent"
+          android:layout_height="0dp"
           android:orientation="vertical"
-          app:layout_constraintBottom_toTopOf="@id/parentLike_itemVidDef"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toStartOf="@id/Profile_channel_videoThumb"
+          app:layout_constraintStart_toEndOf="@id/parentLike_itemVidDef"
           app:layout_constraintTop_toBottomOf="@id/parentPoster_itemDef"
-         >
+          app:layout_constraintWidth_percent=".62">
 
           <TextView
             android:id="@+id/titleFa_video_itemVideoThumb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="top"
             android:ellipsize="end"
             android:fontFamily="@font/lalezar_regular"
-            android:gravity="top|center_horizontal"
+            android:gravity="top|center"
             android:includeFontPadding="false"
-android:textDirection="rtl"
             android:maxLines="1"
-            android:paddingRight="1dp"
+            android:minLines="1"
+            android:paddingStart="1dp"
+            android:paddingEnd="1dp"
             android:textColor="@color/popit_brown"
-            android:textSize="11sp" />
+            android:textSize="9sp" />
 
           <TextView
             android:id="@+id/titleEn_video_itemVideoThumb"
@@ -122,10 +123,12 @@ android:textDirection="rtl"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:fontFamily="@font/bree_serif"
-            android:gravity="top|center_horizontal"
-            android:maxLines="1"
-android:textDirection="rtl"
+            android:gravity="center_horizontal"
             android:includeFontPadding="false"
+            android:maxLines="1"
+            android:minLines="1"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:textColor="@color/popit_brown"
             android:textSize="9sp" />
         </LinearLayout>
@@ -136,28 +139,24 @@ android:textDirection="rtl"
           android:layout_height="wrap_content"
           android:layout_marginStart="@dimen/plane_08"
           android:layout_marginTop="@dimen/plane_04"
-          android:gravity="center_horizontal"
           android:orientation="horizontal"
           android:paddingStart="4dp"
           android:paddingEnd="4dp"
           app:layout_constraintBottom_toTopOf="@id/parentView_itemVidDef"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/parentTitle_itemDefult">
+          app:layout_constraintTop_toBottomOf="@id/parentPoster_itemDef">
 
           <ImageView
             android:id="@+id/like"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
             android:src="@drawable/ic_baseline_heart_broken_24" />
 
           <TextView
             android:id="@+id/tvLike_itemVidDef"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
             android:fontFamily="@font/bree_serif"
-            android:layout_marginStart="@dimen/plane_04"
-            android:gravity="top|center_horizontal"
             android:textSize="10sp" />
         </LinearLayout>
 
@@ -174,8 +173,8 @@ android:textDirection="rtl"
 
           <ImageView
             android:id="@+id/view"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
             android:src="@drawable/ic_baseline_eye_24" />
 
           <TextView
@@ -183,8 +182,6 @@ android:textDirection="rtl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/bree_serif"
-            android:gravity="top|center_horizontal"
-            android:layout_marginStart="@dimen/plane_04"
             android:textSize="10sp" />
         </LinearLayout>
 
@@ -195,12 +192,15 @@ android:textDirection="rtl"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHeight_percent=".15"
-          app:layout_constraintTop_toBottomOf="@id/parentTitle_itemDefult"
-
-          app:riv_border_color="@color/popit_orange"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="1"
+          app:riv_border_color="@color/yellow_active"
           app:riv_border_width="1dp"
           app:riv_corner_radius="50dp" />
+
       </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
+
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

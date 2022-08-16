@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFCC22"
+    android:background="@drawable/shape_tag3"
     tools:context=".activity.AllChannelActivity">
 
     <TextView
@@ -66,6 +66,7 @@
       android:id="@+id/rvAllChannel_activityAllChannel"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+
       android:padding="@dimen/plane_08"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"

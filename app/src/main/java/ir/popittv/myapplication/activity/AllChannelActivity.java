@@ -2,6 +2,7 @@ package ir.popittv.myapplication.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -82,8 +83,8 @@ public class AllChannelActivity extends AppCompatActivity implements OnClickAllC
     }
 
     private void initRecyclerView() {
-        binding.rvAllChannelActivityAllChannel.setLayoutManager(new LinearLayoutManager
-                (this, RecyclerView.VERTICAL,false));
+        binding.rvAllChannelActivityAllChannel.setLayoutManager(new GridLayoutManager
+                (this, 2, GridLayoutManager.VERTICAL, false));
         binding.rvAllChannelActivityAllChannel.setAdapter(allChannel_adapter);
 
     }

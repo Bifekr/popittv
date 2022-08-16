@@ -88,7 +88,7 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
                 context.startActivity(intent);
             });
 
-            holder.binding.ivMarcItemDef.setOnClickListener(v -> {
+        /*    holder.binding.ivMarcItemDef.setOnClickListener(v -> {
                 if (!boo_mark) {
                     int id_funny = funnyDataModels.get(position).getId_funny();
                     onClickFunny.onClickSave(id_funny);
@@ -100,7 +100,7 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
                     holder.binding.ivMarcItemDef.setBackgroundResource(R.drawable.shape_tag4);
                     boo_mark=false;
                 }
-            });
+            });*/
 
 
             holder.binding.parentLikeItemVidDef.setOnClickListener(v -> {
@@ -118,7 +118,7 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
 
             });
 
-            holder.binding.ivLaterItemDef.setOnClickListener(v -> {
+         /*   holder.binding.ivLaterItemDef.setOnClickListener(v -> {
                 if (!boo_later) {
                     int id_funny2 = funnyDataModels.get(position).getId_funny();
                     onClickFunny.onClickLater(id_funny2);
@@ -130,7 +130,7 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
                     holder.binding.ivLaterItemDef.setBackgroundResource(R.drawable.shape_tag4);
                     boo_later=false;
                 }
-            });
+            });*/
 
 
             //region playerActivity
