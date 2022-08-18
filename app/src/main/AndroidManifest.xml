@@ -51,10 +51,7 @@
       android:name=".activity.RealityActivity"
       android:exported="false"
       android:screenOrientation="landscape" />
-    <activity
-      android:name=".ui.TestActivity"
-      android:exported="false"
-      android:screenOrientation="landscape" />
+  
     <activity
       android:name=".activity.MainActivity"
       android:exported="true"
