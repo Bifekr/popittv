@@ -27,44 +27,8 @@
       android:paddingRight="@dimen/plane_04"
       android:paddingBottom="6dp">
 
-      <FrameLayout
-        android:id="@+id/ivLater_itemDef"
-        android:layout_width="@dimen/plane_24"
-        android:layout_height="@dimen/plane_24"
-        android:background="@drawable/shape_tag6"
-        android:elevation="9dp"
-        app:layout_constraintBottom_toBottomOf="@id/parentPoster_itemDef"
-        app:layout_constraintEnd_toEndOf="@id/parentPoster_itemDef"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.03">
 
-        <ImageView
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:adjustViewBounds="true"
-          android:elevation="13dp"
-          android:src="@drawable/ic_schedule" />
-      </FrameLayout>
 
-      <FrameLayout
-        android:id="@+id/ivMarc_itemDef"
-        android:layout_width="@dimen/plane_24"
-        android:layout_height="@dimen/plane_24"
-        android:background="@drawable/shape_tag6"
-        android:elevation="13dp"
-        app:layout_constraintBottom_toBottomOf="@id/parentPoster_itemDef"
-        app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="@id/parentPoster_itemDef"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.03">
-
-        <ImageView
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:adjustViewBounds="true"
-          android:elevation="13dp"
-          android:src="@drawable/ic_bookmark_24dp" />
-      </FrameLayout>
       <androidx.cardview.widget.CardView
         android:id="@+id/parentPoster_itemDef"
         android:layout_width="0dp"
@@ -112,7 +76,7 @@
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toStartOf="@id/parentChannelProfile_itemAllChan"
           app:layout_constraintHeight_percent=".3"
-          app:layout_constraintStart_toEndOf="@id/parentLike_itemVidDef"
+          app:layout_constraintStart_toEndOf="@id/parentView_itemVidDef"
           app:layout_constraintVertical_bias="1"
           app:layout_constraintWidth_percent=".62">
 
@@ -153,20 +117,20 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginStart="@dimen/plane_08"
-          android:layout_marginTop="@dimen/plane_04"
+
           android:elevation="@dimen/plane_16"
           android:orientation="horizontal"
           android:paddingStart="4dp"
           android:paddingEnd="4dp"
-          app:layout_constraintBottom_toTopOf="@id/parentView_itemVidDef"
+         app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="@id/parentTitleItemAllChannel">
+          >
 
           <ImageView
             android:id="@+id/like"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:src="@drawable/ic_baseline_heart_broken_24" />
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:src="@drawable/ic_archive" />
 
           <TextView
             android:id="@+id/tvLike_itemVidDef"
@@ -180,19 +144,19 @@
           android:id="@+id/parentView_itemVidDef"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginStart="@dimen/plane_08"
+         app:layout_constraintEnd_toStartOf="@id/parentTitleItemAllChannel"
           android:elevation="@dimen/plane_16"
           android:paddingStart="4dp"
           android:paddingEnd="4dp"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/parentLike_itemVidDef">
+          app:layout_constraintBottom_toBottomOf="@id/parentLike_itemVidDef"
+          app:layout_constraintStart_toEndOf="@id/parentLike_itemVidDef"
+          app:layout_constraintTop_toTopOf="@id/parentLike_itemVidDef">
 
           <ImageView
             android:id="@+id/view"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:src="@drawable/ic_baseline_eye_24" />
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:src="@drawable/ic_baseline_stars_24" />
 
           <TextView
             android:id="@+id/tvView_itemVidDef"

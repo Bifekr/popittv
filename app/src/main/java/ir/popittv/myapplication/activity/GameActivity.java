@@ -3,6 +3,7 @@ package ir.popittv.myapplication.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
@@ -60,7 +61,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void initRv() {
-        binding.rvGame.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        binding.rvGame.setLayoutManager(new GridLayoutManager
+                (this, 2, GridLayoutManager.VERTICAL, false));
         binding.rvGame.setAdapter(gameAdapter);
     }
 

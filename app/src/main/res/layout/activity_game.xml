@@ -38,7 +38,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-          android:id="@+id/tv"
+          android:id="@+id/titrGame"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="All Games"
@@ -51,7 +51,7 @@
           android:id="@+id/rvGame"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          app:layout_constraintTop_toBottomOf="@id/tv"
+          app:layout_constraintTop_toBottomOf="@id/titrGame"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintBottom_toBottomOf="parent"/>
