@@ -78,5 +78,7 @@ public interface ApiClient {
 
     @GET("getGame.php")
     Call<GameResponse> getGame ();
+    @GET("getGame_poster.php")
+    Call<GameResponse> getPoster(@Query("id_game")int id_game);
 
 }

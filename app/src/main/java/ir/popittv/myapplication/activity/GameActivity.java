@@ -48,9 +48,9 @@ public class GameActivity extends AppCompatActivity {
         gameViewModel.getGame().observe(this,gameDataModels -> {
             if (gameDataModels!=null){
             gameAdapter.setData(gameDataModels);
-                Toast.makeText(this,""+gameDataModels.get(0).getBanner_game(),Toast.LENGTH_LONG).show();
+
             }else {
-                Toast.makeText(this,"not success",Toast.LENGTH_LONG).show();
+
             }
         });
 

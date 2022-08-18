@@ -24,7 +24,7 @@
         <androidx.cardview.widget.CardView
           android:id="@+id/parentDetailGame"
           android:layout_width="match_parent"
-          android:layout_height="150dp"
+          android:layout_height="250dp"
           android:layout_margin="4dp"
           app:cardCornerRadius="@dimen/plane_16"
           app:layout_constraintBottom_toTopOf="@id/btnInstall"
@@ -231,7 +231,7 @@
         <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/rvGame_poster"
           android:layout_width="match_parent"
-          android:layout_height="match_parent"
+          android:layout_height="wrap_content"
           app:layout_constraintBottom_toTopOf="@id/titrGame"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
