@@ -274,6 +274,17 @@ app:layout_constraintHorizontal_bias=".98"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/parentDetailGame" />
+        <ProgressBar
+          android:id="@+id/progressDown"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:visibility="gone"
+          style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+          android:indeterminateTint="@android:color/holo_red_light"
+          app:layout_constraintStart_toStartOf="@id/btnInstall"
+          app:layout_constraintEnd_toEndOf="@id/btnInstall"
+          app:layout_constraintTop_toTopOf="@id/btnInstall"
+          app:layout_constraintBottom_toBottomOf="@id/btnInstall"/>
 
 <ImageView
   android:elevation="32dp"
