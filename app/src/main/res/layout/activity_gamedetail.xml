@@ -24,7 +24,7 @@
         <androidx.cardview.widget.CardView
           android:id="@+id/parentDetailGame"
           android:layout_width="match_parent"
-          android:layout_height="250dp"
+          android:layout_height="280dp"
           android:layout_margin="4dp"
           app:cardCornerRadius="@dimen/plane_16"
           app:layout_constraintBottom_toTopOf="@id/btnInstall"
@@ -63,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:src="@drawable/trophy" />
             </androidx.cardview.widget.CardView>
 
@@ -73,27 +73,29 @@
               android:layout_height="0dp"
               android:background="@drawable/shape_tag5"
               android:elevation="@dimen/plane_16"
+
               app:layout_constraintBottom_toBottomOf="@+id/parentPoster_itemDef"
               app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintHeight_percent=".3"
+              app:layout_constraintHeight_percent=".25"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent"
               app:layout_constraintVertical_bias="1">
 
               <LinearLayout
                 android:id="@+id/parentTitleItemAllChannel"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:elevation="@dimen/plane_16"
                 android:gravity="bottom"
                 android:orientation="vertical"
                 android:transitionName="parentTitle_channel"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/parentChannelProfile_itemAllChan"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent=".3"
-                app:layout_constraintStart_toEndOf="@id/parentView_itemVidDef"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/gradiantdesc"
                 app:layout_constraintVertical_bias="1"
+                app:layout_constraintHorizontal_bias=".8"
                 app:layout_constraintWidth_percent=".62">
 
                 <TextView
@@ -110,7 +112,7 @@
                   android:paddingStart="1dp"
                   android:paddingEnd="1dp"
                   android:textColor="@color/popit_brown"
-                  android:textSize="9sp" />
+                  android:textSize="16sp" />
 
                 <TextView
                   android:id="@+id/titleEn_video_itemVideoThumb"
@@ -125,15 +127,17 @@
                   android:paddingLeft="15dp"
                   android:paddingRight="15dp"
                   android:textColor="@color/popit_brown"
-                  android:textSize="9sp" />
+                  android:textSize="14sp" />
               </LinearLayout>
 
               <LinearLayout
+                android:gravity="center_horizontal|center_vertical"
                 android:id="@+id/parentLike_itemVidDef"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/plane_08"
-
+                android:layout_margin="@dimen/plane_04"
+                app:layout_constraintEnd_toStartOf="@id/parentView_itemVidDef"
                 android:elevation="@dimen/plane_16"
                 android:orientation="horizontal"
                 android:paddingStart="4dp"
@@ -148,22 +152,25 @@
                   android:src="@drawable/ic_archive" />
 
                 <TextView
+                  android:padding="@dimen/plane_01"
                   android:id="@+id/tvLike_itemVidDef"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:fontFamily="@font/bree_serif"
-                  android:textSize="10sp" />
+                  android:textSize="14sp" />
               </LinearLayout>
 
               <LinearLayout
+                android:gravity="center_horizontal|center_vertical"
                 android:id="@+id/parentView_itemVidDef"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:elevation="@dimen/plane_16"
                 android:paddingStart="4dp"
                 android:paddingEnd="4dp"
+                android:layout_margin="@dimen/plane_04"
                 app:layout_constraintBottom_toBottomOf="@id/parentLike_itemVidDef"
-                app:layout_constraintEnd_toStartOf="@id/parentTitleItemAllChannel"
+                app:layout_constraintEnd_toStartOf="@id/parentPG_itemVidDef"
                 app:layout_constraintStart_toEndOf="@id/parentLike_itemVidDef"
                 app:layout_constraintTop_toTopOf="@id/parentLike_itemVidDef">
 
@@ -174,44 +181,76 @@
                   android:src="@drawable/ic_baseline_stars_24" />
 
                 <TextView
+                  android:padding="@dimen/plane_01"
                   android:id="@+id/tvView_itemVidDef"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:fontFamily="@font/bree_serif"
-                  android:textSize="10sp" />
+                  android:textSize="14sp" />
               </LinearLayout>
-
-              <androidx.cardview.widget.CardView
-                android:id="@+id/parentChannelProfile_itemAllChan"
+              <LinearLayout
+                android:id="@+id/parentPG_itemVidDef"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/plane_02"
-                android:transitionName="cardProfile_channel"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="@dimen/plane_16"
+                android:elevation="@dimen/plane_16"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:layout_margin="@dimen/plane_04"
+                android:gravity="center_horizontal|center_vertical"
+                app:layout_constraintBottom_toBottomOf="@id/parentLike_itemVidDef"
+                app:layout_constraintEnd_toStartOf="@id/parentTitleItemAllChannel"
+                app:layout_constraintStart_toEndOf="@id/parentView_itemVidDef"
+                app:layout_constraintTop_toTopOf="@id/parentLike_itemVidDef">
+
+                <ImageView
+                  android:id="@+id/pg"
+                  android:layout_width="26dp"
+                  android:layout_height="26dp"
+                  android:src="@drawable/ic_baseline_groups_3_24" />
+
+                <TextView
+                  android:padding="@dimen/plane_04"
+                  android:id="@+id/tvPg"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:fontFamily="@font/bree_serif"
+                  android:textSize="14sp"
+                  android:text=" 2+"/>
+              </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.cardview.widget.CardView
+              android:id="@+id/parentChannelProfile_itemAllChan"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_margin="@dimen/plane_02"
+              android:transitionName="cardProfile_channel"
+              app:cardCornerRadius="14dp"
+app:layout_constraintHorizontal_bias=".98"
+              app:cardElevation="@dimen/plane_16"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHeight_percent=".15"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintVertical_bias="1">
+
+              <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/Profile_channel_videoThumb"
+                android:layout_width="79dp"
+                android:layout_height="76dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:src="@drawable/avatar_2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent=".15"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1">
-
-                <com.makeramen.roundedimageview.RoundedImageView
-                  android:id="@+id/Profile_channel_videoThumb"
-                  android:layout_width="42dp"
-                  android:layout_height="42dp"
-                  android:layout_gravity="center_vertical|center_horizontal"
-                  android:src="@drawable/avatar_2"
-                  app:layout_constraintBottom_toBottomOf="parent"
-                  app:layout_constraintEnd_toEndOf="parent"
-                  app:layout_constraintHeight_percent=".15"
-                  app:layout_constraintTop_toTopOf="parent"
-                  app:layout_constraintVertical_bias="1"
-                  app:riv_border_color="@color/blue_bg_light"
-                  app:riv_border_width="3dp"
-                  app:riv_corner_radius="14dp" />
-              </androidx.cardview.widget.CardView>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+                app:layout_constraintVertical_bias="1"
+                app:riv_border_color="@color/blue_bg_light"
+                app:riv_border_width="3dp"
+                app:riv_corner_radius="14dp" />
+            </androidx.cardview.widget.CardView>
 
           </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -219,19 +258,41 @@
 
         <Button
           android:id="@+id/btnInstall"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
+          android:layout_width="0dp"
+          android:layout_height="60dp"
+          android:background="@drawable/shape_btn_bg"
           android:text="install"
+          android:paddingStart="@dimen/plane_24"
+          android:fontFamily="@font/baloo"
+         android:textColor="@color/popit_orange"
+          android:textSize="26sp"
+          android:textAlignment="textStart"
+          android:layout_marginTop="@dimen/plane_16"
+          app:layout_constraintWidth_percent=".3"
+
           app:layout_constraintBottom_toTopOf="@id/rvGame_poster"
-          app:layout_constraintEnd_toEndOf="@+id/parentDetailGame"
-          app:layout_constraintStart_toStartOf="@+id/parentDetailGame"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/parentDetailGame" />
 
-
+<ImageView
+  android:elevation="32dp"
+  android:layout_width="60dp"
+  android:layout_height="40dp"
+  app:layout_constraintHorizontal_bias="1"
+  app:layout_constraintStart_toStartOf="@id/btnInstall"
+  app:layout_constraintTop_toTopOf="@id/btnInstall"
+  app:layout_constraintBottom_toBottomOf="@id/btnInstall"
+  android:src="@drawable/ic_archive"
+  app:layout_constraintEnd_toEndOf="@id/btnInstall"/>
         <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/rvGame_poster"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          android:background="@drawable/shape_btn_bg"
+          android:paddingTop="@dimen/plane_08"
+          android:paddingBottom="@dimen/plane_16"
+          android:layout_marginTop="@dimen/plane_16"
           app:layout_constraintBottom_toTopOf="@id/titrGame"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
@@ -242,16 +303,23 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:fontFamily="@font/baloo"
-          android:text="Aboute Game"
+          android:text="Aboute Game - - - -"
           android:textSize="24sp"
+          android:layout_marginTop="@dimen/plane_16"
+          android:padding="@dimen/plane_08"
+          android:background="@drawable/shape_btn_bg"
           app:layout_constraintBottom_toTopOf="@id/gameDesc"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/rvGame_poster" />
 
         <TextView
+          android:layout_marginTop="@dimen/plane_16"
+          android:background="@drawable/shape_btn_bg"
+          android:padding="@dimen/plane_06"
           android:id="@+id/gameDesc"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          android:fontFamily="@font/lalezar_regular"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="@+id/rvGame_poster"
           app:layout_constraintStart_toStartOf="@+id/rvGame_poster"

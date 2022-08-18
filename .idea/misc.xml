@@ -73,6 +73,7 @@
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/search_background_oval.xml" value="0.2945205479452055" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/search_background_stroke.xml" value="0.2945205479452055" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/shadow_back.xml" value="0.3233333333333333" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/shape_btn_bg.xml" value="0.337037037037037" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/shape_search.xml" value="0.337037037037037" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/shape_tag1.xml" value="0.3111111111111111" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/shape_tag2.xml" value="0.337037037037037" />
@@ -100,7 +101,7 @@
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_farsi.xml" value="0.29269406392694064" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_fullscreen.xml" value="0.1" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_game.xml" value="0.29269406392694064" />
-        <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_gamedetail.xml" value="0.313963963963964" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_gamedetail.xml" value="0.33" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_player.xml" value="0.2983732876712329" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/activity_reality.xml" value="0.22916666666666666" />
@@ -136,7 +137,7 @@
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_frg1_rv1.xml" value="0.22" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_game.xml" value="0.25" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_infinit_frg1.xml" value="0.28036529680365296" />
-        <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_poster.xml" value="0.313963963963964" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_poster.xml" value="0.22" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_search.xml" value="0.3226851851851852" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_shapeable_imageview.xml" value="0.29269406392694064" />
         <entry key="..\:/popitv/popittv/app/src/main/res/layout/item_stack.xml" value="0.32871794871794874" />
