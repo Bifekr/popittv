@@ -348,6 +348,9 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         mainViewModel.getChannel_kind().observe(this, channelDataModels -> {
             if (channelDataModels!=null) {
                 rvChannel_frg1.setData(channelDataModels);
+
+            }else {
+                Toast.makeText(this,"not success",Toast.LENGTH_LONG).show();
             }
         });
     }

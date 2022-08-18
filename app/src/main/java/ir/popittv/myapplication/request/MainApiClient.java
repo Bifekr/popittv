@@ -22,7 +22,13 @@ public class MainApiClient {
 
 
     private static MainApiClient mainApiClient;
-
+    //singleTone pattern
+    public static MainApiClient getInstance() {
+        if (mainApiClient==null) {
+            mainApiClient = new MainApiClient();
+        }
+        return mainApiClient;
+    }
 
     private ChannelKind_Runnable channelKindRunnable;
     private ChannelDetail_Run channelDetail_run;
@@ -42,13 +48,7 @@ public class MainApiClient {
         mAllChannel = new MutableLiveData<>();
     }
 
-    //singleTone pattern
-    public static MainApiClient getInstance() {
-        if (mainApiClient==null) {
-            mainApiClient = new MainApiClient();
-        }
-        return mainApiClient;
-    }
+
 
 
     //methode of receive data from mutable

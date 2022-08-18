@@ -2,22 +2,31 @@ package ir.popittv.myapplication.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationBarView;
 
 import ir.popittv.myapplication.R;
+import ir.popittv.myapplication.adapter.GameAdapter;
 import ir.popittv.myapplication.databinding.ActivityGameBinding;
-import ir.popittv.myapplication.viewmodel.MainViewModel;
+import ir.popittv.myapplication.viewmodel.GameViewModel;
+
 
 public class GameActivity extends AppCompatActivity {
 
-    private MainViewModel viewModel;
+    private final int KIND = 5;
+    private GameViewModel gameViewModel;
     private ActivityGameBinding binding;
+
+    //RecyclerView
+    private GameAdapter gameAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +34,36 @@ public class GameActivity extends AppCompatActivity {
         binding=ActivityGameBinding.inflate(getLayoutInflater());
         View view=binding.getRoot();
         setContentView(view);
+        gameViewModel = new  ViewModelProvider(this).get(GameViewModel.class);
+        gameAdapter = new GameAdapter(this);
+
         initRailActivity();
+        initRv();
+        request();
+        getGame();
     }
+
+    private void getGame() {
+        gameViewModel.getGame().observe(this,gameDataModels -> {
+            if (gameDataModels!=null){
+            gameAdapter.setData(gameDataModels);
+                Toast.makeText(this,""+gameDataModels.get(0).getBanner_game(),Toast.LENGTH_LONG).show();
+            }else {
+                Toast.makeText(this,"not success",Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    private void request() {
+        gameViewModel.request_game();
+    }
+
+    private void initRv() {
+        binding.rvGame.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        binding.rvGame.setAdapter(gameAdapter);
+    }
+
     private void initRailActivity() {
         binding.navRail.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

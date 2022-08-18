@@ -5,6 +5,7 @@ import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.models.UserDataModel;
 import ir.popittv.myapplication.response.ChannelResponse;
 import ir.popittv.myapplication.response.FunnyResponse;
+import ir.popittv.myapplication.response.GameResponse;
 import ir.popittv.myapplication.response.UserResponse;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -74,5 +75,8 @@ public interface ApiClient {
     Call<ResponseBody> insertUserLike(@Query("id_user") int id_user,@Query("id_vid") int id_vid, @Query("id_table") int kind);
     @GET("userLater.php")
     Call<ResponseBody> insertUserLater(@Query("id_user") int id_user,@Query("id_vid") int id_vid, @Query("id_table") int kind);
+
+    @GET("getGame.php")
+    Call<GameResponse> getGame ();
 
 }
