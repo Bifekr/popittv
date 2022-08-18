@@ -37,5 +37,7 @@
   <string name="enter">ورود به حساب</string>
   <string name="netLowPrice">صرفه جویی در حجم اینترنت</string>
   <string name="showAllChannelFa">All\nCha\nnnels</string>
+  <string name="downloadInstal">"نصب شده </string>
+  <string name="install">install</string>
 
 </resources>

@@ -2,6 +2,7 @@ package ir.popittv.myapplication.activity;
 
 import android.Manifest;
 import android.app.DownloadManager;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -21,6 +23,8 @@ import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import ir.popittv.myapplication.BuildConfig;
+import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.adapter.PosterAdapter;
 import ir.popittv.myapplication.databinding.ActivityGamedetailBinding;
 import ir.popittv.myapplication.viewmodel.GameViewModel;
@@ -99,10 +103,17 @@ public class GameDetailActivity extends AppCompatActivity {
                                 switch (status){
                                     case DownloadManager.STATUS_SUCCESSFUL:
                                         Toast.makeText(GameDetailActivity.this, "success", Toast.LENGTH_SHORT).show();
+                                        Intent intent=new Intent(Intent.ACTION_VIEW);
+                                        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                        Uri uri1= FileProvider.getUriForFile(GameDetailActivity.this, BuildConfig.APPLICATION_ID + ".provider"
+                                        ,new File(Environment.getExternalStorageDirectory(),"GamePB/"+uri_down));
+                                        intent.setDataAndType(uri1,"application/vnd.android.package-archive");
+                                        startActivity(intent);
                                         timer.purge();
                                         timer.cancel();
+                                        binding.btnInstall.setText(R.string.downloadInstal);
                                         break;
-                                    case DownloadManager.STATUS_FAILED:
+                                    case DownloadManager.ERROR_FILE_ALREADY_EXISTS:
                                         Toast.makeText(GameDetailActivity.this, "faild", Toast.LENGTH_SHORT).show();
                                         break;
 
