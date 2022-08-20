@@ -67,16 +67,14 @@ public class AllChannelActivity extends AppCompatActivity implements OnClickAllC
                 new int[]{0xFFFFEB3B, 0xffaaf400});
         GradientDrawable drawable4 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
                 new int[]{0xFF7ADCCF, 0xFF80CBC4});
-        GradientDrawable drawable5 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xf469a9, 0xFFF48FB1});
+
         ArrayList<AgeDataModel> ageList = new ArrayList<>();
         ageList.add(new AgeDataModel("بدون محدویت سنی",drawable1));
-        ageList.add(new AgeDataModel("تا 2 4 ",drawable1));
-        ageList.add(new AgeDataModel("5 تا 8 ",drawable2));
-        ageList.add(new AgeDataModel("7تا 9  ",drawable3));
-        ageList.add(new AgeDataModel("9 تا 14 ",drawable4));
-        ageList.add(new AgeDataModel("5 تا 12 ",drawable5));
-        ageList.add(new AgeDataModel("مناسب تمام سنین",drawable5));
+        ageList.add(new AgeDataModel("تا 2 6 ",drawable1));
+        ageList.add(new AgeDataModel("4 تا 8 ",drawable2));
+        ageList.add(new AgeDataModel("612  ",drawable3));
+        ageList.add(new AgeDataModel("8 تا 14 ",drawable4));
+
 
         ageMenu_adapter=new AgeMenu_Adapter(ageList,this);
         binding.rvAgeMenuActivityAllChannel.setAdapter(ageMenu_adapter);
