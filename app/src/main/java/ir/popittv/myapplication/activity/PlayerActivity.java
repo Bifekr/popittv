@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -42,6 +43,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.adapter.ChannelDetail_adapter;
+import ir.popittv.myapplication.adapter.FunnyAdapter;
 import ir.popittv.myapplication.databinding.ActivityPlayerBinding;
 import ir.popittv.myapplication.models.UserDataModel;
 import ir.popittv.myapplication.request.Service;
@@ -92,7 +94,8 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     ////////////////////////////////////
     private final boolean isLocked = false;
     private boolean b_kindlink;
-    private ChannelDetail_adapter detail_adapter;
+    private FunnyAdapter detail_adapter;
+    private ChannelDetail_adapter funnyAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +111,8 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         setContentView(view);
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         // userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        detail_adapter = new ChannelDetail_adapter(this, this);
+        detail_adapter = new FunnyAdapter(this, this);
+        funnyAdapter = new ChannelDetail_adapter(this,this);
         lockScreen = findViewById(R.id.exo_lock);
         initRv();
         Log.i("TAG", "onCreate: " + b_kindlink);
@@ -118,6 +122,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         Toast.makeText(PlayerActivity.this, "i_channel . ." + id_channel + "id_vid . ." + id_vid_funny + "kind . " + kind, Toast.LENGTH_LONG).show();
         mainViewModel.requestFunny_single(id_vid_funny, kind);
         mainViewModel.requestChannel_detail(id_channel, kind);
+        mainViewModel.requestFunny_subMenu(0, kind);
         ff = findViewById(R.id.exo_ffwd);
         ff2 = findViewById(R.id.exo_pause);
         ff3 = findViewById(R.id.exo_rew);
@@ -126,6 +131,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         initExo();
         getChannel_detail();
         getFunny_single();
+        getFunny_subMenu();
         //iconLockScreen();
 
 
@@ -203,15 +209,25 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
         binding.rvChannelVideoPlayer.setHasFixedSize(true);
         //binding.rvChannelVideoPlayer.setLayoutManager(new LinearLayoutManager(PlayerActivity.this, RecyclerView.VERTICAL, false));
-        binding.rvChannelVideoPlayer.setLayoutManager(new GridLayoutManager(this, 2, RecyclerView.VERTICAL
-                , false));
+        binding.rvChannelVideoPlayer.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         binding.rvChannelVideoPlayer.setAdapter(detail_adapter);
+        binding.rvMenuTagPlayer.setLayoutManager(new GridLayoutManager(this, 2, RecyclerView.VERTICAL
+                , false));
+        binding.rvMenuTagPlayer.setAdapter(funnyAdapter);
     }
+    private void getFunny_subMenu() {
 
+        mainViewModel.getFunny_subMenu().observe(this, funnyDataModels -> {
+            if (funnyDataModels!=null) {
+                funnyAdapter.setFunnyDataModels(funnyDataModels);
+
+            }
+        });
+    }
     private void getChannel_detail() {
         mainViewModel.getChannel_detail().observe(this, channelDataModel -> {
 
-            detail_adapter.setFunnyDataModels(channelDataModel.getVideos_channel());
+            detail_adapter.setData(channelDataModel.getVideos_channel());
 
             Glide.with(this).load(channelDataModel.getBanner_chann())
                     .into(binding.ivBannerItemChannelAll);
