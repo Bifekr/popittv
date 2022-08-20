@@ -194,20 +194,21 @@ public class MainApiClient {
 
 
     //all Channel and Age
-    public void requestChannel_all(int age) {
+    public void requestChannel_all(int kind,int age) {
 
 
         if (channelAll_run!=null) {
             channelAll_run = null;
         }
 
-        channelAll_run = new ChannelAll_Run(age);
+        channelAll_run = new ChannelAll_Run(kind,age);
 
         final Future myHandler3 = AppExecuter.getAppExecuter().networkIo().submit(channelAll_run);
 
         AppExecuter.getAppExecuter().networkIo().schedule(new Runnable() {
             @Override
             public void run() {
+                channelAll_run.canclable=true;
                 myHandler3.cancel(true);
 
             }
@@ -216,12 +217,14 @@ public class MainApiClient {
     private class ChannelAll_Run implements Runnable {
 
 
-        private final boolean canclable;
+        private boolean canclable;
         private int age;
+        private int kind;
 
 
-        public ChannelAll_Run(int age) {
+        public ChannelAll_Run(int kind,int age) {
             this.age=age;
+            this.kind=kind;
             canclable = false;
         }
 
@@ -232,7 +235,7 @@ public class MainApiClient {
                 if (canclable)
                     return;
 
-                Response response3 = channelResponseCall(age).execute();
+                Response response3 = channelResponseCall(kind,age).execute();
 
                 if (response3.code()==200) {
                     assert response3.body()!=null;
@@ -254,8 +257,8 @@ public class MainApiClient {
         }
 
 
-        private Call<ChannelResponse> channelResponseCall(int age) {
-            return Service.getApiClient().getChannel_all(1,age);
+        private Call<ChannelResponse> channelResponseCall(int kind,int age) {
+            return Service.getApiClient().getChannel_all(kind,age);
 
         }
 

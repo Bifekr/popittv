@@ -325,6 +325,7 @@ public class StudyActivity extends AppCompatActivity implements OnClickFrg1, OnC
     private void allChannel() {
         binding.showAllChannel.setOnClickListener(v -> {
             Intent intent = new Intent(StudyActivity.this, AllChannelActivity.class);
+            intent.putExtra("kind",KIND);
             startActivity(intent);
         });
     }

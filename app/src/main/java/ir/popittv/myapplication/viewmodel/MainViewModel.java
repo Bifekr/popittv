@@ -30,7 +30,7 @@ public class MainViewModel extends ViewModel {
     public void requestChannel_detail(int id_channel,int kind){mainRepository.requestChannel_detail(id_channel,kind);}
 
     public LiveData<List<ChannelDataModel>> getChannel_all(){return mainRepository.getChannel_all();}
-    public void requestChannel_all(int age){mainRepository.requestChannel_all(age);}
+    public void requestChannel_all(int kind,int age){mainRepository.requestChannel_all(kind,age);}
 
     ///////////  funny Best /////////////////
     public LiveData<List<FunnyDataModel>> getFunny_best() {

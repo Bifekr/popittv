@@ -30,7 +30,7 @@ public class AllChannelActivity extends AppCompatActivity implements OnClickAllC
     AllChannel_Adapter allChannel_adapter;
 
     //variable
-    private int id_channel;
+    private int kind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,8 @@ public class AllChannelActivity extends AppCompatActivity implements OnClickAllC
 
         viewModel=new ViewModelProvider(this).get(MainViewModel.class);
         allChannel_adapter = new AllChannel_Adapter(this,this,AllChannelActivity.this);
-        viewModel.requestChannel_all(0);
+        kind=getIntent().getIntExtra("kind",1);
+        viewModel.requestChannel_all(kind,0);
 
 
 
@@ -103,7 +104,7 @@ public class AllChannelActivity extends AppCompatActivity implements OnClickAllC
     public void onClickAge(int pos) {
 
         Toast.makeText(this, "age id ; "+pos, Toast.LENGTH_SHORT).show();
-        viewModel.requestChannel_all(pos);
+        viewModel.requestChannel_all(kind,pos);
 
     }
 

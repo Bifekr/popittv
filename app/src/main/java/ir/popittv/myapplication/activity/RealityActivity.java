@@ -330,6 +330,7 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
     private void allChannel() {
         binding.showAllChannel.setOnClickListener(v -> {
             Intent intent = new Intent(RealityActivity.this, AllChannelActivity.class);
+            intent.putExtra("kind",KIND);
             startActivity(intent);
         });
     }

@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.icu.text.DecimalFormat;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -12,29 +13,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.exoplayer2.ExoPlaybackException;
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.MediaItem;
-import com.google.android.exoplayer2.PlaybackParameters;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.Timeline;
-import com.google.android.exoplayer2.metadata.Metadata;
-import com.google.android.exoplayer2.source.TrackGroupArray;
-import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
+import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.ui.PlayerControlView;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
@@ -43,8 +39,6 @@ import com.google.android.exoplayer2.util.Util;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
-
-import java.util.List;
 
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.adapter.ChannelDetail_adapter;
@@ -60,43 +54,45 @@ import retrofit2.Response;
 
 public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
+
     private final String STATE_RESUME_WINDOW = "resumeWindow";
     private final String STATE_RESUME_POSITION = "resumePosition";
-    //   private UserViewModel userViewModel;
     private final String STATE_PLAYER_FULLSCREEN = "playerFullscreen";
     SharedPreferences.Editor editor;
     TextInputLayout et_phone;
-    SimpleExoPlayer exoPlayer;
+    int kind;
+    int id_channel;
+    ImageView lockScreen;
+    ImageButton ff, ff2, ff3, ff4;
     boolean playWhenReady = true;
     int currentWindow = 0;
     long playBackPosition = 0;
     MediaItem mediaItem;
+    SimpleExoPlayer simpleExoPlayer;
     private ActivityPlayerBinding binding;
     private MainViewModel mainViewModel;
+    //////////////////////////// exoPlayer Variable/////////////////////////////////////////////////////
     private SharedPreferences sharedPreferences;
     private String name_user;
     private String phone_user;
     private String code_user;
     private int id_user;
-
-/////////////////////////////////////////////////////////////////////////////////
     private int id_vid_funny;
-    int kind;
-    int id_channel;
     private View bottomView;
     private View bottomView2;
     private PlayerView playerView;
+    private MediaSource mVideoSource;
     private boolean mExoPlayerFullscreen = false;
-    private FrameLayout mFullScreenButton;
     private ImageView mFullScreenIcon;
     private Dialog mFullScreenDialog;
-    private DataSource.Factory dataSourceFactory;
+    private int mResumeWindow;
+    private long mResumePosition;
+
+
+    ////////////////////////////////////
+    private final boolean isLocked = false;
     private boolean b_kindlink;
-
     private ChannelDetail_adapter detail_adapter;
-
-////////////////////////////////////
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,19 +109,24 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         // userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         detail_adapter = new ChannelDetail_adapter(this, this);
+        lockScreen = findViewById(R.id.exo_lock);
         initRv();
         Log.i("TAG", "onCreate: " + b_kindlink);
         id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
         kind = getIntent().getIntExtra("kind", 0);
-         id_channel = getIntent().getIntExtra("id_channel", 0);
-        Toast.makeText(PlayerActivity.this, "i_channel"+id_channel+"id_vid"+id_vid_funny+"==="+kind, Toast.LENGTH_LONG).show();
+        id_channel = getIntent().getIntExtra("id_channel", 0);
+        Toast.makeText(PlayerActivity.this, "i_channel . ." + id_channel + "id_vid . ." + id_vid_funny + "kind . " + kind, Toast.LENGTH_LONG).show();
         mainViewModel.requestFunny_single(id_vid_funny, kind);
         mainViewModel.requestChannel_detail(id_channel, kind);
-
+        ff = findViewById(R.id.exo_ffwd);
+        ff2 = findViewById(R.id.exo_pause);
+        ff3 = findViewById(R.id.exo_rew);
+        ff4 = findViewById(R.id.exo_play);
 
         initExo();
         getChannel_detail();
         getFunny_single();
+        //iconLockScreen();
 
 
      /*   btn_fullScreen = binding.exoPlayer.findViewById(R.id.bt_fullscreen);
@@ -136,7 +137,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         //   if (phone_user==null) { login();}
 
 ///////////////////////
-        dataSourceFactory =
+    /*    dataSourceFactory =
                 new DefaultDataSourceFactory(
                         this, Util.getUserAgent(this, getString(R.string.app_name)));
 
@@ -144,20 +145,66 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             currentWindow = savedInstanceState.getInt(STATE_RESUME_WINDOW);
             playBackPosition = savedInstanceState.getLong(STATE_RESUME_POSITION);
             mExoPlayerFullscreen = savedInstanceState.getBoolean(STATE_PLAYER_FULLSCREEN);
+        }*/
+        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(
+                this, Util.getUserAgent(this, getString(R.string.app_name)));
+
+        if (savedInstanceState!=null) {
+            mResumeWindow = savedInstanceState.getInt(STATE_RESUME_WINDOW);
+            mResumePosition = savedInstanceState.getLong(STATE_RESUME_POSITION);
+            mExoPlayerFullscreen = savedInstanceState.getBoolean(STATE_PLAYER_FULLSCREEN);
         }
 
-
+//----------------------onCreate---------------------------------------------
     }
 
+/*    private void iconLockScreen() {
+        lockScreen.setOnClickListener(v -> {
+            if (!isLocked) {
+                lockScreen.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_baseline_lock));
+            } else {
+                lockScreen.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_baseline_lock_open));
+            }
+            isLocked = !isLocked;
+            lockActivity(isLocked);
+        });
+    }
 
-    //------------------- onCreate ------------
+    private void lockActivity(boolean isLocked) {
+
+        if (isLocked) {
+            ff.setVisibility(View.INVISIBLE);
+            ff2.setVisibility(View.INVISIBLE);
+            ff3.setVisibility(View.INVISIBLE);
+            ff4.setVisibility(View.INVISIBLE);
+
+        } else {
+            ff.setVisibility(View.VISIBLE);
+            ff2.setVisibility(View.VISIBLE);
+            ff3.setVisibility(View.VISIBLE);
+            ff4.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!isLocked) {
+
+            if (getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE) {
+                lockScreen.performClick();
+            } else {
+                super.onBackPressed();
+            }
+        }
+    }*/
+
     private void initRv() {
 
 
         binding.rvChannelVideoPlayer.setHasFixedSize(true);
         //binding.rvChannelVideoPlayer.setLayoutManager(new LinearLayoutManager(PlayerActivity.this, RecyclerView.VERTICAL, false));
-        binding.rvChannelVideoPlayer.setLayoutManager(new GridLayoutManager(this,2, RecyclerView.VERTICAL
-                ,false));
+        binding.rvChannelVideoPlayer.setLayoutManager(new GridLayoutManager(this, 2, RecyclerView.VERTICAL
+                , false));
         binding.rvChannelVideoPlayer.setAdapter(detail_adapter);
     }
 
@@ -166,7 +213,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
             detail_adapter.setFunnyDataModels(channelDataModel.getVideos_channel());
 
-         Glide.with(this).load(channelDataModel.getBanner_chann())
+            Glide.with(this).load(channelDataModel.getBanner_chann())
                     .into(binding.ivBannerItemChannelAll);
         /*    Glide.with(this).load(channelDataModel.getProfile_chann())
                     .into(binding.ivProfileItemAllChan);
@@ -196,29 +243,36 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             binding.titleEnVideoPlayer.setText(funnyDataModel.getTitle_en());
             binding.titleFaVideoPlayer.setText(funnyDataModel.getTitle_fa());
             binding.titleEnChannelPlayer.setText(funnyDataModel.getName_chan_en());
-           binding.titleFaChannelPlayer.setText(funnyDataModel.getName_chan_fa());
+            binding.titleFaChannelPlayer.setText(funnyDataModel.getName_chan_fa());
             binding.titleSubPlayer.setText(funnyDataModel.getFollowers());
             int like = Integer.parseInt(funnyDataModel.getLiky());
             int view = Integer.parseInt(funnyDataModel.getView());
 
             binding.tvViewItemVidDef.setText(prettyCount(view));
             binding.tvLikeItemVidDef.setText(prettyCount(like));
-           int id_channel_2 = funnyDataModel.getId_channel();
+            int id_channel_2 = funnyDataModel.getId_channel();
             Glide.with(this).load(funnyDataModel.getPoster())
                     .into(binding.posterPlayer);
 
             Glide.with(this).load(funnyDataModel.getProfile_chann())
                     .into(binding.ivProfileItemAllChan);
 
+
             if (b_kindlink) {
-                mediaItem = MediaItem.fromUri(funnyDataModel.getLink_480());
+                String video_link = funnyDataModel.getLink_480();
+                Uri uri = Uri.parse(video_link);
+                mediaItem = MediaItem.fromUri(uri);
 
             } else {
-                mediaItem = MediaItem.fromUri(funnyDataModel.getLink_720());
+                String video_link = funnyDataModel.getLink_720();
+                Uri uri = Uri.parse(video_link);
+                mediaItem = MediaItem.fromUri(uri);
+
 
             }
 
-            exoPlayer.setMediaItem(mediaItem);
+            simpleExoPlayer.setMediaItem(mediaItem);
+            simpleExoPlayer.play();
 
         });
     }
@@ -227,8 +281,8 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     @Override
     public void onSaveInstanceState(Bundle outState) {
 
-        outState.putInt(STATE_RESUME_WINDOW, currentWindow);
-        outState.putLong(STATE_RESUME_POSITION, playBackPosition);
+        outState.putInt(STATE_RESUME_WINDOW, mResumeWindow);
+        outState.putLong(STATE_RESUME_POSITION, mResumePosition);
         outState.putBoolean(STATE_PLAYER_FULLSCREEN, mExoPlayerFullscreen);
 
         super.onSaveInstanceState(outState);
@@ -273,7 +327,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
         PlayerControlView controlView = playerView.findViewById(R.id.exo_controller);
         mFullScreenIcon = controlView.findViewById(R.id.exo_fullscreen_icon);
-        mFullScreenButton = controlView.findViewById(R.id.exo_fullscreen_button);
+        FrameLayout mFullScreenButton = controlView.findViewById(R.id.exo_fullscreen_button);
         mFullScreenButton.setOnClickListener(v -> {
             if (!mExoPlayerFullscreen)
                 openFullscreenDialog();
@@ -283,6 +337,57 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
     }
 
+    private void initExo() {
+        try {
+
+            simpleExoPlayer = new SimpleExoPlayer.Builder(this)
+
+
+                    .build();
+            boolean haveResumePosition = mResumeWindow!=C.INDEX_UNSET;
+            binding.exoplayer.setPlayer(simpleExoPlayer);
+            binding.exoplayer.setKeepScreenOn(true);
+            if (haveResumePosition) {
+                Log.i("DEBUG", " haveResumePosition ");
+                simpleExoPlayer.seekTo(mResumeWindow, mResumePosition);
+            }
+            simpleExoPlayer.setPlayWhenReady(playWhenReady);
+            simpleExoPlayer.seekTo(currentWindow, playBackPosition);
+            simpleExoPlayer.addListener(new Player.EventListener() {
+                @Override
+                public void onPlaybackStateChanged(int state) {
+                    if (state==simpleExoPlayer.STATE_BUFFERING) {
+
+                        binding.progressBar.setVisibility(View.VISIBLE);
+
+                    } else if (state==simpleExoPlayer.STATE_READY) {
+                        binding.progressBar.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onPlayWhenReadyChanged(boolean playWhenReady, int reason) {
+                    // play and Pause click
+
+                }
+
+
+            });
+
+            if (!simpleExoPlayer.getPlayWhenReady()) {
+
+                binding.progressBar.setVisibility(View.VISIBLE);
+            }
+
+
+            simpleExoPlayer.prepare();
+
+        } catch (Exception e) {
+            // below line is used for
+            // handling our errors.
+            Log.e("TAG", "Error : " + e.toString());
+        }
+    }
 
     //endregion
 
@@ -394,146 +499,14 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
 
     private void releasePlayer() {
-        if (exoPlayer!=null) {
-            playWhenReady = exoPlayer.getPlayWhenReady();
-            playBackPosition = exoPlayer.getCurrentPosition();
-            currentWindow = exoPlayer.getCurrentWindowIndex();
+        if (simpleExoPlayer!=null) {
+            playWhenReady = simpleExoPlayer.getPlayWhenReady();
+            playBackPosition = simpleExoPlayer.getCurrentPosition();
+            currentWindow = simpleExoPlayer.getCurrentWindowIndex();
 
-            exoPlayer.release();
-            exoPlayer = null;
+            simpleExoPlayer.release();
+            simpleExoPlayer = null;
         }
-    }
-
-
-    private void initExo() {
-        try {
-
-            exoPlayer = new SimpleExoPlayer.Builder(this)
-
-                    .build();
-            binding.exoplayer.setPlayer(exoPlayer);
-            exoPlayer.prepare();
-            exoPlayer.addListener(new Player.EventListener() {
-                @Override
-                public void onTimelineChanged(Timeline timeline, int reason) {
-
-                }
-
-
-                @Override
-                public void onMediaItemTransition(@Nullable MediaItem mediaItem, int reason) {
-
-                }
-
-                @Override
-                public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
-
-                }
-
-                @Override
-                public void onStaticMetadataChanged(List<Metadata> metadataList) {
-
-                }
-
-                @Override
-                public void onIsLoadingChanged(boolean isLoading) {
-
-                }
-
-
-                @Override
-                public void onPlaybackStateChanged(int state) {
-                    if (state==exoPlayer.STATE_BUFFERING) {
-
-                        binding.progressBar.setVisibility(View.VISIBLE);
-                    } else if (state==exoPlayer.STATE_READY) {
-                        binding.progressBar.setVisibility(View.GONE);
-
-                    }
-
-                }
-
-                @Override
-                public void onPlayWhenReadyChanged(boolean playWhenReady, int reason) {
-
-                    // play and Pause click
-
-
-                }
-
-                @Override
-                public void onPlaybackSuppressionReasonChanged(int playbackSuppressionReason) {
-
-                }
-
-                @Override
-                public void onIsPlayingChanged(boolean isPlaying) {
-
-                }
-
-                @Override
-                public void onRepeatModeChanged(int repeatMode) {
-
-                }
-
-                @Override
-                public void onShuffleModeEnabledChanged(boolean shuffleModeEnabled) {
-
-                }
-
-                @Override
-                public void onPlayerError(ExoPlaybackException error) {
-
-                }
-
-                @Override
-                public void onPositionDiscontinuity(int reason) {
-
-                }
-
-                @Override
-                public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
-
-                }
-
-                @Override
-                public void onExperimentalOffloadSchedulingEnabledChanged(boolean offloadSchedulingEnabled) {
-
-                }
-
-                @Override
-                public void onExperimentalSleepingForOffloadChanged(boolean sleepingForOffload) {
-
-                }
-
-                @Override
-                public void onEvents(Player player, Player.Events events) {
-
-                }
-            });
-            exoPlayer.setPlayWhenReady(playWhenReady);
-            if (!exoPlayer.getPlayWhenReady()) {
-
-                binding.progressBar.setVisibility(View.VISIBLE);
-            }
-            exoPlayer.seekTo(currentWindow, playBackPosition);
-
-
-        } catch (Exception e) {
-            // below line is used for
-            // handling our errors.
-            Log.e("TAG", "Error : " + e.toString());
-        }
-    }
-
-    private void pausePlayer() {
-        exoPlayer.setPlayWhenReady(false);
-        exoPlayer.getPlaybackState();
-    }
-
-    private void startPlayer() {
-        exoPlayer.setPlayWhenReady(true);
-        exoPlayer.getPlaybackState();
     }
 
 
@@ -550,34 +523,43 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     @Override
     protected void onResume() {
         super.onResume();
-        //pausePlayer();
         if (playerView==null) {
             playerView = findViewById(R.id.exoplayer);
             initFullscreenDialog();
             initFullscreenButton();
         }
-        if (exoPlayer==null) {
-            initExo();
-            hideSystemUi();
-        }
-        //  startPlayer();
-    }
+        initExo();
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (exoPlayer==null) {
-            initExo();
+        if (mExoPlayerFullscreen) {
+            ((ViewGroup) playerView.getParent()).removeView(playerView);
+            mFullScreenDialog.addContentView(playerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(PlayerActivity.this, R.drawable.ic_fullscreen_skrink));
+            mFullScreenDialog.show();
         }
-
-        //startPlayer();
 
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        releasePlayer();
+    protected void onPause() {
+        super.onPause();
+        if (playerView!=null && simpleExoPlayer!=null) {
+            mResumeWindow = simpleExoPlayer.getCurrentWindowIndex();
+            mResumePosition = Math.max(0, simpleExoPlayer.getContentPosition());
+
+            simpleExoPlayer.release();
+        }
+
+        if (mFullScreenDialog!=null)
+            mFullScreenDialog.dismiss();
+
+    }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        simpleExoPlayer.setPlayWhenReady(true);
+        simpleExoPlayer.getPlaybackState();
 
     }
 
@@ -610,7 +592,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     @Override
     public void onClickPlayer(int id_vid_funny, int id_channel, int kind) {
         id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
-        Toast.makeText(PlayerActivity.this, ""+id_vid_funny, Toast.LENGTH_SHORT).show();
+        Toast.makeText(PlayerActivity.this, "" + id_vid_funny, Toast.LENGTH_SHORT).show();
         kind = getIntent().getIntExtra("kind", 0);
         id_channel = getIntent().getIntExtra("id_channel", 0);
         mainViewModel.requestFunny_single(id_vid_funny, kind);

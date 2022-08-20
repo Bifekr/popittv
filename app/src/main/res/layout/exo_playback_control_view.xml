@@ -67,7 +67,21 @@
       app:layout_constraintStart_toEndOf="@+id/header_tv"
       app:layout_constraintTop_toTopOf="@+id/header_tv" />
 
+
   </androidx.constraintlayout.widget.ConstraintLayout>
+  <ImageView
+    android:id="@+id/exo_lock"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_baseline_lock"
+    app:layout_constraintEnd_toStartOf="@id/cross_im"
+    app:layout_constraintTop_toTopOf="@id/cross_im"
+    app:layout_constraintBottom_toBottomOf="@id/cross_im"
+    android:paddingLeft="20dp"
+    android:paddingTop="25dp"
+    android:paddingRight="20dp"
+    android:background="?attr/selectableItemBackgroundBorderless"
+    android:paddingBottom="20dp"/>
     <androidx.appcompat.widget.AppCompatImageView
       android:id="@+id/cross_im"
       android:layout_width="wrap_content"
@@ -97,6 +111,7 @@
     <ImageButton
       android:id="@id/exo_rew"
       style="@style/ExoMediaButton.Rewind"
+      android:theme="@style/ClickableView"
       android:layout_marginRight="40dp"
       android:src="@drawable/ic_exo_icon_rewind"
       android:visibility="visible"
@@ -123,6 +138,7 @@
   <ImageButton
     android:id="@+id/exo_pause"
     style="@style/ExoMediaButton.Pause"
+    android:theme="@style/ClickableView"
     android:layout_width="56dp"
     android:layout_height="56dp"
     android:src="@drawable/ic_exo_icon_pause"
@@ -134,9 +150,10 @@
     <ImageButton
       android:id="@id/exo_ffwd"
       style="@style/ExoMediaButton.FastForward"
-      android:layout_marginLeft="40dp"
+      android:layout_marginStart="40dp"
       android:src="@drawable/ic_exo_icon_fastforward"
       android:visibility="visible"
+      android:theme="@style/ClickableView"
       app:layout_constraintBottom_toBottomOf="@id/exo_play"
       app:layout_constraintLeft_toRightOf="@+id/barrier_right"
       app:layout_constraintTop_toTopOf="@id/exo_play"/>
@@ -189,8 +206,8 @@
       android:layout_marginRight="7dp"
       android:layout_weight="1"
       app:buffered_color="@color/white_50"
-      app:played_color="@color/live_red"
-      app:scrubber_color="@color/live_red"
+      app:played_color="@color/popit_orange"
+      app:scrubber_color="@color/popit_yellow"
       app:unplayed_color="@color/white_20" />
 
     <TextView

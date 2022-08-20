@@ -69,10 +69,12 @@ public class AllChannel_Adapter extends RecyclerView.Adapter<AllChannel_Adapter.
 
         holder.binding.ivBannerItemChannelAll.setOnClickListener(v -> {
             row_index=channelDataModels.get(position).getId_channel();
+            int kind=channelDataModels.get(position).getKind();
             onClickDetailActivity.onClickDetailChannel(row_index);
 
             Intent intent=new Intent(context, DetailActivity.class);
-            intent.putExtra("id_channel",row_index);
+            intent.putExtra("id_channel_single",row_index);
+            intent.putExtra("kind",kind);
             Pair[] pairs = new Pair[3];
             pairs[0] = new Pair<View,String>(holder.binding.ivBannerItemChannelAll,"banner_channel");
             pairs[1] = new Pair<View,String>(holder.binding.parentChannelProfileItemAllChan,"cardProfile_channel");

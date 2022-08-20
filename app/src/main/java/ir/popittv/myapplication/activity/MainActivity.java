@@ -46,10 +46,10 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnClickFunny {
 
     private final int KIND = 1;
-    //global Variable
-    int id_channel_single;
     private MainViewModel mainViewModel;
     private ActivityMainBinding binding;
+    //global Variable
+    int id_channel_single;
     private int row_index;
     private int id_user;
     private boolean b_switchLink;
@@ -114,11 +114,9 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         binding.iconWifiToolbar.setOnClickListener(v -> {
             Toast.makeText(this, "sdfsdf", Toast.LENGTH_SHORT).show();
         });
-
-
-    }
-
-    ///////////---------------------------------OnCreate--------------------------------------------------------------///////////////
+     ///////////-----------------------OnCreate----------------------///////////////
+    }//////////---------------------------------------------------////////////////
+    ///////////---------------OnCreate--------------------------///////////////
     private void initNewRv(MainActivity mainActivity, MainActivity mainActivity1) {
         rvChannel_frg1 = new RvChannel_Frg1(mainActivity, mainActivity1);
         recommend_adapter = new ChannelDetail_adapter(mainActivity, mainActivity1);
@@ -340,6 +338,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
     private void allChannel() {
         binding.showAllChannel.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AllChannelActivity.class);
+            intent.putExtra("kind",KIND);
             startActivity(intent);
         });
     }

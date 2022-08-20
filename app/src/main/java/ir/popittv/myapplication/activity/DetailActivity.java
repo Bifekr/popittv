@@ -60,16 +60,19 @@ public class DetailActivity extends AppCompatActivity implements OnClickFrg1, On
     private void getChannel_detail() {
         viewModel.getChannel_detail().observe(this,channelDataModel -> {
 
-            detail_adapter.setFunnyDataModels(channelDataModel.getVideos_channel());
+            if (channelDataModel!=null){
+                detail_adapter.setFunnyDataModels(channelDataModel.getVideos_channel());
 
-            Glide.with(this).load(channelDataModel.getBanner_chann())
-                    .into(binding.ivBannerItemChannelAll);
-            Glide.with(this).load(channelDataModel.getProfile_chann())
-                    .into(binding.ivProfileItemAllChan);
-            binding.tvSubAllChannel.setText(channelDataModel.getFollowers());
-            binding.tvAgeAllChannel.setText(channelDataModel.getAge_name());
-            binding.titleFaItemAllChannel.setText(channelDataModel.getName_chan_fa().trim());
-            binding.titleEnItemAllChannel.setText(channelDataModel.getName_chan_en().trim());
+                Glide.with(this).load(channelDataModel.getBanner_chann())
+                        .into(binding.ivBannerItemChannelAll);
+                Glide.with(this).load(channelDataModel.getProfile_chann())
+                        .into(binding.ivProfileItemAllChan);
+                binding.tvSubAllChannel.setText(channelDataModel.getFollowers());
+                binding.tvAgeAllChannel.setText(channelDataModel.getAge_name());
+                binding.titleFaItemAllChannel.setText(channelDataModel.getName_chan_fa().trim());
+                binding.titleEnItemAllChannel.setText(channelDataModel.getName_chan_en().trim());
+            }
+
 
 
         });
