@@ -1,10 +1,11 @@
 package ir.popittv.myapplication.adapter;
 
+
+
 import android.content.Context;
 import android.content.Intent;
 import android.icu.text.DecimalFormat;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -23,7 +24,7 @@ import ir.popittv.myapplication.databinding.ItemVidDefultBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.utils.OnClickFunny;
 
-public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_adapter.DetailChannel_holder> {
+public class ChannelDetail_adapter2 extends RecyclerView.Adapter<ChannelDetail_adapter2.DetailChannel_holder2> {
 
     private List<FunnyDataModel> funnyDataModels;
     private final Context context;
@@ -35,7 +36,7 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
     private  boolean boo_mark=false;
     private  boolean boo_later=false;
 
-    public ChannelDetail_adapter(Context context,OnClickFunny onClickFunny) {
+    public ChannelDetail_adapter2(Context context,OnClickFunny onClickFunny) {
         this.context = context;
         this.onClickFunny=onClickFunny;
     }
@@ -47,12 +48,12 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
     }
     @NonNull
     @Override
-    public DetailChannel_holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DetailChannel_holder2 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater=LayoutInflater.from(parent.getContext());
         ItemChannelDetailBinding binding= DataBindingUtil.inflate(inflater, R.layout.item_channel_detail,
                 parent,false);
 
-        return new DetailChannel_holder(binding);
+        return new DetailChannel_holder2(binding);
     }
     public String prettyCount(Number number) {
         char[] suffix = {' ', 'k', 'M', 'B', 'T', 'P', 'E'};
@@ -66,7 +67,7 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
         }
     }
     @Override
-    public void onBindViewHolder(@NonNull DetailChannel_holder holder, int position) {
+    public void onBindViewHolder(@NonNull DetailChannel_holder2 holder, int position) {
 
         if(funnyDataModels!=null) {
 
@@ -79,24 +80,28 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
             holder.binding.tvViewItemVidDef.setText(prettyCount(view));
             Glide.with(context).load(funnyDataModels.get(position).getPoster())
                     .into(holder.binding.ivPosterItemVideo);
-            if (funnyDataModels.get(position).getProfile_chann()!=null) {
-                Glide.with(context).load(funnyDataModels.get(position).getProfile_chann())
-                        .into(holder.binding.ProfileChannelVideoThumb);
-            }else {
-                holder.binding.ProfileChannelVideoThumb.setVisibility(View.GONE);
-            }
+            Glide.with(context).load(funnyDataModels.get(position).getProfile_chann())
+                    .into(holder.binding.ProfileChannelVideoThumb);
+
+            //region playerActivity
+            holder.binding.ivPosterItemVideo.setOnClickListener(v -> {
+                int id_funny3 = funnyDataModels.get(position).getId_funny();
+                int kind = funnyDataModels.get(position).getKind();
+                int id_channel = funnyDataModels.get(position).getId_channel();
+                if (!boo_later) {
+                    int id_funny2 = funnyDataModels.get(position).getId_funny();
+                    onClickFunny.onClickLater(id_funny2);
+                    holder.binding.parentViewItemVidDef.setBackgroundResource(R.drawable.shape_tag2);
+                    boo_later=true;
+                }else {
+                    int id_funny2 = funnyDataModels.get(position).getId_funny();
+                    onClickFunny.onClickLater(id_funny2);
+                    boo_later=false;
+                }
+                onClickFunny.onClickSee(id_funny3);
+                onClickFunny.onClickPlayer(id_funny3,id_channel,kind);
 
 
-           holder.binding.ivPosterItemVideo.setOnClickListener(v -> {
-                Intent intent = new Intent(context, PlayerActivity.class);
-                id_vid_funny = funnyDataModels.get(position).getId_funny();
-               int kind = funnyDataModels.get(position).getKind();
-               int id_channel = funnyDataModels.get(position).getId_channel();
-                intent.putExtra("id_vid_funny", id_vid_funny);
-                intent.putExtra("kind", kind);
-                intent.putExtra("id_channel", id_channel);
-                notifyDataSetChanged();
-                context.startActivity(intent);
             });
 
         /*    holder.binding.ivMarcItemDef.setOnClickListener(v -> {
@@ -188,11 +193,11 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
         }
     }
 
-    public class DetailChannel_holder extends RecyclerView.ViewHolder{
+    public class DetailChannel_holder2 extends RecyclerView.ViewHolder{
 
         private ItemChannelDetailBinding binding;
 
-        public DetailChannel_holder(@NonNull ItemChannelDetailBinding binding) {
+        public DetailChannel_holder2(@NonNull ItemChannelDetailBinding binding) {
             super(binding.getRoot());
 
             this.binding=binding;
@@ -200,3 +205,4 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
     }
 
 }
+

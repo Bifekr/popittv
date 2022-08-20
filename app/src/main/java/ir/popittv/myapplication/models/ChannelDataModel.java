@@ -16,6 +16,12 @@ public class ChannelDataModel implements Parcelable {
     private String age;
     private String age_name;
     private int kind;
+    private int id_funny;
+
+    public int getId_funny() {
+        return id_funny;
+    }
+
     private List<FunnyDataModel> videos_channel;
 
     public ChannelDataModel() {

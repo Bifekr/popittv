@@ -42,7 +42,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
 
 import ir.popittv.myapplication.R;
-import ir.popittv.myapplication.adapter.ChannelDetail_adapter;
+import ir.popittv.myapplication.adapter.ChannelDetail_adapter2;
 import ir.popittv.myapplication.adapter.FunnyAdapter;
 import ir.popittv.myapplication.databinding.ActivityPlayerBinding;
 import ir.popittv.myapplication.models.UserDataModel;
@@ -94,8 +94,8 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     ////////////////////////////////////
     private final boolean isLocked = false;
     private boolean b_kindlink;
-    private FunnyAdapter detail_adapter;
-    private ChannelDetail_adapter funnyAdapter;
+    private FunnyAdapter funnyAdapter1;
+    private ChannelDetail_adapter2 detail_adapter2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,8 +111,8 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         setContentView(view);
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         // userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        detail_adapter = new FunnyAdapter(this, this);
-        funnyAdapter = new ChannelDetail_adapter(this,this);
+        funnyAdapter1 = new FunnyAdapter(this, this);
+        detail_adapter2 = new ChannelDetail_adapter2(this,this);
         lockScreen = findViewById(R.id.exo_lock);
         initRv();
         Log.i("TAG", "onCreate: " + b_kindlink);
@@ -210,16 +210,17 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         binding.rvChannelVideoPlayer.setHasFixedSize(true);
         //binding.rvChannelVideoPlayer.setLayoutManager(new LinearLayoutManager(PlayerActivity.this, RecyclerView.VERTICAL, false));
         binding.rvChannelVideoPlayer.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        binding.rvChannelVideoPlayer.setAdapter(detail_adapter);
+        binding.rvChannelVideoPlayer.setAdapter(funnyAdapter1);
+
         binding.rvMenuTagPlayer.setLayoutManager(new GridLayoutManager(this, 2, RecyclerView.VERTICAL
                 , false));
-        binding.rvMenuTagPlayer.setAdapter(funnyAdapter);
+        binding.rvMenuTagPlayer.setAdapter(detail_adapter2);
     }
     private void getFunny_subMenu() {
 
         mainViewModel.getFunny_subMenu().observe(this, funnyDataModels -> {
             if (funnyDataModels!=null) {
-                funnyAdapter.setFunnyDataModels(funnyDataModels);
+                detail_adapter2.setFunnyDataModels(funnyDataModels);
 
             }
         });
@@ -228,10 +229,13 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         mainViewModel.getChannel_detail().observe(this, channelDataModel -> {
 
             if (channelDataModel!=null) {
-                detail_adapter.setData(channelDataModel.getVideos_channel());
+                funnyAdapter1.setData(channelDataModel.getVideos_channel());
 
                 Glide.with(this).load(channelDataModel.getBanner_chann())
                         .into(binding.ivBannerItemChannelAll);
+                id_vid_funny=channelDataModel.getId_funny();
+                id_channel=channelDataModel.getId_channel();
+                kind=channelDataModel.getKind();
         /*    Glide.with(this).load(channelDataModel.getProfile_chann())
                     .into(binding.ivProfileItemAllChan);
          binding.titleSubPlayer.setText(channelDataModel.getFollowers());
@@ -616,5 +620,8 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         mainViewModel.requestFunny_single(id_vid_funny, kind);
         mainViewModel.requestChannel_detail(id_channel, kind);
         mainViewModel.requestFunny_subMenu(0, kind);
+        getChannel_detail();
+        getFunny_subMenu();
+        getFunny_single();
     }
 }
