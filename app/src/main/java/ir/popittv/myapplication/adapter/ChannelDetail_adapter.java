@@ -84,7 +84,12 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
            holder.binding.ivPosterItemVideo.setOnClickListener(v -> {
                 Intent intent = new Intent(context, PlayerActivity.class);
                 id_vid_funny = funnyDataModels.get(position).getId_funny();
+               int kind = funnyDataModels.get(position).getKind();
+               int id_channel = funnyDataModels.get(position).getId_channel();
                 intent.putExtra("id_vid_funny", id_vid_funny);
+                intent.putExtra("kind", kind);
+                intent.putExtra("id_channel", id_channel);
+                notifyDataSetChanged();
                 context.startActivity(intent);
             });
 

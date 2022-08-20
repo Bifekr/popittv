@@ -227,10 +227,11 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     private void getChannel_detail() {
         mainViewModel.getChannel_detail().observe(this, channelDataModel -> {
 
-            detail_adapter.setData(channelDataModel.getVideos_channel());
+            if (channelDataModel!=null) {
+                detail_adapter.setData(channelDataModel.getVideos_channel());
 
-            Glide.with(this).load(channelDataModel.getBanner_chann())
-                    .into(binding.ivBannerItemChannelAll);
+                Glide.with(this).load(channelDataModel.getBanner_chann())
+                        .into(binding.ivBannerItemChannelAll);
         /*    Glide.with(this).load(channelDataModel.getProfile_chann())
                     .into(binding.ivProfileItemAllChan);
          binding.titleSubPlayer.setText(channelDataModel.getFollowers());
@@ -238,7 +239,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             binding.titleFaChannelPlayer.setText(channelDataModel.getName_chan_fa().trim());
             binding.titleEnChannelPlayer.setText(channelDataModel.getName_chan_en().trim());*/
 
-
+            }
         });
     }
 
@@ -256,40 +257,41 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
     private void getFunny_single() {
         mainViewModel.getFunny_single().observe(this, funnyDataModel -> {
-            binding.titleEnVideoPlayer.setText(funnyDataModel.getTitle_en());
-            binding.titleFaVideoPlayer.setText(funnyDataModel.getTitle_fa());
-            binding.titleEnChannelPlayer.setText(funnyDataModel.getName_chan_en());
-            binding.titleFaChannelPlayer.setText(funnyDataModel.getName_chan_fa());
-            binding.titleSubPlayer.setText(funnyDataModel.getFollowers());
-            int like = Integer.parseInt(funnyDataModel.getLiky());
-            int view = Integer.parseInt(funnyDataModel.getView());
+            if (funnyDataModel!=null) {
+                binding.titleEnVideoPlayer.setText(funnyDataModel.getTitle_en());
+                binding.titleFaVideoPlayer.setText(funnyDataModel.getTitle_fa());
+                binding.titleEnChannelPlayer.setText(funnyDataModel.getName_chan_en());
+                binding.titleFaChannelPlayer.setText(funnyDataModel.getName_chan_fa());
+                binding.titleSubPlayer.setText(funnyDataModel.getFollowers());
+                int like = Integer.parseInt(funnyDataModel.getLiky());
+                int view = Integer.parseInt(funnyDataModel.getView());
 
-            binding.tvViewItemVidDef.setText(prettyCount(view));
-            binding.tvLikeItemVidDef.setText(prettyCount(like));
-            int id_channel_2 = funnyDataModel.getId_channel();
-            Glide.with(this).load(funnyDataModel.getPoster())
-                    .into(binding.posterPlayer);
+                binding.tvViewItemVidDef.setText(prettyCount(view));
+                binding.tvLikeItemVidDef.setText(prettyCount(like));
+                int id_channel_2 = funnyDataModel.getId_channel();
+                Glide.with(this).load(funnyDataModel.getPoster())
+                        .into(binding.posterPlayer);
 
-            Glide.with(this).load(funnyDataModel.getProfile_chann())
-                    .into(binding.ivProfileItemAllChan);
-
-
-            if (b_kindlink) {
-                String video_link = funnyDataModel.getLink_480();
-                Uri uri = Uri.parse(video_link);
-                mediaItem = MediaItem.fromUri(uri);
-
-            } else {
-                String video_link = funnyDataModel.getLink_720();
-                Uri uri = Uri.parse(video_link);
-                mediaItem = MediaItem.fromUri(uri);
+                Glide.with(this).load(funnyDataModel.getProfile_chann())
+                        .into(binding.ivProfileItemAllChan);
 
 
+                if (b_kindlink) {
+                    String video_link = funnyDataModel.getLink_480();
+                    Uri uri = Uri.parse(video_link);
+                    mediaItem = MediaItem.fromUri(uri);
+
+                } else {
+                    String video_link = funnyDataModel.getLink_720();
+                    Uri uri = Uri.parse(video_link);
+                    mediaItem = MediaItem.fromUri(uri);
+
+
+                }
+
+                simpleExoPlayer.setMediaItem(mediaItem);
+                simpleExoPlayer.play();
             }
-
-            simpleExoPlayer.setMediaItem(mediaItem);
-            simpleExoPlayer.play();
-
         });
     }
 
@@ -607,11 +609,12 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
     @Override
     public void onClickPlayer(int id_vid_funny, int id_channel, int kind) {
-        id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
+      //  id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
         Toast.makeText(PlayerActivity.this, "" + id_vid_funny, Toast.LENGTH_SHORT).show();
-        kind = getIntent().getIntExtra("kind", 0);
-        id_channel = getIntent().getIntExtra("id_channel", 0);
+      //  kind = getIntent().getIntExtra("kind", 0);
+       // id_channel = getIntent().getIntExtra("id_channel", 0);
         mainViewModel.requestFunny_single(id_vid_funny, kind);
         mainViewModel.requestChannel_detail(id_channel, kind);
+        mainViewModel.requestFunny_subMenu(0, kind);
     }
 }
