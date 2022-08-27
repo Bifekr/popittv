@@ -140,7 +140,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
         });
 */
-        //   if (phone_user==null) { login();}
+         if (phone_user==null) { login();}
 
 ///////////////////////
     /*    dataSourceFactory =

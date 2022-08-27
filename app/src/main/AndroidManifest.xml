@@ -5,9 +5,9 @@
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
   <uses-permission android:name="android.permission.RECORD_AUDIO" />
-  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-  <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
   <application
     android:allowBackup="true"
@@ -18,20 +18,23 @@
     android:supportsRtl="true"
     android:theme="@style/Theme.PopitTv"
     android:usesCleartextTraffic="true">
-
+    <activity
+      android:name=".activity.MainActivity2"
+      android:exported="false"
+      android:screenOrientation="landscape" />
     <activity
       android:name=".activity.GameDetailActivity"
       android:exported="false"
-      android:screenOrientation="landscape"/>
+      android:screenOrientation="landscape" />
     <activity
       android:name=".activity.UserActivity"
       android:exported="false"
       android:screenOrientation="landscape" />
     <activity
       android:name=".activity.PlayerActivity"
+      android:configChanges="orientation|screenSize|screenLayout"
       android:exported="false"
-      android:screenOrientation="landscape"
-      android:configChanges="orientation|screenSize|screenLayout"/>
+      android:screenOrientation="landscape" />
     <activity
       android:name=".activity.DetailActivity"
       android:exported="false"
@@ -56,7 +59,6 @@
       android:name=".activity.RealityActivity"
       android:exported="false"
       android:screenOrientation="landscape" />
-  
     <activity
       android:name=".activity.MainActivity"
       android:exported="true"
@@ -67,6 +69,7 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+
     <provider
       android:name="androidx.core.content.FileProvider"
       android:authorities="${applicationId}.provider"

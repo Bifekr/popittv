@@ -1,7 +1,10 @@
 plugins {
     id 'com.android.application'
+    id 'kotlin-android'
 }
-
+project.ext {
+    zarinpalSdkVersion = "0.5.3"
+}
 android {
     compileSdk 31
 
@@ -58,6 +61,7 @@ dependencies {
 
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
     // Annotation processor
@@ -76,6 +80,7 @@ dependencies {
     implementation 'com.ramotion.circlemenu:circle-menu:0.3.2'
 
     //ZarinPall
+    implementation "com.zarinpal:payment-provider:" + project.ext.zarinpalSdkVersion
 
 
 

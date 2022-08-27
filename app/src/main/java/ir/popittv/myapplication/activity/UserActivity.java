@@ -62,6 +62,9 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
     private final boolean userLoged = true;
     private boolean b_switchLink;
 
+    //-----------
+    private final String apiZarinKey="6a5ecf11-5142-479f-940b-dc931a2a368c";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPreferences = UserActivity.this.getSharedPreferences("user_info", MODE_PRIVATE);
@@ -82,13 +85,11 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
         funnyAdapter4 = new FunnyAdapter(this, this);
         funnyAdapter5 = new RvChannel_Frg1(this, this);
 
-
+        btnClickOnCreate();
         initRailActivity();
         intRvUser();
 
-        binding.avatarUserUserActivity.setOnClickListener(v -> {
-            loginUser();
-        });
+
 
         userViewModel.request_userLater(id_user, 1);
         userViewModel.request_userLike(id_user,1);
@@ -100,33 +101,6 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
         userLaterMenuClick(id_user);
         userSeeMenuClick(id_user);
         userLikeMenuClick(id_user);
-        if (phone_user!=null) {
-            binding.phoneNumUserActivity.setText(phone_user);
-            binding.userNameUserActivity.setText(name_user);
-            binding.avatarUserUserActivity.setBackgroundResource(R.drawable.trophy);
-            binding.tvExitUserActivity.setText(R.string.exite);
-            binding.tvEnter1RvSubUser.setVisibility(View.GONE);
-
-        } else
-            {
-            binding.phoneNumUserActivity.setText(R.string.hint_number);
-            binding.userNameUserActivity.setText(R.string.hint_user_name);
-            binding.tvExitUserActivity.setText(R.string.enter);
-            binding.tvEnter1RvSubUser.setVisibility(View.VISIBLE);
-            binding.tvEnter1RvSubUser.setOnClickListener(v -> {
-                loginUser();
-                binding.tvEnter1RvSubUser.setVisibility(View.GONE);
-            });
-        }
-
-        binding.tvExitUserActivity.setOnClickListener(v -> {
-            sharedPreferences = this.getSharedPreferences("user_info", MODE_PRIVATE);
-            SharedPreferences.Editor editor22 = sharedPreferences.edit();
-            editor22.putString("phone_user", null);
-            editor22.apply();
-            recreate();
-            Toast.makeText(getApplicationContext(), "شما از حساب خود خارج شدید", Toast.LENGTH_SHORT).show();
-        });
 
         getUserSub();
         getUserSave();
@@ -135,8 +109,50 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
         getUserLike();
 
 
+
     }
 
+    private void btnClickOnCreate() {
+        binding.btnCode1UserActivity.setOnClickListener(v->{
+            if (phone_user!=null) {
+                startActivity(new Intent(UserActivity.this, MainActivity2.class));
+            }else {
+                loginUser();
+            }
+        });
+
+        binding.avatarUserUserActivity.setOnClickListener(v -> {
+            loginUser();
+        });
+        if (phone_user!=null) {
+            binding.phoneNumUserActivity.setText(phone_user);
+            binding.userNameUserActivity.setText(name_user);
+            binding.avatarUserUserActivity.setBackgroundResource(R.drawable.trophy);
+            binding.tvExitUserActivity.setText(R.string.exite);
+            binding.tvEnter1RvSubUser.setVisibility(View.GONE);
+
+        } else
+        {
+            binding.phoneNumUserActivity.setText(R.string.hint_number);
+            binding.userNameUserActivity.setText(R.string.hint_user_name);
+            binding.tvExitUserActivity.setText(R.string.enter);
+            binding.tvEnter1RvSubUser.setVisibility(View.VISIBLE);
+            loginUser();
+
+        }
+        binding.tvEnter1RvSubUser.setOnClickListener(v -> {
+            loginUser();
+            binding.tvEnter1RvSubUser.setVisibility(View.GONE);
+        });
+        binding.tvExitUserActivity.setOnClickListener(v -> {
+            sharedPreferences = this.getSharedPreferences("user_info", MODE_PRIVATE);
+            SharedPreferences.Editor editor22 = sharedPreferences.edit();
+            editor22.putString("phone_user", null);
+            editor22.apply();
+            recreate();
+            Toast.makeText(getApplicationContext(), "شما از حساب خود خارج شدید", Toast.LENGTH_SHORT).show();
+        });
+    }
 
 
     private void getUserSub() {

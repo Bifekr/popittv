@@ -195,37 +195,52 @@
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+            <TextView
               android:id="@+id/ivCode1_userActivity"
               android:layout_width="260dp"
               android:layout_height="50dp"
               android:layout_marginTop="@dimen/plane_16"
               android:scaleType="centerCrop"
+              android:text="دریافت اشتراک 1 ماه"
+              android:textAlignment="center"
+              android:textSize="24sp"
+              android:textStyle="bold"
+              android:textDirection="ltr"
               android:src="@drawable/banner_channel_poster"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintHorizontal_bias=".95"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toBottomOf="@id/titleCode_userActivity" />
 
-            <ImageView
+            <TextView
               android:id="@+id/ivCode2_userActivity"
               android:layout_width="260dp"
               android:layout_height="50dp"
               android:layout_marginTop="@dimen/plane_16"
               android:scaleType="centerCrop"
+              android:text="دریافت اشتراک 3 ماه"
+              android:textAlignment="center"
+              android:textSize="24sp"
+              android:textStyle="bold"
+              android:textDirection="ltr"
               android:src="@drawable/banner_channel_poster"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintHorizontal_bias=".95"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toBottomOf="@id/ivCode1_userActivity" />
 
-            <ImageView
+            <TextView
               android:id="@+id/ivCode3_userActivity"
               android:layout_width="260dp"
               android:layout_height="50dp"
               android:layout_marginTop="@dimen/plane_16"
               android:scaleType="centerCrop"
               android:src="@drawable/banner_channel_poster"
+              android:text="دریافت اشتراک 6 ماه"
+              android:textAlignment="center"
+              android:textSize="24sp"
+              android:textStyle="bold"
+              android:textDirection="ltr"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintHorizontal_bias=".95"
               app:layout_constraintStart_toStartOf="parent"
