@@ -4,14 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,13 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
-import com.zarinpal.ZarinPalBillingClient;
-import com.zarinpal.billing.purchase.Purchase;
-import com.zarinpal.client.BillingClientStateListener;
-import com.zarinpal.client.ClientState;
-import com.zarinpal.provider.core.future.FutureCompletionListener;
-import com.zarinpal.provider.core.future.TaskResult;
-import com.zarinpal.provider.model.response.Receipt;
 
 import java.util.List;
 import java.util.Objects;
@@ -60,8 +49,8 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
     View bottomView;
     View bottomView2;
     TextInputLayout et_phone;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+    private SharedPreferences sharedPreferences;
+   private SharedPreferences.Editor editor;
 
     private UserViewModel userViewModel;
     private FunnyAdapter funnyAdapter;
@@ -78,8 +67,14 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
     private  String transactionId;
     private String firstDate;
-    private  String Lastdate;
+    private int lastdate;
    private int expire;
+
+   private long unixCurrentTime;
+   private final Long month_1=2600000000L;
+   private final Long month_3=7860000000L;
+   private final Long month_6=15592000000L;
+   private  Long expireDate;
 
 
     private boolean b_switchLink;
@@ -90,7 +85,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPreferences = UserActivity.this.getSharedPreferences("user_info", MODE_PRIVATE);
-
+        editor = sharedPreferences.edit();
         phone_user = sharedPreferences.getString("phone_user", null);
         name_user = sharedPreferences.getString("name_user", null);
         id_user = sharedPreferences.getInt("id_user", 0);
@@ -98,6 +93,8 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
         transactionId = sharedPreferences.getString("transactionId",null);
         firstDate=sharedPreferences.getString("firstDate",null);
         expire=sharedPreferences.getInt("expire",0);
+        unixCurrentTime=sharedPreferences.getLong("expireDate",System.currentTimeMillis());
+        expireDate=sharedPreferences.getLong("expireDate",0);
 
 
 
@@ -162,26 +159,58 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
     private void setLastDate(boolean status) {
         if (status) {
             binding.btnPayment.setVisibility(View.GONE);
-            setInfoPay();
+            binding.tvTransactionId.setText(transactionId);
+            binding.tvFirstDate.setText(firstDate);
+
+            switch (expire){
+                case 1: {
+                    binding.tvAmount.setText("تومان  12,000 ");
+                    expireDate = unixCurrentTime + month_1;
+
+                    editor.putLong("expireDate",expireDate);
+                    editor.commit();
+                    expireDate =  expireDate - System.currentTimeMillis();
+                    expireDate =  (expireDate/1000);
+                    expireDate =  (expireDate/60);
+                    expireDate =  (expireDate/60);
+                    expireDate =  (expireDate/24);
+
+                    binding.tvLastDate.setText(expireDate + "روز");
+                    break;
+                }
+                case 2: {
+                    binding.tvAmount.setText(" 30,000 تومان");
+                    expireDate = unixCurrentTime + month_3;
+                    editor.putLong("expireDate",expireDate);
+                    editor.commit();
+                    expireDate =  expireDate - System.currentTimeMillis();
+                    expireDate =  (expireDate/1000);
+                    expireDate =  (expireDate/60);
+                    expireDate =  (expireDate/60);
+                    expireDate =  (expireDate/24);
+
+                    binding.tvLastDate.setText(expireDate + "روز");
+                    break;
+                }
+                case 3: {
+                    binding.tvAmount.setText(" 60,000 تومان");
+                    expireDate = unixCurrentTime + month_6;
+                    editor.putLong("expireDate",expireDate);
+                    editor.commit();
+                    expireDate =  expireDate - System.currentTimeMillis();
+                    expireDate =  (expireDate/1000);
+                    expireDate =  (expireDate/60);
+                    expireDate =  (expireDate/60);
+                    expireDate =  (expireDate/24);
+
+                    binding.tvLastDate.setText(expireDate + "روز");
+                    break;
+                }
+            }
+
         }
     }
 
-    private void setInfoPay() {
-        switch (expire){
-            case 1:
-                binding.tvAmount.setText("10,000");
-                break;
-            case 2:
-                binding.tvAmount.setText("20,000");
-                break;
-            case 3:
-                binding.tvAmount.setText("30,000");
-                break;
-        }
-        binding.tvTransactionId.setText(transactionId);
-        binding.tvFirstDate.setText(firstDate);
-
-    }
 
 
 
@@ -461,7 +490,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
                                             UserDataModel userDataModel = response1.body();
                                             if (response1.isSuccessful()) {
                                                 assert userDataModel!=null;
-                                                id_user = userDataModel.getUser_id();
+                                                id_user = userDataModel.getId_user();
                                                 name_user = userDataModel.getName();
                                                 editor = sharedPreferences.edit();
                                                 editor.putString("name_user", name_user);

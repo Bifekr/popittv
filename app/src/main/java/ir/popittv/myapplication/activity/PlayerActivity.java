@@ -478,7 +478,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
                                             UserDataModel userDataModel = response1.body();
                                             if (response1.isSuccessful()) {
                                                 assert userDataModel!=null;
-                                                id_user = userDataModel.getUser_id();
+                                                id_user = userDataModel.getId_user();
                                                 name_user = userDataModel.getName();
                                                 editor = sharedPreferences.edit();
                                                 editor.putString("name_user", name_user);
