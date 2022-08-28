@@ -35,13 +35,57 @@
     app:layout_constraintStart_toStartOf="@+id/btn_payment_request"
     app:layout_constraintTop_toBottomOf="@+id/btn_authority" />
 
+  <Button
+    android:id="@+id/btn_sku2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="28dp"
+    android:text="back"
+    app:layout_constraintBottom_toBottomOf="@+id/btn_payment_request"
+    app:layout_constraintEnd_toStartOf="@+id/btn_payment_request"
+    app:layout_constraintTop_toTopOf="@+id/btn_payment_request"
+    app:layout_constraintVertical_bias="0.0" />
+
   <TextView
     android:id="@+id/txt_receipt"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Result of Receipt!"
-    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.185"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/btn_sku" />
+
+  <TextView
+    android:id="@+id/txt_receipt2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:text="Result of Receipt!"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.508"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/btn_sku" />
+
+  <TextView
+    android:id="@+id/txt_receipt3"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="52dp"
+    android:text="Result of Receipt!"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.761"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/btn_sku" />
+
+  <TextView
+    android:id="@+id/txt_receipt4"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="52dp"
+    android:text="Result of Receipt!"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.331"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/btn_sku" />
 </androidx.constraintlayout.widget.ConstraintLayout>

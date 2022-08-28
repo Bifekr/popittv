@@ -1,9 +1,13 @@
 package ir.popittv.myapplication.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +24,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
+import com.zarinpal.ZarinPalBillingClient;
+import com.zarinpal.billing.purchase.Purchase;
+import com.zarinpal.client.BillingClientStateListener;
+import com.zarinpal.client.ClientState;
+import com.zarinpal.provider.core.future.FutureCompletionListener;
+import com.zarinpal.provider.core.future.Task;
+import com.zarinpal.provider.core.future.TaskResult;
+import com.zarinpal.provider.model.response.Receipt;
 
 import java.util.List;
 import java.util.Objects;
@@ -63,7 +75,14 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
     private boolean b_switchLink;
 
     //-----------
-    private final String apiZarinKey="6a5ecf11-5142-479f-940b-dc931a2a368c";
+    private final String MERCHENT_ID="6a5ecf11-5142-479f-940b-dc931a2a368c";
+    ZarinPalBillingClient client=null;
+    BillingClientStateListener billingClientStateListener;
+    private Long price=1000L;
+    private Long price2=2000L;
+    private Long price3=3000L;
+    private int expier;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +108,62 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
         initRailActivity();
         intRvUser();
 
+        billingClientStateListener = new BillingClientStateListener() {
+            @Override
+            public void onClientSetupFinished(@NonNull ClientState clientState) {
 
+            }
+
+            @Override
+            public void onClientServiceDisconnected() {
+
+            }
+        };
+
+
+
+        FutureCompletionListener<Receipt> futureCompletionListener = new FutureCompletionListener<Receipt>() {
+       @Override
+       public void onComplete(TaskResult<Receipt> task) {
+           boolean amunt= Objects.requireNonNull(task.getSuccess()).isSuccess();
+
+           new Handler(Looper.getMainLooper()).post(new Runnable() {
+               @Override
+               public void run() {
+                   if (amunt){
+
+                       Toast.makeText(UserActivity.this, "پرداخت موفق"+expier, Toast.LENGTH_SHORT).show();
+                   }else{
+                       Toast.makeText(UserActivity.this, "khl,tr"+expier, Toast.LENGTH_SHORT).show();
+                   }
+               }
+           });
+           Log.i("TAG", "onComplete: "+amunt);
+
+
+
+       }
+   } ;
+
+        client = ZarinPalBillingClient.newBuilder(this)
+                .enableShowInvoice()
+                .setListener(billingClientStateListener)
+                .build();
+
+
+        binding.btnPayment.setOnClickListener(v -> {
+            if (phone_user!=null) {
+                startActivity(new Intent(UserActivity.this, MainActivity2.class));
+
+            }else {
+                loginUser();
+            }
+        });
+
+        int expire2= getIntent().getIntExtra("expire",0);
+        if (expire2!=0) {
+            Toast.makeText(this, "" + expire2, Toast.LENGTH_SHORT).show();
+        }
 
         userViewModel.request_userLater(id_user, 1);
         userViewModel.request_userLike(id_user,1);
@@ -112,14 +186,20 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
 
     }
 
+    private Purchase getPurchaseAsPaymentRequest(long price){
+
+            String description = "Payment Request via ZarinPal SDK";
+            String callback = "https://pikoboom.ir" ; // Your Server address
+
+
+            return Purchase.newBuilder()
+
+                    .asPaymentRequest(MERCHENT_ID, price, callback, description)
+                    .build();
+        }
+
+
     private void btnClickOnCreate() {
-        binding.btnCode1UserActivity.setOnClickListener(v->{
-            if (phone_user!=null) {
-                startActivity(new Intent(UserActivity.this, MainActivity2.class));
-            }else {
-                loginUser();
-            }
-        });
 
         binding.avatarUserUserActivity.setOnClickListener(v -> {
             loginUser();

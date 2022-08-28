@@ -18,9 +18,9 @@
       app:headerLayout="@layout/header_rail"
       app:labelVisibilityMode="auto"
       app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/scroll"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintEnd_toStartOf="@id/scroll"
       app:menu="@menu/menu_rail"
       app:menuGravity="bottom" />
 
@@ -33,7 +33,7 @@
       app:layout_constraintTop_toTopOf="parent">
 
       <androidx.constraintlayout.widget.ConstraintLayout
-       android:id="@+id/parentUnderScroll"
+        android:id="@+id/parentUnderScroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="4dp">
@@ -41,10 +41,11 @@
         <androidx.cardview.widget.CardView
           android:id="@+id/parentUserDetail_userActivity"
           android:layout_width="match_parent"
-          android:layout_height="180dp"
+          android:layout_height="wrap_content"
           android:layout_marginTop="@dimen/plane_08"
           android:elevation="@dimen/plane_16"
           app:cardCornerRadius="40dp"
+          app:layout_constraintBottom_toTopOf="@id/parentSaveChannel_userActivity"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent">
@@ -65,80 +66,212 @@
               app:layout_constraintHorizontal_bias=".9"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-              android:id="@+id/tvNum_userActivity"
+            <LinearLayout
+              android:id="@+id/parenttvNum_userActivity"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:fontFamily="@font/lalezar_regular"
-              android:gravity="end"
-              android:text=" شماره تماس :"
-              android:textSize="18sp"
               app:layout_constraintEnd_toEndOf="@id/tvTitleUser"
-              app:layout_constraintTop_toBottomOf="@id/tvTitleUser" />
+              app:layout_constraintTop_toBottomOf="@id/tvTitleUser">
 
-            <TextView
-              android:id="@+id/phoneNum_userActivity"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginEnd="@dimen/plane_08"
-              android:fontFamily="@font/lalezar_regular"
-              android:hint="@string/hint_number"
-              android:textSize="18sp"
-              android:textStyle="normal"
-              app:layout_constraintBottom_toBottomOf="@id/tvNum_userActivity"
-              app:layout_constraintEnd_toStartOf="@id/tvNum_userActivity"
-              app:layout_constraintTop_toTopOf="@id/tvNum_userActivity" />
+              <TextView
+                android:id="@+id/phoneNum_userActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/plane_08"
+                android:fontFamily="@font/lalezar_regular"
+                android:hint="@string/hint_number"
+                android:textSize="18sp"
+                android:padding="@dimen/plane_04"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum_userActivity"
+                app:layout_constraintEnd_toStartOf="@id/tvNum_userActivity"
+                app:layout_constraintTop_toTopOf="@id/tvNum_userActivity" />
 
-            <TextView
-              android:id="@+id/tvName_userActivity"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:fontFamily="@font/lalezar_regular"
-              android:text="نام کاربری : "
-              android:textSize="18sp"
-              app:layout_constraintEnd_toEndOf="@id/tvNum_userActivity"
-              app:layout_constraintTop_toBottomOf="@id/tvNum_userActivity" />
+              <TextView
+                android:id="@+id/tvNum_userActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lalezar_regular"
+                android:gravity="end"
+                android:text=" شماره تماس :"
+                android:textSize="18sp"
 
-            <TextView
-              android:id="@+id/userName_userActivity"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:fontFamily="@font/lalezar_regular"
-              android:hint="@string/hint_user_name"
-              android:textSize="18sp"
-              app:layout_constraintBottom_toBottomOf="@id/tvName_userActivity"
-              app:layout_constraintEnd_toStartOf="@id/tvName_userActivity"
-              app:layout_constraintTop_toTopOf="@id/tvName_userActivity" />
+                app:layout_constraintEnd_toEndOf="@id/tvTitleUser"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleUser" />
+              <TextView
+                android:id="@+id/userName_userActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lalezar_regular"
+                android:hint="@string/hint_user_name"
+                android:textSize="18sp"
+                android:padding="@dimen/plane_04"
+                app:layout_constraintBottom_toBottomOf="@id/tvName_userActivity"
+                app:layout_constraintEnd_toStartOf="@id/tvName_userActivity"
+                app:layout_constraintTop_toTopOf="@id/tvName_userActivity" />
+
+              <TextView
+                android:id="@+id/tvName_userActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lalezar_regular"
+                android:text="نام کاربری : "
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@id/tvNum_userActivity"
+                app:layout_constraintTop_toBottomOf="@id/tvNum_userActivity" />
+
+            </LinearLayout>
 
             <TextView
               android:id="@+id/tvAccess_userActivity"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_marginTop="@dimen/plane_24"
+              android:padding="@dimen/plane_04"
               android:fontFamily="@font/lalezar_regular"
               android:text=" وضعیت دسترسی :"
               android:textColor="@color/brown"
               android:textSize="24sp"
               android:textStyle="bold"
-              app:layout_constraintEnd_toEndOf="@id/tvName_userActivity"
-              app:layout_constraintTop_toBottomOf="@id/userName_userActivity" />
-
-            <TextView
-              android:id="@+id/showDay_userActivity"
-              android:layout_width="0dp"
+              app:layout_constraintEnd_toEndOf="@id/parenttvNum_userActivity"
+              app:layout_constraintTop_toBottomOf="@id/parenttvNum_userActivity"
+              app:layout_constraintBottom_toTopOf="@id/parentTransaction"/>
+            <LinearLayout
+              android:id="@+id/parentTransaction"
+              android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_marginEnd="@dimen/plane_16"
-              android:fontFamily="@font/lalezar_regular"
-              android:hint="@string/not_acccsec_code"
-              android:textColor="@color/popit_red"
-              android:textColorHint="@color/popit_red"
-              android:textSize="18sp"
-              app:layout_constraintBottom_toBottomOf="@id/tvAccess_userActivity"
-              app:layout_constraintEnd_toStartOf="@id/tvAccess_userActivity"
-              app:layout_constraintStart_toEndOf="@id/avatarUser_userActivity"
-              app:layout_constraintTop_toTopOf="@id/tvAccess_userActivity" />
+              app:layout_constraintEnd_toEndOf="@id/tvAccess_userActivity"
+              app:layout_constraintTop_toBottomOf="@id/tvAccess_userActivity">
 
+              <TextView
+                android:id="@+id/tvTransactionId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/plane_08"
+                android:fontFamily="@font/lalezar_regular"
+                android:hint="@string/hint_number"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum_userActivity"
+                app:layout_constraintEnd_toStartOf="@id/tvNum_userActivity"
+                app:layout_constraintTop_toTopOf="@id/tvNum_userActivity" />
+
+              <TextView
+                android:id="@+id/transationId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lalezar_regular"
+                android:gravity="end"
+                android:text="کد پیگیری تراکنش : "
+                android:textSize="18sp" />
+
+
+            </LinearLayout>
+            <LinearLayout
+              android:id="@+id/parentAmount"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              app:layout_constraintEnd_toEndOf="@id/tvAccess_userActivity"
+              app:layout_constraintTop_toBottomOf="@id/parentTransaction">
+
+              <TextView
+                android:id="@+id/tvAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/plane_08"
+                android:fontFamily="@font/lalezar_regular"
+                android:hint="@string/hint_number"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum_userActivity"
+                app:layout_constraintEnd_toStartOf="@id/tvNum_userActivity"
+                app:layout_constraintTop_toTopOf="@id/tvNum_userActivity" />
+
+              <TextView
+                android:id="@+id/amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lalezar_regular"
+                android:gravity="end"
+                android:text="مبلغ تراکنش : "
+                android:textSize="18sp" />
+
+            </LinearLayout>
+            <LinearLayout
+              android:id="@+id/parentّFirstDate"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              app:layout_constraintEnd_toEndOf="@id/tvAccess_userActivity"
+              app:layout_constraintTop_toBottomOf="@id/parentAmount">
+
+              <TextView
+                android:id="@+id/tvFirstDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/plane_08"
+                android:fontFamily="@font/lalezar_regular"
+                android:hint="@string/hint_number"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum_userActivity"
+                app:layout_constraintEnd_toStartOf="@id/tvNum_userActivity"
+                app:layout_constraintTop_toTopOf="@id/tvNum_userActivity" />
+
+              <TextView
+                android:id="@+id/firstDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lalezar_regular"
+                android:gravity="end"
+                android:text="تاریخ تراکنش : "
+                android:textSize="18sp" />
+
+
+            </LinearLayout>
+            <LinearLayout
+              android:id="@+id/parentّLastDate"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              app:layout_constraintEnd_toEndOf="@id/tvAccess_userActivity"
+              app:layout_constraintTop_toBottomOf="@id/parentّFirstDate">
+
+              <TextView
+                android:id="@+id/tvLastDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/plane_08"
+                android:fontFamily="@font/lalezar_regular"
+                android:hint="@string/hint_number"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="@id/tvNum_userActivity"
+                app:layout_constraintEnd_toStartOf="@id/tvNum_userActivity"
+                app:layout_constraintTop_toTopOf="@id/tvNum_userActivity" />
+
+              <TextView
+                android:id="@+id/lastDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lalezar_regular"
+                android:gravity="end"
+                android:text="روزهای باقی مانده :  "
+                android:textSize="18sp" />
+
+
+            </LinearLayout>
+
+<Button
+  android:id="@+id/btnPayment"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  app:layout_constraintTop_toBottomOf="@id/tvAccess_userActivity"
+  app:layout_constraintBottom_toBottomOf="parent"
+  app:layout_constraintStart_toStartOf="parent"
+  app:layout_constraintEnd_toStartOf="@id/parentTransaction"
+  android:background="@drawable/shape_btn_bg"
+  android:text=" انتخاب و دریافت نوع کد دسترسی "
+  android:textStyle="bold"
+  android:paddingStart="@dimen/plane_08"
+  android:paddingEnd="@dimen/plane_08"/>
             <com.makeramen.roundedimageview.RoundedImageView
               android:id="@+id/avatarUser_userActivity"
               android:layout_width="82dp"
@@ -158,8 +291,11 @@
               android:layout_height="wrap_content"
               android:background="@drawable/shape_tag6"
               android:fontFamily="@font/lalezar_regular"
-              android:padding="@dimen/plane_04"
-              android:text="@string/exite"
+              android:paddingStart="@dimen/plane_16"
+              android:paddingEnd="@dimen/plane_16"
+              android:paddingTop="@dimen/plane_04"
+              android:paddingBottom="@dimen/plane_04"
+              android:text="@string/enter"
               app:layout_constraintStart_toStartOf="@id/avatarUser_userActivity"
               app:layout_constraintTop_toBottomOf="@id/avatarUser_userActivity" />
           </androidx.constraintlayout.widget.ConstraintLayout>
@@ -167,161 +303,32 @@
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-          android:id="@+id/parentAccess_userActivity"
-          android:layout_width="match_parent"
-          android:layout_height="290dp"
-          android:layout_marginTop="@dimen/plane_24"
-          app:cardCornerRadius="40dp"
-          app:cardElevation="@dimen/plane_08"
-          app:layout_constraintTop_toBottomOf="@id/parentUserDetail_userActivity"
-          app:layout_constraintBottom_toTopOf="@id/parentSaveChannel_userActivity">
-
-          <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-              android:id="@+id/titleCode_userActivity"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginTop="@dimen/plane_16"
-              android:fontFamily="@font/lalezar_regular"
-              android:text="تمدید کد دسترسی برنامه"
-              android:textColor="@color/brown"
-              android:textSize="24sp"
-              android:textStyle="bold"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-              android:id="@+id/ivCode1_userActivity"
-              android:layout_width="260dp"
-              android:layout_height="50dp"
-              android:layout_marginTop="@dimen/plane_16"
-              android:scaleType="centerCrop"
-              android:text="دریافت اشتراک 1 ماه"
-              android:textAlignment="center"
-              android:textSize="24sp"
-              android:textStyle="bold"
-              android:textDirection="ltr"
-              android:src="@drawable/banner_channel_poster"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintHorizontal_bias=".95"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toBottomOf="@id/titleCode_userActivity" />
-
-            <TextView
-              android:id="@+id/ivCode2_userActivity"
-              android:layout_width="260dp"
-              android:layout_height="50dp"
-              android:layout_marginTop="@dimen/plane_16"
-              android:scaleType="centerCrop"
-              android:text="دریافت اشتراک 3 ماه"
-              android:textAlignment="center"
-              android:textSize="24sp"
-              android:textStyle="bold"
-              android:textDirection="ltr"
-              android:src="@drawable/banner_channel_poster"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintHorizontal_bias=".95"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toBottomOf="@id/ivCode1_userActivity" />
-
-            <TextView
-              android:id="@+id/ivCode3_userActivity"
-              android:layout_width="260dp"
-              android:layout_height="50dp"
-              android:layout_marginTop="@dimen/plane_16"
-              android:scaleType="centerCrop"
-              android:src="@drawable/banner_channel_poster"
-              android:text="دریافت اشتراک 6 ماه"
-              android:textAlignment="center"
-              android:textSize="24sp"
-              android:textStyle="bold"
-              android:textDirection="ltr"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintHorizontal_bias=".95"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toBottomOf="@id/ivCode2_userActivity" />
-
-            <Button
-              android:id="@+id/btnCode1_userActivity"
-              android:layout_width="0dp"
-              android:layout_height="0dp"
-              android:background="@drawable/shape_tag6"
-              android:fontFamily="@font/lalezar_regular"
-              android:text="کد 1"
-              android:textSize="24sp"
-              app:layout_constraintBottom_toBottomOf="@id/ivCode1_userActivity"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintHorizontal_bias=".05"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toTopOf="@id/ivCode1_userActivity"
-              app:layout_constraintVertical_bias=".3"
-              app:layout_constraintWidth_percent=".35" />
-
-            <Button
-              android:id="@+id/btnCode2_userActivity"
-              android:layout_width="0dp"
-              android:layout_height="0dp"
-              android:background="@drawable/shape_tag6"
-              android:fontFamily="@font/lalezar_regular"
-              android:text="کد 2"
-              android:textSize="24sp"
-              app:layout_constraintBottom_toBottomOf="@id/ivCode2_userActivity"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintHorizontal_bias=".05"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toTopOf="@id/ivCode2_userActivity"
-              app:layout_constraintVertical_bias=".3"
-              app:layout_constraintWidth_percent=".35" />
-
-            <Button
-              android:id="@+id/btnCode3_userActivity"
-              android:layout_width="0dp"
-              android:layout_height="0dp"
-              android:background="@drawable/shape_tag6"
-              android:fontFamily="@font/lalezar_regular"
-              android:text="کد 2"
-              android:textSize="24sp"
-              app:layout_constraintBottom_toBottomOf="@id/ivCode3_userActivity"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintHorizontal_bias=".05"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toTopOf="@id/ivCode3_userActivity"
-              app:layout_constraintVertical_bias=".3"
-              app:layout_constraintWidth_percent=".35" />
-          </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </androidx.cardview.widget.CardView>
 
         <View
           android:layout_width="0dp"
           android:layout_height="8dp"
+          android:background="@drawable/shape_tag1"
           android:elevation="@dimen/plane_08"
-          app:layout_constraintTop_toTopOf="@id/parentMenuUserSub"
           app:layout_constraintBottom_toBottomOf="@id/parentMenuUserSub"
-          app:layout_constraintStart_toStartOf="@id/parentMenuUserSub"
           app:layout_constraintEnd_toEndOf="@id/parentMenuUserSub"
-          android:background="@drawable/shape_tag1"/>
+          app:layout_constraintStart_toStartOf="@id/parentMenuUserSub"
+          app:layout_constraintTop_toTopOf="@id/parentMenuUserSub" />
+
         <LinearLayout
           android:id="@+id/parentMenuUserSub"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:elevation="@dimen/plane_24"
           android:layout_marginTop="@dimen/plane_08"
-          app:layout_constraintStart_toStartOf="@id/parentSaveChannel_userActivity"
-          app:layout_constraintEnd_toEndOf="@id/parentSaveChannel_userActivity"
-          app:layout_constraintTop_toBottomOf="@id/parentAccess_userActivity"
-          app:layout_constraintBottom_toBottomOf="@id/parentSaveChannel_userActivity"
-          app:layout_constraintVertical_bias="0"
-          app:layout_constraintHorizontal_bias=".3"
-          app:layout_constraintHeight_percent=".02"
+          android:elevation="@dimen/plane_24"
           android:orientation="horizontal"
-          >
+          app:layout_constraintBottom_toBottomOf="@id/parentSaveChannel_userActivity"
+          app:layout_constraintEnd_toEndOf="@id/parentSaveChannel_userActivity"
+          app:layout_constraintHeight_percent=".02"
+          app:layout_constraintHorizontal_bias=".3"
+          app:layout_constraintStart_toStartOf="@id/parentSaveChannel_userActivity"
+          app:layout_constraintTop_toBottomOf="@id/parentUserDetail_userActivity"
+          app:layout_constraintVertical_bias="0">
+
           <TextView
             android:id="@+id/menuFunny_subUser"
             style="@style/TextAppearance.Reply.Body1"
@@ -345,8 +352,7 @@
             android:paddingEnd="10dp"
             android:paddingBottom="6dp"
             android:text="@string/reality_nav"
-            android:textColor="@color/white"
-           />
+            android:textColor="@color/white" />
 
           <TextView
             android:id="@+id/menuStudy_subUser"
@@ -360,6 +366,7 @@
             android:paddingBottom="6dp"
             android:text="@string/learning_nav"
             android:textColor="@color/white" />
+
           <TextView
             android:id="@+id/menuFarsi_subUser"
             style="@style/TextAppearance.Reply.Body1"
@@ -370,26 +377,25 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:text="@string/farsi_nav"
-            android:textColor="@color/white"
-            />
+            android:textColor="@color/white" />
         </LinearLayout>
+
         <androidx.cardview.widget.CardView
           android:id="@+id/parentSaveChannel_userActivity"
           android:layout_width="match_parent"
           android:layout_height="180dp"
           android:layout_marginTop="@dimen/plane_24"
-          app:layout_constraintStart_toStartOf="@id/parentUnderScroll"
-          app:layout_constraintEnd_toEndOf="@id/parentUnderScroll"
           app:cardCornerRadius="40dp"
           app:cardElevation="@dimen/plane_08"
-          app:layout_constraintTop_toBottomOf="@id/parentAccess_userActivity">
+          app:layout_constraintEnd_toEndOf="@id/parentUnderScroll"
+          app:layout_constraintStart_toStartOf="@id/parentUnderScroll"
+          app:layout_constraintTop_toBottomOf="@id/parentUserDetail_userActivity">
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-              android:visibility="visible"
               android:id="@+id/tvEnter1_rvSubUser"
               android:layout_width="0dp"
               android:layout_height="match_parent"
@@ -397,6 +403,7 @@
               android:gravity="center_vertical|center_horizontal"
               android:text="برای مشاهده ویدیوهای خود ابتدا وارد شوید"
               android:textSize="40sp"
+              android:visibility="visible"
               app:layout_constraintEnd_toStartOf="@id/parentRvSub_activityUser"
               app:layout_constraintStart_toStartOf="parent" />
 
@@ -436,27 +443,28 @@
         <View
           android:layout_width="0dp"
           android:layout_height="8dp"
+          android:background="@drawable/shape_tag1"
           android:elevation="@dimen/plane_08"
-          app:layout_constraintTop_toTopOf="@id/parentMenuUserbookmark"
           app:layout_constraintBottom_toBottomOf="@id/parentMenuUserbookmark"
-          app:layout_constraintStart_toStartOf="@id/parentMenuUserbookmark"
           app:layout_constraintEnd_toEndOf="@id/parentMenuUserbookmark"
-          android:background="@drawable/shape_tag1"/>
+          app:layout_constraintStart_toStartOf="@id/parentMenuUserbookmark"
+          app:layout_constraintTop_toTopOf="@id/parentMenuUserbookmark" />
+
         <LinearLayout
           android:id="@+id/parentMenuUserbookmark"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:elevation="@dimen/plane_24"
           android:layout_marginTop="@dimen/plane_08"
-          app:layout_constraintStart_toStartOf="@id/parentBookmarkVideo_userActivity"
-          app:layout_constraintEnd_toEndOf="@id/parentBookmarkVideo_userActivity"
-          app:layout_constraintTop_toBottomOf="@id/parentSaveChannel_userActivity"
-          app:layout_constraintBottom_toBottomOf="@id/parentBookmarkVideo_userActivity"
-          app:layout_constraintVertical_bias="0"
-          app:layout_constraintHorizontal_bias=".6"
-          app:layout_constraintHeight_percent=".02"
+          android:elevation="@dimen/plane_24"
           android:orientation="horizontal"
-          >
+          app:layout_constraintBottom_toBottomOf="@id/parentBookmarkVideo_userActivity"
+          app:layout_constraintEnd_toEndOf="@id/parentBookmarkVideo_userActivity"
+          app:layout_constraintHeight_percent=".02"
+          app:layout_constraintHorizontal_bias=".6"
+          app:layout_constraintStart_toStartOf="@id/parentBookmarkVideo_userActivity"
+          app:layout_constraintTop_toBottomOf="@id/parentSaveChannel_userActivity"
+          app:layout_constraintVertical_bias="0">
+
           <TextView
             android:id="@+id/menuFunny_bookmarkUser"
             style="@style/TextAppearance.Reply.Body1"
@@ -480,8 +488,7 @@
             android:paddingEnd="10dp"
             android:paddingBottom="6dp"
             android:text="@string/reality_nav"
-            android:textColor="@color/white"
-            />
+            android:textColor="@color/white" />
 
           <TextView
             android:id="@+id/menuStudy_bookmarkUser"
@@ -495,6 +502,7 @@
             android:paddingBottom="6dp"
             android:text="@string/learning_nav"
             android:textColor="@color/white" />
+
           <TextView
             android:id="@+id/menuFarsi_bookmarkUser"
             style="@style/TextAppearance.Reply.Body1"
@@ -505,9 +513,9 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:text="@string/farsi_nav"
-            android:textColor="@color/white"
-            />
+            android:textColor="@color/white" />
         </LinearLayout>
+
         <androidx.cardview.widget.CardView
           android:id="@+id/parentBookmarkVideo_userActivity"
           android:layout_width="match_parent"
@@ -515,8 +523,8 @@
           android:layout_marginTop="@dimen/plane_24"
           app:cardCornerRadius="40dp"
           app:cardElevation="@dimen/plane_08"
-          app:layout_constraintTop_toBottomOf="@id/parentSaveChannel_userActivity"
-          app:layout_constraintBottom_toTopOf="@id/parentWatchLaterVideo_userActivity">
+          app:layout_constraintBottom_toTopOf="@id/parentWatchLaterVideo_userActivity"
+          app:layout_constraintTop_toBottomOf="@id/parentSaveChannel_userActivity">
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -556,27 +564,28 @@
         <View
           android:layout_width="0dp"
           android:layout_height="8dp"
+          android:background="@drawable/shape_tag1"
           android:elevation="@dimen/plane_08"
-          app:layout_constraintTop_toTopOf="@id/parentMenuUserWatchLater"
           app:layout_constraintBottom_toBottomOf="@id/parentMenuUserWatchLater"
-          app:layout_constraintStart_toStartOf="@id/parentMenuUserWatchLater"
           app:layout_constraintEnd_toEndOf="@id/parentMenuUserWatchLater"
-          android:background="@drawable/shape_tag1"/>
+          app:layout_constraintStart_toStartOf="@id/parentMenuUserWatchLater"
+          app:layout_constraintTop_toTopOf="@id/parentMenuUserWatchLater" />
+
         <LinearLayout
           android:id="@+id/parentMenuUserWatchLater"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:elevation="@dimen/plane_24"
           android:layout_marginTop="@dimen/plane_08"
-          app:layout_constraintStart_toStartOf="@id/parentWatchLaterVideo_userActivity"
-          app:layout_constraintEnd_toEndOf="@id/parentWatchLaterVideo_userActivity"
-          app:layout_constraintTop_toBottomOf="@id/parentBookmarkVideo_userActivity"
-          app:layout_constraintBottom_toBottomOf="@id/parentSaveChannel_userActivity"
-          app:layout_constraintVertical_bias="0"
-          app:layout_constraintHorizontal_bias=".3"
-          app:layout_constraintHeight_percent=".02"
+          android:elevation="@dimen/plane_24"
           android:orientation="horizontal"
-          >
+          app:layout_constraintBottom_toBottomOf="@id/parentSaveChannel_userActivity"
+          app:layout_constraintEnd_toEndOf="@id/parentWatchLaterVideo_userActivity"
+          app:layout_constraintHeight_percent=".02"
+          app:layout_constraintHorizontal_bias=".3"
+          app:layout_constraintStart_toStartOf="@id/parentWatchLaterVideo_userActivity"
+          app:layout_constraintTop_toBottomOf="@id/parentBookmarkVideo_userActivity"
+          app:layout_constraintVertical_bias="0">
+
           <TextView
             android:id="@+id/menuFunny_watchLaterUser"
             style="@style/TextAppearance.Reply.Body1"
@@ -600,8 +609,7 @@
             android:paddingEnd="10dp"
             android:paddingBottom="6dp"
             android:text="@string/reality_nav"
-            android:textColor="@color/white"
-            />
+            android:textColor="@color/white" />
 
           <TextView
             android:id="@+id/menuStudy_watchLaterUser"
@@ -615,6 +623,7 @@
             android:paddingBottom="6dp"
             android:text="@string/learning_nav"
             android:textColor="@color/white" />
+
           <TextView
             android:id="@+id/menuFarsi_watchLaterUser"
             style="@style/TextAppearance.Reply.Body1"
@@ -625,9 +634,9 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:text="@string/farsi_nav"
-            android:textColor="@color/white"
-            />
+            android:textColor="@color/white" />
         </LinearLayout>
+
         <androidx.cardview.widget.CardView
           android:id="@+id/parentWatchLaterVideo_userActivity"
           android:layout_width="match_parent"
@@ -635,8 +644,8 @@
           android:layout_marginTop="@dimen/plane_24"
           app:cardCornerRadius="40dp"
           app:cardElevation="@dimen/plane_08"
-          app:layout_constraintTop_toBottomOf="@id/parentBookmarkVideo_userActivity"
-          app:layout_constraintBottom_toTopOf="@id/parentHistoryVideo_userActivity">
+          app:layout_constraintBottom_toTopOf="@id/parentHistoryVideo_userActivity"
+          app:layout_constraintTop_toBottomOf="@id/parentBookmarkVideo_userActivity">
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -678,27 +687,28 @@
         <View
           android:layout_width="0dp"
           android:layout_height="8dp"
+          android:background="@drawable/shape_tag1"
           android:elevation="@dimen/plane_08"
-          app:layout_constraintTop_toTopOf="@id/parentMenuUserWatchLater"
           app:layout_constraintBottom_toBottomOf="@id/parentMenuUserWatchLater"
-          app:layout_constraintStart_toStartOf="@id/parentMenuUserWatchLater"
           app:layout_constraintEnd_toEndOf="@id/parentMenuUserWatchLater"
-          android:background="@drawable/shape_tag1"/>
+          app:layout_constraintStart_toStartOf="@id/parentMenuUserWatchLater"
+          app:layout_constraintTop_toTopOf="@id/parentMenuUserWatchLater" />
+
         <LinearLayout
           android:id="@+id/parentMenuUserHistory"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:elevation="@dimen/plane_24"
           android:layout_marginTop="@dimen/plane_08"
-          app:layout_constraintStart_toStartOf="@id/parentHistoryVideo_userActivity"
-          app:layout_constraintEnd_toEndOf="@id/parentHistoryVideo_userActivity"
-          app:layout_constraintTop_toBottomOf="@id/parentWatchLaterVideo_userActivity"
-          app:layout_constraintBottom_toBottomOf="@id/parentHistoryVideo_userActivity"
-          app:layout_constraintVertical_bias="0"
-          app:layout_constraintHorizontal_bias=".6"
-          app:layout_constraintHeight_percent=".02"
+          android:elevation="@dimen/plane_24"
           android:orientation="horizontal"
-          >
+          app:layout_constraintBottom_toBottomOf="@id/parentHistoryVideo_userActivity"
+          app:layout_constraintEnd_toEndOf="@id/parentHistoryVideo_userActivity"
+          app:layout_constraintHeight_percent=".02"
+          app:layout_constraintHorizontal_bias=".6"
+          app:layout_constraintStart_toStartOf="@id/parentHistoryVideo_userActivity"
+          app:layout_constraintTop_toBottomOf="@id/parentWatchLaterVideo_userActivity"
+          app:layout_constraintVertical_bias="0">
+
           <TextView
             android:id="@+id/menuFunny_historyUser"
             style="@style/TextAppearance.Reply.Body1"
@@ -722,8 +732,7 @@
             android:paddingEnd="10dp"
             android:paddingBottom="6dp"
             android:text="@string/reality_nav"
-            android:textColor="@color/white"
-            />
+            android:textColor="@color/white" />
 
           <TextView
             android:id="@+id/menuStudy_historyUser"
@@ -737,6 +746,7 @@
             android:paddingBottom="6dp"
             android:text="@string/learning_nav"
             android:textColor="@color/white" />
+
           <TextView
             android:id="@+id/menuFarsi_historyUser"
             style="@style/TextAppearance.Reply.Body1"
@@ -747,9 +757,9 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:text="@string/farsi_nav"
-            android:textColor="@color/white"
-            />
+            android:textColor="@color/white" />
         </LinearLayout>
+
         <androidx.cardview.widget.CardView
           android:id="@+id/parentHistoryVideo_userActivity"
           android:layout_width="match_parent"
@@ -757,8 +767,8 @@
           android:layout_marginTop="@dimen/plane_24"
           app:cardCornerRadius="40dp"
           app:cardElevation="@dimen/plane_08"
-          app:layout_constraintTop_toBottomOf="@id/parentWatchLaterVideo_userActivity"
-          app:layout_constraintBottom_toTopOf="@id/parentLikeVideo_userActivity">
+          app:layout_constraintBottom_toTopOf="@id/parentLikeVideo_userActivity"
+          app:layout_constraintTop_toBottomOf="@id/parentWatchLaterVideo_userActivity">
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -776,9 +786,9 @@
               android:elevation="@dimen/plane_08"
               android:gravity="center_vertical|center_horizontal"
               android:orientation="vertical"
+              app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintBottom_toBottomOf="parent">
+              app:layout_constraintTop_toTopOf="parent">
 
               <ImageView
                 android:layout_width="wrap_content"
@@ -801,27 +811,28 @@
         <View
           android:layout_width="0dp"
           android:layout_height="8dp"
+          android:background="@drawable/shape_tag1"
           android:elevation="@dimen/plane_08"
-          app:layout_constraintTop_toTopOf="@id/parentMenuUserWatchLater"
           app:layout_constraintBottom_toBottomOf="@id/parentMenuUserWatchLater"
-          app:layout_constraintStart_toStartOf="@id/parentMenuUserWatchLater"
           app:layout_constraintEnd_toEndOf="@id/parentMenuUserWatchLater"
-          android:background="@drawable/shape_tag1"/>
+          app:layout_constraintStart_toStartOf="@id/parentMenuUserWatchLater"
+          app:layout_constraintTop_toTopOf="@id/parentMenuUserWatchLater" />
+
         <LinearLayout
           android:id="@+id/parentMenuUserLike"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:elevation="@dimen/plane_24"
           android:layout_marginTop="@dimen/plane_08"
-          app:layout_constraintStart_toStartOf="@id/parentLikeVideo_userActivity"
-          app:layout_constraintEnd_toEndOf="@id/parentLikeVideo_userActivity"
-          app:layout_constraintTop_toBottomOf="@id/parentHistoryVideo_userActivity"
-          app:layout_constraintBottom_toBottomOf="@id/parentLikeVideo_userActivity"
-          app:layout_constraintVertical_bias="0"
-          app:layout_constraintHorizontal_bias=".3"
-          app:layout_constraintHeight_percent=".02"
+          android:elevation="@dimen/plane_24"
           android:orientation="horizontal"
-          >
+          app:layout_constraintBottom_toBottomOf="@id/parentLikeVideo_userActivity"
+          app:layout_constraintEnd_toEndOf="@id/parentLikeVideo_userActivity"
+          app:layout_constraintHeight_percent=".02"
+          app:layout_constraintHorizontal_bias=".3"
+          app:layout_constraintStart_toStartOf="@id/parentLikeVideo_userActivity"
+          app:layout_constraintTop_toBottomOf="@id/parentHistoryVideo_userActivity"
+          app:layout_constraintVertical_bias="0">
+
           <TextView
             android:id="@+id/menuFunny_likeUser"
             style="@style/TextAppearance.Reply.Body1"
@@ -845,8 +856,7 @@
             android:paddingEnd="10dp"
             android:paddingBottom="6dp"
             android:text="@string/reality_nav"
-            android:textColor="@color/white"
-            />
+            android:textColor="@color/white" />
 
           <TextView
             android:id="@+id/menuStudy_likeUser"
@@ -860,6 +870,7 @@
             android:paddingBottom="6dp"
             android:text="@string/learning_nav"
             android:textColor="@color/white" />
+
           <TextView
             android:id="@+id/menuFarsi_likeUser"
             style="@style/TextAppearance.Reply.Body1"
@@ -870,9 +881,9 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:text="@string/farsi_nav"
-            android:textColor="@color/white"
-            />
+            android:textColor="@color/white" />
         </LinearLayout>
+
         <androidx.cardview.widget.CardView
           android:id="@+id/parentLikeVideo_userActivity"
           android:layout_width="match_parent"
@@ -880,8 +891,7 @@
           android:layout_marginTop="@dimen/plane_24"
           app:cardCornerRadius="40dp"
           app:cardElevation="@dimen/plane_08"
-          app:layout_constraintTop_toBottomOf="@id/parentHistoryVideo_userActivity"
-        >
+          app:layout_constraintTop_toBottomOf="@id/parentHistoryVideo_userActivity">
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -899,9 +909,9 @@
               android:elevation="@dimen/plane_08"
               android:gravity="center_vertical|center_horizontal"
               android:orientation="vertical"
+              app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintBottom_toBottomOf="parent">
+              app:layout_constraintTop_toTopOf="parent">
 
               <ImageView
                 android:layout_width="wrap_content"
