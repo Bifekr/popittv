@@ -20,7 +20,8 @@
     android:usesCleartextTraffic="true">
     <activity
       android:name=".activity.PaymentActivity"
-      android:exported="false" />
+      android:exported="false"
+      android:screenOrientation="landscape"/>
     <activity
       android:name=".activity.MainActivity2"
       android:exported="false"

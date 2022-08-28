@@ -1,7 +1,6 @@
 package ir.popittv.myapplication.activity;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,6 +11,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,7 +29,6 @@ import com.zarinpal.billing.purchase.Purchase;
 import com.zarinpal.client.BillingClientStateListener;
 import com.zarinpal.client.ClientState;
 import com.zarinpal.provider.core.future.FutureCompletionListener;
-import com.zarinpal.provider.core.future.Task;
 import com.zarinpal.provider.core.future.TaskResult;
 import com.zarinpal.provider.model.response.Receipt;
 
@@ -52,14 +51,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserActivity extends AppCompatActivity implements OnClickFunny , OnClickFrg1 {
+public class UserActivity extends AppCompatActivity implements OnClickFunny, OnClickFrg1 {
 
+    private final boolean userLoged = true;
+    //-----------
+    private final String MERCHENT_ID = "6a5ecf11-5142-479f-940b-dc931a2a368c";
     ActivityUserBinding binding;
     View bottomView;
     View bottomView2;
     TextInputLayout et_phone;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+
     private UserViewModel userViewModel;
     private FunnyAdapter funnyAdapter;
     private FunnyAdapter funnyAdapter2;
@@ -67,21 +70,21 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
     private FunnyAdapter funnyAdapter4;
     private AllChannel_Adapter channel_adapter;
     private RvChannel_Frg1 funnyAdapter5;
+
     private String name_user;
     private String phone_user;
     private String code_user;
     private int id_user;
-    private final boolean userLoged = true;
+
+    private  String transactionId;
+    private String firstDate;
+    private  String Lastdate;
+   private int expire;
+
+
     private boolean b_switchLink;
 
-    //-----------
-    private final String MERCHENT_ID="6a5ecf11-5142-479f-940b-dc931a2a368c";
-    ZarinPalBillingClient client=null;
-    BillingClientStateListener billingClientStateListener;
-    private Long price=1000L;
-    private Long price2=2000L;
-    private Long price3=3000L;
-    private int expier;
+
 
 
     @Override
@@ -91,6 +94,12 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
         phone_user = sharedPreferences.getString("phone_user", null);
         name_user = sharedPreferences.getString("name_user", null);
         id_user = sharedPreferences.getInt("id_user", 0);
+        boolean status = sharedPreferences.getBoolean("status", false);
+        transactionId = sharedPreferences.getString("transactionId",null);
+        firstDate=sharedPreferences.getString("firstDate",null);
+        expire=sharedPreferences.getInt("expire",0);
+
+
 
         super.onCreate(savedInstanceState);
         binding = ActivityUserBinding.inflate(getLayoutInflater());
@@ -108,67 +117,31 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
         initRailActivity();
         intRvUser();
 
-        billingClientStateListener = new BillingClientStateListener() {
-            @Override
-            public void onClientSetupFinished(@NonNull ClientState clientState) {
-
-            }
-
-            @Override
-            public void onClientServiceDisconnected() {
-
-            }
-        };
 
 
 
-        FutureCompletionListener<Receipt> futureCompletionListener = new FutureCompletionListener<Receipt>() {
-       @Override
-       public void onComplete(TaskResult<Receipt> task) {
-           boolean amunt= Objects.requireNonNull(task.getSuccess()).isSuccess();
-
-           new Handler(Looper.getMainLooper()).post(new Runnable() {
-               @Override
-               public void run() {
-                   if (amunt){
-
-                       Toast.makeText(UserActivity.this, "پرداخت موفق"+expier, Toast.LENGTH_SHORT).show();
-                   }else{
-                       Toast.makeText(UserActivity.this, "khl,tr"+expier, Toast.LENGTH_SHORT).show();
-                   }
-               }
-           });
-           Log.i("TAG", "onComplete: "+amunt);
 
 
 
-       }
-   } ;
 
-        client = ZarinPalBillingClient.newBuilder(this)
-                .enableShowInvoice()
-                .setListener(billingClientStateListener)
-                .build();
-
+        setLastDate(status);
 
         binding.btnPayment.setOnClickListener(v -> {
             if (phone_user!=null) {
-                startActivity(new Intent(UserActivity.this, MainActivity2.class));
+                startActivity(new Intent(UserActivity.this, PaymentActivity.class));
 
-            }else {
+            } else {
                 loginUser();
             }
         });
 
-        int expire2= getIntent().getIntExtra("expire",0);
-        if (expire2!=0) {
-            Toast.makeText(this, "" + expire2, Toast.LENGTH_SHORT).show();
-        }
+
+
 
         userViewModel.request_userLater(id_user, 1);
-        userViewModel.request_userLike(id_user,1);
-        userViewModel.request_userSee(id_user,1);
-        userViewModel.request_userSave(id_user,1);
+        userViewModel.request_userLike(id_user, 1);
+        userViewModel.request_userSee(id_user, 1);
+        userViewModel.request_userSave(id_user, 1);
         userViewModel.request_userSub(id_user);
 
         userSaveMenuClick(id_user);
@@ -186,17 +159,31 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
 
     }
 
-    private Purchase getPurchaseAsPaymentRequest(long price){
-
-            String description = "Payment Request via ZarinPal SDK";
-            String callback = "https://pikoboom.ir" ; // Your Server address
-
-
-            return Purchase.newBuilder()
-
-                    .asPaymentRequest(MERCHENT_ID, price, callback, description)
-                    .build();
+    private void setLastDate(boolean status) {
+        if (status) {
+            binding.btnPayment.setVisibility(View.GONE);
+            setInfoPay();
         }
+    }
+
+    private void setInfoPay() {
+        switch (expire){
+            case 1:
+                binding.tvAmount.setText("10,000");
+                break;
+            case 2:
+                binding.tvAmount.setText("20,000");
+                break;
+            case 3:
+                binding.tvAmount.setText("30,000");
+                break;
+        }
+        binding.tvTransactionId.setText(transactionId);
+        binding.tvFirstDate.setText(firstDate);
+
+    }
+
+
 
 
     private void btnClickOnCreate() {
@@ -211,8 +198,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
             binding.tvExitUserActivity.setText(R.string.exite);
             binding.tvEnter1RvSubUser.setVisibility(View.GONE);
 
-        } else
-        {
+        } else {
             binding.phoneNumUserActivity.setText(R.string.hint_number);
             binding.userNameUserActivity.setText(R.string.hint_user_name);
             binding.tvExitUserActivity.setText(R.string.enter);
@@ -245,13 +231,12 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
     }
 
 
-
-
-    private void getUserLike(){
-        userViewModel.getUserLike().observe(UserActivity.this,funnyDataModels -> {
+    private void getUserLike() {
+        userViewModel.getUserLike().observe(UserActivity.this, funnyDataModels -> {
             funnyAdapter4.setData(funnyDataModels);
         });
     }
+
     private void userLikeMenuClick(int id_user) {
     }
 
@@ -302,7 +287,6 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
 ///////////////////////////////////////////
 
 
-
     /////////////////user later///////////////
     private void getUserLater() {
         userViewModel.getUserLater().observe(UserActivity.this, funnyDataModels -> {
@@ -348,7 +332,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
 
     }
 
-////////////////////user save////////////////////////
+    ////////////////////user save////////////////////////
     private void getUserSave() {
         userViewModel.getUserSave().observe(this, funnyDataModels -> {
 
@@ -403,7 +387,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
         binding.rvSaveChannelUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, RecyclerView.HORIZONTAL, false));
         binding.rvSaveChannelUserActivity.setAdapter(funnyAdapter5);
 
-        binding.rvLikeVideoUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this,LinearLayoutManager.HORIZONTAL,false));
+        binding.rvLikeVideoUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, LinearLayoutManager.HORIZONTAL, false));
         binding.rvLikeVideoUserActivity.setAdapter(funnyAdapter4);
         //RecyclerView user Save Video
         binding.rvBookMarkVideoUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, LinearLayoutManager.HORIZONTAL, false));
@@ -602,9 +586,9 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny , On
     @Override
     public void onClickPlayer(int id_vid_funny, int id_channel, int kind) {
         Intent intent = new Intent(UserActivity.this, PlayerActivity.class);
-        intent.putExtra("id_vid_funny",id_vid_funny);
-        intent.putExtra("kind",kind);
-        intent.putExtra("id_channel",id_channel);
+        intent.putExtra("id_vid_funny", id_vid_funny);
+        intent.putExtra("kind", kind);
+        intent.putExtra("id_channel", id_channel);
         startActivity(intent);
     }
 

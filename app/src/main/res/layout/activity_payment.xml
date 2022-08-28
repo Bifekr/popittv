@@ -6,4 +6,34 @@
   android:layout_height="match_parent"
   tools:context=".activity.PaymentActivity">
 
+  <Button
+    android:id="@+id/btnCode1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="code 1"
+    app:layout_constraintBottom_toTopOf="@id/btnCode2"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <Button
+    android:id="@+id/btnCode2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="code 2"
+    app:layout_constraintBottom_toTopOf="@id/btnCode3"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/btnCode1" />
+
+  <Button
+    android:id="@+id/btnCode3"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="code 3"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/btnCode2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
