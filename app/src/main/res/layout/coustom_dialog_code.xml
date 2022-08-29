@@ -24,6 +24,7 @@
       android:layout_height="match_parent"
       android:drawableStart="@drawable/ic_baseline_phone_iphone_24"
       android:drawableEnd="@drawable/ic_edit"
+      android:inputType="number"
       android:drawablePadding="10dp" />
 
   </com.google.android.material.textfield.TextInputLayout>

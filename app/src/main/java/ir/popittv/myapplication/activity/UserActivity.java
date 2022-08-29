@@ -62,6 +62,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
     private RvChannel_Frg1 funnyAdapter5;
     private String name_user;
     private String phone_user;
+    String phone_user2;
     private String code_user;
     private int id_user;
     private String transactionId;
@@ -571,61 +572,70 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
                     progressBar.setVisibility(View.VISIBLE);
                     phone_user = et_phone.getEditText().getText().toString();
-                    editor = sharedPreferences.edit();
-                    editor.putString("phone_user", phone_user);
-                    editor.apply();
+
+
                     Service.getApiClient().userLogin(phone_user).enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if (response.isSuccessful()) {
+                                bottomSheetDialog.dismiss();
 
-                            bottomSheetDialog.dismiss();
+                                BottomSheetDialog bottomSheetDialog2 = new BottomSheetDialog(UserActivity.this);
+                                bottomView2 = getLayoutInflater().inflate(R.layout.coustom_dialog_code, null);
+                                bottomSheetDialog2.setContentView(bottomView2);
+                                bottomSheetDialog2.setCanceledOnTouchOutside(true);
+                                BottomSheetBehavior sheetBehavior = BottomSheetBehavior.from((View) bottomView2.getParent());
+                                sheetBehavior.setPeekHeight(
 
-                            BottomSheetDialog bottomSheetDialog2 = new BottomSheetDialog(UserActivity.this);
-                            bottomView2 = getLayoutInflater().inflate(R.layout.coustom_dialog_code, null);
-                            bottomSheetDialog2.setContentView(bottomView2);
-                            bottomSheetDialog2.show();
+                                        (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 500, getResources().getDisplayMetrics())
+                                );
+                                bottomSheetDialog2.show();
 
-                            TextInputLayout et_code = bottomView2.findViewById(R.id.et_code_userProfile);
-                            Button btn_code = bottomView2.findViewById(R.id.sendCode_customLogin);
-                            btn_code.setOnClickListener(v1 -> {
+                                TextInputLayout et_code = bottomView2.findViewById(R.id.et_code_userProfile);
+                                Button btn_code = bottomView2.findViewById(R.id.sendCode_customLogin);
+                                btn_code.setOnClickListener(v1 -> {
 
-                                if (et_code.getEditText().getText().toString().equals("")) {
-                                    et_code.setError("کد را وارد کنید");
+                                    if (et_code.getEditText().getText().toString().equals("")) {
+                                        et_code.setError("کد را وارد کنید");
 
-                                } else {
-                                    code_user = et_code.getEditText().getText().toString();
-                                    Service.getApiClient().getUser(phone_user, code_user).enqueue(new Callback<UserDataModel>() {
-                                        @Override
-                                        public void onResponse(Call<UserDataModel> call1, @NonNull Response<UserDataModel> response1) {
-                                            UserDataModel userDataModel = response1.body();
-                                            if (response1.isSuccessful()) {
-                                                assert userDataModel!=null;
-                                                id_user = userDataModel.getId_user();
-                                                name_user = userDataModel.getName();
-                                                editor = sharedPreferences.edit();
-                                                editor.putString("name_user", name_user);
-                                                editor.putInt("id_user", id_user);
-                                                editor.apply();
-                                                bottomSheetDialog2.dismiss();
-                                                binding.phoneNumUserActivity.setText(phone_user);
-                                                binding.userNameUserActivity.setText(name_user);
-                                                binding.avatarUserUserActivity.setBackgroundResource(R.drawable.trophy);
-                                                binding.tvExitUserActivity.setText(R.string.exite);
-                                                binding.tvEnter1RvSubUser.setVisibility(View.GONE);
+                                    } else {
+                                        code_user = et_code.getEditText().getText().toString();
+                                        Service.getApiClient().getUser(phone_user, code_user).enqueue(new Callback<UserDataModel>() {
+                                            @Override
+                                            public void onResponse(Call<UserDataModel> call1, @NonNull Response<UserDataModel> response1) {
+
+                                                if (response1.isSuccessful()) {
+                                                    UserDataModel userDataModel = response1.body();
+                                                    assert userDataModel!=null;
+                                                    id_user = userDataModel.getId_user();
+                                                    name_user = userDataModel.getName();
+                                                  //  phone_user = userDataModel.getPhone();
+                                                    editor.putString("name_user", name_user);
+                                                    editor.putInt("id_user", id_user);
+                                                    editor.putString("phone_user", phone_user);
+                                                    editor.commit();
+                                                    bottomSheetDialog2.dismiss();
+                                                    binding.phoneNumUserActivity.setText(phone_user);
+                                                    binding.userNameUserActivity.setText(name_user);
+                                                   // binding.avatarUserUserActivity.setBackgroundResource(R.drawable.trophy);
+                                                    binding.tvExitUserActivity.setText(R.string.exite);
+                                                    binding.tvEnter1RvSubUser.setVisibility(View.GONE);
+
+                                                }
 
                                             }
 
-                                        }
+                                            @Override
+                                            public void onFailure(Call<UserDataModel> call1, Throwable t) {
 
-                                        @Override
-                                        public void onFailure(Call<UserDataModel> call1, Throwable t) {
-                                            Toast.makeText(UserActivity.this, "wrong", Toast.LENGTH_LONG).show();
-                                        }
-                                    });
-                                }
-                            });
+                                                    et_code.setError("کد تایید اشتباه است");
+                                                Toast.makeText(UserActivity.this, "wrong", Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+                                    }
+                                });
 
-
+                            }
                         }
 
                         @Override
