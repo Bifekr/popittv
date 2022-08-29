@@ -10,15 +10,16 @@ public class UserDataModel {
     private String name;
     private String phone;
     private String code;
-    private int transactionId;
+    private String  transactionId;
     private String firstDate;
+    private String amount;
     private Long expireDate;
 
 
     public UserDataModel() {
     }
 
-    public UserDataModel(String success, int id_user, String name, String phone, String code, int transactionId, String firstDate, Long expireDate) {
+    public UserDataModel(String success, int id_user, String name, String phone, String code, String transactionId, String firstDate, String amount,Long expireDate) {
         this.success = success;
         this.id_user = id_user;
         this.name = name;
@@ -26,6 +27,7 @@ public class UserDataModel {
         this.code = code;
         this.transactionId = transactionId;
         this.firstDate = firstDate;
+        this.amount = amount;
         this.expireDate = expireDate;
     }
 
@@ -49,12 +51,16 @@ public class UserDataModel {
         return code;
     }
 
-    public int getTransactionId() {
+    public String getTransactionId() {
         return transactionId;
     }
 
     public String getFirstDate() {
         return firstDate;
+    }
+
+    public String getAmount() {
+        return amount;
     }
 
     public Long getExpireDate() {

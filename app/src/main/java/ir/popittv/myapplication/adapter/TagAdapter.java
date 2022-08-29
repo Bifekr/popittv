@@ -47,7 +47,7 @@ public class TagAdapter extends RecyclerView.Adapter<TagAdapter.TagHolder> {
     public void onBindViewHolder(@NonNull TagHolder holder, int position) {
         holder.titleTagEn.setText(tagDataModels.get(position).getTag_title_en());
         holder.titleTagFa.setText(tagDataModels.get(position).getTag_title_fa());
-        Toast.makeText(holder.parentTag.getContext(), ""+tagDataModels.get(position).getTag_title_fa(), Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(holder.parentTag.getContext(), ""+tagDataModels.get(position).getTag_title_fa(), Toast.LENGTH_SHORT).show();
         Glide.with(holder.parentItemTag.getContext()).load(tagDataModels.get(position).getTag_pic())
                 .into(holder.iconTag);
        // holder.parentTag.setBackground(tagDataModels.get(position).getBackgroundTag());

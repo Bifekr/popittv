@@ -48,6 +48,11 @@ public interface ApiClient {
     @GET("getCode.php")
     Call<UserDataModel> getUser(@Query("phone") String phone, @Query("code") String code);
 
+    @GET("setPayment.php")
+    Call<UserDataModel> setPayment(@Query("phone")String phone,@Query("transactionId")String transactionId,@Query("firstDate")String firstDate,@Query("expireDate")Long expireDate,@Query("amount")String amount);
+    @GET("getPayment.php")
+    Call<UserDataModel> getPayment(@Query("phone")String phone);
+
     @GET("getUserSub.php")
     Call<ChannelResponse> getUserSub(@Query("id_user") int id_user);
 

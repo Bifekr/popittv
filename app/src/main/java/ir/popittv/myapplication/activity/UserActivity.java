@@ -44,14 +44,15 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
     private final boolean userLoged = true;
     //-----------
-    private final String MERCHENT_ID = "6a5ecf11-5142-479f-940b-dc931a2a368c";
+    private final Long month_1 = 2600000000L;
+    private final Long month_3 = 7860000000L;
+    private final Long month_6 = 15592000000L;
     ActivityUserBinding binding;
     View bottomView;
     View bottomView2;
     TextInputLayout et_phone;
     private SharedPreferences sharedPreferences;
-   private SharedPreferences.Editor editor;
-
+    private SharedPreferences.Editor editor;
     private UserViewModel userViewModel;
     private FunnyAdapter funnyAdapter;
     private FunnyAdapter funnyAdapter2;
@@ -59,43 +60,37 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
     private FunnyAdapter funnyAdapter4;
     private AllChannel_Adapter channel_adapter;
     private RvChannel_Frg1 funnyAdapter5;
-
     private String name_user;
     private String phone_user;
     private String code_user;
     private int id_user;
-
-    private  String transactionId;
+    private String transactionId;
     private String firstDate;
-    private int lastdate;
-   private int expire;
-
-   private long unixCurrentTime;
-   private final Long month_1=2600000000L;
-   private final Long month_3=7860000000L;
-   private final Long month_6=15592000000L;
-   private  Long expireDate;
-
-
+    private String lastDate;
+    private String amount;
+    private int expire;
+    private Long expireDate = null;
+    private long unixCurrentTime;
+    private boolean status;
     private boolean b_switchLink;
-
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         sharedPreferences = UserActivity.this.getSharedPreferences("user_info", MODE_PRIVATE);
         editor = sharedPreferences.edit();
+
         phone_user = sharedPreferences.getString("phone_user", null);
         name_user = sharedPreferences.getString("name_user", null);
         id_user = sharedPreferences.getInt("id_user", 0);
-        boolean status = sharedPreferences.getBoolean("status", false);
-        transactionId = sharedPreferences.getString("transactionId",null);
-        firstDate=sharedPreferences.getString("firstDate",null);
-        expire=sharedPreferences.getInt("expire",0);
-        unixCurrentTime=sharedPreferences.getLong("expireDate",System.currentTimeMillis());
-        expireDate=sharedPreferences.getLong("expireDate",0);
+        status = sharedPreferences.getBoolean("status", false);
 
+        transactionId = sharedPreferences.getString("transactionId", null);
+        firstDate = sharedPreferences.getString("firstDate", null);
+        expire = sharedPreferences.getInt("expire", 0);
+        unixCurrentTime = sharedPreferences.getLong("expireDate", System.currentTimeMillis());
+        expireDate = sharedPreferences.getLong("expireDate", 0);
 
 
         super.onCreate(savedInstanceState);
@@ -115,13 +110,9 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
         intRvUser();
 
 
-
-
-
-
-
-
+        getPeymentFromServer();
         setLastDate(status);
+
 
         binding.btnPayment.setOnClickListener(v -> {
             if (phone_user!=null) {
@@ -131,8 +122,6 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
                 loginUser();
             }
         });
-
-
 
 
         userViewModel.request_userLater(id_user, 1);
@@ -153,6 +142,64 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
         getUserLike();
 
 
+    }
+
+    private void getPeymentFromServer() {
+
+        if (phone_user!=null) {
+
+            Toast.makeText(UserActivity.this, "getPayment"+sharedPreferences.getLong("expireDate",0), Toast.LENGTH_SHORT).show();
+
+
+            Service.getApiClient().getPayment(phone_user).enqueue(new Callback<UserDataModel>() {
+                @Override
+                public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
+                    if (response.isSuccessful()) {
+                        assert response.body()!=null;
+                        expireDate = response.body().getExpireDate();
+                        transactionId = response.body().getTransactionId();
+                        firstDate = response.body().getFirstDate();
+                        amount = response.body().getAmount();
+                        expireDate = expireDate - System.currentTimeMillis();
+                        expireDate = (expireDate / 1000);
+                        expireDate = (expireDate / 60);
+                        expireDate = (expireDate / 60);
+                        expireDate = (expireDate / 24);
+                        binding.tvLastDate.setText(expireDate + "روز");
+                        binding.btnPayment.setVisibility(View.GONE);
+                        binding.tvTransactionId.setText(transactionId);
+                        binding.tvFirstDate.setText(firstDate);
+                        binding.tvAmount.setText(amount + "تومان  ");
+                        if (expireDate==0) {
+                            binding.tvLastDate.setText("کد دسترسی شما منقضی شده است.");
+                            binding.btnPayment.setVisibility(View.VISIBLE);
+                            editor.putLong("expireDate",0);
+                            editor.commit();
+                            Service.getApiClient().setPayment(phone_user, "", "", 0L, "").enqueue(new Callback<UserDataModel>() {
+                                @Override
+                                public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
+                                    editor.putLong("expireDate",0L);
+                                    editor.commit();
+                                }
+
+                                @Override
+                                public void onFailure(Call<UserDataModel> call, Throwable t) {
+
+                                }
+                            });
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<UserDataModel> call, Throwable t) {
+
+                }
+            });
+
+
+        }
 
     }
 
@@ -162,46 +209,80 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
             binding.tvTransactionId.setText(transactionId);
             binding.tvFirstDate.setText(firstDate);
 
-            switch (expire){
+            switch (expire) {
                 case 1: {
-                    binding.tvAmount.setText("تومان  12,000 ");
+                    amount = "12,000";
+                    binding.tvAmount.setText(amount + " تومان ");
                     expireDate = unixCurrentTime + month_1;
-
-                    editor.putLong("expireDate",expireDate);
+                    editor.putLong("expireDate", expireDate);
                     editor.commit();
-                    expireDate =  expireDate - System.currentTimeMillis();
-                    expireDate =  (expireDate/1000);
-                    expireDate =  (expireDate/60);
-                    expireDate =  (expireDate/60);
-                    expireDate =  (expireDate/24);
+                    if (expireDate > 0) {
+                        expireDate = expireDate - System.currentTimeMillis();
+                        expireDate = (expireDate / 1000);
+                        expireDate = (expireDate / 60);
+                        expireDate = (expireDate / 60);
+                        expireDate = (expireDate / 24);
+                        binding.tvLastDate.setText(expireDate + "روز");
 
-                    binding.tvLastDate.setText(expireDate + "روز");
+                        //send info Payment
+                        Service.getApiClient().setPayment(phone_user, transactionId, firstDate, sharedPreferences.getLong("expireDate", 0), amount).enqueue(new Callback<UserDataModel>() {
+                            @Override
+                            public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<UserDataModel> call, Throwable t) {
+
+                            }
+                        });
+
+                    } else {
+                        editor.putLong("expireDate",0L);
+                        editor.commit();
+                        Service.getApiClient().setPayment(phone_user, "", "", 0L, "").enqueue(new Callback<UserDataModel>() {
+                            @Override
+                            public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<UserDataModel> call, Throwable t) {
+
+                            }
+                        });
+                        binding.tvLastDate.setText("کد دسترسی شما منقضی شده است.");
+                        binding.btnPayment.setVisibility(View.VISIBLE);
+                    }
+
                     break;
                 }
                 case 2: {
-                    binding.tvAmount.setText(" 30,000 تومان");
+                    amount = "30,000";
+                    binding.tvAmount.setText(amount + " تومان ");
                     expireDate = unixCurrentTime + month_3;
-                    editor.putLong("expireDate",expireDate);
+                    editor.putLong("expireDate", expireDate);
                     editor.commit();
-                    expireDate =  expireDate - System.currentTimeMillis();
-                    expireDate =  (expireDate/1000);
-                    expireDate =  (expireDate/60);
-                    expireDate =  (expireDate/60);
-                    expireDate =  (expireDate/24);
+                    expireDate = expireDate - System.currentTimeMillis();
+                    expireDate = (expireDate / 1000);
+                    expireDate = (expireDate / 60);
+                    expireDate = (expireDate / 60);
+                    expireDate = (expireDate / 24);
 
                     binding.tvLastDate.setText(expireDate + "روز");
                     break;
                 }
                 case 3: {
-                    binding.tvAmount.setText(" 60,000 تومان");
+                    amount = "60,000";
+                    binding.tvAmount.setText(amount + " تومان ");
                     expireDate = unixCurrentTime + month_6;
-                    editor.putLong("expireDate",expireDate);
+                    editor.putLong("expireDate", expireDate);
                     editor.commit();
-                    expireDate =  expireDate - System.currentTimeMillis();
-                    expireDate =  (expireDate/1000);
-                    expireDate =  (expireDate/60);
-                    expireDate =  (expireDate/60);
-                    expireDate =  (expireDate/24);
+                    expireDate = expireDate - System.currentTimeMillis();
+                    expireDate = (expireDate / 1000);
+                    expireDate = (expireDate / 60);
+                    expireDate = (expireDate / 60);
+                    expireDate = (expireDate / 24);
 
                     binding.tvLastDate.setText(expireDate + "روز");
                     break;
@@ -210,9 +291,6 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
         }
     }
-
-
-
 
 
     private void btnClickOnCreate() {

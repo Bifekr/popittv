@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
     //-------------
     private SharedPreferences.Editor switchEditor;
+    private SharedPreferences.Editor editor;
     private ChannelDetail_adapter funnyAdapter;
     private FunnyAdapter funnyAdapter_liky;
     private FunnyAdapter funnyAdapter_view;
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
     protected void onCreate(Bundle savedInstanceState) {
         //get preferences data
         sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         id_user = sharedPreferences.getInt("id_user", 0);
 
         super.onCreate(savedInstanceState);
@@ -92,7 +94,9 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
         search();
         //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+        long expireDate = System.currentTimeMillis();
+        editor.putLong("expireDate",expireDate);
+        editor.commit();
 
         initNewRv(this, this);
         initRailActivity();

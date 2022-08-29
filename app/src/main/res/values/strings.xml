@@ -39,5 +39,8 @@
   <string name="showAllChannelFa">All\nCha\nnnels</string>
   <string name="downloadInstal">"نصب شده </string>
   <string name="install">install</string>
+  <string name="payment1mounth">دریافت کد دسترسی با اعتبار 1 ماه\n به مبلغ 12000 هزارتومان</string>
+  <string name="payment3mounth">دریافت کد دسترسی با اعتبار 3 ماه\n به مبلغ 30000 هزارتومان</string>
+  <string name="payment6mounth">دریافت کد دسترسی با اعتبار 6 ماه\n به مبلغ 60000 هزارتومان</string>
 
 </resources>

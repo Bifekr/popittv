@@ -1,6 +1,8 @@
 package ir.popittv.myapplication.activity;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.icu.text.DecimalFormat;
@@ -19,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -140,7 +143,8 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
         });
 */
-         if (phone_user==null) { login();}
+        // if (phone_user==null) { login();}
+         login();
 
 ///////////////////////
     /*    dataSourceFactory =
@@ -424,6 +428,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
     private void loginUser() {
         String check = sharedPreferences.getString("phone_user", null);
+        Long expireDate = sharedPreferences.getLong("expireDate", 0);
         if (check==null) {
 
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
@@ -485,6 +490,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
                                                 editor.putInt("id_user", id_user);
                                                 editor.apply();
                                                 bottomSheetDialog2.dismiss();
+                                                Toast.makeText(PlayerActivity.this, "با موفقیت وارد خساب حود شدید", Toast.LENGTH_LONG).show();
 
                                             }
 
@@ -492,7 +498,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
                                         @Override
                                         public void onFailure(Call<UserDataModel> call1, Throwable t) {
-                                            Toast.makeText(PlayerActivity.this, "wrong", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(PlayerActivity.this, "کد تایید را اشتباه وارد  کردید", Toast.LENGTH_LONG).show();
                                         }
                                     });
                                 }
@@ -512,9 +518,27 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
 
             });
-        } else {
-            String news = sharedPreferences.getString("phone_user", null);
-            Toast.makeText(this, "قبلا وارد شده اید" + news, Toast.LENGTH_SHORT).show();
+        }else if (expireDate.equals(0L)) {
+          AlertDialog.Builder builder;
+          builder = new AlertDialog.Builder(PlayerActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+          builder.setTitle("عدم دسترسی به محتوا")
+                  .setMessage("کد دسترسی معتبری یافت نشد")
+                  .setPositiveButton("دریافت کد دسترسی", new DialogInterface.OnClickListener() {
+                      @Override
+                      public void onClick(DialogInterface dialog, int which) {
+                          Toast.makeText(PlayerActivity.this, "YES", Toast.LENGTH_SHORT).show();
+
+                      }
+                  }).setNegativeButton("بعدا یادوری کن", new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialog, int which) {
+                  Toast.makeText(PlayerActivity.this, "NO", Toast.LENGTH_SHORT).show();
+              }
+          });
+          builder.show();
+           // startActivity(new Intent(PlayerActivity.this,PlayerActivity.class));
+        }else {
+            Toast.makeText(PlayerActivity.this, ""+expireDate, Toast.LENGTH_SHORT).show();
         }
 
     }

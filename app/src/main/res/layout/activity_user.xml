@@ -22,7 +22,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:menu="@menu/menu_rail"
-      app:menuGravity="bottom" />
+      app:menuGravity="top" />
 
     <ScrollView
       android:id="@+id/scroll"
@@ -267,8 +267,10 @@
   app:layout_constraintBottom_toBottomOf="parent"
   app:layout_constraintStart_toStartOf="parent"
   app:layout_constraintEnd_toStartOf="@id/parentTransaction"
-  android:background="@drawable/shape_btn_bg"
-  android:text=" انتخاب و دریافت نوع کد دسترسی "
+  android:background="@drawable/shape_tag6"
+  android:text="  دریافت  کد دسترسی "
+  android:drawableStart="@drawable/ic_baseline_add_card_24"
+  android:drawableEnd="@drawable/ic_reply"
   android:textStyle="bold"
   android:paddingStart="@dimen/plane_08"
   android:paddingEnd="@dimen/plane_08"/>
@@ -289,7 +291,7 @@
               android:id="@+id/tvExit_userActivity"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:background="@drawable/shape_tag6"
+              android:background="@drawable/shape_btn_bg"
               android:fontFamily="@font/lalezar_regular"
               android:paddingStart="@dimen/plane_16"
               android:paddingEnd="@dimen/plane_16"
@@ -297,7 +299,8 @@
               android:paddingBottom="@dimen/plane_04"
               android:text="@string/enter"
               app:layout_constraintStart_toStartOf="@id/avatarUser_userActivity"
-              app:layout_constraintTop_toBottomOf="@id/avatarUser_userActivity" />
+              app:layout_constraintTop_toBottomOf="@id/avatarUser_userActivity"
+              app:drawableStartCompat="@drawable/ic_baseline_exit_to_app_24" />
           </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -434,6 +437,7 @@
                 android:fontFamily="@font/baloo"
                 android:gravity="center"
                 android:text="@string/parentSubscribe"
+                android:textColor="@color/brown"
                 android:textSize="24sp"
                 android:textStyle="bold" />
             </LinearLayout>
@@ -555,6 +559,7 @@
                 android:fontFamily="@font/baloo"
                 android:gravity="center"
                 android:text="@string/parentBookmark"
+                android:textColor="@color/brown"
                 android:textSize="24sp"
                 android:textStyle="bold" />
             </LinearLayout>
@@ -676,6 +681,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/baloo"
                 android:gravity="center"
+                android:textColor="@color/brown"
                 android:text="@string/parentWatchLater"
                 android:textSize="22sp"
                 android:textStyle="bold" />
@@ -802,6 +808,7 @@
                 android:fontFamily="@font/baloo"
                 android:gravity="center"
                 android:text="@string/parentHistoey"
+                android:textColor="@color/brown"
                 android:textSize="24sp"
                 android:textStyle="bold" />
             </LinearLayout>
@@ -925,6 +932,7 @@
                 android:fontFamily="@font/baloo"
                 android:gravity="center"
                 android:text="@string/parentLike"
+                android:textColor="@color/brown"
                 android:textSize="24sp"
                 android:textStyle="bold" />
             </LinearLayout>
