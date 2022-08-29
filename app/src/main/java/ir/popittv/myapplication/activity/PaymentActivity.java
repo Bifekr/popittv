@@ -70,6 +70,8 @@ public class PaymentActivity extends AppCompatActivity {
                 transactionId = task.getSuccess().getTransactionID();
                 new Handler(Looper.getMainLooper()).post(() -> {
                     if (status) {
+                        long unixCurrentTime = System.currentTimeMillis();
+                        editor.putLong("unixCurrentTime",unixCurrentTime);
                         editor.putBoolean("status", true);
                         editor.putInt("expire", expire);
                         editor.putString("amount", amount);

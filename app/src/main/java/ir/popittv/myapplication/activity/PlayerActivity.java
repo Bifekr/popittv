@@ -428,7 +428,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
     private void loginUser() {
         String check = sharedPreferences.getString("phone_user", null);
-        Long expireDate = sharedPreferences.getLong("expireDate", 0);
+        Long lastDate = sharedPreferences.getLong("lastDate", 0);
         if (check==null) {
 
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
@@ -518,7 +518,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
 
             });
-        }else if (expireDate.equals(0L)) {
+        }else if (lastDate==0) {
           AlertDialog.Builder builder;
           builder = new AlertDialog.Builder(PlayerActivity.this, android.R.style.Theme_Material_Dialog_Alert);
           builder.setTitle("عدم دسترسی به محتوا")
@@ -527,6 +527,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
                       @Override
                       public void onClick(DialogInterface dialog, int which) {
                           Toast.makeText(PlayerActivity.this, "YES", Toast.LENGTH_SHORT).show();
+                          startActivity(new Intent(PlayerActivity.this,PaymentActivity.class));
 
                       }
                   }).setNegativeButton("بعدا یادوری کن", new DialogInterface.OnClickListener() {
@@ -536,9 +537,9 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
               }
           });
           builder.show();
-           // startActivity(new Intent(PlayerActivity.this,PlayerActivity.class));
+           //
         }else {
-            Toast.makeText(PlayerActivity.this, ""+expireDate, Toast.LENGTH_SHORT).show();
+            Toast.makeText(PlayerActivity.this, ""+lastDate, Toast.LENGTH_SHORT).show();
         }
 
     }

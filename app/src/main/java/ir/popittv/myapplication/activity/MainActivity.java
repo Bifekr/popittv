@@ -94,9 +94,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
         search();
         //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        long expireDate = System.currentTimeMillis();
-        editor.putLong("expireDate",expireDate);
-        editor.commit();
+
 
         initNewRv(this, this);
         initRailActivity();
