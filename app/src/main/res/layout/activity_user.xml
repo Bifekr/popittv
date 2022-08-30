@@ -319,13 +319,28 @@
               android:background="@drawable/shape_btn_bg"
               android:fontFamily="@font/lalezar_regular"
               android:paddingStart="@dimen/plane_16"
-              android:text="@string/enter"
+              android:text="@string/exite"
               android:paddingTop="@dimen/plane_04"
               android:paddingEnd="@dimen/plane_16"
               android:paddingBottom="@dimen/plane_04"
+              android:visibility="gone"
               app:drawableStartCompat="@drawable/ic_baseline_exit_to_app_24"
               app:layout_constraintStart_toStartOf="@id/avatarUser_userActivity"
               app:layout_constraintTop_toBottomOf="@id/avatarUser_userActivity" />
+            <!--   <TextView
+                 android:id="@+id/tvEnter_userActivity"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:background="@drawable/shape_btn_bg"
+                 android:fontFamily="@font/lalezar_regular"
+                 android:paddingStart="@dimen/plane_16"
+                 android:text="@string/enter"
+                 android:paddingTop="@dimen/plane_04"
+                 android:paddingEnd="@dimen/plane_16"
+                 android:paddingBottom="@dimen/plane_04"
+                 app:drawableStartCompat="@drawable/ic_baseline_exit_to_app_24"
+                 app:layout_constraintStart_toStartOf="@id/avatarUser_userActivity"
+                 app:layout_constraintTop_toBottomOf="@id/avatarUser_userActivity" />-->
           </androidx.constraintlayout.widget.ConstraintLayout>
 
 

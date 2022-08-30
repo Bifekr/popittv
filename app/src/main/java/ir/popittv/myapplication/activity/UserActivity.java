@@ -8,7 +8,6 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -105,12 +104,13 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
         allAdapterNew();
         loginUser();
+        getPeymentFromServer();
         btnClickOnCreate();
         initRailActivity();
         intRvUser();
 
-        getPeymentFromServer();
-        setLastDate(status);
+
+        setPaymentTransection(status);
 
         allUserRequest();
 
@@ -151,7 +151,6 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
     private void getPeymentFromServer() {
 
         if (phone_user!=null) {
-            binding.btnPayment.setVisibility(View.VISIBLE);
             Service.getApiClient().getPayment(phone_user).enqueue(new Callback<UserDataModel>() {
                 @Override
                 public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
@@ -161,49 +160,45 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
                         transactionId = response.body().getTransactionId();
                         firstDate = response.body().getFirstDate();
                         amount = response.body().getAmount();
-                        if (expireDate > 0) {  //==0 -> first install or <0 -> reInstall app
-                            lastDate = expireDate - System.currentTimeMillis();
-                            lastDate = (lastDate / 1000);
-                            lastDate = (lastDate / 60);
-                            lastDate = (lastDate / 60);
-                            lastDate = (lastDate / 24);
-                            // lastDate=expireDate;
-                            Toast.makeText(UserActivity.this, "" + lastDate, Toast.LENGTH_SHORT).show();
+                        lastDate = expireDate - System.currentTimeMillis();
+                        lastDate = (lastDate / 1000);
+                        lastDate = (lastDate / 60);
+                        lastDate = (lastDate / 60);
+                        lastDate = (lastDate / 24);
+                        editor.putLong("lastDate", lastDate);
+                        editor.commit();
+                        if (lastDate==0) {
+                            binding.tvLastDate.setText("برای مشاهده وارد شوید");
+                            binding.tvLastDate.setHint("کد دسترسی شما منقضی شده است.");
+                            binding.tvAmount.setHint("بدون تراکنش    ");
+                            binding.btnPayment.setVisibility(View.VISIBLE);
+                            binding.btnPaymentLogin.setVisibility(View.GONE);
+                            editor.putLong("lastDate", 0);
+                            editor.commit();
+
+                            Service.getApiClient().setPayment(phone_user, "", "", expireDate,  "").enqueue(new Callback<UserDataModel>() {
+                                @Override
+                                public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<UserDataModel> call, Throwable t) {
+
+                                }
+                            });
+
+                        } else {
                             editor.putLong("lastDate", lastDate);
                             editor.commit();
                             binding.tvLastDate.setText(lastDate + "روز");
                             binding.btnPayment.setVisibility(View.GONE);
+                            binding.btnPaymentLogin.setVisibility(View.GONE);
                             binding.tvTransactionId.setText(transactionId);
                             binding.tvFirstDate.setText(firstDate);
                             binding.tvAmount.setText(amount + "تومان  ");
 
-                            if (lastDate==0) {
-                                binding.tvLastDate.setText("کد دسترسی شما منقضی شده است.");
-                                binding.tvAmount.setText("بدون تراکنش    ");
-                                binding.btnPayment.setVisibility(View.VISIBLE);
-                                editor.putLong("lastDate", lastDate);
-                                editor.commit();
-
-                                Service.getApiClient().setPayment(phone_user, "", "", sharedPreferences.getLong("expireDate", 0), "").enqueue(new Callback<UserDataModel>() {
-                                    @Override
-                                    public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
-
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<UserDataModel> call, Throwable t) {
-
-                                    }
-                                });
-                            }
-                        } else {
-                            binding.tvLastDate.setHint(R.string.hint_textPay);
-                            binding.tvAmount.setText("بدون تراکنش    ");
-                            binding.btnPayment.setVisibility(View.VISIBLE);
-                            editor.putLong("lastDate", 0);
-                            editor.putBoolean("status", false);
-                            editor.commit();
-
+                            recreate();
                         }
 
                     }
@@ -219,7 +214,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
     }
 
-    private void setLastDate(boolean status) {
+    private void setPaymentTransection(boolean status) {
         if (status) {  // این تابع بعد از خرید موفق تراکنش اجرا می شود
             binding.btnPayment.setVisibility(View.GONE);
             binding.tvTransactionId.setText(transactionId);
@@ -308,7 +303,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
                     binding.tvLastDate.setText(lastDate + "روز");
 
                     //send info Payment
-                    Service.getApiClient().setPayment(phone_user, transactionId, firstDate,expireDate, amount).enqueue(new Callback<UserDataModel>() {
+                    Service.getApiClient().setPayment(phone_user, transactionId, firstDate, expireDate, amount).enqueue(new Callback<UserDataModel>() {
                         @Override
                         public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
 
@@ -327,62 +322,13 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
         }
     }
 
-
-    private void btnClickOnCreate() {
-
-        binding.tvExitUserActivity.setOnClickListener(v -> {
-            if (phone_user!=null) {
-                binding.btnPaymentLogin.setVisibility(View.VISIBLE);
-                binding.btnPayment.setVisibility(View.GONE);
-                editor.putString("phone_user", "");
-                editor.putInt("id_user", 0);
-                editor.putLong("lastDate",0);
-                editor.apply();
-                recreate();
-
-                binding.phoneNumUserActivity.setText(R.string.hint_number);
-                binding.userNameUserActivity.setText(R.string.hint_user_name);
-                binding.tvExitUserActivity.setText(R.string.enter);
-                binding.tvLastDate.setText( "برای مشاهده وارد شوید");
-                binding.avatarUserUserActivity.setBackgroundResource(R.drawable.ic_baseline_account_circle_24);
-                binding.tvEnter1RvSubUser.setVisibility(View.VISIBLE);
-            } else {
-                loginUser();
-
-            }
-
-
-        });
-
-        binding.avatarUserUserActivity.setOnClickListener(v -> {
-            if (phone_user==null) {
-                loginUser();
-            }
-        });
-
-
-        binding.tvEnter1RvSubUser.setOnClickListener(v -> { // پیغم نمایش داده شده در لیست ویدیوهای کاربر چنلها
-            loginUser();
-
-        });
-        binding.btnPayment.setOnClickListener(v -> {
-            if (phone_user!=null) {
-                binding.btnPaymentLogin.setVisibility(View.GONE);
-                startActivity(new Intent(UserActivity.this, PaymentActivity.class));
-
-            }
-        });
-
-
-    }
-
     private void loginUser() {
         String check = sharedPreferences.getString("phone_user", "");
 
         if (check.equals("")) { // هیچ کاربری وارد برنامه نشده
             binding.btnPaymentLogin.setVisibility(View.VISIBLE);
             binding.btnPayment.setVisibility(View.GONE);
-            binding.tvExitUserActivity.setText(R.string.enter);
+            //  binding.tvExitUserActivity.setText(R.string.enter);
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
             bottomView = getLayoutInflater().inflate(R.layout.custom_dialog, null);
             bottomSheetDialog.setContentView(bottomView);
@@ -430,7 +376,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
                                         Service.getApiClient().getUser(phone_user2, code_user).enqueue(new Callback<UserDataModel>() {
                                             @Override
                                             public void onResponse(Call<UserDataModel> call1, @NonNull Response<UserDataModel> response1) { // در صورتی که کد با کد سرور برابر باشد
-                                                if (response1.isSuccessful()) {
+                                                if (response1.isSuccessful()) {  // کاربر وارد حساب شد ---------
                                                     UserDataModel userDataModel = response1.body();
                                                     assert userDataModel!=null;
                                                     id_user = userDataModel.getId_user();
@@ -438,18 +384,20 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
                                                     phone_user = userDataModel.getPhone();
                                                     editor.putString("name_user", name_user);
                                                     editor.putInt("id_user", id_user);
-                                                    editor.putString("phone_user", phone_user); // شماره نهایی کاربر که اطلاعات صحیح وارد شده
+                                                    editor.putString("phone_user", phone_user);
                                                     editor.commit();
                                                     bottomSheetDialog2.dismiss();
                                                     binding.phoneNumUserActivity.setText(phone_user);
                                                     binding.userNameUserActivity.setText(name_user);
                                                     binding.btnPaymentLogin.setVisibility(View.GONE);
                                                     binding.btnPayment.setVisibility(View.VISIBLE);
+                                                    binding.tvExitUserActivity.setVisibility(View.VISIBLE);
+                                                    // binding.tvEnterUserActivity.setVisibility(View.GONE);
+                                                    // binding.tvExitUserActivity.setVisibility(View.VISIBLE);
                                                     getPeymentFromServer();
                                                     // binding.avatarUserUserActivity.setBackgroundResource(R.drawable.trophy);
-                                                    binding.tvExitUserActivity.setText(R.string.exite);
                                                     binding.tvEnter1RvSubUser.setVisibility(View.GONE);
-                                                    binding.avatarUserUserActivity.setBackgroundResource(R.drawable.ic_happy);
+                                                    binding.avatarUserUserActivity.setBackgroundResource(R.drawable.ic_parents_happy);
 
                                                 }
 
@@ -476,16 +424,69 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
                         }
                     });
-                } //  در صورتی که شماره صحیح وارد شد
-
-
+                }
             });
-        } else {
-            String news = sharedPreferences.getString("phone_user", "");
-            Toast.makeText(this, "قبلا وارد شده اید" + news, Toast.LENGTH_SHORT).show();
+        } else { //کاربر از قبل وارد شده
+            binding.phoneNumUserActivity.setText(phone_user);
+            binding.userNameUserActivity.setText(name_user);
+            binding.btnPaymentLogin.setVisibility(View.GONE);
+            binding.btnPayment.setVisibility(View.VISIBLE);
+            //  binding.tvExitUserActivity.setVisibility(View.VISIBLE);
+            //  binding.tvEnterUserActivity.setVisibility(View.GONE);
+            getPeymentFromServer();
+            binding.tvEnter1RvSubUser.setVisibility(View.GONE);
+            binding.avatarUserUserActivity.setBackgroundResource(R.drawable.ic_parents_happy);
         }
 
     }
+    private void btnClickOnCreate() {
+
+        binding.tvExitUserActivity.setOnClickListener(v -> {
+
+
+                binding.btnPaymentLogin.setVisibility(View.VISIBLE);
+                binding.btnPayment.setVisibility(View.GONE);
+                editor.putString("phone_user", "");
+                editor.putInt("id_user", 0);
+                editor.putLong("lastDate",0);
+                editor.commit();
+                recreate();
+                binding.phoneNumUserActivity.setText(R.string.hint_number);
+                binding.userNameUserActivity.setText(R.string.hint_user_name);
+                binding.avatarUserUserActivity.setBackgroundResource(R.drawable.ic_baseline_account_circle_24);
+                binding.tvEnter1RvSubUser.setVisibility(View.VISIBLE);
+
+
+
+        });
+
+        binding.btnPaymentLogin.setOnClickListener(v -> {
+            loginUser();
+        });
+
+        binding.avatarUserUserActivity.setOnClickListener(v -> {
+            if (phone_user==null) {
+                loginUser();
+            }
+        });
+
+
+        binding.tvEnter1RvSubUser.setOnClickListener(v -> { // پیغم نمایش داده شده در لیست ویدیوهای کاربر چنلها
+            loginUser();
+
+        });
+        binding.btnPayment.setOnClickListener(v -> {
+            if (phone_user!=null) {
+                binding.btnPaymentLogin.setVisibility(View.GONE);
+                startActivity(new Intent(UserActivity.this, PaymentActivity.class));
+
+            }
+        });
+
+
+    }
+
+
 
     private Boolean validatePhone() { //  متد خطاهای شماره تماس
         String valName = et_phone.getEditText().getText().toString();
