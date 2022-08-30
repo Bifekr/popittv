@@ -51,6 +51,8 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
     View bottomView;
     View bottomView2;
     TextInputLayout et_phone;
+    TextInputLayout et_code;
+    String phone_user2;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private UserViewModel userViewModel;
@@ -62,7 +64,6 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
     private RvChannel_Frg1 funnyAdapter5;
     private String name_user;
     private String phone_user;
-    String phone_user2;
     private String code_user;
     private int id_user;
     private String transactionId;
@@ -101,36 +102,17 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
         setContentView(binding.getRoot());
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        funnyAdapter = new FunnyAdapter(this, this);
-        funnyAdapter2 = new FunnyAdapter(this, this);
-        funnyAdapter3 = new FunnyAdapter(this, this);
-        funnyAdapter4 = new FunnyAdapter(this, this);
-        funnyAdapter5 = new RvChannel_Frg1(this, this);
 
+        allAdapterNew();
+        loginUser();
         btnClickOnCreate();
         initRailActivity();
         intRvUser();
 
-
         getPeymentFromServer();
         setLastDate(status);
 
-
-        binding.btnPayment.setOnClickListener(v -> {
-            if (phone_user!=null) {
-                startActivity(new Intent(UserActivity.this, PaymentActivity.class));
-
-            } else {
-                loginUser();
-            }
-        });
-
-
-        userViewModel.request_userLater(id_user, 1);
-        userViewModel.request_userLike(id_user, 1);
-        userViewModel.request_userSee(id_user, 1);
-        userViewModel.request_userSave(id_user, 1);
-        userViewModel.request_userSub(id_user);
+        allUserRequest();
 
         userSaveMenuClick(id_user);
         userLaterMenuClick(id_user);
@@ -146,10 +128,30 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
     }
 
+    private void allAdapterNew() {
+        funnyAdapter = new FunnyAdapter(this, this);
+        funnyAdapter2 = new FunnyAdapter(this, this);
+        funnyAdapter3 = new FunnyAdapter(this, this);
+        funnyAdapter4 = new FunnyAdapter(this, this);
+        funnyAdapter5 = new RvChannel_Frg1(this, this);
+    }
+
+    private void allUserRequest() {
+        if (phone_user!=null) {
+
+            userViewModel.request_userLater(id_user, 1);
+            userViewModel.request_userLike(id_user, 1);
+            userViewModel.request_userSee(id_user, 1);
+            userViewModel.request_userSave(id_user, 1);
+            userViewModel.request_userSub(id_user);
+        }
+
+    }
+
     private void getPeymentFromServer() {
 
         if (phone_user!=null) {
-
+            binding.btnPayment.setVisibility(View.VISIBLE);
             Service.getApiClient().getPayment(phone_user).enqueue(new Callback<UserDataModel>() {
                 @Override
                 public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
@@ -195,7 +197,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
                                 });
                             }
                         } else {
-                            binding.tvLastDate.setText(" <-- برای دستسرس و دریافت کد اشتراک دکمه روبرو را انتخاب کنید -->>");
+                            binding.tvLastDate.setHint(R.string.hint_textPay);
                             binding.tvAmount.setText("بدون تراکنش    ");
                             binding.btnPayment.setVisibility(View.VISIBLE);
                             editor.putLong("lastDate", 0);
@@ -218,7 +220,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
     }
 
     private void setLastDate(boolean status) {
-        if (status) {
+        if (status) {  // این تابع بعد از خرید موفق تراکنش اجرا می شود
             binding.btnPayment.setVisibility(View.GONE);
             binding.tvTransactionId.setText(transactionId);
             binding.tvFirstDate.setText(firstDate);
@@ -242,7 +244,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
                     binding.tvLastDate.setText(lastDate + "روز");
 
                     //send info Payment
-                    Service.getApiClient().setPayment(phone_user, transactionId, firstDate, sharedPreferences.getLong("expireDate", 0), amount).enqueue(new Callback<UserDataModel>() {
+                    Service.getApiClient().setPayment(phone_user, transactionId, firstDate, expireDate, amount).enqueue(new Callback<UserDataModel>() {
                         @Override
                         public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
 
@@ -274,7 +276,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
                     binding.tvLastDate.setText(lastDate + "روز");
 
                     //send info Payment
-                    Service.getApiClient().setPayment(phone_user, transactionId, firstDate, sharedPreferences.getLong("expireDate", 0), amount).enqueue(new Callback<UserDataModel>() {
+                    Service.getApiClient().setPayment(phone_user, transactionId, firstDate, expireDate, amount).enqueue(new Callback<UserDataModel>() {
                         @Override
                         public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
 
@@ -306,7 +308,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
                     binding.tvLastDate.setText(lastDate + "روز");
 
                     //send info Payment
-                    Service.getApiClient().setPayment(phone_user, transactionId, firstDate, sharedPreferences.getLong("expireDate", 0), amount).enqueue(new Callback<UserDataModel>() {
+                    Service.getApiClient().setPayment(phone_user, transactionId, firstDate,expireDate, amount).enqueue(new Callback<UserDataModel>() {
                         @Override
                         public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
 
@@ -328,36 +330,205 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
     private void btnClickOnCreate() {
 
-        binding.avatarUserUserActivity.setOnClickListener(v -> {
-            loginUser();
-        });
-        if (phone_user!=null) {
-            binding.phoneNumUserActivity.setText(phone_user);
-            binding.userNameUserActivity.setText(name_user);
-            binding.avatarUserUserActivity.setBackgroundResource(R.drawable.trophy);
-            binding.tvExitUserActivity.setText(R.string.exite);
-            binding.tvEnter1RvSubUser.setVisibility(View.GONE);
-
-        } else {
-            binding.phoneNumUserActivity.setText(R.string.hint_number);
-            binding.userNameUserActivity.setText(R.string.hint_user_name);
-            binding.tvExitUserActivity.setText(R.string.enter);
-            binding.tvEnter1RvSubUser.setVisibility(View.VISIBLE);
-            loginUser();
-
-        }
-        binding.tvEnter1RvSubUser.setOnClickListener(v -> {
-            loginUser();
-            binding.tvEnter1RvSubUser.setVisibility(View.GONE);
-        });
         binding.tvExitUserActivity.setOnClickListener(v -> {
-            sharedPreferences = this.getSharedPreferences("user_info", MODE_PRIVATE);
-            SharedPreferences.Editor editor22 = sharedPreferences.edit();
-            editor22.putString("phone_user", null);
-            editor22.apply();
-            recreate();
-            Toast.makeText(getApplicationContext(), "شما از حساب خود خارج شدید", Toast.LENGTH_SHORT).show();
+            if (phone_user!=null) {
+                binding.btnPaymentLogin.setVisibility(View.VISIBLE);
+                binding.btnPayment.setVisibility(View.GONE);
+                editor.putString("phone_user", "");
+                editor.putInt("id_user", 0);
+                editor.putLong("lastDate",0);
+                editor.apply();
+                recreate();
+
+                binding.phoneNumUserActivity.setText(R.string.hint_number);
+                binding.userNameUserActivity.setText(R.string.hint_user_name);
+                binding.tvExitUserActivity.setText(R.string.enter);
+                binding.tvLastDate.setText( "برای مشاهده وارد شوید");
+                binding.avatarUserUserActivity.setBackgroundResource(R.drawable.ic_baseline_account_circle_24);
+                binding.tvEnter1RvSubUser.setVisibility(View.VISIBLE);
+            } else {
+                loginUser();
+
+            }
+
+
         });
+
+        binding.avatarUserUserActivity.setOnClickListener(v -> {
+            if (phone_user==null) {
+                loginUser();
+            }
+        });
+
+
+        binding.tvEnter1RvSubUser.setOnClickListener(v -> { // پیغم نمایش داده شده در لیست ویدیوهای کاربر چنلها
+            loginUser();
+
+        });
+        binding.btnPayment.setOnClickListener(v -> {
+            if (phone_user!=null) {
+                binding.btnPaymentLogin.setVisibility(View.GONE);
+                startActivity(new Intent(UserActivity.this, PaymentActivity.class));
+
+            }
+        });
+
+
+    }
+
+    private void loginUser() {
+        String check = sharedPreferences.getString("phone_user", "");
+
+        if (check.equals("")) { // هیچ کاربری وارد برنامه نشده
+            binding.btnPaymentLogin.setVisibility(View.VISIBLE);
+            binding.btnPayment.setVisibility(View.GONE);
+            binding.tvExitUserActivity.setText(R.string.enter);
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+            bottomView = getLayoutInflater().inflate(R.layout.custom_dialog, null);
+            bottomSheetDialog.setContentView(bottomView);
+            BottomSheetBehavior sheetBehavior = BottomSheetBehavior.from((View) bottomView.getParent());
+            sheetBehavior.setPeekHeight(
+
+                    (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 500, getResources().getDisplayMetrics())
+            );
+            bottomSheetDialog.show();
+
+            et_phone = bottomView.findViewById(R.id.et_phone_userProfile);
+            Button btn_send = bottomView.findViewById(R.id.send_customLogin);
+            ProgressBar progressBar = bottomView.findViewById(R.id.progress_dialog);
+
+            btn_send.setOnClickListener(V -> { //رفتن به مرحله وارد کردن کد پیامک شدن
+                if (validatePhone()) { // چک کردن خطاهای احتمالی هنگام وارد کردن شماره
+
+                    btn_send.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.VISIBLE);
+
+                    String phone_user2 = et_phone.getEditText().getText().toString();
+                    Service.getApiClient().userLogin(phone_user2).enqueue(new Callback<ResponseBody>() { //  ارسال شماره به سرور و دریافت پیامک که در اینجا اگر شماره جدید باشد ستون جدید و اگر نه اپدیت کد پیامکی
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if (response.isSuccessful()) {
+                                bottomSheetDialog.dismiss();
+
+                                BottomSheetDialog bottomSheetDialog2 = new BottomSheetDialog(UserActivity.this);
+                                bottomView2 = getLayoutInflater().inflate(R.layout.coustom_dialog_code, null);
+                                bottomSheetDialog2.setContentView(bottomView2);
+                                bottomSheetDialog2.setCanceledOnTouchOutside(true);
+                                BottomSheetBehavior sheetBehavior = BottomSheetBehavior.from((View) bottomView2.getParent());
+                                sheetBehavior.setPeekHeight(
+
+                                        (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 500, getResources().getDisplayMetrics())
+                                );
+                                bottomSheetDialog2.show();
+
+                                et_code = bottomView2.findViewById(R.id.et_code_userProfile);
+                                Button btn_code = bottomView2.findViewById(R.id.sendCode_customLogin);
+                                btn_code.setOnClickListener(v1 -> {
+
+                                    if (validateCode()) { //  خطاهای احتمالی هنگام وارد کردن کد به غیر از یکی بودن کد تایپ شده با کد ارسالی
+                                        code_user = et_code.getEditText().getText().toString();
+                                        Service.getApiClient().getUser(phone_user2, code_user).enqueue(new Callback<UserDataModel>() {
+                                            @Override
+                                            public void onResponse(Call<UserDataModel> call1, @NonNull Response<UserDataModel> response1) { // در صورتی که کد با کد سرور برابر باشد
+                                                if (response1.isSuccessful()) {
+                                                    UserDataModel userDataModel = response1.body();
+                                                    assert userDataModel!=null;
+                                                    id_user = userDataModel.getId_user();
+                                                    name_user = userDataModel.getName();
+                                                    phone_user = userDataModel.getPhone();
+                                                    editor.putString("name_user", name_user);
+                                                    editor.putInt("id_user", id_user);
+                                                    editor.putString("phone_user", phone_user); // شماره نهایی کاربر که اطلاعات صحیح وارد شده
+                                                    editor.commit();
+                                                    bottomSheetDialog2.dismiss();
+                                                    binding.phoneNumUserActivity.setText(phone_user);
+                                                    binding.userNameUserActivity.setText(name_user);
+                                                    binding.btnPaymentLogin.setVisibility(View.GONE);
+                                                    binding.btnPayment.setVisibility(View.VISIBLE);
+                                                    getPeymentFromServer();
+                                                    // binding.avatarUserUserActivity.setBackgroundResource(R.drawable.trophy);
+                                                    binding.tvExitUserActivity.setText(R.string.exite);
+                                                    binding.tvEnter1RvSubUser.setVisibility(View.GONE);
+                                                    binding.avatarUserUserActivity.setBackgroundResource(R.drawable.ic_happy);
+
+                                                }
+
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<UserDataModel> call1, Throwable t) { // زمانب که کد وارد شده با کد داخ سرور هماهنگ نباشد
+
+                                                et_code.setError("کدی که وارد کردید با کد ارسالی مطابقت ندارد ... بهتر هستش از یک بزرگتر درخواست راهنمایی کنید ");
+
+                                            }
+                                        });
+                                    }
+
+
+                                });
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            et_phone.setError("اینترنت شما قطع و یا ضعیف است .. waiting");
+
+                        }
+                    });
+                } //  در صورتی که شماره صحیح وارد شد
+
+
+            });
+        } else {
+            String news = sharedPreferences.getString("phone_user", "");
+            Toast.makeText(this, "قبلا وارد شده اید" + news, Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private Boolean validatePhone() { //  متد خطاهای شماره تماس
+        String valName = et_phone.getEditText().getText().toString();
+        String noWhiteSpace = "(?=\\s+$)"; // if inot work can use this -> \\A\\w{4,20}\\z   :A that mean start and w means evrything including alphabets and digit
+        // with small letters and capital letters  and 4-22 is limits  \\ thats no soace   )
+
+        if (valName.isEmpty()) {
+            et_phone.setError("هنوز شماره موبایل وارد نشده است");
+            return false;
+        } else if (valName.length() < 11) {
+            et_phone.setError(" تعداد اعداد شماره تلفن کم است");
+            return false;
+        }
+      /*  else if (!valName.matches(noWhiteSpace)) {
+            et_phone.setError("به اشتباه بجای عدد ، حروف وارد کرده اید ");
+            return false;
+        }*/
+        else {
+            et_phone.setError(null);
+            return true;
+        }
+    }
+
+    private Boolean validateCode() { //  متد خطاهای شماره تماس
+        String valName = et_code.getEditText().getText().toString();
+        String noWhiteSpace = "(?=\\s+$)"; // if inot work can use this -> \\A\\w{4,20}\\z   :A that mean start and w means evrything including alphabets and digit
+        // with small letters and capital letters  and 4-22 is limits  \\ thats no soace   )
+
+        if (valName.isEmpty()) {
+            et_code.setError("هنوز شماره کد ارسال شده وارد نشده است");
+            return false;
+        } else if (valName.length() < 4) {
+            et_code.setError(" کد را 4 رقمی وارد کنید");
+            return false;
+        }
+      /*  else if (!valName.matches(noWhiteSpace)) {
+            et_phone.setError("به اشتباه بجای عدد ، حروف وارد کرده اید ");
+            return false;
+        }*/
+        else {
+            et_code.setError(null);
+            return true;
+        }
     }
 
 
@@ -543,118 +714,6 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
     }
 
-    private void loginUser() {
-        String check = sharedPreferences.getString("phone_user", "");
-        if (check.equals("")) {
-
-            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
-            bottomView = getLayoutInflater().inflate(R.layout.custom_dialog, null);
-            bottomSheetDialog.setContentView(bottomView);
-            BottomSheetBehavior sheetBehavior = BottomSheetBehavior.from((View) bottomView.getParent());
-            sheetBehavior.setPeekHeight(
-
-                    (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 500, getResources().getDisplayMetrics())
-            );
-
-
-            bottomSheetDialog.show();
-            et_phone = bottomView.findViewById(R.id.et_phone_userProfile);
-            Button btn_send = bottomView.findViewById(R.id.send_customLogin);
-            ProgressBar progressBar = bottomView.findViewById(R.id.progress_dialog);
-
-
-            btn_send.setOnClickListener(V -> {
-
-                if (et_phone.getEditText().getText().toString().equals("")) {
-                    et_phone.setError("شماره را وارد کنید");
-
-                } else {
-
-                    progressBar.setVisibility(View.VISIBLE);
-                    phone_user = et_phone.getEditText().getText().toString();
-
-
-                    Service.getApiClient().userLogin(phone_user).enqueue(new Callback<ResponseBody>() {
-                        @Override
-                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            if (response.isSuccessful()) {
-                                bottomSheetDialog.dismiss();
-
-                                BottomSheetDialog bottomSheetDialog2 = new BottomSheetDialog(UserActivity.this);
-                                bottomView2 = getLayoutInflater().inflate(R.layout.coustom_dialog_code, null);
-                                bottomSheetDialog2.setContentView(bottomView2);
-                                bottomSheetDialog2.setCanceledOnTouchOutside(true);
-                                BottomSheetBehavior sheetBehavior = BottomSheetBehavior.from((View) bottomView2.getParent());
-                                sheetBehavior.setPeekHeight(
-
-                                        (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 500, getResources().getDisplayMetrics())
-                                );
-                                bottomSheetDialog2.show();
-
-                                TextInputLayout et_code = bottomView2.findViewById(R.id.et_code_userProfile);
-                                Button btn_code = bottomView2.findViewById(R.id.sendCode_customLogin);
-                                btn_code.setOnClickListener(v1 -> {
-
-                                    if (et_code.getEditText().getText().toString().equals("")) {
-                                        et_code.setError("کد را وارد کنید");
-
-                                    } else {
-                                        code_user = et_code.getEditText().getText().toString();
-                                        Service.getApiClient().getUser(phone_user, code_user).enqueue(new Callback<UserDataModel>() {
-                                            @Override
-                                            public void onResponse(Call<UserDataModel> call1, @NonNull Response<UserDataModel> response1) {
-
-                                                if (response1.isSuccessful()) {
-                                                    UserDataModel userDataModel = response1.body();
-                                                    assert userDataModel!=null;
-                                                    id_user = userDataModel.getId_user();
-                                                    name_user = userDataModel.getName();
-                                                  //  phone_user = userDataModel.getPhone();
-                                                    editor.putString("name_user", name_user);
-                                                    editor.putInt("id_user", id_user);
-                                                    editor.putString("phone_user", phone_user);
-                                                    editor.commit();
-                                                    bottomSheetDialog2.dismiss();
-                                                    binding.phoneNumUserActivity.setText(phone_user);
-                                                    binding.userNameUserActivity.setText(name_user);
-                                                   // binding.avatarUserUserActivity.setBackgroundResource(R.drawable.trophy);
-                                                    binding.tvExitUserActivity.setText(R.string.exite);
-                                                    binding.tvEnter1RvSubUser.setVisibility(View.GONE);
-
-                                                }
-
-                                            }
-
-                                            @Override
-                                            public void onFailure(Call<UserDataModel> call1, Throwable t) {
-
-                                                    et_code.setError("کد تایید اشتباه است");
-                                                Toast.makeText(UserActivity.this, "wrong", Toast.LENGTH_LONG).show();
-                                            }
-                                        });
-                                    }
-                                });
-
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            Toast.makeText(UserActivity.this, "send again", Toast.LENGTH_SHORT).show();
-
-                        }
-                    });
-
-                }
-
-
-            });
-        } else {
-            String news = sharedPreferences.getString("phone_user", "");
-            Toast.makeText(this, "قبلا وارد شده اید" + news, Toast.LENGTH_SHORT).show();
-        }
-
-    }
 
     @SuppressLint("NonConstantResourceId")
     private void initRailActivity() {

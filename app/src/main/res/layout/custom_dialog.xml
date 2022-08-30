@@ -18,6 +18,7 @@
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       app:layout_constraintVertical_bias=".2"
+      app:counterMaxLength="11"
       android:hint="09xx xxx xx  xx">
       <com.google.android.material.textfield.TextInputEditText
         android:layout_width="match_parent"
@@ -26,6 +27,7 @@
         android:drawableEnd="@drawable/ic_edit"
         android:drawablePadding="10dp"
         android:inputType="phone"
+        android:maxLength="11"
         />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -38,7 +40,7 @@
     app:layout_constraintStart_toStartOf="@id/et_phone_userProfile"
     app:layout_constraintEnd_toEndOf="@id/et_phone_userProfile"
     android:text="send"
-    android:layout_marginTop="60dp"
+    android:layout_marginTop="35dp"
     />
   <ProgressBar
     android:id="@+id/progress_dialog"
@@ -49,6 +51,28 @@
     app:layout_constraintEnd_toEndOf="@id/et_phone_userProfile"
     android:layout_marginTop="60dp"
     android:visibility="gone"/>
+
+  <TextView
+    android:padding="@dimen/plane_08"
+    android:textAlignment="center"
+    android:textDirection="rtl"
+    android:textStyle="bold"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:text="اگر هنوز موفق به ارسال شماره تماس نشده اید از والدین خود درخواست راهنمایی کنید"
+    app:layout_constraintBottom_toBottomOf="@+id/send_customLogin"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/et_phone_userProfile"
+    app:layout_constraintTop_toTopOf="@+id/et_phone_userProfile" />
+
+  <ImageView
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:src="@drawable/parent_help"
+    app:layout_constraintBottom_toBottomOf="@+id/send_customLogin"
+    app:layout_constraintEnd_toStartOf="@+id/send_customLogin"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/et_phone_userProfile" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

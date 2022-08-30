@@ -66,6 +66,7 @@
               app:layout_constraintHorizontal_bias=".9"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent" />
+
             <LinearLayout
               android:id="@+id/parenttvNum_userActivity"
               android:layout_width="wrap_content"
@@ -80,8 +81,8 @@
                 android:layout_marginEnd="@dimen/plane_08"
                 android:fontFamily="@font/lalezar_regular"
                 android:hint="@string/hint_number"
-                android:textSize="18sp"
                 android:padding="@dimen/plane_04"
+                android:textSize="12sp"
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="@id/tvNum_userActivity"
                 app:layout_constraintEnd_toStartOf="@id/tvNum_userActivity"
@@ -98,14 +99,15 @@
 
                 app:layout_constraintEnd_toEndOf="@id/tvTitleUser"
                 app:layout_constraintTop_toBottomOf="@id/tvTitleUser" />
+
               <TextView
                 android:id="@+id/userName_userActivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lalezar_regular"
                 android:hint="@string/hint_user_name"
-                android:textSize="18sp"
                 android:padding="@dimen/plane_04"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@id/tvName_userActivity"
                 app:layout_constraintEnd_toStartOf="@id/tvName_userActivity"
                 app:layout_constraintTop_toTopOf="@id/tvName_userActivity" />
@@ -126,15 +128,16 @@
               android:id="@+id/tvAccess_userActivity"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:padding="@dimen/plane_04"
               android:fontFamily="@font/lalezar_regular"
+              android:padding="@dimen/plane_04"
               android:text=" وضعیت دسترسی :"
               android:textColor="@color/brown"
               android:textSize="24sp"
               android:textStyle="bold"
+              app:layout_constraintBottom_toTopOf="@id/parentTransaction"
               app:layout_constraintEnd_toEndOf="@id/parenttvNum_userActivity"
-              app:layout_constraintTop_toBottomOf="@id/parenttvNum_userActivity"
-              app:layout_constraintBottom_toTopOf="@id/parentTransaction"/>
+              app:layout_constraintTop_toBottomOf="@id/parenttvNum_userActivity" />
+
             <LinearLayout
               android:id="@+id/parentTransaction"
               android:layout_width="wrap_content"
@@ -149,7 +152,7 @@
                 android:layout_marginEnd="@dimen/plane_08"
                 android:fontFamily="@font/lalezar_regular"
                 android:hint="@string/hint_number"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="@id/tvNum_userActivity"
                 app:layout_constraintEnd_toStartOf="@id/tvNum_userActivity"
@@ -166,6 +169,7 @@
 
 
             </LinearLayout>
+
             <LinearLayout
               android:id="@+id/parentAmount"
               android:layout_width="wrap_content"
@@ -180,7 +184,7 @@
                 android:layout_marginEnd="@dimen/plane_08"
                 android:fontFamily="@font/lalezar_regular"
                 android:hint="@string/hint_number"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="@id/tvNum_userActivity"
                 app:layout_constraintEnd_toStartOf="@id/tvNum_userActivity"
@@ -196,6 +200,7 @@
                 android:textSize="18sp" />
 
             </LinearLayout>
+
             <LinearLayout
               android:id="@+id/parentّFirstDate"
               android:layout_width="wrap_content"
@@ -210,7 +215,7 @@
                 android:layout_marginEnd="@dimen/plane_08"
                 android:fontFamily="@font/lalezar_regular"
                 android:hint="@string/hint_number"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="@id/tvNum_userActivity"
                 app:layout_constraintEnd_toStartOf="@id/tvNum_userActivity"
@@ -227,6 +232,7 @@
 
 
             </LinearLayout>
+
             <LinearLayout
               android:id="@+id/parentّLastDate"
               android:layout_width="wrap_content"
@@ -241,7 +247,7 @@
                 android:layout_marginEnd="@dimen/plane_08"
                 android:fontFamily="@font/lalezar_regular"
                 android:hint="@string/hint_number"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="@id/tvNum_userActivity"
                 app:layout_constraintEnd_toStartOf="@id/tvNum_userActivity"
@@ -259,27 +265,46 @@
 
             </LinearLayout>
 
-<Button
-  android:id="@+id/btnPayment"
-  android:layout_width="wrap_content"
-  android:layout_height="wrap_content"
-  app:layout_constraintTop_toBottomOf="@id/tvAccess_userActivity"
-  app:layout_constraintBottom_toBottomOf="parent"
-  app:layout_constraintStart_toStartOf="parent"
-  app:layout_constraintEnd_toStartOf="@id/parentTransaction"
-  android:background="@drawable/shape_tag6"
-  android:text="  دریافت  کد دسترسی "
-  android:drawableStart="@drawable/ic_baseline_add_card_24"
-  android:drawableEnd="@drawable/ic_reply"
-  android:textStyle="bold"
-  android:paddingStart="@dimen/plane_08"
-  android:paddingEnd="@dimen/plane_08"/>
+            <Button
+              android:id="@+id/btnPayment"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:background="@drawable/shape_tag6"
+              android:drawableStart="@drawable/ic_baseline_add_card_24"
+              android:drawableEnd="@drawable/ic_reply"
+              android:paddingStart="@dimen/plane_08"
+              android:paddingEnd="@dimen/plane_08"
+              android:text="  دریافت  کد دسترسی "
+              android:textStyle="bold"
+              android:visibility="gone"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintEnd_toStartOf="@id/parentTransaction"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/tvAccess_userActivity" />
+
+            <Button
+              android:id="@+id/btnPaymentLogin"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:background="@drawable/shape_btn_bg"
+
+              android:drawableEnd="@drawable/ic_reply"
+              android:paddingStart="@dimen/plane_08"
+              android:paddingEnd="@dimen/plane_08"
+              android:text="  ورود به برنامه "
+              android:textStyle="bold"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintEnd_toStartOf="@id/parentTransaction"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/tvAccess_userActivity" />
+
             <com.makeramen.roundedimageview.RoundedImageView
               android:id="@+id/avatarUser_userActivity"
               android:layout_width="82dp"
               android:layout_height="82dp"
               android:elevation="@dimen/plane_08"
               android:src="@drawable/ic_baseline_account_circle_24"
+              android:scaleType="centerCrop"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent"
               app:riv_border_color="@color/popit_yellow"
@@ -294,13 +319,13 @@
               android:background="@drawable/shape_btn_bg"
               android:fontFamily="@font/lalezar_regular"
               android:paddingStart="@dimen/plane_16"
-              android:paddingEnd="@dimen/plane_16"
-              android:paddingTop="@dimen/plane_04"
-              android:paddingBottom="@dimen/plane_04"
               android:text="@string/enter"
+              android:paddingTop="@dimen/plane_04"
+              android:paddingEnd="@dimen/plane_16"
+              android:paddingBottom="@dimen/plane_04"
+              app:drawableStartCompat="@drawable/ic_baseline_exit_to_app_24"
               app:layout_constraintStart_toStartOf="@id/avatarUser_userActivity"
-              app:layout_constraintTop_toBottomOf="@id/avatarUser_userActivity"
-              app:drawableStartCompat="@drawable/ic_baseline_exit_to_app_24" />
+              app:layout_constraintTop_toBottomOf="@id/avatarUser_userActivity" />
           </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -429,7 +454,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/iv_header_12" />
+                 />
 
               <TextView
                 android:layout_width="wrap_content"
@@ -671,20 +696,10 @@
               app:layout_constraintEnd_toEndOf="parent">
 
               <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_schedule" />
-
-              <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/baloo"
-                android:gravity="center"
-                android:textColor="@color/brown"
-                android:text="@string/parentWatchLater"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                android:scaleType="centerInside"
+                android:src="@drawable/parent_history" />
 
             </LinearLayout>
           </androidx.constraintlayout.widget.ConstraintLayout>
@@ -924,17 +939,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_like_selected" />
+                android:src="@drawable/ic_parents_like" />
 
-              <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/baloo"
-                android:gravity="center"
-                android:text="@string/parentLike"
-                android:textColor="@color/brown"
-                android:textSize="24sp"
-                android:textStyle="bold" />
             </LinearLayout>
           </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

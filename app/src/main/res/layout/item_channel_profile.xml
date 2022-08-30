@@ -23,7 +23,6 @@
         android:layout_width="66dp"
         android:layout_height="66dp"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:src="@drawable/avatar_2"
         app:riv_border_color="@color/blue_bg_light"
         app:riv_border_width="3dp"
         app:riv_corner_radius="20dp" />

@@ -31,7 +31,8 @@
   <string name="dialog_login_negative">الان نه ، ادامه گشت و گذار</string>
   <string name="username">username</string>
   <string name="password">password</string>
-  <string name="hint_number"> + + + + + + + + </string>
+  <string name="hint_number">روی عکس یا کادر زرد روبرو کلیک کنید---))</string>
+  <string name="hint_textPay">"  برای دستسرس و دریافت کد اشتراک دکمه روبرو را انتخاب کنید ---))</string>
   <string name="hint_user_name">بدون نام</string>
   <string name="exite">خروج از حساب</string>
   <string name="enter">ورود به حساب</string>
@@ -42,5 +43,7 @@
   <string name="payment1mounth">دریافت کد دسترسی با اعتبار 1 ماه\n به مبلغ 12000 هزارتومان</string>
   <string name="payment3mounth">دریافت کد دسترسی با اعتبار 3 ماه\n به مبلغ 30000 هزارتومان</string>
   <string name="payment6mounth">دریافت کد دسترسی با اعتبار 6 ماه\n به مبلغ 60000 هزارتومان</string>
+  <string name="sendAgainPhoneNumber">اگر بعد از مدت کوتاهی پیام حاوی کد تایید را دریافت نکرده اید از این صفحه خارج شوید و دوباره و با دقت بیشتری شماره خود و یا والدین خود را وارد کنید.</string>
+  <string name="offer_ege">سن پیشنهادی</string>
 
 </resources>

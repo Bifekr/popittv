@@ -20,7 +20,6 @@
     android:adjustViewBounds="true"
     android:layout_height="50dp"
     android:scaleType="fitXY"
-    android:src="@drawable/iv_btn_2"
     android:layout_gravity="center"/>
   <TextView
     android:gravity="center_vertical|center_horizontal"

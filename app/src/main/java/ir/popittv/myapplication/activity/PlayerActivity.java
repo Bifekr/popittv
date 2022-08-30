@@ -45,6 +45,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
 
 import ir.popittv.myapplication.R;
+import ir.popittv.myapplication.ViewDialog;
 import ir.popittv.myapplication.adapter.ChannelDetail_adapter2;
 import ir.popittv.myapplication.adapter.FunnyAdapter;
 import ir.popittv.myapplication.databinding.ActivityPlayerBinding;
@@ -64,7 +65,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     private final String STATE_RESUME_POSITION = "resumePosition";
     private final String STATE_PLAYER_FULLSCREEN = "playerFullscreen";
     SharedPreferences.Editor editor;
-    TextInputLayout et_phone;
+
     int kind;
     int id_channel;
     ImageView lockScreen;
@@ -73,6 +74,8 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     int currentWindow = 0;
     long playBackPosition = 0;
     MediaItem mediaItem;
+
+
     SimpleExoPlayer simpleExoPlayer;
     private ActivityPlayerBinding binding;
     private MainViewModel mainViewModel;
@@ -81,10 +84,16 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     private String name_user;
     private String phone_user;
     private String code_user;
+   private Long lastDate;
     private int id_user;
     private int id_vid_funny;
     private View bottomView;
     private View bottomView2;
+    TextInputLayout et_phone;
+    TextInputLayout et_code;;
+    String subscribe_b;
+    BottomSheetDialog bottomSheetDialog2;
+    BottomSheetDialog bottomSheetDialog;
     private PlayerView playerView;
     private MediaSource mVideoSource;
     private boolean mExoPlayerFullscreen = false;
@@ -107,7 +116,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         name_user = sharedPreferences.getString("name_user", null);
         id_user = sharedPreferences.getInt("id_user", 0);
         b_kindlink = sharedPreferences.getBoolean("switchNet", true);
-
+        lastDate = sharedPreferences.getLong("lastDate", 0);
         super.onCreate(savedInstanceState);
         binding = ActivityPlayerBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
@@ -138,14 +147,27 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         //iconLockScreen();
 
 
+        binding.parentSub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (subscribe_b.equals(0)) {
+                    binding.parentSub.setImageResource(R.drawable.red_youtube);
+                    subscribe_b.equals(1);
+                }else {
+                    binding.parentSub.setImageResource(R.drawable.red_white_sub);
+                    subscribe_b.equals(0);
+                }
+            }
+        });
+
      /*   btn_fullScreen = binding.exoPlayer.findViewById(R.id.bt_fullscreen);
         btn_fullScreen.setOnClickListener(v -> {
 
         });
-*/
-        // if (phone_user==null) { login();}
-         login();
+*/if (phone_user==null  || lastDate==0 || lastDate==null) {
+            login();
 
+        }
 ///////////////////////
     /*    dataSourceFactory =
                 new DefaultDataSourceFactory(
@@ -211,10 +233,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     private void initRv() {
 
 
-        binding.rvChannelVideoPlayer.setHasFixedSize(true);
-        //binding.rvChannelVideoPlayer.setLayoutManager(new LinearLayoutManager(PlayerActivity.this, RecyclerView.VERTICAL, false));
-        binding.rvChannelVideoPlayer.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        binding.rvChannelVideoPlayer.setAdapter(funnyAdapter1);
+
 
         binding.rvMenuTagPlayer.setLayoutManager(new GridLayoutManager(this, 2, RecyclerView.VERTICAL
                 , false));
@@ -418,131 +437,53 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     //endregion
 
     private void login() {
-        new Handler().postDelayed(() -> {
+        if (phone_user==null  || lastDate==0 || lastDate==null) {
+            new Handler().postDelayed(() -> {
 
-            loginUser();
-
-
-        }, 5000);
-    }
-
-    private void loginUser() {
-        String check = sharedPreferences.getString("phone_user", null);
-        Long lastDate = sharedPreferences.getLong("lastDate", 0);
-        if (check==null) {
-
-            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
-            bottomView = getLayoutInflater().inflate(R.layout.custom_dialog, null);
-            bottomSheetDialog.setContentView(bottomView);
-            BottomSheetBehavior sheetBehavior = BottomSheetBehavior.from((View) bottomView.getParent());
-            sheetBehavior.setPeekHeight(
-
-                    (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 500, getResources().getDisplayMetrics())
-            );
-
-            bottomSheetDialog.show();
-            et_phone = bottomView.findViewById(R.id.et_phone_userProfile);
-            Button btn_send = bottomView.findViewById(R.id.send_customLogin);
-            ProgressBar progressBar = bottomView.findViewById(R.id.progress_dialog);
-
-            btn_send.setOnClickListener(V -> {
-
-                if (et_phone.getEditText().getText().toString().equals("")) {
-                    et_phone.setError("شماره را وارد کنید");
-
-                } else {
-
-                    progressBar.setVisibility(View.VISIBLE);
-                    phone_user = et_phone.getEditText().getText().toString();
-                    editor = sharedPreferences.edit();
-                    editor.putString("phone_user", phone_user);
-                    editor.apply();
-                    Service.getApiClient().userLogin(phone_user).enqueue(new Callback<ResponseBody>() {
-                        @Override
-                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                            bottomSheetDialog.dismiss();
-
-                            BottomSheetDialog bottomSheetDialog2 = new BottomSheetDialog(PlayerActivity.this);
-                            bottomView2 = getLayoutInflater().inflate(R.layout.coustom_dialog_code, null);
-                            bottomSheetDialog2.setContentView(bottomView2);
-                            bottomSheetDialog2.show();
-
-                            TextInputLayout et_code = bottomView2.findViewById(R.id.et_code_userProfile);
-                            Button btn_code = bottomView2.findViewById(R.id.sendCode_customLogin);
-                            btn_code.setOnClickListener(v1 -> {
-
-                                if (et_code.getEditText().getText().toString().equals("")) {
-                                    et_code.setError("کد را وارد کنید");
-
-                                } else {
-                                    code_user = et_code.getEditText().getText().toString();
-                                    Service.getApiClient().getUser(phone_user, code_user).enqueue(new Callback<UserDataModel>() {
-                                        @Override
-                                        public void onResponse(Call<UserDataModel> call1, @NonNull Response<UserDataModel> response1) {
-                                            UserDataModel userDataModel = response1.body();
-                                            if (response1.isSuccessful()) {
-                                                assert userDataModel!=null;
-                                                id_user = userDataModel.getId_user();
-                                                name_user = userDataModel.getName();
-                                                editor = sharedPreferences.edit();
-                                                editor.putString("name_user", name_user);
-                                                editor.putInt("id_user", id_user);
-                                                editor.apply();
-                                                bottomSheetDialog2.dismiss();
-                                                Toast.makeText(PlayerActivity.this, "با موفقیت وارد خساب حود شدید", Toast.LENGTH_LONG).show();
-
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<UserDataModel> call1, Throwable t) {
-                                            Toast.makeText(PlayerActivity.this, "کد تایید را اشتباه وارد  کردید", Toast.LENGTH_LONG).show();
-                                        }
-                                    });
-                                }
-                            });
+            checkExpireUser();
 
 
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            Toast.makeText(PlayerActivity.this, "send again", Toast.LENGTH_SHORT).show();
-
-                        }
-                    });
-
-                }
-
-
-            });
-        }else if (lastDate==0) {
-          AlertDialog.Builder builder;
-          builder = new AlertDialog.Builder(PlayerActivity.this, android.R.style.Theme_Material_Dialog_Alert);
-          builder.setTitle("عدم دسترسی به محتوا")
-                  .setMessage("کد دسترسی معتبری یافت نشد")
-                  .setPositiveButton("دریافت کد دسترسی", new DialogInterface.OnClickListener() {
-                      @Override
-                      public void onClick(DialogInterface dialog, int which) {
-                          Toast.makeText(PlayerActivity.this, "YES", Toast.LENGTH_SHORT).show();
-                          startActivity(new Intent(PlayerActivity.this,PaymentActivity.class));
-
-                      }
-                  }).setNegativeButton("بعدا یادوری کن", new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialog, int which) {
-                  Toast.makeText(PlayerActivity.this, "NO", Toast.LENGTH_SHORT).show();
-              }
-          });
-          builder.show();
-           //
-        }else {
-            Toast.makeText(PlayerActivity.this, ""+lastDate, Toast.LENGTH_SHORT).show();
+            }, 5000);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
 
     }
+
+
+    private void checkExpireUser(){
+        if (lastDate==0) {
+            ViewDialog alert = new ViewDialog();
+            alert.showDialog(PlayerActivity.this, "!! کد دسترسی یافت نشد !! ");
+        }
+  /*          AlertDialog.Builder builder;
+            builder = new AlertDialog.Builder(PlayerActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+            builder.setTitle("عدم دسترسی به محتوا")
+                    .setMessage("کد دسترسی معتبری یافت نشد")
+                    .setIcon(R.drawable.ic_parents_monny)
+                    .setPositiveButton("دریافت کد دسترسی", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {  // مددیریت پرداخت پول و دریافت اشتراک برای کاربر
+                            Toast.makeText(PlayerActivity.this, "YES", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(PlayerActivity.this,UserActivity.class));
+
+                        }
+                    }).setNegativeButton("بعدا یادوری کن", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {  // مدیریت عدم خواستن دریافت اشتراک
+                    Toast.makeText(PlayerActivity.this, "NO", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(PlayerActivity.this,MainActivity.class));
+                }
+            });
+            builder.show();
+
+        }*/
+    }
+
 
 
     private void releasePlayer() {

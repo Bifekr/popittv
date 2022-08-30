@@ -2,6 +2,7 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical">
@@ -17,6 +18,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintVertical_bias=".2"
+    app:counterMaxLength="4"
     app:layout_constraintWidth_percent=".5">
 
     <com.google.android.material.textfield.TextInputEditText
@@ -25,6 +27,7 @@
       android:drawableStart="@drawable/ic_baseline_phone_iphone_24"
       android:drawableEnd="@drawable/ic_edit"
       android:inputType="number"
+      android:maxLength="4"
       android:drawablePadding="10dp" />
 
   </com.google.android.material.textfield.TextInputLayout>
@@ -33,11 +36,34 @@
     android:id="@+id/sendCode_customLogin"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_marginTop="60dp"
+    android:layout_marginTop="35dp"
     android:background="@drawable/shape_tag6"
     android:text="code"
     app:layout_constraintEnd_toEndOf="@id/et_code_userProfile"
     app:layout_constraintStart_toStartOf="@id/et_code_userProfile"
     app:layout_constraintTop_toBottomOf="@id/et_code_userProfile" />
+
+  <TextView
+    android:textStyle="bold"
+    android:textDirection="rtl"
+    android:textAlignment="center"
+    android:padding="@dimen/plane_08"
+    android:id="@+id/sendAgainPhoneNumber"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:text="@string/sendAgainPhoneNumber"
+    app:layout_constraintBottom_toBottomOf="@+id/sendCode_customLogin"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/sendCode_customLogin"
+    app:layout_constraintTop_toTopOf="@+id/et_code_userProfile" />
+
+  <ImageView
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:src="@drawable/ic_parents_code"
+    app:layout_constraintBottom_toBottomOf="@+id/sendCode_customLogin"
+    app:layout_constraintEnd_toStartOf="@+id/et_code_userProfile"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/et_code_userProfile" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

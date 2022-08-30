@@ -31,7 +31,7 @@
         android:id="@+id/main_media_frame"
         android:layout_width="0dp"
         android:layout_height="280dp"
-        app:layout_constraintEnd_toStartOf="@id/rvChannelVideo_player"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -58,36 +58,13 @@
         android:id="@+id/progress_bar"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:visibility="gone"
         android:indeterminateTint="@color/popit_yellow"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/main_media_frame"
         app:layout_constraintEnd_toEndOf="@id/main_media_frame"
         app:layout_constraintStart_toStartOf="@id/main_media_frame"
         app:layout_constraintTop_toTopOf="@id/main_media_frame" />
 
-      <ImageView
-        android:id="@+id/ivBannerItemChannelAll"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@id/parentProfile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.08"
-        app:layout_constraintStart_toEndOf="@id/main_media_frame"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0" />
-
-      <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvChannelVideo_player"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:elevation="@dimen/plane_08"
-        app:layout_constraintBottom_toTopOf="@id/parentFavTag_player"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/main_media_frame"
-        app:layout_constraintTop_toBottomOf="@id/ivBannerItemChannelAll"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintWidth_percent=".4" />
 
       <!--<ImageView
         android:layout_width="400dp"
@@ -101,15 +78,24 @@
       <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/parentProfile"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="@dimen/plane_04"
+        android:layout_height="70dp"
         android:elevation="@dimen/plane_16"
-        app:layout_constraintBottom_toBottomOf="@id/ivBannerItemChannelAll"
+        android:padding="@dimen/plane_04"
+        app:layout_constraintBottom_toTopOf="@id/parentFavTag_player"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@id/main_media_frame"
-        app:layout_constraintTop_toTopOf="@id/ivBannerItemChannelAll"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/parentCon_activityPlayer"
         app:layout_constraintVertical_bias=".01">
+
+        <ImageView
+          android:id="@+id/ivBannerItemChannelAll"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:adjustViewBounds="true"
+          android:scaleType="centerCrop"
+          tools:layout_editor_absoluteX="4dp"
+          tools:layout_editor_absoluteY="4dp" />
 
         <androidx.cardview.widget.CardView
           android:id="@+id/parentChannelProfile_itemAllChan"
@@ -129,7 +115,6 @@
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:src="@drawable/avatar_2"
             app:riv_border_color="@color/blue_bg_light"
             app:riv_border_width="3dp"
             app:riv_corner_radius="14dp" />
@@ -140,12 +125,12 @@
           android:id="@+id/titleFaChannel_player"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:background="@color/transparent40"
           android:fontFamily="@font/lalezar_regular"
           android:gravity="center_horizontal"
           android:includeFontPadding="true"
           android:paddingStart="15dp"
           android:paddingEnd="1dp"
-          android:background="@color/transparent40"
           android:text="fdkljfdkjfg rfg  "
           android:textSize="12sp"
           app:layout_constraintBottom_toTopOf="@id/titleEnChannel_player"
@@ -158,9 +143,9 @@
           android:id="@+id/titleEnChannel_player"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:background="@color/transparent40"
           android:fontFamily="@font/baloo"
           android:gravity="start"
-          android:background="@color/transparent40"
           android:includeFontPadding="true"
           android:paddingLeft="15dp"
           android:paddingRight="15dp"
@@ -172,36 +157,48 @@
           app:layout_constraintTop_toBottomOf="@id/titleFaChannel_player" />
 
 
-        <TextView
+        <ImageView
           android:id="@+id/parentSub"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:background="@drawable/shape_tag2"
-          android:fontFamily="@font/baloo"
-          android:paddingStart="12dp"
-          android:paddingTop="@dimen/plane_08"
-          android:paddingEnd="12dp"
-          android:paddingBottom="@dimen/plane_08"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:scaleType="fitXY"
+          android:src="@drawable/red_youtube"
           android:text="Subscribe"
           android:textSize="11sp"
+          app:layout_constraintBottom_toTopOf="@id/titleSub_player"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="1"
-          app:layout_constraintTop_toTopOf="@id/titleFaChannel_player" />
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="0"
+          app:layout_constraintWidth_percent=".18"
+          app:layout_constraintHeight_percent=".5"/>
 
         <TextView
           android:id="@+id/titleSub_player"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:gravity="center_horizontal|center_vertical"
-          android:paddingLeft="@dimen/plane_08"
-          android:paddingEnd="@dimen/plane_16"
+
           android:text="2 to 4"
           android:textSize="12sp"
-          app:layout_constraintEnd_toEndOf="@id/parentSub"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toStartOf="@id/titleSub2_player"
           app:layout_constraintStart_toStartOf="@id/parentSub"
-          app:layout_constraintTop_toBottomOf="@id/parentSub"
+          app:layout_constraintTop_toBottomOf="@id/parentSub" />
 
-          />
+        <TextView
+          android:id="@+id/titleSub2_player"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:gravity="center_horizontal|center_vertical"
+          android:paddingLeft="@dimen/plane_08"
+          android:text="@string/offer_ege"
+          android:textSize="12sp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="@id/parentSub"
+          app:layout_constraintStart_toEndOf="@id/titleSub_player"
+          app:layout_constraintTop_toBottomOf="@id/parentSub" />
 
 
       </androidx.constraintlayout.widget.ConstraintLayout>
@@ -212,10 +209,9 @@
         android:layout_height="70dp"
         android:padding="@dimen/plane_04"
 
-        app:layout_constraintEnd_toStartOf="@id/rvChannelVideo_player"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_media_frame"
-        app:layout_constraintBottom_toTopOf="@id/parentFavTag_player">
+        app:layout_constraintTop_toBottomOf="@id/main_media_frame">
 
         <LinearLayout
           android:id="@+id/linearLayout"
@@ -331,7 +327,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/parentCon_activityPlayer">
+        app:layout_constraintTop_toBottomOf="@id/parentProfile">
 
         <TextView
           android:id="@+id/titleFav_frg1"

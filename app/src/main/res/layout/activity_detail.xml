@@ -25,7 +25,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/banner_channel_poster"
         android:transitionName="banner_channel"/>
 
       <androidx.constraintlayout.widget.ConstraintLayout
