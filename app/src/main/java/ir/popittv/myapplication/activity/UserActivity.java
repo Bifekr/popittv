@@ -446,6 +446,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
                 binding.btnPaymentLogin.setVisibility(View.VISIBLE);
                 binding.btnPayment.setVisibility(View.GONE);
+                binding.tvExitUserActivity.setVisibility(View.GONE);
                 editor.putString("phone_user", "");
                 editor.putInt("id_user", 0);
                 editor.putLong("lastDate",0);

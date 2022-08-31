@@ -34,6 +34,7 @@ import ir.popittv.myapplication.adapter.TagAdapter;
 import ir.popittv.myapplication.databinding.ActivityMainBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.models.HashTagDataModel;
+import ir.popittv.myapplication.models.UserDataModel;
 import ir.popittv.myapplication.request.Service;
 import ir.popittv.myapplication.utils.OnClickFrg1;
 import ir.popittv.myapplication.utils.OnClickFunny;
@@ -52,6 +53,10 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
     int id_channel_single;
     private int row_index;
     private int id_user;
+ 
+    private String  phone_user ;
+    private Long  expireDate ;
+    private Long  lastDate ;
     private boolean b_switchLink;
     private boolean b_search = false;
 
@@ -83,7 +88,9 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         id_user = sharedPreferences.getInt("id_user", 0);
-
+        phone_user = sharedPreferences.getString("phone_user", null);
+        expireDate = sharedPreferences.getLong("expireDate", 0);
+        lastDate = sharedPreferences.getLong("lastDate", 0);
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -100,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         initRailActivity();
         taginit();
         initRv_Vp_adapter();
-
+        getPeymentFromServer();
         //retrieve data into modelClass
         request();
 
@@ -133,7 +140,37 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
         tagAdapter = new TagAdapter( mainActivity);
     }
+    private void getPeymentFromServer() {
 
+        if (phone_user!=null) {
+            Service.getApiClient().getPayment(phone_user).enqueue(new Callback<UserDataModel>() {
+                @Override
+                public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
+                    if (response.isSuccessful()) {
+                        assert response.body()!=null;
+                        expireDate = response.body().getExpireDate();
+                        lastDate = expireDate - System.currentTimeMillis();
+                        lastDate = (lastDate / 1000);
+                        lastDate = (lastDate / 60);
+                        lastDate = (lastDate / 60);
+                        lastDate = (lastDate / 24);
+                        editor.putLong("lastDate", lastDate);
+                        editor.commit();
+                        if (lastDate<=0){
+                            Toast.makeText(MainActivity.this, "کد دسترسی به محتوا به پایان رسیده است", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<UserDataModel> call, Throwable t) {
+
+                }
+            });
+
+        }
+
+    }
     private void getSearchFunny() {
         mainViewModel.getFunny_search().observe(this, funnyDataModels -> {
 
