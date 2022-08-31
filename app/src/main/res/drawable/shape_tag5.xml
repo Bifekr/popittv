@@ -5,7 +5,7 @@
   <corners android:bottomRightRadius="@dimen/plane_24" android:topRightRadius="@dimen/plane_24"/>
 
   <gradient
-    android:centerColor="@color/orange_inactive"
+    android:centerColor="@color/transparent80"
     android:startColor="@color/popit_yellow"
     android:endColor="@color/transparent"
     android:angle="90"/>

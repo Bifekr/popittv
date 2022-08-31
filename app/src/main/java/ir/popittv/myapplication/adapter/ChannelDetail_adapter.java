@@ -34,6 +34,7 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
     private  boolean bool_like=false;
     private  boolean boo_mark=false;
     private  boolean boo_later=false;
+    private  boolean boo_see=false;
 
     public ChannelDetail_adapter(Context context,OnClickFunny onClickFunny) {
         this.context = context;
@@ -87,19 +88,7 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
             }
 
 
-           holder.binding.ivPosterItemVideo.setOnClickListener(v -> {
-                Intent intent = new Intent(context, PlayerActivity.class);
-                id_vid_funny = funnyDataModels.get(position).getId_funny();
-               int kind = funnyDataModels.get(position).getKind();
-               int id_channel = funnyDataModels.get(position).getId_channel();
-                intent.putExtra("id_vid_funny", id_vid_funny);
-                intent.putExtra("kind", kind);
-                intent.putExtra("id_channel", id_channel);
-                notifyDataSetChanged();
-                context.startActivity(intent);
-            });
-
-        /*    holder.binding.ivMarcItemDef.setOnClickListener(v -> {
+            holder.binding.ivMarcItemDef.setOnClickListener(v -> {
                 if (!boo_mark) {
                     int id_funny = funnyDataModels.get(position).getId_funny();
                     onClickFunny.onClickSave(id_funny);
@@ -111,7 +100,7 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
                     holder.binding.ivMarcItemDef.setBackgroundResource(R.drawable.shape_tag4);
                     boo_mark=false;
                 }
-            });*/
+            });
 
 
             holder.binding.parentLikeItemVidDef.setOnClickListener(v -> {
@@ -129,7 +118,7 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
 
             });
 
-         /*   holder.binding.ivLaterItemDef.setOnClickListener(v -> {
+            holder.binding.ivLaterItemDef.setOnClickListener(v -> {
                 if (!boo_later) {
                     int id_funny2 = funnyDataModels.get(position).getId_funny();
                     onClickFunny.onClickLater(id_funny2);
@@ -141,7 +130,7 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
                     holder.binding.ivLaterItemDef.setBackgroundResource(R.drawable.shape_tag4);
                     boo_later=false;
                 }
-            });*/
+            });
 
 
             //region playerActivity
@@ -149,18 +138,12 @@ public class ChannelDetail_adapter extends RecyclerView.Adapter<ChannelDetail_ad
                 int id_funny3 = funnyDataModels.get(position).getId_funny();
                 int id_channel = funnyDataModels.get(position).getId_channel();
                 int kind = funnyDataModels.get(position).getKind();
-                if (!boo_later) {
-                    int id_funny2 = funnyDataModels.get(position).getId_funny();
-                    onClickFunny.onClickLater(id_funny2);
-                    holder.binding.parentViewItemVidDef.setBackgroundResource(R.drawable.shape_tag2);
-                    boo_later=true;
-                }else {
-                    int id_funny2 = funnyDataModels.get(position).getId_funny();
-                    onClickFunny.onClickLater(id_funny2);
-                    boo_later=false;
-                }
                 onClickFunny.onClickSee(id_funny3);
                 onClickFunny.onClickPlayer(id_funny3,id_channel,kind);
+                if (!boo_see) {
+                    holder.binding.parentViewItemVidDef.setBackgroundResource(R.drawable.shape_tag2);
+                }
+
 
 
             });

@@ -58,7 +58,7 @@ public class AllChannel_Adapter extends RecyclerView.Adapter<AllChannel_Adapter.
 
 
         holder.binding.tvSubAllChannel.setText(channelDataModels.get(position).getFollowers());
-        holder.binding.tvAgeAllChannel.setText(channelDataModels.get(position).getAge_name());
+        holder.binding.tvAge2AllChannel.setText(channelDataModels.get(position).getAge_name());
         holder.binding.titleFaItemAllChannel.setText(channelDataModels.get(position).getName_chan_fa());
         holder.binding.titleEnItemAllChannel.setText(channelDataModels.get(position).getName_chan_en());
 
@@ -75,10 +75,10 @@ public class AllChannel_Adapter extends RecyclerView.Adapter<AllChannel_Adapter.
             Intent intent=new Intent(context, DetailActivity.class);
             intent.putExtra("id_channel_single",row_index);
             intent.putExtra("kind",kind);
-            Pair[] pairs = new Pair[3];
+            Pair[] pairs = new Pair[2];
             pairs[0] = new Pair<View,String>(holder.binding.ivBannerItemChannelAll,"banner_channel");
             pairs[1] = new Pair<View,String>(holder.binding.parentChannelProfileItemAllChan,"cardProfile_channel");
-            pairs[2] = new Pair<View,String>(holder.binding.parentTitleItemAllChannel,"parentTitle_channel");
+         //   pairs[2] = new Pair<View,String>(holder.binding.parentTitleItemAllChannel,"parentTitle_channel");
             ActivityOptions activityOptions=ActivityOptions.makeSceneTransitionAnimation(activity,pairs);
             context.startActivity(intent,activityOptions.toBundle());
 

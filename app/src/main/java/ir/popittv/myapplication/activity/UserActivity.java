@@ -431,6 +431,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
             binding.userNameUserActivity.setText(name_user);
             binding.btnPaymentLogin.setVisibility(View.GONE);
             binding.btnPayment.setVisibility(View.VISIBLE);
+            binding.tvExitUserActivity.setVisibility(View.VISIBLE);
             //  binding.tvExitUserActivity.setVisibility(View.VISIBLE);
             //  binding.tvEnterUserActivity.setVisibility(View.GONE);
             getPeymentFromServer();

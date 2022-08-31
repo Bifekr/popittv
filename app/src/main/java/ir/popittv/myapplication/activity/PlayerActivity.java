@@ -1,8 +1,6 @@
 package ir.popittv.myapplication.activity;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.icu.text.DecimalFormat;
@@ -10,20 +8,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -40,23 +34,21 @@ import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.ViewDialog;
-import ir.popittv.myapplication.adapter.ChannelDetail_adapter2;
+import ir.popittv.myapplication.adapter.ChannelDetail_adapter;
 import ir.popittv.myapplication.adapter.FunnyAdapter;
 import ir.popittv.myapplication.databinding.ActivityPlayerBinding;
-import ir.popittv.myapplication.models.UserDataModel;
-import ir.popittv.myapplication.request.Service;
+import ir.popittv.myapplication.models.ChannelDataModel;
+import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.utils.OnClickFunny;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
@@ -64,8 +56,9 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     private final String STATE_RESUME_WINDOW = "resumeWindow";
     private final String STATE_RESUME_POSITION = "resumePosition";
     private final String STATE_PLAYER_FULLSCREEN = "playerFullscreen";
+    ////////////////////////////////////
+    private final boolean isLocked = false;
     SharedPreferences.Editor editor;
-
     int kind;
     int id_channel;
     ImageView lockScreen;
@@ -74,9 +67,12 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     int currentWindow = 0;
     long playBackPosition = 0;
     MediaItem mediaItem;
-
-
     SimpleExoPlayer simpleExoPlayer;
+    TextInputLayout et_phone;
+    TextInputLayout et_code;
+    String subscribe_b;
+    BottomSheetDialog bottomSheetDialog2;
+    BottomSheetDialog bottomSheetDialog;
     private ActivityPlayerBinding binding;
     private MainViewModel mainViewModel;
     //////////////////////////// exoPlayer Variable/////////////////////////////////////////////////////
@@ -84,16 +80,12 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     private String name_user;
     private String phone_user;
     private String code_user;
-   private Long lastDate;
+    private Long lastDate;
+    ;
     private int id_user;
     private int id_vid_funny;
     private View bottomView;
     private View bottomView2;
-    TextInputLayout et_phone;
-    TextInputLayout et_code;;
-    String subscribe_b;
-    BottomSheetDialog bottomSheetDialog2;
-    BottomSheetDialog bottomSheetDialog;
     private PlayerView playerView;
     private MediaSource mVideoSource;
     private boolean mExoPlayerFullscreen = false;
@@ -101,13 +93,9 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     private Dialog mFullScreenDialog;
     private int mResumeWindow;
     private long mResumePosition;
-
-
-    ////////////////////////////////////
-    private final boolean isLocked = false;
     private boolean b_kindlink;
     private FunnyAdapter funnyAdapter1;
-    private ChannelDetail_adapter2 detail_adapter2;
+    private FunnyAdapter detail_adapter2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,52 +110,70 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         View view = binding.getRoot();
         setContentView(view);
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        // userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+
         funnyAdapter1 = new FunnyAdapter(this, this);
-        detail_adapter2 = new ChannelDetail_adapter2(this,this);
+        detail_adapter2 = new FunnyAdapter(this, this);
         lockScreen = findViewById(R.id.exo_lock);
         initRv();
         Log.i("TAG", "onCreate: " + b_kindlink);
         id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
         kind = getIntent().getIntExtra("kind", 0);
         id_channel = getIntent().getIntExtra("id_channel", 0);
-        Toast.makeText(PlayerActivity.this, "i_channel . ." + id_channel + "id_vid . ." + id_vid_funny + "kind . " + kind, Toast.LENGTH_LONG).show();
+        //  Toast.makeText(PlayerActivity.this, "i_channel . ." + id_channel + "id_vid . ." + id_vid_funny + "kind . " + kind, Toast.LENGTH_LONG).show();
         mainViewModel.requestFunny_single(id_vid_funny, kind);
-        mainViewModel.requestChannel_detail(id_channel, kind);
-        mainViewModel.requestFunny_subMenu(0, kind);
+
+
         ff = findViewById(R.id.exo_ffwd);
         ff2 = findViewById(R.id.exo_pause);
         ff3 = findViewById(R.id.exo_rew);
         ff4 = findViewById(R.id.exo_play);
 
         initExo();
-        getChannel_detail();
+        //getChannel_detail();
         getFunny_single();
-        getFunny_subMenu();
+
         //iconLockScreen();
 
 
-        binding.parentSub.setOnClickListener(new View.OnClickListener() {
+      /*  binding.parentSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (subscribe_b.equals(0)) {
                     binding.parentSub.setImageResource(R.drawable.red_youtube);
                     subscribe_b.equals(1);
-                }else {
+                } else {
                     binding.parentSub.setImageResource(R.drawable.red_white_sub);
                     subscribe_b.equals(0);
                 }
             }
-        });
+        });*/
 
      /*   btn_fullScreen = binding.exoPlayer.findViewById(R.id.bt_fullscreen);
         btn_fullScreen.setOnClickListener(v -> {
 
         });
-*/if (phone_user==null  || lastDate==0 || lastDate==null) {
+*/
+        if (phone_user==null || lastDate==0 || lastDate==null) {
             login();
 
         }
+
+   /*     binding.rvVidChannelPlayer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        binding.rvVidChannelPlayer.setAdapter(detail_adapter2);
+        mainViewModel.requestChannel_detail(id_channel, kind);
+        Toast.makeText(this, "id_chabneel" + id_channel, Toast.LENGTH_SHORT).show();
+        mainViewModel.getChannel_detail().observe(this, new Observer<ChannelDataModel>() {
+            @Override
+            public void onChanged(ChannelDataModel channelDataModel) {
+                //  detail_adapter2.setFunnyDataModels(channelDataModel.getVideos_channel());
+
+                if (channelDataModel!=null) {
+                    List<FunnyDataModel> funnyDataModels = new ArrayList<>((channelDataModel).getVideos_channel());
+
+                    detail_adapter2.setData(funnyDataModels);
+                }
+            }
+        });*/
 ///////////////////////
     /*    dataSourceFactory =
                 new DefaultDataSourceFactory(
@@ -233,22 +239,16 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     private void initRv() {
 
 
-
-
         binding.rvMenuTagPlayer.setLayoutManager(new GridLayoutManager(this, 2, RecyclerView.VERTICAL
                 , false));
-        binding.rvMenuTagPlayer.setAdapter(detail_adapter2);
+       // binding.rvMenuTagPlayer.setAdapter(detail_adapter2);
+        binding.rvVidChannelPlayer.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        binding.rvVidChannelPlayer.setAdapter(funnyAdapter1);
     }
-    private void getFunny_subMenu() {
 
-        mainViewModel.getFunny_subMenu().observe(this, funnyDataModels -> {
-            if (funnyDataModels!=null) {
-                detail_adapter2.setFunnyDataModels(funnyDataModels);
 
-            }
-        });
-    }
-    private void getChannel_detail() {
+
+     private void getChannel_detail() {
         mainViewModel.getChannel_detail().observe(this, channelDataModel -> {
 
             if (channelDataModel!=null) {
@@ -256,30 +256,18 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
                 Glide.with(this).load(channelDataModel.getBanner_chann())
                         .into(binding.ivBannerItemChannelAll);
-                id_vid_funny=channelDataModel.getId_funny();
-                id_channel=channelDataModel.getId_channel();
-                kind=channelDataModel.getKind();
-        /*    Glide.with(this).load(channelDataModel.getProfile_chann())
+                id_vid_funny = channelDataModel.getId_funny();
+                id_channel = channelDataModel.getId_channel();
+                kind = channelDataModel.getKind();
+          Glide.with(this).load(channelDataModel.getProfile_chann())
                     .into(binding.ivProfileItemAllChan);
          binding.titleSubPlayer.setText(channelDataModel.getFollowers());
-            binding.titleAgePlayer.setText(channelDataModel.getAge_name());
+          //  binding.titleAgePlayer.setText(channelDataModel.getAge_name());
             binding.titleFaChannelPlayer.setText(channelDataModel.getName_chan_fa().trim());
-            binding.titleEnChannelPlayer.setText(channelDataModel.getName_chan_en().trim());*/
+            binding.titleEnChannelPlayer.setText(channelDataModel.getName_chan_en().trim());
 
             }
         });
-    }
-
-    public String prettyCount(Number number) {
-        char[] suffix = {' ', 'k', 'M', 'B', 'T', 'P', 'E'};
-        long numValue = number.longValue();
-        int value = (int) Math.floor(Math.log10(numValue));
-        int base = value / 3;
-        if (value >= 3 && base < suffix.length) {
-            return new DecimalFormat("#0.0").format(numValue / Math.pow(10, base * 3)) + suffix[base];
-        } else {
-            return new DecimalFormat("#,##0").format(numValue);
-        }
     }
 
     private void getFunny_single() {
@@ -322,6 +310,17 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         });
     }
 
+    public String prettyCount(Number number) {
+        char[] suffix = {' ', 'k', 'M', 'B', 'T', 'P', 'E'};
+        long numValue = number.longValue();
+        int value = (int) Math.floor(Math.log10(numValue));
+        int base = value / 3;
+        if (value >= 3 && base < suffix.length) {
+            return new DecimalFormat("#0.0").format(numValue / Math.pow(10, base * 3)) + suffix[base];
+        } else {
+            return new DecimalFormat("#,##0").format(numValue);
+        }
+    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -437,13 +436,9 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     //endregion
 
     private void login() {
-        if (phone_user==null  || lastDate==0 || lastDate==null) {
-            new Handler().postDelayed(() -> {
+        if (phone_user==null || lastDate==0 || lastDate==null) {
+            new Handler().postDelayed(this::checkExpireUser, 115000);
 
-            checkExpireUser();
-
-
-            }, 5000);
         }
     }
 
@@ -455,7 +450,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     }
 
 
-    private void checkExpireUser(){
+    private void checkExpireUser() {
         if (lastDate==0) {
             ViewDialog alert = new ViewDialog();
             alert.showDialog(PlayerActivity.this, "!! کد دسترسی یافت نشد !! ");
@@ -483,7 +478,6 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
         }*/
     }
-
 
 
     private void releasePlayer() {
@@ -579,15 +573,14 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
     @Override
     public void onClickPlayer(int id_vid_funny, int id_channel, int kind) {
-      //  id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
+
         Toast.makeText(PlayerActivity.this, "" + id_vid_funny, Toast.LENGTH_SHORT).show();
-      //  kind = getIntent().getIntExtra("kind", 0);
-       // id_channel = getIntent().getIntExtra("id_channel", 0);
+
         mainViewModel.requestFunny_single(id_vid_funny, kind);
         mainViewModel.requestChannel_detail(id_channel, kind);
         mainViewModel.requestFunny_subMenu(0, kind);
         getChannel_detail();
-        getFunny_subMenu();
+
         getFunny_single();
     }
 }

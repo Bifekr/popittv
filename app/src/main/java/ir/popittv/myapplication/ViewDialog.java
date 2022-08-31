@@ -31,7 +31,8 @@ public class ViewDialog {
             @Override
             public void onClick(View v) {
 //                    Toast.makeText(getApplicationContext(),"Cancel" ,Toast.LENGTH_SHORT).show();
-                activity.startActivity(new Intent(activity, MainActivity.class));
+               // activity.startActivity(new Intent(activity, MainActivity.class));
+             activity.onBackPressed();
                 dialog.dismiss();
             }
         });
