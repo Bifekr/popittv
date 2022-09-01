@@ -4,10 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Pair;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -149,8 +151,9 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
     }
 
     private void getPeymentFromServer() {
-
-        if (phone_user!=null) {
+        String check = sharedPreferences.getString("phone_user", "");
+        if (check.equals("")) {
+            Toast.makeText(UserActivity.this, "+++", Toast.LENGTH_SHORT).show();
             Service.getApiClient().getPayment(phone_user).enqueue(new Callback<UserDataModel>() {
                 @Override
                 public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
@@ -395,6 +398,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
                                                     // binding.tvEnterUserActivity.setVisibility(View.GONE);
                                                     // binding.tvExitUserActivity.setVisibility(View.VISIBLE);
                                                     getPeymentFromServer();
+
                                                     // binding.avatarUserUserActivity.setBackgroundResource(R.drawable.trophy);
                                                     binding.tvEnter1RvSubUser.setVisibility(View.GONE);
                                                     binding.avatarUserUserActivity.setBackgroundResource(R.drawable.ic_parents_happy);

@@ -113,6 +113,7 @@
             android:maxLines="1"
             android:minLines="1"
             android:paddingStart="1dp"
+            android:transitionName="titleFa_tran"
             android:paddingEnd="1dp"
             android:textColor="@color/popit_brown"
             android:textSize="9sp" />
@@ -127,6 +128,7 @@
             android:includeFontPadding="false"
             android:maxLines="1"
             android:minLines="1"
+            android:transitionName="titleEn_tran"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:textColor="@color/popit_brown"
@@ -194,6 +196,7 @@
           app:layout_constraintHeight_percent=".15"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintVertical_bias="1"
+          android:transitionName="profile"
           app:riv_border_color="@color/yellow_active"
           app:riv_border_width="1dp"
           app:riv_corner_radius="50dp" />

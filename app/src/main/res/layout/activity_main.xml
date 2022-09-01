@@ -7,7 +7,7 @@
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FCE4EC"
+    android:background="@color/red_inactive"
     android:layoutDirection="ltr"
     tools:context=".activity.MainActivity">
 
@@ -233,6 +233,7 @@ android:elevation="@dimen/plane_04"
             android:background="@drawable/shape_titlerv"
             android:gravity="center_vertical|center_horizontal"
             android:padding="@dimen/plane_04"
+            android:transitionName="banner_channel"
             app:layout_constraintBottom_toBottomOf="@id/rvDetail_frg1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/rvDetail_frg1">
@@ -248,8 +249,10 @@ android:elevation="@dimen/plane_04"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent"
               app:riv_border_color="@color/red_active"
+              android:transitionName="cardProfile_channel"
               app:riv_border_width="1dp"
               app:riv_oval="true"
+
               tools:ignore="ImageContrastCheck" />
 
             <TextView
@@ -260,7 +263,7 @@ android:elevation="@dimen/plane_04"
               android:text="@string/subscribe"
               android:textColor="@color/popit_red"
               android:textSize="12sp"
-
+              android:transitionName="parentSub"
               app:layout_constraintBottom_toBottomOf="@id/sub_showChannel_mainActivity"
               app:layout_constraintEnd_toStartOf="@id/sub_showChannel_mainActivity"
               app:layout_constraintStart_toStartOf="parent"

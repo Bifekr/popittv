@@ -96,6 +96,7 @@
       app:layout_constraintTop_toBottomOf="@id/toolbar">
 
       <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/purple_inactive"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

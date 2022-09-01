@@ -72,7 +72,7 @@ public class RvChannel_Frg1 extends RecyclerView.Adapter<RvChannel_Frg1.rvChanne
 
         if (row_index==position){
 
-            holder.binding.llBack.setBackgroundResource(R.color.reply_orange_300);
+            holder.binding.llBack.setBackgroundResource(R.color.popit_yellow);
             holder.binding.parentItemProfileChan.setCardElevation(28.8f);
 
         }else {

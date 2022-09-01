@@ -79,13 +79,10 @@ public class UserApi {
 
         Future handler_userSub = AppExecuter.getAppExecuter().networkIo().submit(userSub_run);
 
-        AppExecuter.getAppExecuter().networkIo().schedule(new Runnable() {
-            @Override
-            public void run() {
-
-                handler_userSub.cancel(true);
-            }
-        },2,TimeUnit.MINUTES);
+        AppExecuter.getAppExecuter().networkIo().schedule(() -> {
+            userSub_run.canclable=true;
+            handler_userSub.cancel(true);
+        },10,TimeUnit.SECONDS);
 
 
 

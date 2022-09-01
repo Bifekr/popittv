@@ -127,7 +127,8 @@
             android:layout_gravity="center_vertical|center_horizontal"
             app:riv_border_color="@color/blue_bg_light"
             app:riv_border_width="3dp"
-            app:riv_corner_radius="14dp" />
+            app:riv_corner_radius="14dp"
+            android:transitionName="profile"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -245,6 +246,7 @@
             android:maxLines="2"
             android:textDirection="ltr"
             android:textSize="14sp"
+            android:transitionName="titleFa_tran"
             app:layout_constraintBottom_toTopOf="@id/titleEnVideo_player"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/parentCon_activityPlayer" />
@@ -258,7 +260,7 @@
             android:includeFontPadding="true"
             android:maxLines="2"
             android:textDirection="rtl"
-
+android:transitionName="titleEn_tran"
             android:textSize="10sp" />
 
         </LinearLayout>

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.adapter.AgeMenu_Adapter;
 import ir.popittv.myapplication.adapter.AllChannel_Adapter;
 import ir.popittv.myapplication.databinding.ActivityAllChannelBinding;
@@ -28,7 +30,7 @@ public class AllChannelActivity extends AppCompatActivity implements OnClickAllC
     //init Adapter
     AgeMenu_Adapter ageMenu_adapter;
     AllChannel_Adapter allChannel_adapter;
-
+    View view;
     //variable
     private int kind;
 
@@ -36,7 +38,7 @@ public class AllChannelActivity extends AppCompatActivity implements OnClickAllC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivityAllChannelBinding.inflate(getLayoutInflater());
-        View view=binding.getRoot();
+       view=binding.getRoot();
         setContentView(view);
 
         viewModel=new ViewModelProvider(this).get(MainViewModel.class);
@@ -44,7 +46,7 @@ public class AllChannelActivity extends AppCompatActivity implements OnClickAllC
         kind=getIntent().getIntExtra("kind",1);
         viewModel.requestChannel_all(kind,0);
 
-
+setActivityName();
 
         initAgeMenu();
 
@@ -54,6 +56,29 @@ public class AllChannelActivity extends AppCompatActivity implements OnClickAllC
         getChannel_All();
 
 
+
+    }
+
+    private void setActivityName() {
+        switch (kind){
+            case 1:
+                binding.tvAllChannelActivityAllChannel.setText("All Funny Channels");
+
+                view.setBackgroundResource(R.color.red_active);
+                break;
+            case 2:
+                binding.tvAllChannelActivityAllChannel.setText("All Reality Channels");
+                view.setBackgroundResource(R.color.blue_active);
+                break;
+            case 3:
+                binding.tvAllChannelActivityAllChannel.setText("All Learning Channels");
+                view.setBackgroundResource(R.color.green_active);
+                break;
+            case 4:
+                binding.tvAllChannelActivityAllChannel.setText("All Farsi Channels");
+                view.setBackgroundResource(R.color.purple_active);
+                break;
+        }
     }
 
     private void initAgeMenu() {

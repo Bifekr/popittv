@@ -75,13 +75,39 @@ public class AllChannel_Adapter extends RecyclerView.Adapter<AllChannel_Adapter.
             Intent intent=new Intent(context, DetailActivity.class);
             intent.putExtra("id_channel_single",row_index);
             intent.putExtra("kind",kind);
-            Pair[] pairs = new Pair[2];
+            Pair[] pairs = new Pair[9];
             pairs[0] = new Pair<View,String>(holder.binding.ivBannerItemChannelAll,"banner_channel");
             pairs[1] = new Pair<View,String>(holder.binding.parentChannelProfileItemAllChan,"cardProfile_channel");
-         //   pairs[2] = new Pair<View,String>(holder.binding.parentTitleItemAllChannel,"parentTitle_channel");
+            pairs[2] = new Pair<View,String>(holder.binding.parentSub,"parentSub");
+            pairs[3] = new Pair<View,String>(holder.binding.titleEnItemAllChannel,"enTran");
+            pairs[4] = new Pair<View,String>(holder.binding.titleFaItemAllChannel,"faTran");
+            pairs[5] = new Pair<View,String>(holder.binding.titleSub2Player,"titleSub2_player");
+            pairs[6] = new Pair<View,String>(holder.binding.tvSubAllChannel,"tvSubAllChannel");
+            pairs[7] = new Pair<View,String>(holder.binding.titleSub22Player,"titleSub22_player");
+            pairs[8] = new Pair<View,String>(holder.binding.tvAge2AllChannel,"tvAge2AllChannel");
+
+
             ActivityOptions activityOptions=ActivityOptions.makeSceneTransitionAnimation(activity,pairs);
             context.startActivity(intent,activityOptions.toBundle());
 
+        });
+        holder.binding.parentSub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                row_index=channelDataModels.get(position).getId_channel();
+                int kind=channelDataModels.get(position).getKind();
+                onClickDetailActivity.onClickDetailChannel(row_index);
+
+                Intent intent=new Intent(context, DetailActivity.class);
+                intent.putExtra("id_channel_single",row_index);
+                intent.putExtra("kind",kind);
+                Pair[] pairs = new Pair[3];
+                pairs[0] = new Pair<View,String>(holder.binding.ivBannerItemChannelAll,"banner_channel");
+                pairs[1] = new Pair<View,String>(holder.binding.parentChannelProfileItemAllChan,"cardProfile_channel");
+                pairs[2] = new Pair<View,String>(holder.binding.parentSub,"parentSub");
+                ActivityOptions activityOptions=ActivityOptions.makeSceneTransitionAnimation(activity,pairs);
+                context.startActivity(intent,activityOptions.toBundle());
+            }
         });
 
     }

@@ -54,7 +54,7 @@ public interface ApiClient {
     Call<UserDataModel> getPayment(@Query("phone")String phone);
 
     @GET("getUserSub.php")
-    Call<ChannelResponse> getUserSub(@Query("id_user") int id_user);
+    Call<ChannelResponse> getUserSub(@Query("id_user") int id_user );
 
     @GET("getUserSave.php")
     Call<UserResponse> getUserSave(@Query("id_user") int id_user, @Query("id_table") int kind);
@@ -73,7 +73,8 @@ public interface ApiClient {
 
     @GET("userSave.php")
     Call<ResponseBody> insertUserSave(@Query("id_user") int id_user,@Query("id_vid") int id_vid, @Query("id_table") int kind);
-
+    @GET("userSub.php")
+    Call<ResponseBody> insertUserSub(@Query("id_user") int id_user,@Query("id_channel") int id_channel);
     @GET("userSee.php")
     Call<ResponseBody> insertUserSee(@Query("id_user") int id_user,@Query("id_vid") int id_vid, @Query("id_table") int kind);
     @GET("userLike.php")

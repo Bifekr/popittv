@@ -49,6 +49,7 @@
 
       <TextView
         android:id="@+id/tvAge2AllChannel"
+        android:transitionName="tvAge2AllChannel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="@dimen/plane_16"
@@ -61,6 +62,7 @@
 
       <TextView
         android:id="@+id/titleSub22_player"
+        android:transitionName="titleSub22_player"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/plane_16"
@@ -122,11 +124,10 @@
           android:includeFontPadding="true"
           android:paddingStart="15dp"
           android:paddingEnd="1dp"
+          android:transitionName="faTran"
           android:text="fdkljfdkjfg rfg  "
           android:textSize="12sp"
           app:layout_constraintBottom_toTopOf="@id/titleEnItemAllChannel"
-          app:layout_constraintEnd_toStartOf="@+id/parentSub"
-          app:layout_constraintHorizontal_bias="0"
           app:layout_constraintStart_toEndOf="@id/parentChannelProfile_itemAllChan"
           app:layout_constraintTop_toTopOf="@id/parentChannelProfile_itemAllChan" />
 
@@ -140,17 +141,17 @@
           android:includeFontPadding="true"
           android:paddingLeft="15dp"
           android:paddingRight="15dp"
+          android:transitionName="enTran"
           android:text="fdkljfdkjfg rfg "
           android:textSize="9sp"
           app:layout_constraintBottom_toBottomOf="@id/parentChannelProfile_itemAllChan"
-          app:layout_constraintEnd_toEndOf="@id/titleFaItemAllChannel"
           app:layout_constraintStart_toStartOf="@id/titleFaItemAllChannel"
           app:layout_constraintTop_toBottomOf="@id/titleFaItemAllChannel" />
 
 
         <Button
           android:id="@+id/parentSub"
-          android:layout_width="0dp"
+          android:layout_width="wrap_content"
           android:layout_height="0dp"
           android:layout_marginEnd="@dimen/plane_08"
           android:background="@drawable/shape_active_youtube"
@@ -158,6 +159,7 @@
           android:text="Subscribe"
           android:textColor="@color/white"
           android:textSize="14sp"
+          android:transitionName="parentSub"
           app:layout_constraintBottom_toTopOf="@id/titleSub2_player"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHeight_percent=".5"
@@ -172,7 +174,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:gravity="center_horizontal|center_vertical"
-
+android:transitionName="tvSubAllChannel"
           android:text="56 m"
           android:textSize="12sp"
           app:layout_constraintBottom_toBottomOf="parent"
@@ -188,6 +190,7 @@
           android:paddingLeft="@dimen/plane_08"
           android:text="دنبال کننده ها :"
           android:textSize="12sp"
+          android:transitionName="titleSub2_player"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="@id/parentSub"
           app:layout_constraintStart_toEndOf="@id/tvSubAllChannel"

@@ -1,5 +1,7 @@
 package ir.popittv.myapplication.utils;
 
+import android.util.Pair;
+
 public interface OnClickFunny {
 
     void onClickSave(int id_vid);
