@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
             @Override
             public boolean onQueryTextSubmit(String query) {
                 if (!query.equals("")) {
-                    mainViewModel.requestFunny_search(query);
+                    mainViewModel.requestFunny_search(query,KIND);
 
                 }
                 return true;
@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
             public boolean onQueryTextChange(String newText) {
 
                 if (!newText.equals("")) {
-                    mainViewModel.requestFunny_search(newText);
+                    mainViewModel.requestFunny_search(newText,KIND);
 
                 }
                 return true;

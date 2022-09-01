@@ -1,6 +1,12 @@
 package ir.popittv.myapplication.activity;
 
-import androidx.annotation.NonNull;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProvider;
@@ -8,17 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.util.Pair;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
-import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,11 +39,10 @@ import retrofit2.Response;
 
 public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnClickFunny {
     private final int KIND = 4;
-    private MainViewModel mainViewModel;
-    private ActivityFarsiBinding binding;
-
     //global Variable
     int id_channel_single;
+    private MainViewModel mainViewModel;
+    private ActivityFarsiBinding binding;
     private int row_index;
     private int id_user;
     private boolean b_switchLink;
@@ -77,10 +72,10 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
         sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
         id_user = sharedPreferences.getInt("id_user", 0);
         super.onCreate(savedInstanceState);
-        binding=ActivityFarsiBinding.inflate(getLayoutInflater());
-        View view=binding.getRoot();
+        binding = ActivityFarsiBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
         setContentView(view);
-        mainViewModel=new ViewModelProvider(this).get(MainViewModel.class);
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         switchNet();
 
         search();
@@ -94,7 +89,7 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
 
         //retrieve data into modelClass
         request();
-shareApp();
+        shareApp();
         //update AND get Data from DataModel into LiveData
         allChannel();
         getChannel_kind();
@@ -109,6 +104,8 @@ shareApp();
         });
     }
     ///////////---------------OnCreate--------------------------///////////////
+
+
     private void initNewRv(FarsiActivity mainActivity, FarsiActivity mainActivity1) {
         rvChannel_frg1 = new RvChannel_Frg1(mainActivity, mainActivity1);
         recommend_adapter = new ChannelDetail_adapter(mainActivity, mainActivity1);
@@ -121,7 +118,7 @@ shareApp();
         funnyAdapter_view = new FunnyAdapter(mainActivity, mainActivity1);
         searchAdapter = new SearchAdapter(mainActivity);
 
-        tagAdapter = new TagAdapter( mainActivity);
+        tagAdapter = new TagAdapter(mainActivity);
     }
 
     private void getSearchFunny() {
@@ -142,7 +139,7 @@ shareApp();
             @Override
             public boolean onQueryTextSubmit(String query) {
                 if (!query.equals("")) {
-                    mainViewModel.requestFunny_search(query);
+                    mainViewModel.requestFunny_search(query, KIND);
 
                 }
                 return true;
@@ -152,7 +149,7 @@ shareApp();
             public boolean onQueryTextChange(String newText) {
 
                 if (!newText.equals("")) {
-                    mainViewModel.requestFunny_search(newText);
+                    mainViewModel.requestFunny_search(newText, KIND);
 
                 }
                 return true;
@@ -190,19 +187,21 @@ shareApp();
         mainViewModel.requestFunny_subMenu(0, KIND);
         mainViewModel.request_tag(KIND);
     }
+
     private void shareApp() {
         binding.share.setOnClickListener(v -> {
-            Intent shareIntent=new Intent(Intent.ACTION_SEND);
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_TEXT,"http://dl.pikoboom.ir/game/12%20Locks%202/com.rud.twelvelocks2_12_apps.evozi.com.apk");
-            startActivity(Intent.createChooser(shareIntent,"لینک دانلود برنامه پیکوبوم"));
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "http://dl.pikoboom.ir/game/12%20Locks%202/com.rud.twelvelocks2_12_apps.evozi.com.apk");
+            startActivity(Intent.createChooser(shareIntent, "لینک دانلود برنامه پیکوبوم"));
         });
     }
+
     @SuppressLint("NonConstantResourceId")
     private void initRailActivity() {
         binding.navRail.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
-                case  R.id.Funny:
+                case R.id.Funny:
                     startActivity(new Intent(FarsiActivity.this, MainActivity.class));
                     break;
                 case R.id.Reality:
@@ -212,7 +211,7 @@ shareApp();
                     startActivity(new Intent(FarsiActivity.this, StudyActivity.class));
                     break;
                 case R.id.Farsi:
-                  startActivity(new Intent(FarsiActivity.this, FarsiActivity.class));
+                    startActivity(new Intent(FarsiActivity.this, FarsiActivity.class));
                     break;
                 case R.id.Games:
                     startActivity(new Intent(FarsiActivity.this, GameActivity.class));
@@ -220,10 +219,10 @@ shareApp();
             }
             return false;
         });
-      binding.navRail.setOnItemReselectedListener(item -> {
-            switch (item.getItemId()){
+        binding.navRail.setOnItemReselectedListener(item -> {
+            switch (item.getItemId()) {
                 case R.id.Funny:
-                    startActivity(new Intent(FarsiActivity.this,MainActivity.class));
+                    startActivity(new Intent(FarsiActivity.this, MainActivity.class));
                     break;
                 case R.id.Reality:
                     startActivity(new Intent(FarsiActivity.this, RealityActivity.class));
@@ -232,7 +231,7 @@ shareApp();
                     startActivity(new Intent(FarsiActivity.this, StudyActivity.class));
                     break;
                 case R.id.Farsi:
-                 //   startActivity(new Intent(FarsiActivity.this, FarsiActivity.class));
+                    //   startActivity(new Intent(FarsiActivity.this, FarsiActivity.class));
                     break;
                 case R.id.Games:
                     startActivity(new Intent(FarsiActivity.this, GameActivity.class));
@@ -242,6 +241,7 @@ shareApp();
             }
         });
     }
+
     private void taginit() {
 
 
@@ -265,10 +265,6 @@ shareApp();
         mainViewModel.getTag().observe(this, hashTagDataModels -> {
             tagAdapter.setData(hashTagDataModels);
         });
-
-
-
-
 
 
     }
@@ -300,8 +296,6 @@ shareApp();
         binding.rvBestViewMainActivity.setAdapter(funnyAdapter_view);
 
 
-
-
         binding.rvSubMenuTagFrg1.setAdapter(funnyAdapter);
         binding.rvSubMenuTagFrg1.setLayoutManager(new GridLayoutManager
                 (this, 3, GridLayoutManager.VERTICAL, false));
@@ -322,7 +316,7 @@ shareApp();
     private void allChannel() {
         binding.showAllChannel.setOnClickListener(v -> {
             Intent intent = new Intent(FarsiActivity.this, AllChannelActivity.class);
-            intent.putExtra("kind",KIND);
+            intent.putExtra("kind", KIND);
             startActivity(intent);
         });
     }
@@ -332,8 +326,8 @@ shareApp();
             if (channelDataModels!=null) {
                 rvChannel_frg1.setData(channelDataModels);
 
-            }else {
-                Toast.makeText(this,"not success",Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "not success", Toast.LENGTH_LONG).show();
             }
         });
     }

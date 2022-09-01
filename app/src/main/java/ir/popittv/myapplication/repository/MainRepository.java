@@ -71,7 +71,7 @@ public void requestChannel_all(int kind,int age){mainApiClient.requestChannel_al
     public void requestFunny_single(int id_funny,int kind){funnyApiClient.requestFunny_single(id_funny,kind);}
 
     public LiveData<List<FunnyDataModel>> getFunny_search(){return funnyApiClient.getFunny_search();}
-    public void requestFunny_search(String search){ funnyApiClient.requestFunny_search(search);}
+    public void requestFunny_search(String search,int kind){ funnyApiClient.requestFunny_search(search,kind);}
 
     public LiveData<List<HashTagDataModel>> getTag(){return funnyApiClient.getTag();}
     public void request_tag(int kind){ funnyApiClient.request_tag(kind);}

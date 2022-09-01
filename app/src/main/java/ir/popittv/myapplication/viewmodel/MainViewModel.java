@@ -68,7 +68,7 @@ public class MainViewModel extends ViewModel {
 
 
     public LiveData<List<FunnyDataModel>> getFunny_search(){return mainRepository.getFunny_search();}
-    public void requestFunny_search(String search){ mainRepository.requestFunny_search(search);}
+    public void requestFunny_search(String search,int kind){ mainRepository.requestFunny_search(search,kind);}
 
     public LiveData<List<HashTagDataModel>> getTag(){return mainRepository.getTag();}
     public void request_tag(int kind){ mainRepository.request_tag(kind);}

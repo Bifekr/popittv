@@ -153,7 +153,7 @@ shareApp();
             @Override
             public boolean onQueryTextSubmit(String query) {
                 if (!query.equals("")) {
-                    mainViewModel.requestFunny_search(query);
+                    mainViewModel.requestFunny_search(query,KIND);
 
                 }
                 return true;
@@ -163,7 +163,7 @@ shareApp();
             public boolean onQueryTextChange(String newText) {
 
                 if (!newText.equals("")) {
-                    mainViewModel.requestFunny_search(newText);
+                    mainViewModel.requestFunny_search(newText,KIND);
 
                 }
                 return true;

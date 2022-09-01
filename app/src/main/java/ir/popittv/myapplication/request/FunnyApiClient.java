@@ -150,32 +150,31 @@ public class FunnyApiClient {
         }, 2, TimeUnit.MINUTES);
     }
 
-    public void requestFunny_search(String search){
+    public void requestFunny_search(String search,int kind){
 
         if (funnySearch_runnable != null){
             funnySearch_runnable=null;
         }
 
-        funnySearch_runnable = new FunnySearch_Runnable(search);
+        funnySearch_runnable = new FunnySearch_Runnable(search,kind);
 
         final Future handler_search = AppExecuter.getAppExecuter().networkIo().submit(funnySearch_runnable);
-        AppExecuter.getAppExecuter().networkIo().schedule(new Runnable() {
-            @Override
-            public void run() {
-                handler_search.cancel(true);
-                funnySearch_runnable.cancellable =true;
+        AppExecuter.getAppExecuter().networkIo().schedule(() -> {
+            handler_search.cancel(true);
+            funnySearch_runnable.cancellable =true;
 
-            }
-        },2,TimeUnit.MINUTES);
+        },1,TimeUnit.MINUTES);
 
     }
     private class FunnySearch_Runnable implements Runnable{
 
         private boolean cancellable;
         private String search;
+        private int kind;
 
-        private FunnySearch_Runnable(String search) {
+        private FunnySearch_Runnable(String search,int kind) {
             this.search=search;
+            this.kind=kind;
             cancellable = false;
         }
 
@@ -186,7 +185,7 @@ public class FunnyApiClient {
                 if (cancellable){
                     return;
                 }
-                Response response=callSearch(search).execute();
+                Response response=callSearch(search,kind).execute();
                 if (response.body()!=null){
                     List<FunnyDataModel> funnyDataModelList = new ArrayList<>(((FunnyResponse)response.body()).getSearch());
                     mFunny_search.postValue(funnyDataModelList);
@@ -200,8 +199,8 @@ public class FunnyApiClient {
 
         }
 
-        private Call<FunnyResponse> callSearch(String search){
-            return Service.getApiClient().searchFunny(search);
+        private Call<FunnyResponse> callSearch(String search,int kind){
+            return Service.getApiClient().searchFunny(search,kind);
         }
     }
 
