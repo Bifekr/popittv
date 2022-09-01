@@ -20,7 +20,7 @@
       app:menu="@menu/menu_rail"
       android:elevation="1dp"
       app:elevation="1dp"
-      app:menuGravity="bottom"
+      app:menuGravity="top"
       style="@style/Widget.MaterialComponents.NavigationRailView.PrimarySurface"
       app:headerLayout="@layout/header_rail"/>
 

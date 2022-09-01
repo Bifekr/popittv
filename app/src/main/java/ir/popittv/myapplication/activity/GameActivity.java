@@ -67,50 +67,45 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void initRailActivity() {
-        binding.navRail.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case  R.id.Funny:
-                        startActivity(new Intent(GameActivity.this, MainActivity.class));
-                        break;
-                    case R.id.Reality:
-                        startActivity(new Intent(GameActivity.this, RealityActivity.class));
-                        break;
-                    case R.id.Learning:
-                        startActivity(new Intent(GameActivity.this, StudyActivity.class));
-                        break;
-                    case R.id.Farsi:
-                        startActivity(new Intent(GameActivity.this, FarsiActivity.class));
-                        break;
-                    case R.id.Games:
-                        startActivity(new Intent(GameActivity.this, GameActivity.class));
-                        break;
-                }
-                return true;
+        binding.navRail.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case  R.id.Funny:
+                    startActivity(new Intent(GameActivity.this, MainActivity.class));
+                    break;
+                case R.id.Reality:
+                    startActivity(new Intent(GameActivity.this, RealityActivity.class));
+                    break;
+                case R.id.Learning:
+                    startActivity(new Intent(GameActivity.this, StudyActivity.class));
+                    break;
+                case R.id.Farsi:
+                    startActivity(new Intent(GameActivity.this, FarsiActivity.class));
+                    break;
+                case R.id.Games:
+                    startActivity(new Intent(GameActivity.this, GameActivity.class));
+                    break;
             }
+            return true;
         });
-        binding.navRail.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
-            @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.Funny:
-                        break;
-                    case R.id.Reality:
-                        startActivity(new Intent(GameActivity.this, RealityActivity.class));
-                        break;
-                    case R.id.Learning:
-                        startActivity(new Intent(GameActivity.this, StudyActivity.class));
-                        break;
-                    case R.id.Farsi:
-                        startActivity(new Intent(GameActivity.this, FarsiActivity.class));
-                        break;
-                    case R.id.Games:
-                        startActivity(new Intent(GameActivity.this, GameActivity.class));
-                        break;
+        binding.navRail.setOnItemReselectedListener(item -> {
+            switch (item.getItemId()){
+                case R.id.Funny:
+                    startActivity(new Intent(GameActivity.this, MainActivity.class));
+                    break;
+                case R.id.Reality:
+                    startActivity(new Intent(GameActivity.this, RealityActivity.class));
+                    break;
+                case R.id.Learning:
+                    startActivity(new Intent(GameActivity.this, StudyActivity.class));
+                    break;
+                case R.id.Farsi:
+                    startActivity(new Intent(GameActivity.this, FarsiActivity.class));
+                    break;
+                case R.id.Games:
+                    startActivity(new Intent(GameActivity.this, GameActivity.class));
+                    break;
 
 
-                }
             }
         });
     }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -93,7 +94,7 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
 
         //retrieve data into modelClass
         request();
-
+shareApp();
         //update AND get Data from DataModel into LiveData
         allChannel();
         getChannel_kind();
@@ -189,7 +190,15 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
         mainViewModel.requestFunny_subMenu(0, KIND);
         mainViewModel.request_tag(KIND);
     }
-
+    private void shareApp() {
+        binding.share.setOnClickListener(v -> {
+            Intent shareIntent=new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT,"http://dl.pikoboom.ir/game/12%20Locks%202/com.rud.twelvelocks2_12_apps.evozi.com.apk");
+            startActivity(Intent.createChooser(shareIntent,"لینک دانلود برنامه پیکوبوم"));
+        });
+    }
+    @SuppressLint("NonConstantResourceId")
     private void initRailActivity() {
         binding.navRail.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
@@ -203,15 +212,15 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
                     startActivity(new Intent(FarsiActivity.this, StudyActivity.class));
                     break;
                 case R.id.Farsi:
-                    startActivity(new Intent(FarsiActivity.this, FarsiActivity.class));
+                  startActivity(new Intent(FarsiActivity.this, FarsiActivity.class));
                     break;
                 case R.id.Games:
                     startActivity(new Intent(FarsiActivity.this, GameActivity.class));
                     break;
             }
-            return true;
+            return false;
         });
-        binding.navRail.setOnItemReselectedListener(item -> {
+      binding.navRail.setOnItemReselectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.Funny:
                     startActivity(new Intent(FarsiActivity.this,MainActivity.class));
@@ -223,7 +232,7 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
                     startActivity(new Intent(FarsiActivity.this, StudyActivity.class));
                     break;
                 case R.id.Farsi:
-                    startActivity(new Intent(FarsiActivity.this, FarsiActivity.class));
+                 //   startActivity(new Intent(FarsiActivity.this, FarsiActivity.class));
                     break;
                 case R.id.Games:
                     startActivity(new Intent(FarsiActivity.this, GameActivity.class));

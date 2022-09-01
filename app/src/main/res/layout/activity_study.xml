@@ -12,7 +12,7 @@
     tools:context=".activity.StudyActivity">
     <com.google.android.material.navigationrail.NavigationRailView
       android:id="@+id/navRail"
-      style="@style/Widget.MaterialComponents.NavigationRailView.Colored"
+      style="@style/Widget.MaterialComponents.NavigationRailView.PrimarySurface"
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
       app:headerLayout="@layout/header_rail"
@@ -63,7 +63,7 @@
         android:gravity="end|center_horizontal|center_vertical"
         android:soundEffectsEnabled="true"
         android:text="@string/netLowPrice"
-
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/iconWifi_toolbar"
         app:layout_constraintStart_toEndOf="@id/search_toolbar"
@@ -82,9 +82,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/switchNet_toolbar"
         app:layout_constraintHeight_percent=".8"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/share"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent=".5" />
+        app:layout_constraintWidth_percent=".4" />
+
+      <ImageView
+        android:id="@+id/share"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_baseline_share_24"
+        android:paddingStart="@dimen/plane_04"
+        android:paddingEnd="@dimen/plane_04"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/search_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
       <!--   <com.google.android.material.textfield.TextInputLayout
            android:id="@+id/search2_toolbar"
            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -182,7 +195,6 @@
               android:layout_height="wrap_content"
 
               android:layout_marginEnd="8dp"
-              android:layout_marginBottom="8dp"
               android:fontFamily="@font/baloo"
               android:gravity="center_horizontal|center_vertical"
               android:padding="@dimen/plane_08"
@@ -193,8 +205,7 @@
               android:textStyle="bold"
               app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintHorizontal_bias="0"
-              app:layout_constraintStart_toStartOf="parent" />
+              app:layout_constraintTop_toTopOf="parent" />
 
           </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -394,18 +405,7 @@
                 app:layout_constraintEnd_toStartOf="@id/ivTitle_infilit"
                 app:layout_constraintTop_toTopOf="@+id/ivTitle_infilit" />
 
-              <TextView
-                android:id="@+id/tvfun_infilit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lalezar_regular"
-                android:text="به انتخاب بچه ها"
-                android:textColor="@color/popit_disable"
-                android:textSize="9sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvInfilit_mainActivity"
-                app:layout_constraintEnd_toStartOf="@+id/tvInfilit_mainActivity"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvInfilit_mainActivity" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -470,7 +470,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/trophy"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="tvI"
+
                 app:layout_constraintTop_toTopOf="parent"
 
                 app:riv_border_color="@color/red_active"
@@ -490,18 +490,6 @@
                 app:layout_constraintEnd_toStartOf="@id/ivTitle2_infilit"
                 app:layout_constraintTop_toTopOf="@+id/ivTitle2_infilit" />
 
-              <TextView
-                android:id="@+id/tvfun2_infilit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lalezar_regular"
-                android:text="به انتخاب بچه ها"
-                android:textColor="@color/popit_disable"
-                android:textSize="9sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvInfilit2_mainActivity"
-                app:layout_constraintEnd_toStartOf="@+id/tvInfilit2_mainActivity"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvInfilit2_mainActivity" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

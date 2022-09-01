@@ -1,5 +1,6 @@
 package ir.popittv.myapplication.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
@@ -94,8 +95,8 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
         initNewRv(this, this);
 
         initRailActivity();
+shareApp();
 
-        initRailActivity();
        // taginit();
         initRv_Vp_adapter();
 
@@ -200,55 +201,35 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
         mainViewModel.requestFunny_subMenu(0,KIND);
     }
 
-
+    private void shareApp() {
+        binding.share.setOnClickListener(v -> {
+            Intent shareIntent=new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT,"http://dl.pikoboom.ir/game/12%20Locks%202/com.rud.twelvelocks2_12_apps.evozi.com.apk");
+            startActivity(Intent.createChooser(shareIntent,"لینک دانلود برنامه پیکوبوم"));
+        });
+    }
+    @SuppressLint("NonConstantResourceId")
     private void initRailActivity() {
-        binding.navRail.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.Funny:
-                        startActivity(new Intent(RealityActivity.this, MainActivity.class));
-                        break;
-                    case R.id.Reality:
-                        startActivity(new Intent(RealityActivity.this, RealityActivity.class));
-                        break;
-                    case R.id.Learning:
-                        startActivity(new Intent(RealityActivity.this, StudyActivity.class));
-                        break;
-                    case R.id.Farsi:
-                        startActivity(new Intent(RealityActivity.this, FarsiActivity.class));
-                        break;
-                    case R.id.Games:
-                        startActivity(new Intent(RealityActivity.this, GameActivity.class));
-                        break;
-                }
-                return true;
+     binding.navRail.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.Funny:
+                    startActivity(new Intent(RealityActivity.this, MainActivity.class));
+                    return true;
+                case R.id.Learning:
+                    startActivity(new Intent(RealityActivity.this, StudyActivity.class));
+                    return false;
+                case R.id.Farsi:
+                    startActivity(new Intent(RealityActivity.this, FarsiActivity.class));
+                    break;
+                case R.id.Games:
+                    startActivity(new Intent(RealityActivity.this, GameActivity.class));
+                    break;
             }
+            return false;
         });
-        binding.navRail.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
-            @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.Funny:
-                        startActivity(new Intent(RealityActivity.this, MainActivity.class));
-                        break;
-                    case R.id.Reality:
-                        startActivity(new Intent(RealityActivity.this, RealityActivity.class));
-                        break;
-                    case R.id.Learning:
-                        startActivity(new Intent(RealityActivity.this, StudyActivity.class));
-                        break;
-                    case R.id.Farsi:
-                        startActivity(new Intent(RealityActivity.this, FarsiActivity.class));
-                        break;
-                    case R.id.Games:
-                        startActivity(new Intent(RealityActivity.this, GameActivity.class));
-                        break;
 
 
-                }
-            }
-        });
     }
 
     private void taginit() {

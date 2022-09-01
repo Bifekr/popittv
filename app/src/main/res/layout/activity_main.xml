@@ -13,9 +13,9 @@
 
     <com.google.android.material.navigationrail.NavigationRailView
       android:id="@+id/navRail"
-      style="@style/Widget.MaterialComponents.NavigationRailView.Colored"
+      style="@style/Widget.MaterialComponents.NavigationRailView.PrimarySurface"
       android:layout_width="wrap_content"
-      android:layout_height="match_parent"
+      android:layout_height="0dp"
       app:headerLayout="@layout/header_rail"
       app:labelVisibilityMode="labeled"
       app:layout_constraintBottom_toBottomOf="parent"
@@ -65,7 +65,7 @@
         android:gravity="end|center_horizontal|center_vertical"
         android:soundEffectsEnabled="true"
         android:text="@string/netLowPrice"
-
+android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/iconWifi_toolbar"
         app:layout_constraintStart_toEndOf="@id/search_toolbar"
@@ -84,9 +84,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/switchNet_toolbar"
         app:layout_constraintHeight_percent=".8"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/share"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent=".5" />
+        app:layout_constraintWidth_percent=".4" />
+
+      <ImageView
+        android:id="@+id/share"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_baseline_share_24"
+        android:paddingStart="@dimen/plane_04"
+        android:paddingEnd="@dimen/plane_04"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/search_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
       <!--   <com.google.android.material.textfield.TextInputLayout
            android:id="@+id/search2_toolbar"
            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -154,15 +167,14 @@
             android:id="@+id/rv_channelList_frg1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:foregroundGravity="center_vertical|center_horizontal"
             android:paddingStart="@dimen/plane_08"
             android:paddingEnd="0dp"
-            android:foregroundGravity="center_vertical|center_horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-             />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
           <androidx.constraintlayout.widget.ConstraintLayout
@@ -173,8 +185,8 @@
             android:gravity="center_vertical|center_horizontal"
             android:padding="@dimen/plane_04"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="1"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0">
 
@@ -184,7 +196,6 @@
               android:layout_height="wrap_content"
 
               android:layout_marginEnd="8dp"
-              android:layout_marginBottom="8dp"
               android:fontFamily="@font/baloo"
               android:gravity="center_horizontal|center_vertical"
               android:padding="@dimen/plane_08"
@@ -195,8 +206,7 @@
               android:textStyle="bold"
               app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintHorizontal_bias="0"
-              app:layout_constraintStart_toStartOf="parent" />
+              app:layout_constraintTop_toTopOf="parent" />
 
           </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -208,9 +218,9 @@
           android:id="@+id/parentChannelDetail_cardView"
           android:layout_width="0dp"
           android:layout_height="180dp"
+          android:layout_marginTop="@dimen/plane_16"
           android:background="@drawable/shape_tag3"
           android:elevation="@dimen/plane_04"
-          android:layout_marginTop="@dimen/plane_16"
           app:layout_constraintBottom_toTopOf="@id/parentInfint_cardView"
           app:layout_constraintEnd_toStartOf="@id/rvRecommend_frg1"
           app:layout_constraintStart_toStartOf="parent"
@@ -221,13 +231,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
+            android:paddingStart="@dimen/plane_08"
+            android:paddingEnd="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@id/conDetail"
             app:layout_constraintTop_toTopOf="parent"
-            android:paddingStart="@dimen/plane_08"
-            android:paddingEnd="0dp"
             app:layout_constraintVertical_bias="0.0"
             app:layout_constraintWidth_percent="1" />
 
@@ -241,7 +251,7 @@
             android:transitionName="banner_channel"
             app:layout_constraintBottom_toBottomOf="@id/rvDetail_frg1"
 
-app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/rvDetail_frg1">
 
             <com.makeramen.roundedimageview.RoundedImageView
@@ -308,13 +318,13 @@ app:layout_constraintEnd_toEndOf="parent"
           android:id="@+id/rvRecommend_frg1"
           android:layout_width="0dp"
           android:layout_height="0dp"
+          android:layout_marginBottom="@dimen/plane_16"
           android:background="@drawable/shape_tag3"
-android:layout_marginBottom="@dimen/plane_16"
+          android:paddingTop="@dimen/plane_08"
+          android:paddingBottom="@dimen/plane_08"
           app:layout_constraintBottom_toTopOf="@id/parentPopular_mainActivity"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="1"
-          android:paddingTop="@dimen/plane_08"
-          android:paddingBottom="@dimen/plane_08"
           app:layout_constraintStart_toEndOf="@id/parentChannelDetail_cardView"
           app:layout_constraintTop_toBottomOf="@id/parentAllChannel_mainActivity"
           app:layout_constraintWidth_percent=".38" />
@@ -325,8 +335,8 @@ android:layout_marginBottom="@dimen/plane_16"
           android:layout_height="180dp"
           android:layout_marginTop="@dimen/plane_16"
           android:layout_marginEnd="10dp"
-          app:cardCornerRadius="@dimen/plane_24"
           app:cardBackgroundColor="#43FCE4EC"
+          app:cardCornerRadius="@dimen/plane_24"
           app:layout_constraintBottom_toTopOf="@id/parentInfint2_cardView"
           app:layout_constraintEnd_toStartOf="@id/rvRecommend_frg1"
           app:layout_constraintStart_toStartOf="parent"
@@ -336,7 +346,7 @@ android:layout_marginBottom="@dimen/plane_16"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-       >
+            >
 
             <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
               android:id="@+id/infinitCycle_frg1"
@@ -364,11 +374,11 @@ android:layout_marginBottom="@dimen/plane_16"
               android:background="@drawable/shape_titlerv"
               android:gravity="center_vertical|center_horizontal"
               android:orientation="vertical"
-app:layout_constraintHorizontal_bias="1"
-              app:layout_constraintWidth_percent=".6"
               app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="1"
               app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toTopOf="parent">
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintWidth_percent=".6">
 
               <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/ivTitle_infilit"
@@ -397,18 +407,7 @@ app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintEnd_toStartOf="@id/ivTitle_infilit"
                 app:layout_constraintTop_toTopOf="@+id/ivTitle_infilit" />
 
-              <TextView
-                android:id="@+id/tvfun_infilit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lalezar_regular"
-                android:text="به انتخاب بچه ها"
-                android:textColor="@color/popit_disable"
-                android:textSize="9sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvInfilit_mainActivity"
-                app:layout_constraintEnd_toStartOf="@+id/tvInfilit_mainActivity"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvInfilit_mainActivity" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -421,8 +420,8 @@ app:layout_constraintHorizontal_bias="1"
           android:layout_height="180dp"
           android:layout_marginTop="@dimen/plane_16"
           android:layout_marginEnd="10dp"
-          app:cardCornerRadius="@dimen/plane_24"
           app:cardBackgroundColor="#43FCE4EC"
+          app:cardCornerRadius="@dimen/plane_24"
           app:layout_constraintBottom_toTopOf="@id/parentInfint2_cardView"
           app:layout_constraintEnd_toStartOf="@id/rvRecommend_frg1"
           app:layout_constraintStart_toStartOf="parent"
@@ -430,13 +429,13 @@ app:layout_constraintHorizontal_bias="1"
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
               android:id="@+id/infinitCycle2_frg1"
               android:layout_width="0dp"
               android:layout_height="match_parent"
+              android:paddingEnd="@dimen/plane_08"
               app:icvp_center_page_scale_offset="12dp"
               app:icvp_interpolator="@android:anim/accelerate_decelerate_interpolator"
               app:icvp_max_page_scale="0.8"
@@ -444,7 +443,6 @@ app:layout_constraintHorizontal_bias="1"
               app:icvp_min_page_scale="0.55"
               app:icvp_min_page_scale_offset="8dp"
               app:icvp_scroll_duration="150"
-              android:paddingEnd="@dimen/plane_08"
               app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintHorizontal_bias="0"
@@ -459,11 +457,11 @@ app:layout_constraintHorizontal_bias="1"
               android:background="@drawable/shape_titlerv"
               android:gravity="center_vertical|center_horizontal"
               android:orientation="vertical"
-              app:layout_constraintWidth_percent=".6"
-app:layout_constraintHorizontal_bias="1"
               app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="1"
               app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toTopOf="parent">
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintWidth_percent=".6">
 
               <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/ivTitle2_infilit"
@@ -473,7 +471,7 @@ app:layout_constraintHorizontal_bias="1"
                 android:scaleType="fitXY"
                 android:src="@drawable/trophy"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="tvI"
+
                 app:layout_constraintTop_toTopOf="parent"
 
                 app:riv_border_color="@color/red_active"
@@ -493,18 +491,7 @@ app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintEnd_toStartOf="@id/ivTitle2_infilit"
                 app:layout_constraintTop_toTopOf="@+id/ivTitle2_infilit" />
 
-              <TextView
-                android:id="@+id/tvfun2_infilit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lalezar_regular"
-                android:text="به انتخاب بچه ها"
-                android:textColor="@color/popit_disable"
-                android:textSize="9sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvInfilit2_mainActivity"
-                app:layout_constraintEnd_toStartOf="@+id/tvInfilit2_mainActivity"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvInfilit2_mainActivity" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -527,10 +514,10 @@ app:layout_constraintHorizontal_bias="1"
             android:id="@+id/rvPopular_mainActivity"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:paddingStart="@dimen/plane_08"
             android:paddingEnd="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -609,10 +596,9 @@ app:layout_constraintHorizontal_bias="1"
             android:paddingStart="@dimen/plane_08"
             android:paddingEnd="0dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"

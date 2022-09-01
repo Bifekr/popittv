@@ -106,8 +106,9 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
 
         initNewRv(this, this);
-        initRailActivity();
+      initRailActivity();
         taginit();
+        shareApp();
         initRv_Vp_adapter();
         getPeymentFromServer();
         //retrieve data into modelClass
@@ -127,6 +128,16 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         });
      ///////////-----------------------OnCreate----------------------///////////////
     }//////////---------------------------------------------------////////////////
+
+    private void shareApp() {
+        binding.share.setOnClickListener(v -> {
+            Intent shareIntent=new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT,"http://dl.pikoboom.ir/game/12%20Locks%202/com.rud.twelvelocks2_12_apps.evozi.com.apk");
+            startActivity(Intent.createChooser(shareIntent,"لینک دانلود برنامه پیکوبوم"));
+        });
+    }
+
     ///////////---------------OnCreate--------------------------///////////////
     private void initNewRv(MainActivity mainActivity, MainActivity mainActivity1) {
         rvChannel_frg1 = new RvChannel_Frg1(mainActivity, mainActivity1);
@@ -241,19 +252,16 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
     }
 
     //Initialize widgets
-    @SuppressLint("NonConstantResourceId")
+
     private void initRailActivity() {
         binding.navRail.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
-                case R.id.Funny:
-                    startActivity(new Intent(MainActivity.this, MainActivity.class));
-                    break;
                 case R.id.Reality:
                     startActivity(new Intent(MainActivity.this, RealityActivity.class));
-                    break;
-                case R.id.Learning:
+                  return true;
+               case R.id.Learning:
                     startActivity(new Intent(MainActivity.this, StudyActivity.class));
-                    break;
+                    return true;
                 case R.id.Farsi:
                     startActivity(new Intent(MainActivity.this, FarsiActivity.class));
                     break;
@@ -261,34 +269,14 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
                     startActivity(new Intent(MainActivity.this, GameActivity.class));
                     break;
             }
-            return true;
+         return false;
         });
 
         Objects.requireNonNull(binding.navRail.getHeaderView()).findViewById(R.id.fab_add).setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, UserActivity.class));
         });
         
-             /*  binding.navRail.setOnItemReselectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.Funny:
-                    startActivity(new Intent(MainActivity.this, MainActivity.class));
-                    break;
-                case R.id.Reality:
-                    startActivity(new Intent(MainActivity.this, RealityActivity.class));
-                    break;
-                case R.id.Learning:
-                    startActivity(new Intent(MainActivity.this, StudyActivity.class));
-                    break;
-                case R.id.Farsi:
-                    startActivity(new Intent(MainActivity.this, FarsiActivity.class));
-                    break;
-                case R.id.Games:
-                    startActivity(new Intent(MainActivity.this, GameActivity.class));
-                    break;
 
-
-            }
-        });*/
     }
 
     private void taginit() {

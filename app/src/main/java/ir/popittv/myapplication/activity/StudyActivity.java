@@ -93,7 +93,7 @@ public class StudyActivity extends AppCompatActivity implements OnClickFrg1, OnC
         initNewRv(this, this);
 
         initRailActivity();
-
+shareApp();
         //taginit();
         initRv_Vp_adapter();
 
@@ -194,10 +194,18 @@ public class StudyActivity extends AppCompatActivity implements OnClickFrg1, OnC
         mainViewModel.requestFunny_liky(KIND);
         mainViewModel.requestFunny_subMenu(0, KIND);
     }
-
+    private void shareApp() {
+        binding.share.setOnClickListener(v -> {
+            Intent shareIntent=new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT,"http://dl.pikoboom.ir/game/12%20Locks%202/com.rud.twelvelocks2_12_apps.evozi.com.apk");
+            startActivity(Intent.createChooser(shareIntent,"لینک دانلود برنامه پیکوبوم"));
+        });
+    }
     //Initialize widgets
     private void initRailActivity() {
         binding.navRail.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
@@ -207,9 +215,7 @@ public class StudyActivity extends AppCompatActivity implements OnClickFrg1, OnC
                     case R.id.Reality:
                         startActivity(new Intent(StudyActivity.this, RealityActivity.class));
                         break;
-                    case R.id.Learning:
-                        startActivity(new Intent(StudyActivity.this, StudyActivity.class));
-                        break;
+
                     case R.id.Farsi:
                         startActivity(new Intent(StudyActivity.this, FarsiActivity.class));
                         break;
@@ -217,33 +223,30 @@ public class StudyActivity extends AppCompatActivity implements OnClickFrg1, OnC
                         startActivity(new Intent(StudyActivity.this, GameActivity.class));
                         break;
                 }
-                return true;
+                return false;
             }
         });
-        binding.navRail.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
-            @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.Funny:
-                        startActivity(new Intent(StudyActivity.this,MainActivity.class));
-                        break;
-                    case R.id.Reality:
-                        startActivity(new Intent(StudyActivity.this, RealityActivity.class));
-                        break;
-                    case R.id.Learning:
-                        startActivity(new Intent(StudyActivity.this, StudyActivity.class));
-                        break;
-                    case R.id.Farsi:
-                        startActivity(new Intent(StudyActivity.this, FarsiActivity.class));
-                        break;
-                    case R.id.Games:
-                        startActivity(new Intent(StudyActivity.this, GameActivity.class));
-                        break;
+     binding.navRail.setOnItemReselectedListener(item -> {
+        switch (item.getItemId()){
+            case R.id.Funny:
+                startActivity(new Intent(StudyActivity.this,MainActivity.class));
+                break;
+            case R.id.Reality:
+                startActivity(new Intent(StudyActivity.this, RealityActivity.class));
+                break;
+            case R.id.Learning:
+              //  startActivity(new Intent(StudyActivity.this, StudyActivity.class));
+                break;
+            case R.id.Farsi:
+                startActivity(new Intent(StudyActivity.this, FarsiActivity.class));
+                break;
+            case R.id.Games:
+                startActivity(new Intent(StudyActivity.this, GameActivity.class));
+                break;
 
 
-                }
-            }
-        });
+        }
+    });
     }
 
     private void taginit() {
