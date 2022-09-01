@@ -129,7 +129,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:foregroundGravity="center_vertical|center_horizontal"
-            app:layout_constraintWidth_percent=".9"
+            android:paddingStart="@dimen/plane_08"
+            android:paddingEnd="0dp"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -145,7 +146,7 @@
             android:gravity="center_vertical|center_horizontal"
             android:padding="@dimen/plane_04"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0">
@@ -195,11 +196,12 @@
             android:background="@drawable/shape_tag3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-
-            app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintStart_toEndOf="@id/conDetail"
+            android:paddingStart="@dimen/plane_08"
+            android:paddingEnd="0dp"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent=".94" />
+           />
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/conDetail"
@@ -209,7 +211,7 @@
             android:gravity="center_vertical|center_horizontal"
             android:padding="@dimen/plane_04"
             app:layout_constraintBottom_toBottomOf="@id/rvDetail_frg1"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/rvDetail_frg1">
 
             <com.makeramen.roundedimageview.RoundedImageView
@@ -292,12 +294,14 @@
             android:id="@+id/rvPopular_mainActivity"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:paddingStart="@dimen/plane_08"
+            android:paddingEnd="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintStart_toStartOf="@id/parentLike_con"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent=".94" />
+             />
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/parentLike_con"
@@ -308,7 +312,7 @@
             android:gravity="center_vertical|center_horizontal"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <com.makeramen.roundedimageview.RoundedImageView
               android:id="@+id/xxx"
@@ -357,7 +361,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
           android:id="@+id/parentBestView_mainActivity"
           android:layout_width="0dp"
-          android:layout_height="160dp"
+          android:layout_height="180dp"
           android:layout_marginTop="@dimen/plane_16"
           android:background="@drawable/shape_tag3"
           app:layout_constraintBottom_toTopOf="@id/parentFavTag_frg1"
@@ -369,11 +373,13 @@
             android:id="@+id/rvBestView_mainActivity"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:paddingStart="@dimen/plane_08"
+            android:paddingEnd="0dp"
             android:foregroundGravity="center_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent=".94" />
+             />
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -382,7 +388,7 @@
             android:background="@drawable/shape_titlerv"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <com.makeramen.roundedimageview.RoundedImageView
               android:id="@+id/xxxx"
@@ -455,6 +461,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/banner_background"
+            android:paddingStart="@dimen/plane_08"
+            android:paddingEnd="0dp"
             app:layout_constraintBottom_toTopOf="@id/rvSubMenuTag_frg1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

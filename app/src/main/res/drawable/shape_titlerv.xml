@@ -6,7 +6,7 @@
 
   <gradient
     android:centerColor="@color/popit_yellow"
-    android:endColor="@color/transparent_color"
-    android:startColor="@color/orange_inactive" />
+    android:endColor="@color/orange_active"
+    android:startColor="@color/transparent_color" />
 
 </shape>
