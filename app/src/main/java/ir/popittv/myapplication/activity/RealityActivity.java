@@ -98,7 +98,7 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
         initRailActivity();
 shareApp();
 
-       // taginit();
+       taginit();
         initRv_Vp_adapter();
 
         //retrieve data into modelClass
@@ -134,6 +134,7 @@ shareApp();
         funnyAdapter_liky = new FunnyAdapter(realityActivity, realityActivity1);
         funnyAdapter_view = new FunnyAdapter(realityActivity, realityActivity1);
         searchAdapter = new SearchAdapter(realityActivity,realityActivity1);
+        tagAdapter = new TagAdapter(realityActivity);
     }
 
     private void getSearchFunny() {
@@ -206,6 +207,7 @@ shareApp();
         mainViewModel.requestFunny_view(KIND);
         mainViewModel.requestFunny_liky(KIND);
         mainViewModel.requestFunny_subMenu(0,KIND);
+        mainViewModel.request_tag(KIND);
     }
 
     private void shareApp() {
@@ -241,7 +243,7 @@ shareApp();
 
     private void taginit() {
 
-        binding.rvMenuTagFrg1.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+       // binding.rvMenuTagFrg1.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         GradientDrawable drawable1 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
                 new int[]{0xffeff400, 0xffaff600});
         GradientDrawable drawable2 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
@@ -262,7 +264,9 @@ shareApp();
 
         tagAdapter = new TagAdapter( this);
         binding.rvMenuTagFrg1.setAdapter(tagAdapter);*/
-
+        mainViewModel.getTag().observe(this, hashTagDataModels -> {
+            tagAdapter.setData(hashTagDataModels);
+        });
 
     }
 
@@ -311,7 +315,9 @@ shareApp();
         binding.rvSearch.setAdapter(searchAdapter);
         binding.rvSearch.setLayoutManager(new GridLayoutManager
                 (this, 3, GridLayoutManager.VERTICAL, false));
-
+        binding.rvMenuTagFrg1.setLayoutManager(new LinearLayoutManager(this,
+                RecyclerView.HORIZONTAL, false));
+        binding.rvMenuTagFrg1.setAdapter(tagAdapter);
 
     }
 

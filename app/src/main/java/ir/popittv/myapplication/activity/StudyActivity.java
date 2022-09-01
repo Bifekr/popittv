@@ -95,12 +95,12 @@ public class StudyActivity extends AppCompatActivity implements OnClickFrg1, OnC
 
         initRailActivity();
 shareApp();
-        //taginit();
+
         initRv_Vp_adapter();
 
         //retrieve data into modelClass
         request();
-
+        taginit();
         //update AND get Data from DataModel into LiveData
         allChannel();
         getChannel_kind();
@@ -129,6 +129,7 @@ shareApp();
         funnyAdapter_liky = new FunnyAdapter(mainActivity, mainActivity1);
         funnyAdapter_view = new FunnyAdapter(mainActivity, mainActivity1);
         searchAdapter = new SearchAdapter(mainActivity,mainActivity1);
+        tagAdapter = new TagAdapter(mainActivity);
     }
 
     private void getSearchFunny() {
@@ -200,6 +201,7 @@ shareApp();
         mainViewModel.requestFunny_view(KIND);
         mainViewModel.requestFunny_liky(KIND);
         mainViewModel.requestFunny_subMenu(0, KIND);
+        mainViewModel.request_tag(KIND);
     }
     private void shareApp() {
         binding.share.setOnClickListener(v -> {
@@ -258,7 +260,7 @@ shareApp();
 
     private void taginit() {
 
-        binding.rvMenuTagFrg1.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+
         GradientDrawable drawable1 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
                 new int[]{0xffeff400, 0xffaff600});
         GradientDrawable drawable2 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
@@ -279,7 +281,9 @@ shareApp();
 
         tagAdapter = new TagAdapter( this);
         binding.rvMenuTagFrg1.setAdapter(tagAdapter);
-*/
+*/        mainViewModel.getTag().observe(this, hashTagDataModels -> {
+            tagAdapter.setData(hashTagDataModels);
+        });
 
     }
 
@@ -329,7 +333,9 @@ shareApp();
         binding.rvSearch.setLayoutManager(new GridLayoutManager
                 (this, 3, GridLayoutManager.VERTICAL, false));
 
-
+        binding.rvMenuTagFrg1.setLayoutManager(new LinearLayoutManager(this,
+                RecyclerView.HORIZONTAL, false));
+        binding.rvMenuTagFrg1.setAdapter(tagAdapter);
     }
 
     //Set Data to LiveData

@@ -45,5 +45,9 @@
   <string name="payment6mounth">دریافت کد دسترسی با اعتبار 6 ماه\n به مبلغ 60000 هزارتومان</string>
   <string name="sendAgainPhoneNumber">اگر بعد از مدت کوتاهی پیام حاوی کد تایید را دریافت نکرده اید از این صفحه خارج شوید و دوباره و با دقت بیشتری شماره خود و یا والدین خود را وارد کنید.</string>
   <string name="offer_ege">سن پیشنهادی</string>
+  <string name="all_funny_videos_tag">All Funny \nVideos</string>
+  <string name="all_funny_videos_tagFarsi">All Farsi \nVideos</string>
+  <string name="all_funny_videos_tagreality">All Reality \nVideos</string>
+  <string name="all_funny_videos_tagStudy">All Study \nVideos</string>
 
 </resources>

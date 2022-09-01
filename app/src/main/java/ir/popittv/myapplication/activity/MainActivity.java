@@ -260,6 +260,9 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         mainViewModel.requestFunny_view(KIND);
         mainViewModel.requestFunny_liky(KIND);
         mainViewModel.requestFunny_subMenu(0, KIND);
+        binding.parentItemTag.setOnClickListener(v->{
+            mainViewModel.requestFunny_subMenu(0, KIND);
+        });
         mainViewModel.request_tag(KIND);
     }
 

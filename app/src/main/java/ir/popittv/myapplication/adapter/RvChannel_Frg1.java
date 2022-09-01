@@ -75,6 +75,7 @@ public class RvChannel_Frg1 extends RecyclerView.Adapter<RvChannel_Frg1.rvChanne
             holder.binding.llBack.setBackgroundResource(R.color.popit_yellow);
             holder.binding.parentItemProfileChan.setCardElevation(28.8f);
 
+
         }else {
             holder.binding.llBack.setBackgroundResource(R.color.reply_blue_50_alpha_060);
 
