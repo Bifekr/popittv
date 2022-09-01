@@ -13,17 +13,21 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import ir.popittv.myapplication.R;
+import ir.popittv.myapplication.databinding.ItemChannelDetailBinding;
 import ir.popittv.myapplication.databinding.ItemSearchBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
+import ir.popittv.myapplication.utils.OnClickFunny;
 
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder_search> {
 
     private List<FunnyDataModel> funnyDataModels;
     private Context context;
+    private  boolean boo_later=false;
+    private final OnClickFunny onClickFunny;
 
-    public SearchAdapter( Context context) {
-
+    public SearchAdapter( Context context,OnClickFunny onClickFunny) {
+        this.onClickFunny=onClickFunny;
         this.context = context;
     }
 
@@ -31,8 +35,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     @Override
     public ViewHolder_search onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater=LayoutInflater.from(parent.getContext());
-        ItemSearchBinding binding= DataBindingUtil
-                .inflate(inflater, R.layout.item_search,parent,false);
+        ItemChannelDetailBinding binding= DataBindingUtil
+                .inflate(inflater, R.layout.item_channel_detail,parent,false);
         return new ViewHolder_search(binding);
     }
 
@@ -45,6 +49,26 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
                 .into(holder.binding.ivPosterItemVideo);
         Glide.with(context).load(funnyDataModels.get(position).getProfile_chann())
                 .into(holder.binding.ProfileChannelVideoThumb);
+
+        holder.binding.ivPosterItemVideo.setOnClickListener(v -> {
+            int id_funny3 = funnyDataModels.get(position).getId_funny();
+            int kind = funnyDataModels.get(position).getKind();
+            int id_channel = funnyDataModels.get(position).getId_channel();
+            if (!boo_later) {
+                int id_funny2 = funnyDataModels.get(position).getId_funny();
+                onClickFunny.onClickLater(id_funny2);
+                holder.binding.parentViewItemVidDef.setBackgroundResource(R.drawable.shape_tag2);
+                boo_later=true;
+            }else {
+                int id_funny2 = funnyDataModels.get(position).getId_funny();
+                onClickFunny.onClickLater(id_funny2);
+                boo_later=false;
+            }
+            onClickFunny.onClickSee(id_funny3);
+            onClickFunny.onClickPlayer(id_funny3,id_channel,kind);
+
+
+        });
 
     }
 
@@ -59,9 +83,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     public class ViewHolder_search extends RecyclerView.ViewHolder{
 
-        private ItemSearchBinding binding;
+        private ItemChannelDetailBinding binding;
 
-        public ViewHolder_search(@NonNull ItemSearchBinding binding) {
+        public ViewHolder_search(@NonNull ItemChannelDetailBinding binding) {
             super(binding.getRoot());
             this.binding=binding;
         }

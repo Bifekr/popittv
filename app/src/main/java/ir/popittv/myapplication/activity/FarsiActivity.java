@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -79,7 +80,7 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
         switchNet();
 
         search();
-        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 
 
         initNewRv(this, this);
@@ -116,7 +117,7 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
         funnyAdapter = new ChannelDetail_adapter(mainActivity, mainActivity1);
         funnyAdapter_liky = new FunnyAdapter(mainActivity, mainActivity1);
         funnyAdapter_view = new FunnyAdapter(mainActivity, mainActivity1);
-        searchAdapter = new SearchAdapter(mainActivity);
+        searchAdapter = new SearchAdapter(mainActivity,mainActivity1);
 
         tagAdapter = new TagAdapter(mainActivity);
     }
@@ -134,7 +135,13 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
     }
 
     private void search() {
-
+        binding.searchToolbar.setImeOptions( EditorInfo.IME_FLAG_NO_EXTRACT_UI);
+        binding.searchToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.searchToolbar.setIconified(false);
+            }
+        });
         binding.searchToolbar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
