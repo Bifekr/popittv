@@ -356,27 +356,28 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
               android:id="@+id/parentInfint_con"
-              android:layout_width="120dp"
-              android:layout_height="match_parent"
+              android:layout_width="0dp"
+              android:layout_height="40dp"
               android:background="@drawable/shape_titlerv"
               android:gravity="center_vertical|center_horizontal"
               android:orientation="vertical"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintEnd_toEndOf="parent">
+              app:layout_constraintHorizontal_bias="1"
+              app:layout_constraintWidth_percent=".6"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent">
 
               <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/ivTitle_infilit"
-                android:layout_width="70dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
                 android:elevation="@dimen/plane_16"
                 android:scaleType="fitXY"
                 android:src="@drawable/trophy"
-                app:layout_constraintBottom_toTopOf="@+id/tvInfilit_mainActivity"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:riv_border_color="@color/red_active"
 
+                app:riv_border_color="@color/red_active"
                 app:riv_oval="true"
                 tools:ignore="ImageContrastCheck" />
 
@@ -384,27 +385,27 @@
                 android:id="@+id/tvInfilit_mainActivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/plane_08"
                 android:fontFamily="@font/lalezar_regular"
-                android:text="@string/fav_title"
+                android:text="ویدیوهای برتر ماه"
                 android:textColor="@color/reply_red_400"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@id/tvfun_infilit"
-                app:layout_constraintEnd_toEndOf="@+id/ivTitle_infilit"
-                app:layout_constraintStart_toStartOf="@+id/ivTitle_infilit"
-                app:layout_constraintTop_toBottomOf="@+id/ivTitle_infilit" />
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/ivTitle_infilit"
+                app:layout_constraintEnd_toStartOf="@id/ivTitle_infilit"
+                app:layout_constraintTop_toTopOf="@+id/ivTitle_infilit" />
 
               <TextView
                 android:id="@+id/tvfun_infilit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lalezar_regular"
-                android:text="@string/fun_video"
+                android:text="به انتخاب بچه ها"
                 android:textColor="@color/popit_disable"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/tvInfilit_mainActivity"
-                app:layout_constraintStart_toStartOf="@id/tvInfilit_mainActivity"
-                app:layout_constraintTop_toBottomOf="@+id/tvInfilit_mainActivity" />
+                android:textSize="9sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvInfilit_mainActivity"
+                app:layout_constraintEnd_toStartOf="@+id/tvInfilit_mainActivity"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvInfilit_mainActivity" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -450,27 +451,29 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
               android:id="@+id/parentInfint2_con"
-              android:layout_width="120dp"
-              android:layout_height="match_parent"
+              android:layout_width="0dp"
+              android:layout_height="40dp"
               android:background="@drawable/shape_titlerv"
               android:gravity="center_vertical|center_horizontal"
               android:orientation="vertical"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintEnd_toEndOf="parent">
+              app:layout_constraintWidth_percent=".6"
+              app:layout_constraintHorizontal_bias="1"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent">
 
               <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/ivTitle_infilit2"
-                android:layout_width="70dp"
-                android:layout_height="60dp"
+                android:id="@+id/ivTitle2_infilit"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
                 android:elevation="@dimen/plane_16"
                 android:scaleType="fitXY"
                 android:src="@drawable/trophy"
-                app:layout_constraintBottom_toTopOf="@+id/tvInfilit2_mainActivity"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="tvI"
                 app:layout_constraintTop_toTopOf="parent"
-                app:riv_border_color="@color/red_active"
 
+                app:riv_border_color="@color/red_active"
                 app:riv_oval="true"
                 tools:ignore="ImageContrastCheck" />
 
@@ -478,27 +481,27 @@
                 android:id="@+id/tvInfilit2_mainActivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/plane_08"
                 android:fontFamily="@font/lalezar_regular"
-                android:text="@string/fav_title"
+                android:text="تازه محبوب شده ها"
                 android:textColor="@color/reply_red_400"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@id/tvfun_infilit2"
-                app:layout_constraintEnd_toEndOf="@+id/ivTitle_infilit2"
-                app:layout_constraintStart_toStartOf="@+id/ivTitle_infilit2"
-                app:layout_constraintTop_toBottomOf="@+id/ivTitle_infilit2" />
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/ivTitle2_infilit"
+                app:layout_constraintEnd_toStartOf="@id/ivTitle2_infilit"
+                app:layout_constraintTop_toTopOf="@+id/ivTitle2_infilit" />
 
               <TextView
-                android:id="@+id/tvfun_infilit2"
+                android:id="@+id/tvfun2_infilit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lalezar_regular"
-                android:text="@string/fun_video"
+                android:text="به انتخاب بچه ها"
                 android:textColor="@color/popit_disable"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/tvInfilit2_mainActivity"
-                app:layout_constraintStart_toStartOf="@id/tvInfilit2_mainActivity"
-                app:layout_constraintTop_toBottomOf="@+id/tvInfilit2_mainActivity" />
+                android:textSize="9sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvInfilit2_mainActivity"
+                app:layout_constraintEnd_toStartOf="@+id/tvInfilit2_mainActivity"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvInfilit2_mainActivity" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
