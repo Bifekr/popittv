@@ -64,19 +64,19 @@ setActivityName();
             case 1:
                 binding.tvAllChannelActivityAllChannel.setText("All Funny Channels");
 
-                view.setBackgroundResource(R.color.red_active);
+                view.setBackgroundResource(R.color.red_inactive);
                 break;
             case 2:
                 binding.tvAllChannelActivityAllChannel.setText("All Reality Channels");
-                view.setBackgroundResource(R.color.blue_active);
+                view.setBackgroundResource(R.color.blue_inactive);
                 break;
             case 3:
                 binding.tvAllChannelActivityAllChannel.setText("All Learning Channels");
-                view.setBackgroundResource(R.color.green_active);
+                view.setBackgroundResource(R.color.green_inactive);
                 break;
             case 4:
                 binding.tvAllChannelActivityAllChannel.setText("All Farsi Channels");
-                view.setBackgroundResource(R.color.purple_active);
+                view.setBackgroundResource(R.color.purple_inactive);
                 break;
         }
     }

@@ -11,19 +11,17 @@
     tools:context=".activity.RealityActivity">
     <com.google.android.material.navigationrail.NavigationRailView
       android:id="@+id/navRail"
+      style="@style/Widget.MaterialComponents.NavigationRailView.Colored"
       android:layout_width="wrap_content"
-      android:layout_height="0dp"
-      app:labelVisibilityMode="selected"
-      app:layout_constraintStart_toStartOf="parent"
-
+      android:layout_height="match_parent"
+      app:headerLayout="@layout/header_rail"
+      app:labelVisibilityMode="labeled"
       app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:menu="@menu/menu_rail"
-      android:elevation="1dp"
-      app:elevation="1dp"
-      app:menuGravity="bottom"
-      style="@style/Widget.MaterialComponents.NavigationRailView.PrimarySurface"
-      app:headerLayout="@layout/header_rail"/>
+      app:menuGravity="top" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/toolbar"
       android:layout_width="0dp"
@@ -77,17 +75,16 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/shape_search"
         android:clickable="true"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:background="@drawable/shape_search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/switchNet_toolbar"
+        app:layout_constraintHeight_percent=".8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent=".5"
-        app:layout_constraintHeight_percent=".8"
-        />
+        app:layout_constraintWidth_percent=".5" />
       <!--   <com.google.android.material.textfield.TextInputLayout
            android:id="@+id/search2_toolbar"
            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -130,77 +127,86 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/rvSearch"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:padding="@dimen/plane_24"
-          android:elevation="@dimen/plane_24"
-
-          android:id="@+id/rvSearch"
           android:background="@color/transparent80"
-          app:layout_constraintTop_toTopOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
+          android:elevation="@dimen/plane_24"
+          android:padding="@dimen/plane_24"
+          android:visibility="gone"
           app:layout_constraintEnd_toEndOf="parent"
-          android:visibility="gone"/>
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
 
-
-
-
-
-        <androidx.cardview.widget.CardView
+        <androidx.constraintlayout.widget.ConstraintLayout
           android:id="@+id/parentAllChannel_mainActivity"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginTop="@dimen/plane_08"
-          android:elevation="@dimen/plane_16"
-          app:cardCornerRadius="@dimen/plane_24"
+          android:background="@drawable/shape_tag3"
           app:layout_constraintBottom_toTopOf="@id/parentChannelDetail_cardView"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent">
 
-          <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+          <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_channelList_frg1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:foregroundGravity="center_vertical|center_horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent=".9" />
 
-            <androidx.recyclerview.widget.RecyclerView
-              android:id="@+id/rv_channelList_frg1"
-              android:layout_width="0dp"
-              android:layout_height="match_parent"
-              android:background="#FCE4EC"
-              android:foregroundGravity="center_vertical|center_horizontal"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintEnd_toStartOf="@id/showAllChannel"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toTopOf="parent" />
+
+          <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/showAllChannel"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_titlerv"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="@dimen/plane_04"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0">
 
             <TextView
-              android:id="@+id/showAllChannel"
-              android:layout_width="87dp"
-              android:layout_height="0dp"
-              android:background="@drawable/shape_tag5"
+
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+
+              android:layout_marginEnd="8dp"
+              android:layout_marginBottom="8dp"
               android:fontFamily="@font/baloo"
               android:gravity="center_horizontal|center_vertical"
               android:padding="@dimen/plane_08"
               android:text="@string/showAllChannelFa"
               android:textAlignment="center"
               android:textColor="#6D4C41"
-              android:textDirection="rtl"
               android:textSize="18sp"
               android:textStyle="bold"
               app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintHorizontal_bias="1"
-              app:layout_constraintStart_toEndOf="@id/rv_channelList_frg1"
-              app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintVertical_bias="0" />
+              app:layout_constraintHorizontal_bias="0"
+              app:layout_constraintStart_toStartOf="parent" />
+
           </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
           android:id="@+id/parentChannelDetail_cardView"
           android:layout_width="0dp"
-          android:layout_height="140dp"
+          android:layout_height="180dp"
           android:background="@drawable/shape_tag3"
+          android:elevation="@dimen/plane_04"
+          android:layout_marginTop="@dimen/plane_16"
           app:layout_constraintBottom_toTopOf="@id/parentInfint_cardView"
           app:layout_constraintEnd_toStartOf="@id/rvRecommend_frg1"
           app:layout_constraintStart_toStartOf="parent"
@@ -209,13 +215,15 @@
           <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvDetail_frg1"
             android:layout_width="0dp"
-            android:layout_height="140dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_tag3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@id/conDetail"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent=".94"
-            app:layout_constraintHorizontal_bias="1"/>
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintWidth_percent=".94" />
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/conDetail"
@@ -224,6 +232,7 @@
             android:background="@drawable/shape_titlerv"
             android:gravity="center_vertical|center_horizontal"
             android:padding="@dimen/plane_04"
+            android:transitionName="banner_channel"
             app:layout_constraintBottom_toBottomOf="@id/rvDetail_frg1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/rvDetail_frg1">
@@ -234,6 +243,7 @@
               android:layout_height="80dp"
               android:elevation="@dimen/plane_24"
               android:scaleType="centerCrop"
+              android:transitionName="cardProfile_channel"
               app:layout_constraintBottom_toTopOf="@id/tvSub_mainActivity"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toStartOf="parent"
@@ -241,6 +251,7 @@
               app:riv_border_color="@color/red_active"
               app:riv_border_width="1dp"
               app:riv_oval="true"
+
               tools:ignore="ImageContrastCheck" />
 
             <TextView
@@ -251,7 +262,7 @@
               android:text="@string/subscribe"
               android:textColor="@color/popit_red"
               android:textSize="12sp"
-
+              android:transitionName="parentSub"
               app:layout_constraintBottom_toBottomOf="@id/sub_showChannel_mainActivity"
               app:layout_constraintEnd_toStartOf="@id/sub_showChannel_mainActivity"
               app:layout_constraintStart_toStartOf="parent"
@@ -275,7 +286,6 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:fontFamily="@font/baloo"
-              android:text="MonsterSchool"
               android:textColor="#6D4C41"
               app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintEnd_toEndOf="parent"
@@ -291,20 +301,22 @@
           android:id="@+id/rvRecommend_frg1"
           android:layout_width="0dp"
           android:layout_height="0dp"
-          android:background="@color/popit_yellow"
-          android:elevation="@dimen/plane_08"
-          app:layout_constraintBottom_toBottomOf="@id/parentInfint2_cardView"
+          android:background="@drawable/shape_tag3"
+          android:layout_marginBottom="@dimen/plane_16"
+          app:layout_constraintBottom_toTopOf="@id/parentPopular_mainActivity"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="1"
+          android:paddingTop="@dimen/plane_08"
+          android:paddingBottom="@dimen/plane_08"
           app:layout_constraintStart_toEndOf="@id/parentChannelDetail_cardView"
-          app:layout_constraintTop_toTopOf="@id/parentChannelDetail_cardView"
-          app:layout_constraintWidth_percent=".40" />
+          app:layout_constraintTop_toBottomOf="@id/parentAllChannel_mainActivity"
+          app:layout_constraintWidth_percent=".38" />
 
         <androidx.cardview.widget.CardView
           android:id="@+id/parentInfint_cardView"
           android:layout_width="0dp"
-          android:layout_height="140dp"
-          android:layout_marginTop="@dimen/plane_08"
+          android:layout_height="180dp"
+          android:layout_marginTop="@dimen/plane_16"
           android:layout_marginEnd="10dp"
           app:cardCornerRadius="@dimen/plane_24"
           app:layout_constraintBottom_toTopOf="@id/parentInfint2_cardView"
@@ -315,6 +327,7 @@
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:background="#FCE4EC">
 
             <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
@@ -395,8 +408,8 @@
         <androidx.cardview.widget.CardView
           android:id="@+id/parentInfint2_cardView"
           android:layout_width="0dp"
-          android:layout_height="140dp"
-          android:layout_marginTop="@dimen/plane_08"
+          android:layout_height="180dp"
+          android:layout_marginTop="@dimen/plane_16"
           android:layout_marginEnd="10dp"
           app:cardCornerRadius="@dimen/plane_24"
           app:layout_constraintBottom_toTopOf="@id/parentInfint2_cardView"
@@ -485,12 +498,11 @@
         </androidx.cardview.widget.CardView>
 
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
           android:id="@+id/parentPopular_mainActivity"
           android:layout_width="0dp"
-          android:layout_height="140dp"
-          android:layout_marginTop="@dimen/plane_08"
+          android:layout_height="180dp"
+          android:layout_marginTop="@dimen/plane_16"
           android:background="@drawable/shape_tag3"
           app:layout_constraintBottom_toTopOf="@id/parentBestView_mainActivity"
           app:layout_constraintEnd_toEndOf="parent"
@@ -513,6 +525,7 @@
             android:layout_width="120dp"
             android:layout_height="match_parent"
             android:background="@drawable/shape_titlerv"
+            android:elevation="@dimen/plane_08"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -565,8 +578,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
           android:id="@+id/parentBestView_mainActivity"
           android:layout_width="0dp"
-          android:layout_height="140dp"
-          android:layout_marginTop="@dimen/plane_08"
+          android:layout_height="160dp"
+          android:layout_marginTop="@dimen/plane_16"
           android:background="@drawable/shape_tag3"
           app:layout_constraintBottom_toTopOf="@id/parentFavTag_frg1"
           app:layout_constraintEnd_toEndOf="parent"
@@ -577,6 +590,7 @@
             android:id="@+id/rvBestView_mainActivity"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:foregroundGravity="center_horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toStartOf="parent"
@@ -613,7 +627,7 @@
               android:fontFamily="@font/lalezar_regular"
               android:text="@string/mostview_title"
               android:textColor="@color/popit_red"
-              android:textSize="24sp"
+              android:textSize="20sp"
               app:layout_constraintEnd_toEndOf="@+id/xxxx"
               app:layout_constraintStart_toStartOf="@+id/xxxx"
               app:layout_constraintTop_toBottomOf="@+id/xxxx" />
@@ -624,7 +638,7 @@
               android:fontFamily="@font/lalezar_regular"
               android:text="@string/fun_video"
               android:textColor="@color/popit_disable"
-              android:textSize="18sp"
+              android:textSize="16sp"
               app:layout_constraintEnd_toEndOf="@id/tvBestView_mainActivity"
               app:layout_constraintStart_toStartOf="@id/tvBestView_mainActivity"
               app:layout_constraintTop_toBottomOf="@+id/tvBestView_mainActivity" />
@@ -635,43 +649,42 @@
           android:id="@+id/parentFavTag_frg1"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:layout_marginTop="10dp"
-          android:elevation="@dimen/plane_08"
+          android:layout_marginTop="@dimen/plane_16"
           android:background="@drawable/shape_tag3"
+          android:elevation="@dimen/plane_08"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/parentBestView_mainActivity">
 
-          <TextView
-            android:id="@+id/titleFav_frg1"
-            style="@style/TextAppearance.Reply.Headline6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingTop="6dp"
-            android:paddingEnd="10dp"
-            android:paddingBottom="6dp"
-            android:text="# Favorite Tag"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+          <!--         <TextView
+                     android:id="@+id/titleFav_frg1"
+                     style="@style/TextAppearance.Reply.Headline6"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:paddingStart="10dp"
+                     android:paddingTop="6dp"
+                     android:paddingEnd="10dp"
+                     android:text="# Favorite Tag"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     app:layout_constraintHorizontal_bias="0"
+                     app:layout_constraintStart_toStartOf="parent"
+                     app:layout_constraintTop_toTopOf="parent" />-->
 
           <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMenuTag_frg1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/banner_background"
             app:layout_constraintBottom_toTopOf="@id/rvSubMenuTag_frg1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleFav_frg1" />
+            app:layout_constraintTop_toTopOf="parent" />
 
           <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSubMenuTag_frg1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/plane_08"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -22,7 +22,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:menu="@menu/menu_rail"
-      app:menuGravity="bottom" />
+      app:menuGravity="top" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/toolbar"
@@ -144,7 +144,7 @@
           android:id="@+id/parentAllChannel_mainActivity"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:background="#FCE4EC"
+          android:background="@drawable/shape_tag3"
           app:layout_constraintBottom_toTopOf="@id/parentChannelDetail_cardView"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
@@ -155,48 +155,48 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:foregroundGravity="center_vertical|center_horizontal"
-            app:layout_constraintWidth_percent=".9"
-            app:layout_constraintHorizontal_bias="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent=".9" />
 
 
-           <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/showAllChannel"
+          <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/showAllChannel"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_titlerv"
             android:gravity="center_vertical|center_horizontal"
             android:padding="@dimen/plane_04"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintHorizontal_bias="1"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0">
 
-             <TextView
+            <TextView
 
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
 
-               android:layout_marginEnd="8dp"
-               android:layout_marginBottom="8dp"
-               android:fontFamily="@font/baloo"
-               android:gravity="center_horizontal|center_vertical"
-               android:padding="@dimen/plane_08"
-               android:text="@string/showAllChannelFa"
-               android:textAlignment="center"
-               android:textColor="#6D4C41"
-               android:textSize="18sp"
-               android:textStyle="bold"
-               app:layout_constraintHorizontal_bias="0"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintBottom_toBottomOf="parent"
-               app:layout_constraintEnd_toEndOf="parent" />
+              android:layout_marginEnd="8dp"
+              android:layout_marginBottom="8dp"
+              android:fontFamily="@font/baloo"
+              android:gravity="center_horizontal|center_vertical"
+              android:padding="@dimen/plane_08"
+              android:text="@string/showAllChannelFa"
+              android:textAlignment="center"
+              android:textColor="#6D4C41"
+              android:textSize="18sp"
+              android:textStyle="bold"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="0"
+              app:layout_constraintStart_toStartOf="parent" />
 
-           </androidx.constraintlayout.widget.ConstraintLayout>
+          </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -207,7 +207,8 @@
           android:layout_width="0dp"
           android:layout_height="180dp"
           android:background="@drawable/shape_tag3"
-android:elevation="@dimen/plane_04"
+          android:elevation="@dimen/plane_04"
+          android:layout_marginTop="@dimen/plane_16"
           app:layout_constraintBottom_toTopOf="@id/parentInfint_cardView"
           app:layout_constraintEnd_toStartOf="@id/rvRecommend_frg1"
           app:layout_constraintStart_toStartOf="parent"
@@ -236,6 +237,7 @@ android:elevation="@dimen/plane_04"
             android:transitionName="banner_channel"
             app:layout_constraintBottom_toBottomOf="@id/rvDetail_frg1"
             app:layout_constraintStart_toStartOf="parent"
+
             app:layout_constraintTop_toTopOf="@id/rvDetail_frg1">
 
             <com.makeramen.roundedimageview.RoundedImageView
@@ -244,12 +246,12 @@ android:elevation="@dimen/plane_04"
               android:layout_height="80dp"
               android:elevation="@dimen/plane_24"
               android:scaleType="centerCrop"
+              android:transitionName="cardProfile_channel"
               app:layout_constraintBottom_toTopOf="@id/tvSub_mainActivity"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent"
               app:riv_border_color="@color/red_active"
-              android:transitionName="cardProfile_channel"
               app:riv_border_width="1dp"
               app:riv_oval="true"
 
@@ -302,13 +304,15 @@ android:elevation="@dimen/plane_04"
           android:id="@+id/rvRecommend_frg1"
           android:layout_width="0dp"
           android:layout_height="0dp"
-          android:background="#FCE4EC"
-
+          android:background="@drawable/shape_tag3"
+android:layout_marginBottom="@dimen/plane_16"
           app:layout_constraintBottom_toTopOf="@id/parentPopular_mainActivity"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="1"
+          android:paddingTop="@dimen/plane_08"
+          android:paddingBottom="@dimen/plane_08"
           app:layout_constraintStart_toEndOf="@id/parentChannelDetail_cardView"
-          app:layout_constraintTop_toTopOf="@id/parentChannelDetail_cardView"
+          app:layout_constraintTop_toBottomOf="@id/parentAllChannel_mainActivity"
           app:layout_constraintWidth_percent=".38" />
 
         <androidx.cardview.widget.CardView
