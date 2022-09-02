@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -18,7 +17,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,19 +33,11 @@ import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.textfield.TextInputLayout;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.ViewDialog;
-import ir.popittv.myapplication.adapter.ChannelDetail_adapter;
 import ir.popittv.myapplication.adapter.FunnyAdapter;
 import ir.popittv.myapplication.databinding.ActivityPlayerBinding;
-import ir.popittv.myapplication.models.ChannelDataModel;
-import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.utils.OnClickFunny;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
@@ -69,24 +59,19 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     long playBackPosition = 0;
     MediaItem mediaItem;
     SimpleExoPlayer simpleExoPlayer;
-    TextInputLayout et_phone;
-    TextInputLayout et_code;
-    String subscribe_b;
-    BottomSheetDialog bottomSheetDialog2;
-    BottomSheetDialog bottomSheetDialog;
+
     private ActivityPlayerBinding binding;
     private MainViewModel mainViewModel;
     //////////////////////////// exoPlayer Variable/////////////////////////////////////////////////////
     private SharedPreferences sharedPreferences;
     private String name_user;
     private String phone_user;
-    private String code_user;
+
     private Long lastDate;
-    ;
+
     private int id_user;
     private int id_vid_funny;
-    private View bottomView;
-    private View bottomView2;
+
     private PlayerView playerView;
     private MediaSource mVideoSource;
     private boolean mExoPlayerFullscreen = false;
@@ -96,7 +81,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     private long mResumePosition;
     private boolean b_kindlink;
     private FunnyAdapter funnyAdapter1;
-    private FunnyAdapter detail_adapter2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,14 +98,13 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         funnyAdapter1 = new FunnyAdapter(this, this);
-        detail_adapter2 = new FunnyAdapter(this, this);
+
         lockScreen = findViewById(R.id.exo_lock);
         initRv();
         Log.i("TAG", "onCreate: " + b_kindlink);
         id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
         kind = getIntent().getIntExtra("kind", 0);
         id_channel = getIntent().getIntExtra("id_channel", 0);
-        //  Toast.makeText(PlayerActivity.this, "i_channel . ." + id_channel + "id_vid . ." + id_vid_funny + "kind . " + kind, Toast.LENGTH_LONG).show();
         mainViewModel.requestFunny_single(id_vid_funny, kind);
 
 
@@ -130,61 +114,16 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         ff4 = findViewById(R.id.exo_play);
 
         initExo();
-        //getChannel_detail();
+
         getFunny_single();
 
-        //iconLockScreen();
 
-
-      /*  binding.parentSub.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (subscribe_b.equals(0)) {
-                    binding.parentSub.setImageResource(R.drawable.red_youtube);
-                    subscribe_b.equals(1);
-                } else {
-                    binding.parentSub.setImageResource(R.drawable.red_white_sub);
-                    subscribe_b.equals(0);
-                }
-            }
-        });*/
-
-     /*   btn_fullScreen = binding.exoPlayer.findViewById(R.id.bt_fullscreen);
-        btn_fullScreen.setOnClickListener(v -> {
-
-        });
-*/
         if (phone_user==null || lastDate==0 || lastDate==null) {
             login();
 
         }
 
-   /*     binding.rvVidChannelPlayer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        binding.rvVidChannelPlayer.setAdapter(detail_adapter2);
-        mainViewModel.requestChannel_detail(id_channel, kind);
-        Toast.makeText(this, "id_chabneel" + id_channel, Toast.LENGTH_SHORT).show();
-        mainViewModel.getChannel_detail().observe(this, new Observer<ChannelDataModel>() {
-            @Override
-            public void onChanged(ChannelDataModel channelDataModel) {
-                //  detail_adapter2.setFunnyDataModels(channelDataModel.getVideos_channel());
 
-                if (channelDataModel!=null) {
-                    List<FunnyDataModel> funnyDataModels = new ArrayList<>((channelDataModel).getVideos_channel());
-
-                    detail_adapter2.setData(funnyDataModels);
-                }
-            }
-        });*/
-///////////////////////
-    /*    dataSourceFactory =
-                new DefaultDataSourceFactory(
-                        this, Util.getUserAgent(this, getString(R.string.app_name)));
-
-        if (savedInstanceState!=null) {
-            currentWindow = savedInstanceState.getInt(STATE_RESUME_WINDOW);
-            playBackPosition = savedInstanceState.getLong(STATE_RESUME_POSITION);
-            mExoPlayerFullscreen = savedInstanceState.getBoolean(STATE_PLAYER_FULLSCREEN);
-        }*/
         DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(
                 this, Util.getUserAgent(this, getString(R.string.app_name)));
 
@@ -197,59 +136,19 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 //----------------------onCreate---------------------------------------------
     }
 
-/*    private void iconLockScreen() {
-        lockScreen.setOnClickListener(v -> {
-            if (!isLocked) {
-                lockScreen.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_baseline_lock));
-            } else {
-                lockScreen.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_baseline_lock_open));
-            }
-            isLocked = !isLocked;
-            lockActivity(isLocked);
-        });
-    }
-
-    private void lockActivity(boolean isLocked) {
-
-        if (isLocked) {
-            ff.setVisibility(View.INVISIBLE);
-            ff2.setVisibility(View.INVISIBLE);
-            ff3.setVisibility(View.INVISIBLE);
-            ff4.setVisibility(View.INVISIBLE);
-
-        } else {
-            ff.setVisibility(View.VISIBLE);
-            ff2.setVisibility(View.VISIBLE);
-            ff3.setVisibility(View.VISIBLE);
-            ff4.setVisibility(View.VISIBLE);
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (!isLocked) {
-
-            if (getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE) {
-                lockScreen.performClick();
-            } else {
-                super.onBackPressed();
-            }
-        }
-    }*/
 
     private void initRv() {
 
 
         binding.rvMenuTagPlayer.setLayoutManager(new GridLayoutManager(this, 2, RecyclerView.VERTICAL
                 , false));
-       // binding.rvMenuTagPlayer.setAdapter(detail_adapter2);
-        binding.rvVidChannelPlayer.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        // binding.rvMenuTagPlayer.setAdapter(detail_adapter2);
+        binding.rvVidChannelPlayer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.rvVidChannelPlayer.setAdapter(funnyAdapter1);
     }
 
 
-
-     private void getChannel_detail() {
+    private void getChannel_detail() {
         mainViewModel.getChannel_detail().observe(this, channelDataModel -> {
 
             if (channelDataModel!=null) {
@@ -260,12 +159,12 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
                 id_vid_funny = channelDataModel.getId_funny();
                 id_channel = channelDataModel.getId_channel();
                 kind = channelDataModel.getKind();
-          Glide.with(this).load(channelDataModel.getProfile_chann())
-                    .into(binding.ivProfileItemAllChan);
-         binding.titleSubPlayer.setText(channelDataModel.getFollowers());
-          //  binding.titleAgePlayer.setText(channelDataModel.getAge_name());
-            binding.titleFaChannelPlayer.setText(channelDataModel.getName_chan_fa().trim());
-            binding.titleEnChannelPlayer.setText(channelDataModel.getName_chan_en().trim());
+                Glide.with(this).load(channelDataModel.getProfile_chann())
+                        .into(binding.ivProfileItemAllChan);
+                binding.titleSubPlayer.setText(channelDataModel.getFollowers());
+                //  binding.titleAgePlayer.setText(channelDataModel.getAge_name());
+                binding.titleFaChannelPlayer.setText(channelDataModel.getName_chan_fa().trim());
+                binding.titleEnChannelPlayer.setText(channelDataModel.getName_chan_en().trim());
 
             }
         });
@@ -511,22 +410,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             initFullscreenDialog();
             initFullscreenButton();
 
-        }else {
-     /*       simpleExoPlayer.seekTo(mResumePosition);
 
-            boolean haveResumePosition = mResumeWindow!=C.INDEX_UNSET;
-            if (haveResumePosition) {
-                Log.i("DEBUG", " haveResumePosition ");
-                simpleExoPlayer.seekTo(mResumeWindow, mResumePosition);
-                simpleExoPlayer.setPlayWhenReady(playWhenReady);
-            }
-            simpleExoPlayer.setPlayWhenReady(playWhenReady);*/
-           // simpleExoPlayer.seekTo(currentWindow, playBackPosition);
-
-
-
-         //   simpleExoPlayer.setMediaItem(mediaItem);
-         //  simpleExoPlayer.play();
         }
 
         Toast.makeText(PlayerActivity.this, "onResume", Toast.LENGTH_SHORT).show();
@@ -556,7 +440,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     }
 
 
-   @Override
+    @Override
     protected void onRestart() {
         super.onRestart();
         if (playerView==null) {
@@ -564,12 +448,12 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             initFullscreenDialog();
             initFullscreenButton();
 
-        }else {
-       initExo();
+        } else {
+            initExo();
 
-             simpleExoPlayer.setMediaItem(mediaItem);
-             simpleExoPlayer.seekTo(mResumePosition);
-             simpleExoPlayer.getPlayWhenReady();
+            simpleExoPlayer.setMediaItem(mediaItem);
+            simpleExoPlayer.seekTo(mResumePosition);
+            simpleExoPlayer.getPlayWhenReady();
 
             Toast.makeText(PlayerActivity.this, "onRestart", Toast.LENGTH_SHORT).show();
         }
