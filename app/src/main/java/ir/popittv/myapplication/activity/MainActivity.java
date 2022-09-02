@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
     private RvChannel_Frg1 rvChannel_frg1;
     private FunnyAdapter detail_adapter;
     private InfinitFrg1_PagerAdapter infinitAdapter;
+    private InfinitFrg1_PagerAdapter infinitAdapter2;
     private ChannelDetail_adapter recommend_adapter;
 
 
@@ -117,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         shareApp();
         initRv_Vp_adapter();
         getBest();
+        getNew_best();
         getPeymentFromServer();
         //retrieve data into modelClass
         request();
@@ -152,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
         detail_adapter = new FunnyAdapter(mainActivity, mainActivity1);
         infinitAdapter = new InfinitFrg1_PagerAdapter(MainActivity.this,mainActivity1);
+        infinitAdapter2 = new InfinitFrg1_PagerAdapter(MainActivity.this,mainActivity1);
 
         funnyAdapter = new ChannelDetail_adapter(mainActivity, mainActivity1);
         funnyAdapter_liky = new FunnyAdapter(mainActivity, mainActivity1);
@@ -357,6 +360,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         //horizontal viewpager infinite
 
         binding.infinitCycleFrg1.setAdapter(infinitAdapter);
+        binding.infinitCycle2Frg1.setAdapter(infinitAdapter2);
 
         //Recommended Vide Rv
         binding.rvRecommendFrg1.setHasFixedSize(true);
@@ -430,6 +434,23 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
             }
 
 
+        });
+    }
+
+    private void getNew_best(){
+        Service.getApiClient().getNew_Best(KIND).enqueue(new Callback<List<FunnyDataModel>>() {
+            @Override
+            public void onResponse(Call<List<FunnyDataModel>> call, Response<List<FunnyDataModel>> response) {
+                if (response.body()!=null) {
+                    infinitAdapter2.setData(response.body());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FunnyDataModel>> call, Throwable t) {
+
+            }
         });
     }
 

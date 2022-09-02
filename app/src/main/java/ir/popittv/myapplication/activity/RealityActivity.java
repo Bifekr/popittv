@@ -68,6 +68,7 @@ public class RealityActivity extends AppCompatActivity implements OnClickFrg1, O
     private RvChannel_Frg1 rvChannel_frg1;
     private FunnyAdapter detail_adapter;
     private InfinitFrg1_PagerAdapter infinitAdapter;
+    private InfinitFrg1_PagerAdapter infinitAdapter2;
     private ChannelDetail_adapter recommend_adapter;
 
 
@@ -101,6 +102,7 @@ shareApp();
        taginit();
         initRv_Vp_adapter();
         getBest();
+        getNew_best();
         //retrieve data into modelClass
         request();
 
@@ -130,6 +132,7 @@ shareApp();
         detail_adapter = new FunnyAdapter(realityActivity, realityActivity1);
 
         infinitAdapter = new InfinitFrg1_PagerAdapter(RealityActivity.this,realityActivity1);
+        infinitAdapter2 = new InfinitFrg1_PagerAdapter(RealityActivity.this,realityActivity1);
         funnyAdapter = new ChannelDetail_adapter(realityActivity, realityActivity1);
         funnyAdapter_liky = new FunnyAdapter(realityActivity, realityActivity1);
         funnyAdapter_view = new FunnyAdapter(realityActivity, realityActivity1);
@@ -299,6 +302,7 @@ shareApp();
         //horizontal viewpager infinite
 
         binding.infinitCycleFrg1.setAdapter(infinitAdapter);
+        binding.infinitCycle2Frg1.setAdapter(infinitAdapter2);
 
         //Recommended Vide Rv
         binding.rvRecommendFrg1.setHasFixedSize(true);
@@ -364,6 +368,22 @@ shareApp();
             }
 
 
+        });
+    }
+    private void getNew_best(){
+        Service.getApiClient().getNew_Best(KIND).enqueue(new Callback<List<FunnyDataModel>>() {
+            @Override
+            public void onResponse(Call<List<FunnyDataModel>> call, Response<List<FunnyDataModel>> response) {
+                if (response.body()!=null) {
+                    infinitAdapter2.setData(response.body());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FunnyDataModel>> call, Throwable t) {
+
+            }
         });
     }
     private void getBest(){

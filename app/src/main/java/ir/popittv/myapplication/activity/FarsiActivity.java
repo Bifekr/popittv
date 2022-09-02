@@ -61,6 +61,7 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
     private RvChannel_Frg1 rvChannel_frg1;
     private FunnyAdapter detail_adapter;
     private InfinitFrg1_PagerAdapter infinitAdapter;
+    private InfinitFrg1_PagerAdapter infinitAdapter2;
     private ChannelDetail_adapter recommend_adapter;
 
 
@@ -93,6 +94,7 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
         shareApp();
         //update AND get Data from DataModel into LiveData
         getBest();
+        getNew_best();
         allChannel();
         getChannel_kind();
         getChannel_detail();
@@ -114,7 +116,7 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
 
         detail_adapter = new FunnyAdapter(mainActivity, mainActivity1);
         infinitAdapter = new InfinitFrg1_PagerAdapter(mainActivity,mainActivity1);
-
+        infinitAdapter2 = new InfinitFrg1_PagerAdapter(mainActivity,mainActivity1);
         funnyAdapter = new ChannelDetail_adapter(mainActivity, mainActivity1);
         funnyAdapter_liky = new FunnyAdapter(mainActivity, mainActivity1);
         funnyAdapter_view = new FunnyAdapter(mainActivity, mainActivity1);
@@ -302,8 +304,8 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
         binding.rvBestViewMainActivity.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false));
         binding.rvBestViewMainActivity.setAdapter(funnyAdapter_view);
-
-
+      //  binding.rvRecommendFrg1.setAdapter(recommend_adapter);
+      //  binding.infinitCycle2Frg1.setAdapter(infinitAdapter2);
         binding.rvSubMenuTagFrg1.setAdapter(funnyAdapter);
         binding.rvSubMenuTagFrg1.setLayoutManager(new GridLayoutManager
                 (this, 3, GridLayoutManager.VERTICAL, false));
@@ -369,6 +371,22 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
             }
 
 
+        });
+    }
+    private void getNew_best(){
+        Service.getApiClient().getNew_Best(KIND).enqueue(new Callback<List<FunnyDataModel>>() {
+            @Override
+            public void onResponse(Call<List<FunnyDataModel>> call, Response<List<FunnyDataModel>> response) {
+                if (response.body()!=null) {
+                    infinitAdapter2.setData(response.body());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FunnyDataModel>> call, Throwable t) {
+
+            }
         });
     }
     private void getBest() {
