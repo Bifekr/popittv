@@ -29,7 +29,7 @@ public interface ApiClient {
     Call<List<FunnyDataModel>> getBest(@Query("kind") int kind);
     @GET("get_best.php")
     Call<List<FunnyDataModel>> getNew_Best(@Query("kind") int kind);
-    @GET("get_new_best.php")
+    @GET("getFunny_liky.php")
     Call<FunnyResponse> getFunny_liky(@Query("kind") int kind);
 
     @GET("getFunny_view.php")
