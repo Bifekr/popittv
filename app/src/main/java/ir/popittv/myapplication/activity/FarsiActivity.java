@@ -92,6 +92,7 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
         request();
         shareApp();
         //update AND get Data from DataModel into LiveData
+        getBest();
         allChannel();
         getChannel_kind();
         getChannel_detail();
@@ -112,7 +113,7 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
         recommend_adapter = new ChannelDetail_adapter(mainActivity, mainActivity1);
 
         detail_adapter = new FunnyAdapter(mainActivity, mainActivity1);
-        infinitAdapter = new InfinitFrg1_PagerAdapter(mainActivity);
+        infinitAdapter = new InfinitFrg1_PagerAdapter(mainActivity,mainActivity1);
 
         funnyAdapter = new ChannelDetail_adapter(mainActivity, mainActivity1);
         funnyAdapter_liky = new FunnyAdapter(mainActivity, mainActivity1);
@@ -370,14 +371,31 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
 
         });
     }
+    private void getBest() {
+
+        Service.getApiClient().getBest(KIND).enqueue(new Callback<List<FunnyDataModel>>() {
+            @Override
+            public void onResponse(Call<List<FunnyDataModel>> call, Response<List<FunnyDataModel>> response) {
+                if (response.body()!=null) {
+                    infinitAdapter.setData(response.body());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FunnyDataModel>> call, Throwable t) {
+
+            }
+        });
+    }
 
     private void getFunny_view() {
         mainViewModel.getFunny_view().observe(this, funnyDataModels -> {
             if (funnyDataModels!=null) {
-                infinitAdapter.setData(funnyDataModels);
+
                 funnyAdapter_view.setData(funnyDataModels);
             } else {
-                Toast.makeText(this, "اینترنت را بررسی کنید", Toast.LENGTH_SHORT).show();
+               mainViewModel.requestFunny_view(KIND);
             }
         });
     }

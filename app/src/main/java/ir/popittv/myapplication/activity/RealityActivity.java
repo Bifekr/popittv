@@ -100,7 +100,7 @@ shareApp();
 
        taginit();
         initRv_Vp_adapter();
-
+        getBest();
         //retrieve data into modelClass
         request();
 
@@ -128,8 +128,8 @@ shareApp();
         recommend_adapter = new ChannelDetail_adapter(realityActivity, realityActivity1);
 
         detail_adapter = new FunnyAdapter(realityActivity, realityActivity1);
-        infinitAdapter = new InfinitFrg1_PagerAdapter(realityActivity);
 
+        infinitAdapter = new InfinitFrg1_PagerAdapter(RealityActivity.this,realityActivity1);
         funnyAdapter = new ChannelDetail_adapter(realityActivity, realityActivity1);
         funnyAdapter_liky = new FunnyAdapter(realityActivity, realityActivity1);
         funnyAdapter_view = new FunnyAdapter(realityActivity, realityActivity1);
@@ -366,14 +366,30 @@ shareApp();
 
         });
     }
+    private void getBest(){
 
+        Service.getApiClient().getBest(KIND).enqueue(new Callback<List<FunnyDataModel>>() {
+            @Override
+            public void onResponse(Call<List<FunnyDataModel>> call, Response<List<FunnyDataModel>> response) {
+                if (response.body()!=null) {
+                    infinitAdapter.setData(response.body());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FunnyDataModel>> call, Throwable t) {
+
+            }
+        });
+    }
     private void getFunny_view() {
         mainViewModel.getFunny_view().observe(this, funnyDataModels -> {
             if (funnyDataModels!=null) {
-                infinitAdapter.setData(funnyDataModels);
+
                 funnyAdapter_view.setData(funnyDataModels);
             } else {
-                Toast.makeText(this, "اینترنت را بررسی کنید", Toast.LENGTH_SHORT).show();
+                mainViewModel.requestFunny_view(KIND);
             }
         });
     }

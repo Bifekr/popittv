@@ -16,14 +16,16 @@ import java.util.List;
 
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.models.FunnyDataModel;
+import ir.popittv.myapplication.utils.OnClickFunny;
 
 public class InfinitFrg1_PagerAdapter extends androidx.viewpager.widget.PagerAdapter {
 
     private Context context;
     private List<FunnyDataModel> funnyDataModels;
-
-    public InfinitFrg1_PagerAdapter(Context context) {
+    private final OnClickFunny onClickFunny;
+    public InfinitFrg1_PagerAdapter(Context context,OnClickFunny onClickFunny) {
         this.context = context;
+        this.onClickFunny=onClickFunny;
     }
 
     @Override
@@ -69,7 +71,14 @@ public class InfinitFrg1_PagerAdapter extends androidx.viewpager.widget.PagerAda
       //  titleChann_en.setText(funnyDataModels.get(position).getTitle_en());
 
         imageView.setOnClickListener(v -> {
-            Toast.makeText(context, "OnClick"+funnyDataModels.get(position).getTitle_en(), Toast.LENGTH_SHORT).show();
+
+            int id_funny3 = funnyDataModels.get(position).getId_funny();
+            int kind = funnyDataModels.get(position).getKind();
+            int id_channel = funnyDataModels.get(position).getId_channel();
+
+            onClickFunny.onClickPlayer(id_funny3,id_channel,kind);
+
+            Toast.makeText(context, "OnClick"+funnyDataModels.get(position).getId_funny(), Toast.LENGTH_SHORT).show();
         });
 
         container.addView(view);

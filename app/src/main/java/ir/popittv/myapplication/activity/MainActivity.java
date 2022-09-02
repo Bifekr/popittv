@@ -40,6 +40,7 @@ import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.models.HashTagDataModel;
 import ir.popittv.myapplication.models.UserDataModel;
 import ir.popittv.myapplication.request.Service;
+import ir.popittv.myapplication.response.FunnyResponse;
 import ir.popittv.myapplication.utils.OnClickFrg1;
 import ir.popittv.myapplication.utils.OnClickFunny;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
@@ -115,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         taginit();
         shareApp();
         initRv_Vp_adapter();
+        getBest();
         getPeymentFromServer();
         //retrieve data into modelClass
         request();
@@ -149,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         recommend_adapter = new ChannelDetail_adapter(mainActivity, mainActivity1);
 
         detail_adapter = new FunnyAdapter(mainActivity, mainActivity1);
-        infinitAdapter = new InfinitFrg1_PagerAdapter(mainActivity);
+        infinitAdapter = new InfinitFrg1_PagerAdapter(MainActivity.this,mainActivity1);
 
         funnyAdapter = new ChannelDetail_adapter(mainActivity, mainActivity1);
         funnyAdapter_liky = new FunnyAdapter(mainActivity, mainActivity1);
@@ -431,10 +433,28 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         });
     }
 
+    private void getBest(){
+
+        Service.getApiClient().getBest(KIND).enqueue(new Callback<List<FunnyDataModel>>() {
+            @Override
+            public void onResponse(Call<List<FunnyDataModel>> call, Response<List<FunnyDataModel>> response) {
+                if (response.body()!=null) {
+                    infinitAdapter.setData(response.body());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FunnyDataModel>> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void getFunny_view() {
         mainViewModel.getFunny_view().observe(this, funnyDataModels -> {
             if (funnyDataModels!=null) {
-                infinitAdapter.setData(funnyDataModels);
+
                 funnyAdapter_view.setData(funnyDataModels);
             } else {
                 Toast.makeText(this, "اینترنت را بررسی کنید", Toast.LENGTH_SHORT).show();

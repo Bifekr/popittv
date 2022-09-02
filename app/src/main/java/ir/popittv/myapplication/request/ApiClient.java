@@ -1,5 +1,7 @@
 package ir.popittv.myapplication.request;
 
+import java.util.List;
+
 import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.models.UserDataModel;
@@ -23,7 +25,8 @@ public interface ApiClient {
 
     @GET("getFunny_best.php")
     Call<FunnyResponse> getFunny_best();
-
+    @GET("get_best.php")
+    Call<List<FunnyDataModel>> getBest(@Query("kind") int kind);
     @GET("getFunny_liky.php")
     Call<FunnyResponse> getFunny_liky(@Query("kind") int kind);
 
