@@ -413,7 +413,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
                 @Override
                 public void onPlayWhenReadyChanged(boolean playWhenReady, int reason) {
                     // play and Pause click
-
+                    Toast.makeText(PlayerActivity.this, "onPlay", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -510,9 +510,26 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             playerView = findViewById(R.id.exoplayer);
             initFullscreenDialog();
             initFullscreenButton();
-        }
-        initExo();
 
+        }else {
+     /*       simpleExoPlayer.seekTo(mResumePosition);
+
+            boolean haveResumePosition = mResumeWindow!=C.INDEX_UNSET;
+            if (haveResumePosition) {
+                Log.i("DEBUG", " haveResumePosition ");
+                simpleExoPlayer.seekTo(mResumeWindow, mResumePosition);
+                simpleExoPlayer.setPlayWhenReady(playWhenReady);
+            }
+            simpleExoPlayer.setPlayWhenReady(playWhenReady);*/
+           // simpleExoPlayer.seekTo(currentWindow, playBackPosition);
+
+
+
+         //   simpleExoPlayer.setMediaItem(mediaItem);
+         //  simpleExoPlayer.play();
+        }
+
+        Toast.makeText(PlayerActivity.this, "onResume", Toast.LENGTH_SHORT).show();
         if (mExoPlayerFullscreen) {
             ((ViewGroup) playerView.getParent()).removeView(playerView);
             mFullScreenDialog.addContentView(playerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -530,19 +547,32 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             mResumePosition = Math.max(0, simpleExoPlayer.getContentPosition());
 
             simpleExoPlayer.release();
-        }
 
+        }
+        Toast.makeText(PlayerActivity.this, "onPause", Toast.LENGTH_SHORT).show();
         if (mFullScreenDialog!=null)
             mFullScreenDialog.dismiss();
 
     }
 
 
-    @Override
+   @Override
     protected void onRestart() {
         super.onRestart();
-        simpleExoPlayer.setPlayWhenReady(true);
-        simpleExoPlayer.getPlaybackState();
+        if (playerView==null) {
+            playerView = findViewById(R.id.exoplayer);
+            initFullscreenDialog();
+            initFullscreenButton();
+
+        }else {
+       initExo();
+
+             simpleExoPlayer.setMediaItem(mediaItem);
+             simpleExoPlayer.seekTo(mResumePosition);
+             simpleExoPlayer.getPlayWhenReady();
+
+            Toast.makeText(PlayerActivity.this, "onRestart", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
