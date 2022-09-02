@@ -43,7 +43,8 @@ public interface ApiClient {
 
     @GET("getChannel_all.php")
     Call<ChannelResponse> getChannel_all(@Query("kind") int kind, @Query("age") int age);
-
+    @GET("getVid_channel.php")
+    Call<List<FunnyDataModel>> getVid_Channel(@Query("id_channel") int id_channel);
     @GET("getTag.php")
     Call<FunnyResponse> getTag(@Query("kind") int kind);
 

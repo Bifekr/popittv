@@ -34,12 +34,20 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
+import java.util.List;
+
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.ViewDialog;
 import ir.popittv.myapplication.adapter.FunnyAdapter;
 import ir.popittv.myapplication.databinding.ActivityPlayerBinding;
+import ir.popittv.myapplication.models.FunnyDataModel;
+import ir.popittv.myapplication.request.Service;
+import ir.popittv.myapplication.response.ChannelResponse;
 import ir.popittv.myapplication.utils.OnClickFunny;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
@@ -81,6 +89,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     private long mResumePosition;
     private boolean b_kindlink;
     private FunnyAdapter funnyAdapter1;
+    private FunnyAdapter viChennrlAdapter1;
 
 
     @Override
@@ -98,6 +107,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         funnyAdapter1 = new FunnyAdapter(this, this);
+        viChennrlAdapter1 = new FunnyAdapter(this,this);
 
         lockScreen = findViewById(R.id.exo_lock);
         initRv();
@@ -116,7 +126,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         initExo();
 
         getFunny_single();
-
+getVid_channel();
 
         if (phone_user==null || lastDate==0 || lastDate==null) {
             login();
@@ -145,8 +155,25 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         // binding.rvMenuTagPlayer.setAdapter(detail_adapter2);
         binding.rvVidChannelPlayer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.rvVidChannelPlayer.setAdapter(funnyAdapter1);
-    }
 
+        binding.rvVidChannelPlayer.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        binding.rvVidChannelPlayer.setAdapter(viChennrlAdapter1);
+
+    }
+private void getVid_channel(){
+    Service.getApiClient().getVid_Channel(5).enqueue(new Callback<List<FunnyDataModel>>() {
+        @Override
+        public void onResponse(Call<List<FunnyDataModel>> call, Response<List<FunnyDataModel>> response) {
+            if (response.isSuccessful())
+            viChennrlAdapter1.setData(response.body());
+        }
+
+        @Override
+        public void onFailure(Call<List<FunnyDataModel>> call, Throwable t) {
+
+        }
+    });
+}
 
     private void getChannel_detail() {
         mainViewModel.getChannel_detail().observe(this, channelDataModel -> {
@@ -231,7 +258,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
         super.onSaveInstanceState(outState);
     }
-//region fullScreen ExoPlayer
+//region  ExoPlayer
 
     private void initFullscreenDialog() {
 
@@ -285,8 +312,6 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         try {
 
             simpleExoPlayer = new SimpleExoPlayer.Builder(this)
-
-
                     .build();
             boolean haveResumePosition = mResumeWindow!=C.INDEX_UNSET;
             binding.exoplayer.setPlayer(simpleExoPlayer);
@@ -314,7 +339,6 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
                     // play and Pause click
                     Toast.makeText(PlayerActivity.this, "onPlay", Toast.LENGTH_SHORT).show();
                 }
-
 
             });
 

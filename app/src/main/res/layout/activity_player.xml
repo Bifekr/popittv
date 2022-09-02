@@ -31,21 +31,21 @@
         android:id="@+id/rvVidChannelPlayer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/main_media_frame"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/main_media_frame"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/main_media_frame"
+        app:layout_constraintTop_toTopOf="parent" />
+
       <FrameLayout
         android:id="@+id/main_media_frame"
         android:layout_width="0dp"
         android:layout_height="280dp"
         app:layout_constraintEnd_toStartOf="@id/rvVidChannelPlayer"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintWidth_percent=".75"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0">
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintWidth_percent=".75">
 
         <com.google.android.exoplayer2.ui.PlayerView
           android:id="@+id/exoplayer"
@@ -107,30 +107,6 @@
           tools:layout_editor_absoluteX="4dp"
           tools:layout_editor_absoluteY="4dp" />
 
-        <androidx.cardview.widget.CardView
-          android:id="@+id/parentChannelProfile_itemAllChan"
-          android:layout_width="44dp"
-          android:layout_height="44dp"
-          android:layout_margin="@dimen/plane_06"
-          android:transitionName="cardProfile_channel"
-          app:cardCornerRadius="14dp"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toStartOf="@+id/parentSub"
-          app:layout_constraintHorizontal_bias="0"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent">
-
-          <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/ivProfile_itemAllChan"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:layout_gravity="center_vertical|center_horizontal"
-            app:riv_border_color="@color/blue_bg_light"
-            app:riv_border_width="3dp"
-            app:riv_corner_radius="14dp"
-            android:transitionName="profile"/>
-
-        </androidx.cardview.widget.CardView>
 
         <TextView
           android:id="@+id/titleFaChannel_player"
@@ -138,17 +114,15 @@
           android:layout_height="wrap_content"
           android:background="@color/transparent40"
           android:fontFamily="@font/lalezar_regular"
-          android:gravity="center_horizontal"
+          android:gravity="start"
           android:includeFontPadding="true"
           android:paddingStart="15dp"
           android:paddingEnd="1dp"
           android:text="fdkljfdkjfg rfg  "
-          android:textSize="12sp"
+          android:textSize="14sp"
           app:layout_constraintBottom_toTopOf="@id/titleEnChannel_player"
-          app:layout_constraintEnd_toStartOf="@+id/parentSub"
-          app:layout_constraintHorizontal_bias="0"
-          app:layout_constraintStart_toEndOf="@id/parentChannelProfile_itemAllChan"
-          app:layout_constraintTop_toTopOf="@id/parentChannelProfile_itemAllChan" />
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
           android:id="@+id/titleEnChannel_player"
@@ -161,8 +135,7 @@
           android:paddingLeft="15dp"
           android:paddingRight="15dp"
           android:text="fdkljfdkjfg rfg "
-          android:textSize="9sp"
-          app:layout_constraintBottom_toBottomOf="@id/parentChannelProfile_itemAllChan"
+          android:textSize="11sp"
           app:layout_constraintEnd_toEndOf="@id/titleFaChannel_player"
           app:layout_constraintStart_toStartOf="@id/titleFaChannel_player"
           app:layout_constraintTop_toBottomOf="@id/titleFaChannel_player" />
@@ -172,28 +145,27 @@
           android:id="@+id/parentSub"
           android:layout_width="0dp"
           android:layout_height="0dp"
-          android:scaleType="fitXY"
           android:background="@drawable/shape_active_youtube"
+          android:scaleType="fitXY"
           android:text="Subscribe"
-          android:textSize="14sp"
           android:textColor="@color/white"
+          android:textSize="14sp"
           app:layout_constraintBottom_toTopOf="@id/titleSub_player"
           app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHorizontal_bias="1"
+          app:layout_constraintHeight_percent=".5"
+          app:layout_constraintHorizontal_bias=".98"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintVertical_bias="0"
-          app:layout_constraintWidth_percent=".18"
-          app:layout_constraintHeight_percent=".5"/>
+          app:layout_constraintWidth_percent=".18" />
 
         <TextView
           android:id="@+id/titleSub_player"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:gravity="center_horizontal|center_vertical"
-
           android:text="2 to 4"
-          android:textSize="12sp"
+
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toStartOf="@id/titleSub2_player"
           app:layout_constraintStart_toStartOf="@id/parentSub"
@@ -206,11 +178,51 @@
           android:gravity="center_horizontal|center_vertical"
           android:paddingLeft="@dimen/plane_08"
           android:text="دنبال کننده ها :"
-          android:textSize="12sp"
+
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="@id/parentSub"
           app:layout_constraintStart_toEndOf="@id/titleSub_player"
           app:layout_constraintTop_toBottomOf="@id/parentSub" />
+
+        <ImageView
+          android:id="@+id/ic_bookmark"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/ic_baseline_bookmarks_24"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="@id/parentSub"
+          app:layout_constraintBottom_toBottomOf="@id/parentSub"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintHorizontal_bias=".62"/>
+        <ImageView
+          android:id="@+id/ic_watchLater"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/ic_baseline_watch_later_24"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="@id/parentSub"
+          app:layout_constraintBottom_toBottomOf="@id/parentSub"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintHorizontal_bias=".74"/>
+
+        <TextView
+          android:id="@+id/textView"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="WatchLater"
+          app:layout_constraintEnd_toEndOf="@id/ic_watchLater"
+          app:layout_constraintStart_toStartOf="@id/ic_watchLater"
+          app:layout_constraintTop_toTopOf="@+id/titleSub_player" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toTopOf="@id/titleSub_player"
+          android:text="Bookmark"
+          app:layout_constraintEnd_toEndOf="@id/ic_bookmark"
+          app:layout_constraintStart_toStartOf="@id/ic_bookmark"
+          tools:layout_editor_absoluteY="36dp" />
+
 
 
       </androidx.constraintlayout.widget.ConstraintLayout>
@@ -219,33 +231,58 @@
         android:id="@+id/parentCon_activityPlayer"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:padding="@dimen/plane_04"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/main_media_frame">
+
+        <androidx.cardview.widget.CardView
+          android:id="@+id/parentChannelProfile_itemAllChan"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_margin="@dimen/plane_06"
+          android:transitionName="cardProfile_channel"
+          app:cardCornerRadius="14dp"
+          app:layout_constraintBottom_toBottomOf="@id/linearLayout"
+          app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="@id/linearLayout">
+
+          <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/ivProfile_itemAllChan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:transitionName="profile"
+            app:riv_border_color="@color/blue_bg_light"
+            app:riv_border_width="3dp"
+            app:riv_corner_radius="12dp" />
+
+        </androidx.cardview.widget.CardView>
 
         <LinearLayout
           android:id="@+id/linearLayout"
           android:layout_width="0dp"
           android:layout_height="match_parent"
           android:orientation="vertical"
+          android:weightSum="2"
           app:layout_constraintBottom_toBottomOf="@+id/parentCon_activityPlayer"
           app:layout_constraintEnd_toStartOf="@id/parentLike_itemVidDef"
-          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintStart_toEndOf="@id/parentChannelProfile_itemAllChan"
           app:layout_constraintTop_toTopOf="@+id/parentCon_activityPlayer"
-          app:layout_constraintWidth_percent=".8">
+          app:layout_constraintWidth_percent=".75">
 
           <TextView
             android:id="@+id/titleFaVideo_player"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/lalezar_regular"
-            android:gravity="end"
-            android:includeFontPadding="true"
             android:maxLines="2"
-            android:textDirection="ltr"
+            android:layout_weight="1"
+            android:textDirection="rtl"
+            android:gravity="center_vertical|end"
             android:textSize="14sp"
+            android:text="بیتا یتباین تبا نسیابنسی نسبا نیباسی"
             android:transitionName="titleFa_tran"
             app:layout_constraintBottom_toTopOf="@id/titleEnVideo_player"
             app:layout_constraintStart_toStartOf="parent"
@@ -255,13 +292,14 @@
             android:id="@+id/titleEnVideo_player"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:fontFamily="@font/baloo"
-            android:gravity="start"
-            android:includeFontPadding="true"
+            android:gravity="center_vertical"
             android:maxLines="2"
-            android:textDirection="rtl"
-android:transitionName="titleEn_tran"
-            android:textSize="10sp" />
+            android:text="fsdjflkdjf sdhsfhfhdsakjfh"
+            android:textDirection="ltr"
+            android:textSize="12sp"
+            android:transitionName="titleEn_tran" />
 
         </LinearLayout>
 
@@ -273,6 +311,7 @@ android:transitionName="titleEn_tran"
           android:gravity="center|end"
           android:orientation="horizontal"
           android:weightSum="2"
+          app:layout_constraintWidth_percent=".15"
           app:layout_constraintBottom_toTopOf="@id/parentView_itemVidDef"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toEndOf="@+id/linearLayout"
@@ -280,9 +319,10 @@ android:transitionName="titleEn_tran"
 
           <ImageView
             android:id="@+id/like"
-            android:layout_width="match_parent"
+            android:layout_width="58dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:src="@drawable/ic_like" />
 
           <TextView
@@ -290,7 +330,7 @@ android:transitionName="titleEn_tran"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="start|center"
             android:paddingRight="@dimen/plane_04"
             android:text="124k"
             android:textSize="14sp"
@@ -311,7 +351,7 @@ android:transitionName="titleEn_tran"
 
           <ImageView
             android:id="@+id/view"
-            android:layout_width="match_parent"
+            android:layout_width="58dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/ic_baseline_eye_24" />
@@ -321,7 +361,7 @@ android:transitionName="titleEn_tran"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="start|center"
             android:text="124k"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -342,20 +382,7 @@ android:transitionName="titleEn_tran"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/parentProfile">
 
-        <TextView
-          android:id="@+id/titleFav_frg1"
-          style="@style/TextAppearance.Reply.Headline6"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:paddingStart="10dp"
-          android:paddingTop="6dp"
-          android:paddingEnd="10dp"
-          android:paddingBottom="6dp"
-          android:text="# Favorite Tag"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHorizontal_bias="0"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent" />
+
 
         <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/rvMenuTag_player"
@@ -364,7 +391,7 @@ android:transitionName="titleEn_tran"
           app:layout_constraintBottom_toTopOf="@id/rvSubMenuTag_player"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/titleFav_frg1" />
+          app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/rvSubMenuTag_player"
