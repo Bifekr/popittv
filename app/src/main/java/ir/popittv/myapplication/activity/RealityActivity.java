@@ -447,6 +447,11 @@ shareApp();
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        request();
+    }
 
     @Override
     public void OnclickDetail(int pos) {

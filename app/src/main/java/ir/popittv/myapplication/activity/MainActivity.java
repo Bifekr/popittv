@@ -531,6 +531,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
     protected void onResume() {
         super.onResume();
 getChannel_detail();
+request();
 
     }
 

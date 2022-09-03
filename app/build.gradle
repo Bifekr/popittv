@@ -85,5 +85,5 @@ dependencies {
 
 //otp pin
     implementation 'io.github.chaosleung:pinview:1.4.4'
-
+    implementation 'com.airbnb.android:lottie:5.2.0'
 }

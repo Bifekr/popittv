@@ -465,7 +465,7 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
     protected void onResume() {
         super.onResume();
 
-
+request();
     }
 
 

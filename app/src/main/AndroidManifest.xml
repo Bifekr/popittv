@@ -19,9 +19,20 @@
     android:theme="@style/Theme.PopitTv"
     android:usesCleartextTraffic="true">
     <activity
+      android:name=".activity.IntroActivity"
+      android:screenOrientation="landscape"
+      android:exported="true"
+    >
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity
       android:name=".activity.PaymentActivity"
       android:exported="false"
-      android:screenOrientation="landscape"/>
+      android:screenOrientation="landscape" />
     <activity
       android:name=".activity.MainActivity2"
       android:exported="false"
@@ -65,14 +76,10 @@
       android:screenOrientation="landscape" />
     <activity
       android:name=".activity.MainActivity"
-      android:exported="true"
-      android:windowSoftInputMode="stateHidden|adjustPan|adjustResize"
-    android:screenOrientation="landscape">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
+      android:exported="false"
+      android:screenOrientation="landscape"
+      android:windowSoftInputMode="stateHidden|adjustPan|adjustResize">
 
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
     </activity>
 
     <provider
