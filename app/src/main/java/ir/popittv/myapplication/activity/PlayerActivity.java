@@ -1,9 +1,11 @@
 package ir.popittv.myapplication.activity;
 
 import android.app.Dialog;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+
 import android.graphics.drawable.ColorDrawable;
 import android.icu.text.DecimalFormat;
 import android.net.Uri;
@@ -12,14 +14,17 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -40,12 +45,15 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import ir.popittv.myapplication.R;
+import ir.popittv.myapplication.ViewDialog;
 import ir.popittv.myapplication.adapter.FunnyAdapter;
 import ir.popittv.myapplication.databinding.ActivityPlayerBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.request.Service;
+import ir.popittv.myapplication.utils.AppExecuter;
 import ir.popittv.myapplication.utils.OnClickFunny;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 import retrofit2.Call;
@@ -88,11 +96,13 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     private int mResumeWindow;
     private long mResumePosition;
     private boolean b_kindlink;
+    AlertDialog.Builder builder;
     private FunnyAdapter single_adapter;
     private FunnyAdapter viChennrlAdapter1;
     private FunnyAdapter best_Adapter;
     private FunnyAdapter new_bestAdapter;
     private FunnyAdapter all_adapter;
+    Runnable runnable;
 
 
     @Override
@@ -111,6 +121,9 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         handler = new Handler();
         single_adapter = new FunnyAdapter(this, this);
         viChennrlAdapter1 = new FunnyAdapter(this, this);
+        best_Adapter =new FunnyAdapter(this,this);
+        new_bestAdapter = new FunnyAdapter(this,this);
+        all_adapter = new FunnyAdapter(this,this);
 
         lockScreen = findViewById(R.id.exo_lock);
         initRv();
@@ -132,7 +145,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         getFunny_single();
         getVid_channel();
         getBest();
-        getNew_best();
+       getNew_best();
         getAllVid();
 
         if (phone_user==null || lastDate==0 || lastDate==null) {
@@ -290,48 +303,58 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     }
 
     private void login() {
-        handler.postDelayed(this::checkExpireUser, 50000);
+
+       runnable=new Runnable() {
+            @Override
+            public void run() {
+                checkExpireUser();
+            }
+        };
+        handler.postDelayed(runnable, 50000);
+
     }
 
     private void checkExpireUser() {
-
-        final Dialog dialog = new Dialog(PlayerActivity.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(false);
-        dialog.setContentView(R.layout.custom_dialogbox_otp);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-        TextView text = (TextView) dialog.findViewById(R.id.txt_file_path);
-        text.setText(R.string.exite);
-
-        Button dialogBtn_cancel = (Button) dialog.findViewById(R.id.btn_cancel);
-        dialogBtn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                    Toast.makeText(getApplicationContext(),"Cancel" ,Toast.LENGTH_SHORT).show();
-                // activity.startActivity(new Intent(activity, MainActivity.class));
-                finish();
-
-                dialog.dismiss();
-            }
-        });
-
-        Button dialogBtn_okay = (Button) dialog.findViewById(R.id.btn_okay);
-        dialogBtn_okay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                    Toast.makeText(getApplicationContext(),"Okay" ,Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(PlayerActivity.this, UserActivity.class));
-                dialog.cancel();
-            }
-        });
-
-        dialog.show();
         if (lastDate==0) {
-        /*    ViewDialog alert = new ViewDialog();
-            alert.showDialog(PlayerActivity.this, "!! کد دسترسی یافت نشد !! ");*/
+            final Dialog dialog = new Dialog(PlayerActivity.this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(false);
+            dialog.setContentView(R.layout.custom_dialogbox_otp);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+            TextView text = (TextView) dialog.findViewById(R.id.txt_file_path);
+            text.setText(R.string.exite);
+
+            Button dialogBtn_cancel = (Button) dialog.findViewById(R.id.btn_cancel);
+            dialogBtn_cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    Toast.makeText(getApplicationContext(),"Cancel" ,Toast.LENGTH_SHORT).show();
+                    // activity.startActivity(new Intent(activity, MainActivity.class));
+                    onBackPressed();
+                   // finish();
+
+                    dialog.dismiss();
+                }
+            });
+
+            Button dialogBtn_okay = (Button) dialog.findViewById(R.id.btn_okay);
+            dialogBtn_okay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    Toast.makeText(getApplicationContext(),"Okay" ,Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(PlayerActivity.this, UserActivity.class));
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
         }
-  /*          AlertDialog.Builder builder;
+
+       /* if (lastDate==0) {
+           ViewDialog alert = new ViewDialog();
+            alert.showDialog(PlayerActivity.this, "!! کد دسترسی یافت نشد !! ");
+
+*//*
             builder = new AlertDialog.Builder(PlayerActivity.this, android.R.style.Theme_Material_Dialog_Alert);
             builder.setTitle("عدم دسترسی به محتوا")
                     .setMessage("کد دسترسی معتبری یافت نشد")
@@ -340,19 +363,20 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {  // مددیریت پرداخت پول و دریافت اشتراک برای کاربر
                             Toast.makeText(PlayerActivity.this, "YES", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(PlayerActivity.this,UserActivity.class));
+                            startActivity(new Intent(PlayerActivity.this, UserActivity.class));
 
                         }
                     }).setNegativeButton("بعدا یادوری کن", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {  // مدیریت عدم خواستن دریافت اشتراک
                     Toast.makeText(PlayerActivity.this, "NO", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(PlayerActivity.this,MainActivity.class));
+                    onBackPressed();
                 }
             });
-            builder.show();
+            builder.show();*//*
 
-        }*/
+        }
+*/
     }
 /* private void getChannel_detail() {
         mainViewModel.getChannel_detail().observe(this, channelDataModel -> {
@@ -512,6 +536,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     public void onBackPressed() {
         super.onBackPressed();
 
+      handler.removeCallbacks(runnable);
 
     }
 
@@ -601,14 +626,15 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     }
 
     @Override
-    public void onClickPlayer(int id_vid_funny, int id_channel, int kind) {
+    public void onClickPlayer(int id_vid_funny, int id_channel, int kind2) {
 
         Toast.makeText(PlayerActivity.this, "" + id_vid_funny, Toast.LENGTH_SHORT).show();
-
-        mainViewModel.requestFunny_single(id_vid_funny, kind);
-        mainViewModel.requestChannel_detail(id_channel, kind);
-        mainViewModel.requestFunny_subMenu(0, kind);
-
+        kind=kind2;
+        mainViewModel.requestFunny_single(id_vid_funny, kind2);
+//recreate();
         getFunny_single();
+        getVid_channel();
+        getBest();
+        getNew_best();
     }
 }

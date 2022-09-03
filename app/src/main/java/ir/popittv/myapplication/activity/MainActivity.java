@@ -36,6 +36,7 @@ import ir.popittv.myapplication.adapter.RvChannel_Frg1;
 import ir.popittv.myapplication.adapter.SearchAdapter;
 import ir.popittv.myapplication.adapter.TagAdapter;
 import ir.popittv.myapplication.databinding.ActivityMainBinding;
+import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.models.HashTagDataModel;
 import ir.popittv.myapplication.models.UserDataModel;
@@ -409,9 +410,9 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         mainViewModel.getChannel_detail().observe(this, channelDataModel -> {
 
             if (channelDataModel!=null) {
-                List<FunnyDataModel> funnyDataModels = new ArrayList<>((channelDataModel).getVideos_channel());
+                List<FunnyDataModel> funnyDataModels5 = new ArrayList<>((channelDataModel).getVideos_channel());
 
-                detail_adapter.setData(funnyDataModels);
+                detail_adapter.setData(funnyDataModels5);
 
 
                 Glide.with(this).load(channelDataModel.getProfile_chann())
@@ -522,14 +523,14 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
     @Override
     public void onRow_index(int position) {
-        row_index = position;
+        mainViewModel.requestChannel_detail(position,KIND);
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-
+getChannel_detail();
 
     }
 
