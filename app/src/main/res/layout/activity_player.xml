@@ -385,23 +385,32 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-          android:id="@+id/rvMenuTag_player"
+          android:id="@+id/rvBest_player"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          app:layout_constraintBottom_toTopOf="@id/rvSubMenuTag_player"
+          android:layout_height="300dp"
+          android:layout_marginBottom="@dimen/plane_16"
+          app:layout_constraintBottom_toTopOf="@id/rvNew_best_player"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-          android:id="@+id/rvSubMenuTag_player"
+          android:id="@+id/rvNew_best_player"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="@dimen/plane_08"
-          app:layout_constraintBottom_toBottomOf="parent"
+          android:layout_height="300dp"
+          app:layout_constraintBottom_toTopOf="@id/rvAllVid_player"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/rvMenuTag_player" />
+          app:layout_constraintTop_toBottomOf="@id/rvBest_player" />
+        <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/rvAllVid_player"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+         android:layout_marginTop="@dimen/plane_16"
+
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/rvNew_best_player" />
       </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,10 @@
 package ir.popittv.myapplication.activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.drawable.ColorDrawable;
 import android.icu.text.DecimalFormat;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,9 +12,12 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,12 +42,10 @@ import com.google.android.exoplayer2.util.Util;
 import java.util.List;
 
 import ir.popittv.myapplication.R;
-import ir.popittv.myapplication.ViewDialog;
 import ir.popittv.myapplication.adapter.FunnyAdapter;
 import ir.popittv.myapplication.databinding.ActivityPlayerBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.request.Service;
-import ir.popittv.myapplication.response.ChannelResponse;
 import ir.popittv.myapplication.utils.OnClickFunny;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 import retrofit2.Call;
@@ -67,19 +70,16 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     long playBackPosition = 0;
     MediaItem mediaItem;
     SimpleExoPlayer simpleExoPlayer;
-
+    Handler handler;
     private ActivityPlayerBinding binding;
     private MainViewModel mainViewModel;
     //////////////////////////// exoPlayer Variable/////////////////////////////////////////////////////
     private SharedPreferences sharedPreferences;
     private String name_user;
     private String phone_user;
-
     private Long lastDate;
-
     private int id_user;
     private int id_vid_funny;
-
     private PlayerView playerView;
     private MediaSource mVideoSource;
     private boolean mExoPlayerFullscreen = false;
@@ -88,8 +88,11 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     private int mResumeWindow;
     private long mResumePosition;
     private boolean b_kindlink;
-    private FunnyAdapter funnyAdapter1;
+    private FunnyAdapter single_adapter;
     private FunnyAdapter viChennrlAdapter1;
+    private FunnyAdapter best_Adapter;
+    private FunnyAdapter new_bestAdapter;
+    private FunnyAdapter all_adapter;
 
 
     @Override
@@ -105,9 +108,9 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         View view = binding.getRoot();
         setContentView(view);
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-
-        funnyAdapter1 = new FunnyAdapter(this, this);
-        viChennrlAdapter1 = new FunnyAdapter(this,this);
+        handler = new Handler();
+        single_adapter = new FunnyAdapter(this, this);
+        viChennrlAdapter1 = new FunnyAdapter(this, this);
 
         lockScreen = findViewById(R.id.exo_lock);
         initRv();
@@ -124,9 +127,13 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         ff4 = findViewById(R.id.exo_play);
 
         initExo();
+        mainViewModel.requestFunny_subMenu(0, kind);
 
         getFunny_single();
-getVid_channel();
+        getVid_channel();
+        getBest();
+        getNew_best();
+        getAllVid();
 
         if (phone_user==null || lastDate==0 || lastDate==null) {
             login();
@@ -150,52 +157,83 @@ getVid_channel();
     private void initRv() {
 
 
-        binding.rvMenuTagPlayer.setLayoutManager(new GridLayoutManager(this, 2, RecyclerView.VERTICAL
-                , false));
-        // binding.rvMenuTagPlayer.setAdapter(detail_adapter2);
-        binding.rvVidChannelPlayer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        binding.rvVidChannelPlayer.setAdapter(funnyAdapter1);
 
-        binding.rvVidChannelPlayer.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        /*binding.rvVidChannelPlayer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        binding.rvVidChannelPlayer.setAdapter(single_adapter);*/
+
+        binding.rvVidChannelPlayer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.rvVidChannelPlayer.setAdapter(viChennrlAdapter1);
 
+        binding.rvBestPlayer.setLayoutManager(new GridLayoutManager(this, 2, RecyclerView.VERTICAL
+                , false));
+        binding.rvBestPlayer.setAdapter(best_Adapter);
+
+        binding.rvNewBestPlayer.setLayoutManager(new GridLayoutManager(this, 2, RecyclerView.VERTICAL
+                , false));
+        binding.rvNewBestPlayer.setAdapter(new_bestAdapter);
+
+        binding.rvAllVidPlayer.setLayoutManager(new GridLayoutManager(this, 2, RecyclerView.VERTICAL
+                , false));
+        binding.rvAllVidPlayer.setAdapter(all_adapter);
+
     }
-private void getVid_channel(){
-    Service.getApiClient().getVid_Channel(5).enqueue(new Callback<List<FunnyDataModel>>() {
-        @Override
-        public void onResponse(Call<List<FunnyDataModel>> call, Response<List<FunnyDataModel>> response) {
-            if (response.isSuccessful())
-            viChennrlAdapter1.setData(response.body());
-        }
 
-        @Override
-        public void onFailure(Call<List<FunnyDataModel>> call, Throwable t) {
+    private void getVid_channel() {
+        Service.getApiClient().getVid_Channel(id_channel, kind).enqueue(new Callback<List<FunnyDataModel>>() {
+            @Override
+            public void onResponse(Call<List<FunnyDataModel>> call, Response<List<FunnyDataModel>> response) {
+                if (response.isSuccessful())
+                    viChennrlAdapter1.setData(response.body());
+            }
 
-        }
-    });
-}
-
-    private void getChannel_detail() {
-        mainViewModel.getChannel_detail().observe(this, channelDataModel -> {
-
-            if (channelDataModel!=null) {
-                funnyAdapter1.setData(channelDataModel.getVideos_channel());
-
-                Glide.with(this).load(channelDataModel.getBanner_chann())
-                        .into(binding.ivBannerItemChannelAll);
-                id_vid_funny = channelDataModel.getId_funny();
-                id_channel = channelDataModel.getId_channel();
-                kind = channelDataModel.getKind();
-                Glide.with(this).load(channelDataModel.getProfile_chann())
-                        .into(binding.ivProfileItemAllChan);
-                binding.titleSubPlayer.setText(channelDataModel.getFollowers());
-                //  binding.titleAgePlayer.setText(channelDataModel.getAge_name());
-                binding.titleFaChannelPlayer.setText(channelDataModel.getName_chan_fa().trim());
-                binding.titleEnChannelPlayer.setText(channelDataModel.getName_chan_en().trim());
+            @Override
+            public void onFailure(Call<List<FunnyDataModel>> call, Throwable t) {
 
             }
         });
     }
+
+    private void getBest() {
+        Service.getApiClient().getBest(0).enqueue(new Callback<List<FunnyDataModel>>() {
+            @Override
+            public void onResponse(Call<List<FunnyDataModel>> call, Response<List<FunnyDataModel>> response) {
+                if (response.isSuccessful()) {
+                    best_Adapter.setData(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FunnyDataModel>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void getNew_best() {
+        Service.getApiClient().getNew_Best(0).enqueue(new Callback<List<FunnyDataModel>>() {
+            @Override
+            public void onResponse(Call<List<FunnyDataModel>> call, Response<List<FunnyDataModel>> response) {
+                if (response.isSuccessful()) {
+                    new_bestAdapter.setData(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FunnyDataModel>> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void getAllVid() {
+        mainViewModel.getFunny_subMenu().observe(PlayerActivity.this, funnyDataModels -> {
+            if (funnyDataModels!=null) {
+                all_adapter.setData(funnyDataModels);
+            }
+        });
+    }
+
 
     private void getFunny_single() {
         mainViewModel.getFunny_single().observe(this, funnyDataModel -> {
@@ -210,7 +248,9 @@ private void getVid_channel(){
 
                 binding.tvViewItemVidDef.setText(prettyCount(view));
                 binding.tvLikeItemVidDef.setText(prettyCount(like));
-                int id_channel_2 = funnyDataModel.getId_channel();
+                id_channel = funnyDataModel.getId_channel();
+                id_vid_funny = funnyDataModel.getId_funny();
+                kind = funnyDataModel.getKind();
                 Glide.with(this).load(funnyDataModel.getPoster())
                         .into(binding.posterPlayer);
 
@@ -249,6 +289,94 @@ private void getVid_channel(){
         }
     }
 
+    private void login() {
+        handler.postDelayed(this::checkExpireUser, 50000);
+    }
+
+    private void checkExpireUser() {
+
+        final Dialog dialog = new Dialog(PlayerActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.custom_dialogbox_otp);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        TextView text = (TextView) dialog.findViewById(R.id.txt_file_path);
+        text.setText(R.string.exite);
+
+        Button dialogBtn_cancel = (Button) dialog.findViewById(R.id.btn_cancel);
+        dialogBtn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                    Toast.makeText(getApplicationContext(),"Cancel" ,Toast.LENGTH_SHORT).show();
+                // activity.startActivity(new Intent(activity, MainActivity.class));
+                finish();
+
+                dialog.dismiss();
+            }
+        });
+
+        Button dialogBtn_okay = (Button) dialog.findViewById(R.id.btn_okay);
+        dialogBtn_okay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                    Toast.makeText(getApplicationContext(),"Okay" ,Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(PlayerActivity.this, UserActivity.class));
+                dialog.cancel();
+            }
+        });
+
+        dialog.show();
+        if (lastDate==0) {
+        /*    ViewDialog alert = new ViewDialog();
+            alert.showDialog(PlayerActivity.this, "!! کد دسترسی یافت نشد !! ");*/
+        }
+  /*          AlertDialog.Builder builder;
+            builder = new AlertDialog.Builder(PlayerActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+            builder.setTitle("عدم دسترسی به محتوا")
+                    .setMessage("کد دسترسی معتبری یافت نشد")
+                    .setIcon(R.drawable.ic_parents_monny)
+                    .setPositiveButton("دریافت کد دسترسی", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {  // مددیریت پرداخت پول و دریافت اشتراک برای کاربر
+                            Toast.makeText(PlayerActivity.this, "YES", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(PlayerActivity.this,UserActivity.class));
+
+                        }
+                    }).setNegativeButton("بعدا یادوری کن", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {  // مدیریت عدم خواستن دریافت اشتراک
+                    Toast.makeText(PlayerActivity.this, "NO", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(PlayerActivity.this,MainActivity.class));
+                }
+            });
+            builder.show();
+
+        }*/
+    }
+/* private void getChannel_detail() {
+        mainViewModel.getChannel_detail().observe(this, channelDataModel -> {
+
+            if (channelDataModel!=null) {
+                funnyAdapter1.setData(channelDataModel.getVideos_channel());
+
+                Glide.with(this).load(channelDataModel.getBanner_chann())
+                        .into(binding.ivBannerItemChannelAll);
+                id_vid_funny = channelDataModel.getId_funny();
+                id_channel = channelDataModel.getId_channel();
+                kind = channelDataModel.getKind();
+                Glide.with(this).load(channelDataModel.getProfile_chann())
+                        .into(binding.ivProfileItemAllChan);
+                binding.titleSubPlayer.setText(channelDataModel.getFollowers());
+                //  binding.titleAgePlayer.setText(channelDataModel.getAge_name());
+                binding.titleFaChannelPlayer.setText(channelDataModel.getName_chan_fa().trim());
+                binding.titleEnChannelPlayer.setText(channelDataModel.getName_chan_en().trim());
+
+            }
+        });
+    }*/
+
+    //region  ExoPlayer
     @Override
     public void onSaveInstanceState(Bundle outState) {
 
@@ -258,7 +386,6 @@ private void getVid_channel(){
 
         super.onSaveInstanceState(outState);
     }
-//region  ExoPlayer
 
     private void initFullscreenDialog() {
 
@@ -357,53 +484,6 @@ private void getVid_channel(){
         }
     }
 
-    //endregion
-
-    private void login() {
-        if (phone_user==null || lastDate==0 || lastDate==null) {
-            new Handler().postDelayed(this::checkExpireUser, 115000);
-
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-
-    }
-
-
-    private void checkExpireUser() {
-        if (lastDate==0) {
-            ViewDialog alert = new ViewDialog();
-            alert.showDialog(PlayerActivity.this, "!! کد دسترسی یافت نشد !! ");
-        }
-  /*          AlertDialog.Builder builder;
-            builder = new AlertDialog.Builder(PlayerActivity.this, android.R.style.Theme_Material_Dialog_Alert);
-            builder.setTitle("عدم دسترسی به محتوا")
-                    .setMessage("کد دسترسی معتبری یافت نشد")
-                    .setIcon(R.drawable.ic_parents_monny)
-                    .setPositiveButton("دریافت کد دسترسی", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {  // مددیریت پرداخت پول و دریافت اشتراک برای کاربر
-                            Toast.makeText(PlayerActivity.this, "YES", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(PlayerActivity.this,UserActivity.class));
-
-                        }
-                    }).setNegativeButton("بعدا یادوری کن", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {  // مدیریت عدم خواستن دریافت اشتراک
-                    Toast.makeText(PlayerActivity.this, "NO", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(PlayerActivity.this,MainActivity.class));
-                }
-            });
-            builder.show();
-
-        }*/
-    }
-
-
     private void releasePlayer() {
         if (simpleExoPlayer!=null) {
             playWhenReady = simpleExoPlayer.getPlayWhenReady();
@@ -425,6 +505,16 @@ private void getVid_channel(){
                         View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         );
     }
+    //endregion
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+
+    }
+
 
     @Override
     protected void onResume() {
@@ -518,7 +608,6 @@ private void getVid_channel(){
         mainViewModel.requestFunny_single(id_vid_funny, kind);
         mainViewModel.requestChannel_detail(id_channel, kind);
         mainViewModel.requestFunny_subMenu(0, kind);
-        getChannel_detail();
 
         getFunny_single();
     }
