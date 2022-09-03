@@ -21,6 +21,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,9 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -249,8 +253,19 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     }
 
     private void getAllVid() {
+
         mainViewModel.getFunny_subMenu().observe(PlayerActivity.this, funnyDataModels -> {
             if (funnyDataModels!=null) {
+
+            /*    Collections.sort(funnyDataModels, new Comparator<FunnyDataModel>() { //sorted by last id
+
+                    @Override
+                    public int compare(FunnyDataModel o1, FunnyDataModel o2) {
+                        // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
+                        return o1.getId_funny() > o2.getId_funny() ? -1 : (o1.getId_funny() < o2.getId_funny() ) ? 1 : 0;
+                    }
+                });*/
+
                 all_adapter.setFunnyDataModels(funnyDataModels);
             }
         });
@@ -273,8 +288,8 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
                 id_channel = funnyDataModel.getId_channel();
                 id_vid_funny = funnyDataModel.getId_funny();
                 kind = funnyDataModel.getKind();
-                Glide.with(this).load(funnyDataModel.getPoster())
-                        .into(binding.posterPlayer);
+               /* Glide.with(this).load(funnyDataModel.getPoster())
+                        .into(binding.posterPlayer);*/
 
                 Glide.with(this).load(funnyDataModel.getProfile_chann())
                         .into(binding.ivProfileItemAllChan);
@@ -642,6 +657,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         kind=kind2;
 
         mainViewModel.requestFunny_single(id_vid_funny, kind2);
+        binding.containerMain.fullScroll(ScrollView.FOCUS_UP);
 //recreate();
         getFunny_single();
         getVid_channel();
