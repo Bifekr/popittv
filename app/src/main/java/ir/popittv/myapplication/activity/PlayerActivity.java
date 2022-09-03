@@ -49,6 +49,7 @@ import java.util.concurrent.TimeUnit;
 
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.ViewDialog;
+import ir.popittv.myapplication.adapter.ChannelDetail_adapter;
 import ir.popittv.myapplication.adapter.FunnyAdapter;
 import ir.popittv.myapplication.databinding.ActivityPlayerBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
@@ -99,9 +100,9 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     AlertDialog.Builder builder;
     private FunnyAdapter single_adapter;
     private FunnyAdapter viChennrlAdapter1;
-    private FunnyAdapter best_Adapter;
-    private FunnyAdapter new_bestAdapter;
-    private FunnyAdapter all_adapter;
+    private ChannelDetail_adapter best_Adapter;
+    private ChannelDetail_adapter new_bestAdapter;
+    private ChannelDetail_adapter all_adapter;
     Runnable runnable;
 
 
@@ -121,9 +122,9 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         handler = new Handler();
         single_adapter = new FunnyAdapter(this, this);
         viChennrlAdapter1 = new FunnyAdapter(this, this);
-        best_Adapter =new FunnyAdapter(this,this);
-        new_bestAdapter = new FunnyAdapter(this,this);
-        all_adapter = new FunnyAdapter(this,this);
+        best_Adapter =new ChannelDetail_adapter(this,this);
+        new_bestAdapter = new ChannelDetail_adapter(this,this);
+        all_adapter = new ChannelDetail_adapter(this,this);
 
         lockScreen = findViewById(R.id.exo_lock);
         initRv();
@@ -131,6 +132,8 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
         kind = getIntent().getIntExtra("kind", 0);
         id_channel = getIntent().getIntExtra("id_channel", 0);
+
+
         mainViewModel.requestFunny_single(id_vid_funny, kind);
 
 
@@ -148,10 +151,10 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
        getNew_best();
         getAllVid();
 
-        if (phone_user==null || lastDate==0 || lastDate==null) {
+     /*   if (phone_user==null || lastDate==0 || lastDate==null) {
             login();
 
-        }
+        }*/
 
 
         DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(
@@ -185,7 +188,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
                 , false));
         binding.rvNewBestPlayer.setAdapter(new_bestAdapter);
 
-        binding.rvAllVidPlayer.setLayoutManager(new GridLayoutManager(this, 2, RecyclerView.VERTICAL
+        binding.rvAllVidPlayer.setLayoutManager(new GridLayoutManager(this, 3, RecyclerView.VERTICAL
                 , false));
         binding.rvAllVidPlayer.setAdapter(all_adapter);
 
@@ -211,7 +214,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             @Override
             public void onResponse(Call<List<FunnyDataModel>> call, Response<List<FunnyDataModel>> response) {
                 if (response.isSuccessful()) {
-                    best_Adapter.setData(response.body());
+                    best_Adapter.setFunnyDataModels(response.body());
                 }
             }
 
@@ -227,7 +230,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             @Override
             public void onResponse(Call<List<FunnyDataModel>> call, Response<List<FunnyDataModel>> response) {
                 if (response.isSuccessful()) {
-                    new_bestAdapter.setData(response.body());
+                    new_bestAdapter.setFunnyDataModels(response.body());
                 }
             }
 
@@ -242,7 +245,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     private void getAllVid() {
         mainViewModel.getFunny_subMenu().observe(PlayerActivity.this, funnyDataModels -> {
             if (funnyDataModels!=null) {
-                all_adapter.setData(funnyDataModels);
+                all_adapter.setFunnyDataModels(funnyDataModels);
             }
         });
     }
@@ -308,6 +311,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             @Override
             public void run() {
                 checkExpireUser();
+                simpleExoPlayer.stop();
             }
         };
         handler.postDelayed(runnable, 50000);
@@ -630,6 +634,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
         Toast.makeText(PlayerActivity.this, "" + id_vid_funny, Toast.LENGTH_SHORT).show();
         kind=kind2;
+
         mainViewModel.requestFunny_single(id_vid_funny, kind2);
 //recreate();
         getFunny_single();

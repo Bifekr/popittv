@@ -78,7 +78,7 @@ public class InfinitFrg1_PagerAdapter extends androidx.viewpager.widget.PagerAda
 
             onClickFunny.onClickPlayer(id_funny3,id_channel,kind);
 
-            Toast.makeText(context, "OnClick"+funnyDataModels.get(position).getId_funny(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "OnClick"+id_channel, Toast.LENGTH_SHORT).show();
         });
 
         container.addView(view);

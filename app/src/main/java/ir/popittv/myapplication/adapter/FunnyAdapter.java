@@ -67,10 +67,10 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.FunnyHolder>
 
         holder.binding.titleFaVideoItemVideoThumb.setText(funnyDataModels.get(position).getTitle_fa());
         holder.binding.titleEnVideoItemVideoThumb.setText(funnyDataModels.get(position).getTitle_en());
-        //int like= Integer.parseInt(funnyDataModels.get(position).getLiky());
-      //  int view= Integer.parseInt(funnyDataModels.get(position).getView());
-     //   holder.binding.tvLikeItemVidDef.setText(prettyCount(like));
-       // holder.binding.tvViewItemVidDef.setText(prettyCount(view));
+       int like= Integer.parseInt(funnyDataModels.get(position).getLiky());
+        int view= Integer.parseInt(funnyDataModels.get(position).getView());
+      holder.binding.tvLikeItemVidDef.setText(prettyCount(like));
+        holder.binding.tvViewItemVidDef.setText(prettyCount(view));
         Glide.with(context).load(funnyDataModels.get(position).getPoster())
                 .into(holder.binding.ivPosterItemVideo);
         if (funnyDataModels.get(position).getProfile_chann()!=null) {
