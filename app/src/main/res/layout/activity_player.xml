@@ -387,8 +387,8 @@
         <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/rvBest_player"
           android:layout_width="match_parent"
-          android:layout_height="300dp"
-          android:layout_marginBottom="@dimen/plane_16"
+          android:layout_height="280dp"
+          android:layout_marginBottom="@dimen/plane_24"
           app:layout_constraintBottom_toTopOf="@id/rvNew_best_player"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
@@ -397,7 +397,7 @@
         <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/rvNew_best_player"
           android:layout_width="match_parent"
-          android:layout_height="300dp"
+          android:layout_height="280dp"
           app:layout_constraintBottom_toTopOf="@id/rvAllVid_player"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
@@ -406,7 +406,7 @@
           android:id="@+id/rvAllVid_player"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-         android:layout_marginTop="@dimen/plane_16"
+         android:layout_marginTop="@dimen/plane_24"
 
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"

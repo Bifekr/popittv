@@ -187,6 +187,12 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         binding.rvNewBestPlayer.setLayoutManager(new GridLayoutManager(this, 2, RecyclerView.VERTICAL
                 , false));
         binding.rvNewBestPlayer.setAdapter(new_bestAdapter);
+    /*    binding.rvBestPlayer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        binding.rvBestPlayer.setAdapter(best_Adapter);
+
+        binding.rvNewBestPlayer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        binding.rvNewBestPlayer.setAdapter(new_bestAdapter);*/
+
 
         binding.rvAllVidPlayer.setLayoutManager(new GridLayoutManager(this, 3, RecyclerView.VERTICAL
                 , false));
