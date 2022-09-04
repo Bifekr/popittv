@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout
+  android:background="#541244"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <com.airbnb.lottie.LottieAnimationView
+    android:id="@+id/lottie_intro"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    app:lottie_autoPlay="true"
+    app:lottie_rawRes="@raw/happy_loader" />
+  <com.airbnb.lottie.LottieAnimationView
+    android:id="@+id/lottie2_intro"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    app:lottie_autoPlay="true"
+    app:lottie_rawRes="@raw/banks_pan" />
+  <com.airbnb.lottie.LottieAnimationView
+    android:id="@+id/lottie3_intro"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    app:lottie_autoPlay="true"
+    app:lottie_rawRes="@raw/lotti_bomb_explosion_cartoon" />
+  <com.airbnb.lottie.LottieAnimationView
+    android:id="@+id/lottie4_intro"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    app:lottie_autoPlay="true"
+    app:lottie_rawRes="@raw/lotti_calendar" />
+  <com.airbnb.lottie.LottieAnimationView
+    android:id="@+id/lottie5_intro"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    app:lottie_autoPlay="true"
+    app:lottie_rawRes="@raw/lotti_celebrating_peak_pro_purchasethe_right_way" />
+  <com.airbnb.lottie.LottieAnimationView
+    android:id="@+id/lottie6_intro"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    app:lottie_autoPlay="true"
+    app:lottie_rawRes="@raw/lotti_grey_mail" />
+
+</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

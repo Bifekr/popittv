@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
@@ -344,7 +345,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
             et_phone = bottomView.findViewById(R.id.et_phone_userProfile);
             Button btn_send = bottomView.findViewById(R.id.send_customLogin);
-            ProgressBar progressBar = bottomView.findViewById(R.id.progress_dialog);
+            LottieAnimationView progressBar = bottomView.findViewById(R.id.progress_dialog);
 
             btn_send.setOnClickListener(V -> { //رفتن به مرحله وارد کردن کد پیامک شدن
                 if (validatePhone()) { // چک کردن خطاهای احتمالی هنگام وارد کردن شماره
