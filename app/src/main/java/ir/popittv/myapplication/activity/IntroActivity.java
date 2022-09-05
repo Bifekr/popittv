@@ -18,44 +18,35 @@ import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 
 public class IntroActivity extends AppCompatActivity {
-    private static final int splash_time_out = 12000;
-    ImageView image_intro;
-    TextView  line4,line5;
-    LottieAnimationView lottie_intro ,tv_a,tv_appName,logo_intro;
+    private static final int splash_time_out = 8000;
+    ImageView image_intro, line4;
+    LottieAnimationView tv_a, lottie_intro;
+    LottieAnimationView tv_appName;
+    LottieAnimationView logo_intro;
+    View line1, line2, line3;
+    TextView tv_tag, tv_tag2;
+    Animation topAnim, middleAnim, bottomAnim;
     private MainViewModel mainViewModel;
-    View line1,line2,line3;
-    TextView tv_tag,tv_tag2;
-    Animation topAnim,middleAnim,bottomAnim;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        mainViewModel.requestChannel_kind(2);
-        mainViewModel.requestFunny_subMenu(0, 1);
+        //  mainViewModel.requestChannel_kind(2);
+        // mainViewModel.requestFunny_subMenu(0, 1);
         getChannel_kind();
         getFunny_subMenu();
 
-        topAnim = AnimationUtils.loadAnimation(this,R.anim.top_anim_splash);
-        middleAnim = AnimationUtils.loadAnimation(this,R.anim.center_anim_splash);
-        bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_anim_splash);
+        topAnim = AnimationUtils.loadAnimation(this, R.anim.top_anim_splash);
+        middleAnim = AnimationUtils.loadAnimation(this, R.anim.center_anim_splash);
+        bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_anim_splash);
 
 
-        image_intro = findViewById(R.id.image_intro);
-        logo_intro = findViewById(R.id.logo_intro);
-        tv_appName = findViewById(R.id.tv_appName_intro);
-        lottie_intro = findViewById(R.id.lottie_intro);
-
-        image_intro.animate().translationY(1600).setDuration(1000).setStartDelay(2800);
-        logo_intro.animate().translationX(1400).setDuration(900).setStartDelay(1800);
-        tv_appName.animate().translationX(-1400).setDuration(900).setStartDelay(1800);
-        lottie_intro.animate().translationX(15000).setDuration(13000).setStartDelay(4);
-                                //مقصد حرکت         //sorat harekat     //zaman ejra shoro harekat ba sorat taeen shodeh
-        handlerSplash();                            // adad bishtar ahestetar
+        handlerSplash();
         initiatedView();
         setAnim();
     }
-
 
 
     private void handlerSplash() {
@@ -74,25 +65,27 @@ public class IntroActivity extends AppCompatActivity {
         line2.setAnimation(topAnim);
         line3.setAnimation(topAnim);
         line4.setAnimation(topAnim);
-        line5.setAnimation(topAnim);
 
+        lottie_intro.setAnimation(middleAnim);
         tv_a.setAnimation(middleAnim);
         tv_tag.setAnimation(bottomAnim);
         tv_tag2.setAnimation(bottomAnim);
     }
+
     private void initiatedView() {
 
-        line1=findViewById(R.id.line1_topSplash);
-        line2=findViewById(R.id.line2_topSplash);
-        line3=findViewById(R.id.line3_topSplash);
-        line4=findViewById(R.id.line4_topSplash);
-        line5=findViewById(R.id.line5_topSplash);
+        line1 = findViewById(R.id.line1_topSplash);
+        line2 = findViewById(R.id.line2_topSplash);
+        line3 = findViewById(R.id.line3_topSplash);
+        line4 = findViewById(R.id.line4_topSplash);
 
-        tv_a=findViewById(R.id.tv_a_splash);
-        tv_tag=findViewById(R.id.tv_tag_splash);
-        tv_tag2=findViewById(R.id.tv_tag2_splash);
+        lottie_intro = findViewById(R.id.lottie_intro);
+        tv_a = findViewById(R.id.tv_a_splash);
+        tv_tag = findViewById(R.id.tv_tag_splash);
+        tv_tag2 = findViewById(R.id.tv_tag2_splash);
 
     }
+
     private void getChannel_kind() {
         mainViewModel.getChannel_kind().observe(this, channelDataModels -> {
       /*      if (channelDataModels!=null) {

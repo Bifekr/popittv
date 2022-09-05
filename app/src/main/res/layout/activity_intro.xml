@@ -5,70 +5,24 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:layoutDirection="ltr"
+  android:background="#ffae00"
   tools:context=".activity.IntroActivity">
 
- <com.airbnb.lottie.LottieAnimationView
-   android:id="@+id/image_intro"
-   android:layout_width="match_parent"
-   android:layout_height="match_parent"
-   android:adjustViewBounds="true"
-   android:scaleType="centerCrop"
-android:visibility="visible"
-   android:src="@drawable/ic_tweet_tound_false"
-   app:layout_constraintBottom_toBottomOf="parent"
-   app:layout_constraintEnd_toEndOf="parent"
-   app:layout_constraintHorizontal_bias="1.0"
-   app:layout_constraintStart_toEndOf="parent"
-   app:layout_constraintStart_toStartOf="parent"
-   app:lottie_autoPlay="true"
-   app:lottie_rawRes="@raw/lotti_bomb_explosion_cartoon" />
-
- <com.airbnb.lottie.LottieAnimationView
-   android:id="@+id/logo_intro"
-   android:layout_width="132dp"
-   android:layout_height="120dp"
-   android:fontFamily="@font/lalezar_regular"
-   android:text="پــیـکـوبــــووم"
-   android:textColor="@color/black"
-   android:textSize="40dp"
-   android:visibility="visible"
-   app:layout_constraintBottom_toBottomOf="parent"
-   app:layout_constraintEnd_toEndOf="parent"
-   app:layout_constraintHorizontal_bias="0.859"
-   app:layout_constraintStart_toStartOf="parent"
-
-   app:layout_constraintTop_toTopOf="parent"
-   app:layout_constraintVertical_bias="0.216"
-   app:lottie_autoPlay="true"
-   app:lottie_loop="true"
-   app:lottie_rawRes="@raw/lotti_smiling_face_with_heart_shaped" />
-
- <com.airbnb.lottie.LottieAnimationView
-   android:id="@+id/tv_appName_intro"
-   android:layout_width="186dp"
-   android:layout_height="100dp"
-   app:layout_constraintBottom_toTopOf="@+id/lottie_intro"
-   app:layout_constraintEnd_toEndOf="parent"
-   app:layout_constraintHorizontal_bias="0.145"
-   app:layout_constraintStart_toStartOf="parent"
-   app:layout_constraintTop_toTopOf="parent"
-   app:layout_constraintVertical_bias="0.325"
-   app:lottie_autoPlay="true"
-   app:lottie_loop="true"
-   app:lottie_rawRes="@raw/lotti_cute_bunnies_love_animation" />
 
  <com.airbnb.lottie.LottieAnimationView
    android:id="@+id/lottie_intro"
-   android:layout_width="200dp"
-   android:layout_height="80dp"
-   app:layout_constraintBottom_toBottomOf="parent"
-   app:layout_constraintStart_toStartOf="parent"
-   app:layout_constraintTop_toTopOf="parent"
-   app:layout_constraintVertical_bias="1.0"
+   android:layout_width="212dp"
+   android:layout_height="46dp"
+   android:layout_marginBottom="6dp"
+   app:layout_constraintBottom_toTopOf="@+id/tv_tag_splash"
+   app:layout_constraintEnd_toEndOf="@+id/tv_a_splash"
+   app:layout_constraintHorizontal_bias="0.409"
+   app:layout_constraintStart_toStartOf="@+id/tv_a_splash"
+   app:layout_constraintTop_toBottomOf="@+id/tv_a_splash"
+   app:layout_constraintVertical_bias="0.0"
    app:lottie_autoPlay="true"
    app:lottie_loop="true"
    app:lottie_rawRes="@raw/happy_loader" />
-
 
  <View
    android:id="@+id/line1_topSplash"
@@ -101,46 +55,26 @@ android:visibility="visible"
    android:visibility="gone"
    android:layout_toRightOf="@id/line2_topSplash"
    android:background="@drawable/swoard_purpol"
-   app:layout_constraintEnd_toStartOf="@+id/line5_topSplash"
+   app:layout_constraintEnd_toStartOf="@+id/line4_topSplash"
    app:layout_constraintTop_toTopOf="parent" />
 
- <TextView
+
+ <ImageView
    android:id="@+id/line4_topSplash"
    android:layout_width="wrap_content"
    android:layout_height="wrap_content"
    android:layout_marginTop="16dp"
-   android:background="@drawable/shape_tag6"
+
    android:fontFamily="@font/lalezar_regular"
    android:paddingStart="@dimen/plane_16"
    android:paddingEnd="@dimen/plane_16"
-   android:text="پــیـکـوبــــووم"
-
+   android:src="@drawable/logo_intro"
    android:textColor="@color/black"
    android:textSize="36dp"
    app:layout_constraintEnd_toEndOf="parent"
-   app:layout_constraintHorizontal_bias="0.49"
+   app:layout_constraintHorizontal_bias="0.496"
    app:layout_constraintStart_toStartOf="parent"
    app:layout_constraintTop_toTopOf="parent" />
-
- <TextView
-   android:id="@+id/line5_topSplash"
-   android:layout_width="wrap_content"
-   android:layout_height="wrap_content"
-   android:background="@drawable/shape_tag6"
-   android:fontFamily="@font/baloo"
-   android:text="PikoBoom"
-   android:paddingEnd="@dimen/plane_16"
-   android:paddingStart="@dimen/plane_16"
-
-   android:textColor="@color/black"
-   android:textSize="36dp"
-   app:layout_constraintBottom_toTopOf="@+id/lottie_intro"
-   app:layout_constraintEnd_toEndOf="parent"
-   app:layout_constraintHorizontal_bias="0.49"
-   app:layout_constraintStart_toStartOf="parent"
-   app:layout_constraintTop_toBottomOf="@+id/line4_topSplash"
-   app:layout_constraintVertical_bias="0.0" />
-
 
  <com.airbnb.lottie.LottieAnimationView
    android:id="@+id/tv_a_splash"
@@ -151,11 +85,11 @@ android:visibility="visible"
    android:textSize="80sp"
    android:visibility="visible"
    app:layout_constraintBottom_toTopOf="@id/tv_tag_splash"
-   app:layout_constraintEnd_toEndOf="@+id/line5_topSplash"
-   app:layout_constraintHorizontal_bias="0.363"
-   app:layout_constraintStart_toStartOf="@id/line5_topSplash"
-   app:layout_constraintTop_toBottomOf="@+id/line5_topSplash"
-   app:layout_constraintVertical_bias="0.135"
+   app:layout_constraintEnd_toEndOf="@+id/line4_topSplash"
+   app:layout_constraintHorizontal_bias="0.507"
+   app:layout_constraintStart_toStartOf="@id/line4_topSplash"
+   app:layout_constraintTop_toBottomOf="@+id/line4_topSplash"
+   app:layout_constraintVertical_bias="0.0"
    app:lottie_autoPlay="true"
    app:lottie_loop="true"
    app:lottie_rawRes="@raw/lotti_cute_bunnies_love_animation" />
@@ -167,11 +101,11 @@ android:visibility="visible"
    android:layout_centerHorizontal="true"
    android:layout_marginBottom="48dp"
    android:fontFamily="@font/lalezar_regular"
-   android:text="دانلود آخرین نسخه از"
+   android:paddingStart="@dimen/plane_08"
+   android:paddingEnd="@dimen/plane_08"
+   android:text="Download App :"
    android:textColor="@color/black"
    android:textSize="20sp"
-   android:paddingEnd="@dimen/plane_08"
-   android:paddingStart="@dimen/plane_08"
    app:layout_constraintBottom_toBottomOf="parent"
    app:layout_constraintEnd_toEndOf="parent"
    app:layout_constraintHorizontal_bias="0.482"
