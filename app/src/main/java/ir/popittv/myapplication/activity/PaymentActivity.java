@@ -26,12 +26,14 @@ import ir.popittv.myapplication.R;
 
 public class PaymentActivity extends AppCompatActivity {
 
+
+
     private final Long price = 1000L;
     private final Long price2 = 2000L;
     private final Long price3 = 3000L;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    ZarinPalBillingClient client = null;
+    ZarinPalBillingClient client ;
     BillingClientStateListener billingClientStateListener;
     //--------------
     private boolean status = false;
@@ -62,45 +64,43 @@ public class PaymentActivity extends AppCompatActivity {
         };
 
 
-        FutureCompletionListener<Receipt> futureCompletionListener = new FutureCompletionListener<Receipt>() {
-            @Override
-            public void onComplete(TaskResult<Receipt> task) {
-                status = Objects.requireNonNull(task.getSuccess()).isSuccess();
-                amount = String.valueOf(task.getSuccess().getAmount());
-                firstDate = task.getSuccess().getDate();
-                transactionId = task.getSuccess().getTransactionID();
-                Log.d("TAG", "onComplete Receipt is :"+task.getSuccess().getAmount());
-                Log.d("TAG", "onComplete Receipt is ${task.success?.amount.toString()}");
-                long unixCurrentTime = System.currentTimeMillis();
-                editor.putLong("unixCurrentTime",unixCurrentTime);
+        FutureCompletionListener<Receipt> futureCompletionListener = task -> {
+            status = Objects.requireNonNull(task.getSuccess()).isSuccess();
+            amount = String.valueOf(task.getSuccess().getAmount());
+            firstDate = task.getSuccess().getDate();
+            transactionId = task.getSuccess().getTransactionID();
+            Log.d("TAG", "onComplete Receipt is :"+task.getSuccess().getAmount());
+            Log.d("TAG", "onComplete Receipt is ${task.success?.amount.toString()}");
+            long unixCurrentTime = System.currentTimeMillis();
+            editor.putLong("unixCurrentTime",unixCurrentTime);
+            editor.putBoolean("status", true);
+            editor.putInt("expire", expire);
+            editor.putString("amount", String.valueOf(task.getSuccess().getAmount()));
+            editor.putString("firstDate", firstDate);
+            editor.putString("transactionId", transactionId);
+            editor.commit();
+            recreate();
+            startActivity(new Intent(PaymentActivity.this, UserActivity.class));
+       /*     new Handler(Looper.getMainLooper()).post(() -> {
+
+                long unixCurrentTime2 = System.currentTimeMillis();
+                editor.putLong("unixCurrentTime", unixCurrentTime);
                 editor.putBoolean("status", true);
                 editor.putInt("expire", expire);
-                editor.putString("amount", String.valueOf(task.getSuccess().getAmount()));
+                editor.putString("amount", amount);
                 editor.putString("firstDate", firstDate);
                 editor.putString("transactionId", transactionId);
                 editor.commit();
-                recreate();
-                //  Toast.makeText(PaymentActivity.this, "پرداخت موفق"+ firstDate, Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(PaymentActivity.this, "پرداخت موفق" + task.getSuccess().isSuccess(), Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(PaymentActivity.this, UserActivity.class));
-                new Handler(Looper.getMainLooper()).post(() -> {
-
-                    long unixCurrentTime2 = System.currentTimeMillis();
-                    editor.putLong("unixCurrentTime", unixCurrentTime);
-                    editor.putBoolean("status", true);
-                    editor.putInt("expire", expire);
-                    editor.putString("amount", amount);
-                    editor.putString("firstDate", firstDate);
-                    editor.putString("transactionId", transactionId);
-                    editor.commit();
-
-                    Toast.makeText(PaymentActivity.this, "پرداخت موفق" + task.getSuccess().isSuccess(), Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(PaymentActivity.this, UserActivity.class));
 
 
-                });
+            });*/
 
-            }
         };
+
+
 
         client = ZarinPalBillingClient.newBuilder(this)
                 .enableShowInvoice()
@@ -132,11 +132,8 @@ public class PaymentActivity extends AppCompatActivity {
 
 
     private Purchase getPurchaseAsPaymentRequest(long price) {
-
         final String description = " پرداخت و دریافت اشتراک برای برنامه پیکوبوم ";
         final String callback = "https://pikoboom.ir/"; // Your Server address
-
-
         //-----------
         final String MERCHENT_ID = "6a5ecf11-5142-479f-940b-dc931a2a368c";
         return Purchase.newBuilder()
