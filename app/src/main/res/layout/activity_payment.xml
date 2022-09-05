@@ -11,57 +11,126 @@
     android:id="@+id/btnCode1"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/payment1mounth"
     android:background="@drawable/shape_tag6"
-    android:paddingStart="@dimen/plane_16"
-    android:paddingEnd="@dimen/plane_16"
-    android:paddingTop="@dimen/plane_04"
-    android:paddingBottom="@dimen/plane_04"
     android:fontFamily="@font/lalezar_regular"
-    app:layout_constraintBottom_toTopOf="@id/btnCode2"
+    android:paddingStart="@dimen/plane_16"
+    android:paddingTop="@dimen/plane_04"
+    android:paddingEnd="@dimen/plane_16"
+    android:paddingBottom="@dimen/plane_04"
+    android:text="@string/payment1mounth"
     app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.917"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    tools:layout_editor_absoluteY="35dp" />
 
-  <Button
-    android:id="@+id/btnCode2"
+  <TextView
+    android:id="@+id/textView4"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/payment3mounth"
-    android:background="@drawable/shape_tag6"
-    android:paddingStart="@dimen/plane_16"
-    android:paddingEnd="@dimen/plane_16"
-    android:paddingTop="@dimen/plane_04"
-    android:paddingBottom="@dimen/plane_04"
-    android:fontFamily="@font/lalezar_regular"
-    app:layout_constraintBottom_toTopOf="@id/btnCode3"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/btnCode1" />
+    android:textColor="@color/black"
+    android:text="6 ماه اعتبار  50هزارتومان"
+    app:layout_constraintBottom_toTopOf="@+id/btnCode3"
+    app:layout_constraintEnd_toEndOf="@+id/btnCode3"
+    app:layout_constraintStart_toStartOf="@+id/btnCode3" />
+
+  <TextView
+    android:id="@+id/textView3"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/black"
+    android:text="1 ماه اعتبار  9هزارتومان"
+    app:layout_constraintBottom_toTopOf="@+id/btnCode1"
+    app:layout_constraintEnd_toEndOf="@+id/btnCode1"
+    app:layout_constraintHorizontal_bias="0.513"
+    app:layout_constraintStart_toStartOf="@+id/btnCode1" />
+
+  <TextView
+    android:id="@+id/textView2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/black"
+    android:text="3 ماه اعتبار  25هزارتومان"
+    app:layout_constraintBottom_toTopOf="@+id/btnCode2"
+    app:layout_constraintEnd_toEndOf="@+id/btnCode2"
+    app:layout_constraintHorizontal_bias="0.507"
+    app:layout_constraintStart_toStartOf="@+id/btnCode2" />
 
   <Button
     android:id="@+id/btnCode3"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/payment6mounth"
     android:background="@drawable/shape_tag6"
-    android:paddingStart="@dimen/plane_16"
-    android:paddingEnd="@dimen/plane_16"
-    android:paddingTop="@dimen/plane_04"
-    android:paddingBottom="@dimen/plane_04"
     android:fontFamily="@font/lalezar_regular"
-    app:layout_constraintBottom_toTopOf="@id/btnBack_Payment"
+    android:paddingStart="@dimen/plane_16"
+    android:paddingTop="@dimen/plane_04"
+    android:paddingEnd="@dimen/plane_16"
+    android:paddingBottom="@dimen/plane_04"
+    android:text="@string/payment6mounth"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.048"
+    app:layout_constraintStart_toStartOf="parent"
+    tools:layout_editor_absoluteY="39dp" />
+
+  <Button
+    android:id="@+id/btnCode2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="36dp"
+    android:background="@drawable/shape_tag6"
+    android:fontFamily="@font/lalezar_regular"
+    android:paddingStart="@dimen/plane_16"
+    android:paddingTop="@dimen/plane_04"
+    android:paddingEnd="@dimen/plane_16"
+    android:paddingBottom="@dimen/plane_04"
+    android:text="@string/payment3mounth"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/btnCode2" />
+    app:layout_constraintTop_toTopOf="parent" />
+
   <Button
     android:id="@+id/btnBack_Payment"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="back"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="16dp"
     android:background="@drawable/shape_btn_bg"
+    android:text="back"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+  <TextView
+    android:id="@+id/textView5"
+    android:layout_width="191dp"
+    android:layout_height="170dp"
+    android:layout_marginStart="4dp"
+    android:textColor="@color/black"
+    android:text="در صورتی که بعد از پرداخت موفق به این صفحه برگشت داده شده اید کد تراکنش و یا ساعت و مبلغ تراکنش و شماره ای که با آن ثبت نام کرده اید را به شماره 09352625251 ارسال فرمایید تا حساب شما مورد تاییید و شارژ شود"
+    android:textAlignment="center"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.659" />
+
+  <ImageView
+    android:id="@+id/imageView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
+    app:layout_constraintBottom_toTopOf="@+id/textView5"
+    app:layout_constraintEnd_toEndOf="@+id/textView5"
+    app:srcCompat="@drawable/ic_baseline_sms_failed_24" />
+
+  <ImageView
+    android:id="@+id/imageView2"
+    android:layout_width="583dp"
+    android:layout_height="312dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="1.0"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/btnCode3" />
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="1.0"
+    app:srcCompat="@drawable/parent_kid_happy" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

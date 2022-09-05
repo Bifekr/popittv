@@ -345,7 +345,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
             et_phone = bottomView.findViewById(R.id.et_phone_userProfile);
             Button btn_send = bottomView.findViewById(R.id.send_customLogin);
-            LottieAnimationView progressBar = bottomView.findViewById(R.id.progress_dialog);
+            ProgressBar progressBar = bottomView.findViewById(R.id.progress_dialog);
 
             btn_send.setOnClickListener(V -> { //رفتن به مرحله وارد کردن کد پیامک شدن
                 if (validatePhone()) { // چک کردن خطاهای احتمالی هنگام وارد کردن شماره

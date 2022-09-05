@@ -27,7 +27,7 @@ class MainActivity2 : AppCompatActivity() {
         const val TAG = "InAppBilling Sample: "
     }
 
-    private val price=500L;
+    private val price=1000L;
     private val price2=1000L;
     private val price3=3000L;
 
@@ -61,13 +61,16 @@ class MainActivity2 : AppCompatActivity() {
             purchaseCompletedListener = object : FutureCompletionListener<Receipt> {
                 override fun onComplete(task: TaskResult<Receipt>) {
                     Log.d(TAG, "onComplete Receipt is ${task.isSuccess}")
-
+                    Log.d(TAG, "onComplete Receipt is ${task.success?.amount.toString()}")
                     if (task.isSuccess) {
                         txtReceipt.text = task.success?.isSuccess.toString()
                         txtReceipt2.text = task.success?.status.toString()
                         txtReceipt3.text = task.success?.transactionID.toString()
                         txtReceipt4.text = task.success?.amount.toString()
                         Log.d(TAG, "onComplete Receipt is ${task.isSuccess}")
+                        Log.d(TAG, "onComplete Receipt is ${task.success?.amount.toString()}")
+                        Log.d(TAG, "onComplete Receipt is ${task.success?.status.toString()}")
+                        Log.d(TAG, "onComplete Receipt is ${task.success?.transactionID.toString()}")
                     } else {
 
                         txtReceipt.text = "Receipt failed: \n" +
@@ -134,7 +137,7 @@ class MainActivity2 : AppCompatActivity() {
     private fun getPurchaseAsPaymentRequest3(log: Long): Purchase {
         val merchantId = "6a5ecf11-5142-479f-940b-dc931a2a368c"
         val description = "Payment Request via ZarinPal SDK"
-        val callback = "https://pikoboom.ir" // Your Server address
+        val callback = "https://pikoboom.ir/" // Your Server address
 
 
         return Purchase.newBuilder()

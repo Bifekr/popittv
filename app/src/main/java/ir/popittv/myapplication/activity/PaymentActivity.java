@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -68,25 +69,35 @@ public class PaymentActivity extends AppCompatActivity {
                 amount = String.valueOf(task.getSuccess().getAmount());
                 firstDate = task.getSuccess().getDate();
                 transactionId = task.getSuccess().getTransactionID();
+                Log.d("TAG", "onComplete Receipt is :"+task.getSuccess().getAmount());
+                Log.d("TAG", "onComplete Receipt is ${task.success?.amount.toString()}");
+                long unixCurrentTime = System.currentTimeMillis();
+                editor.putLong("unixCurrentTime",unixCurrentTime);
+                editor.putBoolean("status", true);
+                editor.putInt("expire", expire);
+                editor.putString("amount", String.valueOf(task.getSuccess().getAmount()));
+                editor.putString("firstDate", firstDate);
+                editor.putString("transactionId", transactionId);
+                editor.commit();
+                recreate();
+                //  Toast.makeText(PaymentActivity.this, "پرداخت موفق"+ firstDate, Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(PaymentActivity.this, UserActivity.class));
                 new Handler(Looper.getMainLooper()).post(() -> {
-                    if (status) {
-                        long unixCurrentTime = System.currentTimeMillis();
-                        editor.putLong("unixCurrentTime",unixCurrentTime);
-                        editor.putBoolean("status", true);
-                        editor.putInt("expire", expire);
-                        editor.putString("amount", amount);
-                        editor.putString("firstDate", firstDate);
-                        editor.putString("transactionId", transactionId);
-                        editor.commit();
-                        recreate();
-                        //  Toast.makeText(PaymentActivity.this, "پرداخت موفق"+ firstDate, Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(PaymentActivity.this, UserActivity.class));
-                    } else {
-                        editor.putBoolean("status", false);
-                        Toast.makeText(PaymentActivity.this, "پرداخت ناموفق", Toast.LENGTH_SHORT).show();
-                    }
-                });
 
+                    long unixCurrentTime2 = System.currentTimeMillis();
+                    editor.putLong("unixCurrentTime", unixCurrentTime);
+                    editor.putBoolean("status", true);
+                    editor.putInt("expire", expire);
+                    editor.putString("amount", amount);
+                    editor.putString("firstDate", firstDate);
+                    editor.putString("transactionId", transactionId);
+                    editor.commit();
+
+                    Toast.makeText(PaymentActivity.this, "پرداخت موفق" + task.getSuccess().isSuccess(), Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(PaymentActivity.this, UserActivity.class));
+
+
+                });
 
             }
         };
@@ -123,7 +134,7 @@ public class PaymentActivity extends AppCompatActivity {
     private Purchase getPurchaseAsPaymentRequest(long price) {
 
         final String description = " پرداخت و دریافت اشتراک برای برنامه پیکوبوم ";
-        final String callback = "https://pikoboom.ir"; // Your Server address
+        final String callback = "https://pikoboom.ir/"; // Your Server address
 
 
         //-----------
