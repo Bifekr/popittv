@@ -6,7 +6,7 @@
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/popit_yellow"
+    android:background="@color/banner_background"
     android:layoutDirection="ltr"
     tools:context=".activity.UserActivity">
 
@@ -17,11 +17,11 @@
       android:layout_height="0dp"
       app:headerLayout="@layout/header_rail"
       app:labelVisibilityMode="labeled"
-      app:layout_constraintVertical_bias="0"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toStartOf="@id/scroll"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0"
       app:menu="@menu/menu_rail"
       app:menuGravity="top" />
 
@@ -304,8 +304,8 @@
               android:layout_width="82dp"
               android:layout_height="82dp"
               android:elevation="@dimen/plane_08"
-              android:src="@drawable/ic_baseline_account_circle_24"
               android:scaleType="centerCrop"
+              android:src="@drawable/ic_baseline_account_circle_24"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent"
               app:riv_border_color="@color/popit_yellow"
@@ -320,10 +320,10 @@
               android:background="@drawable/shape_btn_bg"
               android:fontFamily="@font/lalezar_regular"
               android:paddingStart="@dimen/plane_16"
-              android:text="@string/exite"
               android:paddingTop="@dimen/plane_04"
               android:paddingEnd="@dimen/plane_16"
               android:paddingBottom="@dimen/plane_04"
+              android:text="@string/exite"
               android:visibility="gone"
               app:drawableStartCompat="@drawable/ic_baseline_exit_to_app_24"
               app:layout_constraintStart_toStartOf="@id/avatarUser_userActivity"
@@ -346,9 +346,6 @@
 
 
         </androidx.cardview.widget.CardView>
-
-
-
 
 
         <androidx.cardview.widget.CardView
@@ -388,12 +385,12 @@
               android:layout_height="match_parent"
               android:background="@drawable/shape_titlerv"
               android:elevation="@dimen/plane_08"
-              android:weightSum="2"
-              android:paddingEnd="@dimen/plane_08"
-              android:paddingStart="@dimen/plane_08"
-
               android:gravity="end|center_horizontal"
               android:orientation="vertical"
+              android:paddingStart="@dimen/plane_08"
+
+              android:paddingEnd="@dimen/plane_08"
+              android:weightSum="2"
               app:layout_constraintEnd_toEndOf="parent">
 
               <ImageView
@@ -402,13 +399,14 @@
 
                 android:layout_weight="1"
                 android:src="@drawable/subscribe" />
+
               <TextView
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:fontFamily="@font/baloo"
                 android:gravity="center"
                 android:includeFontPadding="true"
-                android:layout_weight="1"
                 android:text="@string/parentSubscribe"
                 android:textColor="@color/brown"
                 android:textSize="16sp"
@@ -494,68 +492,72 @@
             android:textColor="@color/white" />
         </LinearLayout>
 
-        <androidx.cardview.widget.CardView
+        <androidx.constraintlayout.widget.ConstraintLayout
           android:id="@+id/parentBookmarkVideo_userActivity"
           android:layout_width="match_parent"
           android:layout_height="180dp"
           android:layout_marginTop="@dimen/plane_24"
-          app:cardElevation="@dimen/plane_08"
+          android:background="@drawable/back_player_rv3"
+          android:padding="@dimen/plane_16"
           app:layout_constraintBottom_toTopOf="@id/parentWatchLaterVideo_userActivity"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/parentSaveChannel_userActivity">
 
-          <androidx.constraintlayout.widget.ConstraintLayout
+
+          <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvBookMarkVideo_userActivity"
             android:layout_width="match_parent"
-            android:background="@color/transparent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:background="@drawable/back_player_rv3"
+            android:padding="@dimen/plane_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.96"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintWidth_percent=".95" />
 
-            <androidx.recyclerview.widget.RecyclerView
-              android:id="@+id/rvBookMarkVideo_userActivity"
-              android:layout_width="0dp"
-              android:layout_height="0dp"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintHeight_percent="0.96"
-              app:layout_constraintWidth_percent=".95"
-              app:layout_constraintVertical_bias="1"
-              app:layout_constraintHorizontal_bias="1"/>
 
-            <LinearLayout
-              android:layout_width="130dp"
-              android:layout_height="match_parent"
-              android:background="@drawable/shape_titlerv_ax"
-              android:elevation="@dimen/plane_08"
-              android:gravity="start|center_horizontal"
-              android:orientation="vertical"
-              android:paddingStart="@dimen/plane_08"
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-              android:paddingEnd="@dimen/plane_08"
-              android:weightSum="2"
-              app:layout_constraintStart_toStartOf="parent">
+        <LinearLayout
+          android:layout_width="130dp"
+          android:layout_height="0dp"
+          android:background="@drawable/shape_titlerv_ax"
+          android:elevation="@dimen/plane_16"
+          android:gravity="start|center_horizontal"
+          android:orientation="vertical"
+          android:paddingStart="@dimen/plane_08"
 
-              <ImageView
-                android:layout_width="90dp"
-                android:layout_height="80dp"
+          android:paddingEnd="@dimen/plane_08"
+          android:weightSum="2"
+          app:layout_constraintBottom_toBottomOf="@id/parentBookmarkVideo_userActivity"
+          app:layout_constraintStart_toStartOf="@id/parentBookmarkVideo_userActivity"
+          app:layout_constraintTop_toTopOf="@id/parentBookmarkVideo_userActivity">
 
-                android:layout_weight="1"
-                android:src="@drawable/marked" />
+          <ImageView
+            android:layout_width="90dp"
+            android:layout_height="80dp"
 
-              <TextView
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/baloo"
-                android:gravity="center"
-                android:includeFontPadding="true"
-                android:text="@string/parentBookmark"
-                android:textColor="@color/brown"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+            android:layout_weight="1"
+            android:src="@drawable/marked" />
 
-            </LinearLayout>
-          </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+          <TextView
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/baloo"
+            android:gravity="center"
+            android:includeFontPadding="true"
+            android:text="@string/parentBookmark"
+            android:textColor="@color/brown"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        </LinearLayout>
 
         <View
           android:layout_width="0dp"
@@ -633,69 +635,79 @@
             android:textColor="@color/white" />
         </LinearLayout>
 
-        <androidx.cardview.widget.CardView
+        <androidx.constraintlayout.widget.ConstraintLayout
           android:id="@+id/parentWatchLaterVideo_userActivity"
           android:layout_width="match_parent"
           android:layout_height="180dp"
-          android:layout_marginTop="@dimen/plane_24"
-
-          app:cardElevation="@dimen/plane_08"
+          android:layout_marginTop="24dp"
+          android:background="@drawable/back_player_rv2"
+          android:padding="@dimen/plane_16"
           app:layout_constraintBottom_toTopOf="@id/parentHistoryVideo_userActivity"
           app:layout_constraintTop_toBottomOf="@id/parentBookmarkVideo_userActivity">
 
-          <androidx.constraintlayout.widget.ConstraintLayout
+
+          <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvWatchLater_userActivity"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:background="@drawable/back_player_rv2"
+            android:layoutDirection="rtl"
+            android:padding="@dimen/plane_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.96"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintWidth_percent=".95" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-              android:id="@+id/rvWatchLater_userActivity"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent" />
+        <LinearLayout
+          android:layout_width="130dp"
+          android:layout_height="0dp"
+          android:background="@drawable/shape_titlerv"
+          android:elevation="@dimen/plane_08"
+          android:gravity="end|center_horizontal"
+          android:orientation="vertical"
+          android:paddingStart="@dimen/plane_08"
 
-            <LinearLayout
-              android:layout_width="130dp"
-              android:layout_height="match_parent"
-              android:background="@drawable/shape_titlerv"
-              android:elevation="@dimen/plane_08"
-              android:weightSum="2"
-              android:paddingEnd="@dimen/plane_08"
-              android:paddingStart="@dimen/plane_08"
+          android:paddingEnd="@dimen/plane_08"
+          android:weightSum="2"
+          app:layout_constraintBottom_toBottomOf="@id/parentWatchLaterVideo_userActivity"
+          app:layout_constraintEnd_toEndOf="@id/parentWatchLaterVideo_userActivity"
+          app:layout_constraintTop_toTopOf="@id/parentWatchLaterVideo_userActivity">
 
-              android:gravity="end|center_horizontal"
-              android:orientation="vertical"
-              app:layout_constraintEnd_toEndOf="parent">
+          <ImageView
+            android:layout_width="90dp"
+            android:layout_height="80dp"
 
-              <ImageView
-                android:layout_width="90dp"
-                android:layout_height="80dp"
+            android:layout_weight="1"
+            android:src="@drawable/parent_history" />
 
-                android:layout_weight="1"
-                android:src="@drawable/parent_history" />
-              <TextView
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/baloo"
-                android:gravity="center"
-                android:includeFontPadding="true"
-                android:layout_weight="1"
-                android:text="@string/parentWatchLater"
-                android:textColor="@color/brown"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+          <TextView
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/baloo"
+            android:gravity="center"
+            android:includeFontPadding="true"
+            android:text="@string/parentWatchLater"
+            android:textColor="@color/brown"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            </LinearLayout>
-          </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
         <View
           android:layout_width="0dp"
           android:layout_height="8dp"
           android:background="@drawable/shape_tag1"
           android:elevation="@dimen/plane_08"
-          app:layout_constraintBottom_toBottomOf="@id/parentMenuUserWatchLater"
-          app:layout_constraintEnd_toEndOf="@id/parentMenuUserWatchLater"
-          app:layout_constraintStart_toStartOf="@id/parentMenuUserWatchLater"
-          app:layout_constraintTop_toTopOf="@id/parentMenuUserWatchLater" />
+          app:layout_constraintBottom_toBottomOf="@id/parentMenuUserHistory"
+          app:layout_constraintEnd_toEndOf="@id/parentMenuUserHistory"
+          app:layout_constraintStart_toStartOf="@id/parentMenuUserHistory"
+          app:layout_constraintTop_toTopOf="@id/parentMenuUserHistory" />
 
         <LinearLayout
           android:id="@+id/parentMenuUserHistory"
@@ -763,70 +775,77 @@
             android:textColor="@color/white" />
         </LinearLayout>
 
-        <androidx.cardview.widget.CardView
+        <androidx.constraintlayout.widget.ConstraintLayout
           android:id="@+id/parentHistoryVideo_userActivity"
           android:layout_width="match_parent"
           android:layout_height="180dp"
-          android:layout_marginTop="@dimen/plane_24"
-
-          app:cardElevation="@dimen/plane_08"
+          android:layout_marginTop="24dp"
+          android:background="@drawable/back_player_rv3"
+          android:padding="@dimen/plane_16"
           app:layout_constraintBottom_toTopOf="@id/parentLikeVideo_userActivity"
           app:layout_constraintTop_toBottomOf="@id/parentWatchLaterVideo_userActivity">
 
-          <androidx.constraintlayout.widget.ConstraintLayout
+
+          <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvHistoryVideo_userActivity"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:background="@drawable/back_player_rv3"
+            android:padding="@dimen/plane_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.96"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintWidth_percent=".95" />
 
-            <androidx.recyclerview.widget.RecyclerView
-              android:id="@+id/rvHistoryVideo_userActivity"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent" />
 
-            <LinearLayout
-              android:layout_width="130dp"
-              android:layout_height="match_parent"
-              android:background="@drawable/shape_titlerv_ax"
-              android:elevation="@dimen/plane_08"
-              android:gravity="start|center_horizontal"
-              android:orientation="vertical"
-              android:paddingStart="@dimen/plane_08"
+          <LinearLayout
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_titlerv_ax"
+            android:elevation="@dimen/plane_08"
+            android:gravity="start|center_horizontal"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/plane_08"
 
-              android:paddingEnd="@dimen/plane_08"
-              android:weightSum="2"
-              app:layout_constraintStart_toStartOf="parent">
+            android:paddingEnd="@dimen/plane_08"
+            android:weightSum="2"
+            app:layout_constraintStart_toStartOf="parent">
 
-              <ImageView
-                android:layout_width="90dp"
-                android:layout_height="80dp"
+            <ImageView
+              android:layout_width="90dp"
+              android:layout_height="80dp"
 
-                android:layout_weight="1"
-                android:src="@drawable/calendar" />
+              android:layout_weight="1"
+              android:src="@drawable/calendar" />
 
-              <TextView
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/baloo"
-                android:gravity="center"
-                android:includeFontPadding="true"
-                android:text="@string/parentHistoey"
-                android:textColor="@color/brown"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+            <TextView
+              android:layout_width="90dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:fontFamily="@font/baloo"
+              android:gravity="center"
+              android:includeFontPadding="true"
+              android:text="@string/parentHistoey"
+              android:textColor="@color/brown"
+              android:textSize="20sp"
+              android:textStyle="bold" />
 
-            </LinearLayout>
-          </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+          </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
           android:layout_width="0dp"
           android:layout_height="8dp"
           android:background="@drawable/shape_tag1"
           android:elevation="@dimen/plane_08"
-          app:layout_constraintBottom_toBottomOf="@id/parentMenuUserWatchLater"
-          app:layout_constraintEnd_toEndOf="@id/parentMenuUserWatchLater"
-          app:layout_constraintStart_toStartOf="@id/parentMenuUserWatchLater"
-          app:layout_constraintTop_toTopOf="@id/parentMenuUserWatchLater" />
+          app:layout_constraintBottom_toBottomOf="@id/parentMenuUserLike"
+          app:layout_constraintEnd_toEndOf="@id/parentMenuUserLike"
+          app:layout_constraintStart_toStartOf="@id/parentMenuUserLike"
+          app:layout_constraintTop_toTopOf="@id/parentMenuUserLike" />
 
         <LinearLayout
           android:id="@+id/parentMenuUserLike"
@@ -894,58 +913,69 @@
             android:textColor="@color/white" />
         </LinearLayout>
 
-        <androidx.cardview.widget.CardView
+
+        <androidx.constraintlayout.widget.ConstraintLayout
           android:id="@+id/parentLikeVideo_userActivity"
           android:layout_width="match_parent"
           android:layout_height="180dp"
-          android:layout_marginTop="@dimen/plane_24"
-          app:cardCornerRadius="40dp"
-          app:cardElevation="@dimen/plane_08"
+          android:layout_marginTop="24dp"
+          android:background="@drawable/back_player_rv1"
+          android:padding="@dimen/plane_16"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/parentHistoryVideo_userActivity">
 
-          <androidx.constraintlayout.widget.ConstraintLayout
+
+          <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvLikeVideo_userActivity"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:background="@drawable/back_player_rv1"
+            android:padding="@dimen/plane_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.96"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintWidth_percent=".95" />
 
-            <androidx.recyclerview.widget.RecyclerView
-              android:id="@+id/rvLikeVideo_userActivity"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent" />
 
-            <LinearLayout
-              android:layout_width="130dp"
-              android:layout_height="match_parent"
-              android:background="@drawable/shape_titlerv"
-              android:elevation="@dimen/plane_08"
-              android:weightSum="2"
-              android:paddingEnd="@dimen/plane_08"
-              android:paddingStart="@dimen/plane_08"
+          <LinearLayout
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_titlerv"
+            android:elevation="@dimen/plane_08"
+            android:gravity="end|center_horizontal"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/plane_08"
 
-              android:gravity="end|center_horizontal"
-              android:orientation="vertical"
-              app:layout_constraintEnd_toEndOf="parent">
+            android:paddingEnd="@dimen/plane_08"
+            android:weightSum="2"
+            app:layout_constraintEnd_toEndOf="parent">
 
-              <ImageView
-                android:layout_width="90dp"
-                android:layout_height="80dp"
-android:scaleType="centerCrop"
-                android:layout_weight="1"
-                android:src="@drawable/ic_parents_like" />
-              <TextView
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/baloo"
-                android:gravity="center"
-                android:includeFontPadding="true"
-                android:layout_weight="1"
-                android:text="@string/parentLike"
-                android:textColor="@color/brown"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+            <ImageView
+              android:layout_width="90dp"
+              android:layout_height="80dp"
+              android:layout_weight="1"
+              android:scaleType="centerCrop"
+              android:src="@drawable/ic_parents_like" />
 
-            </LinearLayout>
-          </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+            <TextView
+              android:layout_width="90dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:fontFamily="@font/baloo"
+              android:gravity="center"
+              android:includeFontPadding="true"
+              android:text="@string/parentLike"
+              android:textColor="@color/brown"
+              android:textSize="20sp"
+              android:textStyle="bold" />
+
+          </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
       </androidx.constraintlayout.widget.ConstraintLayout>
