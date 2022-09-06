@@ -1,24 +1,15 @@
 package ir.popittv.myapplication.activity;
 
-import android.annotation.SuppressLint;
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Pair;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,8 +23,6 @@ import java.util.List;
 import java.util.Objects;
 
 import ir.popittv.myapplication.R;
-import ir.popittv.myapplication.ShadowTransformer;
-import ir.popittv.myapplication.adapter.CardPagerAdapter2;
 import ir.popittv.myapplication.adapter.ChannelDetail_adapter;
 import ir.popittv.myapplication.adapter.FunnyAdapter;
 import ir.popittv.myapplication.adapter.InfinitFrg1_PagerAdapter;
@@ -41,12 +30,9 @@ import ir.popittv.myapplication.adapter.RvChannel_Frg1;
 import ir.popittv.myapplication.adapter.SearchAdapter;
 import ir.popittv.myapplication.adapter.TagAdapter;
 import ir.popittv.myapplication.databinding.ActivityMainBinding;
-import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
-import ir.popittv.myapplication.models.HashTagDataModel;
 import ir.popittv.myapplication.models.UserDataModel;
 import ir.popittv.myapplication.request.Service;
-import ir.popittv.myapplication.response.FunnyResponse;
 import ir.popittv.myapplication.utils.OnClickFrg1;
 import ir.popittv.myapplication.utils.OnClickFunny;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
@@ -91,8 +77,8 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
     private TagAdapter tagAdapter;
 
     //Utils Class
-    private CardPagerAdapter2 cardPagerAdapter2;
-    private ShadowTransformer shadowTransformer;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-
-  <gradient android:startColor="@color/popit_blue_on_light"
-             android:centerColor="@color/popit_blue_light"
-    android:endColor="@color/popit_gradiant_back_brown"/>
-</shape>

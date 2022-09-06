@@ -166,7 +166,7 @@
             android:id="@+id/like"
             android:layout_width="14dp"
             android:layout_height="14dp"
-            android:src="@drawable/ic_baseline_heart_broken_24" />
+            android:src="@drawable/ic_like" />
 
           <TextView
             android:id="@+id/tvLike_itemVidDef"
@@ -221,7 +221,6 @@
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:src="@drawable/avatar_2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent=".15"

@@ -58,6 +58,8 @@
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_baseline_correct_16.xml" value="0.37916666666666665" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_baseline_exit_to_app_24.xml" value="0.3111111111111111" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_baseline_eye_24.xml" value="0.37916666666666665" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_baseline_groups_3_24.xml" value="0.37916666666666665" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_baseline_heart_broken_24.xml" value="0.37916666666666665" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_baseline_live_tv_24.xml" value="0.3279279279279279" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_baseline_lock.xml" value="0.37916666666666665" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_baseline_lock_open.xml" value="0.37916666666666665" />
@@ -78,6 +80,7 @@
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_farsi_rail.xml" value="0.21927083333333333" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_forward.xml" value="0.37916666666666665" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_history_24.xml" value="0.3111111111111111" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_launcher_background.xml" value="0.37916666666666665" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_like.xml" value="0.37916666666666665" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_parents_like.xml" value="0.37916666666666665" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/ic_reality_24.xml" value="0.1" />
@@ -128,6 +131,7 @@
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/transition_background_drawable_person.xml" value="0.2945205479452055" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/transition_background_drawable_photos.xml" value="0.37916666666666665" />
         <entry key="..\:/popitv/popittv/app/src/main/res/drawable/transition_background_drawable_search.xml" value="0.2945205479452055" />
+        <entry key="..\:/popitv/popittv/app/src/main/res/drawable/transition_background_drawable_shop.xml" value="0.37916666666666665" />
         <entry key="..\:/popitv/popittv/app/src/main/res/font/work_sans.xml" value="0.2712962962962963" />
         <entry key="..\:/popitv/popittv/app/src/main/res/font/work_sans_bold.xml" value="0.1" />
         <entry key="..\:/popitv/popittv/app/src/main/res/font/work_sans_extrabold.xml" value="0.1" />

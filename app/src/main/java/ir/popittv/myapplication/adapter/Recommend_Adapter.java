@@ -15,7 +15,6 @@ import java.util.List;
 
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.databinding.ItemVidDefultBinding;
-import ir.popittv.myapplication.databinding.ItemVidThumbBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
 
 public class Recommend_Adapter extends RecyclerView.Adapter<Recommend_Adapter.Rv2ViewHolder> {

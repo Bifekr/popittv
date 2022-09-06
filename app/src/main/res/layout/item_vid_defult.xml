@@ -149,7 +149,7 @@
             android:id="@+id/like"
             android:layout_width="12dp"
             android:layout_height="12dp"
-            android:src="@drawable/ic_baseline_heart_broken_24" />
+            android:src="@drawable/ic_like" />
 
           <TextView
             android:id="@+id/tvLike_itemVidDef"
