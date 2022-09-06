@@ -226,7 +226,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
             switch (expire) {
                 case 1: {
-                    amount = "12,000";
+                    amount = "9,000";
                     binding.tvAmount.setText(amount + " تومان ");
                     expireDate = unixCurrentTime + month_1;
                     editor.putLong("expireDate", expireDate);
@@ -258,7 +258,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
                     break;
                 }
                 case 2: {
-                    amount = "30,000";
+                    amount = "25,000";
                     binding.tvAmount.setText(amount + " تومان ");
                     expireDate = unixCurrentTime + month_3;
                     editor.putLong("expireDate", expireDate);
@@ -290,7 +290,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
                     break;
                 }
                 case 3: {
-                    amount = "60,000";
+                    amount = "50,000";
                     binding.tvAmount.setText(amount + " تومان ");
                     expireDate = unixCurrentTime + month_6;
                     editor.putLong("expireDate", expireDate);
@@ -322,6 +322,10 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
                     break;
                 }
             }
+
+        }else {
+            binding.tvTransactionId.setText(transactionId + "  ناموفق  ");
+            binding.tvFirstDate.setText(firstDate);
 
         }
     }
