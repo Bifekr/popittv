@@ -103,10 +103,10 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
         getFunny_liky();
         getFunny_subMenu();
         getSearchFunny();
+        if (!binding.switchNetToolbar.isChecked()){
+            binding.iconWifiToolbar.setImageResource(R.drawable.ic_wifi_off_svgrepo);
+        }
 
-        binding.iconWifiToolbar.setOnClickListener(v -> {
-            Toast.makeText(this, "sdfsdf", Toast.LENGTH_SHORT).show();
-        });
     }
     ///////////---------------OnCreate--------------------------///////////////
 
@@ -220,7 +220,7 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
             }else if (item2==R.id.games){
                 startActivity(new Intent(FarsiActivity.this, GameActivity.class));
             }
-            return false;
+            return true;
         });
 
         Objects.requireNonNull(binding.navRail.getHeaderView()).findViewById(R.id.fab_add).setOnClickListener(v -> {
@@ -281,8 +281,12 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
         binding.rvBestViewMainActivity.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false));
         binding.rvBestViewMainActivity.setAdapter(funnyAdapter_view);
-      //  binding.rvRecommendFrg1.setAdapter(recommend_adapter);
-      //  binding.infinitCycle2Frg1.setAdapter(infinitAdapter2);
+
+       binding.rvRecommendFrg1.setAdapter(recommend_adapter);
+
+        binding.infinitCycleFrg1.setAdapter(infinitAdapter);
+        binding.infinitCycle2Frg1.setAdapter(infinitAdapter2);
+
         binding.rvSubMenuTagFrg1.setAdapter(funnyAdapter);
         binding.rvSubMenuTagFrg1.setLayoutManager(new GridLayoutManager
                 (this, 3, GridLayoutManager.VERTICAL, false));

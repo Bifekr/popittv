@@ -145,7 +145,9 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         }).setActionTextColor(Color.RED)
         .setTextColor(Color.YELLOW);
 
-
+        if (!binding.switchNetToolbar.isChecked()){
+            binding.iconWifiToolbar.setImageResource(R.drawable.ic_wifi_off_svgrepo);
+        }
      ///////////-----------------------OnCreate----------------------///////////////
     }//////////---------------------------------------------------////////////////
 
@@ -256,9 +258,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
         binding.switchNetToolbar.setOnCheckedChangeListener((buttonView, isChecked) -> {
 
-            if (isChecked){
-                binding.iconWifiToolbar.setImageResource(R.drawable.ic_baseline_account_circle_24);
-            }
+
             switchEditor = sharedPreferences.edit();
             switchEditor.putBoolean("switchNet", isChecked);
             switchEditor.commit();

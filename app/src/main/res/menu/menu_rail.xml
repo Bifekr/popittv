@@ -2,27 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
   <item
     android:id="@+id/funny"
-
-    android:icon="@drawable/ic_baseline_groups_3_24"
+    android:icon="@drawable/ic_funny_rail"
     android:title="@string/funny_nav" />
   <item
     android:id="@+id/reality"
-android:checked="false"
-    android:icon="@drawable/ic_baseline_live_tv_24"
+    android:checked="false"
+    android:icon="@drawable/ic_reality_rail"
     android:title="@string/reality_nav" />
   <item
     android:id="@+id/learning"
-
-    android:icon="@drawable/ic_baseline_school_24"
+    android:icon="@drawable/ic_study_rail"
     android:title="@string/learning_nav" />
   <item
     android:id="@+id/farsi"
-
-    android:icon="@drawable/ic_baseline_stars_24"
+    android:icon="@drawable/arabic_gh"
     android:title="@string/farsi_nav" />
   <item
     android:id="@+id/games"
-
-    android:icon="@drawable/ic_baseline_videogame_asset_24"
+    android:icon="@drawable/ic_game__rail"
     android:title="@string/games_nav" />
 </menu>

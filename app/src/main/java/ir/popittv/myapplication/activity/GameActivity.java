@@ -1,18 +1,12 @@
 package ir.popittv.myapplication.activity;
 
-import androidx.annotation.NonNull;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-
-import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.Objects;
 
@@ -34,10 +28,10 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivityGameBinding.inflate(getLayoutInflater());
-        View view=binding.getRoot();
+        binding = ActivityGameBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
         setContentView(view);
-        gameViewModel = new  ViewModelProvider(this).get(GameViewModel.class);
+        gameViewModel = new ViewModelProvider(this).get(GameViewModel.class);
         gameAdapter = new GameAdapter(this);
 
         initRailActivity();
@@ -47,11 +41,11 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void getGame() {
-        gameViewModel.getGame().observe(this,gameDataModels -> {
-            if (gameDataModels!=null){
-            gameAdapter.setData(gameDataModels);
+        gameViewModel.getGame().observe(this, gameDataModels -> {
+            if (gameDataModels!=null) {
+                gameAdapter.setData(gameDataModels);
 
-            }else {
+            } else {
 
             }
         });
@@ -70,17 +64,17 @@ public class GameActivity extends AppCompatActivity {
 
     private void initRailActivity() {
         binding.navRail.setOnItemSelectedListener(item -> {
-            int item2=item.getItemId();
-            if(item2==R.id.funny){
+            int item2 = item.getItemId();
+            if (item2==R.id.funny) {
                 startActivity(new Intent(GameActivity.this, MainActivity.class));
-            }else if (item2==R.id.learning){
+            } else if (item2==R.id.learning) {
                 startActivity(new Intent(GameActivity.this, StudyActivity.class));
-            }else if (item2==R.id.reality){
+            } else if (item2==R.id.reality) {
                 startActivity(new Intent(GameActivity.this, RealityActivity.class));
-            }else if (item2==R.id.farsi){
+            } else if (item2==R.id.farsi) {
                 startActivity(new Intent(GameActivity.this, FarsiActivity.class));
             }
-            return false;
+            return true;
         });
 
         Objects.requireNonNull(binding.navRail.getHeaderView()).findViewById(R.id.fab_add).setOnClickListener(v -> {

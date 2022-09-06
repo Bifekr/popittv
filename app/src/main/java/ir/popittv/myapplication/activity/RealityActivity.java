@@ -116,11 +116,11 @@ shareApp();
         getFunny_subMenu();
         getSearchFunny();
 
-        binding.iconWifiToolbar.setOnClickListener(v -> {
-            Toast.makeText(this, "sdfsdf", Toast.LENGTH_SHORT).show();
-        });
 
 
+        if (!binding.switchNetToolbar.isChecked()){
+            binding.iconWifiToolbar.setImageResource(R.drawable.ic_wifi_off_svgrepo);
+        }
     }
 
 //-------------End On Create-------------------------
@@ -235,7 +235,7 @@ shareApp();
             }else if (item2==R.id.games){
                 startActivity(new Intent(RealityActivity.this, GameActivity.class));
             }
-            return false;
+            return true;
         });
 
         Objects.requireNonNull(binding.navRail.getHeaderView()).findViewById(R.id.fab_add).setOnClickListener(v -> {
@@ -314,7 +314,7 @@ shareApp();
         binding.rvSubMenuTagFrg1.setAdapter(funnyAdapter);
         binding.rvSubMenuTagFrg1.setLayoutManager(new GridLayoutManager
                 (this, 3, GridLayoutManager.VERTICAL, false));
-        // binding.rvSubMenuTagFrg1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL));
+
 
         binding.rvSearch.setAdapter(searchAdapter);
         binding.rvSearch.setLayoutManager(new GridLayoutManager
@@ -370,6 +370,7 @@ shareApp();
 
         });
     }
+
     private void getNew_best(){
         Service.getApiClient().getNew_Best(KIND).enqueue(new Callback<List<FunnyDataModel>>() {
             @Override
@@ -403,6 +404,7 @@ shareApp();
             }
         });
     }
+
     private void getFunny_view() {
         mainViewModel.getFunny_view().observe(this, funnyDataModels -> {
             if (funnyDataModels!=null) {

@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
   android:shape="rectangle">
 
-  <corners android:bottomLeftRadius="@dimen/plane_24" android:topLeftRadius="@dimen/plane_24"/>
+  <corners android:bottomRightRadius="@dimen/plane_24" android:topRightRadius="@dimen/plane_24"/>
 
   <gradient
     android:centerColor="@color/popit_yellow"

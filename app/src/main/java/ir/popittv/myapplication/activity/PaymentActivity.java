@@ -37,9 +37,9 @@ public class PaymentActivity extends AppCompatActivity {
 
 
 
-    private final Long price = 1000L;
-    private final Long price2 = 2000L;
-    private final Long price3 = 3000L;
+    private final Long price = 9000L;
+    private final Long price2 = 25000L;
+    private final Long price3 = 50000L;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     ZarinPalBillingClient client ;

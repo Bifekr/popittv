@@ -12,7 +12,7 @@
 
     <com.google.android.material.navigationrail.NavigationRailView
       android:id="@+id/navRail"
-      style="@style/Widget.MaterialComponents.NavigationRailView.PrimarySurface"
+      style="@style/Widget.MaterialComponents.NavigationRailView.Compact"
       android:layout_width="wrap_content"
       android:layout_height="0dp"
       app:headerLayout="@layout/header_rail"
@@ -291,6 +291,7 @@
               app:layout_constraintEnd_toStartOf="@id/parentTransaction"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toBottomOf="@id/tvAccess_userActivity" />
+
             <com.makeramen.roundedimageview.RoundedImageView
               android:id="@+id/avatarUser_userActivity"
               android:layout_width="82dp"
@@ -304,6 +305,7 @@
               app:riv_border_color="@color/popit_yellow"
               app:riv_border_width="8dp"
               app:riv_oval="true" />
+
             <TextView
               android:id="@+id/tvExit_userActivity"
               android:layout_width="wrap_content"
@@ -320,54 +322,55 @@
               app:layout_constraintStart_toStartOf="@id/avatarUser_userActivity"
               app:layout_constraintTop_toBottomOf="@id/avatarUser_userActivity" />
           </androidx.constraintlayout.widget.ConstraintLayout>
-
-
         </androidx.cardview.widget.CardView>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/parentSaveChannel_userActivity"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/plane_24"
+          android:background="@drawable/back_player_rv5"
+          android:padding="@dimen/plane_16"
+          app:cardElevation="@dimen/plane_08"
+          app:layout_constraintEnd_toEndOf="@id/parentUnderScroll"
+          app:layout_constraintStart_toStartOf="@id/parentUnderScroll"
+          app:layout_constraintTop_toBottomOf="@id/parentUserDetail_userActivity">
 
-
-
-          <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/parentSaveChannel_userActivity"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:padding="@dimen/plane_16"
-            android:layout_marginTop="@dimen/plane_24"
+          <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSaveChannel_userActivity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:background="@drawable/back_player_rv5"
-            app:cardElevation="@dimen/plane_08"
-            app:layout_constraintEnd_toEndOf="@id/parentUnderScroll"
-            app:layout_constraintStart_toStartOf="@id/parentUnderScroll"
-            app:layout_constraintTop_toBottomOf="@id/parentUserDetail_userActivity">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="16dp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-              android:id="@+id/rvSaveChannel_userActivity"
-              android:layout_width="match_parent"
-              android:layout_height="120dp"
-              android:background="@drawable/back_player_rv5"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintTop_toTopOf="parent"
-              tools:layout_editor_absoluteX="16dp" />
 
-            <LinearLayout
-              android:layout_width="130dp"
-              android:layout_height="match_parent"
-              android:background="@drawable/shape_titlerv"
-              android:elevation="@dimen/plane_08"
-              android:gravity="end|center_horizontal"
-              android:orientation="vertical"
-              android:paddingStart="@dimen/plane_08"
-              android:paddingEnd="@dimen/plane_08"
-              app:layout_constraintEnd_toEndOf="parent">
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-              <ImageView
-                android:layout_width="90dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:src="@drawable/subscribe" />
+        <LinearLayout
+          android:layout_width="130dp"
+          android:layout_height="0dp"
+          android:background="@drawable/shape_titlerv"
+          android:elevation="@dimen/plane_08"
+          android:gravity="end|center_horizontal"
+          android:orientation="vertical"
+          android:paddingStart="@dimen/plane_08"
+          android:paddingEnd="@dimen/plane_08"
+          app:layout_constraintBottom_toBottomOf="@id/parentSaveChannel_userActivity"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="@id/parentSaveChannel_userActivity"
+          tools:layout_editor_absoluteY="16dp">
 
-            </LinearLayout>
-          </androidx.constraintlayout.widget.ConstraintLayout>
+          <ImageView
+            android:layout_width="90dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/subscribe" />
 
+        </LinearLayout>
 
         <View
           android:layout_width="0dp"
@@ -461,18 +464,17 @@
 
           <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvBookMarkVideo_userActivity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:background="@drawable/back_player_rv4"
-            android:padding="@dimen/plane_16"
+            android:padding="@dimen/plane_08"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.96"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1"
-            app:layout_constraintWidth_percent=".95" />
+            app:layout_constraintVertical_bias="1" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -602,19 +604,17 @@
 
           <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvWatchLater_userActivity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:background="@drawable/back_player_rv2"
-            android:layoutDirection="rtl"
-            android:padding="@dimen/plane_16"
+            android:padding="@dimen/plane_08"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.96"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1"
-            app:layout_constraintWidth_percent=".95" />
+            app:layout_constraintVertical_bias="1" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
@@ -742,10 +742,10 @@
 
           <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvHistoryVideo_userActivity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:background="@drawable/back_player_rv3"
-            android:padding="@dimen/plane_16"
+            android:padding="@dimen/plane_08"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.96"
@@ -756,40 +756,43 @@
             app:layout_constraintWidth_percent=".95" />
 
 
-          <LinearLayout
-            android:layout_width="130dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/shape_titlerv_ax"
-            android:elevation="@dimen/plane_08"
-            android:gravity="start|center_horizontal"
-            android:orientation="vertical"
-            android:paddingStart="@dimen/plane_08"
-
-            android:paddingEnd="@dimen/plane_08"
-            android:weightSum="2"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <ImageView
-              android:layout_width="90dp"
-              android:layout_height="80dp"
-
-              android:layout_weight="1"
-              android:src="@drawable/calendar" />
-
-            <TextView
-              android:layout_width="90dp"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:fontFamily="@font/baloo"
-              android:gravity="center"
-              android:includeFontPadding="true"
-              android:text="@string/parentHistoey"
-              android:textColor="@color/brown"
-              android:textSize="20sp"
-              android:textStyle="bold" />
-
-          </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+          android:layout_width="130dp"
+          android:layout_height="0dp"
+          android:background="@drawable/shape_titlerv_ax"
+          android:elevation="@dimen/plane_08"
+          android:gravity="start|center_horizontal"
+          android:orientation="vertical"
+          android:paddingStart="@dimen/plane_08"
+
+          android:paddingEnd="@dimen/plane_08"
+          android:weightSum="2"
+          app:layout_constraintBottom_toBottomOf="@id/parentHistoryVideo_userActivity"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="@id/parentHistoryVideo_userActivity">
+
+          <ImageView
+            android:layout_width="90dp"
+            android:layout_height="80dp"
+
+            android:layout_weight="1"
+            android:src="@drawable/calendar" />
+
+          <TextView
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/baloo"
+            android:gravity="center"
+            android:includeFontPadding="true"
+            android:text="@string/parentHistoey"
+            android:textColor="@color/brown"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        </LinearLayout>
 
         <View
           android:layout_width="0dp"
@@ -882,55 +885,56 @@
 
           <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvLikeVideo_userActivity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:background="@drawable/back_player_rv1"
-            android:padding="@dimen/plane_16"
+            android:padding="@dimen/plane_08"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.96"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1"
-            app:layout_constraintWidth_percent=".95" />
+            app:layout_constraintVertical_bias="1" />
 
 
-          <LinearLayout
-            android:layout_width="130dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/shape_titlerv"
-            android:elevation="@dimen/plane_08"
-            android:gravity="end|center_horizontal"
-            android:orientation="vertical"
-            android:paddingStart="@dimen/plane_08"
-
-            android:paddingEnd="@dimen/plane_08"
-            android:weightSum="2"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <ImageView
-              android:layout_width="90dp"
-              android:layout_height="80dp"
-              android:layout_weight="1"
-              android:scaleType="centerCrop"
-              android:src="@drawable/ic_parents_like" />
-
-            <TextView
-              android:layout_width="90dp"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:fontFamily="@font/baloo"
-              android:gravity="center"
-              android:includeFontPadding="true"
-              android:text="@string/parentLike"
-              android:textColor="@color/brown"
-              android:textSize="20sp"
-              android:textStyle="bold" />
-
-          </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <LinearLayout
+          android:layout_width="130dp"
+          android:layout_height="0dp"
+          android:background="@drawable/shape_titlerv"
+          android:elevation="@dimen/plane_08"
+          android:gravity="end|center_horizontal"
+          android:orientation="vertical"
+          android:paddingStart="@dimen/plane_08"
+
+          android:paddingEnd="@dimen/plane_08"
+          android:weightSum="2"
+          app:layout_constraintBottom_toBottomOf="@id/parentLikeVideo_userActivity"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="@id/parentLikeVideo_userActivity">
+
+          <ImageView
+            android:layout_width="90dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_parents_like" />
+
+          <TextView
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/baloo"
+            android:gravity="center"
+            android:includeFontPadding="true"
+            android:text="@string/parentLike"
+            android:textColor="@color/brown"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        </LinearLayout>
 
       </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

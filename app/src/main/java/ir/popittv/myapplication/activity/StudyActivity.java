@@ -113,10 +113,10 @@ shareApp();
         getFunny_subMenu();
         getSearchFunny();
 
-        binding.iconWifiToolbar.setOnClickListener(v -> {
-            Toast.makeText(this, "sdfsdf", Toast.LENGTH_SHORT).show();
-        });
 
+        if (!binding.switchNetToolbar.isChecked()){
+            binding.iconWifiToolbar.setImageResource(R.drawable.ic_wifi_off_svgrepo);
+        }
 
      ///////////---------------------------------OnCreate--------------------------------------------------------------///////////////
     }
@@ -227,7 +227,7 @@ shareApp();
             }else if (item2==R.id.games){
                 startActivity(new Intent(StudyActivity.this, GameActivity.class));
             }
-            return false;
+            return true;
         });
 
         Objects.requireNonNull(binding.navRail.getHeaderView()).findViewById(R.id.fab_add).setOnClickListener(v -> {
