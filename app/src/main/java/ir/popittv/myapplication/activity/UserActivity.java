@@ -398,7 +398,6 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
                                                     binding.btnPayment.setVisibility(View.VISIBLE);
                                                     binding.tvExitUserActivity.setVisibility(View.VISIBLE);
                                                     getPeymentFromServer();
-                                                    binding.tvEnter1RvSubUser.setVisibility(View.GONE);
                                                     binding.avatarUserUserActivity.setBackgroundResource(R.drawable.ic_parents_happy);
 
                                                 }
@@ -435,7 +434,6 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
             binding.btnPayment.setVisibility(View.VISIBLE);
             binding.tvExitUserActivity.setVisibility(View.VISIBLE);
             getPeymentFromServer();
-            binding.tvEnter1RvSubUser.setVisibility(View.GONE);
             binding.avatarUserUserActivity.setBackgroundResource(R.drawable.ic_parents_happy);
         }
 
@@ -457,8 +455,6 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
             binding.phoneNumUserActivity.setText(R.string.hint_number);
             binding.userNameUserActivity.setText(R.string.hint_user_name);
             binding.avatarUserUserActivity.setBackgroundResource(R.drawable.ic_baseline_account_circle_24);
-            binding.tvEnter1RvSubUser.setVisibility(View.VISIBLE);
-
 
         });
 
@@ -470,11 +466,6 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
             }
         });
 
-
-        binding.tvEnter1RvSubUser.setOnClickListener(v -> { // پیغم نمایش داده شده در لیست ویدیوهای کاربر چنلها
-            loginUser();
-
-        });
         binding.btnPayment.setOnClickListener(v -> {
             if (phone_user!=null) {
                 binding.btnPaymentLogin.setVisibility(View.GONE);

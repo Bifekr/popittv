@@ -4,12 +4,16 @@ import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Pair;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,8 +86,8 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
     private InfinitFrg1_PagerAdapter infinitAdapter;
     private InfinitFrg1_PagerAdapter infinitAdapter2;
     private ChannelDetail_adapter recommend_adapter;
-
-
+    Snackbar mSnackbar;
+    boolean doubleBackToExitPressedOnce = false;
     private TagAdapter tagAdapter;
 
     //Utils Class
@@ -133,9 +138,14 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         getFunny_subMenu();
         getSearchFunny();
 
-        binding.iconWifiToolbar.setOnClickListener(v -> {
-            Toast.makeText(this, "sdfsdf", Toast.LENGTH_SHORT).show();
-        });
+        mSnackbar = Snackbar.make(binding.getRoot(), "Please click BACK again to exit", Snackbar.LENGTH_SHORT);
+        mSnackbar.setAction("exit",v -> {
+            onBackPressed();
+
+        }).setActionTextColor(Color.RED)
+        .setTextColor(Color.YELLOW);
+
+
      ///////////-----------------------OnCreate----------------------///////////////
     }//////////---------------------------------------------------////////////////
 
@@ -148,7 +158,6 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         });
     }
 
-    ///////////---------------OnCreate--------------------------///////////////
     private void initNewRv(MainActivity mainActivity, MainActivity mainActivity1) {
         rvChannel_frg1 = new RvChannel_Frg1(mainActivity, mainActivity1);
         recommend_adapter = new ChannelDetail_adapter(mainActivity, mainActivity1);
@@ -247,6 +256,9 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
         binding.switchNetToolbar.setOnCheckedChangeListener((buttonView, isChecked) -> {
 
+            if (isChecked){
+                binding.iconWifiToolbar.setImageResource(R.drawable.ic_baseline_account_circle_24);
+            }
             switchEditor = sharedPreferences.edit();
             switchEditor.putBoolean("switchNet", isChecked);
             switchEditor.commit();
@@ -532,12 +544,32 @@ request();
 
     @Override
     public void onBackPressed() {
-
         if (b_search) {
             binding.rvSearch.setVisibility(View.GONE);
         } else {
-            super.onBackPressed();
+
+            if (mSnackbar.isShown()) {
+                super.onBackPressed();
+            } else {
+                mSnackbar.show();
+            }
+         /*   if (doubleBackToExitPressedOnce) {
+                super.onBackPressed();
+                return;
+            }
+
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce=false;
+                }
+            }, 2000);*/
         }
+
 
     }
 

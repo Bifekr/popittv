@@ -167,8 +167,6 @@
                 android:gravity="end"
                 android:text="کد پیگیری تراکنش : "
                 android:textSize="18sp" />
-
-
             </LinearLayout>
 
             <LinearLayout
@@ -199,7 +197,6 @@
                 android:gravity="end"
                 android:text="مبلغ تراکنش : "
                 android:textSize="18sp" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -230,8 +227,6 @@
                 android:gravity="end"
                 android:text="تاریخ تراکنش : "
                 android:textSize="18sp" />
-
-
             </LinearLayout>
 
             <LinearLayout
@@ -262,8 +257,6 @@
                 android:gravity="end"
                 android:text="روزهای باقی مانده :  "
                 android:textSize="18sp" />
-
-
             </LinearLayout>
 
             <Button
@@ -298,21 +291,19 @@
               app:layout_constraintEnd_toStartOf="@id/parentTransaction"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toBottomOf="@id/tvAccess_userActivity" />
-
             <com.makeramen.roundedimageview.RoundedImageView
               android:id="@+id/avatarUser_userActivity"
               android:layout_width="82dp"
               android:layout_height="82dp"
               android:elevation="@dimen/plane_08"
               android:scaleType="centerCrop"
+
               android:src="@drawable/ic_baseline_account_circle_24"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toTopOf="parent"
               app:riv_border_color="@color/popit_yellow"
-              app:riv_border_width="2dp"
+              app:riv_border_width="8dp"
               app:riv_oval="true" />
-
-
             <TextView
               android:id="@+id/tvExit_userActivity"
               android:layout_width="wrap_content"
@@ -328,57 +319,34 @@
               app:drawableStartCompat="@drawable/ic_baseline_exit_to_app_24"
               app:layout_constraintStart_toStartOf="@id/avatarUser_userActivity"
               app:layout_constraintTop_toBottomOf="@id/avatarUser_userActivity" />
-            <!--   <TextView
-                 android:id="@+id/tvEnter_userActivity"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:background="@drawable/shape_btn_bg"
-                 android:fontFamily="@font/lalezar_regular"
-                 android:paddingStart="@dimen/plane_16"
-                 android:text="@string/enter"
-                 android:paddingTop="@dimen/plane_04"
-                 android:paddingEnd="@dimen/plane_16"
-                 android:paddingBottom="@dimen/plane_04"
-                 app:drawableStartCompat="@drawable/ic_baseline_exit_to_app_24"
-                 app:layout_constraintStart_toStartOf="@id/avatarUser_userActivity"
-                 app:layout_constraintTop_toBottomOf="@id/avatarUser_userActivity" />-->
           </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.cardview.widget.CardView>
 
 
-        <androidx.cardview.widget.CardView
-          android:id="@+id/parentSaveChannel_userActivity"
-          android:layout_width="match_parent"
-          android:layout_height="120dp"
-          android:layout_marginTop="@dimen/plane_24"
-          app:cardCornerRadius="25dp"
-          app:cardElevation="@dimen/plane_08"
-          app:layout_constraintEnd_toEndOf="@id/parentUnderScroll"
-          app:layout_constraintStart_toStartOf="@id/parentUnderScroll"
-          app:layout_constraintTop_toBottomOf="@id/parentUserDetail_userActivity">
+
 
           <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/parentSaveChannel_userActivity"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-              android:id="@+id/tvEnter1_rvSubUser"
-              android:layout_width="0dp"
-              android:layout_height="match_parent"
-              android:fontFamily="@font/lalezar_regular"
-              android:gravity="center_vertical|center_horizontal"
-              android:text="برای مشاهده ویدیوهای خود ابتدا وارد شوید"
-              android:textSize="40sp"
-              android:visibility="visible"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintStart_toStartOf="parent" />
+            android:layout_height="140dp"
+            android:padding="@dimen/plane_16"
+            android:layout_marginTop="@dimen/plane_24"
+            android:background="@drawable/back_player_rv5"
+            app:cardElevation="@dimen/plane_08"
+            app:layout_constraintEnd_toEndOf="@id/parentUnderScroll"
+            app:layout_constraintStart_toStartOf="@id/parentUnderScroll"
+            app:layout_constraintTop_toBottomOf="@id/parentUserDetail_userActivity">
 
             <androidx.recyclerview.widget.RecyclerView
               android:id="@+id/rvSaveChannel_userActivity"
               android:layout_width="match_parent"
-              android:layout_height="match_parent" />
+              android:layout_height="120dp"
+              android:background="@drawable/back_player_rv5"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              tools:layout_editor_absoluteX="16dp" />
 
             <LinearLayout
               android:layout_width="130dp"
@@ -388,38 +356,23 @@
               android:gravity="end|center_horizontal"
               android:orientation="vertical"
               android:paddingStart="@dimen/plane_08"
-
               android:paddingEnd="@dimen/plane_08"
-              android:weightSum="2"
               app:layout_constraintEnd_toEndOf="parent">
 
               <ImageView
                 android:layout_width="90dp"
-                android:layout_height="80dp"
-
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:src="@drawable/subscribe" />
 
-              <TextView
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/baloo"
-                android:gravity="center"
-                android:includeFontPadding="true"
-                android:text="@string/parentSubscribe"
-                android:textColor="@color/brown"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
             </LinearLayout>
           </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+
 
         <View
           android:layout_width="0dp"
           android:layout_height="8dp"
-          android:background="@drawable/shape_tag1"
+          android:background="@color/red_inactive"
           android:elevation="@dimen/plane_08"
           app:layout_constraintBottom_toBottomOf="@id/parentMenuUserbookmark"
           app:layout_constraintEnd_toEndOf="@id/parentMenuUserbookmark"
@@ -498,7 +451,7 @@
           android:layout_width="match_parent"
           android:layout_height="180dp"
           android:layout_marginTop="@dimen/plane_24"
-          android:background="@drawable/back_player_rv3"
+          android:background="@drawable/back_player_rv4"
           android:padding="@dimen/plane_16"
           app:layout_constraintBottom_toTopOf="@id/parentWatchLaterVideo_userActivity"
           app:layout_constraintEnd_toEndOf="parent"
@@ -510,7 +463,7 @@
             android:id="@+id/rvBookMarkVideo_userActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/back_player_rv3"
+            android:background="@drawable/back_player_rv4"
             android:padding="@dimen/plane_16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -563,7 +516,7 @@
         <View
           android:layout_width="0dp"
           android:layout_height="8dp"
-          android:background="@drawable/shape_tag1"
+          android:background="@color/red_inactive"
           android:elevation="@dimen/plane_08"
           app:layout_constraintBottom_toBottomOf="@id/parentMenuUserWatchLater"
           app:layout_constraintEnd_toEndOf="@id/parentMenuUserWatchLater"
@@ -703,7 +656,7 @@
         <View
           android:layout_width="0dp"
           android:layout_height="8dp"
-          android:background="@drawable/shape_tag1"
+          android:background="@color/red_inactive"
           android:elevation="@dimen/plane_08"
           app:layout_constraintBottom_toBottomOf="@id/parentMenuUserHistory"
           app:layout_constraintEnd_toEndOf="@id/parentMenuUserHistory"
@@ -841,7 +794,7 @@
         <View
           android:layout_width="0dp"
           android:layout_height="8dp"
-          android:background="@drawable/shape_tag1"
+          android:background="@color/red_inactive"
           android:elevation="@dimen/plane_08"
           app:layout_constraintBottom_toBottomOf="@id/parentMenuUserLike"
           app:layout_constraintEnd_toEndOf="@id/parentMenuUserLike"

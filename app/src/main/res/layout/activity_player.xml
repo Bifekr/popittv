@@ -380,6 +380,46 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/parentProfile">
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/parentInfint_con"
+          android:layout_width="0dp"
+          android:elevation="@dimen/plane_16"
+          android:layout_height="40dp"
+          android:background="@drawable/shape_titlerv"
+          android:gravity="center_vertical|center_horizontal"
+          android:orientation="vertical"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="1"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="@id/rvBest2_player"
+          app:layout_constraintWidth_percent=".6">
+
+          <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/ivTitle_infilit"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:elevation="@dimen/plane_16"
+            android:scaleType="fitXY"
+            android:src="@drawable/best_vid"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_border_color="@color/red_active"
+            app:riv_oval="true"
+            tools:ignore="ImageContrastCheck" />
+          <TextView
+            android:id="@+id/tvInfilit_mainActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/plane_08"
+            android:fontFamily="@font/lalezar_regular"
+            android:text="ویدیوهای برتر ماه"
+            android:textColor="@color/reply_red_400"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivTitle_infilit"
+            app:layout_constraintEnd_toStartOf="@id/ivTitle_infilit"
+            app:layout_constraintTop_toTopOf="@+id/ivTitle_infilit" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <LinearLayout
           android:id="@+id/rvBest2_player"
           android:layout_width="match_parent"
@@ -389,8 +429,10 @@
           android:padding="@dimen/plane_16"
           app:layout_constraintBottom_toTopOf="@id/rvNew2_best_player"
           app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent">
+
           <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvBest_player"
             android:layout_width="match_parent"
@@ -402,7 +444,51 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/parentInfint2_con"
+          android:layout_width="0dp"
+          android:layout_height="40dp"
+          android:background="@drawable/shape_titlerv"
+          android:gravity="center_vertical|center_horizontal"
+          android:orientation="vertical"
+          android:elevation="@dimen/plane_16"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="1"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="@id/rvNew2_best_player"
+          app:layout_constraintWidth_percent=".6">
 
+          <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/ivTitle2_infilit"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:elevation="@dimen/plane_16"
+            android:scaleType="centerInside"
+            android:src="@drawable/win"
+            app:layout_constraintEnd_toEndOf="parent"
+
+
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:riv_border_color="@color/red_active"
+            app:riv_oval="true"
+            tools:ignore="ImageContrastCheck" />
+
+          <TextView
+            android:id="@+id/tvInfilit2_mainActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/plane_08"
+            android:fontFamily="@font/lalezar_regular"
+            android:text="تازه محبوب شده ها"
+            android:textColor="@color/reply_red_400"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivTitle2_infilit"
+            app:layout_constraintEnd_toStartOf="@id/ivTitle2_infilit"
+            app:layout_constraintTop_toTopOf="@+id/ivTitle2_infilit" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <LinearLayout
           android:id="@+id/rvNew2_best_player"
           android:layout_width="match_parent"
@@ -425,7 +511,50 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rvBest_player" />
         </LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/parentInfint22_con"
+          android:layout_width="0dp"
+          android:layout_height="40dp"
+          android:background="@drawable/shape_titlerv"
+          android:gravity="center_vertical|center_horizontal"
+          android:orientation="vertical"
+          android:elevation="@dimen/plane_16"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="1"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="@id/rvAllVid2_player"
+          app:layout_constraintWidth_percent=".6">
 
+          <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/ivTitle22_infilit"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:elevation="@dimen/plane_16"
+            android:scaleType="centerInside"
+            app:layout_constraintEnd_toEndOf="parent"
+
+
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:riv_border_color="@color/red_active"
+            app:riv_oval="true"
+            tools:ignore="ImageContrastCheck" />
+
+          <TextView
+            android:id="@+id/tvInfilit22_mainActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/plane_08"
+            android:fontFamily="@font/lalezar_regular"
+            android:text="ویدیوهای مرتبط  "
+            android:textColor="@color/reply_red_400"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivTitle22_infilit"
+            app:layout_constraintEnd_toStartOf="@id/ivTitle22_infilit"
+            app:layout_constraintTop_toTopOf="@+id/ivTitle22_infilit" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <LinearLayout
           android:id="@+id/rvAllVid2_player"
           android:layout_width="match_parent"

@@ -235,7 +235,7 @@ shareApp();
             }else if (item2==R.id.games){
                 startActivity(new Intent(RealityActivity.this, GameActivity.class));
             }
-            return true;
+            return false;
         });
 
         Objects.requireNonNull(binding.navRail.getHeaderView()).findViewById(R.id.fab_add).setOnClickListener(v -> {
