@@ -199,6 +199,7 @@
           android:background="@drawable/back_player_rv1"
           android:elevation="@dimen/plane_04"
           android:padding="@dimen/plane_16"
+          android:layout_marginEnd="10dp"
           app:layout_constraintBottom_toTopOf="@id/parentInfint_cardView"
           app:layout_constraintEnd_toStartOf="@id/rvRecommend_frg1"
           app:layout_constraintStart_toStartOf="parent"
