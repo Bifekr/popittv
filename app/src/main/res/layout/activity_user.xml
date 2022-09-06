@@ -12,11 +12,12 @@
 
     <com.google.android.material.navigationrail.NavigationRailView
       android:id="@+id/navRail"
-      style="@style/Widget.MaterialComponents.NavigationRailView.Compact"
+      style="@style/Widget.MaterialComponents.NavigationRailView.PrimarySurface"
       android:layout_width="wrap_content"
-      android:layout_height="match_parent"
+      android:layout_height="0dp"
       app:headerLayout="@layout/header_rail"
-      app:labelVisibilityMode="auto"
+      app:labelVisibilityMode="labeled"
+      app:layout_constraintVertical_bias="0"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toStartOf="@id/scroll"
       app:layout_constraintStart_toStartOf="parent"
@@ -347,88 +348,15 @@
         </androidx.cardview.widget.CardView>
 
 
-        <View
-          android:layout_width="0dp"
-          android:layout_height="8dp"
-          android:background="@drawable/shape_tag1"
-          android:elevation="@dimen/plane_08"
-          app:layout_constraintBottom_toBottomOf="@id/parentMenuUserSub"
-          app:layout_constraintEnd_toEndOf="@id/parentMenuUserSub"
-          app:layout_constraintStart_toStartOf="@id/parentMenuUserSub"
-          app:layout_constraintTop_toTopOf="@id/parentMenuUserSub" />
 
-        <LinearLayout
-          android:id="@+id/parentMenuUserSub"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="@dimen/plane_08"
-          android:elevation="@dimen/plane_24"
-          android:orientation="horizontal"
-          app:layout_constraintBottom_toBottomOf="@id/parentSaveChannel_userActivity"
-          app:layout_constraintEnd_toEndOf="@id/parentSaveChannel_userActivity"
-          app:layout_constraintHeight_percent=".02"
-          app:layout_constraintHorizontal_bias=".3"
-          app:layout_constraintStart_toStartOf="@id/parentSaveChannel_userActivity"
-          app:layout_constraintTop_toBottomOf="@id/parentUserDetail_userActivity"
-          app:layout_constraintVertical_bias="0">
 
-          <TextView
-            android:id="@+id/menuFunny_subUser"
-            style="@style/TextAppearance.Reply.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/shape_tag2"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:paddingBottom="6dp"
-            android:text="@string/funny_nav"
-            android:textColor="@color/white" />
-
-          <TextView
-            android:id="@+id/menuReality_subUser"
-            style="@style/TextAppearance.Reply.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/plane_16"
-            android:background="@drawable/shape_tag1"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:paddingBottom="6dp"
-            android:text="@string/reality_nav"
-            android:textColor="@color/white" />
-
-          <TextView
-            android:id="@+id/menuStudy_subUser"
-            style="@style/TextAppearance.Reply.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/plane_16"
-            android:background="@drawable/shape_tag1"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:paddingBottom="6dp"
-            android:text="@string/learning_nav"
-            android:textColor="@color/white" />
-
-          <TextView
-            android:id="@+id/menuFarsi_subUser"
-            style="@style/TextAppearance.Reply.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/plane_16"
-            android:background="@drawable/shape_tag1"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:text="@string/farsi_nav"
-            android:textColor="@color/white" />
-        </LinearLayout>
 
         <androidx.cardview.widget.CardView
           android:id="@+id/parentSaveChannel_userActivity"
           android:layout_width="match_parent"
-          android:layout_height="180dp"
+          android:layout_height="120dp"
           android:layout_marginTop="@dimen/plane_24"
-          app:cardCornerRadius="40dp"
+          app:cardCornerRadius="25dp"
           app:cardElevation="@dimen/plane_08"
           app:layout_constraintEnd_toEndOf="@id/parentUnderScroll"
           app:layout_constraintStart_toStartOf="@id/parentUnderScroll"
@@ -447,7 +375,7 @@
               android:text="برای مشاهده ویدیوهای خود ابتدا وارد شوید"
               android:textSize="40sp"
               android:visibility="visible"
-              app:layout_constraintEnd_toStartOf="@id/parentRvSub_activityUser"
+              app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -456,30 +384,36 @@
               android:layout_height="match_parent" />
 
             <LinearLayout
-              android:id="@+id/parentRvSub_activityUser"
               android:layout_width="130dp"
               android:layout_height="match_parent"
-              android:background="@drawable/shape_tag6"
+              android:background="@drawable/shape_titlerv"
               android:elevation="@dimen/plane_08"
-              android:gravity="center_vertical|center_horizontal"
+              android:weightSum="2"
+              android:paddingEnd="@dimen/plane_08"
+              android:paddingStart="@dimen/plane_08"
+
+              android:gravity="end|center_horizontal"
               android:orientation="vertical"
               app:layout_constraintEnd_toEndOf="parent">
 
-              <com.makeramen.roundedimageview.RoundedImageView
-                android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:scaleType="fitXY"
-                 />
+              <ImageView
+                android:layout_width="90dp"
+                android:layout_height="80dp"
 
+                android:layout_weight="1"
+                android:src="@drawable/subscribe" />
               <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/baloo"
                 android:gravity="center"
+                android:includeFontPadding="true"
+                android:layout_weight="1"
                 android:text="@string/parentSubscribe"
                 android:textColor="@color/brown"
-                android:textSize="24sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
+
             </LinearLayout>
           </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -577,31 +511,44 @@
             <androidx.recyclerview.widget.RecyclerView
               android:id="@+id/rvBookMarkVideo_userActivity"
               android:layout_width="match_parent"
-              android:layout_height="match_parent" />
+              android:layout_height="0dp"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintHeight_percent="0.96"
+              app:layout_constraintVertical_bias="1"/>
 
             <LinearLayout
               android:layout_width="130dp"
               android:layout_height="match_parent"
-              android:background="@drawable/shape_tag6"
+              android:background="@drawable/shape_titlerv_ax"
               android:elevation="@dimen/plane_08"
-              android:gravity="center_vertical|center_horizontal"
+              android:gravity="start|center_horizontal"
               android:orientation="vertical"
+              android:paddingStart="@dimen/plane_08"
+
+              android:paddingEnd="@dimen/plane_08"
+              android:weightSum="2"
               app:layout_constraintStart_toStartOf="parent">
 
               <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:src="@drawable/ic_mark_color_2" />
+                android:layout_width="90dp"
+                android:layout_height="80dp"
+
+                android:layout_weight="1"
+                android:src="@drawable/marked" />
 
               <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:fontFamily="@font/baloo"
                 android:gravity="center"
+                android:includeFontPadding="true"
                 android:text="@string/parentBookmark"
                 android:textColor="@color/brown"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
+
             </LinearLayout>
           </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -687,7 +634,7 @@
           android:layout_width="match_parent"
           android:layout_height="180dp"
           android:layout_marginTop="@dimen/plane_24"
-          app:cardCornerRadius="40dp"
+          app:cardCornerRadius="25dp"
           app:cardElevation="@dimen/plane_08"
           app:layout_constraintBottom_toTopOf="@id/parentHistoryVideo_userActivity"
           app:layout_constraintTop_toBottomOf="@id/parentBookmarkVideo_userActivity">
@@ -704,17 +651,33 @@
             <LinearLayout
               android:layout_width="130dp"
               android:layout_height="match_parent"
-              android:background="@drawable/shape_tag6"
+              android:background="@drawable/shape_titlerv"
               android:elevation="@dimen/plane_08"
-              android:gravity="center_vertical|center_horizontal"
+              android:weightSum="2"
+              android:paddingEnd="@dimen/plane_08"
+              android:paddingStart="@dimen/plane_08"
+
+              android:gravity="end|center_horizontal"
               android:orientation="vertical"
               app:layout_constraintEnd_toEndOf="parent">
 
               <ImageView
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:scaleType="centerInside"
+                android:layout_width="90dp"
+                android:layout_height="80dp"
+
+                android:layout_weight="1"
                 android:src="@drawable/parent_history" />
+              <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/baloo"
+                android:gravity="center"
+                android:includeFontPadding="true"
+                android:layout_weight="1"
+                android:text="@string/parentWatchLater"
+                android:textColor="@color/brown"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             </LinearLayout>
           </androidx.constraintlayout.widget.ConstraintLayout>
@@ -818,29 +781,35 @@
             <LinearLayout
               android:layout_width="130dp"
               android:layout_height="match_parent"
-              android:background="@drawable/shape_tag6"
+              android:background="@drawable/shape_titlerv_ax"
               android:elevation="@dimen/plane_08"
-              android:gravity="center_vertical|center_horizontal"
+              android:gravity="start|center_horizontal"
               android:orientation="vertical"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toTopOf="parent">
+              android:paddingStart="@dimen/plane_08"
+
+              android:paddingEnd="@dimen/plane_08"
+              android:weightSum="2"
+              app:layout_constraintStart_toStartOf="parent">
 
               <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_history_24" />
+                android:layout_width="90dp"
+                android:layout_height="80dp"
+
+                android:layout_weight="1"
+                android:src="@drawable/calendar" />
 
               <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:fontFamily="@font/baloo"
                 android:gravity="center"
+                android:includeFontPadding="true"
                 android:text="@string/parentHistoey"
                 android:textColor="@color/brown"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
+
             </LinearLayout>
           </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -942,19 +911,33 @@
             <LinearLayout
               android:layout_width="130dp"
               android:layout_height="match_parent"
-              android:background="@drawable/shape_tag6"
+              android:background="@drawable/shape_titlerv"
               android:elevation="@dimen/plane_08"
-              android:gravity="center_vertical|center_horizontal"
+              android:weightSum="2"
+              android:paddingEnd="@dimen/plane_08"
+              android:paddingStart="@dimen/plane_08"
+
+              android:gravity="end|center_horizontal"
               android:orientation="vertical"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintTop_toTopOf="parent">
+              app:layout_constraintEnd_toEndOf="parent">
 
               <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
+                android:layout_width="90dp"
+                android:layout_height="80dp"
+android:scaleType="centerCrop"
+                android:layout_weight="1"
                 android:src="@drawable/ic_parents_like" />
+              <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/baloo"
+                android:gravity="center"
+                android:includeFontPadding="true"
+                android:layout_weight="1"
+                android:text="@string/parentLike"
+                android:textColor="@color/brown"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             </LinearLayout>
           </androidx.constraintlayout.widget.ConstraintLayout>

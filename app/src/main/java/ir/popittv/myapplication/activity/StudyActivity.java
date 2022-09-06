@@ -216,49 +216,24 @@ shareApp();
     }
     //Initialize widgets
     private void initRailActivity() {
-        binding.navRail.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @SuppressLint("NonConstantResourceId")
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case  R.id.Funny:
-                        startActivity(new Intent(StudyActivity.this, MainActivity.class));
-                        break;
-                    case R.id.Reality:
-                        startActivity(new Intent(StudyActivity.this, RealityActivity.class));
-                        break;
-
-                    case R.id.Farsi:
-                        startActivity(new Intent(StudyActivity.this, FarsiActivity.class));
-                        break;
-                    case R.id.Games:
-                        startActivity(new Intent(StudyActivity.this, GameActivity.class));
-                        break;
-                }
-                return false;
-            }
-        });
-     binding.navRail.setOnItemReselectedListener(item -> {
-        switch (item.getItemId()){
-            case R.id.Funny:
-                startActivity(new Intent(StudyActivity.this,MainActivity.class));
-                break;
-            case R.id.Reality:
-                startActivity(new Intent(StudyActivity.this, RealityActivity.class));
-                break;
-            case R.id.Learning:
-              //  startActivity(new Intent(StudyActivity.this, StudyActivity.class));
-                break;
-            case R.id.Farsi:
+        binding.navRail.setOnItemSelectedListener(item -> {
+            int item2=item.getItemId();
+            if(item2==R.id.funny){
+                startActivity(new Intent(StudyActivity.this, MainActivity.class));
+            }else if (item2==R.id.farsi){
                 startActivity(new Intent(StudyActivity.this, FarsiActivity.class));
-                break;
-            case R.id.Games:
+            }else if (item2==R.id.reality){
+                startActivity(new Intent(StudyActivity.this, RealityActivity.class));
+            }else if (item2==R.id.games){
                 startActivity(new Intent(StudyActivity.this, GameActivity.class));
-                break;
+            }
+            return false;
+        });
 
+        Objects.requireNonNull(binding.navRail.getHeaderView()).findViewById(R.id.fab_add).setOnClickListener(v -> {
+            startActivity(new Intent(StudyActivity.this, UserActivity.class));
+        });
 
-        }
-    });
     }
 
     private void taginit() {

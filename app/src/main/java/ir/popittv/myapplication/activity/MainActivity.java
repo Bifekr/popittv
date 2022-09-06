@@ -276,28 +276,22 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
 
     private void initRailActivity() {
         binding.navRail.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.Reality:
-                    startActivity(new Intent(MainActivity.this, RealityActivity.class));
-
-                  return true;
-               case R.id.Learning:
-                    startActivity(new Intent(MainActivity.this, StudyActivity.class));
-                    return true;
-                case R.id.Farsi:
-                    startActivity(new Intent(MainActivity.this, FarsiActivity.class));
-                    break;
-                case R.id.Games:
-                    startActivity(new Intent(MainActivity.this, GameActivity.class));
-                    break;
+                int item2=item.getItemId();
+            if(item2==R.id.reality){
+                startActivity(new Intent(MainActivity.this, RealityActivity.class));
+            }else if (item2==R.id.farsi){
+                startActivity(new Intent(MainActivity.this, FarsiActivity.class));
+            }else if (item2==R.id.learning){
+                startActivity(new Intent(MainActivity.this, StudyActivity.class));
+            }else if (item2==R.id.games){
+                startActivity(new Intent(MainActivity.this, GameActivity.class));
             }
-         return false;
+         return true;
         });
 
         Objects.requireNonNull(binding.navRail.getHeaderView()).findViewById(R.id.fab_add).setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, UserActivity.class));
         });
-        
 
     }
 

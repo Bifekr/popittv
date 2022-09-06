@@ -24,6 +24,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.adapter.ChannelDetail_adapter;
@@ -221,26 +222,25 @@ shareApp();
             startActivity(Intent.createChooser(shareIntent,"لینک دانلود برنامه پیکوبوم"));
         });
     }
-    @SuppressLint("NonConstantResourceId")
+
     private void initRailActivity() {
-     binding.navRail.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.Funny:
-                    startActivity(new Intent(RealityActivity.this, MainActivity.class));
-                    return true;
-                case R.id.Learning:
-                    startActivity(new Intent(RealityActivity.this, StudyActivity.class));
-                    return false;
-                case R.id.Farsi:
-                    startActivity(new Intent(RealityActivity.this, FarsiActivity.class));
-                    break;
-                case R.id.Games:
-                    startActivity(new Intent(RealityActivity.this, GameActivity.class));
-                    break;
+        binding.navRail.setOnItemSelectedListener(item -> {
+            int item2=item.getItemId();
+            if(item2==R.id.funny){
+                startActivity(new Intent(RealityActivity.this, MainActivity.class));
+            }else if (item2==R.id.farsi){
+                startActivity(new Intent(RealityActivity.this, FarsiActivity.class));
+            }else if (item2==R.id.learning){
+                startActivity(new Intent(RealityActivity.this, StudyActivity.class));
+            }else if (item2==R.id.games){
+                startActivity(new Intent(RealityActivity.this, GameActivity.class));
             }
-            return false;
+            return true;
         });
 
+        Objects.requireNonNull(binding.navRail.getHeaderView()).findViewById(R.id.fab_add).setOnClickListener(v -> {
+            startActivity(new Intent(RealityActivity.this, UserActivity.class));
+        });
 
     }
 

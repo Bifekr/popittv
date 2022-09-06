@@ -79,7 +79,7 @@
  <com.airbnb.lottie.LottieAnimationView
    android:id="@+id/tv_a_splash"
    android:layout_width="234dp"
-   android:layout_height="113dp"
+   android:layout_height="100dp"
    android:text="A"
    android:textColor="@color/black"
    android:textSize="80sp"

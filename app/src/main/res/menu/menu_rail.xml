@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
   <item
-    android:id="@+id/Funny"
+    android:id="@+id/funny"
 
     android:icon="@drawable/ic_baseline_groups_3_24"
     android:title="@string/funny_nav" />
   <item
-    android:id="@+id/Reality"
+    android:id="@+id/reality"
 android:checked="false"
     android:icon="@drawable/ic_baseline_live_tv_24"
     android:title="@string/reality_nav" />
   <item
-    android:id="@+id/Learning"
+    android:id="@+id/learning"
 
     android:icon="@drawable/ic_baseline_school_24"
     android:title="@string/learning_nav" />
   <item
-    android:id="@+id/Farsi"
+    android:id="@+id/farsi"
 
     android:icon="@drawable/ic_baseline_stars_24"
     android:title="@string/farsi_nav" />
   <item
-    android:id="@+id/Games"
+    android:id="@+id/games"
 
     android:icon="@drawable/ic_baseline_videogame_asset_24"
     android:title="@string/games_nav" />

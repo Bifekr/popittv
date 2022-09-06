@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import ir.popittv.myapplication.R;
 import ir.popittv.myapplication.adapter.ChannelDetail_adapter;
@@ -207,49 +208,25 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
         });
     }
 
-    @SuppressLint("NonConstantResourceId")
     private void initRailActivity() {
         binding.navRail.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.Funny:
-                    startActivity(new Intent(FarsiActivity.this, MainActivity.class));
-                    break;
-                case R.id.Reality:
-                    startActivity(new Intent(FarsiActivity.this, RealityActivity.class));
-                    break;
-                case R.id.Learning:
-                    startActivity(new Intent(FarsiActivity.this, StudyActivity.class));
-                    break;
-                case R.id.Farsi:
-                    startActivity(new Intent(FarsiActivity.this, FarsiActivity.class));
-                    break;
-                case R.id.Games:
-                    startActivity(new Intent(FarsiActivity.this, GameActivity.class));
-                    break;
+            int item2=item.getItemId();
+            if(item2==R.id.funny){
+                startActivity(new Intent(FarsiActivity.this, MainActivity.class));
+            }else if (item2==R.id.learning){
+                startActivity(new Intent(FarsiActivity.this, StudyActivity.class));
+            }else if (item2==R.id.reality){
+                startActivity(new Intent(FarsiActivity.this, RealityActivity.class));
+            }else if (item2==R.id.games){
+                startActivity(new Intent(FarsiActivity.this, GameActivity.class));
             }
             return false;
         });
-        binding.navRail.setOnItemReselectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.Funny:
-                    startActivity(new Intent(FarsiActivity.this, MainActivity.class));
-                    break;
-                case R.id.Reality:
-                    startActivity(new Intent(FarsiActivity.this, RealityActivity.class));
-                    break;
-                case R.id.Learning:
-                    startActivity(new Intent(FarsiActivity.this, StudyActivity.class));
-                    break;
-                case R.id.Farsi:
-                    //   startActivity(new Intent(FarsiActivity.this, FarsiActivity.class));
-                    break;
-                case R.id.Games:
-                    startActivity(new Intent(FarsiActivity.this, GameActivity.class));
-                    break;
 
-
-            }
+        Objects.requireNonNull(binding.navRail.getHeaderView()).findViewById(R.id.fab_add).setOnClickListener(v -> {
+            startActivity(new Intent(FarsiActivity.this, UserActivity.class));
         });
+
     }
 
     private void taginit() {

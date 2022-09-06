@@ -1,10 +1,8 @@
 package ir.popittv.myapplication.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Pair;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +16,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.textfield.TextInputLayout;
@@ -44,7 +41,7 @@ import retrofit2.Response;
 
 public class UserActivity extends AppCompatActivity implements OnClickFunny, OnClickFrg1 {
 
-    private final boolean userLoged = true;
+
     //-----------
     private final Long month_1 = 2600000000L;
     private final Long month_3 = 7860000000L;
@@ -54,7 +51,10 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
     View bottomView2;
     TextInputLayout et_phone;
     TextInputLayout et_code;
-    String phone_user2;
+    private int kindClickLike;
+    private int kindClickSave;
+    private int kindClickSee;
+    private int kindClickLater;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private UserViewModel userViewModel;
@@ -76,8 +76,6 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
     private Long expireDate = null;
     private long unixCurrentTime;
     private boolean status;
-    private boolean b_switchLink;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +98,6 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
         super.onCreate(savedInstanceState);
         binding = ActivityUserBinding.inflate(getLayoutInflater());
-        // this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         setContentView(binding.getRoot());
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
@@ -153,7 +150,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
     private void getPeymentFromServer() {
         String check = sharedPreferences.getString("phone_user", "");
-        if (check.equals("")) {
+        if (!check.equals("")) {
             Toast.makeText(UserActivity.this, "+++", Toast.LENGTH_SHORT).show();
             Service.getApiClient().getPayment(phone_user).enqueue(new Callback<UserDataModel>() {
                 @Override
@@ -180,7 +177,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
                             editor.putLong("lastDate", 0);
                             editor.commit();
 
-                            Service.getApiClient().setPayment(phone_user, "", "", expireDate,  "").enqueue(new Callback<UserDataModel>() {
+                            Service.getApiClient().setPayment(phone_user, "", "", expireDate, "").enqueue(new Callback<UserDataModel>() {
                                 @Override
                                 public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
 
@@ -202,7 +199,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
                             binding.tvFirstDate.setText(firstDate);
                             binding.tvAmount.setText(amount + "تومان  ");
 
-                            recreate();
+                            // recreate();
                         }
 
                     }
@@ -323,7 +320,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
                 }
             }
 
-        }else {
+        } else {
             binding.tvTransactionId.setText(transactionId + "  ناموفق  ");
             binding.tvFirstDate.setText(firstDate);
 
@@ -400,11 +397,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
                                                     binding.btnPaymentLogin.setVisibility(View.GONE);
                                                     binding.btnPayment.setVisibility(View.VISIBLE);
                                                     binding.tvExitUserActivity.setVisibility(View.VISIBLE);
-                                                    // binding.tvEnterUserActivity.setVisibility(View.GONE);
-                                                    // binding.tvExitUserActivity.setVisibility(View.VISIBLE);
                                                     getPeymentFromServer();
-
-                                                    // binding.avatarUserUserActivity.setBackgroundResource(R.drawable.trophy);
                                                     binding.tvEnter1RvSubUser.setVisibility(View.GONE);
                                                     binding.avatarUserUserActivity.setBackgroundResource(R.drawable.ic_parents_happy);
 
@@ -441,39 +434,35 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
             binding.btnPaymentLogin.setVisibility(View.GONE);
             binding.btnPayment.setVisibility(View.VISIBLE);
             binding.tvExitUserActivity.setVisibility(View.VISIBLE);
-            //  binding.tvExitUserActivity.setVisibility(View.VISIBLE);
-            //  binding.tvEnterUserActivity.setVisibility(View.GONE);
             getPeymentFromServer();
             binding.tvEnter1RvSubUser.setVisibility(View.GONE);
             binding.avatarUserUserActivity.setBackgroundResource(R.drawable.ic_parents_happy);
         }
 
     }
+
     private void btnClickOnCreate() {
 
         binding.tvExitUserActivity.setOnClickListener(v -> {
 
 
-                binding.btnPaymentLogin.setVisibility(View.VISIBLE);
-                binding.btnPayment.setVisibility(View.GONE);
-                binding.tvExitUserActivity.setVisibility(View.GONE);
-                editor.putString("phone_user", "");
-                editor.putInt("id_user", 0);
-                editor.putLong("lastDate",0);
-                editor.commit();
-                recreate();
-                binding.phoneNumUserActivity.setText(R.string.hint_number);
-                binding.userNameUserActivity.setText(R.string.hint_user_name);
-                binding.avatarUserUserActivity.setBackgroundResource(R.drawable.ic_baseline_account_circle_24);
-                binding.tvEnter1RvSubUser.setVisibility(View.VISIBLE);
-
+            binding.btnPaymentLogin.setVisibility(View.VISIBLE);
+            binding.btnPayment.setVisibility(View.GONE);
+            binding.tvExitUserActivity.setVisibility(View.GONE);
+            editor.putString("phone_user", "");
+            editor.putInt("id_user", 0);
+            editor.putLong("lastDate", 0);
+            editor.commit();
+            recreate();
+            binding.phoneNumUserActivity.setText(R.string.hint_number);
+            binding.userNameUserActivity.setText(R.string.hint_user_name);
+            binding.avatarUserUserActivity.setBackgroundResource(R.drawable.ic_baseline_account_circle_24);
+            binding.tvEnter1RvSubUser.setVisibility(View.VISIBLE);
 
 
         });
 
-        binding.btnPaymentLogin.setOnClickListener(v -> {
-            loginUser();
-        });
+        binding.btnPaymentLogin.setOnClickListener(v -> loginUser());
 
         binding.avatarUserUserActivity.setOnClickListener(v -> {
             if (phone_user==null) {
@@ -497,13 +486,8 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
     }
 
-
-
     private Boolean validatePhone() { //  متد خطاهای شماره تماس
-        String valName = et_phone.getEditText().getText().toString();
-        String noWhiteSpace = "(?=\\s+$)"; // if inot work can use this -> \\A\\w{4,20}\\z   :A that mean start and w means evrything including alphabets and digit
-        // with small letters and capital letters  and 4-22 is limits  \\ thats no soace   )
-
+        String valName = Objects.requireNonNull(et_phone.getEditText()).getText().toString();
         if (valName.isEmpty()) {
             et_phone.setError("هنوز شماره موبایل وارد نشده است");
             return false;
@@ -522,10 +506,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
     }
 
     private Boolean validateCode() { //  متد خطاهای شماره تماس
-        String valName = et_code.getEditText().getText().toString();
-        String noWhiteSpace = "(?=\\s+$)"; // if inot work can use this -> \\A\\w{4,20}\\z   :A that mean start and w means evrything including alphabets and digit
-        // with small letters and capital letters  and 4-22 is limits  \\ thats no soace   )
-
+        String valName = Objects.requireNonNull(et_code.getEditText()).getText().toString();
         if (valName.isEmpty()) {
             et_code.setError("هنوز شماره کد ارسال شده وارد نشده است");
             return false;
@@ -543,7 +524,6 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
         }
     }
 
-
     private void getUserSub() {
         userViewModel.getUserSub().observe(this, new Observer<List<ChannelDataModel>>() {
             @Override
@@ -553,6 +533,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
         });
     }
 
+    //////////////user Like/////////////////
 
     private void getUserLike() {
         userViewModel.getUserLike().observe(UserActivity.this, funnyDataModels -> {
@@ -561,6 +542,47 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
     }
 
     private void userLikeMenuClick(int id_user) {
+        binding.menuFunnyLikeUser.setOnClickListener(v -> {
+            kindClickLike = 1;
+            userViewModel.request_userLike(id_user, 1);
+            getUserLike();
+            binding.menuFunnyLikeUser.setBackgroundResource(R.drawable.shape_tag2);
+            binding.menuRealityLikeUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuStudyLikeUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuFarsiLikeUser.setBackgroundResource(R.drawable.shape_tag1);
+
+        });
+        binding.menuRealityLikeUser.setOnClickListener(v -> {
+            kindClickLike = 2;
+            userViewModel.request_userLike(id_user, 2);
+            getUserLike();
+            binding.menuFunnyLikeUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuRealityLikeUser.setBackgroundResource(R.drawable.shape_tag2);
+            binding.menuStudyLikeUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuFarsiLikeUser.setBackgroundResource(R.drawable.shape_tag1);
+        });
+
+        binding.menuStudyLikeUser.setOnClickListener(v -> {
+            kindClickLike = 3;
+            userViewModel.request_userLike(id_user, 3);
+            getUserLike();
+            binding.menuFunnyLikeUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuRealityLikeUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuStudyLikeUser.setBackgroundResource(R.drawable.shape_tag2);
+            binding.menuFarsiLikeUser.setBackgroundResource(R.drawable.shape_tag1);
+        });
+
+        binding.menuFarsiLikeUser.setOnClickListener(v -> {
+            kindClickLike = 4;
+            userViewModel.request_userLike(id_user, 4);
+            getUserLike();
+            binding.menuFunnyLikeUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuRealityLikeUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuStudyLikeUser.setBackgroundResource(R.drawable.shape_tag1);
+            binding.menuFarsiLikeUser.setBackgroundResource(R.drawable.shape_tag2);
+        });
+
+
     }
 
     //////////////user see/////////////////
@@ -573,8 +595,9 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
     private void userSeeMenuClick(int id_user) {
         binding.menuFunnyHistoryUser.setOnClickListener(v -> {
-
+            kindClickSee = 1;
             userViewModel.request_userSee(id_user, 1);
+            getUserSee();
             binding.menuFunnyHistoryUser.setBackgroundResource(R.drawable.shape_tag2);
             binding.menuRealityHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuStudyHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
@@ -582,7 +605,9 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
         });
         binding.menuRealityHistoryUser.setOnClickListener(v -> {
+            kindClickSee = 2;
             userViewModel.request_userSee(id_user, 2);
+            getUserSee();
             binding.menuFunnyHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuRealityHistoryUser.setBackgroundResource(R.drawable.shape_tag2);
             binding.menuStudyHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
@@ -590,7 +615,9 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
         });
 
         binding.menuStudyHistoryUser.setOnClickListener(v -> {
+            kindClickSee = 3;
             userViewModel.request_userSee(id_user, 3);
+            getUserSee();
             binding.menuFunnyHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuRealityHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuStudyHistoryUser.setBackgroundResource(R.drawable.shape_tag2);
@@ -598,7 +625,9 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
         });
 
         binding.menuFarsiHistoryUser.setOnClickListener(v -> {
+            kindClickSee = 4;
             userViewModel.request_userSee(id_user, 4);
+            getUserSee();
             binding.menuFunnyHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuRealityHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuStudyHistoryUser.setBackgroundResource(R.drawable.shape_tag1);
@@ -606,9 +635,6 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
         });
 
     }
-
-///////////////////////////////////////////
-
 
     /////////////////user later///////////////
     private void getUserLater() {
@@ -621,8 +647,9 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
     private void userLaterMenuClick(int id_user) {
         binding.menuFunnyWatchLaterUser.setOnClickListener(v -> {
-
+            kindClickLater = 1;
             userViewModel.request_userLater(id_user, 1);
+            getUserLater();
             binding.menuFunnyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag2);
             binding.menuRealityWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuStudyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
@@ -630,7 +657,9 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
         });
         binding.menuRealityWatchLaterUser.setOnClickListener(v -> {
+            kindClickLater = 2;
             userViewModel.request_userLater(id_user, 2);
+            getUserLater();
             binding.menuFunnyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuRealityWatchLaterUser.setBackgroundResource(R.drawable.shape_tag2);
             binding.menuStudyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
@@ -638,7 +667,9 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
         });
 
         binding.menuStudyWatchLaterUser.setOnClickListener(v -> {
+            kindClickLater = 3;
             userViewModel.request_userLater(id_user, 3);
+            getUserLater();
             binding.menuFunnyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuRealityWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuStudyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag2);
@@ -646,7 +677,9 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
         });
 
         binding.menuFarsiWatchLaterUser.setOnClickListener(v -> {
+            kindClickLater = 4;
             userViewModel.request_userLater(id_user, 4);
+            getUserLater();
             binding.menuFunnyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuRealityWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuStudyWatchLaterUser.setBackgroundResource(R.drawable.shape_tag1);
@@ -668,8 +701,9 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
     private void userSaveMenuClick(int id_user) {
         binding.menuFunnyBookmarkUser.setOnClickListener(v -> {
-
+            kindClickSave = 1;
             userViewModel.request_userSave(id_user, 1);
+            getUserSave();
             binding.menuFunnyBookmarkUser.setBackgroundResource(R.drawable.shape_tag2);
             binding.menuRealityBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuStudyBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
@@ -677,7 +711,9 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
 
         });
         binding.menuRealityBookmarkUser.setOnClickListener(v -> {
+            kindClickSave = 2;
             userViewModel.request_userSave(id_user, 2);
+            getUserSave();
             binding.menuFunnyBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuRealityBookmarkUser.setBackgroundResource(R.drawable.shape_tag2);
             binding.menuStudyBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
@@ -685,7 +721,9 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
         });
 
         binding.menuStudyBookmarkUser.setOnClickListener(v -> {
+            kindClickSave = 3;
             userViewModel.request_userSave(id_user, 3);
+            getUserSave();
             binding.menuFunnyBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuRealityBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuStudyBookmarkUser.setBackgroundResource(R.drawable.shape_tag2);
@@ -693,7 +731,9 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
         });
 
         binding.menuFarsiBookmarkUser.setOnClickListener(v -> {
+            kindClickSave = 4;
             userViewModel.request_userSave(id_user, 4);
+            getUserSave();
             binding.menuFunnyBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuRealityBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
             binding.menuStudyBookmarkUser.setBackgroundResource(R.drawable.shape_tag1);
@@ -727,74 +767,91 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
     }
 
 
-    @SuppressLint("NonConstantResourceId")
     private void initRailActivity() {
         binding.navRail.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.Funny:
-                    startActivity(new Intent(UserActivity.this, MainActivity.class));
-                    break;
-                case R.id.Reality:
-                    startActivity(new Intent(UserActivity.this, RealityActivity.class));
-                    break;
-                case R.id.Learning:
-                    startActivity(new Intent(UserActivity.this, StudyActivity.class));
-                    break;
-                case R.id.Farsi:
-                    startActivity(new Intent(UserActivity.this, FarsiActivity.class));
-                    break;
-                case R.id.Games:
-                    startActivity(new Intent(UserActivity.this, GameActivity.class));
-                    break;
+            int item2 = item.getItemId();
+            if (item2==R.id.funny) {
+                startActivity(new Intent(UserActivity.this, MainActivity.class));
+            } else if (item2==R.id.learning) {
+                startActivity(new Intent(UserActivity.this, StudyActivity.class));
+            } else if (item2==R.id.reality) {
+                startActivity(new Intent(UserActivity.this, RealityActivity.class));
+            } else if (item2==R.id.farsi) {
+                startActivity(new Intent(UserActivity.this, FarsiActivity.class));
+            } else if (item2==R.id.games) {
+                startActivity(new Intent(UserActivity.this, GameActivity.class));
             }
-            return true;
+            return false;
         });
 
         Objects.requireNonNull(binding.navRail.getHeaderView()).findViewById(R.id.fab_add).setOnClickListener(v -> {
-            startActivity(new Intent(UserActivity.this, MainActivity.class));
-            // binding.navRail.getHeaderView().setBackgroundResource(R.drawable.ic_close);
+            startActivity(new Intent(UserActivity.this, UserActivity.class));
         });
 
-             /*  binding.navRail.setOnItemReselectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.Funny:
-                    startActivity(new Intent(MainActivity.this, MainActivity.class));
-                    break;
-                case R.id.Reality:
-                    startActivity(new Intent(MainActivity.this, RealityActivity.class));
-                    break;
-                case R.id.Learning:
-                    startActivity(new Intent(MainActivity.this, StudyActivity.class));
-                    break;
-                case R.id.Farsi:
-                    startActivity(new Intent(MainActivity.this, FarsiActivity.class));
-                    break;
-                case R.id.Games:
-                    startActivity(new Intent(MainActivity.this, GameActivity.class));
-                    break;
-
-
-            }
-        });*/
     }
 
     @Override
     public void onClickSave(int id_vid) {
+        Service.getApiClient().insertUserSave(id_user, id_vid, kindClickSave).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
 
     }
 
     @Override
     public void onClickSee(int id_vid) {
+        Service.getApiClient().insertUserSee(id_user, id_vid, kindClickSee).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
 
     }
 
     @Override
     public void onClickLike(int id_vid) {
+        Service.getApiClient().insertUserLike(id_user, id_vid, kindClickLike).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
     public void onClickLater(int id_vid) {
+        Service.getApiClient().insertUserLater(id_user, id_vid, kindClickLater).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
 
     }
 
