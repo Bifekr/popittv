@@ -61,6 +61,7 @@ import ir.popittv.myapplication.request.Service;
 import ir.popittv.myapplication.utils.AppExecuter;
 import ir.popittv.myapplication.utils.OnClickFunny;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -100,12 +101,15 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     private Dialog mFullScreenDialog;
     private int mResumeWindow;
     private long mResumePosition;
+    private  boolean boo_mark=false;
+    private  boolean boo_like=false;
+    private  boolean boo_whatchLater=false;
     private boolean b_kindlink;
     AlertDialog.Builder builder;
     private FunnyAdapter single_adapter;
-    private FunnyAdapter viChennrlAdapter1;
-    private ChannelDetail_adapter best_Adapter;
-    private ChannelDetail_adapter new_bestAdapter;
+    private ChannelDetail_adapter viChennrlAdapter1;
+    private FunnyAdapter best_Adapter;
+    private FunnyAdapter new_bestAdapter;
     private ChannelDetail_adapter all_adapter;
     Runnable runnable;
 
@@ -125,9 +129,9 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         handler = new Handler();
         single_adapter = new FunnyAdapter(this, this);
-        viChennrlAdapter1 = new FunnyAdapter(this, this);
-        best_Adapter =new ChannelDetail_adapter(this,this);
-        new_bestAdapter = new ChannelDetail_adapter(this,this);
+        viChennrlAdapter1 = new ChannelDetail_adapter(this, this);
+        best_Adapter =new FunnyAdapter(this,this);
+        new_bestAdapter = new FunnyAdapter(this,this);
         all_adapter = new ChannelDetail_adapter(this,this);
 
         lockScreen = findViewById(R.id.exo_lock);
@@ -159,7 +163,144 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             login();
 
         }*/
+        binding.parentSub.setOnClickListener(v -> {
 
+
+            if (id_user>0 ) {
+                Service.getApiClient().insertUserSub(id_user,id_channel).enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+
+                        if(view.getTag()==null){
+                            //first time set color to green
+                            view.setTag("green");
+                            view.setBackgroundResource(R.color.green);
+                            binding.parentSub.setBackgroundResource(R.drawable.shape_youtube_desable);
+                            Toast.makeText(PlayerActivity.this, "اضافه شد", Toast.LENGTH_SHORT).show();
+                        }else if(view.getTag().toString().equals("green")){
+                            //green color already set change to grey
+                            view.setBackgroundResource(R.color.gray);
+                            binding.parentSub.setBackgroundResource(R.drawable.shape_active_youtube);
+                            Toast.makeText(PlayerActivity.this, "حذف شد", Toast.LENGTH_SHORT).show();
+                            view.setTag(null);
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        binding.parentSub.setBackgroundResource(R.drawable.shape_active_youtube);
+                    }
+                });
+
+
+            }else {
+                Toast.makeText(PlayerActivity.this, "برای فالو کرن ، ابتدا وارد شوید", Toast.LENGTH_SHORT).show();
+            }
+        });
+        binding.like.setOnClickListener(v -> {
+            if (!boo_like) {
+               binding.like.setBackgroundResource(R.drawable.shape_tag2);
+                Service.getApiClient().insertUserLike(id_user, id_vid_funny, kind).enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
+                boo_mark=true;
+
+            }else {
+
+               binding.like.setBackgroundResource(R.drawable.shape_tag4);
+                Service.getApiClient().insertUserLike(id_user, id_vid_funny, kind).enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
+                boo_mark=false;
+            }
+        });
+        binding.icBookmark.setOnClickListener(v->{
+            if (!boo_mark) {
+            binding.icBookmark.setBackgroundResource(R.drawable.shape_tag2);
+            Service.getApiClient().insertUserLike(id_user, id_vid_funny, kind).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                }
+            });
+
+            boo_mark=true;
+
+        }else {
+
+            binding.icBookmark.setBackgroundResource(R.drawable.shape_tag4);
+            Service.getApiClient().insertUserSave(id_user, id_vid_funny, kind).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                }
+            });
+            boo_mark=false;
+        }
+
+        });
+        binding.icWatchLater.setOnClickListener(v->{
+            if (!boo_mark) {
+                binding.icWatchLater.setBackgroundResource(R.drawable.shape_tag2);
+                Service.getApiClient().insertUserLater(id_user, id_vid_funny, kind).enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
+
+                boo_mark=true;
+
+            }else {
+
+                binding.icWatchLater.setBackgroundResource(R.drawable.shape_tag4);
+                Service.getApiClient().insertUserLater(id_user, id_vid_funny, kind).enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    }
+                });
+                boo_mark=false;
+            }
+        });
 
         DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(
                 this, Util.getUserAgent(this, getString(R.string.app_name)));
@@ -184,11 +325,11 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         binding.rvVidChannelPlayer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.rvVidChannelPlayer.setAdapter(viChennrlAdapter1);
 
-        binding.rvBestPlayer.setLayoutManager(new GridLayoutManager(this, 2, RecyclerView.VERTICAL
+        binding.rvBestPlayer.setLayoutManager(new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL
                 , false));
         binding.rvBestPlayer.setAdapter(best_Adapter);
 
-        binding.rvNewBestPlayer.setLayoutManager(new GridLayoutManager(this, 2, RecyclerView.VERTICAL
+        binding.rvNewBestPlayer.setLayoutManager(new GridLayoutManager(this, 2, RecyclerView.HORIZONTAL
                 , false));
         binding.rvNewBestPlayer.setAdapter(new_bestAdapter);
     /*    binding.rvBestPlayer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -196,7 +337,6 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
         binding.rvNewBestPlayer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         binding.rvNewBestPlayer.setAdapter(new_bestAdapter);*/
-
 
         binding.rvAllVidPlayer.setLayoutManager(new GridLayoutManager(this, 3, RecyclerView.VERTICAL
                 , false));
@@ -209,7 +349,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             @Override
             public void onResponse(Call<List<FunnyDataModel>> call, Response<List<FunnyDataModel>> response) {
                 if (response.isSuccessful())
-                    viChennrlAdapter1.setData(response.body());
+                    viChennrlAdapter1.setFunnyDataModels(response.body());
             }
 
             @Override
@@ -224,7 +364,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             @Override
             public void onResponse(Call<List<FunnyDataModel>> call, Response<List<FunnyDataModel>> response) {
                 if (response.isSuccessful()) {
-                    best_Adapter.setFunnyDataModels(response.body());
+                    best_Adapter.setData(response.body());
                 }
             }
 
@@ -240,7 +380,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             @Override
             public void onResponse(Call<List<FunnyDataModel>> call, Response<List<FunnyDataModel>> response) {
                 if (response.isSuccessful()) {
-                    new_bestAdapter.setFunnyDataModels(response.body());
+                    new_bestAdapter.setData(response.body());
                 }
             }
 
@@ -375,55 +515,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             dialog.show();
         }
 
-       /* if (lastDate==0) {
-           ViewDialog alert = new ViewDialog();
-            alert.showDialog(PlayerActivity.this, "!! کد دسترسی یافت نشد !! ");
-
-*//*
-            builder = new AlertDialog.Builder(PlayerActivity.this, android.R.style.Theme_Material_Dialog_Alert);
-            builder.setTitle("عدم دسترسی به محتوا")
-                    .setMessage("کد دسترسی معتبری یافت نشد")
-                    .setIcon(R.drawable.ic_parents_monny)
-                    .setPositiveButton("دریافت کد دسترسی", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {  // مددیریت پرداخت پول و دریافت اشتراک برای کاربر
-                            Toast.makeText(PlayerActivity.this, "YES", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(PlayerActivity.this, UserActivity.class));
-
-                        }
-                    }).setNegativeButton("بعدا یادوری کن", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {  // مدیریت عدم خواستن دریافت اشتراک
-                    Toast.makeText(PlayerActivity.this, "NO", Toast.LENGTH_SHORT).show();
-                    onBackPressed();
-                }
-            });
-            builder.show();*//*
-
-        }
-*/
     }
-/* private void getChannel_detail() {
-        mainViewModel.getChannel_detail().observe(this, channelDataModel -> {
-
-            if (channelDataModel!=null) {
-                funnyAdapter1.setData(channelDataModel.getVideos_channel());
-
-                Glide.with(this).load(channelDataModel.getBanner_chann())
-                        .into(binding.ivBannerItemChannelAll);
-                id_vid_funny = channelDataModel.getId_funny();
-                id_channel = channelDataModel.getId_channel();
-                kind = channelDataModel.getKind();
-                Glide.with(this).load(channelDataModel.getProfile_chann())
-                        .into(binding.ivProfileItemAllChan);
-                binding.titleSubPlayer.setText(channelDataModel.getFollowers());
-                //  binding.titleAgePlayer.setText(channelDataModel.getAge_name());
-                binding.titleFaChannelPlayer.setText(channelDataModel.getName_chan_fa().trim());
-                binding.titleEnChannelPlayer.setText(channelDataModel.getName_chan_en().trim());
-
-            }
-        });
-    }*/
 
     //region  ExoPlayer
     @Override
@@ -627,22 +719,63 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
     @Override
     public void onClickSave(int id_vid) {
+        Service.getApiClient().insertUserSave(id_user, id_vid, kind).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
     public void onClickSee(int id_vid) {
+        Service.getApiClient().insertUserSee(id_user, id_vid, kind).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
     public void onClickLike(int id_vid) {
+        Service.getApiClient().insertUserLike(id_user, id_vid, kind).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
     public void onClickLater(int id_vid) {
+        Service.getApiClient().insertUserLater(id_user, id_vid, kind).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
@@ -658,7 +791,6 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
         mainViewModel.requestFunny_single(id_vid_funny, kind2);
         binding.containerMain.fullScroll(ScrollView.FOCUS_UP);
-//recreate();
         getFunny_single();
         getVid_channel();
         getBest();

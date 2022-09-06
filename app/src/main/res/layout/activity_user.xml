@@ -499,23 +499,27 @@
           android:layout_width="match_parent"
           android:layout_height="180dp"
           android:layout_marginTop="@dimen/plane_24"
-          app:cardCornerRadius="40dp"
           app:cardElevation="@dimen/plane_08"
           app:layout_constraintBottom_toTopOf="@id/parentWatchLaterVideo_userActivity"
           app:layout_constraintTop_toBottomOf="@id/parentSaveChannel_userActivity">
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:background="@color/transparent"
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
               android:id="@+id/rvBookMarkVideo_userActivity"
-              android:layout_width="match_parent"
+              android:layout_width="0dp"
               android:layout_height="0dp"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintTop_toTopOf="parent"
               app:layout_constraintBottom_toBottomOf="parent"
               app:layout_constraintHeight_percent="0.96"
-              app:layout_constraintVertical_bias="1"/>
+              app:layout_constraintWidth_percent=".95"
+              app:layout_constraintVertical_bias="1"
+              app:layout_constraintHorizontal_bias="1"/>
 
             <LinearLayout
               android:layout_width="130dp"
@@ -634,7 +638,7 @@
           android:layout_width="match_parent"
           android:layout_height="180dp"
           android:layout_marginTop="@dimen/plane_24"
-          app:cardCornerRadius="25dp"
+
           app:cardElevation="@dimen/plane_08"
           app:layout_constraintBottom_toTopOf="@id/parentHistoryVideo_userActivity"
           app:layout_constraintTop_toBottomOf="@id/parentBookmarkVideo_userActivity">
@@ -764,7 +768,7 @@
           android:layout_width="match_parent"
           android:layout_height="180dp"
           android:layout_marginTop="@dimen/plane_24"
-          app:cardCornerRadius="40dp"
+
           app:cardElevation="@dimen/plane_08"
           app:layout_constraintBottom_toTopOf="@id/parentLikeVideo_userActivity"
           app:layout_constraintTop_toBottomOf="@id/parentWatchLaterVideo_userActivity">

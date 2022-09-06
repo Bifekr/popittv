@@ -753,7 +753,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
         binding.rvLikeVideoUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, LinearLayoutManager.HORIZONTAL, false));
         binding.rvLikeVideoUserActivity.setAdapter(funnyAdapter4);
         //RecyclerView user Save Video
-        binding.rvBookMarkVideoUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, LinearLayoutManager.HORIZONTAL, false));
+        binding.rvBookMarkVideoUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, LinearLayoutManager.HORIZONTAL, true));
         binding.rvBookMarkVideoUserActivity.setAdapter(funnyAdapter);
 
         //RecyclerView User WatchLater
@@ -761,7 +761,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
         binding.rvWatchLaterUserActivity.setAdapter(funnyAdapter2);
 
         //RecyclerView User History (see)
-        binding.rvHistoryVideoUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, RecyclerView.HORIZONTAL, false));
+        binding.rvHistoryVideoUserActivity.setLayoutManager(new LinearLayoutManager(UserActivity.this, RecyclerView.HORIZONTAL, true));
         binding.rvHistoryVideoUserActivity.setAdapter(funnyAdapter3);
 
     }
