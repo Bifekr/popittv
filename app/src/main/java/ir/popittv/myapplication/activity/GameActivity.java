@@ -45,6 +45,7 @@ public class GameActivity extends AppCompatActivity {
             if (gameDataModels!=null) {
                 gameAdapter.setData(gameDataModels);
 
+
             } else {
 
             }

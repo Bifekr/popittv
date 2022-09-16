@@ -451,7 +451,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             checkExpireUser();
             simpleExoPlayer.stop();
         };
-        handler.postDelayed(runnable, 50000);
+        handler.postDelayed(runnable, 180000);
 
     }
 
@@ -554,7 +554,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             binding.exoplayer.setPlayer(simpleExoPlayer);
             binding.exoplayer.setKeepScreenOn(true);
             if (haveResumePosition) {
-                Log.i("DEBUG", " haveResumePosition ");
+
                 simpleExoPlayer.seekTo(mResumeWindow, mResumePosition);
             }
             simpleExoPlayer.setPlayWhenReady(playWhenReady);

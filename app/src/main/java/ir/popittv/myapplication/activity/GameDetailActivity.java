@@ -173,7 +173,7 @@ public class GameDetailActivity extends AppCompatActivity {
                 .into(binding.ivPosterItemVideo);
         Glide.with(this).load(icon)
                 .into(binding.ProfileChannelVideoThumb);
-        //Toast.makeText(this, "id_game" + id_game, Toast.LENGTH_SHORT).show();
+
     }
 
     private void infoIntentGame() {

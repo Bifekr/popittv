@@ -4,6 +4,7 @@ import java.util.List;
 
 import ir.popittv.myapplication.models.ChannelDataModel;
 import ir.popittv.myapplication.models.FunnyDataModel;
+import ir.popittv.myapplication.models.LinkAppDataModel;
 import ir.popittv.myapplication.models.UserDataModel;
 import ir.popittv.myapplication.response.ChannelResponse;
 import ir.popittv.myapplication.response.FunnyResponse;
@@ -16,6 +17,8 @@ import retrofit2.http.Query;
 
 public interface ApiClient {
 
+    @GET("app_share.php")
+    Call<LinkAppDataModel> getLinkApp();
 
     @GET("getFunny.php")
     Call<FunnyResponse> getFunny(@Query("id_subMenu") int id_subMenu,@Query("kind") int kind);
