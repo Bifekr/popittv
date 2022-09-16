@@ -260,7 +260,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         mainViewModel.requestChannel_kind(KIND);
         //detail Channel Selected
 
-        mainViewModel.requestChannel_detail(1, KIND);
+        mainViewModel.requestChannel_detail(51, KIND);
         mainViewModel.requestFunny_view(KIND);
         mainViewModel.requestFunny_liky(KIND);
         mainViewModel.requestFunny_subMenu(0, KIND);

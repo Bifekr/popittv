@@ -436,7 +436,7 @@
           <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvBest_player"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:background="@drawable/back_player_rv1"
             android:padding="@dimen/plane_16"
             app:layout_constraintBottom_toTopOf="@id/rvNew_best_player"
@@ -503,7 +503,7 @@
           <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvNew_best_player"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:background="@drawable/back_player_rv2"
             android:padding="@dimen/plane_16"
             app:layout_constraintBottom_toTopOf="@id/rvAllVid_player"

@@ -207,7 +207,7 @@ shareApp();
         mainViewModel.requestChannel_kind(KIND);
         //detail Channel Selected
 
-        mainViewModel.requestChannel_detail(15,KIND);
+        mainViewModel.requestChannel_detail(40,KIND);
         mainViewModel.requestFunny_view(KIND);
         mainViewModel.requestFunny_liky(KIND);
         mainViewModel.requestFunny_subMenu(0,KIND);

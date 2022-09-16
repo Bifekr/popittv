@@ -49,5 +49,8 @@
   <string name="all_funny_videos_tagFarsi">All Farsi \nVideos</string>
   <string name="all_funny_videos_tagreality">All Reality \nVideos</string>
   <string name="all_funny_videos_tagStudy">All Study \nVideos</string>
+  <string name="vid_farsi_tag">ویدیوهای فارسی \nاتفاقی</string>
+  <string name="best_month">ویدیوهای برتر ماه</string>
+  <string name="new_best">تازه محبوب شده ها</string>
 
 </resources>

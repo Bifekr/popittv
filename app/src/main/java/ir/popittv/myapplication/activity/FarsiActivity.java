@@ -192,7 +192,7 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
         mainViewModel.requestChannel_kind(KIND);
         //detail Channel Selected
 
-        mainViewModel.requestChannel_detail(1, KIND);
+        mainViewModel.requestChannel_detail(49, KIND);
         mainViewModel.requestFunny_view(KIND);
         mainViewModel.requestFunny_liky(KIND);
         mainViewModel.requestFunny_subMenu(0, KIND);
@@ -282,7 +282,11 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
                 LinearLayoutManager.HORIZONTAL, false));
         binding.rvBestViewMainActivity.setAdapter(funnyAdapter_view);
 
-       binding.rvRecommendFrg1.setAdapter(recommend_adapter);
+        //Recommended Vide Rv
+        binding.rvRecommendFrg1.setHasFixedSize(true);
+        binding.rvRecommendFrg1.setLayoutManager(new LinearLayoutManager(this,
+                RecyclerView.VERTICAL, false));
+        binding.rvRecommendFrg1.setAdapter(recommend_adapter);
 
         binding.infinitCycleFrg1.setAdapter(infinitAdapter);
         binding.infinitCycle2Frg1.setAdapter(infinitAdapter2);
@@ -296,9 +300,9 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
         binding.rvSearch.setLayoutManager(new GridLayoutManager
                 (this, 3, GridLayoutManager.VERTICAL, false));
 
-        binding.rvMenuTagFrg1.setLayoutManager(new LinearLayoutManager(this,
+/*        binding.rvMenuTagFrg1.setLayoutManager(new LinearLayoutManager(this,
                 RecyclerView.HORIZONTAL, false));
-        binding.rvMenuTagFrg1.setAdapter(tagAdapter);
+        binding.rvMenuTagFrg1.setAdapter(tagAdapter);*/
 
 
     }
@@ -446,7 +450,6 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
     protected void onResume() {
         super.onResume();
 
-request();
     }
 
 
