@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -32,6 +33,7 @@ import ir.popittv.myapplication.adapter.SearchAdapter;
 import ir.popittv.myapplication.adapter.TagAdapter;
 import ir.popittv.myapplication.databinding.ActivityFarsiBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
+import ir.popittv.myapplication.models.LinkAppDataModel;
 import ir.popittv.myapplication.request.Service;
 import ir.popittv.myapplication.utils.OnClickFrg1;
 import ir.popittv.myapplication.utils.OnClickFunny;
@@ -69,7 +71,8 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
    private Snackbar mSnackbar;
 
     private TagAdapter tagAdapter;
-
+    private String linkApp;
+    private Uri link;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -208,11 +211,25 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
     }
 
     private void shareApp() {
+        Service.getApiClient().getLinkApp().enqueue(new Callback<LinkAppDataModel>() {
+            @Override
+            public void onResponse(Call<LinkAppDataModel> call, Response<LinkAppDataModel> response) {
+
+
+                linkApp=response.body().getLink_app();
+                link= Uri.parse(linkApp);
+            }
+
+            @Override
+            public void onFailure(Call<LinkAppDataModel> call, Throwable t) {
+
+            }
+        });
         binding.share.setOnClickListener(v -> {
-            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            Intent shareIntent=new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_TEXT, "http://dl.pikoboom.ir/game/12%20Locks%202/com.rud.twelvelocks2_12_apps.evozi.com.apk");
-            startActivity(Intent.createChooser(shareIntent, "لینک دانلود برنامه پیکوبوم"));
+            shareIntent.putExtra(Intent.EXTRA_TEXT,link);
+            startActivity(Intent.createChooser(shareIntent,"دانلود جدیدترین نسخه برنامه پیکوبوم"));
         });
     }
 
