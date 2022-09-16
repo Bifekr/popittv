@@ -151,7 +151,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
     private void getPeymentFromServer() {
         String check = sharedPreferences.getString("phone_user", "");
         if (!check.equals("")) {
-            Toast.makeText(UserActivity.this, "+++", Toast.LENGTH_SHORT).show();
+
             Service.getApiClient().getPayment(phone_user).enqueue(new Callback<UserDataModel>() {
                 @Override
                 public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
@@ -220,7 +220,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
             binding.btnPayment.setVisibility(View.GONE);
             binding.tvTransactionId.setText(transactionId);
             binding.tvFirstDate.setText(firstDate);
-
+            Toast.makeText(UserActivity.this, "کد دسترسی با موفقیت ثبت شد", Toast.LENGTH_SHORT).show();
             switch (expire) {
                 case 1: {
                     amount = "9,000";
@@ -399,7 +399,7 @@ public class UserActivity extends AppCompatActivity implements OnClickFunny, OnC
                                                     binding.tvExitUserActivity.setVisibility(View.VISIBLE);
                                                     getPeymentFromServer();
                                                     binding.avatarUserUserActivity.setBackgroundResource(R.drawable.ic_parents_happy);
-
+                                                    Toast.makeText(UserActivity.this, " با موفقیت وارد حساب خود شدید", Toast.LENGTH_SHORT).show();
                                                 }
 
                                             }

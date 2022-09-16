@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Pair;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +74,7 @@ public class StudyActivity extends AppCompatActivity implements OnClickFrg1, OnC
     private InfinitFrg1_PagerAdapter infinitAdapter2;
     private ChannelDetail_adapter recommend_adapter;
 
-
+   private Snackbar mSnackbar;
     private TagAdapter tagAdapter;
 
     @Override
@@ -112,7 +114,12 @@ shareApp();
         getFunny_liky();
         getFunny_subMenu();
         getSearchFunny();
+        mSnackbar = Snackbar.make(binding.getRoot(), "Please click BACK again to exit", Snackbar.LENGTH_SHORT);
+        mSnackbar.setAction("exit",v -> {
+            onBackPressed();
 
+        }).setActionTextColor(Color.RED)
+                .setTextColor(Color.YELLOW);
 
         if (!binding.switchNetToolbar.isChecked()){
             binding.iconWifiToolbar.setImageResource(R.drawable.ic_wifi_off_svgrepo);
@@ -329,6 +336,9 @@ shareApp();
         mainViewModel.getChannel_kind().observe(this, channelDataModels -> {
             if (channelDataModels!=null) {
                 rvChannel_frg1.setData(channelDataModels);
+            }else {
+                Toast.makeText(this,"اینترنت ضعیف است",Toast.LENGTH_LONG).show();
+                mainViewModel.requestChannel_kind(KIND);
             }
         });
     }
@@ -358,7 +368,10 @@ shareApp();
                 binding.titleShowChannelMainActivity.setText(channelDataModel.getName_chan_en().trim());
 
             } else {
-                Toast.makeText(StudyActivity.this, "net not connection", Toast.LENGTH_LONG).show();
+
+                    Toast.makeText(this, "انترنت خود را بررسی کنید", Toast.LENGTH_LONG).show();
+                    mainViewModel.requestChannel_detail(50, KIND);
+
             }
 
 
@@ -426,6 +439,9 @@ shareApp();
             if (funnyDataModels!=null) {
                 funnyAdapter.setFunnyDataModels(funnyDataModels);
                 recommend_adapter.setFunnyDataModels(funnyDataModels);
+            }else {
+                Toast.makeText(this, "فقط از ای پی ایران استفاده کنید", Toast.LENGTH_SHORT).show();
+                mainViewModel.requestFunny_subMenu(0, KIND);
             }
         });
     }
@@ -454,7 +470,10 @@ shareApp();
     @Override
     protected void onResume() {
         super.onResume();
-request();
+        request();
+        if (b_search) {
+            binding.rvSearch.setVisibility(View.GONE);
+        }
 
     }
 
@@ -467,7 +486,11 @@ request();
         } else {
             super.onBackPressed();
         }
-
+        if (mSnackbar.isShown()) {
+            super.onBackPressed();
+        } else {
+            mSnackbar.show();
+        }
     }
 
     @Override
@@ -476,7 +499,7 @@ request();
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(StudyActivity.this, "bookmark saved", Toast.LENGTH_SHORT).show();
+
                 }
             }
 

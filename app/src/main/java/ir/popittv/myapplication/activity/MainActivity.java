@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
     private InfinitFrg1_PagerAdapter infinitAdapter;
     private InfinitFrg1_PagerAdapter infinitAdapter2;
     private ChannelDetail_adapter recommend_adapter;
-    Snackbar mSnackbar;
+   private Snackbar mSnackbar;
     boolean doubleBackToExitPressedOnce = false;
     private TagAdapter tagAdapter;
 
@@ -264,9 +264,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         mainViewModel.requestFunny_view(KIND);
         mainViewModel.requestFunny_liky(KIND);
         mainViewModel.requestFunny_subMenu(0, KIND);
-        binding.parentItemTag.setOnClickListener(v->{
-            mainViewModel.requestFunny_subMenu(0, KIND);
-        });
+        binding.parentItemTag.setOnClickListener(v-> mainViewModel.requestFunny_subMenu(0, KIND));
         mainViewModel.request_tag(KIND);
     }
 
@@ -296,23 +294,6 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
     private void taginit() {
 
 
-    /*    GradientDrawable drawable1 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xffeff400, 0xffaff600});
-        GradientDrawable drawable2 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xFF03A9F4, 0xFF90CAF9});
-        GradientDrawable drawable3 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xFFFFEB3B, 0xffaaf400});
-        GradientDrawable drawable4 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xFF7ADCCF, 0xFF80CBC4});
-        GradientDrawable drawable5 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xf469a9, 0xFFF48FB1});
-        ArrayList<HashTagDataModel> tagList = new ArrayList<>();
-        tagList.add(new HashTagDataModel("#Huggy Wuggy", R.drawable.tag_huggy_1, drawable1, "#اگی واگی"));
-        tagList.add(new HashTagDataModel("#Sonic", R.drawable.tag_sonic_1, drawable2, "#سونیک"));
-        tagList.add(new HashTagDataModel("#duls khamir", R.drawable.tag_claymixer_1, drawable3, "#آدمک خای خمیری"));
-        tagList.add(new HashTagDataModel("#Christmas", R.drawable.tag_christmas_1, drawable4, "#کریستمس"));
-        tagList.add(new HashTagDataModel("#Kissy Missy", R.drawable.tag_kissy_1, drawable5, "#کیسی میسی"));
-*/
         mainViewModel.getTag().observe(this, hashTagDataModels -> {
             tagAdapter.setData(hashTagDataModels);
         });
@@ -365,7 +346,7 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
         binding.rvSubMenuTagFrg1.setAdapter(funnyAdapter);
         binding.rvSubMenuTagFrg1.setLayoutManager(new GridLayoutManager
                 (this, 3, GridLayoutManager.VERTICAL, false));
-        // binding.rvSubMenuTagFrg1.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL));
+
 
         binding.rvSearch.setAdapter(searchAdapter);
         binding.rvSearch.setLayoutManager(new GridLayoutManager
@@ -393,7 +374,8 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
                 rvChannel_frg1.setData(channelDataModels);
 
             }else {
-                Toast.makeText(this,"not success",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"اینترنت ضعیف است",Toast.LENGTH_LONG).show();
+                mainViewModel.requestChannel_kind(KIND);
             }
         });
     }
@@ -423,7 +405,8 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
                 binding.titleShowChannelMainActivity.setText(channelDataModel.getName_chan_en().trim());
 
             } else {
-                Toast.makeText(MainActivity.this, "net not connection", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "انترنت خود را بررسی کنید", Toast.LENGTH_LONG).show();
+                mainViewModel.requestChannel_detail(51, KIND);
             }
 
 
@@ -494,6 +477,9 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
             if (funnyDataModels!=null) {
                 funnyAdapter.setFunnyDataModels(funnyDataModels);
                 recommend_adapter.setFunnyDataModels(funnyDataModels);
+            }else {
+                Toast.makeText(MainActivity.this, "فقط از ای پی ایران استفاده کنید", Toast.LENGTH_SHORT).show();
+                mainViewModel.requestFunny_subMenu(0, KIND);
             }
         });
     }
@@ -522,8 +508,10 @@ public class MainActivity extends AppCompatActivity implements OnClickFrg1, OnCl
     @Override
     protected void onResume() {
         super.onResume();
-getChannel_detail();
 request();
+        if (b_search) {
+            binding.rvSearch.setVisibility(View.GONE);
+        }
 
     }
 
@@ -564,9 +552,7 @@ request();
         Service.getApiClient().insertUserSave(id_user, id_vid, KIND).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
-                    Toast.makeText(MainActivity.this, "bookmark saved", Toast.LENGTH_SHORT).show();
-                }
+
             }
 
             @Override

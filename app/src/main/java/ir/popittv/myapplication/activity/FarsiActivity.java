@@ -3,6 +3,7 @@ package ir.popittv.myapplication.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +66,7 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
     private InfinitFrg1_PagerAdapter infinitAdapter;
     private InfinitFrg1_PagerAdapter infinitAdapter2;
     private ChannelDetail_adapter recommend_adapter;
-
+   private Snackbar mSnackbar;
 
     private TagAdapter tagAdapter;
 
@@ -103,6 +105,12 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
         getFunny_liky();
         getFunny_subMenu();
         getSearchFunny();
+        mSnackbar = Snackbar.make(binding.getRoot(), "Please click BACK again to exit", Snackbar.LENGTH_SHORT);
+        mSnackbar.setAction("exit",v -> {
+            onBackPressed();
+
+        }).setActionTextColor(Color.RED)
+                .setTextColor(Color.YELLOW);
         if (!binding.switchNetToolbar.isChecked()){
             binding.iconWifiToolbar.setImageResource(R.drawable.ic_wifi_off_svgrepo);
         }
@@ -231,27 +239,7 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
 
     private void taginit() {
 
-
-    /*    GradientDrawable drawable1 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xffeff400, 0xffaff600});
-        GradientDrawable drawable2 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xFF03A9F4, 0xFF90CAF9});
-        GradientDrawable drawable3 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xFFFFEB3B, 0xffaaf400});
-        GradientDrawable drawable4 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xFF7ADCCF, 0xFF80CBC4});
-        GradientDrawable drawable5 = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
-                new int[]{0xf469a9, 0xFFF48FB1});
-        ArrayList<HashTagDataModel> tagList = new ArrayList<>();
-        tagList.add(new HashTagDataModel("#Huggy Wuggy", R.drawable.tag_huggy_1, drawable1, "#اگی واگی"));
-        tagList.add(new HashTagDataModel("#Sonic", R.drawable.tag_sonic_1, drawable2, "#سونیک"));
-        tagList.add(new HashTagDataModel("#duls khamir", R.drawable.tag_claymixer_1, drawable3, "#آدمک خای خمیری"));
-        tagList.add(new HashTagDataModel("#Christmas", R.drawable.tag_christmas_1, drawable4, "#کریستمس"));
-        tagList.add(new HashTagDataModel("#Kissy Missy", R.drawable.tag_kissy_1, drawable5, "#کیسی میسی"));
-*/
-        mainViewModel.getTag().observe(this, hashTagDataModels -> {
-            tagAdapter.setData(hashTagDataModels);
-        });
+        mainViewModel.getTag().observe(this, hashTagDataModels -> tagAdapter.setData(hashTagDataModels));
 
 
     }
@@ -300,9 +288,6 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
         binding.rvSearch.setLayoutManager(new GridLayoutManager
                 (this, 3, GridLayoutManager.VERTICAL, false));
 
-/*        binding.rvMenuTagFrg1.setLayoutManager(new LinearLayoutManager(this,
-                RecyclerView.HORIZONTAL, false));
-        binding.rvMenuTagFrg1.setAdapter(tagAdapter);*/
 
 
     }
@@ -322,7 +307,8 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
                 rvChannel_frg1.setData(channelDataModels);
 
             } else {
-                Toast.makeText(this, "not success", Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"اینترنت ضعیف است",Toast.LENGTH_LONG).show();
+                mainViewModel.requestChannel_kind(KIND);
             }
         });
     }
@@ -351,8 +337,9 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
                 binding.subShowChannelMainActivity.setText(channelDataModel.getFollowers());
                 binding.titleShowChannelMainActivity.setText(channelDataModel.getName_chan_en().trim());
 
-            } else {
-                Toast.makeText(FarsiActivity.this, "net not connection", Toast.LENGTH_LONG).show();
+            }else {
+                Toast.makeText(this, "انترنت خود را بررسی کنید", Toast.LENGTH_LONG).show();
+                mainViewModel.requestChannel_detail(49, KIND);
             }
 
 
@@ -421,6 +408,9 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
             if (funnyDataModels!=null) {
                 funnyAdapter.setFunnyDataModels(funnyDataModels);
                 recommend_adapter.setFunnyDataModels(funnyDataModels);
+            }else {
+                Toast.makeText(this, "فقط از ای پی ایران استفاده کنید", Toast.LENGTH_SHORT).show();
+                mainViewModel.requestFunny_subMenu(0, KIND);
             }
         });
     }
@@ -449,7 +439,10 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
     @Override
     protected void onResume() {
         super.onResume();
-
+        request();
+        if (b_search) {
+            binding.rvSearch.setVisibility(View.GONE);
+        }
     }
 
 
@@ -461,7 +454,11 @@ public class FarsiActivity extends AppCompatActivity implements OnClickFrg1, OnC
         } else {
             super.onBackPressed();
         }
-
+        if (mSnackbar.isShown()) {
+            super.onBackPressed();
+        } else {
+            mSnackbar.show();
+        }
     }
 
     @Override

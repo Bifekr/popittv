@@ -71,7 +71,6 @@ public class DetailActivity extends AppCompatActivity implements OnClickFrg1, On
 
         id_channel2 = getIntent().getIntExtra("id_channel_single", 0);
         kind2 = getIntent().getIntExtra("kind", 0);
-        Toast.makeText(this, "" + kind2, Toast.LENGTH_SHORT).show();
         viewModel.requestChannel_detail(id_channel2, kind2);
         binding.parentSub.setOnClickListener(v -> {
 
@@ -180,7 +179,6 @@ public class DetailActivity extends AppCompatActivity implements OnClickFrg1, On
         Intent intent = new Intent(DetailActivity.this, PlayerActivity.class);
         intent.putExtra("id_vid_funny", id_vid_funny);
         intent.putExtra("kind", kind2);
-        Toast.makeText(DetailActivity.this, "kind" + kind2 + "kk" + kind, Toast.LENGTH_SHORT).show();
         intent.putExtra("id_channel", id_channel2);
         startActivity(intent);
     }

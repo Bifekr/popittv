@@ -1,11 +1,9 @@
 package ir.popittv.myapplication.activity;
 
 import android.app.Dialog;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-
 import android.graphics.drawable.ColorDrawable;
 import android.icu.text.DecimalFormat;
 import android.net.Uri;
@@ -14,13 +12,11 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,20 +41,14 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import ir.popittv.myapplication.R;
-import ir.popittv.myapplication.ViewDialog;
 import ir.popittv.myapplication.adapter.ChannelDetail_adapter;
 import ir.popittv.myapplication.adapter.FunnyAdapter;
 import ir.popittv.myapplication.databinding.ActivityPlayerBinding;
 import ir.popittv.myapplication.models.FunnyDataModel;
 import ir.popittv.myapplication.request.Service;
-import ir.popittv.myapplication.utils.AppExecuter;
 import ir.popittv.myapplication.utils.OnClickFunny;
 import ir.popittv.myapplication.viewmodel.MainViewModel;
 import okhttp3.ResponseBody;
@@ -74,6 +64,8 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     private final String STATE_PLAYER_FULLSCREEN = "playerFullscreen";
     ////////////////////////////////////
     private final boolean isLocked = false;
+    private final boolean boo_like = false;
+    private final boolean boo_whatchLater = false;
     SharedPreferences.Editor editor;
     int kind;
     int id_channel;
@@ -85,6 +77,8 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     MediaItem mediaItem;
     SimpleExoPlayer simpleExoPlayer;
     Handler handler;
+    AlertDialog.Builder builder;
+    Runnable runnable;
     private ActivityPlayerBinding binding;
     private MainViewModel mainViewModel;
     //////////////////////////// exoPlayer Variable/////////////////////////////////////////////////////
@@ -101,18 +95,13 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     private Dialog mFullScreenDialog;
     private int mResumeWindow;
     private long mResumePosition;
-    private  boolean boo_mark=false;
-    private  boolean boo_like=false;
-    private  boolean boo_whatchLater=false;
+    private boolean boo_mark = false;
     private boolean b_kindlink;
-    AlertDialog.Builder builder;
     private FunnyAdapter single_adapter;
     private ChannelDetail_adapter viChennrlAdapter1;
     private FunnyAdapter best_Adapter;
     private FunnyAdapter new_bestAdapter;
     private ChannelDetail_adapter all_adapter;
-    Runnable runnable;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,11 +119,11 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         handler = new Handler();
         single_adapter = new FunnyAdapter(this, this);
         viChennrlAdapter1 = new ChannelDetail_adapter(this, this);
-        best_Adapter =new FunnyAdapter(this,this);
-        new_bestAdapter = new FunnyAdapter(this,this);
-        all_adapter = new ChannelDetail_adapter(this,this);
+        best_Adapter = new FunnyAdapter(this, this);
+        new_bestAdapter = new FunnyAdapter(this, this);
+        all_adapter = new ChannelDetail_adapter(this, this);
 
-        lockScreen = findViewById(R.id.exo_lock);
+        //  lockScreen = findViewById(R.id.exo_lock);
         initRv();
         Log.i("TAG", "onCreate: " + b_kindlink);
         id_vid_funny = getIntent().getIntExtra("id_vid_funny", 0);
@@ -156,29 +145,29 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         getFunny_single();
         getVid_channel();
         getBest();
-       getNew_best();
+        getNew_best();
         getAllVid();
 
-     /*   if (phone_user==null || lastDate==0 || lastDate==null) {
+        if (phone_user==null || lastDate==0 || lastDate==null) {
             login();
 
-        }*/
+        }
         binding.parentSub.setOnClickListener(v -> {
 
 
-            if (id_user>0 ) {
-                Service.getApiClient().insertUserSub(id_user,id_channel).enqueue(new Callback<ResponseBody>() {
+            if (id_user > 0) {
+                Service.getApiClient().insertUserSub(id_user, id_channel).enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
 
-                        if(view.getTag()==null){
+                        if (view.getTag()==null) {
                             //first time set color to green
                             view.setTag("green");
                             view.setBackgroundResource(R.color.green);
                             binding.parentSub.setBackgroundResource(R.drawable.shape_youtube_desable);
                             Toast.makeText(PlayerActivity.this, "اضافه شد", Toast.LENGTH_SHORT).show();
-                        }else if(view.getTag().toString().equals("green")){
+                        } else if (view.getTag().toString().equals("green")) {
                             //green color already set change to grey
                             view.setBackgroundResource(R.color.gray);
                             binding.parentSub.setBackgroundResource(R.drawable.shape_active_youtube);
@@ -195,13 +184,13 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
                 });
 
 
-            }else {
+            } else {
                 Toast.makeText(PlayerActivity.this, "برای فالو کرن ، ابتدا وارد شوید", Toast.LENGTH_SHORT).show();
             }
         });
         binding.like.setOnClickListener(v -> {
             if (!boo_like) {
-               binding.like.setBackgroundResource(R.drawable.shape_tag2);
+                binding.like.setBackgroundResource(R.drawable.shape_tag2);
                 Service.getApiClient().insertUserLike(id_user, id_vid_funny, kind).enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -213,11 +202,11 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
                     }
                 });
-                boo_mark=true;
+                boo_mark = true;
 
-            }else {
+            } else {
 
-               binding.like.setBackgroundResource(R.drawable.shape_tag4);
+                binding.like.setBackgroundResource(R.drawable.shape_tag4);
                 Service.getApiClient().insertUserLike(id_user, id_vid_funny, kind).enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -229,45 +218,45 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
                     }
                 });
-                boo_mark=false;
+                boo_mark = false;
             }
         });
-        binding.icBookmark.setOnClickListener(v->{
+        binding.icBookmark.setOnClickListener(v -> {
             if (!boo_mark) {
-            binding.icBookmark.setBackgroundResource(R.drawable.shape_tag2);
-            Service.getApiClient().insertUserLike(id_user, id_vid_funny, kind).enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                binding.icBookmark.setBackgroundResource(R.drawable.shape_tag2);
+                Service.getApiClient().insertUserLike(id_user, id_vid_funny, kind).enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-                }
+                    }
 
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
 
-                }
-            });
+                    }
+                });
 
-            boo_mark=true;
+                boo_mark = true;
 
-        }else {
+            } else {
 
-            binding.icBookmark.setBackgroundResource(R.drawable.shape_tag4);
-            Service.getApiClient().insertUserSave(id_user, id_vid_funny, kind).enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                binding.icBookmark.setBackgroundResource(R.drawable.shape_tag4);
+                Service.getApiClient().insertUserSave(id_user, id_vid_funny, kind).enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-                }
+                    }
 
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
 
-                }
-            });
-            boo_mark=false;
-        }
+                    }
+                });
+                boo_mark = false;
+            }
 
         });
-        binding.icWatchLater.setOnClickListener(v->{
+        binding.icWatchLater.setOnClickListener(v -> {
             if (!boo_mark) {
                 binding.icWatchLater.setBackgroundResource(R.drawable.shape_tag2);
                 Service.getApiClient().insertUserLater(id_user, id_vid_funny, kind).enqueue(new Callback<ResponseBody>() {
@@ -282,9 +271,9 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
                     }
                 });
 
-                boo_mark=true;
+                boo_mark = true;
 
-            }else {
+            } else {
 
                 binding.icWatchLater.setBackgroundResource(R.drawable.shape_tag4);
                 Service.getApiClient().insertUserLater(id_user, id_vid_funny, kind).enqueue(new Callback<ResponseBody>() {
@@ -298,7 +287,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
                     }
                 });
-                boo_mark=false;
+                boo_mark = false;
             }
         });
 
@@ -317,11 +306,6 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
     private void initRv() {
 
-
-
-        /*binding.rvVidChannelPlayer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        binding.rvVidChannelPlayer.setAdapter(single_adapter);*/
-
         binding.rvVidChannelPlayer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.rvVidChannelPlayer.setAdapter(viChennrlAdapter1);
 
@@ -332,11 +316,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
         binding.rvNewBestPlayer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL
                 , false));
         binding.rvNewBestPlayer.setAdapter(new_bestAdapter);
-    /*    binding.rvBestPlayer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        binding.rvBestPlayer.setAdapter(best_Adapter);
 
-        binding.rvNewBestPlayer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        binding.rvNewBestPlayer.setAdapter(new_bestAdapter);*/
 
         binding.rvAllVidPlayer.setLayoutManager(new GridLayoutManager(this, 3, RecyclerView.VERTICAL
                 , false));
@@ -428,8 +408,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
                 id_channel = funnyDataModel.getId_channel();
                 id_vid_funny = funnyDataModel.getId_funny();
                 kind = funnyDataModel.getKind();
-               /* Glide.with(this).load(funnyDataModel.getPoster())
-                        .into(binding.posterPlayer);*/
+
 
                 Glide.with(this).load(funnyDataModel.getProfile_chann())
                         .into(binding.ivProfileItemAllChan);
@@ -468,12 +447,9 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
     private void login() {
 
-       runnable=new Runnable() {
-            @Override
-            public void run() {
-                checkExpireUser();
-                simpleExoPlayer.stop();
-            }
+        runnable = () -> {
+            checkExpireUser();
+            simpleExoPlayer.stop();
         };
         handler.postDelayed(runnable, 50000);
 
@@ -487,30 +463,23 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             dialog.setContentView(R.layout.custom_dialogbox_otp);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
-            TextView text = (TextView) dialog.findViewById(R.id.txt_file_path);
+            TextView text = dialog.findViewById(R.id.txt_file_path);
             text.setText(R.string.exite);
 
-            Button dialogBtn_cancel = (Button) dialog.findViewById(R.id.btn_cancel);
-            dialogBtn_cancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                    Toast.makeText(getApplicationContext(),"Cancel" ,Toast.LENGTH_SHORT).show();
-                    // activity.startActivity(new Intent(activity, MainActivity.class));
-                    onBackPressed();
-                   // finish();
-
-                    dialog.dismiss();
-                }
+            Button dialogBtn_cancel = dialog.findViewById(R.id.btn_cancel);
+            dialogBtn_cancel.setOnClickListener(v -> {
+                onBackPressed();
+                dialog.dismiss();
             });
 
-            Button dialogBtn_okay = (Button) dialog.findViewById(R.id.btn_okay);
-            dialogBtn_okay.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                    Toast.makeText(getApplicationContext(),"Okay" ,Toast.LENGTH_SHORT).show();
+            Button dialogBtn_okay = dialog.findViewById(R.id.btn_okay);
+            dialogBtn_okay.setOnClickListener(v -> {
+                if (phone_user!=null) {
+                    startActivity(new Intent(PlayerActivity.this, PaymentActivity.class));
+                } else {
                     startActivity(new Intent(PlayerActivity.this, UserActivity.class));
-                    dialog.dismiss();
                 }
+                dialog.dismiss();
             });
             dialog.show();
         }
@@ -653,7 +622,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     public void onBackPressed() {
         super.onBackPressed();
 
-      handler.removeCallbacks(runnable);
+        handler.removeCallbacks(runnable);
 
     }
 
@@ -669,7 +638,6 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
 
         }
 
-        Toast.makeText(PlayerActivity.this, "onResume", Toast.LENGTH_SHORT).show();
         if (mExoPlayerFullscreen) {
             ((ViewGroup) playerView.getParent()).removeView(playerView);
             mFullScreenDialog.addContentView(playerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -689,7 +657,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             simpleExoPlayer.release();
 
         }
-        Toast.makeText(PlayerActivity.this, "onPause", Toast.LENGTH_SHORT).show();
+
         if (mFullScreenDialog!=null)
             mFullScreenDialog.dismiss();
 
@@ -711,7 +679,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
             simpleExoPlayer.seekTo(mResumePosition);
             simpleExoPlayer.getPlayWhenReady();
 
-            Toast.makeText(PlayerActivity.this, "onRestart", Toast.LENGTH_SHORT).show();
+
         }
 
     }
@@ -787,7 +755,7 @@ public class PlayerActivity extends AppCompatActivity implements OnClickFunny {
     public void onClickPlayer(int id_vid_funny, int id_channel, int kind2) {
 
         Toast.makeText(PlayerActivity.this, "" + id_vid_funny, Toast.LENGTH_SHORT).show();
-        kind=kind2;
+        kind = kind2;
 
         mainViewModel.requestFunny_single(id_vid_funny, kind2);
         binding.containerMain.fullScroll(ScrollView.FOCUS_UP);
